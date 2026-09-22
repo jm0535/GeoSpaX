@@ -14,9 +14,11 @@ science, geography, forestry, biology, and conservation.
 | [`DOMAIN_TOOLBOX.md`](DOMAIN_TOOLBOX.md) | Field-by-field catalogue: specialised tools (existing / ported / new) and data sources per domain, with sample workflows |
 | [`../GEOSPAX_PLAN.md`](../GEOSPAX_PLAN.md) | v1 plan (initial two-repo review and strategy selection — superseded by PLAN.md but still the detailed evidence index for the GeoLibre/GeoSpaX overlap matrix) |
 
-## Pending infrastructure step
+## Status (2026-09-22)
 
-The Arena GitHub connection for this session is scoped to `jm0535/GeoLibre` only, so
-`jm0535/geospax` could not be created from here. PLAN.md §4.2 lists the two-step unlock
-(create/fork the repo on github.com, then grant the Arena GitHub App access). Everything
-in this folder is written to be pushed into `jm0535/geospax` verbatim as its first commit.
+**Plan confirmed — Phase 0–1 in progress.** The product repo is
+[`jm0535/GeoSpaX`](https://github.com/jm0535/GeoSpaX) (the fork of `opengeos/GeoLibre`,
+renamed; this is also the repo the current work session is bound to). `jm0535/map-kit`
+(GeoSpaX v1) remains untouched and live until the Phase 7 parity cutover.
+
+Decision log — see [`PLAN.md`](PLAN.md) §11.

@@ -190,26 +190,26 @@ numerics run in workers inside plugin bundles; every result layer carries proven
 (source, licence, date, method, parameters); plugin state persists in projects so a
 coursework submission is one file that reopens complete.
 
-### 4.2 Repository seed & GitHub access (action required — the one blocker)
+### 4.2 Repository seed & GitHub access — RESOLVED (2026-09-22)
 
-The Arena GitHub connection for this session is scoped to `jm0535/GeoLibre` only
-(verified: `installation/repositories` lists exactly one repo; fork-create and
-repo-create both return 403). To land this plan and the product in `jm0535/geospax`:
+The product repo is **[`jm0535/GeoSpaX`](https://github.com/jm0535/GeoSpaX)**: the fork of
+`opengeos/GeoLibre` (previously named `jm0535/GeoLibre`), renamed by the owner. Verified:
+`fork: true`, `parent: opengeos/GeoLibre`, default branch `main`, and the work session's
+GitHub installation now resolves to `jm0535/GeoSpaX`. Because GitHub renames keep the
+repository identity, the session branch (`arena/01a0c905-geolibre`) and its pushed commits
+live on the renamed repo unchanged.
 
-1. **You, on github.com (2 minutes), recommended path:**
-   - Fork `opengeos/GeoLibre` → in the fork's Settings rename it to `geospax`
-     (keeps the "forked from opengeos/GeoLibre" lineage and the Sync-fork button), **or**
-   - Create an empty public repo named `geospax` (I push the full GeoLibre history — only
-     14 MB locally — plus these planning docs; upstream sync then works via git remotes).
-2. **Grant the Arena GitHub App access to `jm0535/geospax`** (repo Settings →
-   Collaborators/Apps, or reconnect GitHub in Arena with the repo selected).
-3. **Then, next session turn:** I push `planning/` as the first commit, scaffold
-   `packages/geospax-*` + the first plugin drop-in, and open the work as PRs on the product
-   repo per its own conventions.
+Working setup (already applied in the working tree):
 
-`jm0535/GeoLibre` (existing fork) stays as a pristine upstream mirror or is retired — your
-choice; the plan does not depend on it. `jm0535/map-kit` is untouched and remains live at
-`geospax.in4metrix.dev` until Phase 7 parity cutover.
+```
+origin    https://github.com/jm0535/GeoSpaX.git      (fetch + push)
+upstream  https://github.com/opengeos/GeoLibre.git   (fetch only; push DISABLED)
+```
+
+Sync ritual: `git fetch upstream && git merge upstream/main` → resolve (branding files:
+take upstream, re-run `python3 scripts/geospax/rebrand.py`) → `npm run ci` → push.
+`jm0535/map-kit` is untouched and remains live at `geospax.in4metrix.dev` until the
+Phase 7 parity cutover.
 
 ---
 
@@ -319,18 +319,22 @@ Full per-field tool and data catalogues: **`DOMAIN_TOOLBOX.md`**.
 
 ---
 
-## 11. Decisions requested (confirm to proceed)
+## 11. Decisions
 
-1. **Proceed to implementation** on this plan, starting Phase 0–1 once `jm0535/geospax` is
-   created and the Arena GitHub App is granted access (§4.2)?
-2. **Repo seed style:** fork-and-rename on github.com (keeps Sync-fork lineage — recommended)
-   vs empty repo + full-history push?
-3. **Product spelling:** "GeoSpaX" (v1 brand, used throughout this plan) vs "GeoSpax"?
-4. **Pack sequencing:** confirm conservation → biodiversity → forestry/marine → agri/environment
-   (§5), or reprioritise (e.g., marine first)?
-5. **MaxEnt path:** client-side logistic GLM first → optional sidecar elapid (recommended)
-   vs keep v1's Vercel serverless function as the hosted endpoint?
-6. **`.gspx` extension:** alias over `.geolibre` (recommended; distinct identity, tiny patch)
-   vs keep `.geolibre`?
-7. **Upstream contributions:** OK to PR generic tools (DBSCAN, equal-area, GBIF connector)
-   to `opengeos/GeoLibre` to shrink fork surface?
+### Decision log (confirmed 2026-09-22)
+
+| # | Decision | Outcome |
+|---|---|---|
+| 1 | Proceed to implementation | **Confirmed** — Phase 0–1 started immediately |
+| 2 | Repo seed style | **Fork-and-rename** — `jm0535/GeoSpaX` (fork of `opengeos/GeoLibre`, renamed; §4.2 resolved) |
+| 3 | Product spelling | **GeoSpaX** (capital X, v1 brand) |
+| 4 | Pack sequencing | **As planned** — conservation → biodiversity → forestry + marine → agriculture + environment → academic/reports |
+
+### Still open (defaults apply until decided)
+
+5. **MaxEnt path:** default = client-side logistic GLM first → optional sidecar elapid
+   (`[sdm]` extra) later; v1's Vercel function available as interim hosted endpoint.
+6. **`.gspx` extension:** default = alias alongside `.geolibre` in Phase 2+ (additive patch
+   to save dialogs; both readable).
+7. **Upstream contributions:** default = yes for generic wins (DBSCAN, equal-area reporting,
+   GBIF connector) to shrink fork surface.
