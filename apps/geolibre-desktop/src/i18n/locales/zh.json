@@ -6,9 +6,9 @@
     "summary": "{{count}} 个图层 · 缩放级别 {{zoom}}",
     "restore": "恢复",
     "discard": "放弃",
-    "restoreError": "无法恢复此快照。它可能已损坏，或与当前 GeoLibre 版本不兼容。",
+    "restoreError": "无法恢复此快照。它可能已损坏，或与当前 GeoSpaX 版本不兼容。",
     "recoveryTitle": "恢复未保存的工作？",
-    "recoveryDescription": "GeoLibre 未正常关闭。有一份更新的“{{name}}”自动保存可用。"
+    "recoveryDescription": "GeoSpaX 未正常关闭。有一份更新的“{{name}}”自动保存可用。"
   },
   "browser": {
     "title": "浏览器",
@@ -47,14 +47,14 @@
     "libraryImportFailed": "无法读取此图层库文件。",
     "libraryExportFailed": "无法导出图层库。",
     "libraryLayerMissing": "该已保存的图层已不存在。",
-    "libraryLayerNeedsDesktop": "此已保存图层需要从磁盘读取文件，因此需要 GeoLibre Desktop。请重新添加该文件以保存新条目。",
+    "libraryLayerNeedsDesktop": "此已保存图层需要从磁盘读取文件，因此需要 GeoSpaX Desktop。请重新添加该文件以保存新条目。",
     "libraryLayerConfigNotApplied": "已添加“{{name}}”的文件，但其保存的样式无法匹配到单个图层，因此未重新应用。",
     "libraryLayerJoinsUnresolved_other": "图层已添加，但有 {{count}} 个已保存的连接无法重新应用：它们所连接的图层不在此项目中。"
   },
   "about": {
     "trigger": "关于",
-    "title": "关于 GeoLibre",
-    "description": "GeoLibre 是一款轻量级的云原生 GIS 平台。",
+    "title": "关于 GeoSpaX",
+    "description": "GeoSpaX 是一款轻量级的云原生 GIS 平台。",
     "version": "版本",
     "checkForUpdates": "检查更新",
     "tryAgain": "重试",
@@ -73,7 +73,7 @@
     "steps": {
       "download": "从下载页面下载适用于您平台的安装程序。",
       "install": "运行安装程序。您的本地项目、设置和 API 密钥将被保留。",
-      "reopen": "重新打开 GeoLibre 以完成更新。"
+      "reopen": "重新打开 GeoSpaX 以完成更新。"
     },
     "severity": {
       "major": "主要版本",
@@ -92,7 +92,7 @@
       "noTag": "最新发行版未包含版本标签。",
       "network": "无法连接到 GitHub。请检查您的网络连接并重试。",
       "viewDownloads": "查看下载页面",
-      "viewDownloadsHint": "在浏览器中打开 GeoLibre 下载页面，以便手动检查最新版本。"
+      "viewDownloadsHint": "在浏览器中打开 GeoSpaX 下载页面，以便手动检查最新版本。"
     },
     "startup": {
       "title": "有可用更新",
@@ -105,7 +105,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "此功能在 Mac App Store 版本的 GeoLibre Desktop 中不可用。"
+    "unavailable": "此功能在 Mac App Store 版本的 GeoSpaX Desktop 中不可用。"
   },
   "bookmark": {
     "captureStateLabel": "包含完整图层状态（激活、未激活及图层顺序）",
@@ -122,7 +122,7 @@
     "trust": {
       "title": "是否加载此项目中的插件？",
       "description_other": "此项目希望从您尚未安装的 URL 加载 {{count}} 个外部插件。插件运行的代码可完全访问本应用。",
-      "warning": "请仅加载来自可信来源的插件。已加载的插件将以与 GeoLibre 本身相同的权限运行。",
+      "warning": "请仅加载来自可信来源的插件。已加载的插件将以与 GeoSpaX 本身相同的权限运行。",
       "trustButton": "信任并加载",
       "dismissButton": "不加载"
     },
@@ -141,7 +141,7 @@
     "openHomepageAria": "打开 {{name}} 的主页",
     "byAuthor": "作者：{{author}}",
     "updateAvailable": "有可用更新",
-    "requiresVersion": "需要 GeoLibre {{version}}+",
+    "requiresVersion": "需要 GeoSpaX {{version}}+",
     "install": "安装",
     "installAria": "安装 {{name}}",
     "removeConfirm": "移除？",
@@ -152,10 +152,10 @@
     "updateAria": "更新 {{name}}",
     "loading": "加载中…",
     "installed": "已安装",
-    "settingsIntro": "GeoLibre 始终会扫描其应用数据中的插件目录。可从文件安装打包好的插件（.zip），或添加额外的本地目录（仅桌面版）。清单 URL（包括市场安装）通过网络加载；此处的更改立即生效。",
+    "settingsIntro": "GeoSpaX 始终会扫描其应用数据中的插件目录。可从文件安装打包好的插件（.zip），或添加额外的本地目录（仅桌面版）。清单 URL（包括市场安装）通过网络加载；此处的更改立即生效。",
     "installFromFile": "从文件安装",
     "chooseZip": "选择 .zip…",
-    "installFromFileHintDesktop": "将打包好的插件归档复制到 GeoLibre 的插件目录。",
+    "installFromFileHintDesktop": "将打包好的插件归档复制到 GeoSpaX 的插件目录。",
     "installFromFileHintWeb": "加载打包好的插件归档；它将保存在您的浏览器中，并在下次访问时重新加载。",
     "localDirectories": "本地目录",
     "directoryAria": "插件目录",
@@ -170,7 +170,7 @@
     "errorDirectoryPicker": "无法打开目录选择器。",
     "errorInstall": "无法安装该插件。",
     "errorUninstall": "无法卸载该插件。",
-    "description": "浏览、安装、更新和移除外部 GeoLibre 插件。插件列于 <registryLink>GeoLibre 插件注册表</registryLink>。"
+    "description": "浏览、安装、更新和移除外部 GeoSpaX 插件。插件列于 <registryLink>GeoSpaX 插件注册表</registryLink>。"
   },
   "viewState": {
     "panelTitle": "信息"
@@ -262,7 +262,7 @@
     "add": "添加",
     "ok": "确定",
     "done": "完成",
-    "openWebApp": "打开 GeoLibre 网页应用"
+    "openWebApp": "打开 GeoSpaX 网页应用"
   },
   "addData": {
     "title": "添加数据",
@@ -313,7 +313,7 @@
       },
       "gdb": {
         "label": "添加文件地理数据库图层",
-        "description": "从 Esri 文件地理数据库（.gdb 文件夹）添加图层。图层通过本地 GeoLibre 服务器读取并重投影至 WGS84。"
+        "description": "从 Esri 文件地理数据库（.gdb 文件夹）添加图层。图层通过本地 GeoSpaX 服务器读取并重投影至 WGS84。"
       },
       "photos": {
         "label": "添加带地理标记的照片",
@@ -655,8 +655,8 @@
       "layerPlaceholder": "请先选择地理数据库",
       "readingLayers": "正在读取图层...",
       "layerOption": "{{name}}（{{type}}，{{count}} 个要素）",
-      "help": "仅含属性的表不会列出。所选要素类通过本地 GeoLibre 服务器加载并重投影至 WGS84。",
-      "desktopOnly": "文件地理数据库图层仅在 GeoLibre 桌面版中可用。此功能需要通过本地 GeoLibre 服务器读取本地 .gdb 文件夹，而网页应用无法访问。",
+      "help": "仅含属性的表不会列出。所选要素类通过本地 GeoSpaX 服务器加载并重投影至 WGS84。",
+      "desktopOnly": "文件地理数据库图层仅在 GeoSpaX 桌面版中可用。此功能需要通过本地 GeoSpaX 服务器读取本地 .gdb 文件夹，而网页应用无法访问。",
       "readError": "无法读取此文件地理数据库。",
       "convertError": "无法加载此要素类。",
       "errorNotGdb": "请选择以 .gdb 结尾的文件夹（Esri 文件地理数据库）。",
@@ -741,7 +741,7 @@
     },
     "postgres": {
       "defaultName": "PostgreSQL 图层",
-      "errorDesktopOnly": "PostgreSQL 图层需要使用 GeoLibre 桌面版。",
+      "errorDesktopOnly": "PostgreSQL 图层需要使用 GeoSpaX 桌面版。",
       "errorConnectionString": "请输入 PostgreSQL 连接字符串。",
       "statusCheckingBinary": "正在检查 Martin 可执行文件...",
       "statusDownloaded": "Martin 已下载完成。正在启动本地服务器...",
@@ -755,7 +755,7 @@
       "errorConnectFirst": "请先连接到 PostgreSQL。",
       "errorNoVectorLayers": "所选的 Martin 数据源没有矢量图层。",
       "errorSelectSource": "请选择要添加的 Martin 数据源。",
-      "desktopOnlyNotice": "PostgreSQL 图层仅在 GeoLibre 桌面版中可用。此功能需要运行本地 Martin 瓦片服务器，而网页版和移动版应用无法启动它。",
+      "desktopOnlyNotice": "PostgreSQL 图层仅在 GeoSpaX 桌面版中可用。此功能需要运行本地 Martin 瓦片服务器，而网页版和移动版应用无法启动它。",
       "savedConnection": "已保存的连接",
       "selectSavedConnection": "选择已保存的连接",
       "connectionString": "PostgreSQL 连接字符串",
@@ -979,7 +979,7 @@
         "format": "覆盖数据未声明支持 GeoTIFF 输出。",
         "crs": "覆盖数据必须支持使用 EPSG:4326 进行请求和输出。",
         "size": "请选择 1 到 4096 像素的尺寸。下载大小限制为 128 MB。",
-        "metadata": "服务返回的元数据超出 GeoLibre 可加载的大小。元数据响应限制为 32 MB。",
+        "metadata": "服务返回的元数据超出 GeoSpaX 可加载的大小。元数据响应限制为 32 MB。",
         "response": "服务未返回有效的 GeoTIFF。",
         "bounds": "请输入有效的边界框：东西经度在 -180 到 180 之间，南北纬度在 -90 到 90 之间，且西 < 东、南 < 北。",
         "url": "请输入 WCS 服务 URL。"
@@ -1255,7 +1255,7 @@
     "nmeaConnectFailed": "无法连接到接收机。",
     "nmeaDisconnected": "接收机已断开连接。",
     "nmeaUnsupportedDevice": "在该设备上未找到 NMEA 服务。它可能是经典蓝牙接收机，需要先在系统设置中配对，然后在此处作为串口连接。",
-    "nmeaUnsupported": "读取 NMEA 接收机需要 Web Serial 或 Web Bluetooth API，而此浏览器不提供这些接口。请在 Chrome 或 Edge 等 Chromium 浏览器中打开 GeoLibre。",
+    "nmeaUnsupported": "读取 NMEA 接收机需要 Web Serial 或 Web Bluetooth API，而此浏览器不提供这些接口。请在 Chrome 或 Edge 等 Chromium 浏览器中打开 GeoSpaX。",
     "nmeaSerialUnsupported": "此处无法使用 Web Serial，因此无法打开串口接收机。",
     "nmeaBluetoothUnsupported": "此处无法使用 Web Bluetooth，因此无法打开低功耗蓝牙接收机。",
     "nmeaBluetoothHint": "大多数蓝牙 GPS 接收机使用经典蓝牙：在系统设置中配对后，它会在此处显示为串口。仅在使用低功耗蓝牙接收机时才使用“连接蓝牙”。",
@@ -1389,7 +1389,7 @@
     "step1Title": "1. 获取 API 令牌",
     "step1Description": "登录 {{shareHost}}，然后在“设置 → API 令牌”下创建一个令牌。",
     "getToken": "获取 API 令牌",
-    "step2Title": "2. 将令牌添加到 GeoLibre",
+    "step2Title": "2. 将令牌添加到 GeoSpaX",
     "step2Description": "将令牌粘贴到本设备上的“设置 → 环境变量”中。",
     "configureToken": "配置本地令牌",
     "liveAt": "您的项目已发布在：",
@@ -1437,7 +1437,7 @@
   },
   "gallery": {
     "title": "项目图库",
-    "description": "浏览在 {{shareHost}} 上共享的公开项目，并在 GeoLibre 中打开其中一个。",
+    "description": "浏览在 {{shareHost}} 上共享的公开项目，并在 GeoSpaX 中打开其中一个。",
     "searchPlaceholder": "按标题、作者或标签筛选已加载的项目",
     "loading": "正在加载项目…",
     "loadingMore": "正在加载更多…",
@@ -1538,7 +1538,7 @@
       "groupNavigation": "将指北针与比例尺编组",
       "footer": "页脚文本",
       "date": "日期",
-      "attribution": "包含 GeoLibre 归属信息",
+      "attribution": "包含 GeoSpaX 归属信息",
       "pageBorder": "页面边框",
       "infoBlock": "信息块（标题栏）",
       "colorbar": "色带",
@@ -1816,9 +1816,9 @@
   },
   "auth": {
     "unavailableTitle": "登录不可用",
-    "unavailableDescription": "GeoLibre 无法访问登录服务，因此无法判断您是否已登录。这通常是暂时的；如果持续出现，可能需要检查此部署的身份验证设置。",
+    "unavailableDescription": "GeoSpaX 无法访问登录服务，因此无法判断您是否已登录。这通常是暂时的；如果持续出现，可能需要检查此部署的身份验证设置。",
     "retry": "重试",
-    "signInTitle": "登录 GeoLibre",
+    "signInTitle": "登录 GeoSpaX",
     "signInDescription": "此部署需要账户。系统会将您带到安全的登录页面，然后返回此处。",
     "signIn": "登录",
     "signOut": "退出登录",
@@ -1999,7 +1999,7 @@
     "noticeDesc": "打开知识卡片会将您点击地点的坐标（以及您打开的附近条目标题）发送到维基百科公共 API 以获取摘要和照片 — 您的坐标会离开您的设备用于这些请求。"
   },
   "onboarding": {
-    "title": "欢迎使用 GeoLibre",
+    "title": "欢迎使用 GeoSpaX",
     "description": "选择您的经验水平以定制界面。您可以随时在“设置 → 界面”中更改此设置。",
     "level": {
       "beginner": {
@@ -2012,7 +2012,7 @@
       },
       "advanced": {
         "title": "高级",
-        "description": "显示 GeoLibre 提供的所有功能。"
+        "description": "显示 GeoSpaX 提供的所有功能。"
       }
     },
     "showEverything": "跳过 — 显示全部内容"
@@ -2049,7 +2049,7 @@
     },
     "languagePack": {
       "title": "语言包",
-      "description": "按需添加 Whitebox 工具名称、参数和帮助文本翻译，而不会增大每个 GeoLibre 安装包。",
+      "description": "按需添加 Whitebox 工具名称、参数和帮助文本翻译，而不会增大每个 GeoSpaX 安装包。",
       "manage": "管理语言包",
       "interfaceLanguage": "界面语言",
       "installed": "已安装 Whitebox 语言包",
@@ -2071,10 +2071,10 @@
       "privacyLocalOnly": "语言包仅存储在此设备上。此版本不会下载任何内容：请改为导入语言包文件。",
       "browse": "浏览语言包",
       "errorInvalidJson": "该文件不是有效的 JSON。",
-      "errorInvalidFormat": "该文件不是有效的 GeoLibre Whitebox 语言包。",
-      "errorUnsupportedVersion": "当前 GeoLibre 版本不支持此语言包版本。",
+      "errorInvalidFormat": "该文件不是有效的 GeoSpaX Whitebox 语言包。",
+      "errorUnsupportedVersion": "当前 GeoSpaX 版本不支持此语言包版本。",
       "errorInvalidLocale": "语言包的语言代码无效或与预期不符。",
-      "errorUnsupportedLocale": "GeoLibre 未包含此语言包所需的基础界面语言。",
+      "errorUnsupportedLocale": "GeoSpaX 未包含此语言包所需的基础界面语言。",
       "errorTooLarge": "语言包超过 5 MB 安全限制。",
       "errorNotFound": "此语言目前尚无官方 Whitebox 语言包。",
       "errorDownload": "无法下载语言包。请检查网络连接或导入本地文件。",
@@ -2082,9 +2082,9 @@
     },
     "updates": {
       "title": "软件更新",
-      "description": "控制 GeoLibre 桌面应用启动时如何检查新版本。",
+      "description": "控制 GeoSpaX 桌面应用启动时如何检查新版本。",
       "checkOnStartup": "启动时检查更新",
-      "checkOnStartupHint": "启用后，GeoLibre 每次启动时都会检查是否有新版本。若要实现完全离线的工作流程，请关闭此选项。",
+      "checkOnStartupHint": "启用后，GeoSpaX 每次启动时都会检查是否有新版本。若要实现完全离线的工作流程，请关闭此选项。",
       "notificationLevel": "通知我关于",
       "notificationLevelHint": "选择哪些类型的发行版会触发启动通知。",
       "level": {
@@ -2095,7 +2095,7 @@
     },
     "startup": {
       "title": "启动项目",
-      "description": "选择原生应用启动时 GeoLibre 打开的工作区。",
+      "description": "选择原生应用启动时 GeoSpaX 打开的工作区。",
       "mode": {
         "default": "打开默认工作区",
         "last": "重新打开上一个项目",
@@ -2118,7 +2118,7 @@
       "viewUnavailable": "当前地图视图不可用。",
       "selectError": "无法读取所选项目。",
       "restoring": "正在打开启动项目…",
-      "loadWarning": "启动项目不可用。GeoLibre 已改为打开默认工作区。"
+      "loadWarning": "启动项目不可用。GeoSpaX 已改为打开默认工作区。"
     },
     "map": {
       "constraintsTitle": "地图约束",
@@ -2470,7 +2470,7 @@
       "smartPaste": "粘贴坐标",
       "smartPasteInputLabel": "坐标字符串",
       "smartPastePlaceholder": "例如 51.5074, -0.1278 或 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "以 DD、DMS 或 DDM 格式键入或粘贴完整的坐标字符串，然后运行“处理输入”。GeoLibre 会检测格式并填充下方的经度和纬度字段。请在前往目标位置前分别调整缩放、倾斜角和方位角。",
+      "smartPasteInfo": "以 DD、DMS 或 DDM 格式键入或粘贴完整的坐标字符串，然后运行“处理输入”。GeoSpaX 会检测格式并填充下方的经度和纬度字段。请在前往目标位置前分别调整缩放、倾斜角和方位角。",
       "smartPasteInfoLabel": "关于粘贴坐标",
       "smartPasteInvalid": "无法读取这些坐标。请以 DD、DMS 或 DDM 格式输入完整的经纬度，例如 51.5074, -0.1278。部分或不完整的字符串无法解析。",
       "processInput": "处理输入",
@@ -2607,8 +2607,8 @@
     },
     "conversion": {
       "vectorToVector": "矢量转矢量",
-      "zipInputBrowserError": "压缩的 Shapefile 只能在 GeoLibre 桌面应用中转换。在浏览器中，请选择解压后的 .shp 文件及其对应的 .dbf、.shx 和 .prj 文件。",
-      "browserOutputUnsupported": "在浏览器中，输出格式可以是 GeoJSON、CSV、GeoParquet、GeoPackage 或 Shapefile (.zip)。“.{{extension}}”输出需要使用 GeoLibre 桌面应用。",
+      "zipInputBrowserError": "压缩的 Shapefile 只能在 GeoSpaX 桌面应用中转换。在浏览器中，请选择解压后的 .shp 文件及其对应的 .dbf、.shx 和 .prj 文件。",
+      "browserOutputUnsupported": "在浏览器中，输出格式可以是 GeoJSON、CSV、GeoParquet、GeoPackage 或 Shapefile (.zip)。“.{{extension}}”输出需要使用 GeoSpaX 桌面应用。",
       "outputExtensionRequired": "请为输出文件名添加扩展名以选择格式。",
       "readingWithDuckDb": "正在使用 DuckDB-WASM 读取 {{name}}",
       "readFeatures": "已从 {{name}} 读取 {{features}} 个要素",
@@ -2622,7 +2622,7 @@
       "vectorToPmtiles": "矢量转 PMTiles",
       "rasterToCog": "栅格转 COG",
       "rasterToPmtiles": "栅格转 PMTiles",
-      "needsDesktop": "此转换需要 GeoLibre 桌面应用或运行中的 sidecar。",
+      "needsDesktop": "此转换需要 GeoSpaX 桌面应用或运行中的 sidecar。",
       "runsInBrowserDuckDb": "转换在浏览器中使用 DuckDB-WASM 运行。",
       "runsInBrowserWriters": "转换在浏览器中使用 DuckDB-WASM 和内置写入器运行。",
       "runsInBrowserWasm": "转换在浏览器中使用 geolibre-wasm 运行。无需 sidecar。",
@@ -2630,7 +2630,7 @@
       "rasterShape": "读取 {{width}}×{{height}} 栅格，{{bands}} 个波段",
       "wroteCog": "已写入带概览的分块 COG（{{compression}}）",
       "notAGeoTiff": "此文件不是可读的 GeoTIFF。在浏览器中，栅格转 COG 仅读取 GeoTIFF；其他格式需要桌面应用。",
-      "rasterTooLargeForBrowser": "在浏览器中，此操作会在 WebAssembly 中解码整个栅格，而 WebAssembly 的上限约为 4 GB，因此该文件放不下。请使用 GeoLibre 桌面应用进行转换，或先用 gdal_translate 或 rio-cogeo 构建 COG。",
+      "rasterTooLargeForBrowser": "在浏览器中，此操作会在 WebAssembly 中解码整个栅格，而 WebAssembly 的上限约为 4 GB，因此该文件放不下。请使用 GeoSpaX 桌面应用进行转换，或先用 gdal_translate 或 rio-cogeo 构建 COG。",
       "zoomRangeError": "缩放级别必须满足 0 ≤ 最小 ≤ 最大 ≤ {{max}}。",
       "colormap": "颜色映射",
       "resampling": "重采样",
@@ -2785,9 +2785,9 @@
       "outputFile": "输出文件",
       "noOutput": "暂无输出。",
       "errorConnect": "无法连接到 sidecar。",
-      "needsDesktopSidecar": "栅格工具需要 GeoLibre 桌面应用并运行 sidecar。",
+      "needsDesktopSidecar": "栅格工具需要 GeoSpaX 桌面应用并运行 sidecar。",
       "errorPoll": "无法查询作业状态。",
-      "errorStartSidecar": "无法启动 GeoLibre sidecar。",
+      "errorStartSidecar": "无法启动 GeoSpaX sidecar。",
       "errorStartTool": "无法启动栅格工具。"
     },
     "mapControl": {
@@ -2901,7 +2901,7 @@
       "terrain": "地形",
       "remoteSensing": "遥感",
       "projection": "投影",
-      "geolibre": "GeoLibre 工具箱",
+      "geolibre": "GeoSpaX 工具箱",
       "subGroupGeometry": "几何",
       "subGroupOverlay": "叠加",
       "subGroupJoin": "连接",
@@ -2979,12 +2979,12 @@
         "layer-type": "不支持 {{layerType}} 图层类型。",
         "missing-source": "该图层没有可读取的本地数据源。",
         "format": "不支持该图层的数据格式。",
-        "file-geodatabase": "项目中的文件地理数据库（.gdb）数据源不会被加载。请在 GeoLibre Desktop 中通过添加数据 → 文件地理数据库（GDB）添加。",
+        "file-geodatabase": "项目中的文件地理数据库（.gdb）数据源不会被加载。请在 GeoSpaX Desktop 中通过添加数据 → 文件地理数据库（GDB）添加。",
         "file-geodatabase-raster": "存储在文件地理数据库（.gdb）中的栅格数据集不受支持。请将栅格导出为 GeoTIFF，再作为栅格图层添加。",
         "network-path": "出于安全原因，不加载网络共享路径。",
         "service": "暂不支持项目中的 ArcGIS 服务图层。",
-        "browser-local-file": "已引用该本地文件，但浏览器无法重新打开 ArcGIS Pro 数据路径。请使用 GeoLibre Desktop 加载。",
-        "map-extent": "保存的地图范围使用了 GeoLibre 无法转换的坐标系，因此地图以默认视图打开。",
+        "browser-local-file": "已引用该本地文件，但浏览器无法重新打开 ArcGIS Pro 数据路径。请使用 GeoSpaX Desktop 加载。",
+        "map-extent": "保存的地图范围使用了 GeoSpaX 无法转换的坐标系，因此地图以默认视图打开。",
         "nesting": "该分组嵌套层级过深，或项目又引用了已包含它的分组。"
       },
       "qgisImportComplete": "QGIS 项目已导入",
@@ -2997,8 +2997,8 @@
         "format": "不支持该图层的文件格式。",
         "remote-file": "暂不支持远程 QGIS 文件数据源。",
         "network-path": "出于安全原因，不加载网络共享路径。",
-        "browser-local-file": "已引用该本地文件，但浏览器无法重新打开 QGIS 数据路径。请使用 GeoLibre Desktop 加载。",
-        "browser-local-raster": "该栅格通过本地路径引用。请使用 GeoLibre Desktop 加载。"
+        "browser-local-file": "已引用该本地文件，但浏览器无法重新打开 QGIS 数据路径。请使用 GeoSpaX Desktop 加载。",
+        "browser-local-raster": "该栅格通过本地路径引用。请使用 GeoSpaX Desktop 加载。"
       },
       "openProjectFromUrlDesc": "加载 `.geolibre.json` 项目并将其添加到最近项目。",
       "projectUrl": "项目 URL",
@@ -3012,7 +3012,7 @@
       "embedEditedGeometryDesc": "此项目包含已编辑的几何图形。嵌入矢量数据（约 {{size}}）以保留更改。如果不嵌入，引用的图层将恢复原始几何图形，本地数据可能无法使用。",
       "embedVectorDesc": "此项目包含 {{count}} 个从您计算机加载的本地矢量图层。项目重新打开时浏览器无法重新读取这些文件，因此必须将其数据嵌入项目文件中才能恢复。嵌入会为文件增加约 {{size}} 的大小。",
       "embedVectorDescDesktop": "此项目包含 {{count}} 个从您计算机加载的本地矢量图层。您可以嵌入它们的数据以使项目自包含（增加约 {{size}}），也可以保存文件引用，在项目重新打开时从磁盘重新加载。引用可保持文件较小，但若源文件之后被移动或删除则会失效。",
-      "embedVectorDescMas": "此项目包含 {{count}} 个从您计算机加载的本地矢量图层。Mac App Store 沙盒无法在 GeoLibre 关闭后保留对这些文件的访问权限，因此必须将其数据嵌入项目文件中才能恢复。嵌入会为文件增加约 {{size}} 的大小。",
+      "embedVectorDescMas": "此项目包含 {{count}} 个从您计算机加载的本地矢量图层。Mac App Store 沙盒无法在 GeoSpaX 关闭后保留对这些文件的访问权限，因此必须将其数据嵌入项目文件中才能恢复。嵌入会为文件增加约 {{size}} 的大小。",
       "embedVectorLargeWarning": "嵌入约 {{size}} 会生成非常大的项目文件。由于必须一次性解析并在内存中保留全部要素，重新打开时可能很慢，甚至直接失败。对于这种大小的数据，请将图层转换为 PMTiles 或 FlatGeobuf，并以远程图层的方式添加，而不要嵌入。",
       "embedVectorEmbedButton": "嵌入数据",
       "embedVectorReferenceButton": "保存文件引用",
@@ -3128,7 +3128,7 @@
     },
     "error": {
       "couldNotOpenProject": "无法打开项目。",
-      "multipleProjectDrop": "请一次只拖放一个 GeoLibre 项目，不要同时拖放其他文件。",
+      "multipleProjectDrop": "请一次只拖放一个 GeoSpaX 项目，不要同时拖放其他文件。",
       "projectDropNotAllowed": "此部署不允许切换项目。",
       "couldNotImportQgisProject": "无法导入 QGIS 项目。",
       "couldNotImportArcgisProject": "无法导入 ArcGIS Pro 项目。",
@@ -3259,7 +3259,7 @@
     "filterSummary": "已应用图层筛选：{{total}} 个要素中有 {{matched}} 个匹配。",
     "evaluationErrors": "{{count}} 个要素无法求值，未被匹配。",
     "unevaluableDisjoint": "{{count}} 个要素因几何无法求值而被排除。",
-    "tooManyPairs": "此比较需要 {{pairs}} 次要素对测试（上限 {{limit}}）。请改用“处理 → GeoLibre → 矢量 → 按位置选择”并选择 Sidecar 引擎。",
+    "tooManyPairs": "此比较需要 {{pairs}} 次要素对测试（上限 {{limit}}）。请改用“处理 → GeoSpaX → 矢量 → 按位置选择”并选择 Sidecar 引擎。",
     "exportedLayerName": "{{name}}（选择集）"
   },
   "loadEditorFeatures": {
@@ -3787,7 +3787,7 @@
     "addUnsupported": "只有 GeoTIFF/COG、GeoJSON、GeoParquet 和 PMTiles 资源可以添加到地图",
     "addFailed": "无法添加资源",
     "addNoSourceLayers": "此归档未列出可绘制的图层",
-    "cogUnsupported": "此 GeoLibre 主机无法可视化远程 GeoTIFF 资源",
+    "cogUnsupported": "此 GeoSpaX 主机无法可视化远程 GeoTIFF 资源",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3796,7 +3796,7 @@
     "notAddable": "无法添加",
     "addNoTarget": "此资产未列出可绘制的内容",
     "zarrProblemGroup": "此资产指向一组数组，而不是可绘制的单个数组",
-    "zarrProblemUnauthorized": "此 Zarr 存储需要凭据，GeoLibre 目前尚无法提供",
+    "zarrProblemUnauthorized": "此 Zarr 存储需要凭据，GeoSpaX 目前尚无法提供",
     "zarrProblemUnsupportedUrl": "此 Zarr 存储的地址无法按键逐个读取",
     "zarrProblemUnavailable": "无法打开此 Zarr 存储",
     "chooseTarget": "选择要添加的内容",
@@ -3827,7 +3827,7 @@
     "filterWebMap": "Web 地图",
     "webMapAdded_other": "已从此 Web 地图添加 {{count}} 个图层。",
     "webMapAddedPartial": "已从此 Web 地图添加 {{total}} 个图层中的 {{added}} 个；其余无法访问。",
-    "webMapEmpty": "此 Web 地图没有 GeoLibre 可渲染的图层。",
+    "webMapEmpty": "此 Web 地图没有 GeoSpaX 可渲染的图层。",
     "add": "添加",
     "adding": "添加中…",
     "remove": "移除",
@@ -3909,7 +3909,7 @@
     "downloadTitle": "下载此文件",
     "copyUrlTitle": "复制此文件的 URL",
     "openProductTitle": "在 source.coop 上打开此产品",
-    "unsupportedTitle": "GeoLibre 无法渲染此格式 — 请改为下载。",
+    "unsupportedTitle": "GeoSpaX 无法渲染此格式 — 请改为下载。",
     "addError": "无法添加此文件：{{message}}",
     "largeFileWarning": "文件大小为 {{size}}。系统会从源端流式读取，仅加载视图内的部分。",
     "streamHint": "文件大小为 {{size}}。“添加”会将其完整复制到内存；“流式加载”仅读取视图内的部分。",
@@ -3953,7 +3953,7 @@
     "downloadTitle": "下载此文件",
     "copyUrlTitle": "复制此文件的 URL",
     "openDatasetTitle": "在 huggingface.co 上打开此数据集页面",
-    "unsupportedTitle": "GeoLibre 无法渲染此格式 — 请改为下载。",
+    "unsupportedTitle": "GeoSpaX 无法渲染此格式 — 请改为下载。",
     "addError": "无法添加此文件：{{message}}",
     "notRasterIndex": "此 JSON 文件未索引任何栅格，因此没有可放到地图上的内容。支持 MosaicJSON 和 STAC 集合。",
     "largeFileWarning": "文件大小为 {{size}}。系统会从源端流式读取，仅加载视图内的部分。",
@@ -3995,7 +3995,7 @@
     "clearSelection": "清空",
     "selectedFiles_other": "已选择 {{count}} 个文件（{{size}}）。",
     "commitMessageLabel": "提交信息（可选）",
-    "commitMessagePlaceholder": "通过 GeoLibre 上传",
+    "commitMessagePlaceholder": "通过 GeoSpaX 上传",
     "upload": "上传",
     "uploadPreparing": "正在准备上传…",
     "uploadHashing": "正在计算 {{name}} 的哈希（{{index}}/{{total}}）…",
@@ -4506,7 +4506,7 @@
       "importedLog": "已导入包含 {{nodes}} 个节点的模型。",
       "importFailed": "导入失败",
       "importInvalid": "该文件不包含模型图。",
-      "importUnsupported": "该文件不是 GeoLibre 模型。",
+      "importUnsupported": "该文件不是 GeoSpaX 模型。",
       "rasterOutputUnsupported": "“{{name}}”是栅格结果，此版本无法将其添加到地图。",
       "portNeedsVector": "“{{port}}”需要矢量数据，但收到的是栅格。",
       "toolNoOutput": "“{{tool}}”没有产生输出。",
@@ -4561,7 +4561,7 @@
       },
       "filterBySource": "按来源筛选",
       "allSources": "所有来源",
-      "geolibreTools": "GeoLibre 工具",
+      "geolibreTools": "GeoSpaX 工具",
       "whiteboxTools": "Whitebox 工具",
       "toolbox": "Whitebox 工具箱",
       "checkingRuntime": "正在检查运行时。",
@@ -4615,8 +4615,8 @@
       "errorConnect": "无法连接到 sidecar。",
       "errorPoll": "无法查询作业状态。",
       "errorStartTool": "无法启动 Whitebox 工具。",
-      "errorStartSidecar": "无法启动 GeoLibre sidecar。",
-      "errorStopSidecar": "无法停止 GeoLibre sidecar。",
+      "errorStartSidecar": "无法启动 GeoSpaX sidecar。",
+      "errorStopSidecar": "无法停止 GeoSpaX sidecar。",
       "noToolsFound": "未找到工具。",
       "noParameters": "此工具没有参数。",
       "noOutput": "暂无输出。",
@@ -4645,9 +4645,9 @@
       "runLocallyButton": "本地运行 (WASM)",
       "troubleshootingTitle": "仍想使用服务器？",
       "stepStartServerDesktop": "在工具列表面板中点击“启动服务器”以启动它，然后等待几秒钟使其上线。",
-      "stepStartServerBrowser": "服务器只能从 GeoLibre 桌面应用启动。在浏览器中，请继续启用“本地运行 (WASM)”。",
+      "stepStartServerBrowser": "服务器只能从 GeoSpaX 桌面应用启动。在浏览器中，请继续启用“本地运行 (WASM)”。",
       "stepCheckPort": "请确保防火墙、杀毒软件或网络策略未阻止本地端口 {{port}}。",
-      "stepRestart": "如果服务器意外停止，请重启 GeoLibre 桌面应用并重新打开此对话框。"
+      "stepRestart": "如果服务器意外停止，请重启 GeoSpaX 桌面应用并重新打开此对话框。"
     },
     "vectorTools": {
       "title": "矢量工具",
@@ -6260,13 +6260,13 @@
     "segment": "分割",
     "status": {
       "checking": "正在检查 AI 分割服务…",
-      "unavailableDesktop": "AI 分割服务尚未运行。请启动已启用 segment-geospatial 的 GeoLibre 服务器以使用此功能。",
-      "unavailableWeb": "AI 分割在浏览器中不可用。请使用 GeoLibre 桌面应用运行此功能。"
+      "unavailableDesktop": "AI 分割服务尚未运行。请启动已启用 segment-geospatial 的 GeoSpaX 服务器以使用此功能。",
+      "unavailableWeb": "AI 分割在浏览器中不可用。请使用 GeoSpaX 桌面应用运行此功能。"
     },
     "error": {
       "chooseImage": "请选择要分割的图像 (GeoTIFF)。",
       "enterPrompt": "请输入文本提示，例如“树木”或“建筑物”。",
-      "startServer": "无法启动 GeoLibre Sidecar。",
+      "startServer": "无法启动 GeoSpaX Sidecar。",
       "failed": "分割失败。"
     },
     "noObjects": "未找到任何对象。",
@@ -6277,7 +6277,7 @@
       "title": "无法启动 AI 分割服务器。",
       "intro": "AI 分割在本地辅助服务器（{{sidecarUrl}}）中运行，该服务器承载来自 segment-geospatial 的 SAM3 模型。它在后台运行 Python，与应用本身分离，且不属于浏览器构建版本。",
       "troubleshootingTitle": "如何启动服务器",
-      "stepInstall": "请确保 GeoLibre 服务器已安装并启用 segment-geospatial 后端，以便分割模型可用。",
+      "stepInstall": "请确保 GeoSpaX 服务器已安装并启用 segment-geospatial 后端，以便分割模型可用。",
       "stepStartServerDesktop": "点击上方的“启动服务器”以启动它，然后等待几秒钟使模型上线。"
     }
   },
@@ -6531,7 +6531,7 @@
     "import": "导入…",
     "export": "导出…",
     "importFilterName": "样式库 / QML / SLD",
-    "exportFilterName": "GeoLibre 样式库",
+    "exportFilterName": "GeoSpaX 样式库",
     "applied": "已将“{{name}}”应用到 {{layer}}。",
     "appliedRampHint": "已应用“{{name}}”。请将图层切换为分级或分类样式以查看色带。",
     "saved": "已将“{{name}}”保存到库中。",
@@ -7220,7 +7220,7 @@
     "exportStyleDataNotReady": "图层数据尚未准备就绪。请稍后重试。",
     "exportStyleNeedsFeatures": "样式导出需要包含要素的矢量图层。",
     "exportStyleError": "无法导出此图层的样式。",
-    "importStyle": "导入样式（GeoLibre URL / Mapbox GL / SLD / QML）…",
+    "importStyle": "导入样式（GeoSpaX URL / Mapbox GL / SLD / QML）…",
     "openStyleManager": "已保存的样式（样式管理器）…",
     "importStyleSuccess": "样式已导入。",
     "importStyleInvalid": "该文件不是有效的 JSON、SLD 或 QML。",
@@ -7634,10 +7634,10 @@
   },
   "errorBoundary": {
     "title": "出错了",
-    "description": "GeoLibre 遇到意外错误，无法继续。您的工作可能尚未保存 — 请先尝试恢复，再重新加载。",
+    "description": "GeoSpaX 遇到意外错误，无法继续。您的工作可能尚未保存 — 请先尝试恢复，再重新加载。",
     "tryAgain": "重试",
     "reload": "重新加载应用",
-    "sectionFailed": "{{label}} 渲染失败。GeoLibre 的其余部分仍可使用。"
+    "sectionFailed": "{{label}} 渲染失败。GeoSpaX 的其余部分仍可使用。"
   },
   "commandPalette": {
     "title": "命令面板",
@@ -7682,7 +7682,7 @@
     "emptyNetworkError": "未捕获任何网络错误诊断信息。"
   },
   "shell": {
-    "workspaceTitle": "GeoLibre 地图工作区",
+    "workspaceTitle": "GeoSpaX 地图工作区",
     "section": {
       "toolbar": "工具栏",
       "sharedLeftSidebar": "共享左侧栏",
@@ -7955,7 +7955,7 @@
     "navigationButton": "1. 加载数据源并绘制导航",
     "navigationButtonAgain": "绘制另一个导航图层",
     "exportButton": "将绘制结果导出为 GeoJSON",
-    "addLayersButton": "将绘制结果添加到 GeoLibre 图层",
+    "addLayersButton": "将绘制结果添加到 GeoSpaX 图层",
     "clearButton": "清除 NLDI 结果",
     "noComid": "该点未返回 COMID。",
     "requestingBasin": "正在请求上游流域…",

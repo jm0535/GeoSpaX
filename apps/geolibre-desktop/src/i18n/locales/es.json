@@ -6,9 +6,9 @@
     "summary": "Capas: {{count}} · zoom {{zoom}}",
     "restore": "Restaurar",
     "discard": "Descartar",
-    "restoreError": "No se pudo restaurar esta instantánea. Puede estar dañada o ser incompatible con esta versión de GeoLibre.",
+    "restoreError": "No se pudo restaurar esta instantánea. Puede estar dañada o ser incompatible con esta versión de GeoSpaX.",
     "recoveryTitle": "¿Recuperar el trabajo sin guardar?",
-    "recoveryDescription": "GeoLibre no se cerró correctamente. Hay disponible un autoguardado más reciente de «{{name}}»."
+    "recoveryDescription": "GeoSpaX no se cerró correctamente. Hay disponible un autoguardado más reciente de «{{name}}»."
   },
   "browser": {
     "title": "Explorador",
@@ -47,15 +47,15 @@
     "libraryImportFailed": "No se pudo leer este archivo de biblioteca de capas.",
     "libraryExportFailed": "No se pudo exportar la biblioteca de capas.",
     "libraryLayerMissing": "Esa capa guardada ya no existe.",
-    "libraryLayerNeedsDesktop": "Esta capa guardada lee un archivo del disco, por lo que necesita GeoLibre Desktop. Vuelva a añadir el archivo para guardar una nueva entrada.",
+    "libraryLayerNeedsDesktop": "Esta capa guardada lee un archivo del disco, por lo que necesita GeoSpaX Desktop. Vuelva a añadir el archivo para guardar una nueva entrada.",
     "libraryLayerConfigNotApplied": "Se añadió el archivo de «{{name}}», pero su estilo guardado no se pudo asociar a una sola capa, así que no se volvió a aplicar.",
     "libraryLayerJoinsUnresolved_one": "Se añadió la capa, pero no se pudo volver a aplicar 1 unión guardada: la capa con la que se une no está en este proyecto.",
     "libraryLayerJoinsUnresolved_other": "Se añadió la capa, pero no se pudieron volver a aplicar {{count}} uniones guardadas: las capas con las que se unen no están en este proyecto."
   },
   "about": {
     "trigger": "Acerca de",
-    "title": "Acerca de GeoLibre",
-    "description": "GeoLibre es una plataforma SIG ligera y nativa de la nube.",
+    "title": "Acerca de GeoSpaX",
+    "description": "GeoSpaX es una plataforma SIG ligera y nativa de la nube.",
     "version": "Versión",
     "checkForUpdates": "Buscar actualizaciones",
     "tryAgain": "Reintentar",
@@ -74,7 +74,7 @@
     "steps": {
       "download": "Descargue el instalador para su plataforma desde la página de descargas.",
       "install": "Ejecute el instalador. Sus proyectos locales, configuraciones y claves de API se conservan.",
-      "reopen": "Vuelva a abrir GeoLibre para finalizar la actualización."
+      "reopen": "Vuelva a abrir GeoSpaX para finalizar la actualización."
     },
     "severity": {
       "major": "Versión mayor",
@@ -93,7 +93,7 @@
       "noTag": "La última versión no incluye una etiqueta de versión.",
       "network": "No se pudo conectar con GitHub. Compruebe su conexión e inténtelo de nuevo.",
       "viewDownloads": "Ver descargas",
-      "viewDownloadsHint": "Abre la página de descargas de GeoLibre en su navegador para que pueda comprobar manualmente la última versión."
+      "viewDownloadsHint": "Abre la página de descargas de GeoSpaX en su navegador para que pueda comprobar manualmente la última versión."
     },
     "startup": {
       "title": "Actualización disponible",
@@ -106,7 +106,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "Esta función no está disponible en la versión de GeoLibre Desktop de la Mac App Store."
+    "unavailable": "Esta función no está disponible en la versión de GeoSpaX Desktop de la Mac App Store."
   },
   "bookmark": {
     "captureStateLabel": "Incluir el estado completo de las capas (activas, inactivas y orden de las capas)",
@@ -124,7 +124,7 @@
       "title": "¿Cargar complementos de este proyecto?",
       "description_one": "Este proyecto quiere cargar 1 complemento externo desde una URL que no ha instalado. Los complementos ejecutan código con acceso total a la aplicación.",
       "description_other": "Este proyecto quiere cargar {{count}} complementos externos desde URLs que no ha instalado. Los complementos ejecutan código con acceso total a la aplicación.",
-      "warning": "Cargue solo complementos de fuentes en las que confíe. Los complementos cargados se ejecutan con los mismos privilegios que GeoLibre.",
+      "warning": "Cargue solo complementos de fuentes en las que confíe. Los complementos cargados se ejecutan con los mismos privilegios que GeoSpaX.",
       "trustButton": "Confiar y cargar",
       "dismissButton": "No cargar"
     },
@@ -143,7 +143,7 @@
     "openHomepageAria": "Abrir la página de {{name}}",
     "byAuthor": "de {{author}}",
     "updateAvailable": "actualización disponible",
-    "requiresVersion": "requiere GeoLibre {{version}}+",
+    "requiresVersion": "requiere GeoSpaX {{version}}+",
     "install": "Instalar",
     "installAria": "Instalar {{name}}",
     "removeConfirm": "¿Eliminar?",
@@ -154,10 +154,10 @@
     "updateAria": "Actualizar {{name}}",
     "loading": "Cargando…",
     "installed": "Instalado",
-    "settingsIntro": "GeoLibre siempre analiza su directorio de complementos de datos de la aplicación. Instale un complemento empaquetado (.zip) desde un archivo, o añada directorios locales adicionales (solo en el escritorio). Las URL de manifiesto (incluidas las instalaciones desde el marketplace) se cargan por red; los cambios aquí se aplican de inmediato.",
+    "settingsIntro": "GeoSpaX siempre analiza su directorio de complementos de datos de la aplicación. Instale un complemento empaquetado (.zip) desde un archivo, o añada directorios locales adicionales (solo en el escritorio). Las URL de manifiesto (incluidas las instalaciones desde el marketplace) se cargan por red; los cambios aquí se aplican de inmediato.",
     "installFromFile": "Instalar desde archivo",
     "chooseZip": "Elegir .zip…",
-    "installFromFileHintDesktop": "Copia un archivo de complemento empaquetado en el directorio de complementos de GeoLibre.",
+    "installFromFileHintDesktop": "Copia un archivo de complemento empaquetado en el directorio de complementos de GeoSpaX.",
     "installFromFileHintWeb": "Carga un archivo de complemento empaquetado; se almacena en su navegador y se recarga en su próxima visita.",
     "localDirectories": "Directorios locales",
     "directoryAria": "Directorio de complementos",
@@ -172,7 +172,7 @@
     "errorDirectoryPicker": "No se pudo abrir el selector de directorios.",
     "errorInstall": "No se pudo instalar el complemento.",
     "errorUninstall": "No se pudo desinstalar el complemento.",
-    "description": "Explore, instale, actualice y elimine complementos externos de GeoLibre. Los complementos se listan en el <registryLink>registro de complementos de GeoLibre</registryLink>."
+    "description": "Explore, instale, actualice y elimine complementos externos de GeoSpaX. Los complementos se listan en el <registryLink>registro de complementos de GeoSpaX</registryLink>."
   },
   "viewState": {
     "panelTitle": "Información"
@@ -264,7 +264,7 @@
     "add": "Añadir",
     "ok": "Aceptar",
     "done": "Listo",
-    "openWebApp": "Abrir la aplicación web de GeoLibre"
+    "openWebApp": "Abrir la aplicación web de GeoSpaX"
   },
   "addData": {
     "title": "Añadir datos",
@@ -315,7 +315,7 @@
       },
       "gdb": {
         "label": "Añadir capa de geodatabase de archivos",
-        "description": "Añade una capa desde una geodatabase de archivos de Esri (carpeta .gdb). La capa se lee con el servidor local de GeoLibre y se reproyecta a WGS84."
+        "description": "Añade una capa desde una geodatabase de archivos de Esri (carpeta .gdb). La capa se lee con el servidor local de GeoSpaX y se reproyecta a WGS84."
       },
       "photos": {
         "label": "Añadir fotos geoetiquetadas",
@@ -662,8 +662,8 @@
       "layerPlaceholder": "Elija primero una geodatabase",
       "readingLayers": "Leyendo capas...",
       "layerOption": "{{name}} ({{type}}, {{count}} entidades)",
-      "help": "Las tablas solo de atributos no se muestran. La clase de entidad seleccionada se carga a través del servidor local de GeoLibre y se reproyecta a WGS84.",
-      "desktopOnly": "Las capas de geodatabase de archivos solo están disponibles en GeoLibre Desktop. Esta función lee una carpeta .gdb local a través del servidor local de GeoLibre, al que la aplicación web no puede acceder.",
+      "help": "Las tablas solo de atributos no se muestran. La clase de entidad seleccionada se carga a través del servidor local de GeoSpaX y se reproyecta a WGS84.",
+      "desktopOnly": "Las capas de geodatabase de archivos solo están disponibles en GeoSpaX Desktop. Esta función lee una carpeta .gdb local a través del servidor local de GeoSpaX, al que la aplicación web no puede acceder.",
       "readError": "No se pudo leer esta geodatabase de archivos.",
       "convertError": "No se pudo cargar esta clase de entidad.",
       "errorNotGdb": "Elija una carpeta que termine en .gdb (una geodatabase de archivos de Esri).",
@@ -755,7 +755,7 @@
     },
     "postgres": {
       "defaultName": "Capa de PostgreSQL",
-      "errorDesktopOnly": "Las capas de PostgreSQL requieren GeoLibre Desktop.",
+      "errorDesktopOnly": "Las capas de PostgreSQL requieren GeoSpaX Desktop.",
       "errorConnectionString": "Introduzca una cadena de conexión de PostgreSQL.",
       "statusCheckingBinary": "Comprobando el binario de Martin...",
       "statusDownloaded": "Martin descargado. Iniciando servidor local...",
@@ -770,7 +770,7 @@
       "errorConnectFirst": "Conéctese primero a PostgreSQL.",
       "errorNoVectorLayers": "La fuente Martin seleccionada no tiene capas vectoriales.",
       "errorSelectSource": "Seleccione una fuente Martin para añadir.",
-      "desktopOnlyNotice": "Las capas de PostgreSQL solo están disponibles en GeoLibre Desktop. Esta función ejecuta un servidor de teselas Martin local, que las aplicaciones web y móviles no pueden iniciar.",
+      "desktopOnlyNotice": "Las capas de PostgreSQL solo están disponibles en GeoSpaX Desktop. Esta función ejecuta un servidor de teselas Martin local, que las aplicaciones web y móviles no pueden iniciar.",
       "savedConnection": "Conexión guardada",
       "selectSavedConnection": "Seleccionar conexión guardada",
       "connectionString": "Cadena de conexión de PostgreSQL",
@@ -1000,7 +1000,7 @@
         "format": "La cobertura no anuncia salida GeoTIFF.",
         "crs": "La cobertura debe admitir EPSG:4326 para solicitudes y salida.",
         "size": "Elija dimensiones de 1 a 4096 píxeles. Las descargas se limitan a 128 MB.",
-        "metadata": "El servicio devolvió más metadatos de los que GeoLibre puede cargar. Las respuestas de metadatos se limitan a 32 MB.",
+        "metadata": "El servicio devolvió más metadatos de los que GeoSpaX puede cargar. Las respuestas de metadatos se limitan a 32 MB.",
         "response": "El servicio no devolvió un GeoTIFF válido.",
         "bounds": "Introduzca un cuadro válido: oeste/este entre -180 y 180, sur/norte entre -90 y 90, con oeste < este y sur < norte.",
         "url": "Introduzca una URL de servicio WCS."
@@ -1290,7 +1290,7 @@
     "nmeaConnectFailed": "No se pudo conectar con el receptor.",
     "nmeaDisconnected": "El receptor se desconectó.",
     "nmeaUnsupportedDevice": "No se encontró ningún servicio NMEA en ese dispositivo. Puede que sea un receptor Bluetooth clásico, que hay que emparejar en la configuración del sistema y conectar aquí como puerto serie.",
-    "nmeaUnsupported": "Leer un receptor NMEA requiere las API Web Serial o Web Bluetooth, que este navegador no ofrece. Abra GeoLibre en un navegador Chromium como Chrome o Edge.",
+    "nmeaUnsupported": "Leer un receptor NMEA requiere las API Web Serial o Web Bluetooth, que este navegador no ofrece. Abra GeoSpaX en un navegador Chromium como Chrome o Edge.",
     "nmeaSerialUnsupported": "Web Serial no está disponible aquí, así que no se pueden abrir receptores serie.",
     "nmeaBluetoothUnsupported": "Web Bluetooth no está disponible aquí, así que no se pueden abrir receptores Bluetooth Low Energy.",
     "nmeaBluetoothHint": "La mayoría de los receptores GPS Bluetooth usan Bluetooth clásico: empareje uno en la configuración del sistema y aparecerá aquí como puerto serie. Use «Conectar por Bluetooth» solo para receptores Bluetooth Low Energy.",
@@ -1425,7 +1425,7 @@
     "step1Title": "1. Obtener un token de API",
     "step1Description": "Inicie sesión en {{shareHost}} y luego cree un token en Configuración → Tokens de API.",
     "getToken": "Obtener token de API",
-    "step2Title": "2. Añadir el token a GeoLibre",
+    "step2Title": "2. Añadir el token a GeoSpaX",
     "step2Description": "Pegue el token en Configuración → Variables de entorno en este dispositivo.",
     "configureToken": "Configurar token local",
     "liveAt": "Su proyecto está publicado en:",
@@ -1476,7 +1476,7 @@
   },
   "gallery": {
     "title": "Galería de proyectos",
-    "description": "Explore los proyectos públicos compartidos en {{shareHost}} y abra uno en GeoLibre.",
+    "description": "Explore los proyectos públicos compartidos en {{shareHost}} y abra uno en GeoSpaX.",
     "searchPlaceholder": "Filtrar proyectos cargados por título, autor o etiqueta",
     "loading": "Cargando proyectos…",
     "loadingMore": "Cargando más…",
@@ -1578,7 +1578,7 @@
       "groupNavigation": "Agrupar flecha de norte y escala gráfica",
       "footer": "Texto de pie de página",
       "date": "Fecha",
-      "attribution": "Incluir atribución de GeoLibre",
+      "attribution": "Incluir atribución de GeoSpaX",
       "pageBorder": "Borde de página",
       "infoBlock": "Bloque de información (rótulo)",
       "colorbar": "Barra de color",
@@ -1862,9 +1862,9 @@
   },
   "auth": {
     "unavailableTitle": "El inicio de sesión no está disponible",
-    "unavailableDescription": "GeoLibre no pudo conectar con el servicio de inicio de sesión, por lo que no puede saber si ha iniciado sesión. Esto suele ser temporal; si persiste, es posible que haya que revisar la configuración de autenticación de esta implementación.",
+    "unavailableDescription": "GeoSpaX no pudo conectar con el servicio de inicio de sesión, por lo que no puede saber si ha iniciado sesión. Esto suele ser temporal; si persiste, es posible que haya que revisar la configuración de autenticación de esta implementación.",
     "retry": "Reintentar",
-    "signInTitle": "Inicie sesión en GeoLibre",
+    "signInTitle": "Inicie sesión en GeoSpaX",
     "signInDescription": "Esta implementación requiere una cuenta. Se le llevará a una página de inicio de sesión segura y volverá aquí.",
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",
@@ -2045,7 +2045,7 @@
     "noticeDesc": "Al abrir una tarjeta de información se envían las coordenadas del lugar en el que hizo clic (y el título de cualquier artículo cercano que abra) a la API pública de Wikipedia para obtener un resumen y una foto; sus coordenadas salen de su dispositivo en esas solicitudes."
   },
   "onboarding": {
-    "title": "Bienvenido a GeoLibre",
+    "title": "Bienvenido a GeoSpaX",
     "description": "Elija su nivel de experiencia para adaptar la interfaz. Puede cambiarlo en cualquier momento en Configuración → Interfaz.",
     "level": {
       "beginner": {
@@ -2058,7 +2058,7 @@
       },
       "advanced": {
         "title": "Avanzado",
-        "description": "Mostrar todo lo que GeoLibre ofrece."
+        "description": "Mostrar todo lo que GeoSpaX ofrece."
       }
     },
     "showEverything": "Omitir: mostrar todo"
@@ -2095,7 +2095,7 @@
     },
     "languagePack": {
       "title": "Paquetes de idioma",
-      "description": "Añada traducciones opcionales para los nombres, parámetros y textos de ayuda de las herramientas de Whitebox sin aumentar el tamaño de todas las instalaciones de GeoLibre.",
+      "description": "Añada traducciones opcionales para los nombres, parámetros y textos de ayuda de las herramientas de Whitebox sin aumentar el tamaño de todas las instalaciones de GeoSpaX.",
       "manage": "Gestionar paquetes de idioma",
       "interfaceLanguage": "Idioma de la interfaz",
       "installed": "Paquete de idioma de Whitebox instalado",
@@ -2117,10 +2117,10 @@
       "privacyLocalOnly": "Los paquetes se almacenan solo en este dispositivo. Esta compilación no descarga nada: importe un archivo de paquete de idioma en su lugar.",
       "browse": "Explorar paquetes de idioma",
       "errorInvalidJson": "Ese archivo no es un JSON válido.",
-      "errorInvalidFormat": "Ese archivo no es un paquete de idioma de Whitebox para GeoLibre válido.",
-      "errorUnsupportedVersion": "Esta versión de paquete de idioma no es compatible con esta versión de GeoLibre.",
+      "errorInvalidFormat": "Ese archivo no es un paquete de idioma de Whitebox para GeoSpaX válido.",
+      "errorUnsupportedVersion": "Esta versión de paquete de idioma no es compatible con esta versión de GeoSpaX.",
       "errorInvalidLocale": "El paquete de idioma tiene una configuración regional no válida o inesperada.",
-      "errorUnsupportedLocale": "GeoLibre no incluye el idioma base de la interfaz que requiere este paquete.",
+      "errorUnsupportedLocale": "GeoSpaX no incluye el idioma base de la interfaz que requiere este paquete.",
       "errorTooLarge": "El paquete de idioma supera el límite de seguridad de 5 MB.",
       "errorNotFound": "Todavía no hay ningún paquete de idioma oficial de Whitebox para este idioma.",
       "errorDownload": "No se pudo descargar el paquete de idioma. Compruebe su conexión o importe un archivo local.",
@@ -2128,9 +2128,9 @@
     },
     "updates": {
       "title": "Actualizaciones de software",
-      "description": "Controle cómo GeoLibre busca nuevas versiones al iniciar la aplicación de escritorio.",
+      "description": "Controle cómo GeoSpaX busca nuevas versiones al iniciar la aplicación de escritorio.",
       "checkOnStartup": "Buscar actualizaciones al iniciar",
-      "checkOnStartupHint": "Cuando está activado, GeoLibre busca una versión más reciente cada vez que se inicia la aplicación. Desactívelo para un flujo de trabajo totalmente sin conexión.",
+      "checkOnStartupHint": "Cuando está activado, GeoSpaX busca una versión más reciente cada vez que se inicia la aplicación. Desactívelo para un flujo de trabajo totalmente sin conexión.",
       "notificationLevel": "Notificarme sobre",
       "notificationLevelHint": "Elija qué tipos de versiones activan una notificación de inicio.",
       "level": {
@@ -2141,7 +2141,7 @@
     },
     "startup": {
       "title": "Proyecto de inicio",
-      "description": "Elija el espacio de trabajo que GeoLibre abre al iniciarse la aplicación nativa.",
+      "description": "Elija el espacio de trabajo que GeoSpaX abre al iniciarse la aplicación nativa.",
       "mode": {
         "default": "Abrir el espacio de trabajo predeterminado",
         "last": "Volver a abrir el último proyecto",
@@ -2164,7 +2164,7 @@
       "viewUnavailable": "La vista actual del mapa no está disponible.",
       "selectError": "No se pudo leer el proyecto seleccionado.",
       "restoring": "Abriendo su proyecto de inicio…",
-      "loadWarning": "El proyecto de inicio no está disponible. GeoLibre abrió el espacio de trabajo predeterminado en su lugar."
+      "loadWarning": "El proyecto de inicio no está disponible. GeoSpaX abrió el espacio de trabajo predeterminado en su lugar."
     },
     "map": {
       "constraintsTitle": "Restricciones del mapa",
@@ -2518,7 +2518,7 @@
       "smartPaste": "Pegar coordenadas",
       "smartPasteInputLabel": "Cadena de coordenadas",
       "smartPastePlaceholder": "p. ej., 51.5074, -0.1278 o 51°30'26\"N, 0°07'39\"O",
-      "smartPasteInfo": "Escriba o pegue una cadena de coordenadas completa en DD, DMS o DDM y luego ejecute Procesar entrada. GeoLibre detecta el formato y completa los campos de longitud y latitud de abajo. Ajuste el zoom, la inclinación y el rumbo por separado antes de ir.",
+      "smartPasteInfo": "Escriba o pegue una cadena de coordenadas completa en DD, DMS o DDM y luego ejecute Procesar entrada. GeoSpaX detecta el formato y completa los campos de longitud y latitud de abajo. Ajuste el zoom, la inclinación y el rumbo por separado antes de ir.",
       "smartPasteInfoLabel": "Acerca de pegar coordenadas",
       "smartPasteInvalid": "No se pudieron leer esas coordenadas. Introduzca una longitud y latitud completas en DD, DMS o DDM, por ejemplo 51.5074, -0.1278. No se puede analizar una cadena parcial o incompleta.",
       "processInput": "Procesar entrada",
@@ -2655,8 +2655,8 @@
     },
     "conversion": {
       "vectorToVector": "Vectorial a vectorial",
-      "zipInputBrowserError": "Los shapefiles comprimidos solo se pueden convertir en la aplicación de escritorio de GeoLibre. En el navegador, seleccione el .shp descomprimido junto con sus archivos .dbf, .shx y .prj.",
-      "browserOutputUnsupported": "En el navegador, la salida puede ser GeoJSON, CSV, GeoParquet, GeoPackage o Shapefile (.zip). La salida «.{{extension}}» necesita la aplicación de escritorio de GeoLibre.",
+      "zipInputBrowserError": "Los shapefiles comprimidos solo se pueden convertir en la aplicación de escritorio de GeoSpaX. En el navegador, seleccione el .shp descomprimido junto con sus archivos .dbf, .shx y .prj.",
+      "browserOutputUnsupported": "En el navegador, la salida puede ser GeoJSON, CSV, GeoParquet, GeoPackage o Shapefile (.zip). La salida «.{{extension}}» necesita la aplicación de escritorio de GeoSpaX.",
       "outputExtensionRequired": "Añada una extensión de archivo al nombre de salida para elegir el formato.",
       "readingWithDuckDb": "Leyendo {{name}} con DuckDB-WASM",
       "readFeatures": "Se leyeron {{features}} entidades de {{name}}",
@@ -2670,7 +2670,7 @@
       "vectorToPmtiles": "Vectorial a PMTiles",
       "rasterToCog": "Ráster a COG",
       "rasterToPmtiles": "Ráster a PMTiles",
-      "needsDesktop": "Esta conversión necesita la aplicación de escritorio de GeoLibre o un sidecar en ejecución.",
+      "needsDesktop": "Esta conversión necesita la aplicación de escritorio de GeoSpaX o un sidecar en ejecución.",
       "runsInBrowserDuckDb": "La conversión se ejecuta en su navegador con DuckDB-WASM.",
       "runsInBrowserWriters": "La conversión se ejecuta en su navegador con DuckDB-WASM y los escritores integrados.",
       "runsInBrowserWasm": "La conversión se ejecuta en su navegador con geolibre-wasm. No se necesita sidecar.",
@@ -2678,7 +2678,7 @@
       "rasterShape": "Se leyó un ráster de {{width}}×{{height}} con {{bands}} banda(s)",
       "wroteCog": "Se escribió un COG teselado con vistas generales ({{compression}})",
       "notAGeoTiff": "Este archivo no es un GeoTIFF legible. En el navegador, Ráster a COG solo lee GeoTIFF; otros formatos necesitan la aplicación de escritorio.",
-      "rasterTooLargeForBrowser": "En el navegador esto descodifica el ráster completo en WebAssembly, que está limitado a unos 4 GB, por lo que este no cabe. Conviértalo con la aplicación de escritorio de GeoLibre, o cree el COG previamente con gdal_translate o rio-cogeo.",
+      "rasterTooLargeForBrowser": "En el navegador esto descodifica el ráster completo en WebAssembly, que está limitado a unos 4 GB, por lo que este no cabe. Conviértalo con la aplicación de escritorio de GeoSpaX, o cree el COG previamente con gdal_translate o rio-cogeo.",
       "zoomRangeError": "Los niveles de zoom deben cumplir 0 ≤ mín ≤ máx ≤ {{max}}.",
       "colormap": "Mapa de colores",
       "resampling": "Remuestreo",
@@ -2833,9 +2833,9 @@
       "outputFile": "Archivo de salida",
       "noOutput": "Aún no hay salida.",
       "errorConnect": "No se pudo conectar con el sidecar.",
-      "needsDesktopSidecar": "Las herramientas ráster necesitan la aplicación GeoLibre Desktop con un sidecar en ejecución.",
+      "needsDesktopSidecar": "Las herramientas ráster necesitan la aplicación GeoSpaX Desktop con un sidecar en ejecución.",
       "errorPoll": "No se pudo consultar el trabajo.",
-      "errorStartSidecar": "No se pudo iniciar el sidecar de GeoLibre.",
+      "errorStartSidecar": "No se pudo iniciar el sidecar de GeoSpaX.",
       "errorStartTool": "No se pudo iniciar la herramienta ráster."
     },
     "mapControl": {
@@ -2949,7 +2949,7 @@
       "terrain": "Terreno",
       "remoteSensing": "Teledetección",
       "projection": "Proyección",
-      "geolibre": "Caja de herramientas de GeoLibre",
+      "geolibre": "Caja de herramientas de GeoSpaX",
       "subGroupGeometry": "Geometría",
       "subGroupOverlay": "Superposición",
       "subGroupJoin": "Unión",
@@ -3030,12 +3030,12 @@
         "layer-type": "El tipo de capa {{layerType}} no es compatible.",
         "missing-source": "La capa no tiene una fuente de datos local legible.",
         "format": "El formato de datos de la capa no es compatible.",
-        "file-geodatabase": "Las fuentes de geodatabase de archivos (.gdb) no se cargan desde los proyectos. En GeoLibre Desktop, añádelas con Añadir datos → Geodatabase de archivos (GDB).",
+        "file-geodatabase": "Las fuentes de geodatabase de archivos (.gdb) no se cargan desde los proyectos. En GeoSpaX Desktop, añádelas con Añadir datos → Geodatabase de archivos (GDB).",
         "file-geodatabase-raster": "Los conjuntos de datos ráster almacenados en una geodatabase de archivos (.gdb) no son compatibles. Exporta el ráster a GeoTIFF y añádelo como capa ráster.",
         "network-path": "Las rutas de recursos compartidos de red no se cargan por motivos de seguridad.",
         "service": "Las capas de servicio de ArcGIS incluidas en proyectos aún no son compatibles.",
-        "browser-local-file": "Se hace referencia al archivo local, pero los navegadores no pueden volver a abrir rutas de datos de ArcGIS Pro. Use GeoLibre Desktop para cargarlo.",
-        "map-extent": "La extensión de mapa guardada usa un sistema de coordenadas que GeoLibre no puede convertir, así que el mapa se abrió en una vista predeterminada.",
+        "browser-local-file": "Se hace referencia al archivo local, pero los navegadores no pueden volver a abrir rutas de datos de ArcGIS Pro. Use GeoSpaX Desktop para cargarlo.",
+        "map-extent": "La extensión de mapa guardada usa un sistema de coordenadas que GeoSpaX no puede convertir, así que el mapa se abrió en una vista predeterminada.",
         "nesting": "El grupo está anidado a demasiada profundidad, o el proyecto remite a un grupo que ya lo contiene."
       },
       "qgisImportComplete": "Proyecto de QGIS importado",
@@ -3049,8 +3049,8 @@
         "format": "El formato de archivo de la capa no es compatible.",
         "remote-file": "Todavía no se admiten fuentes de archivos remotos de QGIS.",
         "network-path": "Las rutas de recursos compartidos de red no se cargan por motivos de seguridad.",
-        "browser-local-file": "Se hace referencia al archivo local, pero los navegadores no pueden volver a abrir rutas de datos de QGIS. Use GeoLibre Desktop para cargarlo.",
-        "browser-local-raster": "Se hace referencia al ráster mediante una ruta local. Use GeoLibre Desktop para cargarlo."
+        "browser-local-file": "Se hace referencia al archivo local, pero los navegadores no pueden volver a abrir rutas de datos de QGIS. Use GeoSpaX Desktop para cargarlo.",
+        "browser-local-raster": "Se hace referencia al ráster mediante una ruta local. Use GeoSpaX Desktop para cargarlo."
       },
       "openProjectFromUrlDesc": "Carga un proyecto `.geolibre.json` y lo añade a los proyectos recientes.",
       "projectUrl": "URL del proyecto",
@@ -3064,7 +3064,7 @@
       "embedEditedGeometryDesc": "Este proyecto contiene geometrías editadas. Incruste los datos vectoriales (unos {{size}}) para conservarlas. Sin incrustarlos, las capas referenciadas se reabrirán con sus geometrías originales y los datos locales podrían no estar disponibles.",
       "embedVectorDesc": "Este proyecto tiene {{count}} capa(s) vectorial(es) local(es) cargadas desde su equipo. El navegador no puede volver a leerlas cuando se reabre el proyecto, así que sus datos deben incrustarse en el archivo del proyecto para poder restaurarse. Incrustarlas añade aproximadamente {{size}} al archivo.",
       "embedVectorDescDesktop": "Este proyecto tiene {{count}} capa(s) vectorial(es) local(es) cargadas desde su equipo. Incruste sus datos para hacer el proyecto autónomo (añade aproximadamente {{size}}), o guarde referencias de archivo que se recarguen desde el disco al reabrir el proyecto. Las referencias mantienen el archivo pequeño, pero se rompen si el archivo de origen se mueve o elimina más adelante.",
-      "embedVectorDescMas": "Este proyecto tiene {{count}} capa(s) vectorial(es) local(es) cargadas desde su equipo. El entorno aislado de Mac App Store no puede conservar el acceso a esos archivos después de cerrar GeoLibre, por lo que sus datos deben incrustarse en el archivo del proyecto para poder restaurarse. Incrustarlos añade aproximadamente {{size}} al archivo.",
+      "embedVectorDescMas": "Este proyecto tiene {{count}} capa(s) vectorial(es) local(es) cargadas desde su equipo. El entorno aislado de Mac App Store no puede conservar el acceso a esos archivos después de cerrar GeoSpaX, por lo que sus datos deben incrustarse en el archivo del proyecto para poder restaurarse. Incrustarlos añade aproximadamente {{size}} al archivo.",
       "embedVectorLargeWarning": "Incrustar unos {{size}} genera un archivo de proyecto muy grande. Volver a abrirlo puede ser lento o fallar por completo, porque hay que analizar y mantener en memoria todas las entidades a la vez. Para datos de este tamaño, convierta las capas a PMTiles o FlatGeobuf y añádalas como capas remotas en lugar de incrustarlas.",
       "embedVectorEmbedButton": "Incrustar datos",
       "embedVectorReferenceButton": "Guardar referencias de archivo",
@@ -3183,7 +3183,7 @@
     },
     "error": {
       "couldNotOpenProject": "No se pudo abrir el proyecto.",
-      "multipleProjectDrop": "Suelte un solo proyecto de GeoLibre a la vez, sin otros archivos.",
+      "multipleProjectDrop": "Suelte un solo proyecto de GeoSpaX a la vez, sin otros archivos.",
       "projectDropNotAllowed": "Esta implementación no permite cambiar de proyecto.",
       "couldNotImportQgisProject": "No se pudo importar el proyecto de QGIS.",
       "couldNotImportArcgisProject": "No se pudo importar el proyecto de ArcGIS Pro.",
@@ -3318,7 +3318,7 @@
     "filterSummary": "Filtro de capa aplicado: {{matched}} de {{total}} entidad(es) coinciden.",
     "evaluationErrors": "No se pudieron evaluar {{count}} entidad(es), por lo que no coincidieron.",
     "unevaluableDisjoint": "Se excluyeron {{count}} entidad(es) porque no se pudo evaluar su geometría.",
-    "tooManyPairs": "Esta comparación requiere {{pairs}} pruebas de pares de entidades (límite {{limit}}). En su lugar, use Procesamiento → GeoLibre → Vectorial → Seleccionar por ubicación con el motor Sidecar.",
+    "tooManyPairs": "Esta comparación requiere {{pairs}} pruebas de pares de entidades (límite {{limit}}). En su lugar, use Procesamiento → GeoSpaX → Vectorial → Seleccionar por ubicación con el motor Sidecar.",
     "exportedLayerName": "{{name}} (selección)"
   },
   "loadEditorFeatures": {
@@ -3850,11 +3850,11 @@
     "addIcechunkFailed": "No se pudo abrir este repositorio Icechunk",
     "zarrProblemGroup": "Este recurso designa un grupo de matrices, no una que se pueda dibujar",
     "zarrProblemMissing": "Este almacén no contiene esa variable",
-    "zarrProblemUnauthorized": "Este almacén Zarr necesita credenciales que GeoLibre aún no puede proporcionar",
+    "zarrProblemUnauthorized": "Este almacén Zarr necesita credenciales que GeoSpaX aún no puede proporcionar",
     "zarrProblemUnsupportedUrl": "La dirección de este almacén Zarr no se puede leer clave por clave",
     "zarrProblemUnavailable": "No se pudo abrir este almacén Zarr",
     "chooseTarget": "Elige qué añadir",
-    "cogUnsupported": "Este host de GeoLibre no puede visualizar recursos GeoTIFF remotos",
+    "cogUnsupported": "Este host de GeoSpaX no puede visualizar recursos GeoTIFF remotos",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3887,7 +3887,7 @@
     "webMapAdded_one": "Se añadió {{count}} capa de este mapa web.",
     "webMapAdded_other": "Se añadieron {{count}} capas de este mapa web.",
     "webMapAddedPartial": "Capas añadidas: {{added}} de {{total}} de este mapa web; no se pudo acceder al resto.",
-    "webMapEmpty": "este mapa web no tiene capas que GeoLibre pueda renderizar.",
+    "webMapEmpty": "este mapa web no tiene capas que GeoSpaX pueda renderizar.",
     "add": "Añadir",
     "adding": "Añadiendo…",
     "remove": "Quitar",
@@ -3969,7 +3969,7 @@
     "downloadTitle": "Descargar este archivo",
     "copyUrlTitle": "Copiar la URL de este archivo",
     "openProductTitle": "Abrir la página de este producto en source.coop",
-    "unsupportedTitle": "GeoLibre no puede renderizar este formato: descárguelo en su lugar",
+    "unsupportedTitle": "GeoSpaX no puede renderizar este formato: descárguelo en su lugar",
     "addError": "No se pudo añadir este archivo: {{message}}",
     "largeFileWarning": "Este archivo ocupa {{size}}. Se transmite desde el origen, por lo que solo se leen las partes visibles.",
     "streamHint": "Este archivo ocupa {{size}}. Añadir lo copia en memoria; Transmitir lee solo las partes visibles.",
@@ -4014,7 +4014,7 @@
     "downloadTitle": "Descargar este archivo",
     "copyUrlTitle": "Copiar la URL de este archivo",
     "openDatasetTitle": "Abrir la página de este conjunto de datos en huggingface.co",
-    "unsupportedTitle": "GeoLibre no puede renderizar este formato: descárguelo en su lugar",
+    "unsupportedTitle": "GeoSpaX no puede renderizar este formato: descárguelo en su lugar",
     "addError": "No se pudo añadir este archivo: {{message}}",
     "notRasterIndex": "Este archivo JSON no indexa ningún ráster, por lo que no hay nada que poner en el mapa. Se admiten MosaicJSON y colecciones STAC.",
     "largeFileWarning": "Este archivo ocupa {{size}}. Se transmite desde el origen, por lo que solo se leen las partes visibles.",
@@ -4058,7 +4058,7 @@
     "selectedFiles_one": "{{count}} archivo seleccionado ({{size}}).",
     "selectedFiles_other": "{{count}} archivos seleccionados ({{size}}).",
     "commitMessageLabel": "Mensaje de commit (opcional)",
-    "commitMessagePlaceholder": "Subido con GeoLibre",
+    "commitMessagePlaceholder": "Subido con GeoSpaX",
     "upload": "Subir",
     "uploadPreparing": "Preparando la subida…",
     "uploadHashing": "Calculando el hash de {{name}} ({{index}}/{{total}})…",
@@ -4577,7 +4577,7 @@
       "importedLog": "Se importó un modelo con {{nodes}} nodo(s).",
       "importFailed": "La importación falló",
       "importInvalid": "Ese archivo no contiene un grafo de modelo.",
-      "importUnsupported": "Ese archivo no es un modelo de GeoLibre.",
+      "importUnsupported": "Ese archivo no es un modelo de GeoSpaX.",
       "rasterOutputUnsupported": "«{{name}}» es un resultado ráster que esta versión no puede añadir al mapa.",
       "portNeedsVector": "«{{port}}» necesita datos vectoriales, pero llegó un ráster.",
       "toolNoOutput": "«{{tool}}» no produjo ningún resultado.",
@@ -4633,7 +4633,7 @@
       },
       "filterBySource": "Filtrar por origen",
       "allSources": "Todos los orígenes",
-      "geolibreTools": "Herramientas de GeoLibre",
+      "geolibreTools": "Herramientas de GeoSpaX",
       "whiteboxTools": "Herramientas de Whitebox",
       "toolbox": "Caja de herramientas de Whitebox",
       "checkingRuntime": "Comprobando el entorno de ejecución.",
@@ -4688,8 +4688,8 @@
       "errorConnect": "No se pudo conectar con el sidecar.",
       "errorPoll": "No se pudo consultar el trabajo.",
       "errorStartTool": "No se pudo iniciar la herramienta de Whitebox.",
-      "errorStartSidecar": "No se pudo iniciar el sidecar de GeoLibre.",
-      "errorStopSidecar": "No se pudo detener el sidecar de GeoLibre.",
+      "errorStartSidecar": "No se pudo iniciar el sidecar de GeoSpaX.",
+      "errorStopSidecar": "No se pudo detener el sidecar de GeoSpaX.",
       "noToolsFound": "No se encontraron herramientas.",
       "noParameters": "Esta herramienta no tiene parámetros.",
       "noOutput": "Aún no hay salida.",
@@ -4718,9 +4718,9 @@
       "runLocallyButton": "Ejecutar localmente (WASM)",
       "troubleshootingTitle": "¿Aún quiere usar el servidor?",
       "stepStartServerDesktop": "Haga clic en «Iniciar servidor» en el panel de la lista de herramientas para iniciarlo y luego espere unos segundos a que se conecte.",
-      "stepStartServerBrowser": "El servidor solo se puede iniciar desde la aplicación de escritorio de GeoLibre. En el navegador, mantenga activado «Ejecutar localmente (WASM)».",
+      "stepStartServerBrowser": "El servidor solo se puede iniciar desde la aplicación de escritorio de GeoSpaX. En el navegador, mantenga activado «Ejecutar localmente (WASM)».",
       "stepCheckPort": "Asegúrese de que un firewall, antivirus o política de red no esté bloqueando el puerto local {{port}}.",
-      "stepRestart": "Si el servidor se detuvo inesperadamente, reinicie la aplicación de escritorio de GeoLibre y vuelva a abrir este diálogo."
+      "stepRestart": "Si el servidor se detuvo inesperadamente, reinicie la aplicación de escritorio de GeoSpaX y vuelva a abrir este diálogo."
     },
     "vectorTools": {
       "title": "Herramientas vectoriales",
@@ -6333,13 +6333,13 @@
     "segment": "Segmentar",
     "status": {
       "checking": "Comprobando el servicio de segmentación con IA…",
-      "unavailableDesktop": "El servicio de segmentación con IA aún no está en ejecución. Inicie el servidor de GeoLibre con segment-geospatial activado para usarlo.",
-      "unavailableWeb": "La segmentación con IA no está disponible en el navegador. Use la aplicación de escritorio de GeoLibre para ejecutarla."
+      "unavailableDesktop": "El servicio de segmentación con IA aún no está en ejecución. Inicie el servidor de GeoSpaX con segment-geospatial activado para usarlo.",
+      "unavailableWeb": "La segmentación con IA no está disponible en el navegador. Use la aplicación de escritorio de GeoSpaX para ejecutarla."
     },
     "error": {
       "chooseImage": "Elija una imagen (GeoTIFF) para segmentar.",
       "enterPrompt": "Introduzca una instrucción de texto, p. ej., «árboles» o «edificios».",
-      "startServer": "No se pudo iniciar el sidecar de GeoLibre.",
+      "startServer": "No se pudo iniciar el sidecar de GeoSpaX.",
       "failed": "Error en la segmentación."
     },
     "noObjects": "No se encontraron objetos.",
@@ -6350,7 +6350,7 @@
       "title": "No se pudo iniciar el servidor de segmentación con IA.",
       "intro": "La segmentación con IA se ejecuta en un servidor auxiliar local ({{sidecarUrl}}) que aloja el modelo SAM3 de segment-geospatial. Ejecuta Python en segundo plano, separado de la aplicación, y no forma parte de la compilación del navegador.",
       "troubleshootingTitle": "Cómo poner en marcha el servidor",
-      "stepInstall": "Asegúrese de que el servidor de GeoLibre esté instalado con el backend segment-geospatial activado, para que el modelo de segmentación esté disponible.",
+      "stepInstall": "Asegúrese de que el servidor de GeoSpaX esté instalado con el backend segment-geospatial activado, para que el modelo de segmentación esté disponible.",
       "stepStartServerDesktop": "Haga clic en «Iniciar servidor» arriba para iniciarlo y luego espere unos segundos a que el modelo se conecte."
     }
   },
@@ -6607,7 +6607,7 @@
     "import": "Importar…",
     "export": "Exportar…",
     "importFilterName": "Biblioteca de estilos / QML / SLD",
-    "exportFilterName": "Biblioteca de estilos de GeoLibre",
+    "exportFilterName": "Biblioteca de estilos de GeoSpaX",
     "applied": "Se aplicó «{{name}}» a {{layer}}.",
     "appliedRampHint": "Se aplicó «{{name}}». Cambie la capa a estilo graduado o categorizado para ver la rampa.",
     "saved": "Se guardó «{{name}}» en la biblioteca.",
@@ -7301,7 +7301,7 @@
     "exportStyleDataNotReady": "Los datos de la capa aún no están listos. Inténtelo de nuevo en un momento.",
     "exportStyleNeedsFeatures": "La exportación de estilo requiere una capa vectorial con entidades.",
     "exportStyleError": "No se pudo exportar el estilo de esta capa.",
-    "importStyle": "Importar estilo (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "Importar estilo (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "Estilos guardados (Administrador de estilos)…",
     "importStyleSuccess": "Estilo importado.",
     "importStyleInvalid": "Ese archivo no es un JSON, SLD o QML válido.",
@@ -7715,10 +7715,10 @@
   },
   "errorBoundary": {
     "title": "Algo salió mal",
-    "description": "GeoLibre encontró un error inesperado y no pudo continuar. Puede que su trabajo no esté guardado — intente recuperarlo antes de recargar.",
+    "description": "GeoSpaX encontró un error inesperado y no pudo continuar. Puede que su trabajo no esté guardado — intente recuperarlo antes de recargar.",
     "tryAgain": "Reintentar",
     "reload": "Recargar la aplicación",
-    "sectionFailed": "{{label}} no se pudo renderizar. El resto de GeoLibre sigue disponible."
+    "sectionFailed": "{{label}} no se pudo renderizar. El resto de GeoSpaX sigue disponible."
   },
   "commandPalette": {
     "title": "Paleta de comandos",
@@ -7768,7 +7768,7 @@
     "emptyNetworkError": "No se ha capturado ningún diagnóstico de error de red."
   },
   "shell": {
-    "workspaceTitle": "Espacio de trabajo del mapa de GeoLibre",
+    "workspaceTitle": "Espacio de trabajo del mapa de GeoSpaX",
     "section": {
       "toolbar": "Barra de herramientas",
       "sharedLeftSidebar": "Barra lateral izquierda compartida",
@@ -8041,7 +8041,7 @@
     "navigationButton": "1. Cargar fuentes y representar la navegación",
     "navigationButtonAgain": "Representar otra capa de navegación",
     "exportButton": "Exportar los resultados representados a GeoJSON",
-    "addLayersButton": "Añadir los resultados representados a las capas de GeoLibre",
+    "addLayersButton": "Añadir los resultados representados a las capas de GeoSpaX",
     "clearButton": "Borrar el resultado NLDI",
     "noComid": "No se devolvió ningún COMID para este punto.",
     "requestingBasin": "Solicitando la cuenca aguas arriba…",

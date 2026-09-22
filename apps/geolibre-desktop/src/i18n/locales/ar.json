@@ -6,9 +6,9 @@
     "summary": "{{count}} طبقة · تكبير {{zoom}}",
     "restore": "استعادة",
     "discard": "تجاهل",
-    "restoreError": "تعذّرت استعادة هذه اللقطة. قد تكون تالفة أو غير متوافقة مع هذا الإصدار من GeoLibre.",
+    "restoreError": "تعذّرت استعادة هذه اللقطة. قد تكون تالفة أو غير متوافقة مع هذا الإصدار من GeoSpaX.",
     "recoveryTitle": "هل تريد استرداد العمل غير المحفوظ؟",
-    "recoveryDescription": "لم يُغلق GeoLibre بشكل سليم. يتوفر حفظ تلقائي أحدث لـ «{{name}}»."
+    "recoveryDescription": "لم يُغلق GeoSpaX بشكل سليم. يتوفر حفظ تلقائي أحدث لـ «{{name}}»."
   },
   "browser": {
     "title": "المستعرض",
@@ -47,7 +47,7 @@
     "libraryImportFailed": "تعذّرت قراءة ملف مكتبة الطبقات هذا.",
     "libraryExportFailed": "تعذّر تصدير مكتبة الطبقات.",
     "libraryLayerMissing": "لم تعد تلك الطبقة المحفوظة موجودة.",
-    "libraryLayerNeedsDesktop": "تقرأ هذه الطبقة المحفوظة ملفًا من القرص، لذا تحتاج إلى GeoLibre Desktop. أضف الملف مرة أخرى لحفظ إدخال جديد.",
+    "libraryLayerNeedsDesktop": "تقرأ هذه الطبقة المحفوظة ملفًا من القرص، لذا تحتاج إلى GeoSpaX Desktop. أضف الملف مرة أخرى لحفظ إدخال جديد.",
     "libraryLayerConfigNotApplied": "تمت إضافة ملف «{{name}}»، لكن تعذّرت مطابقة تنسيقه المحفوظ بطبقة واحدة، لذلك لم تتم إعادة تطبيقه.",
     "libraryLayerJoinsUnresolved_one": "تمت إضافة الطبقة، لكن تعذّرت إعادة تطبيق عملية ربط محفوظة واحدة: الطبقة التي ترتبط بها غير موجودة في هذا المشروع.",
     "libraryLayerJoinsUnresolved_many": "تمت إضافة الطبقة، لكن تعذّرت إعادة تطبيق {{count}} عمليةَ ربط محفوظة: الطبقات التي ترتبط بها غير موجودة في هذا المشروع.",
@@ -58,8 +58,8 @@
   },
   "about": {
     "trigger": "حول",
-    "title": "حول GeoLibre",
-    "description": "GeoLibre منصة نظم معلومات جغرافية خفيفة مصممة للسحابة أصلًا.",
+    "title": "حول GeoSpaX",
+    "description": "GeoSpaX منصة نظم معلومات جغرافية خفيفة مصممة للسحابة أصلًا.",
     "version": "الإصدار",
     "checkForUpdates": "التحقق من التحديثات",
     "tryAgain": "إعادة المحاولة",
@@ -78,7 +78,7 @@
     "steps": {
       "download": "نزّل المثبّت المناسب لمنصتك من صفحة التنزيلات.",
       "install": "شغّل المثبّت. ستبقى مشاريعك المحلية وإعداداتك ومفاتيح API لديك محفوظة.",
-      "reopen": "أعد فتح GeoLibre لإتمام التحديث."
+      "reopen": "أعد فتح GeoSpaX لإتمام التحديث."
     },
     "severity": {
       "major": "إصدار رئيسي",
@@ -97,7 +97,7 @@
       "noTag": "لا يتضمّن الإصدار الأحدث وسم إصدار.",
       "network": "تعذّر الوصول إلى GitHub. تحقق من اتصالك وأعد المحاولة.",
       "viewDownloads": "عرض التنزيلات",
-      "viewDownloadsHint": "يفتح صفحة تنزيلات GeoLibre في المتصفح لديك لتتمكن من التحقق من أحدث إصدار يدويًا."
+      "viewDownloadsHint": "يفتح صفحة تنزيلات GeoSpaX في المتصفح لديك لتتمكن من التحقق من أحدث إصدار يدويًا."
     },
     "startup": {
       "title": "تحديث متوفر",
@@ -110,7 +110,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "هذه الميزة غير متوفرة في إصدار Mac App Store من GeoLibre Desktop."
+    "unavailable": "هذه الميزة غير متوفرة في إصدار Mac App Store من GeoSpaX Desktop."
   },
   "bookmark": {
     "captureStateLabel": "تضمين حالة الطبقات الكاملة (النشطة وغير النشطة وترتيب الطبقات)",
@@ -132,7 +132,7 @@
       "description_few": "يريد هذا المشروع تحميل {{count}} ملحقات خارجية من عناوين URL لم تثبّتها. تشغّل الملحقات تعليمات برمجية بوصول كامل إلى التطبيق.",
       "description_many": "يريد هذا المشروع تحميل {{count}} ملحقًا خارجيًا من عناوين URL لم تثبّتها. تشغّل الملحقات تعليمات برمجية بوصول كامل إلى التطبيق.",
       "description_other": "يريد هذا المشروع تحميل {{count}} ملحق خارجي من عناوين URL لم تثبّتها. تشغّل الملحقات تعليمات برمجية بوصول كامل إلى التطبيق.",
-      "warning": "لا تحمّل الملحقات إلا من مصادر تثق بها. تعمل الملحقات المحمّلة بالصلاحيات نفسها التي يعمل بها GeoLibre نفسه.",
+      "warning": "لا تحمّل الملحقات إلا من مصادر تثق بها. تعمل الملحقات المحمّلة بالصلاحيات نفسها التي يعمل بها GeoSpaX نفسه.",
       "trustButton": "الوثوق والتحميل",
       "dismissButton": "عدم التحميل"
     },
@@ -151,7 +151,7 @@
     "openHomepageAria": "فتح الصفحة الرئيسية لـ {{name}}",
     "byAuthor": "بواسطة {{author}}",
     "updateAvailable": "يتوفر تحديث",
-    "requiresVersion": "يتطلب GeoLibre {{version}}+",
+    "requiresVersion": "يتطلب GeoSpaX {{version}}+",
     "install": "تثبيت",
     "installAria": "تثبيت {{name}}",
     "removeConfirm": "إزالة؟",
@@ -162,10 +162,10 @@
     "updateAria": "تحديث {{name}}",
     "loading": "جارٍ التحميل…",
     "installed": "مثبّتة",
-    "settingsIntro": "يفحص GeoLibre دائمًا مجلد الإضافات ضمن بيانات التطبيق. ثبّت إضافة مُحزّمة (.zip) من ملف، أو أضف مجلدات محلية إضافية (على سطح المكتب فقط). تُحمَّل روابط البيان (بما في ذلك عمليات التثبيت من المتجر) عبر الشبكة؛ والتغييرات هنا تسري فورًا.",
+    "settingsIntro": "يفحص GeoSpaX دائمًا مجلد الإضافات ضمن بيانات التطبيق. ثبّت إضافة مُحزّمة (.zip) من ملف، أو أضف مجلدات محلية إضافية (على سطح المكتب فقط). تُحمَّل روابط البيان (بما في ذلك عمليات التثبيت من المتجر) عبر الشبكة؛ والتغييرات هنا تسري فورًا.",
     "installFromFile": "التثبيت من ملف",
     "chooseZip": "اختيار ملف ‎.zip…",
-    "installFromFileHintDesktop": "ينسخ أرشيف إضافة مُحزّمة إلى مجلد إضافات GeoLibre.",
+    "installFromFileHintDesktop": "ينسخ أرشيف إضافة مُحزّمة إلى مجلد إضافات GeoSpaX.",
     "installFromFileHintWeb": "يحمّل أرشيف إضافة مُحزّمة؛ يُخزَّن في متصفحك ويُعاد تحميله في زيارتك التالية.",
     "localDirectories": "المجلدات المحلية",
     "directoryAria": "مجلد الإضافات",
@@ -180,7 +180,7 @@
     "errorDirectoryPicker": "تعذّر فتح أداة اختيار المجلد.",
     "errorInstall": "تعذّر تثبيت الإضافة.",
     "errorUninstall": "تعذّر إلغاء تثبيت الإضافة.",
-    "description": "تصفّح إضافات GeoLibre الخارجية وثبّتها وحدّثها وأزلها. الإضافات مُدرَجة في <registryLink>سجل إضافات GeoLibre</registryLink>."
+    "description": "تصفّح إضافات GeoSpaX الخارجية وثبّتها وحدّثها وأزلها. الإضافات مُدرَجة في <registryLink>سجل إضافات GeoSpaX</registryLink>."
   },
   "viewState": {
     "panelTitle": "معلومات"
@@ -272,7 +272,7 @@
     "add": "إضافة",
     "ok": "موافق",
     "done": "تم",
-    "openWebApp": "فتح تطبيق GeoLibre على الويب"
+    "openWebApp": "فتح تطبيق GeoSpaX على الويب"
   },
   "addData": {
     "title": "إضافة بيانات",
@@ -323,7 +323,7 @@
       },
       "gdb": {
         "label": "إضافة طبقة File Geodatabase",
-        "description": "إضافة طبقة من قاعدة بيانات Esri File Geodatabase (مجلد .gdb). تُقرأ الطبقة عبر خادم GeoLibre المحلي ويعاد إسقاطها إلى WGS84."
+        "description": "إضافة طبقة من قاعدة بيانات Esri File Geodatabase (مجلد .gdb). تُقرأ الطبقة عبر خادم GeoSpaX المحلي ويعاد إسقاطها إلى WGS84."
       },
       "photos": {
         "label": "إضافة صور موسومة جغرافيًا",
@@ -690,8 +690,8 @@
       "layerPlaceholder": "اختر قاعدة بيانات جغرافية أولًا",
       "readingLayers": "جارٍ قراءة الطبقات...",
       "layerOption": "{{name}} ({{type}}، {{count}} من المعالم)",
-      "help": "لا تُعرض الجداول التي تحتوي سمات فقط. تُحمَّل فئة المعالم المحددة عبر خادم GeoLibre المحلي ويعاد إسقاطها إلى WGS84.",
-      "desktopOnly": "طبقات File Geodatabase متاحة فقط في GeoLibre Desktop. تقرأ هذه الميزة مجلد .gdb محليًا عبر خادم GeoLibre المحلي، وهو ما لا يستطيع تطبيق الويب الوصول إليه.",
+      "help": "لا تُعرض الجداول التي تحتوي سمات فقط. تُحمَّل فئة المعالم المحددة عبر خادم GeoSpaX المحلي ويعاد إسقاطها إلى WGS84.",
+      "desktopOnly": "طبقات File Geodatabase متاحة فقط في GeoSpaX Desktop. تقرأ هذه الميزة مجلد .gdb محليًا عبر خادم GeoSpaX المحلي، وهو ما لا يستطيع تطبيق الويب الوصول إليه.",
       "readError": "تعذّرت قراءة قاعدة File Geodatabase هذه.",
       "convertError": "تعذّر تحميل فئة المعالم هذه.",
       "errorNotGdb": "اختر مجلدًا ينتهي بـ .gdb (قاعدة بيانات Esri File Geodatabase).",
@@ -811,7 +811,7 @@
     },
     "postgres": {
       "defaultName": "طبقة PostgreSQL",
-      "errorDesktopOnly": "تتطلب طبقات PostgreSQL تطبيق GeoLibre Desktop.",
+      "errorDesktopOnly": "تتطلب طبقات PostgreSQL تطبيق GeoSpaX Desktop.",
       "errorConnectionString": "أدخل سلسلة اتصال PostgreSQL.",
       "statusCheckingBinary": "جارٍ التحقق من ملف Martin الثنائي...",
       "statusDownloaded": "تم تنزيل Martin. جارٍ تشغيل الخادم المحلي...",
@@ -830,7 +830,7 @@
       "errorConnectFirst": "اتصل بـ PostgreSQL أولًا.",
       "errorNoVectorLayers": "مصدر Martin المحدد لا يحتوي على طبقات متجهة.",
       "errorSelectSource": "حدد مصدر Martin لإضافته.",
-      "desktopOnlyNotice": "طبقات PostgreSQL متاحة فقط في GeoLibre Desktop. تشغّل هذه الميزة خادم بلاطات Martin محليًا، وهو ما لا تستطيع تطبيقات الويب والهاتف تشغيله.",
+      "desktopOnlyNotice": "طبقات PostgreSQL متاحة فقط في GeoSpaX Desktop. تشغّل هذه الميزة خادم بلاطات Martin محليًا، وهو ما لا تستطيع تطبيقات الويب والهاتف تشغيله.",
       "savedConnection": "اتصال محفوظ",
       "selectSavedConnection": "اختيار اتصال محفوظ",
       "connectionString": "سلسلة اتصال PostgreSQL",
@@ -1084,7 +1084,7 @@
         "format": "لا تعلن التغطية عن دعم إخراج GeoTIFF.",
         "crs": "يجب أن تدعم التغطية EPSG:4326 للطلبات والإخراج.",
         "size": "اختر أبعادًا من 1 إلى 4096 بكسل. التنزيلات محدودة بـ 128 MB.",
-        "metadata": "أعادت الخدمة بيانات وصفية أكبر مما يمكن لـ GeoLibre تحميله. استجابات البيانات الوصفية محدودة بـ 32 MB.",
+        "metadata": "أعادت الخدمة بيانات وصفية أكبر مما يمكن لـ GeoSpaX تحميله. استجابات البيانات الوصفية محدودة بـ 32 MB.",
         "response": "لم تُعد الخدمة ملف GeoTIFF صالحًا.",
         "bounds": "أدخل مربعًا صالحًا: الغرب/الشرق بين -180 و180، والجنوب/الشمال بين -90 و90، على أن يكون الغرب أصغر من الشرق والجنوب أصغر من الشمال.",
         "url": "أدخل عنوان URL لخدمة WCS."
@@ -1430,7 +1430,7 @@
     "nmeaConnectFailed": "تعذّر الاتصال بالمستقبل.",
     "nmeaDisconnected": "انقطع اتصال المستقبل.",
     "nmeaUnsupportedDevice": "لم يُعثر على خدمة NMEA على ذلك الجهاز. قد يكون مستقبل بلوتوث كلاسيكي، وهو يحتاج إلى الاقتران من إعدادات النظام ثم الاتصال به هنا كمنفذ تسلسلي.",
-    "nmeaUnsupported": "تتطلب قراءة مستقبل NMEA واجهتي Web Serial أو Web Bluetooth، وهما غير متوفرتين في هذا المتصفح. افتح GeoLibre في متصفح يعتمد على Chromium مثل Chrome أو Edge.",
+    "nmeaUnsupported": "تتطلب قراءة مستقبل NMEA واجهتي Web Serial أو Web Bluetooth، وهما غير متوفرتين في هذا المتصفح. افتح GeoSpaX في متصفح يعتمد على Chromium مثل Chrome أو Edge.",
     "nmeaSerialUnsupported": "‏Web Serial غير متوفر هنا، لذا لا يمكن فتح المستقبلات التسلسلية.",
     "nmeaBluetoothUnsupported": "‏Web Bluetooth غير متوفر هنا، لذا لا يمكن فتح مستقبلات بلوتوث منخفض الطاقة.",
     "nmeaBluetoothHint": "تستخدم معظم مستقبلات GPS عبر البلوتوث بلوتوث كلاسيكي: اقترن بأحدها من إعدادات النظام ليظهر هنا كمنفذ تسلسلي. استخدم «اتصال بلوتوث» فقط مع مستقبلات بلوتوث منخفض الطاقة.",
@@ -1569,7 +1569,7 @@
     "step1Title": "1. الحصول على رمز API",
     "step1Description": "سجّل الدخول إلى {{shareHost}}، ثم أنشئ رمزًا من الإعدادات ← رموز API.",
     "getToken": "الحصول على رمز API",
-    "step2Title": "2. إضافة الرمز إلى GeoLibre",
+    "step2Title": "2. إضافة الرمز إلى GeoSpaX",
     "step2Description": "الصق الرمز في الإعدادات ← متغيرات البيئة على هذا الجهاز.",
     "configureToken": "ضبط الرمز المحلي",
     "liveAt": "مشروعك منشور الآن على:",
@@ -1632,7 +1632,7 @@
   },
   "gallery": {
     "title": "معرض المشاريع",
-    "description": "تصفح المشاريع العامة المشتركة على {{shareHost}} وافتح أحدها في GeoLibre.",
+    "description": "تصفح المشاريع العامة المشتركة على {{shareHost}} وافتح أحدها في GeoSpaX.",
     "searchPlaceholder": "تصفية المشاريع المحمّلة حسب العنوان أو المؤلف أو الوسم",
     "loading": "جارٍ تحميل المشاريع…",
     "loadingMore": "جارٍ تحميل المزيد…",
@@ -1738,7 +1738,7 @@
       "groupNavigation": "تجميع سهم الشمال وشريط المقياس",
       "footer": "نص التذييل",
       "date": "التاريخ",
-      "attribution": "تضمين إسناد GeoLibre",
+      "attribution": "تضمين إسناد GeoSpaX",
       "pageBorder": "حد الصفحة",
       "infoBlock": "كتلة المعلومات (خانة العنوان)",
       "colorbar": "شريط الألوان",
@@ -2045,9 +2045,9 @@
   },
   "auth": {
     "unavailableTitle": "تسجيل الدخول غير متاح",
-    "unavailableDescription": "تعذّر على GeoLibre الوصول إلى خدمة تسجيل الدخول، لذا لا يمكنه معرفة ما إذا كنت قد سجّلت الدخول. عادةً ما يكون هذا مؤقتًا؛ وإذا استمر، فقد تحتاج إعدادات المصادقة في هذا النشر إلى المراجعة.",
+    "unavailableDescription": "تعذّر على GeoSpaX الوصول إلى خدمة تسجيل الدخول، لذا لا يمكنه معرفة ما إذا كنت قد سجّلت الدخول. عادةً ما يكون هذا مؤقتًا؛ وإذا استمر، فقد تحتاج إعدادات المصادقة في هذا النشر إلى المراجعة.",
     "retry": "إعادة المحاولة",
-    "signInTitle": "تسجيل الدخول إلى GeoLibre",
+    "signInTitle": "تسجيل الدخول إلى GeoSpaX",
     "signInDescription": "يتطلب هذا النشر حسابًا. سيتم نقلك إلى صفحة تسجيل دخول آمنة ثم إعادتك إلى هنا.",
     "signIn": "تسجيل الدخول",
     "signOut": "تسجيل الخروج",
@@ -2228,7 +2228,7 @@
     "noticeDesc": "عند فتح بطاقة معرفية تُرسل إحداثيات المكان الذي نقرت عليه (وعنوان أي مقالة قريبة تفتحها) إلى واجهة برمجة التطبيقات العامة لويكيبيديا لجلب ملخص وصورة — أي أن إحداثياتك تغادر جهازك في هذه الطلبات."
   },
   "onboarding": {
-    "title": "مرحبًا بك في GeoLibre",
+    "title": "مرحبًا بك في GeoSpaX",
     "description": "اختر مستوى خبرتك لتخصيص الواجهة. يمكنك تغيير ذلك في أي وقت من الإعدادات ← الواجهة.",
     "level": {
       "beginner": {
@@ -2241,7 +2241,7 @@
       },
       "advanced": {
         "title": "متقدم",
-        "description": "إظهار كل ما يقدمه GeoLibre."
+        "description": "إظهار كل ما يقدمه GeoSpaX."
       }
     },
     "showEverything": "تخطٍّ — إظهار كل شيء"
@@ -2278,7 +2278,7 @@
     },
     "languagePack": {
       "title": "حزم اللغات",
-      "description": "أضف ترجمات اختيارية لأسماء أدوات Whitebox ومعاملاتها ونصوص المساعدة الخاصة بها دون زيادة حجم كل تثبيت من GeoLibre.",
+      "description": "أضف ترجمات اختيارية لأسماء أدوات Whitebox ومعاملاتها ونصوص المساعدة الخاصة بها دون زيادة حجم كل تثبيت من GeoSpaX.",
       "manage": "إدارة حزم اللغات",
       "interfaceLanguage": "لغة الواجهة",
       "installed": "حزمة لغة Whitebox مثبّتة",
@@ -2300,10 +2300,10 @@
       "privacyLocalOnly": "تُخزَّن الحزم على هذا الجهاز فقط. لا تنزّل هذه النسخة أي شيء: استورد ملف حزمة لغة بدلًا من ذلك.",
       "browse": "استعراض حزم اللغات",
       "errorInvalidJson": "هذا الملف ليس ملف JSON صالحًا.",
-      "errorInvalidFormat": "هذا الملف ليس حزمة لغة Whitebox صالحة لـ GeoLibre.",
-      "errorUnsupportedVersion": "إصدار حزمة اللغة هذا غير مدعوم في إصدار GeoLibre الحالي.",
+      "errorInvalidFormat": "هذا الملف ليس حزمة لغة Whitebox صالحة لـ GeoSpaX.",
+      "errorUnsupportedVersion": "إصدار حزمة اللغة هذا غير مدعوم في إصدار GeoSpaX الحالي.",
       "errorInvalidLocale": "حزمة اللغة تحمل رمز لغة غير صالح أو غير متوقع.",
-      "errorUnsupportedLocale": "لا يتضمّن GeoLibre لغة الواجهة الأساسية التي تتطلبها هذه الحزمة.",
+      "errorUnsupportedLocale": "لا يتضمّن GeoSpaX لغة الواجهة الأساسية التي تتطلبها هذه الحزمة.",
       "errorTooLarge": "تتجاوز حزمة اللغة حد الأمان البالغ 5 ميغابايت.",
       "errorNotFound": "لا تتوفر بعد حزمة لغة Whitebox رسمية لهذه اللغة.",
       "errorDownload": "تعذّر تنزيل حزمة اللغة. تحقق من اتصالك أو استورد ملفًا محليًا.",
@@ -2311,9 +2311,9 @@
     },
     "updates": {
       "title": "تحديثات البرنامج",
-      "description": "تحكم في كيفية تحقق GeoLibre من الإصدارات الجديدة عند بدء تشغيل تطبيق سطح المكتب.",
+      "description": "تحكم في كيفية تحقق GeoSpaX من الإصدارات الجديدة عند بدء تشغيل تطبيق سطح المكتب.",
       "checkOnStartup": "التحقق من التحديثات عند بدء التشغيل",
-      "checkOnStartupHint": "عند التفعيل، يتحقق GeoLibre من وجود إصدار أحدث في كل مرة يبدأ فيها التطبيق. عطّل هذا الخيار للعمل دون اتصال بالإنترنت تمامًا.",
+      "checkOnStartupHint": "عند التفعيل، يتحقق GeoSpaX من وجود إصدار أحدث في كل مرة يبدأ فيها التطبيق. عطّل هذا الخيار للعمل دون اتصال بالإنترنت تمامًا.",
       "notificationLevel": "تلقي إشعارات عن",
       "notificationLevelHint": "اختر أنواع الإصدارات التي تؤدي إلى ظهور إشعار عند بدء التشغيل.",
       "level": {
@@ -2324,7 +2324,7 @@
     },
     "startup": {
       "title": "مشروع بدء التشغيل",
-      "description": "اختر مساحة العمل التي يفتحها GeoLibre عند بدء تشغيل التطبيق الأصلي.",
+      "description": "اختر مساحة العمل التي يفتحها GeoSpaX عند بدء تشغيل التطبيق الأصلي.",
       "mode": {
         "default": "فتح مساحة العمل الافتراضية",
         "last": "إعادة فتح آخر مشروع",
@@ -2347,7 +2347,7 @@
       "viewUnavailable": "عرض الخريطة الحالي غير متاح.",
       "selectError": "تعذر قراءة المشروع المحدد.",
       "restoring": "جارٍ فتح مشروع بدء التشغيل…",
-      "loadWarning": "مشروع بدء التشغيل غير متاح. فتح GeoLibre مساحة العمل الافتراضية بدلاً منه."
+      "loadWarning": "مشروع بدء التشغيل غير متاح. فتح GeoSpaX مساحة العمل الافتراضية بدلاً منه."
     },
     "map": {
       "constraintsTitle": "قيود الخريطة",
@@ -2709,7 +2709,7 @@
       "smartPaste": "لصق الإحداثيات",
       "smartPasteInputLabel": "سلسلة الإحداثيات",
       "smartPastePlaceholder": "مثال: 51.5074, -0.1278 أو 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "اكتب أو الصق سلسلة إحداثيات كاملة بصيغة DD أو DMS أو DDM، ثم شغّل «معالجة المدخلات». يكتشف GeoLibre الصيغة ويملأ حقلي خط الطول ودائرة العرض أدناه. اضبط التكبير والميل والاتجاه كلًّا على حدة قبل الانتقال.",
+      "smartPasteInfo": "اكتب أو الصق سلسلة إحداثيات كاملة بصيغة DD أو DMS أو DDM، ثم شغّل «معالجة المدخلات». يكتشف GeoSpaX الصيغة ويملأ حقلي خط الطول ودائرة العرض أدناه. اضبط التكبير والميل والاتجاه كلًّا على حدة قبل الانتقال.",
       "smartPasteInfoLabel": "حول لصق الإحداثيات",
       "smartPasteInvalid": "تعذّرت قراءة هذه الإحداثيات. أدخل خط طول ودائرة عرض كاملين بصيغة DD أو DMS أو DDM، مثل 51.5074, -0.1278. لا يمكن تحليل سلسلة جزئية أو غير مكتملة.",
       "processInput": "معالجة المدخلات",
@@ -2846,8 +2846,8 @@
     },
     "conversion": {
       "vectorToVector": "متجه إلى متجه",
-      "zipInputBrowserError": "لا يمكن تحويل ملفات Shapefile المضغوطة إلا في تطبيق GeoLibre لسطح المكتب. في المتصفح، حدد ملف .shp غير المضغوط مع ملفاته .dbf و.shx و.prj.",
-      "browserOutputUnsupported": "في المتصفح، يمكن أن تكون المخرجات بصيغة GeoJSON أو CSV أو GeoParquet أو GeoPackage أو Shapefile (.zip). يتطلب إخراج \".{{extension}}\" تطبيق GeoLibre لسطح المكتب.",
+      "zipInputBrowserError": "لا يمكن تحويل ملفات Shapefile المضغوطة إلا في تطبيق GeoSpaX لسطح المكتب. في المتصفح، حدد ملف .shp غير المضغوط مع ملفاته .dbf و.shx و.prj.",
+      "browserOutputUnsupported": "في المتصفح، يمكن أن تكون المخرجات بصيغة GeoJSON أو CSV أو GeoParquet أو GeoPackage أو Shapefile (.zip). يتطلب إخراج \".{{extension}}\" تطبيق GeoSpaX لسطح المكتب.",
       "outputExtensionRequired": "أضف امتداد ملف إلى اسم المخرجات لاختيار الصيغة.",
       "readingWithDuckDb": "جارٍ قراءة {{name}} باستخدام DuckDB-WASM",
       "readFeatures": "تمت قراءة {{features}} من المعالم من {{name}}",
@@ -2861,7 +2861,7 @@
       "vectorToPmtiles": "متجه إلى PMTiles",
       "rasterToCog": "بيانات نقطية إلى COG",
       "rasterToPmtiles": "راستر إلى PMTiles",
-      "needsDesktop": "يتطلب هذا التحويل تطبيق سطح المكتب GeoLibre أو خدمة مساعدة قيد التشغيل.",
+      "needsDesktop": "يتطلب هذا التحويل تطبيق سطح المكتب GeoSpaX أو خدمة مساعدة قيد التشغيل.",
       "runsInBrowserDuckDb": "يجري التحويل في متصفحك باستخدام DuckDB-WASM.",
       "runsInBrowserWriters": "يجري التحويل في متصفحك باستخدام DuckDB-WASM والكتّاب المضمّنين.",
       "runsInBrowserWasm": "يجري التحويل في متصفحك باستخدام geolibre-wasm. لا حاجة إلى خدمة مساعدة.",
@@ -2869,7 +2869,7 @@
       "rasterShape": "قراءة راستر {{width}}×{{height}} بعدد {{bands}} نطاق",
       "wroteCog": "تمت كتابة COG مبلّط مع نظرات عامة ({{compression}})",
       "notAGeoTiff": "هذا الملف ليس GeoTIFF قابلًا للقراءة. في المتصفح، يقرأ تحويل راستر إلى COG صيغة GeoTIFF فقط؛ وتتطلب الصيغ الأخرى تطبيق سطح المكتب.",
-      "rasterTooLargeForBrowser": "في المتصفح يفكّ هذا ترميز الراستر بالكامل في WebAssembly، وهي محدودة بنحو 4 غيغابايت، لذا لا يتسع هذا الملف. حوّله باستخدام تطبيق GeoLibre لسطح المكتب، أو أنشئ COG مسبقًا باستخدام gdal_translate أو rio-cogeo.",
+      "rasterTooLargeForBrowser": "في المتصفح يفكّ هذا ترميز الراستر بالكامل في WebAssembly، وهي محدودة بنحو 4 غيغابايت، لذا لا يتسع هذا الملف. حوّله باستخدام تطبيق GeoSpaX لسطح المكتب، أو أنشئ COG مسبقًا باستخدام gdal_translate أو rio-cogeo.",
       "zoomRangeError": "يجب أن تحقق مستويات التكبير الشرط 0 ≤ الأدنى ≤ الأقصى ≤ {{max}}.",
       "colormap": "خريطة الألوان",
       "resampling": "إعادة المعاينة",
@@ -3024,9 +3024,9 @@
       "outputFile": "ملف الإخراج",
       "noOutput": "لا يوجد ناتج بعد.",
       "errorConnect": "تعذّر الاتصال بالخدمة المساعدة.",
-      "needsDesktopSidecar": "تحتاج أدوات الراستر إلى تطبيق GeoLibre Desktop مع تشغيل الخدمة المرافقة.",
+      "needsDesktopSidecar": "تحتاج أدوات الراستر إلى تطبيق GeoSpaX Desktop مع تشغيل الخدمة المرافقة.",
       "errorPoll": "تعذّر الاستعلام عن المهمة.",
-      "errorStartSidecar": "تعذّر تشغيل الخدمة المساعدة لـ GeoLibre.",
+      "errorStartSidecar": "تعذّر تشغيل الخدمة المساعدة لـ GeoSpaX.",
       "errorStartTool": "تعذّر بدء أداة الراستر."
     },
     "mapControl": {
@@ -3140,7 +3140,7 @@
       "terrain": "التضاريس",
       "remoteSensing": "الاستشعار عن بُعد",
       "projection": "الإسقاط",
-      "geolibre": "صندوق أدوات GeoLibre",
+      "geolibre": "صندوق أدوات GeoSpaX",
       "subGroupGeometry": "الهندسة",
       "subGroupOverlay": "التراكب",
       "subGroupJoin": "الربط",
@@ -3229,12 +3229,12 @@
         "layer-type": "نوع الطبقة {{layerType}} غير مدعوم.",
         "missing-source": "لا تحتوي الطبقة على مصدر بيانات محلي قابل للقراءة.",
         "format": "تنسيق بيانات الطبقة غير مدعوم.",
-        "file-geodatabase": "لا تُحمَّل مصادر File Geodatabase (‎.gdb) من المشاريع. في GeoLibre Desktop أضِفها من إضافة بيانات ← قاعدة بيانات جغرافية ملفية (GDB).",
+        "file-geodatabase": "لا تُحمَّل مصادر File Geodatabase (‎.gdb) من المشاريع. في GeoSpaX Desktop أضِفها من إضافة بيانات ← قاعدة بيانات جغرافية ملفية (GDB).",
         "file-geodatabase-raster": "مجموعات البيانات النقطية المخزَّنة في File Geodatabase (‎.gdb) غير مدعومة. صدِّر الراستر إلى GeoTIFF ثم أضِفه كطبقة نقطية.",
         "network-path": "لا يتم تحميل مسارات مشاركة الشبكة لأسباب أمنية.",
         "service": "طبقات خدمات ArcGIS داخل المشاريع غير مدعومة بعد.",
-        "browser-local-file": "تمت الإشارة إلى الملف المحلي، لكن المتصفحات لا تستطيع إعادة فتح مسارات بيانات ArcGIS Pro. استخدم GeoLibre Desktop لتحميله.",
-        "map-extent": "يستخدم امتداد الخريطة المحفوظ نظام إحداثيات لا يستطيع GeoLibre تحويله، لذا فُتحت الخريطة على العرض الافتراضي.",
+        "browser-local-file": "تمت الإشارة إلى الملف المحلي، لكن المتصفحات لا تستطيع إعادة فتح مسارات بيانات ArcGIS Pro. استخدم GeoSpaX Desktop لتحميله.",
+        "map-extent": "يستخدم امتداد الخريطة المحفوظ نظام إحداثيات لا يستطيع GeoSpaX تحويله، لذا فُتحت الخريطة على العرض الافتراضي.",
         "nesting": "المجموعة متداخلة بعمق كبير، أو أن المشروع يشير مجددًا إلى مجموعة تحتويها بالفعل."
       },
       "qgisImportComplete": "تم استيراد مشروع QGIS",
@@ -3252,8 +3252,8 @@
         "format": "تنسيق ملف الطبقة غير مدعوم.",
         "remote-file": "مصادر ملفات QGIS البعيدة غير مدعومة بعد.",
         "network-path": "لا يتم تحميل مسارات مشاركة الشبكة لأسباب أمنية.",
-        "browser-local-file": "تمت الإشارة إلى الملف المحلي، لكن المتصفحات لا تستطيع إعادة فتح مسارات بيانات QGIS. استخدم GeoLibre Desktop لتحميله.",
-        "browser-local-raster": "تتم الإشارة إلى الراستر عبر مسار محلي. استخدم GeoLibre Desktop لتحميله."
+        "browser-local-file": "تمت الإشارة إلى الملف المحلي، لكن المتصفحات لا تستطيع إعادة فتح مسارات بيانات QGIS. استخدم GeoSpaX Desktop لتحميله.",
+        "browser-local-raster": "تتم الإشارة إلى الراستر عبر مسار محلي. استخدم GeoSpaX Desktop لتحميله."
       },
       "openProjectFromUrlDesc": "تحميل مشروع `.geolibre.json` وإضافته إلى المشاريع الأخيرة.",
       "projectUrl": "عنوان URL للمشروع",
@@ -3267,7 +3267,7 @@
       "embedEditedGeometryDesc": "يحتوي هذا المشروع على أشكال هندسية معدّلة. ضمّن البيانات المتجهة (حوالي {{size}}) للحفاظ عليها. بدون التضمين، ستُفتح الطبقات المرجعية بأشكالها الهندسية الأصلية وقد لا تتوفر البيانات المحلية.",
       "embedVectorDesc": "يحتوي هذا المشروع على {{count}} من الطبقات المتجهة المحلية المحملة من جهازك. لا يستطيع المتصفح إعادة قراءتها عند إعادة فتح المشروع، لذا يجب تضمين بياناتها في ملف المشروع حتى يمكن استعادتها. يضيف التضمين نحو {{size}} إلى حجم الملف.",
       "embedVectorDescDesktop": "يحتوي هذا المشروع على {{count}} من الطبقات المتجهة المحلية المحملة من جهازك. ضمِّن بياناتها لجعل المشروع مكتفيًا بذاته (يضيف نحو {{size}})، أو احفظ مراجع الملفات التي يعاد تحميلها من القرص عند إعادة فتح المشروع. تُبقي المراجع الملف صغيرًا لكنها تتعطل إذا نُقل ملف مصدر أو حُذف لاحقًا.",
-      "embedVectorDescMas": "يحتوي هذا المشروع على {{count}} من الطبقات المتجهة المحلية المحمّلة من جهازك. لا يمكن لبيئة الحماية في Mac App Store الاحتفاظ بإمكانية الوصول إلى هذه الملفات بعد إغلاق GeoLibre، لذلك يجب تضمين بياناتها في ملف المشروع حتى يمكن استعادتها. يضيف التضمين نحو {{size}} إلى حجم الملف.",
+      "embedVectorDescMas": "يحتوي هذا المشروع على {{count}} من الطبقات المتجهة المحلية المحمّلة من جهازك. لا يمكن لبيئة الحماية في Mac App Store الاحتفاظ بإمكانية الوصول إلى هذه الملفات بعد إغلاق GeoSpaX، لذلك يجب تضمين بياناتها في ملف المشروع حتى يمكن استعادتها. يضيف التضمين نحو {{size}} إلى حجم الملف.",
       "embedVectorLargeWarning": "تضمين حوالي {{size}} ينتج ملف مشروع كبير جدًا. قد تكون إعادة فتحه بطيئة أو قد تفشل تمامًا، لأنه يجب تحليل كل معلم والاحتفاظ به في الذاكرة دفعة واحدة. لبيانات بهذا الحجم، حوِّل الطبقات إلى PMTiles أو FlatGeobuf وأضفها كطبقات بعيدة بدلاً من تضمينها.",
       "embedVectorEmbedButton": "تضمين البيانات",
       "embedVectorReferenceButton": "حفظ مراجع الملفات",
@@ -3402,7 +3402,7 @@
     },
     "error": {
       "couldNotOpenProject": "تعذر فتح المشروع.",
-      "multipleProjectDrop": "أسقط مشروع GeoLibre واحدًا في كل مرة، من دون ملفات أخرى.",
+      "multipleProjectDrop": "أسقط مشروع GeoSpaX واحدًا في كل مرة، من دون ملفات أخرى.",
       "projectDropNotAllowed": "لا يسمح هذا النشر بالتبديل بين المشاريع.",
       "couldNotImportQgisProject": "تعذّر استيراد مشروع QGIS.",
       "couldNotImportArcgisProject": "تعذّر استيراد مشروع ArcGIS Pro.",
@@ -3553,7 +3553,7 @@
     "filterSummary": "تم تطبيق تصفية الطبقة: عدد المعالم المطابقة {{matched}} من أصل {{total}}.",
     "evaluationErrors": "تعذّر تقييم {{count}} معلم ولم تتم مطابقتها.",
     "unevaluableDisjoint": "تم استبعاد {{count}} معلم لتعذّر تقييم أشكالها الهندسية.",
-    "tooManyPairs": "تتطلب هذه المقارنة {{pairs}} اختبار زوج معالم (الحد {{limit}}). استخدم المعالجة ← GeoLibre ← متجه ← التحديد بالموقع مع محرك الخدمة المساعدة بدلًا من ذلك.",
+    "tooManyPairs": "تتطلب هذه المقارنة {{pairs}} اختبار زوج معالم (الحد {{limit}}). استخدم المعالجة ← GeoSpaX ← متجه ← التحديد بالموقع مع محرك الخدمة المساعدة بدلًا من ذلك.",
     "exportedLayerName": "{{name}} (تحديد)"
   },
   "loadEditorFeatures": {
@@ -4085,11 +4085,11 @@
     "addIcechunkFailed": "تعذّر فتح مستودع Icechunk هذا",
     "zarrProblemGroup": "يشير هذا الأصل إلى مجموعة مصفوفات، وليس إلى مصفوفة واحدة يمكن رسمها",
     "zarrProblemMissing": "لا يحتوي هذا المخزن على ذلك المتغيّر",
-    "zarrProblemUnauthorized": "يحتاج مخزن Zarr هذا إلى بيانات اعتماد لا يستطيع GeoLibre توفيرها بعد",
+    "zarrProblemUnauthorized": "يحتاج مخزن Zarr هذا إلى بيانات اعتماد لا يستطيع GeoSpaX توفيرها بعد",
     "zarrProblemUnsupportedUrl": "لا يمكن قراءة عنوان مخزن Zarr هذا مفتاحًا مفتاحًا",
     "zarrProblemUnavailable": "تعذّر فتح مخزن Zarr هذا",
     "chooseTarget": "اختر ما تريد إضافته",
-    "cogUnsupported": "لا يستطيع مضيف GeoLibre هذا عرض أصول GeoTIFF البعيدة",
+    "cogUnsupported": "لا يستطيع مضيف GeoSpaX هذا عرض أصول GeoTIFF البعيدة",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -4126,7 +4126,7 @@
     "webMapAdded_many": "تمت إضافة {{count}} طبقةً من خريطة الويب هذه.",
     "webMapAdded_other": "تمت إضافة {{count}} طبقة من خريطة الويب هذه.",
     "webMapAddedPartial": "الطبقات المضافة: {{added}} من {{total}} من خريطة الويب هذه؛ وتعذّر الوصول إلى البقية.",
-    "webMapEmpty": "لا تحتوي خريطة الويب هذه على طبقات يستطيع GeoLibre عرضها.",
+    "webMapEmpty": "لا تحتوي خريطة الويب هذه على طبقات يستطيع GeoSpaX عرضها.",
     "add": "إضافة",
     "adding": "جارٍ الإضافة…",
     "remove": "إزالة",
@@ -4208,7 +4208,7 @@
     "downloadTitle": "تنزيل هذا الملف",
     "copyUrlTitle": "نسخ عنوان URL لهذا الملف",
     "openProductTitle": "فتح صفحة هذا المنتج في source.coop",
-    "unsupportedTitle": "يتعذّر على GeoLibre عرض هذه الصيغة — نزّلها بدلًا من ذلك",
+    "unsupportedTitle": "يتعذّر على GeoSpaX عرض هذه الصيغة — نزّلها بدلًا من ذلك",
     "addError": "تعذّرت إضافة هذا الملف: {{message}}",
     "largeFileWarning": "حجم هذا الملف {{size}}. يُبَث من المصدر، لذا تُقرأ الأجزاء الظاهرة فقط.",
     "streamHint": "حجم هذا الملف {{size}}. تنسخه الإضافة إلى الذاكرة؛ أما البث فيقرأ الأجزاء الظاهرة فقط.",
@@ -4257,7 +4257,7 @@
     "downloadTitle": "تنزيل هذا الملف",
     "copyUrlTitle": "نسخ عنوان URL لهذا الملف",
     "openDatasetTitle": "فتح صفحة مجموعة البيانات هذه على huggingface.co",
-    "unsupportedTitle": "يتعذّر على GeoLibre عرض هذه الصيغة — نزّلها بدلًا من ذلك",
+    "unsupportedTitle": "يتعذّر على GeoSpaX عرض هذه الصيغة — نزّلها بدلًا من ذلك",
     "addError": "تعذّرت إضافة هذا الملف: {{message}}",
     "notRasterIndex": "لا يفهرس ملف JSON هذا أي بيانات راستر، لذا لا يوجد ما يُوضع على الخريطة. الصيغ المدعومة هي MosaicJSON ومجموعات STAC.",
     "largeFileWarning": "حجم هذا الملف {{size}}. يُبَث من المصدر، لذا تُقرأ الأجزاء الظاهرة فقط.",
@@ -4309,7 +4309,7 @@
     "selectedFiles_many": "تم تحديد {{count}} ملفًا ({{size}}).",
     "selectedFiles_other": "تم تحديد {{count}} ملف ({{size}}).",
     "commitMessageLabel": "رسالة الإيداع (اختياري)",
-    "commitMessagePlaceholder": "رُفع باستخدام GeoLibre",
+    "commitMessagePlaceholder": "رُفع باستخدام GeoSpaX",
     "upload": "رفع",
     "uploadPreparing": "جارٍ التحضير للرفع…",
     "uploadHashing": "جارٍ حساب بصمة {{name}} ({{index}}/{{total}})…",
@@ -4860,7 +4860,7 @@
       "importedLog": "تم استيراد نموذج يحتوي على {{nodes}} عقدة.",
       "importFailed": "فشل الاستيراد",
       "importInvalid": "هذا الملف لا يحتوي على مخطط نموذج.",
-      "importUnsupported": "هذا الملف ليس نموذج GeoLibre.",
+      "importUnsupported": "هذا الملف ليس نموذج GeoSpaX.",
       "rasterOutputUnsupported": "«{{name}}» نتيجة راستر لا يمكن لهذه النسخة إضافتها إلى الخريطة.",
       "portNeedsVector": "«{{port}}» يحتاج إلى بيانات متجهة، لكن وصلت بيانات راستر.",
       "toolNoOutput": "«{{tool}}» لم تُنتج أي مخرجات.",
@@ -4920,7 +4920,7 @@
       },
       "filterBySource": "التصفية حسب المصدر",
       "allSources": "جميع المصادر",
-      "geolibreTools": "أدوات GeoLibre",
+      "geolibreTools": "أدوات GeoSpaX",
       "whiteboxTools": "أدوات Whitebox",
       "toolbox": "صندوق أدوات Whitebox",
       "checkingRuntime": "جارٍ التحقق من بيئة التشغيل.",
@@ -4979,8 +4979,8 @@
       "errorConnect": "تعذّر الاتصال بالخدمة المساعدة.",
       "errorPoll": "تعذّر الاستعلام عن المهمة.",
       "errorStartTool": "تعذّر بدء أداة Whitebox.",
-      "errorStartSidecar": "تعذّر تشغيل الخدمة المساعدة لـ GeoLibre.",
-      "errorStopSidecar": "تعذّر إيقاف الخدمة المساعدة لـ GeoLibre.",
+      "errorStartSidecar": "تعذّر تشغيل الخدمة المساعدة لـ GeoSpaX.",
+      "errorStopSidecar": "تعذّر إيقاف الخدمة المساعدة لـ GeoSpaX.",
       "noToolsFound": "لم يُعثر على أدوات.",
       "noParameters": "لا تحتوي هذه الأداة على معاملات.",
       "noOutput": "لا يوجد ناتج بعد.",
@@ -5009,9 +5009,9 @@
       "runLocallyButton": "التشغيل محليًا (WASM)",
       "troubleshootingTitle": "هل ما زلت تريد استخدام الخادم؟",
       "stepStartServerDesktop": "انقر \"تشغيل الخادم\" في لوحة قائمة الأدوات لتشغيله، ثم انتظر بضع ثوانٍ حتى يصبح متصلًا.",
-      "stepStartServerBrowser": "لا يمكن تشغيل الخادم إلا من تطبيق GeoLibre لسطح المكتب. في المتصفح، أبقِ \"التشغيل محليًا (WASM)\" مفعّلًا بدلًا من ذلك.",
+      "stepStartServerBrowser": "لا يمكن تشغيل الخادم إلا من تطبيق GeoSpaX لسطح المكتب. في المتصفح، أبقِ \"التشغيل محليًا (WASM)\" مفعّلًا بدلًا من ذلك.",
       "stepCheckPort": "تأكد من أن جدار الحماية أو برنامج مكافحة الفيروسات أو سياسة الشبكة لا تحظر المنفذ المحلي {{port}}.",
-      "stepRestart": "إذا توقف الخادم بشكل غير متوقع، فأعد تشغيل تطبيق GeoLibre لسطح المكتب وأعد فتح مربع الحوار هذا."
+      "stepRestart": "إذا توقف الخادم بشكل غير متوقع، فأعد تشغيل تطبيق GeoSpaX لسطح المكتب وأعد فتح مربع الحوار هذا."
     },
     "vectorTools": {
       "title": "أدوات المتجهات",
@@ -6624,13 +6624,13 @@
     "segment": "تجزئة",
     "status": {
       "checking": "جارٍ التحقق من خدمة التجزئة بالذكاء الاصطناعي…",
-      "unavailableDesktop": "خدمة التجزئة بالذكاء الاصطناعي لا تعمل بعد. شغّل خادم GeoLibre مع تفعيل segment-geospatial لاستخدامها.",
-      "unavailableWeb": "التجزئة بالذكاء الاصطناعي غير متاحة في المتصفح. استخدم تطبيق GeoLibre لسطح المكتب لتشغيلها."
+      "unavailableDesktop": "خدمة التجزئة بالذكاء الاصطناعي لا تعمل بعد. شغّل خادم GeoSpaX مع تفعيل segment-geospatial لاستخدامها.",
+      "unavailableWeb": "التجزئة بالذكاء الاصطناعي غير متاحة في المتصفح. استخدم تطبيق GeoSpaX لسطح المكتب لتشغيلها."
     },
     "error": {
       "chooseImage": "اختر صورة (GeoTIFF) لتجزئتها.",
       "enterPrompt": "أدخل موجّهًا نصيًا، مثل «أشجار» أو «مبانٍ».",
-      "startServer": "تعذر تشغيل خادم GeoLibre المساعد.",
+      "startServer": "تعذر تشغيل خادم GeoSpaX المساعد.",
       "failed": "فشلت التجزئة."
     },
     "noObjects": "لم يُعثر على أي كائنات.",
@@ -6641,7 +6641,7 @@
       "title": "تعذر تشغيل خادم التجزئة بالذكاء الاصطناعي.",
       "intro": "تعمل التجزئة بالذكاء الاصطناعي في خادم مساعد محلي ({{sidecarUrl}}) يستضيف نموذج SAM3 من segment-geospatial. وهو يشغّل Python في الخلفية بمعزل عن التطبيق، وليس جزءًا من نسخة المتصفح.",
       "troubleshootingTitle": "كيفية تشغيل الخادم",
-      "stepInstall": "تأكد من تثبيت خادم GeoLibre مع تفعيل الواجهة الخلفية segment-geospatial، حتى يكون نموذج التجزئة متاحًا.",
+      "stepInstall": "تأكد من تثبيت خادم GeoSpaX مع تفعيل الواجهة الخلفية segment-geospatial، حتى يكون نموذج التجزئة متاحًا.",
       "stepStartServerDesktop": "انقر \"تشغيل الخادم\" أعلاه لتشغيله، ثم انتظر بضع ثوانٍ حتى يصبح النموذج متصلًا."
     }
   },
@@ -6910,7 +6910,7 @@
     "import": "استيراد…",
     "export": "تصدير…",
     "importFilterName": "مكتبة أنماط / QML / SLD",
-    "exportFilterName": "مكتبة أنماط GeoLibre",
+    "exportFilterName": "مكتبة أنماط GeoSpaX",
     "applied": "تم تطبيق «{{name}}» على {{layer}}.",
     "appliedRampHint": "تم تطبيق «{{name}}». بدّل الطبقة إلى تنسيق متدرج أو مصنّف لرؤية التدرج.",
     "saved": "تم حفظ «{{name}}» في المكتبة.",
@@ -7624,7 +7624,7 @@
     "exportStyleDataNotReady": "بيانات الطبقة ليست جاهزة بعد. حاول مرة أخرى بعد قليل.",
     "exportStyleNeedsFeatures": "يتطلب تصدير النمط طبقة متجهات تحتوي على معالم.",
     "exportStyleError": "تعذر تصدير نمط هذه الطبقة.",
-    "importStyle": "استيراد نمط (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "استيراد نمط (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "الأنماط المحفوظة (مدير الأنماط)…",
     "importStyleSuccess": "تم استيراد النمط.",
     "importStyleInvalid": "هذا الملف ليس ملف JSON أو SLD أو QML صالحًا.",
@@ -8038,10 +8038,10 @@
   },
   "errorBoundary": {
     "title": "حدث خطأ ما",
-    "description": "واجه GeoLibre خطأً غير متوقع ولم يتمكن من المتابعة. قد يكون عملك غير محفوظ — حاول الاسترداد قبل إعادة التحميل.",
+    "description": "واجه GeoSpaX خطأً غير متوقع ولم يتمكن من المتابعة. قد يكون عملك غير محفوظ — حاول الاسترداد قبل إعادة التحميل.",
     "tryAgain": "إعادة المحاولة",
     "reload": "إعادة تحميل التطبيق",
-    "sectionFailed": "تعذّر عرض {{label}}. بقية أجزاء GeoLibre لا تزال متاحة."
+    "sectionFailed": "تعذّر عرض {{label}}. بقية أجزاء GeoSpaX لا تزال متاحة."
   },
   "commandPalette": {
     "title": "لوحة الأوامر",
@@ -8111,7 +8111,7 @@
     "emptyNetworkError": "لم تُسجَّل أي بيانات تشخيصية لأخطاء الشبكة."
   },
   "shell": {
-    "workspaceTitle": "مساحة عمل خرائط GeoLibre",
+    "workspaceTitle": "مساحة عمل خرائط GeoSpaX",
     "section": {
       "toolbar": "شريط الأدوات",
       "sharedLeftSidebar": "الشريط الجانبي الأيسر المشترك",
@@ -8384,7 +8384,7 @@
     "navigationButton": "١. تحميل المصادر ورسم التتبع",
     "navigationButtonAgain": "رسم طبقة تتبع أخرى",
     "exportButton": "تصدير النتائج المرسومة إلى GeoJSON",
-    "addLayersButton": "إضافة النتائج المرسومة إلى طبقات GeoLibre",
+    "addLayersButton": "إضافة النتائج المرسومة إلى طبقات GeoSpaX",
     "clearButton": "مسح نتيجة NLDI",
     "noComid": "لم يُعَد أي COMID لهذه النقطة.",
     "requestingBasin": "جارٍ طلب حوض المنبع…",

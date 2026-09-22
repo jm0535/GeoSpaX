@@ -6,9 +6,9 @@
     "summary": "{{count}} レイヤー · ズーム {{zoom}}",
     "restore": "復元",
     "discard": "破棄",
-    "restoreError": "このスナップショットを復元できませんでした。破損しているか、このバージョンの GeoLibre と互換性がない可能性があります。",
+    "restoreError": "このスナップショットを復元できませんでした。破損しているか、このバージョンの GeoSpaX と互換性がない可能性があります。",
     "recoveryTitle": "保存されていない作業を復元しますか？",
-    "recoveryDescription": "GeoLibre が正常に終了しませんでした。「{{name}}」のより新しい自動保存が利用できます。"
+    "recoveryDescription": "GeoSpaX が正常に終了しませんでした。「{{name}}」のより新しい自動保存が利用できます。"
   },
   "browser": {
     "title": "ブラウザ",
@@ -47,14 +47,14 @@
     "libraryImportFailed": "このレイヤーライブラリファイルを読み取れませんでした。",
     "libraryExportFailed": "レイヤーライブラリをエクスポートできませんでした。",
     "libraryLayerMissing": "その保存済みレイヤーはもう存在しません。",
-    "libraryLayerNeedsDesktop": "この保存済みレイヤーはディスク上のファイルを読み込むため、GeoLibre Desktop が必要です。ファイルを追加し直して新しいエントリーを保存してください。",
+    "libraryLayerNeedsDesktop": "この保存済みレイヤーはディスク上のファイルを読み込むため、GeoSpaX Desktop が必要です。ファイルを追加し直して新しいエントリーを保存してください。",
     "libraryLayerConfigNotApplied": "「{{name}}」のファイルを追加しましたが、保存されていたスタイルを単一のレイヤーに対応付けられなかったため再適用されませんでした。",
     "libraryLayerJoinsUnresolved_other": "レイヤーを追加しましたが、保存された結合 {{count}} 件を再適用できませんでした。結合先のレイヤーがこのプロジェクトにありません。"
   },
   "about": {
     "trigger": "情報",
-    "title": "GeoLibre について",
-    "description": "GeoLibreは軽量なクラウドネイティブGISプラットフォームです。",
+    "title": "GeoSpaX について",
+    "description": "GeoSpaXは軽量なクラウドネイティブGISプラットフォームです。",
     "version": "バージョン",
     "checkForUpdates": "アップデートを確認",
     "tryAgain": "再試行",
@@ -73,7 +73,7 @@
     "steps": {
       "download": "ダウンロードページからお使いのプラットフォーム用インストーラーをダウンロードしてください。",
       "install": "インストーラーを実行します。ローカルのプロジェクト、設定、APIキーはそのまま保持されます。",
-      "reopen": "GeoLibreを再起動して更新を完了します。"
+      "reopen": "GeoSpaXを再起動して更新を完了します。"
     },
     "severity": {
       "major": "メジャーリリース",
@@ -92,7 +92,7 @@
       "noTag": "最新リリースにバージョンタグが含まれていません。",
       "network": "GitHubに接続できませんでした。接続を確認して再試行してください。",
       "viewDownloads": "ダウンロードを表示",
-      "viewDownloadsHint": "ブラウザでGeoLibreのダウンロードページを開き、最新バージョンを手動で確認できます。"
+      "viewDownloadsHint": "ブラウザでGeoSpaXのダウンロードページを開き、最新バージョンを手動で確認できます。"
     },
     "startup": {
       "title": "アップデートがあります",
@@ -105,7 +105,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "この機能は Mac App Store 版の GeoLibre Desktop では利用できません。"
+    "unavailable": "この機能は Mac App Store 版の GeoSpaX Desktop では利用できません。"
   },
   "bookmark": {
     "captureStateLabel": "完全なレイヤー状態を含める(有効・無効・レイヤー順序)",
@@ -122,7 +122,7 @@
     "trust": {
       "title": "このプロジェクトからプラグインを読み込みますか?",
       "description_other": "このプロジェクトは、インストールされていないURLから{{count}}個の外部プラグインを読み込もうとしています。プラグインはアプリへの完全なアクセス権を持ってコードを実行します。",
-      "warning": "信頼できる提供元のプラグインのみを読み込んでください。読み込まれたプラグインはGeoLibre自体と同じ権限で実行されます。",
+      "warning": "信頼できる提供元のプラグインのみを読み込んでください。読み込まれたプラグインはGeoSpaX自体と同じ権限で実行されます。",
       "trustButton": "信頼して読み込む",
       "dismissButton": "読み込まない"
     },
@@ -141,7 +141,7 @@
     "openHomepageAria": "{{name}} のホームページを開く",
     "byAuthor": "作者: {{author}}",
     "updateAvailable": "更新あり",
-    "requiresVersion": "GeoLibre {{version}}+ が必要",
+    "requiresVersion": "GeoSpaX {{version}}+ が必要",
     "install": "インストール",
     "installAria": "{{name}} をインストール",
     "removeConfirm": "削除しますか？",
@@ -152,10 +152,10 @@
     "updateAria": "{{name}} を更新",
     "loading": "読み込み中…",
     "installed": "インストール済み",
-    "settingsIntro": "GeoLibre は常にアプリデータ内のプラグインディレクトリをスキャンします。パッケージ化されたプラグイン（.zip）をファイルからインストールするか、ローカルディレクトリを追加できます（デスクトップのみ）。マニフェスト URL（マーケットプレイス経由のインストールを含む）はネットワーク経由で読み込まれ、ここでの変更は即座に反映されます。",
+    "settingsIntro": "GeoSpaX は常にアプリデータ内のプラグインディレクトリをスキャンします。パッケージ化されたプラグイン（.zip）をファイルからインストールするか、ローカルディレクトリを追加できます（デスクトップのみ）。マニフェスト URL（マーケットプレイス経由のインストールを含む）はネットワーク経由で読み込まれ、ここでの変更は即座に反映されます。",
     "installFromFile": "ファイルからインストール",
     "chooseZip": ".zip を選択…",
-    "installFromFileHintDesktop": "パッケージ化されたプラグインアーカイブを GeoLibre のプラグインディレクトリにコピーします。",
+    "installFromFileHintDesktop": "パッケージ化されたプラグインアーカイブを GeoSpaX のプラグインディレクトリにコピーします。",
     "installFromFileHintWeb": "パッケージ化されたプラグインアーカイブを読み込みます。ブラウザに保存され、次回アクセス時に再読み込みされます。",
     "localDirectories": "ローカルディレクトリ",
     "directoryAria": "プラグインディレクトリ",
@@ -170,7 +170,7 @@
     "errorDirectoryPicker": "ディレクトリ選択ダイアログを開けませんでした。",
     "errorInstall": "プラグインをインストールできませんでした。",
     "errorUninstall": "プラグインをアンインストールできませんでした。",
-    "description": "外部の GeoLibre プラグインを閲覧、インストール、更新、削除します。プラグインは <registryLink>GeoLibre プラグインレジストリ</registryLink>に掲載されています。"
+    "description": "外部の GeoSpaX プラグインを閲覧、インストール、更新、削除します。プラグインは <registryLink>GeoSpaX プラグインレジストリ</registryLink>に掲載されています。"
   },
   "viewState": {
     "panelTitle": "情報"
@@ -262,7 +262,7 @@
     "add": "追加",
     "ok": "OK",
     "done": "完了",
-    "openWebApp": "GeoLibre Webアプリを開く"
+    "openWebApp": "GeoSpaX Webアプリを開く"
   },
   "addData": {
     "title": "データを追加",
@@ -313,7 +313,7 @@
       },
       "gdb": {
         "label": "ファイルジオデータベースレイヤーを追加",
-        "description": "Esriファイルジオデータベース（.gdbフォルダ）からレイヤーを追加します。レイヤーはローカルのGeoLibreサーバーで読み込まれ、WGS84に再投影されます。"
+        "description": "Esriファイルジオデータベース（.gdbフォルダ）からレイヤーを追加します。レイヤーはローカルのGeoSpaXサーバーで読み込まれ、WGS84に再投影されます。"
       },
       "photos": {
         "label": "位置情報付き写真を追加",
@@ -655,8 +655,8 @@
       "layerPlaceholder": "先にジオデータベースを選択してください",
       "readingLayers": "レイヤーを読み込んでいます...",
       "layerOption": "{{name}}（{{type}}、{{count}}フィーチャ）",
-      "help": "属性のみのテーブルは表示されません。選択したフィーチャクラスはローカルのGeoLibreサーバー経由で読み込まれ、WGS84に再投影されます。",
-      "desktopOnly": "ファイルジオデータベースレイヤーはGeoLibre Desktopでのみ利用できます。この機能はローカルの.gdbフォルダをローカルのGeoLibreサーバー経由で読み取るため、Webアプリからはアクセスできません。",
+      "help": "属性のみのテーブルは表示されません。選択したフィーチャクラスはローカルのGeoSpaXサーバー経由で読み込まれ、WGS84に再投影されます。",
+      "desktopOnly": "ファイルジオデータベースレイヤーはGeoSpaX Desktopでのみ利用できます。この機能はローカルの.gdbフォルダをローカルのGeoSpaXサーバー経由で読み取るため、Webアプリからはアクセスできません。",
       "readError": "このファイルジオデータベースを読み取れませんでした。",
       "convertError": "このフィーチャクラスを読み込めませんでした。",
       "errorNotGdb": ".gdbで終わるフォルダ（Esriファイルジオデータベース）を選択してください。",
@@ -741,7 +741,7 @@
     },
     "postgres": {
       "defaultName": "PostgreSQLレイヤー",
-      "errorDesktopOnly": "PostgreSQLレイヤーにはGeoLibre Desktopが必要です。",
+      "errorDesktopOnly": "PostgreSQLレイヤーにはGeoSpaX Desktopが必要です。",
       "errorConnectionString": "PostgreSQL接続文字列を入力してください。",
       "statusCheckingBinary": "Martinバイナリを確認しています...",
       "statusDownloaded": "Martinをダウンロードしました。ローカルサーバーを起動しています...",
@@ -755,7 +755,7 @@
       "errorConnectFirst": "先にPostgreSQLに接続してください。",
       "errorNoVectorLayers": "選択したMartinソースにはベクターレイヤーがありません。",
       "errorSelectSource": "追加するMartinソースを選択してください。",
-      "desktopOnlyNotice": "PostgreSQLレイヤーはGeoLibre Desktopでのみ利用できます。この機能はローカルのMartinタイルサーバーを実行しますが、Webアプリやモバイルアプリでは起動できません。",
+      "desktopOnlyNotice": "PostgreSQLレイヤーはGeoSpaX Desktopでのみ利用できます。この機能はローカルのMartinタイルサーバーを実行しますが、Webアプリやモバイルアプリでは起動できません。",
       "savedConnection": "保存済み接続",
       "selectSavedConnection": "保存済み接続を選択",
       "connectionString": "PostgreSQL接続文字列",
@@ -979,7 +979,7 @@
         "format": "カバレッジはGeoTIFF出力を提供していません。",
         "crs": "カバレッジはリクエストと出力の両方でEPSG:4326をサポートする必要があります。",
         "size": "1〜4096ピクセルの寸法を選択してください。ダウンロードは128 MBまでです。",
-        "metadata": "サービスが GeoLibre で読み込める量を超えるメタデータを返しました。メタデータの応答は 32 MB までです。",
+        "metadata": "サービスが GeoSpaX で読み込める量を超えるメタデータを返しました。メタデータの応答は 32 MB までです。",
         "response": "サービスが有効なGeoTIFFを返しませんでした。",
         "bounds": "有効な範囲を入力してください: 西/東は−180〜180、南/北は−90〜90で、西<東かつ南<北とします。",
         "url": "WCSサービスのURLを入力してください。"
@@ -1255,7 +1255,7 @@
     "nmeaConnectFailed": "レシーバーに接続できませんでした。",
     "nmeaDisconnected": "レシーバーが切断されました。",
     "nmeaUnsupportedDevice": "そのデバイスで NMEA サービスが見つかりませんでした。クラシック Bluetooth のレシーバーの可能性があります。その場合はシステム設定でペアリングし、ここではシリアルポートとして接続してください。",
-    "nmeaUnsupported": "NMEA レシーバーの読み取りには Web Serial または Web Bluetooth API が必要ですが、このブラウザーでは利用できません。Chrome や Edge などの Chromium 系ブラウザーで GeoLibre を開いてください。",
+    "nmeaUnsupported": "NMEA レシーバーの読み取りには Web Serial または Web Bluetooth API が必要ですが、このブラウザーでは利用できません。Chrome や Edge などの Chromium 系ブラウザーで GeoSpaX を開いてください。",
     "nmeaSerialUnsupported": "ここでは Web Serial を利用できないため、シリアルレシーバーを開けません。",
     "nmeaBluetoothUnsupported": "ここでは Web Bluetooth を利用できないため、Bluetooth Low Energy レシーバーを開けません。",
     "nmeaBluetoothHint": "ほとんどの Bluetooth GPS レシーバーはクラシック Bluetooth を使用します。システム設定でペアリングすると、ここにシリアルポートとして表示されます。「Bluetooth 接続」は Bluetooth Low Energy のレシーバーにのみ使用してください。",
@@ -1389,7 +1389,7 @@
     "step1Title": "1. APIトークンを取得",
     "step1Description": "{{shareHost}} にサインインし、設定 → APIトークンでトークンを作成してください。",
     "getToken": "APIトークンを取得",
-    "step2Title": "2. トークンをGeoLibreに追加",
+    "step2Title": "2. トークンをGeoSpaXに追加",
     "step2Description": "このデバイスの設定 → 環境変数にトークンを貼り付けてください。",
     "configureToken": "ローカルトークンを設定",
     "liveAt": "プロジェクトは次のURLで公開されています:",
@@ -1437,7 +1437,7 @@
   },
   "gallery": {
     "title": "プロジェクトギャラリー",
-    "description": "{{shareHost}} で共有されている公開プロジェクトを閲覧し、GeoLibreで開きます。",
+    "description": "{{shareHost}} で共有されている公開プロジェクトを閲覧し、GeoSpaXで開きます。",
     "searchPlaceholder": "タイトル、作成者、タグで読み込み済みプロジェクトを絞り込む",
     "loading": "プロジェクトを読み込み中…",
     "loadingMore": "さらに読み込み中…",
@@ -1538,7 +1538,7 @@
       "groupNavigation": "方位記号と縮尺バーをグループ化",
       "footer": "フッターテキスト",
       "date": "日付",
-      "attribution": "GeoLibreのクレジットを含める",
+      "attribution": "GeoSpaXのクレジットを含める",
       "pageBorder": "ページ枠線",
       "infoBlock": "情報ブロック(表題欄)",
       "colorbar": "カラーバー",
@@ -1816,9 +1816,9 @@
   },
   "auth": {
     "unavailableTitle": "サインインを利用できません",
-    "unavailableDescription": "GeoLibre はサインインサービスに接続できなかったため、サインイン済みかどうかを判断できません。通常は一時的なものです。解消しない場合は、このデプロイの認証設定を確認する必要があるかもしれません。",
+    "unavailableDescription": "GeoSpaX はサインインサービスに接続できなかったため、サインイン済みかどうかを判断できません。通常は一時的なものです。解消しない場合は、このデプロイの認証設定を確認する必要があるかもしれません。",
     "retry": "再試行",
-    "signInTitle": "GeoLibre にサインイン",
+    "signInTitle": "GeoSpaX にサインイン",
     "signInDescription": "このデプロイにはアカウントが必要です。安全なサインインページに移動し、その後ここに戻ります。",
     "signIn": "サインイン",
     "signOut": "サインアウト",
@@ -1999,7 +1999,7 @@
     "noticeDesc": "ナレッジカードを開くと、クリックした場所の座標（および開いた近隣記事のタイトル）がWikipediaの公開APIに送信され、概要と写真を取得します。これらのリクエストの際、座標はデバイスの外部に送信されます。"
   },
   "onboarding": {
-    "title": "GeoLibreへようこそ",
+    "title": "GeoSpaXへようこそ",
     "description": "経験レベルを選択してインターフェースを調整します。この設定は 設定 → インターフェース からいつでも変更できます。",
     "level": {
       "beginner": {
@@ -2012,7 +2012,7 @@
       },
       "advanced": {
         "title": "上級者",
-        "description": "GeoLibreが提供するすべての機能を表示します。"
+        "description": "GeoSpaXが提供するすべての機能を表示します。"
       }
     },
     "showEverything": "スキップ — すべて表示"
@@ -2049,7 +2049,7 @@
     },
     "languagePack": {
       "title": "言語パック",
-      "description": "GeoLibre のすべてのインストールを大きくすることなく、Whitebox のツール名、パラメーター、ヘルプテキストの任意の翻訳を追加します。",
+      "description": "GeoSpaX のすべてのインストールを大きくすることなく、Whitebox のツール名、パラメーター、ヘルプテキストの任意の翻訳を追加します。",
       "manage": "言語パックを管理",
       "interfaceLanguage": "インターフェースの言語",
       "installed": "Whitebox 言語パックがインストール済みです",
@@ -2071,10 +2071,10 @@
       "privacyLocalOnly": "パックはこのデバイスにのみ保存されます。このビルドは何もダウンロードしません。代わりに言語パックファイルをインポートしてください。",
       "browse": "言語パックを閲覧",
       "errorInvalidJson": "そのファイルは有効な JSON ではありません。",
-      "errorInvalidFormat": "そのファイルは有効な GeoLibre Whitebox 言語パックではありません。",
-      "errorUnsupportedVersion": "この言語パックのバージョンは、この GeoLibre リリースではサポートされていません。",
+      "errorInvalidFormat": "そのファイルは有効な GeoSpaX Whitebox 言語パックではありません。",
+      "errorUnsupportedVersion": "この言語パックのバージョンは、この GeoSpaX リリースではサポートされていません。",
       "errorInvalidLocale": "言語パックのロケールが無効または想定外です。",
-      "errorUnsupportedLocale": "GeoLibre には、このパックが必要とする基本インターフェース言語が含まれていません。",
+      "errorUnsupportedLocale": "GeoSpaX には、このパックが必要とする基本インターフェース言語が含まれていません。",
       "errorTooLarge": "言語パックが 5 MB の安全上限を超えています。",
       "errorNotFound": "この言語向けの公式 Whitebox 言語パックはまだありません。",
       "errorDownload": "言語パックをダウンロードできませんでした。接続を確認するか、ローカルファイルをインポートしてください。",
@@ -2082,9 +2082,9 @@
     },
     "updates": {
       "title": "ソフトウェアアップデート",
-      "description": "デスクトップアプリ起動時のGeoLibreの新バージョン確認方法を設定します。",
+      "description": "デスクトップアプリ起動時のGeoSpaXの新バージョン確認方法を設定します。",
       "checkOnStartup": "起動時にアップデートを確認",
-      "checkOnStartupHint": "有効にすると、アプリの起動ごとにGeoLibreが新しいバージョンを確認します。完全にオフラインで運用する場合はオフにしてください。",
+      "checkOnStartupHint": "有効にすると、アプリの起動ごとにGeoSpaXが新しいバージョンを確認します。完全にオフラインで運用する場合はオフにしてください。",
       "notificationLevel": "通知する更新の種類",
       "notificationLevelHint": "起動時の通知対象とするリリースの種類を選択します。",
       "level": {
@@ -2095,7 +2095,7 @@
     },
     "startup": {
       "title": "起動時のプロジェクト",
-      "description": "ネイティブアプリの起動時にGeoLibreが開くワークスペースを選択します。",
+      "description": "ネイティブアプリの起動時にGeoSpaXが開くワークスペースを選択します。",
       "mode": {
         "default": "既定のワークスペースを開く",
         "last": "最後のプロジェクトを再度開く",
@@ -2118,7 +2118,7 @@
       "viewUnavailable": "現在の地図表示は利用できません。",
       "selectError": "選択したプロジェクトを読み取れませんでした。",
       "restoring": "起動時のプロジェクトを開いています…",
-      "loadWarning": "起動時のプロジェクトを利用できません。GeoLibreは代わりに既定のワークスペースを開きました。"
+      "loadWarning": "起動時のプロジェクトを利用できません。GeoSpaXは代わりに既定のワークスペースを開きました。"
     },
     "map": {
       "constraintsTitle": "地図の制約",
@@ -2470,7 +2470,7 @@
       "smartPaste": "座標を貼り付け",
       "smartPasteInputLabel": "座標文字列",
       "smartPastePlaceholder": "例: 51.5074, -0.1278 または 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "DD、DMS、DDM形式の完全な座標文字列を入力または貼り付けてから、「入力を処理」を実行します。GeoLibreが形式を検出し、下の経度・緯度フィールドに入力します。ズーム、ピッチ、ベアリングは別途調整してから移動してください。",
+      "smartPasteInfo": "DD、DMS、DDM形式の完全な座標文字列を入力または貼り付けてから、「入力を処理」を実行します。GeoSpaXが形式を検出し、下の経度・緯度フィールドに入力します。ズーム、ピッチ、ベアリングは別途調整してから移動してください。",
       "smartPasteInfoLabel": "座標の貼り付けについて",
       "smartPasteInvalid": "その座標を読み取れませんでした。DD、DMS、DDM形式で経度と緯度を完全な形で入力してください（例: 51.5074, -0.1278）。一部だけの文字列や不完全な文字列は解析できません。",
       "processInput": "入力を処理",
@@ -2607,8 +2607,8 @@
     },
     "conversion": {
       "vectorToVector": "ベクターからベクターへ",
-      "zipInputBrowserError": "圧縮されたShapefileはGeoLibreデスクトップアプリでのみ変換できます。ブラウザでは、展開した.shpファイルを.dbf、.shx、.prjファイルと一緒に選択してください。",
-      "browserOutputUnsupported": "ブラウザでは、出力形式はGeoJSON、CSV、GeoParquet、GeoPackage、またはShapefile (.zip) を選択できます。「.{{extension}}」出力にはGeoLibreデスクトップアプリが必要です。",
+      "zipInputBrowserError": "圧縮されたShapefileはGeoSpaXデスクトップアプリでのみ変換できます。ブラウザでは、展開した.shpファイルを.dbf、.shx、.prjファイルと一緒に選択してください。",
+      "browserOutputUnsupported": "ブラウザでは、出力形式はGeoJSON、CSV、GeoParquet、GeoPackage、またはShapefile (.zip) を選択できます。「.{{extension}}」出力にはGeoSpaXデスクトップアプリが必要です。",
       "outputExtensionRequired": "出力名にファイル拡張子を追加して形式を選択してください。",
       "readingWithDuckDb": "DuckDB-WASMで{{name}}を読み込み中",
       "readFeatures": "{{name}}から{{features}}件のフィーチャを読み込みました",
@@ -2622,7 +2622,7 @@
       "vectorToPmtiles": "ベクターからPMTilesへ",
       "rasterToCog": "ラスターからCOGへ",
       "rasterToPmtiles": "ラスターからPMTilesへ",
-      "needsDesktop": "この変換にはGeoLibreデスクトップアプリまたは実行中のサイドカーが必要です。",
+      "needsDesktop": "この変換にはGeoSpaXデスクトップアプリまたは実行中のサイドカーが必要です。",
       "runsInBrowserDuckDb": "変換はDuckDB-WASMを使ってブラウザ内で実行されます。",
       "runsInBrowserWriters": "変換はDuckDB-WASMと同梱のライターを使ってブラウザ内で実行されます。",
       "runsInBrowserWasm": "変換はgeolibre-wasmを使ってブラウザ内で実行されます。サイドカーは不要です。",
@@ -2630,7 +2630,7 @@
       "rasterShape": "{{width}}×{{height}}、{{bands}}バンドのラスターを読み込みました",
       "wroteCog": "オーバービュー付きのタイル化COGを書き出しました（{{compression}}）",
       "notAGeoTiff": "このファイルは読み取り可能なGeoTIFFではありません。ブラウザ版の「ラスターからCOGへ」はGeoTIFFのみ読み取れます。他の形式にはデスクトップアプリが必要です。",
-      "rasterTooLargeForBrowser": "ブラウザではラスター全体を WebAssembly でデコードしますが、WebAssembly は約4GBに制限されているため、このファイルは収まりません。GeoLibre デスクトップアプリで変換するか、gdal_translate または rio-cogeo で事前に COG を作成してください。",
+      "rasterTooLargeForBrowser": "ブラウザではラスター全体を WebAssembly でデコードしますが、WebAssembly は約4GBに制限されているため、このファイルは収まりません。GeoSpaX デスクトップアプリで変換するか、gdal_translate または rio-cogeo で事前に COG を作成してください。",
       "zoomRangeError": "ズームレベルは 0 ≤ 最小 ≤ 最大 ≤ {{max}} を満たす必要があります。",
       "colormap": "カラーマップ",
       "resampling": "リサンプリング",
@@ -2785,9 +2785,9 @@
       "outputFile": "出力ファイル",
       "noOutput": "まだ出力はありません。",
       "errorConnect": "サイドカーに接続できませんでした。",
-      "needsDesktopSidecar": "ラスターツールには、サイドカーが動作している GeoLibre デスクトップアプリが必要です。",
+      "needsDesktopSidecar": "ラスターツールには、サイドカーが動作している GeoSpaX デスクトップアプリが必要です。",
       "errorPoll": "ジョブを取得できませんでした。",
-      "errorStartSidecar": "GeoLibre サイドカーを起動できませんでした。",
+      "errorStartSidecar": "GeoSpaX サイドカーを起動できませんでした。",
       "errorStartTool": "ラスターツールを開始できませんでした。"
     },
     "mapControl": {
@@ -2901,7 +2901,7 @@
       "terrain": "地形",
       "remoteSensing": "リモートセンシング",
       "projection": "投影法",
-      "geolibre": "GeoLibre ツールボックス",
+      "geolibre": "GeoSpaX ツールボックス",
       "subGroupGeometry": "ジオメトリ",
       "subGroupOverlay": "オーバーレイ",
       "subGroupJoin": "結合",
@@ -2980,12 +2980,12 @@
         "layer-type": "{{layerType}} のレイヤータイプはサポートされていません。",
         "missing-source": "このレイヤーには読み取り可能なローカルデータソースがありません。",
         "format": "このレイヤーのデータ形式はサポートされていません。",
-        "file-geodatabase": "ファイルジオデータベース（.gdb）のソースはプロジェクトから読み込まれません。GeoLibre Desktop では、データ追加 → ファイルジオデータベース（GDB）から追加してください。",
+        "file-geodatabase": "ファイルジオデータベース（.gdb）のソースはプロジェクトから読み込まれません。GeoSpaX Desktop では、データ追加 → ファイルジオデータベース（GDB）から追加してください。",
         "file-geodatabase-raster": "ファイルジオデータベース（.gdb）に保存されたラスターデータセットはサポートされていません。ラスターを GeoTIFF にエクスポートし、ラスターレイヤーとして追加してください。",
         "network-path": "ネットワーク共有のパスはセキュリティ上の理由から読み込まれません。",
         "service": "プロジェクト内の ArcGIS サービスレイヤーはまだサポートされていません。",
-        "browser-local-file": "ローカルファイルが参照されていますが、ブラウザーでは ArcGIS Pro のデータパスを開き直せません。GeoLibre Desktop で読み込んでください。",
-        "map-extent": "保存された地図範囲は GeoLibre が変換できない座標系を使用しているため、地図は既定のビューで開きました。",
+        "browser-local-file": "ローカルファイルが参照されていますが、ブラウザーでは ArcGIS Pro のデータパスを開き直せません。GeoSpaX Desktop で読み込んでください。",
+        "map-extent": "保存された地図範囲は GeoSpaX が変換できない座標系を使用しているため、地図は既定のビューで開きました。",
         "nesting": "グループの入れ子が深すぎるか、プロジェクトがそのグループを含むグループを参照し返しています。"
       },
       "qgisImportComplete": "QGIS プロジェクトをインポートしました",
@@ -2998,8 +2998,8 @@
         "format": "このレイヤーのファイル形式はサポートされていません。",
         "remote-file": "リモートの QGIS ファイルソースはまだサポートされていません。",
         "network-path": "ネットワーク共有のパスはセキュリティ上の理由から読み込まれません。",
-        "browser-local-file": "ローカルファイルが参照されていますが、ブラウザーでは QGIS のデータパスを開き直せません。GeoLibre Desktop で読み込んでください。",
-        "browser-local-raster": "ラスターはローカルパスで参照されています。GeoLibre Desktop で読み込んでください。"
+        "browser-local-file": "ローカルファイルが参照されていますが、ブラウザーでは QGIS のデータパスを開き直せません。GeoSpaX Desktop で読み込んでください。",
+        "browser-local-raster": "ラスターはローカルパスで参照されています。GeoSpaX Desktop で読み込んでください。"
       },
       "openProjectFromUrlDesc": "`.geolibre.json` プロジェクトを読み込み、最近使用したプロジェクトに追加します。",
       "projectUrl": "プロジェクト URL",
@@ -3013,7 +3013,7 @@
       "embedEditedGeometryDesc": "このプロジェクトには編集済みのジオメトリが含まれています。変更を保持するにはベクターデータ（約 {{size}}）を埋め込んでください。埋め込まない場合、参照レイヤーは元のジオメトリで再度開かれ、ローカルデータは利用できなくなる場合があります。",
       "embedVectorDesc": "このプロジェクトには、お使いのコンピューターから読み込まれたローカルのベクターレイヤーが {{count}} 個あります。プロジェクトを再度開いたときにブラウザがこれらを再読み込みすることはできないため、復元するにはデータをプロジェクトファイルに埋め込む必要があります。埋め込むとファイルサイズが約 {{size}} 増加します。",
       "embedVectorDescDesktop": "このプロジェクトには、お使いのコンピューターから読み込まれたローカルのベクターレイヤーが {{count}} 個あります。データを埋め込んでプロジェクトを自己完結型にする（約 {{size}} 増加）か、プロジェクトを再度開いたときにディスクから再読み込みされるファイル参照として保存できます。参照はファイルサイズを小さく保ちますが、元のファイルが後で移動または削除されると読み込めなくなります。",
-      "embedVectorDescMas": "このプロジェクトには、お使いのコンピューターから読み込まれたローカルベクターレイヤーが {{count}} 個あります。Mac App Store のサンドボックスでは GeoLibre の終了後もこれらのファイルへのアクセスを保持できないため、復元するにはデータをプロジェクトファイルに埋め込む必要があります。埋め込むとファイルサイズが約 {{size}} 増加します。",
+      "embedVectorDescMas": "このプロジェクトには、お使いのコンピューターから読み込まれたローカルベクターレイヤーが {{count}} 個あります。Mac App Store のサンドボックスでは GeoSpaX の終了後もこれらのファイルへのアクセスを保持できないため、復元するにはデータをプロジェクトファイルに埋め込む必要があります。埋め込むとファイルサイズが約 {{size}} 増加します。",
       "embedVectorLargeWarning": "約 {{size}} を埋め込むと、プロジェクトファイルが非常に大きくなります。すべてのフィーチャを一度に解析してメモリに保持する必要があるため、再度開くときに時間がかかったり、失敗したりすることがあります。このサイズのデータは、レイヤーを PMTiles または FlatGeobuf に変換し、埋め込む代わりにリモートレイヤーとして追加してください。",
       "embedVectorEmbedButton": "データを埋め込む",
       "embedVectorReferenceButton": "ファイル参照を保存",
@@ -3128,7 +3128,7 @@
     },
     "error": {
       "couldNotOpenProject": "プロジェクトを開けませんでした。",
-      "multipleProjectDrop": "他のファイルを含めず、GeoLibre プロジェクトを一度に1つだけドロップしてください。",
+      "multipleProjectDrop": "他のファイルを含めず、GeoSpaX プロジェクトを一度に1つだけドロップしてください。",
       "projectDropNotAllowed": "このデプロイではプロジェクトを切り替えられません。",
       "couldNotImportQgisProject": "QGIS プロジェクトをインポートできませんでした。",
       "couldNotImportArcgisProject": "ArcGIS Pro プロジェクトをインポートできませんでした。",
@@ -3259,7 +3259,7 @@
     "filterSummary": "レイヤーフィルターを適用しました: {{total}}件中{{matched}}件のフィーチャが一致。",
     "evaluationErrors": "{{count}}件のフィーチャは評価できなかったため一致しませんでした。",
     "unevaluableDisjoint": "{{count}}件のフィーチャはジオメトリを評価できなかったため除外されました。",
-    "tooManyPairs": "この比較には{{pairs}}回のフィーチャペア判定が必要です（上限{{limit}}）。代わりにプロセッシング → GeoLibre → ベクター → 空間検索で選択をサイドカーエンジンで実行してください。",
+    "tooManyPairs": "この比較には{{pairs}}回のフィーチャペア判定が必要です（上限{{limit}}）。代わりにプロセッシング → GeoSpaX → ベクター → 空間検索で選択をサイドカーエンジンで実行してください。",
     "exportedLayerName": "{{name}}（選択）"
   },
   "loadEditorFeatures": {
@@ -3791,11 +3791,11 @@
     "addIcechunkFailed": "この Icechunk リポジトリを開けませんでした",
     "zarrProblemGroup": "このアセットは描画可能な 1 つの配列ではなく、配列のグループを指しています",
     "zarrProblemMissing": "このストアにはその変数がありません",
-    "zarrProblemUnauthorized": "この Zarr ストアには、GeoLibre がまだ提供できない認証情報が必要です",
+    "zarrProblemUnauthorized": "この Zarr ストアには、GeoSpaX がまだ提供できない認証情報が必要です",
     "zarrProblemUnsupportedUrl": "この Zarr ストアのアドレスはキー単位で読み取ることができません",
     "zarrProblemUnavailable": "この Zarr ストアを開けませんでした",
     "chooseTarget": "追加するものを選択",
-    "cogUnsupported": "この GeoLibre ホストはリモートの GeoTIFF アセットを表示できません",
+    "cogUnsupported": "この GeoSpaX ホストはリモートの GeoTIFF アセットを表示できません",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3827,7 +3827,7 @@
     "filterWebMap": "Webマップ",
     "webMapAdded_other": "このWebマップから{{count}}件のレイヤーを追加しました。",
     "webMapAddedPartial": "このWebマップの{{total}}件中{{added}}件のレイヤーを追加しました。残りには接続できませんでした。",
-    "webMapEmpty": "このWebマップには GeoLibre が表示できるレイヤーがありません。",
+    "webMapEmpty": "このWebマップには GeoSpaX が表示できるレイヤーがありません。",
     "add": "追加",
     "adding": "追加中…",
     "remove": "削除",
@@ -3909,7 +3909,7 @@
     "downloadTitle": "このファイルをダウンロード",
     "copyUrlTitle": "このファイルのURLをコピー",
     "openProductTitle": "このプロダクトのページを source.coop で開く",
-    "unsupportedTitle": "GeoLibre はこの形式を表示できません。代わりにダウンロードしてください",
+    "unsupportedTitle": "GeoSpaX はこの形式を表示できません。代わりにダウンロードしてください",
     "addError": "このファイルを追加できませんでした: {{message}}",
     "largeFileWarning": "このファイルは {{size}} です。ソースからストリーミングするため、表示中の部分だけが読み込まれます。",
     "streamHint": "このファイルは {{size}} です。「追加」はメモリにコピーし、「ストリーム」は表示中の部分だけを読み込みます。",
@@ -3953,7 +3953,7 @@
     "downloadTitle": "このファイルをダウンロード",
     "copyUrlTitle": "このファイルのURLをコピー",
     "openDatasetTitle": "このデータセットのページを huggingface.co で開く",
-    "unsupportedTitle": "GeoLibre はこの形式を表示できません。代わりにダウンロードしてください",
+    "unsupportedTitle": "GeoSpaX はこの形式を表示できません。代わりにダウンロードしてください",
     "addError": "このファイルを追加できませんでした: {{message}}",
     "notRasterIndex": "このJSONファイルはラスターをインデックスしていないため、地図に表示できるものがありません。MosaicJSON と STAC コレクションに対応しています。",
     "largeFileWarning": "このファイルは {{size}} です。ソースからストリーミングするため、表示中の部分だけが読み込まれます。",
@@ -3995,7 +3995,7 @@
     "clearSelection": "クリア",
     "selectedFiles_other": "{{count}}件のファイルを選択中 ({{size}})。",
     "commitMessageLabel": "コミットメッセージ (任意)",
-    "commitMessagePlaceholder": "GeoLibre からアップロード",
+    "commitMessagePlaceholder": "GeoSpaX からアップロード",
     "upload": "アップロード",
     "uploadPreparing": "アップロードを準備しています…",
     "uploadHashing": "{{name}} のハッシュを計算しています ({{index}}/{{total}})…",
@@ -4506,7 +4506,7 @@
       "importedLog": "{{nodes}} 個のノードを持つモデルをインポートしました。",
       "importFailed": "インポートに失敗しました",
       "importInvalid": "このファイルにはモデルグラフが含まれていません。",
-      "importUnsupported": "このファイルは GeoLibre のモデルではありません。",
+      "importUnsupported": "このファイルは GeoSpaX のモデルではありません。",
       "rasterOutputUnsupported": "「{{name}}」はラスター結果のため、このビルドでは地図に追加できません。",
       "portNeedsVector": "「{{port}}」にはベクターデータが必要ですが、ラスターが渡されました。",
       "toolNoOutput": "「{{tool}}」は出力を生成しませんでした。",
@@ -4561,7 +4561,7 @@
       },
       "filterBySource": "ソースで絞り込み",
       "allSources": "すべてのソース",
-      "geolibreTools": "GeoLibreツール",
+      "geolibreTools": "GeoSpaXツール",
       "whiteboxTools": "Whiteboxツール",
       "toolbox": "Whitebox ツールボックス",
       "checkingRuntime": "ランタイムを確認しています。",
@@ -4615,8 +4615,8 @@
       "errorConnect": "サイドカーに接続できませんでした。",
       "errorPoll": "ジョブを取得できませんでした。",
       "errorStartTool": "Whitebox ツールを開始できませんでした。",
-      "errorStartSidecar": "GeoLibre サイドカーを起動できませんでした。",
-      "errorStopSidecar": "GeoLibre サイドカーを停止できませんでした。",
+      "errorStartSidecar": "GeoSpaX サイドカーを起動できませんでした。",
+      "errorStopSidecar": "GeoSpaX サイドカーを停止できませんでした。",
       "noToolsFound": "ツールが見つかりません。",
       "noParameters": "このツールにはパラメータがありません。",
       "noOutput": "まだ出力はありません。",
@@ -4645,9 +4645,9 @@
       "runLocallyButton": "ローカルで実行 (WASM)",
       "troubleshootingTitle": "それでもサーバーを使用しますか?",
       "stepStartServerDesktop": "ツール一覧パネルの「サーバーを起動」をクリックして起動し、数秒待ってオンラインになるのを確認してください。",
-      "stepStartServerBrowser": "サーバーはGeoLibreデスクトップアプリからのみ起動できます。ブラウザでは代わりに「ローカルで実行 (WASM)」を有効のままにしてください。",
+      "stepStartServerBrowser": "サーバーはGeoSpaXデスクトップアプリからのみ起動できます。ブラウザでは代わりに「ローカルで実行 (WASM)」を有効のままにしてください。",
       "stepCheckPort": "ファイアウォール、ウイルス対策ソフト、またはネットワークポリシーがローカルポート{{port}}をブロックしていないか確認してください。",
-      "stepRestart": "サーバーが予期せず停止した場合は、GeoLibreデスクトップアプリを再起動し、このダイアログを開き直してください。"
+      "stepRestart": "サーバーが予期せず停止した場合は、GeoSpaXデスクトップアプリを再起動し、このダイアログを開き直してください。"
     },
     "vectorTools": {
       "title": "ベクターツール",
@@ -6260,13 +6260,13 @@
     "segment": "セグメント化",
     "status": {
       "checking": "AIセグメンテーションサービスを確認中…",
-      "unavailableDesktop": "AIセグメンテーションサービスがまだ起動していません。segment-geospatialを有効にしてGeoLibreサーバーを起動してください。",
-      "unavailableWeb": "AIセグメンテーションはブラウザでは利用できません。実行するにはGeoLibreデスクトップアプリを使用してください。"
+      "unavailableDesktop": "AIセグメンテーションサービスがまだ起動していません。segment-geospatialを有効にしてGeoSpaXサーバーを起動してください。",
+      "unavailableWeb": "AIセグメンテーションはブラウザでは利用できません。実行するにはGeoSpaXデスクトップアプリを使用してください。"
     },
     "error": {
       "chooseImage": "セグメント化する画像 (GeoTIFF) を選択してください。",
       "enterPrompt": "「樹木」や「建物」などのテキストプロンプトを入力してください。",
-      "startServer": "GeoLibreサイドカーを起動できませんでした。",
+      "startServer": "GeoSpaXサイドカーを起動できませんでした。",
       "failed": "セグメンテーションに失敗しました。"
     },
     "noObjects": "オブジェクトが見つかりませんでした。",
@@ -6277,7 +6277,7 @@
       "title": "AIセグメンテーションサーバーを起動できませんでした。",
       "intro": "AIセグメンテーションは、segment-geospatialのSAM3モデルをホストするローカルヘルパーサーバー ({{sidecarUrl}}) で実行されます。アプリとは別にバックグラウンドでPythonを実行するもので、ブラウザ版には含まれません。",
       "troubleshootingTitle": "サーバーを起動する方法",
-      "stepInstall": "セグメンテーションモデルを利用できるように、segment-geospatialバックエンドを有効にしてGeoLibreサーバーがインストールされていることを確認してください。",
+      "stepInstall": "セグメンテーションモデルを利用できるように、segment-geospatialバックエンドを有効にしてGeoSpaXサーバーがインストールされていることを確認してください。",
       "stepStartServerDesktop": "上部の「サーバーを起動」をクリックして起動し、モデルがオンラインになるまで数秒お待ちください。"
     }
   },
@@ -6531,7 +6531,7 @@
     "import": "インポート…",
     "export": "エクスポート…",
     "importFilterName": "スタイルライブラリ / QML / SLD",
-    "exportFilterName": "GeoLibre スタイルライブラリ",
+    "exportFilterName": "GeoSpaX スタイルライブラリ",
     "applied": "「{{name}}」を {{layer}} に適用しました。",
     "appliedRampHint": "「{{name}}」を適用しました。ランプを表示するには、レイヤーを段階または分類スタイルに切り替えてください。",
     "saved": "「{{name}}」をライブラリに保存しました。",
@@ -7220,7 +7220,7 @@
     "exportStyleDataNotReady": "レイヤーデータの準備がまだ完了していません。しばらくしてから再試行してください。",
     "exportStyleNeedsFeatures": "スタイルのエクスポートにはフィーチャを含むベクターレイヤーが必要です。",
     "exportStyleError": "このレイヤーのスタイルをエクスポートできませんでした。",
-    "importStyle": "スタイルをインポート (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "スタイルをインポート (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "保存済みスタイル(スタイルマネージャー)…",
     "importStyleSuccess": "スタイルをインポートしました。",
     "importStyleInvalid": "そのファイルは有効なJSON、SLD、またはQMLではありません。",
@@ -7634,10 +7634,10 @@
   },
   "errorBoundary": {
     "title": "問題が発生しました",
-    "description": "GeoLibre で予期しないエラーが発生し、続行できませんでした。作業が保存されていない可能性があります — 再読み込みの前に復元をお試しください。",
+    "description": "GeoSpaX で予期しないエラーが発生し、続行できませんでした。作業が保存されていない可能性があります — 再読み込みの前に復元をお試しください。",
     "tryAgain": "再試行",
     "reload": "アプリを再読み込み",
-    "sectionFailed": "{{label}} を表示できませんでした。GeoLibre の他の部分は引き続き利用できます。"
+    "sectionFailed": "{{label}} を表示できませんでした。GeoSpaX の他の部分は引き続き利用できます。"
   },
   "commandPalette": {
     "title": "コマンドパレット",
@@ -7682,7 +7682,7 @@
     "emptyNetworkError": "ネットワークエラーの診断情報は記録されていません。"
   },
   "shell": {
-    "workspaceTitle": "GeoLibre マップワークスペース",
+    "workspaceTitle": "GeoSpaX マップワークスペース",
     "section": {
       "toolbar": "ツールバー",
       "sharedLeftSidebar": "共有左サイドバー",
@@ -7955,7 +7955,7 @@
     "navigationButton": "1. ソースを読み込んでナビゲーションを描画",
     "navigationButtonAgain": "別のナビゲーションレイヤーを描画",
     "exportButton": "描画結果をGeoJSONにエクスポート",
-    "addLayersButton": "描画結果をGeoLibreのレイヤーに追加",
+    "addLayersButton": "描画結果をGeoSpaXのレイヤーに追加",
     "clearButton": "NLDIの結果をクリア",
     "noComid": "この地点に対するCOMIDは返されませんでした。",
     "requestingBasin": "上流域を要求しています…",
