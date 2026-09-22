@@ -1,0 +1,24 @@
+{
+  "name": "@geospax/analysis",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GeoSpaX analysis core - dependency-light, framework-free conservation & natural-resource algorithms (ported from GeoSpaX v1, jm0535/map-kit, with the v1 audit fixes preserved).",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@turf/area": "^7.4.0",
+    "@turf/bbox": "^7.4.0",
+    "@turf/boolean-intersects": "^7.4.0",
+    "@turf/difference": "^7.4.0",
+    "@turf/helpers": "^7.4.0",
+    "@turf/intersect": "^7.4.0",
+    "@turf/union": "^7.4.0",
+    "proj4": "^2.22.0"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "typescript": "^7.0.2"
+  }
+}
