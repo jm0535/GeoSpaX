@@ -6,9 +6,9 @@
     "summary": "{{count}} katman · yakınlaştırma {{zoom}}",
     "restore": "Geri yükle",
     "discard": "Sil",
-    "restoreError": "Bu anlık görüntü geri yüklenemedi. Bozulmuş ya da bu GeoLibre sürümüyle uyumsuz olabilir.",
+    "restoreError": "Bu anlık görüntü geri yüklenemedi. Bozulmuş ya da bu GeoSpaX sürümüyle uyumsuz olabilir.",
     "recoveryTitle": "Kaydedilmemiş çalışma kurtarılsın mı?",
-    "recoveryDescription": "GeoLibre düzgün şekilde kapanmadı. \"{{name}}\" için daha yeni bir otomatik kayıt mevcut."
+    "recoveryDescription": "GeoSpaX düzgün şekilde kapanmadı. \"{{name}}\" için daha yeni bir otomatik kayıt mevcut."
   },
   "browser": {
     "title": "Gözatıcı",
@@ -47,15 +47,15 @@
     "libraryImportFailed": "Bu katman kitaplığı dosyası okunamadı.",
     "libraryExportFailed": "Katman kitaplığı dışa aktarılamadı.",
     "libraryLayerMissing": "Kaydedilmiş o katman artık mevcut değil.",
-    "libraryLayerNeedsDesktop": "Bu kaydedilmiş katman diskten bir dosya okuduğu için GeoLibre Desktop gerektirir. Yeni bir kayıt oluşturmak için dosyayı tekrar ekleyin.",
+    "libraryLayerNeedsDesktop": "Bu kaydedilmiş katman diskten bir dosya okuduğu için GeoSpaX Desktop gerektirir. Yeni bir kayıt oluşturmak için dosyayı tekrar ekleyin.",
     "libraryLayerConfigNotApplied": "\"{{name}}\" için dosya eklendi, ancak kaydedilmiş biçimlendirmesi tek bir katmanla eşleştirilemediği için yeniden uygulanmadı.",
     "libraryLayerJoinsUnresolved_one": "Katman eklendi, ancak kaydedilmiş 1 birleştirme yeniden uygulanamadı: birleştiği katman bu projede yok.",
     "libraryLayerJoinsUnresolved_other": "Katman eklendi, ancak kaydedilmiş {{count}} birleştirme yeniden uygulanamadı: birleştikleri katmanlar bu projede yok."
   },
   "about": {
     "trigger": "Hakkında",
-    "title": "GeoLibre Hakkında",
-    "description": "GeoLibre, hafif, bulut yerel bir CBS platformudur.",
+    "title": "GeoSpaX Hakkında",
+    "description": "GeoSpaX, hafif, bulut yerel bir CBS platformudur.",
     "version": "Sürüm",
     "checkForUpdates": "Güncellemeleri kontrol et",
     "tryAgain": "Yeniden dene",
@@ -74,7 +74,7 @@
     "steps": {
       "download": "Platformunuz için kurulum dosyasını indirmeler sayfasından indirin.",
       "install": "Kurulumu çalıştırın. Yerel projeleriniz, ayarlarınız ve API anahtarlarınız korunur.",
-      "reopen": "Güncellemeyi tamamlamak için GeoLibre'yi yeniden açın."
+      "reopen": "Güncellemeyi tamamlamak için GeoSpaX'yi yeniden açın."
     },
     "severity": {
       "major": "Büyük sürüm",
@@ -93,7 +93,7 @@
       "noTag": "En son sürüm bir sürüm etiketi içermiyor.",
       "network": "GitHub'a ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
       "viewDownloads": "İndirmeleri görüntüle",
-      "viewDownloadsHint": "En son sürümü elle kontrol edebilmeniz için GeoLibre indirmeler sayfasını tarayıcınızda açar."
+      "viewDownloadsHint": "En son sürümü elle kontrol edebilmeniz için GeoSpaX indirmeler sayfasını tarayıcınızda açar."
     },
     "startup": {
       "title": "Güncelleme mevcut",
@@ -106,7 +106,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "Bu özellik GeoLibre Desktop'ın Mac App Store sürümünde kullanılamaz."
+    "unavailable": "Bu özellik GeoSpaX Desktop'ın Mac App Store sürümünde kullanılamaz."
   },
   "bookmark": {
     "captureStateLabel": "Tam katman durumunu dahil et (etkin, etkin olmayan ve katman sırası)",
@@ -124,7 +124,7 @@
       "title": "Bu projedeki eklentiler yüklensin mi?",
       "description_one": "Bu proje, yüklü olmadığınız bir URL'den 1 harici eklenti yüklemek istiyor. Eklentiler, uygulamaya tam erişimle kod çalıştırır.",
       "description_other": "Bu proje, yüklü olmadığınız URL'lerden {{count}} harici eklenti yüklemek istiyor. Eklentiler, uygulamaya tam erişimle kod çalıştırır.",
-      "warning": "Yalnızca güvendiğiniz kaynaklardan eklenti yükleyin. Yüklenen eklentiler, GeoLibre'nin kendisiyle aynı ayrıcalıklarla çalışır.",
+      "warning": "Yalnızca güvendiğiniz kaynaklardan eklenti yükleyin. Yüklenen eklentiler, GeoSpaX'nin kendisiyle aynı ayrıcalıklarla çalışır.",
       "trustButton": "Güven ve yükle",
       "dismissButton": "Yükleme"
     },
@@ -143,7 +143,7 @@
     "openHomepageAria": "{{name}} ana sayfasını aç",
     "byAuthor": "{{author}} tarafından",
     "updateAvailable": "güncelleme mevcut",
-    "requiresVersion": "GeoLibre {{version}}+ gerektirir",
+    "requiresVersion": "GeoSpaX {{version}}+ gerektirir",
     "install": "Kur",
     "installAria": "{{name}} eklentisini kur",
     "removeConfirm": "Kaldırılsın mı?",
@@ -154,10 +154,10 @@
     "updateAria": "{{name}} eklentisini güncelle",
     "loading": "Yükleniyor…",
     "installed": "Kurulu",
-    "settingsIntro": "GeoLibre her zaman uygulama verilerindeki eklenti dizinini tarar. Paketlenmiş bir eklentiyi (.zip) dosyadan kurun ya da ek yerel dizinler ekleyin (yalnızca masaüstü). Manifest URL'leri (mağaza kurulumları dahil) ağ üzerinden yüklenir; buradaki değişiklikler anında geçerli olur.",
+    "settingsIntro": "GeoSpaX her zaman uygulama verilerindeki eklenti dizinini tarar. Paketlenmiş bir eklentiyi (.zip) dosyadan kurun ya da ek yerel dizinler ekleyin (yalnızca masaüstü). Manifest URL'leri (mağaza kurulumları dahil) ağ üzerinden yüklenir; buradaki değişiklikler anında geçerli olur.",
     "installFromFile": "Dosyadan kur",
     "chooseZip": ".zip seç…",
-    "installFromFileHintDesktop": "Paketlenmiş bir eklenti arşivini GeoLibre'nin eklenti dizinine kopyalar.",
+    "installFromFileHintDesktop": "Paketlenmiş bir eklenti arşivini GeoSpaX'nin eklenti dizinine kopyalar.",
     "installFromFileHintWeb": "Paketlenmiş bir eklenti arşivini yükler; tarayıcınızda saklanır ve bir sonraki ziyaretinizde yeniden yüklenir.",
     "localDirectories": "Yerel dizinler",
     "directoryAria": "Eklenti dizini",
@@ -172,7 +172,7 @@
     "errorDirectoryPicker": "Dizin seçici açılamadı.",
     "errorInstall": "Eklenti kurulamadı.",
     "errorUninstall": "Eklenti kaldırılamadı.",
-    "description": "Harici GeoLibre eklentilerine göz atın, kurun, güncelleyin ve kaldırın. Eklentiler <registryLink>GeoLibre eklenti kayıt defterinde</registryLink> listelenir."
+    "description": "Harici GeoSpaX eklentilerine göz atın, kurun, güncelleyin ve kaldırın. Eklentiler <registryLink>GeoSpaX eklenti kayıt defterinde</registryLink> listelenir."
   },
   "viewState": {
     "panelTitle": "Bilgi"
@@ -264,7 +264,7 @@
     "add": "Ekle",
     "ok": "Tamam",
     "done": "Bitti",
-    "openWebApp": "GeoLibre web uygulamasını aç"
+    "openWebApp": "GeoSpaX web uygulamasını aç"
   },
   "addData": {
     "title": "Veri Ekle",
@@ -315,7 +315,7 @@
       },
       "gdb": {
         "label": "File Geodatabase Katmanı Ekle",
-        "description": "Bir Esri File Geodatabase (.gdb klasörü) içinden bir katman ekleyin. Katman, yerel GeoLibre sunucusuyla okunur ve WGS84'e yeniden projeksiyonlanır."
+        "description": "Bir Esri File Geodatabase (.gdb klasörü) içinden bir katman ekleyin. Katman, yerel GeoSpaX sunucusuyla okunur ve WGS84'e yeniden projeksiyonlanır."
       },
       "photos": {
         "label": "Coğrafi Etiketli Fotoğraflar Ekle",
@@ -662,8 +662,8 @@
       "layerPlaceholder": "Önce bir coğrafi veritabanı seçin",
       "readingLayers": "Katmanlar okunuyor...",
       "layerOption": "{{name}} ({{type}}, {{count}} öğe)",
-      "help": "Yalnızca öznitelik içeren tablolar listelenmez. Seçilen öğe sınıfı yerel GeoLibre sunucusu üzerinden yüklenir ve WGS84'e yeniden projeksiyonlanır.",
-      "desktopOnly": "File Geodatabase katmanları yalnızca GeoLibre Masaüstü'nde kullanılabilir. Bu özellik, web uygulamasının erişemediği yerel GeoLibre sunucusu üzerinden yerel bir .gdb klasörünü okur.",
+      "help": "Yalnızca öznitelik içeren tablolar listelenmez. Seçilen öğe sınıfı yerel GeoSpaX sunucusu üzerinden yüklenir ve WGS84'e yeniden projeksiyonlanır.",
+      "desktopOnly": "File Geodatabase katmanları yalnızca GeoSpaX Masaüstü'nde kullanılabilir. Bu özellik, web uygulamasının erişemediği yerel GeoSpaX sunucusu üzerinden yerel bir .gdb klasörünü okur.",
       "readError": "Bu File Geodatabase okunamadı.",
       "convertError": "Bu öğe sınıfı yüklenemedi.",
       "errorNotGdb": ".gdb ile biten bir klasör (Esri File Geodatabase) seçin.",
@@ -755,7 +755,7 @@
     },
     "postgres": {
       "defaultName": "PostgreSQL Katmanı",
-      "errorDesktopOnly": "PostgreSQL katmanları GeoLibre Masaüstü gerektirir.",
+      "errorDesktopOnly": "PostgreSQL katmanları GeoSpaX Masaüstü gerektirir.",
       "errorConnectionString": "Bir PostgreSQL bağlantı dizesi girin.",
       "statusCheckingBinary": "Martin ikili dosyası kontrol ediliyor...",
       "statusDownloaded": "Martin indirildi. Yerel sunucu başlatılıyor...",
@@ -770,7 +770,7 @@
       "errorConnectFirst": "Önce PostgreSQL'e bağlanın.",
       "errorNoVectorLayers": "Seçilen Martin kaynağının vektör katmanı yok.",
       "errorSelectSource": "Eklenecek bir Martin kaynağı seçin.",
-      "desktopOnlyNotice": "PostgreSQL katmanları yalnızca GeoLibre Masaüstü'nde kullanılabilir. Bu özellik, web ve mobil uygulamaların başlatamadığı yerel bir Martin döşeme sunucusu çalıştırır.",
+      "desktopOnlyNotice": "PostgreSQL katmanları yalnızca GeoSpaX Masaüstü'nde kullanılabilir. Bu özellik, web ve mobil uygulamaların başlatamadığı yerel bir Martin döşeme sunucusu çalıştırır.",
       "savedConnection": "Kayıtlı bağlantı",
       "selectSavedConnection": "Kayıtlı bağlantı seç",
       "connectionString": "PostgreSQL bağlantı dizesi",
@@ -1000,7 +1000,7 @@
         "format": "Kapsam GeoTIFF çıktısı bildirmiyor.",
         "crs": "Kapsam hem istekler hem de çıktı için EPSG:4326 desteklemelidir.",
         "size": "1 ile 4096 piksel arasında boyutlar seçin. İndirmeler 128 MB ile sınırlıdır.",
-        "metadata": "Servis GeoLibre'nin yükleyebileceğinden daha fazla meta veri döndürdü. Meta veri yanıtları 32 MB ile sınırlıdır.",
+        "metadata": "Servis GeoSpaX'nin yükleyebileceğinden daha fazla meta veri döndürdü. Meta veri yanıtları 32 MB ile sınırlıdır.",
         "response": "Servis geçerli bir GeoTIFF döndürmedi.",
         "bounds": "Geçerli bir kutu girin: batı/doğu -180 ile 180 arasında, güney/kuzey -90 ile 90 arasında, batı < doğu ve güney < kuzey olacak şekilde.",
         "url": "Bir WCS servis URL'si girin."
@@ -1290,7 +1290,7 @@
     "nmeaConnectFailed": "Alıcıya bağlanılamadı.",
     "nmeaDisconnected": "Alıcının bağlantısı kesildi.",
     "nmeaUnsupportedDevice": "O cihazda NMEA servisi bulunamadı. Klasik Bluetooth alıcısı olabilir; bu durumda sistem ayarlarından eşleştirilip burada seri bağlantı noktası olarak bağlanması gerekir.",
-    "nmeaUnsupported": "Bir NMEA alıcısını okumak için bu tarayıcının sunmadığı Web Serial veya Web Bluetooth API'leri gerekir. GeoLibre'yi Chrome ya da Edge gibi bir Chromium tarayıcısında açın.",
+    "nmeaUnsupported": "Bir NMEA alıcısını okumak için bu tarayıcının sunmadığı Web Serial veya Web Bluetooth API'leri gerekir. GeoSpaX'yi Chrome ya da Edge gibi bir Chromium tarayıcısında açın.",
     "nmeaSerialUnsupported": "Web Serial burada kullanılamıyor, bu nedenle seri alıcılar açılamaz.",
     "nmeaBluetoothUnsupported": "Web Bluetooth burada kullanılamıyor, bu nedenle Bluetooth Low Energy alıcılar açılamaz.",
     "nmeaBluetoothHint": "Çoğu Bluetooth GPS alıcısı klasik Bluetooth kullanır: sistem ayarlarından eşleştirin, burada seri bağlantı noktası olarak görünecektir. \"Bluetooth bağlan\" seçeneğini yalnızca Bluetooth Low Energy alıcılar için kullanın.",
@@ -1425,7 +1425,7 @@
     "step1Title": "1. Bir API belirteci alın",
     "step1Description": "{{shareHost}} adresinde oturum açın, ardından Ayarlar → API belirteçleri altında bir belirteç oluşturun.",
     "getToken": "API belirteci al",
-    "step2Title": "2. Belirteci GeoLibre'ye ekleyin",
+    "step2Title": "2. Belirteci GeoSpaX'ye ekleyin",
     "step2Description": "Belirteci bu cihazda Ayarlar → Ortam Değişkenleri kısmına yapıştırın.",
     "configureToken": "Yerel belirteci yapılandır",
     "liveAt": "Projeniz şu adreste yayında:",
@@ -1476,7 +1476,7 @@
   },
   "gallery": {
     "title": "Proje galerisi",
-    "description": "{{shareHost}} üzerinde paylaşılan genel projelere göz atın ve birini GeoLibre'de açın.",
+    "description": "{{shareHost}} üzerinde paylaşılan genel projelere göz atın ve birini GeoSpaX'de açın.",
     "searchPlaceholder": "Yüklenen projeleri başlığa, yazara veya etikete göre filtrele",
     "loading": "Projeler yükleniyor…",
     "loadingMore": "Daha fazla yükleniyor…",
@@ -1578,7 +1578,7 @@
       "groupNavigation": "Kuzey okunu ve ölçek çubuğunu grupla",
       "footer": "Alt bilgi metni",
       "date": "Tarih",
-      "attribution": "GeoLibre atfını dahil et",
+      "attribution": "GeoSpaX atfını dahil et",
       "pageBorder": "Sayfa kenarlığı",
       "infoBlock": "Bilgi bloğu (başlık bloğu)",
       "colorbar": "Renk çubuğu",
@@ -1862,9 +1862,9 @@
   },
   "auth": {
     "unavailableTitle": "Oturum açma kullanılamıyor",
-    "unavailableDescription": "GeoLibre oturum açma hizmetine ulaşamadı, bu nedenle oturum açıp açmadığınızı belirleyemiyor. Bu durum genellikle geçicidir; sürerse bu dağıtımın kimlik doğrulama ayarlarının gözden geçirilmesi gerekebilir.",
+    "unavailableDescription": "GeoSpaX oturum açma hizmetine ulaşamadı, bu nedenle oturum açıp açmadığınızı belirleyemiyor. Bu durum genellikle geçicidir; sürerse bu dağıtımın kimlik doğrulama ayarlarının gözden geçirilmesi gerekebilir.",
     "retry": "Yeniden dene",
-    "signInTitle": "GeoLibre'de oturum açın",
+    "signInTitle": "GeoSpaX'de oturum açın",
     "signInDescription": "Bu dağıtım bir hesap gerektirir. Güvenli bir oturum açma sayfasına yönlendirilecek ve ardından buraya geri getirileceksiniz.",
     "signIn": "Oturum aç",
     "signOut": "Oturumu kapat",
@@ -2045,7 +2045,7 @@
     "noticeDesc": "Bir bilgi kartı açmak, tıkladığınız yerin koordinatlarını (ve açtığınız yakındaki herhangi bir makalenin başlığını) özet ve fotoğraf almak için Wikipedia'nın herkese açık API'sine gönderir — bu istekler için koordinatlarınız cihazınızdan ayrılır."
   },
   "onboarding": {
-    "title": "GeoLibre'ye Hoş Geldiniz",
+    "title": "GeoSpaX'ye Hoş Geldiniz",
     "description": "Arayüzü kişiselleştirmek için deneyim düzeyinizi seçin. Bunu istediğiniz zaman Ayarlar → Arayüz bölümünden değiştirebilirsiniz.",
     "level": {
       "beginner": {
@@ -2058,7 +2058,7 @@
       },
       "advanced": {
         "title": "İleri düzey",
-        "description": "GeoLibre'nin sunduğu her şeyi göster."
+        "description": "GeoSpaX'nin sunduğu her şeyi göster."
       }
     },
     "showEverything": "Atla — her şeyi göster"
@@ -2095,7 +2095,7 @@
     },
     "languagePack": {
       "title": "Dil paketleri",
-      "description": "Her GeoLibre kurulumunu büyütmeden Whitebox araç adları, parametreleri ve yardım metinleri için isteğe bağlı çeviriler ekleyin.",
+      "description": "Her GeoSpaX kurulumunu büyütmeden Whitebox araç adları, parametreleri ve yardım metinleri için isteğe bağlı çeviriler ekleyin.",
       "manage": "Dil paketlerini yönet",
       "interfaceLanguage": "Arayüz dili",
       "installed": "Whitebox dil paketi kurulu",
@@ -2117,10 +2117,10 @@
       "privacyLocalOnly": "Paketler yalnızca bu cihazda saklanır. Bu sürüm hiçbir şey indirmez: bunun yerine bir dil paketi dosyası içe aktarın.",
       "browse": "Dil paketlerine göz at",
       "errorInvalidJson": "Bu dosya geçerli JSON değil.",
-      "errorInvalidFormat": "Bu dosya geçerli bir GeoLibre Whitebox dil paketi değil.",
-      "errorUnsupportedVersion": "Bu dil paketi sürümü, bu GeoLibre sürümü tarafından desteklenmiyor.",
+      "errorInvalidFormat": "Bu dosya geçerli bir GeoSpaX Whitebox dil paketi değil.",
+      "errorUnsupportedVersion": "Bu dil paketi sürümü, bu GeoSpaX sürümü tarafından desteklenmiyor.",
       "errorInvalidLocale": "Dil paketinin yerel ayarı geçersiz veya beklenmedik.",
-      "errorUnsupportedLocale": "GeoLibre, bu paketin gerektirdiği temel arayüz dilini içermiyor.",
+      "errorUnsupportedLocale": "GeoSpaX, bu paketin gerektirdiği temel arayüz dilini içermiyor.",
       "errorTooLarge": "Dil paketi 5 MB güvenlik sınırını aşıyor.",
       "errorNotFound": "Bu dil için henüz resmi bir Whitebox dil paketi yok.",
       "errorDownload": "Dil paketi indirilemedi. Bağlantınızı kontrol edin veya yerel bir dosya içe aktarın.",
@@ -2128,9 +2128,9 @@
     },
     "updates": {
       "title": "Yazılım Güncellemeleri",
-      "description": "Masaüstü uygulaması başladığında GeoLibre'nin yeni sürümleri nasıl kontrol edeceğini yönetin.",
+      "description": "Masaüstü uygulaması başladığında GeoSpaX'nin yeni sürümleri nasıl kontrol edeceğini yönetin.",
       "checkOnStartup": "Başlangıçta güncellemeleri kontrol et",
-      "checkOnStartupHint": "Etkinleştirildiğinde, GeoLibre uygulama her başladığında daha yeni bir sürüm olup olmadığını kontrol eder. Tamamen çevrimdışı bir iş akışı için bunu kapatın.",
+      "checkOnStartupHint": "Etkinleştirildiğinde, GeoSpaX uygulama her başladığında daha yeni bir sürüm olup olmadığını kontrol eder. Tamamen çevrimdışı bir iş akışı için bunu kapatın.",
       "notificationLevel": "Şunlar hakkında beni bilgilendir",
       "notificationLevelHint": "Hangi tür sürümlerin başlangıç bildirimini tetikleyeceğini seçin.",
       "level": {
@@ -2141,7 +2141,7 @@
     },
     "startup": {
       "title": "Başlangıç projesi",
-      "description": "GeoLibre'nin native uygulama başladığında açacağı çalışma alanını seçin.",
+      "description": "GeoSpaX'nin native uygulama başladığında açacağı çalışma alanını seçin.",
       "mode": {
         "default": "Varsayılan çalışma alanını aç",
         "last": "Son projeyi yeniden aç",
@@ -2164,7 +2164,7 @@
       "viewUnavailable": "Geçerli harita görünümü kullanılamıyor.",
       "selectError": "Seçilen proje okunamadı.",
       "restoring": "Başlangıç projeniz açılıyor…",
-      "loadWarning": "Başlangıç projesi kullanılamıyor. GeoLibre bunun yerine varsayılan çalışma alanını açtı."
+      "loadWarning": "Başlangıç projesi kullanılamıyor. GeoSpaX bunun yerine varsayılan çalışma alanını açtı."
     },
     "map": {
       "constraintsTitle": "Harita kısıtlamaları",
@@ -2518,7 +2518,7 @@
       "smartPaste": "Koordinatları yapıştır",
       "smartPasteInputLabel": "Koordinat dizesi",
       "smartPastePlaceholder": "örn. 51.5074, -0.1278 veya 51°30'26\"K, 0°07'39\"B",
-      "smartPasteInfo": "DD, DMS veya DDM biçiminde tam bir koordinat dizesini yazın veya yapıştırın, ardından Girdiyi İşle'yi çalıştırın. GeoLibre biçimi algılar ve aşağıdaki boylam ve enlem alanlarını doldurur. Yakınlaştırma, eğim ve yönü ayrı ayrı ayarlayın.",
+      "smartPasteInfo": "DD, DMS veya DDM biçiminde tam bir koordinat dizesini yazın veya yapıştırın, ardından Girdiyi İşle'yi çalıştırın. GeoSpaX biçimi algılar ve aşağıdaki boylam ve enlem alanlarını doldurur. Yakınlaştırma, eğim ve yönü ayrı ayrı ayarlayın.",
       "smartPasteInfoLabel": "Koordinat yapıştırma hakkında",
       "smartPasteInvalid": "Bu koordinatlar okunamadı. DD, DMS veya DDM biçiminde tam bir boylam ve enlem girin, örneğin 51.5074, -0.1278. Kısmi veya eksik bir dize çözümlenemez.",
       "processInput": "Girdiyi işle",
@@ -2655,8 +2655,8 @@
     },
     "conversion": {
       "vectorToVector": "Vektörden Vektöre",
-      "zipInputBrowserError": "Zip'lenmiş Shapefile'lar yalnızca GeoLibre masaüstü uygulamasında dönüştürülebilir. Tarayıcıda, açılmamış .shp dosyasını .dbf, .shx ve .prj dosyalarıyla birlikte seçin.",
-      "browserOutputUnsupported": "Tarayıcıda çıktı GeoJSON, CSV, GeoParquet, GeoPackage veya Shapefile (.zip) olabilir. \".{{extension}}\" çıktısı GeoLibre masaüstü uygulamasını gerektirir.",
+      "zipInputBrowserError": "Zip'lenmiş Shapefile'lar yalnızca GeoSpaX masaüstü uygulamasında dönüştürülebilir. Tarayıcıda, açılmamış .shp dosyasını .dbf, .shx ve .prj dosyalarıyla birlikte seçin.",
+      "browserOutputUnsupported": "Tarayıcıda çıktı GeoJSON, CSV, GeoParquet, GeoPackage veya Shapefile (.zip) olabilir. \".{{extension}}\" çıktısı GeoSpaX masaüstü uygulamasını gerektirir.",
       "outputExtensionRequired": "Biçimi seçmek için çıktı adına bir dosya uzantısı ekleyin.",
       "readingWithDuckDb": "{{name}} DuckDB-WASM ile okunuyor",
       "readFeatures": "{{name}} kaynağından {{features}} öğe okundu",
@@ -2670,7 +2670,7 @@
       "vectorToPmtiles": "Vektörden PMTiles'a",
       "rasterToCog": "Rasterdan COG'a",
       "rasterToPmtiles": "Rasterdan PMTiles'a",
-      "needsDesktop": "Bu dönüştürme GeoLibre masaüstü uygulamasını veya çalışan bir sidecar gerektirir.",
+      "needsDesktop": "Bu dönüştürme GeoSpaX masaüstü uygulamasını veya çalışan bir sidecar gerektirir.",
       "runsInBrowserDuckDb": "Dönüştürme tarayıcınızda DuckDB-WASM ile çalışır.",
       "runsInBrowserWriters": "Dönüştürme tarayıcınızda DuckDB-WASM ve paketlenmiş yazıcılarla çalışır.",
       "runsInBrowserWasm": "Dönüştürme tarayıcınızda geolibre-wasm ile çalışır. Sidecar gerekmez.",
@@ -2678,7 +2678,7 @@
       "rasterShape": "{{bands}} bantlı {{width}}×{{height}} raster okundu",
       "wroteCog": "Genel görünümlü, döşenmiş bir COG yazıldı ({{compression}})",
       "notAGeoTiff": "Bu dosya okunabilir bir GeoTIFF değil. Tarayıcıda, Rasterdan COG'a yalnızca GeoTIFF okur; diğer biçimler masaüstü uygulamasını gerektirir.",
-      "rasterTooLargeForBrowser": "Tarayıcıda bu işlem rasterın tamamını WebAssembly içinde çözer; WebAssembly yaklaşık 4 GB ile sınırlı olduğundan bu dosya sığmaz. GeoLibre masaüstü uygulamasıyla dönüştürün ya da COG'u önceden gdal_translate veya rio-cogeo ile oluşturun.",
+      "rasterTooLargeForBrowser": "Tarayıcıda bu işlem rasterın tamamını WebAssembly içinde çözer; WebAssembly yaklaşık 4 GB ile sınırlı olduğundan bu dosya sığmaz. GeoSpaX masaüstü uygulamasıyla dönüştürün ya da COG'u önceden gdal_translate veya rio-cogeo ile oluşturun.",
       "zoomRangeError": "Yakınlaştırma düzeyleri 0 ≤ min ≤ maks ≤ {{max}} koşulunu sağlamalıdır.",
       "colormap": "Renk haritası",
       "resampling": "Yeniden örnekleme",
@@ -2833,9 +2833,9 @@
       "outputFile": "Çıktı dosyası",
       "noOutput": "Henüz çıktı yok.",
       "errorConnect": "Sidecar'a bağlanılamadı.",
-      "needsDesktopSidecar": "Raster araçları, çalışan bir sidecar ile GeoLibre masaüstü uygulamasını gerektirir.",
+      "needsDesktopSidecar": "Raster araçları, çalışan bir sidecar ile GeoSpaX masaüstü uygulamasını gerektirir.",
       "errorPoll": "İş durumu sorgulanamadı.",
-      "errorStartSidecar": "GeoLibre sidecar'ı başlatılamadı.",
+      "errorStartSidecar": "GeoSpaX sidecar'ı başlatılamadı.",
       "errorStartTool": "Raster aracı başlatılamadı."
     },
     "mapControl": {
@@ -2949,7 +2949,7 @@
       "terrain": "Arazi",
       "remoteSensing": "Uzaktan Algılama",
       "projection": "İzdüşüm",
-      "geolibre": "GeoLibre araç kutusu",
+      "geolibre": "GeoSpaX araç kutusu",
       "subGroupGeometry": "Geometri",
       "subGroupOverlay": "Kaplama",
       "subGroupJoin": "Birleştirme",
@@ -3030,12 +3030,12 @@
         "layer-type": "{{layerType}} katman türü desteklenmiyor.",
         "missing-source": "Katmanın okunabilir bir yerel veri kaynağı yok.",
         "format": "Katmanın veri biçimi desteklenmiyor.",
-        "file-geodatabase": "File Geodatabase (.gdb) kaynakları projelerden yüklenmez. GeoLibre Desktop'ta bunları Veri Ekle → Dosya Coğrafi Veritabanı (GDB) ile ekleyin.",
+        "file-geodatabase": "File Geodatabase (.gdb) kaynakları projelerden yüklenmez. GeoSpaX Desktop'ta bunları Veri Ekle → Dosya Coğrafi Veritabanı (GDB) ile ekleyin.",
         "file-geodatabase-raster": "Dosya Coğrafi Veritabanında (.gdb) saklanan raster veri kümeleri desteklenmiyor. Rasteri GeoTIFF olarak dışa aktarın ve raster katmanı olarak ekleyin.",
         "network-path": "Ağ paylaşımı yolları güvenlik nedeniyle yüklenmez.",
         "service": "Projelerdeki ArcGIS servis katmanları henüz desteklenmiyor.",
-        "browser-local-file": "Yerel dosyaya başvuruluyor, ancak tarayıcılar ArcGIS Pro veri yollarını yeniden açamaz. Yüklemek için GeoLibre Desktop kullanın.",
-        "map-extent": "Kaydedilen harita kapsamı GeoLibre'nin dönüştüremediği bir koordinat sistemi kullanıyor, bu yüzden harita varsayılan görünümde açıldı.",
+        "browser-local-file": "Yerel dosyaya başvuruluyor, ancak tarayıcılar ArcGIS Pro veri yollarını yeniden açamaz. Yüklemek için GeoSpaX Desktop kullanın.",
+        "map-extent": "Kaydedilen harita kapsamı GeoSpaX'nin dönüştüremediği bir koordinat sistemi kullanıyor, bu yüzden harita varsayılan görünümde açıldı.",
         "nesting": "Grup çok derin iç içe geçmiş veya proje, onu zaten içeren bir gruba geri başvuruyor."
       },
       "qgisImportComplete": "QGIS projesi içe aktarıldı",
@@ -3049,8 +3049,8 @@
         "format": "Katmanın dosya biçimi desteklenmiyor.",
         "remote-file": "Uzak QGIS dosya kaynakları henüz desteklenmiyor.",
         "network-path": "Ağ paylaşımı yolları güvenlik nedeniyle yüklenmez.",
-        "browser-local-file": "Yerel dosyaya başvuruluyor, ancak tarayıcılar QGIS veri yollarını yeniden açamaz. Yüklemek için GeoLibre Desktop kullanın.",
-        "browser-local-raster": "Rastera yerel bir yol üzerinden başvuruluyor. Yüklemek için GeoLibre Desktop kullanın."
+        "browser-local-file": "Yerel dosyaya başvuruluyor, ancak tarayıcılar QGIS veri yollarını yeniden açamaz. Yüklemek için GeoSpaX Desktop kullanın.",
+        "browser-local-raster": "Rastera yerel bir yol üzerinden başvuruluyor. Yüklemek için GeoSpaX Desktop kullanın."
       },
       "openProjectFromUrlDesc": "Bir `.geolibre.json` projesini yükleyin ve son projelere ekleyin.",
       "projectUrl": "Proje URL'si",
@@ -3064,7 +3064,7 @@
       "embedEditedGeometryDesc": "Bu proje düzenlenmiş geometriler içeriyor. Bunları korumak için vektör verilerini gömün (yaklaşık {{size}}). Gömülmezse referans verilen katmanlar özgün geometrileriyle yeniden açılır ve yerel veriler kullanılamayabilir.",
       "embedVectorDesc": "Bu projede bilgisayarınızdan yüklenmiş {{count}} yerel vektör katmanı var. Tarayıcı, proje yeniden açıldığında bunları yeniden okuyamaz; bu nedenle geri yüklenebilmeleri için verilerinin proje dosyasına gömülmesi gerekir. Gömme, dosyaya yaklaşık {{size}} ekler.",
       "embedVectorDescDesktop": "Bu projede bilgisayarınızdan yüklenmiş {{count}} yerel vektör katmanı var. Projeyi kendi kendine yeterli hale getirmek için verilerini gömün (yaklaşık {{size}} ekler) veya proje yeniden açıldığında diskten yeniden yüklenen dosya referansları kaydedin. Referanslar dosyayı küçük tutar ancak kaynak dosya daha sonra taşınır veya silinirse bozulur.",
-      "embedVectorDescMas": "Bu projede bilgisayarınızdan yüklenmiş {{count}} yerel vektör katmanı var. Mac App Store korumalı alanı, GeoLibre kapatıldıktan sonra bu dosyalara erişimi koruyamaz; bu nedenle geri yüklenebilmeleri için verileri proje dosyasına gömülmelidir. Gömme, dosyaya yaklaşık {{size}} ekler.",
+      "embedVectorDescMas": "Bu projede bilgisayarınızdan yüklenmiş {{count}} yerel vektör katmanı var. Mac App Store korumalı alanı, GeoSpaX kapatıldıktan sonra bu dosyalara erişimi koruyamaz; bu nedenle geri yüklenebilmeleri için verileri proje dosyasına gömülmelidir. Gömme, dosyaya yaklaşık {{size}} ekler.",
       "embedVectorLargeWarning": "Yaklaşık {{size}} gömmek çok büyük bir proje dosyası oluşturur. Her nesnenin aynı anda ayrıştırılıp bellekte tutulması gerektiğinden dosyayı yeniden açmak yavaş olabilir veya tamamen başarısız olabilir. Bu boyuttaki veriler için katmanları PMTiles ya da FlatGeobuf biçimine dönüştürün ve gömmek yerine uzak katman olarak ekleyin.",
       "embedVectorEmbedButton": "Veriyi göm",
       "embedVectorReferenceButton": "Dosya referanslarını kaydet",
@@ -3183,7 +3183,7 @@
     },
     "error": {
       "couldNotOpenProject": "Proje açılamadı.",
-      "multipleProjectDrop": "Başka dosya olmadan tek seferde bir GeoLibre projesi bırakın.",
+      "multipleProjectDrop": "Başka dosya olmadan tek seferde bir GeoSpaX projesi bırakın.",
       "projectDropNotAllowed": "Bu dağıtım projeler arasında geçişe izin vermiyor.",
       "couldNotImportQgisProject": "QGIS projesi içe aktarılamadı.",
       "couldNotImportArcgisProject": "ArcGIS Pro projesi içe aktarılamadı.",
@@ -3318,7 +3318,7 @@
     "filterSummary": "Katman filtresi uygulandı: {{total}} öğeden {{matched}} tanesi eşleşiyor.",
     "evaluationErrors": "{{count}} öğe değerlendirilemedi ve eşleştirilmedi.",
     "unevaluableDisjoint": "{{count}} öğe, geometrileri değerlendirilemediği için hariç tutuldu.",
-    "tooManyPairs": "Bu karşılaştırma {{pairs}} öğe-çifti testi gerektiriyor (sınır {{limit}}). Bunun yerine İşleme → GeoLibre → Vektör → Konuma göre seç aracını Sidecar motoruyla kullanın.",
+    "tooManyPairs": "Bu karşılaştırma {{pairs}} öğe-çifti testi gerektiriyor (sınır {{limit}}). Bunun yerine İşleme → GeoSpaX → Vektör → Konuma göre seç aracını Sidecar motoruyla kullanın.",
     "exportedLayerName": "{{name}} (seçim)"
   },
   "loadEditorFeatures": {
@@ -3850,11 +3850,11 @@
     "addIcechunkFailed": "Bu Icechunk deposu açılamadı",
     "zarrProblemGroup": "Bu varlık çizilebilir tek bir dizi değil, bir dizi grubu adlandırıyor",
     "zarrProblemMissing": "Bu depo o değişkeni içermiyor",
-    "zarrProblemUnauthorized": "Bu Zarr deposu, GeoLibre'nin henüz sağlayamadığı kimlik bilgileri gerektiriyor",
+    "zarrProblemUnauthorized": "Bu Zarr deposu, GeoSpaX'nin henüz sağlayamadığı kimlik bilgileri gerektiriyor",
     "zarrProblemUnsupportedUrl": "Bu Zarr deposunun adresi anahtar bazında okunamıyor",
     "zarrProblemUnavailable": "Bu Zarr deposu açılamadı",
     "chooseTarget": "Ne ekleneceğini seçin",
-    "cogUnsupported": "Bu GeoLibre ana bilgisayarı uzak GeoTIFF varlıklarını görselleştiremiyor",
+    "cogUnsupported": "Bu GeoSpaX ana bilgisayarı uzak GeoTIFF varlıklarını görselleştiremiyor",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3887,7 +3887,7 @@
     "webMapAdded_one": "Bu web haritasından {{count}} katman eklendi.",
     "webMapAdded_other": "Bu web haritasından {{count}} katman eklendi.",
     "webMapAddedPartial": "Bu web haritasından {{total}} katmandan {{added}} tanesi eklendi; geri kalanına ulaşılamadı.",
-    "webMapEmpty": "bu web haritasında GeoLibre'nin görüntüleyebileceği katman yok.",
+    "webMapEmpty": "bu web haritasında GeoSpaX'nin görüntüleyebileceği katman yok.",
     "add": "Ekle",
     "adding": "Ekleniyor…",
     "remove": "Kaldır",
@@ -3969,7 +3969,7 @@
     "downloadTitle": "Bu dosyayı indir",
     "copyUrlTitle": "Bu dosyanın URL'sini kopyala",
     "openProductTitle": "Bu ürünün sayfasını source.coop'ta aç",
-    "unsupportedTitle": "GeoLibre bu biçimi görüntüleyemez — bunun yerine indirin",
+    "unsupportedTitle": "GeoSpaX bu biçimi görüntüleyemez — bunun yerine indirin",
     "addError": "Bu dosya eklenemedi: {{message}}",
     "largeFileWarning": "Bu dosya {{size}}. Kaynaktan akışla getirilir, bu nedenle yalnızca görünümdeki kısımlar okunur.",
     "streamHint": "Bu dosya {{size}}. «Ekle» onu belleğe kopyalar; «Akışla oku» yalnızca görünümdeki kısımları okur.",
@@ -4014,7 +4014,7 @@
     "downloadTitle": "Bu dosyayı indir",
     "copyUrlTitle": "Bu dosyanın URL'sini kopyala",
     "openDatasetTitle": "Bu veri kümesinin sayfasını huggingface.co'da aç",
-    "unsupportedTitle": "GeoLibre bu biçimi görüntüleyemez — bunun yerine indirin",
+    "unsupportedTitle": "GeoSpaX bu biçimi görüntüleyemez — bunun yerine indirin",
     "addError": "Bu dosya eklenemedi: {{message}}",
     "notRasterIndex": "Bu JSON dosyası hiçbir raster'ı dizinlemiyor, dolayısıyla haritaya konulacak bir şey yok. MosaicJSON ve STAC koleksiyonları desteklenir.",
     "largeFileWarning": "Bu dosya {{size}}. Kaynaktan akışla getirilir, bu nedenle yalnızca görünümdeki kısımlar okunur.",
@@ -4058,7 +4058,7 @@
     "selectedFiles_one": "{{count}} dosya seçildi ({{size}}).",
     "selectedFiles_other": "{{count}} dosya seçildi ({{size}}).",
     "commitMessageLabel": "Commit mesajı (isteğe bağlı)",
-    "commitMessagePlaceholder": "GeoLibre ile yüklendi",
+    "commitMessagePlaceholder": "GeoSpaX ile yüklendi",
     "upload": "Yükle",
     "uploadPreparing": "Yükleme hazırlanıyor…",
     "uploadHashing": "{{name}} özetleniyor ({{index}}/{{total}})…",
@@ -4577,7 +4577,7 @@
       "importedLog": "{{nodes}} düğümlü bir model içe aktarıldı.",
       "importFailed": "İçe aktarma başarısız",
       "importInvalid": "Bu dosya bir model grafiği içermiyor.",
-      "importUnsupported": "Bu dosya bir GeoLibre modeli değil.",
+      "importUnsupported": "Bu dosya bir GeoSpaX modeli değil.",
       "rasterOutputUnsupported": "\"{{name}}\" bir raster sonucudur; bu sürüm bunu haritaya ekleyemez.",
       "portNeedsVector": "\"{{port}}\" vektör verisi gerektiriyor ancak bir raster geldi.",
       "toolNoOutput": "\"{{tool}}\" hiçbir çıktı üretmedi.",
@@ -4633,7 +4633,7 @@
       },
       "filterBySource": "Kaynağa göre filtrele",
       "allSources": "Tüm kaynaklar",
-      "geolibreTools": "GeoLibre araçları",
+      "geolibreTools": "GeoSpaX araçları",
       "whiteboxTools": "Whitebox araçları",
       "toolbox": "Whitebox araç kutusu",
       "checkingRuntime": "Çalışma zamanı denetleniyor.",
@@ -4688,8 +4688,8 @@
       "errorConnect": "Sidecar'a bağlanılamadı.",
       "errorPoll": "İş durumu sorgulanamadı.",
       "errorStartTool": "Whitebox aracı başlatılamadı.",
-      "errorStartSidecar": "GeoLibre sidecar'ı başlatılamadı.",
-      "errorStopSidecar": "GeoLibre sidecar'ı durdurulamadı.",
+      "errorStartSidecar": "GeoSpaX sidecar'ı başlatılamadı.",
+      "errorStopSidecar": "GeoSpaX sidecar'ı durdurulamadı.",
       "noToolsFound": "Araç bulunamadı.",
       "noParameters": "Bu aracın parametresi yok.",
       "noOutput": "Henüz çıktı yok.",
@@ -4718,9 +4718,9 @@
       "runLocallyButton": "Yerel olarak çalıştır (WASM)",
       "troubleshootingTitle": "Yine de sunucuyu mu kullanmak istiyorsunuz?",
       "stepStartServerDesktop": "Başlatmak için araç listesi panelinde \"Sunucuyu başlat\"a tıklayın, ardından çevrimiçi olması için birkaç saniye bekleyin.",
-      "stepStartServerBrowser": "Sunucu yalnızca GeoLibre masaüstü uygulamasından başlatılabilir. Tarayıcıda, bunun yerine \"Yerel olarak çalıştır (WASM)\" seçeneğini etkin tutun.",
+      "stepStartServerBrowser": "Sunucu yalnızca GeoSpaX masaüstü uygulamasından başlatılabilir. Tarayıcıda, bunun yerine \"Yerel olarak çalıştır (WASM)\" seçeneğini etkin tutun.",
       "stepCheckPort": "Bir güvenlik duvarının, antivirüsün veya ağ politikasının yerel {{port}} bağlantı noktasını engellemediğinden emin olun.",
-      "stepRestart": "Sunucu beklenmedik şekilde durduysa, GeoLibre masaüstü uygulamasını yeniden başlatın ve bu iletişim kutusunu tekrar açın."
+      "stepRestart": "Sunucu beklenmedik şekilde durduysa, GeoSpaX masaüstü uygulamasını yeniden başlatın ve bu iletişim kutusunu tekrar açın."
     },
     "vectorTools": {
       "title": "Vektör araçları",
@@ -6333,13 +6333,13 @@
     "segment": "Segmentle",
     "status": {
       "checking": "AI segmentasyon servisi kontrol ediliyor…",
-      "unavailableDesktop": "AI segmentasyon servisi henüz çalışmıyor. Kullanmak için segment-geospatial etkinleştirilmiş GeoLibre sunucusunu başlatın.",
-      "unavailableWeb": "AI segmentasyon tarayıcıda kullanılamıyor. Çalıştırmak için GeoLibre masaüstü uygulamasını kullanın."
+      "unavailableDesktop": "AI segmentasyon servisi henüz çalışmıyor. Kullanmak için segment-geospatial etkinleştirilmiş GeoSpaX sunucusunu başlatın.",
+      "unavailableWeb": "AI segmentasyon tarayıcıda kullanılamıyor. Çalıştırmak için GeoSpaX masaüstü uygulamasını kullanın."
     },
     "error": {
       "chooseImage": "Segmentlenecek bir görüntü (GeoTIFF) seçin.",
       "enterPrompt": "Bir metin istemi girin, örn. “ağaçlar” veya “binalar”.",
-      "startServer": "GeoLibre sidecar'ı başlatılamadı.",
+      "startServer": "GeoSpaX sidecar'ı başlatılamadı.",
       "failed": "Segmentasyon başarısız oldu."
     },
     "noObjects": "Nesne bulunamadı.",
@@ -6350,7 +6350,7 @@
       "title": "AI segmentasyon sunucusu başlatılamadı.",
       "intro": "AI segmentasyon, segment-geospatial'dan SAM3 modelini barındıran yerel bir yardımcı sunucuda ({{sidecarUrl}}) çalışır. Arka planda, uygulamadan ayrı olarak Python çalıştırır ve tarayıcı derlemesinin bir parçası değildir.",
       "troubleshootingTitle": "Sunucu nasıl çalıştırılır",
-      "stepInstall": "Segmentasyon modelinin kullanılabilir olması için GeoLibre sunucusunun segment-geospatial arka ucu etkinleştirilmiş olarak kurulduğundan emin olun.",
+      "stepInstall": "Segmentasyon modelinin kullanılabilir olması için GeoSpaX sunucusunun segment-geospatial arka ucu etkinleştirilmiş olarak kurulduğundan emin olun.",
       "stepStartServerDesktop": "Başlatmak için yukarıdaki \"Sunucuyu başlat\"a tıklayın, ardından modelin çevrimiçi olması için birkaç saniye bekleyin."
     }
   },
@@ -6607,7 +6607,7 @@
     "import": "İçe aktar…",
     "export": "Dışa aktar…",
     "importFilterName": "Stil kitaplığı / QML / SLD",
-    "exportFilterName": "GeoLibre stil kitaplığı",
+    "exportFilterName": "GeoSpaX stil kitaplığı",
     "applied": "\"{{name}}\" {{layer}} katmanına uygulandı.",
     "appliedRampHint": "\"{{name}}\" uygulandı. Renk geçişini görmek için katmanı derecelendirilmiş veya kategorize edilmiş stile geçirin.",
     "saved": "\"{{name}}\" kitaplığa kaydedildi.",
@@ -7301,7 +7301,7 @@
     "exportStyleDataNotReady": "Katman verisi henüz hazır değil. Birazdan tekrar deneyin.",
     "exportStyleNeedsFeatures": "Stil dışa aktarımı öğeleri olan bir vektör katmanı gerektirir.",
     "exportStyleError": "Bu katmanın stili dışa aktarılamadı.",
-    "importStyle": "Stil içe aktar (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "Stil içe aktar (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "Kayıtlı stiller (Stil Yöneticisi)…",
     "importStyleSuccess": "Stil içe aktarıldı.",
     "importStyleInvalid": "Bu dosya geçerli JSON, SLD veya QML değil.",
@@ -7715,10 +7715,10 @@
   },
   "errorBoundary": {
     "title": "Bir şeyler ters gitti",
-    "description": "GeoLibre beklenmeyen bir hatayla karşılaştı ve devam edemedi. Çalışmanız kaydedilmemiş olabilir — yeniden yüklemeden önce kurtarmayı deneyin.",
+    "description": "GeoSpaX beklenmeyen bir hatayla karşılaştı ve devam edemedi. Çalışmanız kaydedilmemiş olabilir — yeniden yüklemeden önce kurtarmayı deneyin.",
     "tryAgain": "Yeniden dene",
     "reload": "Uygulamayı yeniden yükle",
-    "sectionFailed": "{{label}} görüntülenemedi. GeoLibre'nin geri kalanı hâlâ kullanılabilir."
+    "sectionFailed": "{{label}} görüntülenemedi. GeoSpaX'nin geri kalanı hâlâ kullanılabilir."
   },
   "commandPalette": {
     "title": "Komut paleti",
@@ -7768,7 +7768,7 @@
     "emptyNetworkError": "Hiç ağ hatası tanılama verisi yakalanmadı."
   },
   "shell": {
-    "workspaceTitle": "GeoLibre harita çalışma alanı",
+    "workspaceTitle": "GeoSpaX harita çalışma alanı",
     "section": {
       "toolbar": "Araç çubuğu",
       "sharedLeftSidebar": "Paylaşılan sol kenar çubuğu",
@@ -8041,7 +8041,7 @@
     "navigationButton": "1. Kaynakları yükle ve gezinmeyi çiz",
     "navigationButtonAgain": "Başka bir gezinme katmanı çiz",
     "exportButton": "Çizilen sonuçları GeoJSON olarak dışa aktar",
-    "addLayersButton": "Çizilen sonuçları GeoLibre Katmanlarına ekle",
+    "addLayersButton": "Çizilen sonuçları GeoSpaX Katmanlarına ekle",
     "clearButton": "NLDI sonucunu temizle",
     "noComid": "Bu nokta için COMID döndürülmedi.",
     "requestingBasin": "Memba havzası isteniyor…",

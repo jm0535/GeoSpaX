@@ -6,9 +6,9 @@
     "summary": "{{count}} lagen · zoom {{zoom}}",
     "restore": "Herstellen",
     "discard": "Weggooien",
-    "restoreError": "Deze momentopname kon niet worden hersteld. Mogelijk is ze beschadigd of niet compatibel met deze versie van GeoLibre.",
+    "restoreError": "Deze momentopname kon niet worden hersteld. Mogelijk is ze beschadigd of niet compatibel met deze versie van GeoSpaX.",
     "recoveryTitle": "Niet-opgeslagen werk herstellen?",
-    "recoveryDescription": "GeoLibre is niet netjes afgesloten. Er is een nieuwere automatische opslag van \"{{name}}\" beschikbaar."
+    "recoveryDescription": "GeoSpaX is niet netjes afgesloten. Er is een nieuwere automatische opslag van \"{{name}}\" beschikbaar."
   },
   "browser": {
     "title": "Browser",
@@ -47,15 +47,15 @@
     "libraryImportFailed": "Dit lagenbibliotheekbestand kon niet worden gelezen.",
     "libraryExportFailed": "De lagenbibliotheek kon niet worden geëxporteerd.",
     "libraryLayerMissing": "Die opgeslagen laag bestaat niet meer.",
-    "libraryLayerNeedsDesktop": "Deze opgeslagen laag leest een bestand van schijf en heeft daarom GeoLibre Desktop nodig. Voeg het bestand opnieuw toe om een nieuw item op te slaan.",
+    "libraryLayerNeedsDesktop": "Deze opgeslagen laag leest een bestand van schijf en heeft daarom GeoSpaX Desktop nodig. Voeg het bestand opnieuw toe om een nieuw item op te slaan.",
     "libraryLayerConfigNotApplied": "Het bestand voor \"{{name}}\" is toegevoegd, maar de opgeslagen stijl kon niet aan één laag worden gekoppeld en is dus niet opnieuw toegepast.",
     "libraryLayerJoinsUnresolved_one": "De laag is toegevoegd, maar 1 opgeslagen koppeling kon niet opnieuw worden toegepast: de laag waarmee ze wordt gekoppeld, zit niet in dit project.",
     "libraryLayerJoinsUnresolved_other": "De laag is toegevoegd, maar {{count}} opgeslagen koppelingen konden niet opnieuw worden toegepast: de lagen waarmee ze worden gekoppeld, zitten niet in dit project."
   },
   "about": {
     "trigger": "Over",
-    "title": "Over GeoLibre",
-    "description": "GeoLibre is een lichtgewicht, cloud-native GIS-platform.",
+    "title": "Over GeoSpaX",
+    "description": "GeoSpaX is een lichtgewicht, cloud-native GIS-platform.",
     "version": "Versie",
     "checkForUpdates": "Controleren op updates",
     "tryAgain": "Opnieuw proberen",
@@ -74,7 +74,7 @@
     "steps": {
       "download": "Download het installatieprogramma voor uw platform van de downloadpagina.",
       "install": "Voer het installatieprogramma uit. Uw lokale projecten, instellingen en API-sleutels blijven behouden.",
-      "reopen": "Open GeoLibre opnieuw om het bijwerken te voltooien."
+      "reopen": "Open GeoSpaX opnieuw om het bijwerken te voltooien."
     },
     "severity": {
       "major": "Grote release",
@@ -93,7 +93,7 @@
       "noTag": "De nieuwste release bevat geen versietag.",
       "network": "Kan GitHub niet bereiken. Controleer uw verbinding en probeer het opnieuw.",
       "viewDownloads": "Downloads bekijken",
-      "viewDownloadsHint": "Opent de GeoLibre-downloadpagina in uw browser zodat u handmatig de nieuwste versie kunt controleren."
+      "viewDownloadsHint": "Opent de GeoSpaX-downloadpagina in uw browser zodat u handmatig de nieuwste versie kunt controleren."
     },
     "startup": {
       "title": "Update beschikbaar",
@@ -106,7 +106,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "Deze functie is niet beschikbaar in de Mac App Store-versie van GeoLibre Desktop."
+    "unavailable": "Deze functie is niet beschikbaar in de Mac App Store-versie van GeoSpaX Desktop."
   },
   "bookmark": {
     "captureStateLabel": "Volledige laagstatus opnemen (actief, inactief en laagvolgorde)",
@@ -124,7 +124,7 @@
       "title": "Plugins van dit project laden?",
       "description_one": "Dit project wil 1 externe plugin laden vanaf een URL die u niet hebt geïnstalleerd. Plugins voeren code uit met volledige toegang tot de app.",
       "description_other": "Dit project wil {{count}} externe plugins laden vanaf URL's die u niet hebt geïnstalleerd. Plugins voeren code uit met volledige toegang tot de app.",
-      "warning": "Laad alleen plugins van bronnen die u vertrouwt. Geladen plugins worden uitgevoerd met dezelfde rechten als GeoLibre zelf.",
+      "warning": "Laad alleen plugins van bronnen die u vertrouwt. Geladen plugins worden uitgevoerd met dezelfde rechten als GeoSpaX zelf.",
       "trustButton": "Vertrouwen en laden",
       "dismissButton": "Niet laden"
     },
@@ -143,7 +143,7 @@
     "openHomepageAria": "Homepage van {{name}} openen",
     "byAuthor": "van {{author}}",
     "updateAvailable": "update beschikbaar",
-    "requiresVersion": "vereist GeoLibre {{version}}+",
+    "requiresVersion": "vereist GeoSpaX {{version}}+",
     "install": "Installeren",
     "installAria": "{{name}} installeren",
     "removeConfirm": "Verwijderen?",
@@ -154,10 +154,10 @@
     "updateAria": "{{name}} bijwerken",
     "loading": "Laden…",
     "installed": "Geïnstalleerd",
-    "settingsIntro": "GeoLibre scant altijd zijn pluginmap in de app-gegevens. Installeer een verpakte plugin (.zip) vanuit een bestand, of voeg extra lokale mappen toe (alleen desktop). Manifest-URL's (inclusief marketplace-installaties) worden via het netwerk geladen; wijzigingen hier werken meteen.",
+    "settingsIntro": "GeoSpaX scant altijd zijn pluginmap in de app-gegevens. Installeer een verpakte plugin (.zip) vanuit een bestand, of voeg extra lokale mappen toe (alleen desktop). Manifest-URL's (inclusief marketplace-installaties) worden via het netwerk geladen; wijzigingen hier werken meteen.",
     "installFromFile": "Installeren vanuit bestand",
     "chooseZip": ".zip kiezen…",
-    "installFromFileHintDesktop": "Kopieert een verpakt pluginarchief naar de pluginmap van GeoLibre.",
+    "installFromFileHintDesktop": "Kopieert een verpakt pluginarchief naar de pluginmap van GeoSpaX.",
     "installFromFileHintWeb": "Laadt een verpakt pluginarchief; het wordt in uw browser opgeslagen en bij uw volgende bezoek opnieuw geladen.",
     "localDirectories": "Lokale mappen",
     "directoryAria": "Pluginmap",
@@ -172,7 +172,7 @@
     "errorDirectoryPicker": "Kon de mapkiezer niet openen.",
     "errorInstall": "Kon de plugin niet installeren.",
     "errorUninstall": "Kon de plugin niet verwijderen.",
-    "description": "Blader door externe GeoLibre-plugins en installeer, werk bij of verwijder ze. Plugins staan in het <registryLink>GeoLibre-pluginregister</registryLink>."
+    "description": "Blader door externe GeoSpaX-plugins en installeer, werk bij of verwijder ze. Plugins staan in het <registryLink>GeoSpaX-pluginregister</registryLink>."
   },
   "viewState": {
     "panelTitle": "Info"
@@ -264,7 +264,7 @@
     "add": "Toevoegen",
     "ok": "OK",
     "done": "Gereed",
-    "openWebApp": "Open de GeoLibre-webapp"
+    "openWebApp": "Open de GeoSpaX-webapp"
   },
   "addData": {
     "title": "Gegevens toevoegen",
@@ -315,7 +315,7 @@
       },
       "gdb": {
         "label": "File Geodatabase-laag toevoegen",
-        "description": "Voeg een laag toe uit een Esri File Geodatabase (.gdb-map). De laag wordt gelezen met de lokale GeoLibre-server en geherprojecteerd naar WGS84."
+        "description": "Voeg een laag toe uit een Esri File Geodatabase (.gdb-map). De laag wordt gelezen met de lokale GeoSpaX-server en geherprojecteerd naar WGS84."
       },
       "photos": {
         "label": "Foto's met geotag toevoegen",
@@ -662,8 +662,8 @@
       "layerPlaceholder": "Kies eerst een geodatabase",
       "readingLayers": "Lagen lezen...",
       "layerOption": "{{name}} ({{type}}, {{count}} features)",
-      "help": "Tabellen met alleen attributen worden niet weergegeven. De geselecteerde feature class wordt geladen via de lokale GeoLibre-server en geherprojecteerd naar WGS84.",
-      "desktopOnly": "File Geodatabase-lagen zijn alleen beschikbaar in GeoLibre Desktop. Deze functie leest een lokale .gdb-map via de lokale GeoLibre-server, waar de webapp geen toegang toe heeft.",
+      "help": "Tabellen met alleen attributen worden niet weergegeven. De geselecteerde feature class wordt geladen via de lokale GeoSpaX-server en geherprojecteerd naar WGS84.",
+      "desktopOnly": "File Geodatabase-lagen zijn alleen beschikbaar in GeoSpaX Desktop. Deze functie leest een lokale .gdb-map via de lokale GeoSpaX-server, waar de webapp geen toegang toe heeft.",
       "readError": "Kan deze File Geodatabase niet lezen.",
       "convertError": "Kan deze feature class niet laden.",
       "errorNotGdb": "Kies een map die eindigt op .gdb (een Esri File Geodatabase).",
@@ -755,7 +755,7 @@
     },
     "postgres": {
       "defaultName": "PostgreSQL-laag",
-      "errorDesktopOnly": "PostgreSQL-lagen vereisen GeoLibre Desktop.",
+      "errorDesktopOnly": "PostgreSQL-lagen vereisen GeoSpaX Desktop.",
       "errorConnectionString": "Voer een PostgreSQL-verbindingsreeks in.",
       "statusCheckingBinary": "Martin-programma controleren...",
       "statusDownloaded": "Martin gedownload. Lokale server wordt gestart...",
@@ -770,7 +770,7 @@
       "errorConnectFirst": "Maak eerst verbinding met PostgreSQL.",
       "errorNoVectorLayers": "De geselecteerde Martin-bron heeft geen vectorlagen.",
       "errorSelectSource": "Selecteer een Martin-bron om toe te voegen.",
-      "desktopOnlyNotice": "PostgreSQL-lagen zijn alleen beschikbaar in GeoLibre Desktop. Deze functie start een lokale Martin-tegelserver, die de web- en mobiele apps niet kunnen starten.",
+      "desktopOnlyNotice": "PostgreSQL-lagen zijn alleen beschikbaar in GeoSpaX Desktop. Deze functie start een lokale Martin-tegelserver, die de web- en mobiele apps niet kunnen starten.",
       "savedConnection": "Opgeslagen verbinding",
       "selectSavedConnection": "Opgeslagen verbinding selecteren",
       "connectionString": "PostgreSQL-verbindingsreeks",
@@ -1000,7 +1000,7 @@
         "format": "De coverage biedt geen GeoTIFF-uitvoer aan.",
         "crs": "De coverage moet EPSG:4326 ondersteunen voor aanvragen en uitvoer.",
         "size": "Kies afmetingen van 1 tot 4096 pixels. Downloads zijn beperkt tot 128 MB.",
-        "metadata": "De service heeft meer metadata teruggestuurd dan GeoLibre kan laden. Metadata-antwoorden zijn beperkt tot 32 MB.",
+        "metadata": "De service heeft meer metadata teruggestuurd dan GeoSpaX kan laden. Metadata-antwoorden zijn beperkt tot 32 MB.",
         "response": "De service heeft geen geldige GeoTIFF teruggestuurd.",
         "bounds": "Voer een geldig kader in: west/oost binnen -180 tot 180, zuid/noord binnen -90 tot 90, met west < oost en zuid < noord.",
         "url": "Voer een WCS-service-URL in."
@@ -1290,7 +1290,7 @@
     "nmeaConnectFailed": "Kon geen verbinding maken met de ontvanger.",
     "nmeaDisconnected": "De ontvanger heeft de verbinding verbroken.",
     "nmeaUnsupportedDevice": "Er is geen NMEA-service gevonden op dat apparaat. Het kan een klassieke Bluetooth-ontvanger zijn, die in de systeeminstellingen gekoppeld moet worden en hier daarna als seriële poort kan worden verbonden.",
-    "nmeaUnsupported": "Het uitlezen van een NMEA-ontvanger vereist de Web Serial- of Web Bluetooth-API, die deze browser niet biedt. Open GeoLibre in een Chromium-browser zoals Chrome of Edge.",
+    "nmeaUnsupported": "Het uitlezen van een NMEA-ontvanger vereist de Web Serial- of Web Bluetooth-API, die deze browser niet biedt. Open GeoSpaX in een Chromium-browser zoals Chrome of Edge.",
     "nmeaSerialUnsupported": "Web Serial is hier niet beschikbaar, dus seriële ontvangers kunnen niet worden geopend.",
     "nmeaBluetoothUnsupported": "Web Bluetooth is hier niet beschikbaar, dus Bluetooth Low Energy-ontvangers kunnen niet worden geopend.",
     "nmeaBluetoothHint": "De meeste Bluetooth-GPS-ontvangers gebruiken klassiek Bluetooth: koppel er een in de systeeminstellingen en hij verschijnt hier als seriële poort. Gebruik \"Bluetooth verbinden\" alleen voor Bluetooth Low Energy-ontvangers.",
@@ -1425,7 +1425,7 @@
     "step1Title": "1. API-token ophalen",
     "step1Description": "Meld u aan bij {{shareHost}} en maak vervolgens een token aan onder Instellingen → API-tokens.",
     "getToken": "API-token ophalen",
-    "step2Title": "2. Token toevoegen aan GeoLibre",
+    "step2Title": "2. Token toevoegen aan GeoSpaX",
     "step2Description": "Plak het token in Instellingen → Omgevingsvariabelen op dit apparaat.",
     "configureToken": "Lokaal token configureren",
     "liveAt": "Uw project is live op:",
@@ -1476,7 +1476,7 @@
   },
   "gallery": {
     "title": "Projectgalerij",
-    "description": "Blader door openbare projecten die zijn gedeeld op {{shareHost}} en open er een in GeoLibre.",
+    "description": "Blader door openbare projecten die zijn gedeeld op {{shareHost}} en open er een in GeoSpaX.",
     "searchPlaceholder": "Filter geladen projecten op titel, auteur of label",
     "loading": "Projecten laden…",
     "loadingMore": "Meer laden…",
@@ -1578,7 +1578,7 @@
       "groupNavigation": "Noordpijl en schaalbalk groeperen",
       "footer": "Voettekst",
       "date": "Datum",
-      "attribution": "GeoLibre-attributie opnemen",
+      "attribution": "GeoSpaX-attributie opnemen",
       "pageBorder": "Paginarand",
       "infoBlock": "Infoblok (titelblok)",
       "colorbar": "Kleurenbalk",
@@ -1862,9 +1862,9 @@
   },
   "auth": {
     "unavailableTitle": "Aanmelden is niet beschikbaar",
-    "unavailableDescription": "GeoLibre kon de aanmeldservice niet bereiken en kan daarom niet vaststellen of u bent aangemeld. Dit is meestal tijdelijk; als het aanhoudt, vragen de authenticatie-instellingen van deze implementatie mogelijk om aandacht.",
+    "unavailableDescription": "GeoSpaX kon de aanmeldservice niet bereiken en kan daarom niet vaststellen of u bent aangemeld. Dit is meestal tijdelijk; als het aanhoudt, vragen de authenticatie-instellingen van deze implementatie mogelijk om aandacht.",
     "retry": "Opnieuw proberen",
-    "signInTitle": "Aanmelden bij GeoLibre",
+    "signInTitle": "Aanmelden bij GeoSpaX",
     "signInDescription": "Deze implementatie vereist een account. U wordt naar een beveiligde aanmeldpagina geleid en daarna hier teruggebracht.",
     "signIn": "Aanmelden",
     "signOut": "Afmelden",
@@ -2045,7 +2045,7 @@
     "noticeDesc": "Bij het openen van een kenniskaart worden de coördinaten van de plaats waarop u klikte (en de titel van een artikel in de buurt dat u opent) naar de openbare API van Wikipedia gestuurd om een samenvatting en foto op te halen — uw coördinaten verlaten uw apparaat voor deze verzoeken."
   },
   "onboarding": {
-    "title": "Welkom bij GeoLibre",
+    "title": "Welkom bij GeoSpaX",
     "description": "Kies uw ervaringsniveau om de interface aan te passen. U kunt dit op elk moment wijzigen via Instellingen → Interface.",
     "level": {
       "beginner": {
@@ -2058,7 +2058,7 @@
       },
       "advanced": {
         "title": "Gevorderd",
-        "description": "Toon alles wat GeoLibre te bieden heeft."
+        "description": "Toon alles wat GeoSpaX te bieden heeft."
       }
     },
     "showEverything": "Overslaan — alles weergeven"
@@ -2095,7 +2095,7 @@
     },
     "languagePack": {
       "title": "Taalpakketten",
-      "description": "Voeg optionele vertalingen toe voor Whitebox-gereedschapsnamen, parameters en helpteksten zonder elke GeoLibre-installatie groter te maken.",
+      "description": "Voeg optionele vertalingen toe voor Whitebox-gereedschapsnamen, parameters en helpteksten zonder elke GeoSpaX-installatie groter te maken.",
       "manage": "Taalpakketten beheren",
       "interfaceLanguage": "Interfacetaal",
       "installed": "Whitebox-taalpakket geïnstalleerd",
@@ -2117,10 +2117,10 @@
       "privacyLocalOnly": "Pakketten worden alleen op dit apparaat opgeslagen. Deze build downloadt niets: importeer in plaats daarvan een taalpakketbestand.",
       "browse": "Taalpakketten doorbladeren",
       "errorInvalidJson": "Dat bestand is geen geldige JSON.",
-      "errorInvalidFormat": "Dat bestand is geen geldig GeoLibre-Whitebox-taalpakket.",
-      "errorUnsupportedVersion": "Deze taalpakketversie wordt niet ondersteund door deze GeoLibre-release.",
+      "errorInvalidFormat": "Dat bestand is geen geldig GeoSpaX-Whitebox-taalpakket.",
+      "errorUnsupportedVersion": "Deze taalpakketversie wordt niet ondersteund door deze GeoSpaX-release.",
       "errorInvalidLocale": "Het taalpakket heeft een ongeldige of onverwachte locale.",
-      "errorUnsupportedLocale": "GeoLibre bevat niet de basisinterfacetaal die dit pakket vereist.",
+      "errorUnsupportedLocale": "GeoSpaX bevat niet de basisinterfacetaal die dit pakket vereist.",
       "errorTooLarge": "Het taalpakket overschrijdt de veiligheidslimiet van 5 MB.",
       "errorNotFound": "Er is nog geen officieel Whitebox-taalpakket beschikbaar voor deze taal.",
       "errorDownload": "Het taalpakket kon niet worden gedownload. Controleer uw verbinding of importeer een lokaal bestand.",
@@ -2128,9 +2128,9 @@
     },
     "updates": {
       "title": "Software-updates",
-      "description": "Bepaal hoe GeoLibre controleert op nieuwe versies wanneer de desktopapp start.",
+      "description": "Bepaal hoe GeoSpaX controleert op nieuwe versies wanneer de desktopapp start.",
       "checkOnStartup": "Controleren op updates bij opstarten",
-      "checkOnStartupHint": "Indien ingeschakeld, controleert GeoLibre bij elke start van de app op een nieuwere versie. Schakel dit uit voor een volledig offline workflow.",
+      "checkOnStartupHint": "Indien ingeschakeld, controleert GeoSpaX bij elke start van de app op een nieuwere versie. Schakel dit uit voor een volledig offline workflow.",
       "notificationLevel": "Meldingen ontvangen voor",
       "notificationLevelHint": "Kies welke soorten releases een melding bij opstarten activeren.",
       "level": {
@@ -2141,7 +2141,7 @@
     },
     "startup": {
       "title": "Opstartproject",
-      "description": "Kies de werkruimte die GeoLibre opent wanneer de native app start.",
+      "description": "Kies de werkruimte die GeoSpaX opent wanneer de native app start.",
       "mode": {
         "default": "De standaardwerkruimte openen",
         "last": "Het laatste project opnieuw openen",
@@ -2164,7 +2164,7 @@
       "viewUnavailable": "De huidige kaartweergave is niet beschikbaar.",
       "selectError": "Het geselecteerde project kon niet worden gelezen.",
       "restoring": "Uw opstartproject wordt geopend…",
-      "loadWarning": "Het opstartproject is niet beschikbaar. GeoLibre heeft in plaats daarvan de standaardwerkruimte geopend."
+      "loadWarning": "Het opstartproject is niet beschikbaar. GeoSpaX heeft in plaats daarvan de standaardwerkruimte geopend."
     },
     "map": {
       "constraintsTitle": "Kaartbeperkingen",
@@ -2518,7 +2518,7 @@
       "smartPaste": "Coördinaten plakken",
       "smartPasteInputLabel": "Coördinatentekst",
       "smartPastePlaceholder": "bijv. 51.5074, -0.1278 of 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "Typ of plak een volledige coördinatentekst in DD, DMS of DDM en voer daarna Invoer verwerken uit. GeoLibre herkent het formaat en vult de velden voor lengtegraad en breedtegraad hieronder in. Pas zoomniveau, kanteling en richting apart aan voordat u verdergaat.",
+      "smartPasteInfo": "Typ of plak een volledige coördinatentekst in DD, DMS of DDM en voer daarna Invoer verwerken uit. GeoSpaX herkent het formaat en vult de velden voor lengtegraad en breedtegraad hieronder in. Pas zoomniveau, kanteling en richting apart aan voordat u verdergaat.",
       "smartPasteInfoLabel": "Over het plakken van coördinaten",
       "smartPasteInvalid": "Deze coördinaten konden niet worden gelezen. Voer een volledige lengte- en breedtegraad in DD, DMS of DDM in, bijvoorbeeld 51.5074, -0.1278. Een gedeeltelijke of onvolledige tekst kan niet worden verwerkt.",
       "processInput": "Invoer verwerken",
@@ -2655,8 +2655,8 @@
     },
     "conversion": {
       "vectorToVector": "Vector naar vector",
-      "zipInputBrowserError": "Gezipte Shapefiles kunnen alleen worden geconverteerd in de GeoLibre-desktopapp. Selecteer in de browser de uitgepakte .shp samen met de bijbehorende .dbf-, .shx- en .prj-bestanden.",
-      "browserOutputUnsupported": "In de browser kan de uitvoer GeoJSON, CSV, GeoParquet, GeoPackage of Shapefile (.zip) zijn. Uitvoer naar \".{{extension}}\" vereist de GeoLibre-desktopapp.",
+      "zipInputBrowserError": "Gezipte Shapefiles kunnen alleen worden geconverteerd in de GeoSpaX-desktopapp. Selecteer in de browser de uitgepakte .shp samen met de bijbehorende .dbf-, .shx- en .prj-bestanden.",
+      "browserOutputUnsupported": "In de browser kan de uitvoer GeoJSON, CSV, GeoParquet, GeoPackage of Shapefile (.zip) zijn. Uitvoer naar \".{{extension}}\" vereist de GeoSpaX-desktopapp.",
       "outputExtensionRequired": "Voeg een bestandsextensie toe aan de uitvoernaam om de indeling te kiezen.",
       "readingWithDuckDb": "{{name}} lezen met DuckDB-WASM",
       "readFeatures": "{{features}} features gelezen uit {{name}}",
@@ -2670,7 +2670,7 @@
       "vectorToPmtiles": "Vector naar PMTiles",
       "rasterToCog": "Raster naar COG",
       "rasterToPmtiles": "Raster naar PMTiles",
-      "needsDesktop": "Deze conversie vereist de GeoLibre-desktop-app of een actieve sidecar.",
+      "needsDesktop": "Deze conversie vereist de GeoSpaX-desktop-app of een actieve sidecar.",
       "runsInBrowserDuckDb": "De conversie draait in uw browser met DuckDB-WASM.",
       "runsInBrowserWriters": "De conversie draait in uw browser met DuckDB-WASM en de meegeleverde writers.",
       "runsInBrowserWasm": "De conversie draait in uw browser met geolibre-wasm. Geen sidecar nodig.",
@@ -2678,7 +2678,7 @@
       "rasterShape": "{{width}}×{{height}} raster gelezen met {{bands}} band(en)",
       "wroteCog": "Getegelde COG met overzichten geschreven ({{compression}})",
       "notAGeoTiff": "Dit bestand is geen leesbare GeoTIFF. In de browser leest Raster naar COG alleen GeoTIFF; andere formaten vereisen de desktop-app.",
-      "rasterTooLargeForBrowser": "In de browser wordt het hele raster in WebAssembly-geheugen gedecodeerd. Dit geheugen is beperkt tot ongeveer 4 GB, waardoor het raster niet past. Converteer het met de GeoLibre-desktop-app, of bouw de COG vooraf met gdal_translate of rio-cogeo.",
+      "rasterTooLargeForBrowser": "In de browser wordt het hele raster in WebAssembly-geheugen gedecodeerd. Dit geheugen is beperkt tot ongeveer 4 GB, waardoor het raster niet past. Converteer het met de GeoSpaX-desktop-app, of bouw de COG vooraf met gdal_translate of rio-cogeo.",
       "zoomRangeError": "Zoomniveaus moeten voldoen aan 0 ≤ min ≤ max ≤ {{max}}.",
       "colormap": "Kleurenkaart",
       "resampling": "Herbemonstering",
@@ -2833,9 +2833,9 @@
       "outputFile": "Uitvoerbestand",
       "noOutput": "Nog geen uitvoer.",
       "errorConnect": "Kon geen verbinding maken met de sidecar.",
-      "needsDesktopSidecar": "Rasterhulpmiddelen vereisen de GeoLibre-desktopapp met een draaiende sidecar.",
+      "needsDesktopSidecar": "Rasterhulpmiddelen vereisen de GeoSpaX-desktopapp met een draaiende sidecar.",
       "errorPoll": "Kon de taak niet opvragen.",
-      "errorStartSidecar": "Kon de GeoLibre-sidecar niet starten.",
+      "errorStartSidecar": "Kon de GeoSpaX-sidecar niet starten.",
       "errorStartTool": "Kon het rastergereedschap niet starten."
     },
     "mapControl": {
@@ -2949,7 +2949,7 @@
       "terrain": "Terrein",
       "remoteSensing": "Remote sensing",
       "projection": "Projectie",
-      "geolibre": "GeoLibre-toolbox",
+      "geolibre": "GeoSpaX-toolbox",
       "subGroupGeometry": "Geometrie",
       "subGroupOverlay": "Overlay",
       "subGroupJoin": "Join",
@@ -3030,12 +3030,12 @@
         "layer-type": "Het laagtype {{layerType}} wordt niet ondersteund.",
         "missing-source": "De laag heeft geen leesbare lokale gegevensbron.",
         "format": "Het gegevensformaat van de laag wordt niet ondersteund.",
-        "file-geodatabase": "File Geodatabase-bronnen (.gdb) worden niet uit projecten geladen. Voeg ze in GeoLibre Desktop toe via Gegevens toevoegen → File Geodatabase (GDB).",
+        "file-geodatabase": "File Geodatabase-bronnen (.gdb) worden niet uit projecten geladen. Voeg ze in GeoSpaX Desktop toe via Gegevens toevoegen → File Geodatabase (GDB).",
         "file-geodatabase-raster": "Rasterdatasets in een File Geodatabase (.gdb) worden niet ondersteund. Exporteer het raster naar GeoTIFF en voeg het toe als rasterlaag.",
         "network-path": "Netwerkpaden worden om veiligheidsredenen niet geladen.",
         "service": "ArcGIS-servicelagen in projecten worden nog niet ondersteund.",
-        "browser-local-file": "Er wordt naar het lokale bestand verwezen, maar browsers kunnen ArcGIS Pro-gegevenspaden niet opnieuw openen. Gebruik GeoLibre Desktop om het te laden.",
-        "map-extent": "De opgeslagen kaartuitsnede gebruikt een coördinatensysteem dat GeoLibre niet kan omrekenen, dus is de kaart in een standaardweergave geopend.",
+        "browser-local-file": "Er wordt naar het lokale bestand verwezen, maar browsers kunnen ArcGIS Pro-gegevenspaden niet opnieuw openen. Gebruik GeoSpaX Desktop om het te laden.",
+        "map-extent": "De opgeslagen kaartuitsnede gebruikt een coördinatensysteem dat GeoSpaX niet kan omrekenen, dus is de kaart in een standaardweergave geopend.",
         "nesting": "De groep is te diep genest, of het project verwijst terug naar een groep die deze al bevat."
       },
       "qgisImportComplete": "QGIS-project geïmporteerd",
@@ -3049,8 +3049,8 @@
         "format": "Het bestandsformaat van de laag wordt niet ondersteund.",
         "remote-file": "Externe QGIS-bestandsbronnen worden nog niet ondersteund.",
         "network-path": "Netwerkpaden worden om veiligheidsredenen niet geladen.",
-        "browser-local-file": "Er wordt naar het lokale bestand verwezen, maar browsers kunnen QGIS-gegevenspaden niet opnieuw openen. Gebruik GeoLibre Desktop om het te laden.",
-        "browser-local-raster": "Er wordt via een lokaal pad naar het raster verwezen. Gebruik GeoLibre Desktop om het te laden."
+        "browser-local-file": "Er wordt naar het lokale bestand verwezen, maar browsers kunnen QGIS-gegevenspaden niet opnieuw openen. Gebruik GeoSpaX Desktop om het te laden.",
+        "browser-local-raster": "Er wordt via een lokaal pad naar het raster verwezen. Gebruik GeoSpaX Desktop om het te laden."
       },
       "openProjectFromUrlDesc": "Laad een `.geolibre.json`-project en voeg het toe aan recente projecten.",
       "projectUrl": "Project-URL",
@@ -3064,7 +3064,7 @@
       "embedEditedGeometryDesc": "Dit project bevat bewerkte geometrieën. Sluit de vectorgegevens in (ongeveer {{size}}) om ze te behouden. Zonder insluiting worden lagen met verwijzingen heropend met hun oorspronkelijke geometrieën en zijn lokale gegevens mogelijk niet beschikbaar.",
       "embedVectorDesc": "Dit project bevat {{count}} lokale vectorlaag/-lagen die vanaf uw computer zijn geladen. De browser kan deze niet opnieuw lezen wanneer het project opnieuw wordt geopend, dus de gegevens moeten in het projectbestand worden ingesloten om te kunnen worden hersteld. Insluiten voegt ongeveer {{size}} toe aan het bestand.",
       "embedVectorDescDesktop": "Dit project bevat {{count}} lokale vectorlaag/-lagen die vanaf uw computer zijn geladen. Sluit de gegevens in om het project op zichzelf staand te maken (voegt ongeveer {{size}} toe), of sla bestandsverwijzingen op die opnieuw worden geladen vanaf schijf wanneer het project opnieuw wordt geopend. Verwijzingen houden het bestand klein, maar breken als een bronbestand later wordt verplaatst of verwijderd.",
-      "embedVectorDescMas": "Dit project bevat {{count}} lokale vectorlaag/-lagen die vanaf uw computer zijn geladen. De Mac App Store-sandbox kan de toegang tot deze bestanden niet behouden nadat GeoLibre is gesloten. Daarom moeten de gegevens in het projectbestand worden ingesloten om te kunnen worden hersteld. Insluiten voegt ongeveer {{size}} toe aan het bestand.",
+      "embedVectorDescMas": "Dit project bevat {{count}} lokale vectorlaag/-lagen die vanaf uw computer zijn geladen. De Mac App Store-sandbox kan de toegang tot deze bestanden niet behouden nadat GeoSpaX is gesloten. Daarom moeten de gegevens in het projectbestand worden ingesloten om te kunnen worden hersteld. Insluiten voegt ongeveer {{size}} toe aan het bestand.",
       "embedVectorLargeWarning": "Ongeveer {{size}} insluiten levert een zeer groot projectbestand op. Opnieuw openen kan traag zijn of helemaal mislukken, omdat elk object in één keer moet worden ingelezen en in het geheugen gehouden. Zet gegevens van dit formaat om naar PMTiles of FlatGeobuf en voeg ze toe als externe lagen in plaats van ze in te sluiten.",
       "embedVectorEmbedButton": "Gegevens insluiten",
       "embedVectorReferenceButton": "Bestandsverwijzingen opslaan",
@@ -3183,7 +3183,7 @@
     },
     "error": {
       "couldNotOpenProject": "Het project kon niet worden geopend.",
-      "multipleProjectDrop": "Zet één GeoLibre-project tegelijk neer, zonder andere bestanden.",
+      "multipleProjectDrop": "Zet één GeoSpaX-project tegelijk neer, zonder andere bestanden.",
       "projectDropNotAllowed": "Deze implementatie staat wisselen van project niet toe.",
       "couldNotImportQgisProject": "Kon het QGIS-project niet importeren.",
       "couldNotImportArcgisProject": "Kon het ArcGIS Pro-project niet importeren.",
@@ -3318,7 +3318,7 @@
     "filterSummary": "Laagfilter toegepast: {{matched}} van {{total}} object(en) komen overeen.",
     "evaluationErrors": "{{count}} object(en) konden niet worden geëvalueerd en kwamen niet overeen.",
     "unevaluableDisjoint": "{{count}} object(en) zijn uitgesloten omdat hun geometrie niet kon worden geëvalueerd.",
-    "tooManyPairs": "Deze vergelijking vereist {{pairs}} object-paartests (limiet {{limit}}). Gebruik in plaats daarvan Verwerking → GeoLibre → Vector → Selecteren op locatie met de Sidecar-engine.",
+    "tooManyPairs": "Deze vergelijking vereist {{pairs}} object-paartests (limiet {{limit}}). Gebruik in plaats daarvan Verwerking → GeoSpaX → Vector → Selecteren op locatie met de Sidecar-engine.",
     "exportedLayerName": "{{name}} (selectie)"
   },
   "loadEditorFeatures": {
@@ -3850,11 +3850,11 @@
     "addIcechunkFailed": "Deze Icechunk-repository kon niet worden geopend",
     "zarrProblemGroup": "Deze asset verwijst naar een groep arrays, niet naar één array die kan worden getekend",
     "zarrProblemMissing": "Deze store bevat die variabele niet",
-    "zarrProblemUnauthorized": "Deze Zarr-store vereist inloggegevens die GeoLibre nog niet kan leveren",
+    "zarrProblemUnauthorized": "Deze Zarr-store vereist inloggegevens die GeoSpaX nog niet kan leveren",
     "zarrProblemUnsupportedUrl": "Het adres van deze Zarr-store kan niet per sleutel worden gelezen",
     "zarrProblemUnavailable": "Deze Zarr-store kon niet worden geopend",
     "chooseTarget": "Kies wat u wilt toevoegen",
-    "cogUnsupported": "Deze GeoLibre-host kan externe GeoTIFF-assets niet weergeven",
+    "cogUnsupported": "Deze GeoSpaX-host kan externe GeoTIFF-assets niet weergeven",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3887,7 +3887,7 @@
     "webMapAdded_one": "{{count}} laag toegevoegd uit deze webkaart.",
     "webMapAdded_other": "{{count}} lagen toegevoegd uit deze webkaart.",
     "webMapAddedPartial": "Lagen toegevoegd: {{added}} van {{total}} uit deze webkaart; de rest was niet bereikbaar.",
-    "webMapEmpty": "deze webkaart bevat geen lagen die GeoLibre kan weergeven.",
+    "webMapEmpty": "deze webkaart bevat geen lagen die GeoSpaX kan weergeven.",
     "add": "Toevoegen",
     "adding": "Toevoegen…",
     "remove": "Verwijderen",
@@ -3969,7 +3969,7 @@
     "downloadTitle": "Dit bestand downloaden",
     "copyUrlTitle": "De URL van dit bestand kopiëren",
     "openProductTitle": "De pagina van dit product openen op source.coop",
-    "unsupportedTitle": "GeoLibre kan dit formaat niet weergeven — download het in plaats daarvan",
+    "unsupportedTitle": "GeoSpaX kan dit formaat niet weergeven — download het in plaats daarvan",
     "addError": "Kan dit bestand niet toevoegen: {{message}}",
     "largeFileWarning": "Dit bestand is {{size}}. Het streamt vanaf de bron, dus alleen de delen in beeld worden gelezen.",
     "streamHint": "Dit bestand is {{size}}. Toevoegen kopieert het naar het geheugen; Streamen leest alleen de delen in beeld.",
@@ -4014,7 +4014,7 @@
     "downloadTitle": "Dit bestand downloaden",
     "copyUrlTitle": "De URL van dit bestand kopiëren",
     "openDatasetTitle": "De pagina van deze dataset openen op huggingface.co",
-    "unsupportedTitle": "GeoLibre kan dit formaat niet weergeven — download het in plaats daarvan",
+    "unsupportedTitle": "GeoSpaX kan dit formaat niet weergeven — download het in plaats daarvan",
     "addError": "Kan dit bestand niet toevoegen: {{message}}",
     "notRasterIndex": "Dit JSON-bestand indexeert geen rasters, dus er valt niets op de kaart te zetten. MosaicJSON en STAC-collecties worden ondersteund.",
     "largeFileWarning": "Dit bestand is {{size}}. Het streamt vanaf de bron, dus alleen de delen in beeld worden gelezen.",
@@ -4058,7 +4058,7 @@
     "selectedFiles_one": "{{count}} bestand geselecteerd ({{size}}).",
     "selectedFiles_other": "{{count}} bestanden geselecteerd ({{size}}).",
     "commitMessageLabel": "Commit-bericht (optioneel)",
-    "commitMessagePlaceholder": "Geüpload met GeoLibre",
+    "commitMessagePlaceholder": "Geüpload met GeoSpaX",
     "upload": "Uploaden",
     "uploadPreparing": "Upload voorbereiden…",
     "uploadHashing": "{{name}} hashen ({{index}}/{{total}})…",
@@ -4577,7 +4577,7 @@
       "importedLog": "Een model met {{nodes}} knooppunt(en) geïmporteerd.",
       "importFailed": "Importeren mislukt",
       "importInvalid": "Dat bestand bevat geen modelgraaf.",
-      "importUnsupported": "Dat bestand is geen GeoLibre-model.",
+      "importUnsupported": "Dat bestand is geen GeoSpaX-model.",
       "rasterOutputUnsupported": "“{{name}}” is een rasterresultaat dat deze build niet aan de kaart kan toevoegen.",
       "portNeedsVector": "“{{port}}” heeft vectorgegevens nodig, maar er kwam een raster binnen.",
       "toolNoOutput": "“{{tool}}” heeft geen uitvoer opgeleverd.",
@@ -4633,7 +4633,7 @@
       },
       "filterBySource": "Filteren op bron",
       "allSources": "Alle bronnen",
-      "geolibreTools": "GeoLibre-hulpmiddelen",
+      "geolibreTools": "GeoSpaX-hulpmiddelen",
       "whiteboxTools": "Whitebox-hulpmiddelen",
       "toolbox": "Whitebox-toolbox",
       "checkingRuntime": "Runtime controleren.",
@@ -4688,8 +4688,8 @@
       "errorConnect": "Kon geen verbinding maken met de sidecar.",
       "errorPoll": "Kon de taak niet opvragen.",
       "errorStartTool": "Kon het Whitebox-gereedschap niet starten.",
-      "errorStartSidecar": "Kon de GeoLibre-sidecar niet starten.",
-      "errorStopSidecar": "Kon de GeoLibre-sidecar niet stoppen.",
+      "errorStartSidecar": "Kon de GeoSpaX-sidecar niet starten.",
+      "errorStopSidecar": "Kon de GeoSpaX-sidecar niet stoppen.",
       "noToolsFound": "Geen gereedschappen gevonden.",
       "noParameters": "Dit gereedschap heeft geen parameters.",
       "noOutput": "Nog geen uitvoer.",
@@ -4718,9 +4718,9 @@
       "runLocallyButton": "Lokaal uitvoeren (WASM)",
       "troubleshootingTitle": "Wilt u toch de server gebruiken?",
       "stepStartServerDesktop": "Klik op \"Server starten\" in het hulpmiddelenpaneel om deze te starten en wacht daarna enkele seconden tot deze online komt.",
-      "stepStartServerBrowser": "De server kan alleen worden gestart vanuit de GeoLibre desktop-app. Houd in de browser in plaats daarvan \"Lokaal uitvoeren (WASM)\" ingeschakeld.",
+      "stepStartServerBrowser": "De server kan alleen worden gestart vanuit de GeoSpaX desktop-app. Houd in de browser in plaats daarvan \"Lokaal uitvoeren (WASM)\" ingeschakeld.",
       "stepCheckPort": "Zorg dat een firewall, antivirusprogramma of netwerkbeleid lokale poort {{port}} niet blokkeert.",
-      "stepRestart": "Als de server onverwacht is gestopt, start dan de GeoLibre desktop-app opnieuw en open dit dialoogvenster opnieuw."
+      "stepRestart": "Als de server onverwacht is gestopt, start dan de GeoSpaX desktop-app opnieuw en open dit dialoogvenster opnieuw."
     },
     "vectorTools": {
       "title": "Vectorgereedschappen",
@@ -6333,13 +6333,13 @@
     "segment": "Segmenteren",
     "status": {
       "checking": "De AI-segmentatieservice wordt gecontroleerd…",
-      "unavailableDesktop": "De AI-segmentatieservice is nog niet actief. Start de GeoLibre-server met segment-geospatial ingeschakeld om deze te gebruiken.",
-      "unavailableWeb": "AI-segmentatie is niet beschikbaar in de browser. Gebruik de GeoLibre desktop-app om dit uit te voeren."
+      "unavailableDesktop": "De AI-segmentatieservice is nog niet actief. Start de GeoSpaX-server met segment-geospatial ingeschakeld om deze te gebruiken.",
+      "unavailableWeb": "AI-segmentatie is niet beschikbaar in de browser. Gebruik de GeoSpaX desktop-app om dit uit te voeren."
     },
     "error": {
       "chooseImage": "Kies een afbeelding (GeoTIFF) om te segmenteren.",
       "enterPrompt": "Voer een tekstprompt in, bijv. “bomen” of “gebouwen”.",
-      "startServer": "De GeoLibre-sidecar kon niet worden gestart.",
+      "startServer": "De GeoSpaX-sidecar kon niet worden gestart.",
       "failed": "Segmentatie is mislukt."
     },
     "noObjects": "Geen objecten gevonden.",
@@ -6350,7 +6350,7 @@
       "title": "De AI-segmentatieserver kon niet worden gestart.",
       "intro": "AI-segmentatie draait in een lokale hulpserver ({{sidecarUrl}}) die het SAM3-model van segment-geospatial host. Deze voert Python uit op de achtergrond, los van de app, en maakt geen deel uit van de browserversie.",
       "troubleshootingTitle": "Zo krijgt u de server aan de praat",
-      "stepInstall": "Zorg dat de GeoLibre-server is geïnstalleerd met de segment-geospatial-backend ingeschakeld, zodat het segmentatiemodel beschikbaar is.",
+      "stepInstall": "Zorg dat de GeoSpaX-server is geïnstalleerd met de segment-geospatial-backend ingeschakeld, zodat het segmentatiemodel beschikbaar is.",
       "stepStartServerDesktop": "Klik hierboven op \"Server starten\" om deze te starten en wacht daarna enkele seconden tot het model online komt."
     }
   },
@@ -6607,7 +6607,7 @@
     "import": "Importeren…",
     "export": "Exporteren…",
     "importFilterName": "Stijlbibliotheek / QML / SLD",
-    "exportFilterName": "GeoLibre-stijlbibliotheek",
+    "exportFilterName": "GeoSpaX-stijlbibliotheek",
     "applied": "\"{{name}}\" toegepast op {{layer}}.",
     "appliedRampHint": "\"{{name}}\" toegepast. Schakel de laag over naar gegradeerde of gecategoriseerde stijl om het verloop te zien.",
     "saved": "\"{{name}}\" opgeslagen in de bibliotheek.",
@@ -7301,7 +7301,7 @@
     "exportStyleDataNotReady": "Laaggegevens zijn nog niet gereed. Probeer het straks opnieuw.",
     "exportStyleNeedsFeatures": "Stijlexport vereist een vectorlaag met objecten.",
     "exportStyleError": "De stijl van deze laag kon niet worden geëxporteerd.",
-    "importStyle": "Stijl importeren (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "Stijl importeren (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "Opgeslagen stijlen (Stijlbeheer)…",
     "importStyleSuccess": "Stijl geïmporteerd.",
     "importStyleInvalid": "Dat bestand is geen geldige JSON, SLD of QML.",
@@ -7715,10 +7715,10 @@
   },
   "errorBoundary": {
     "title": "Er is iets misgegaan",
-    "description": "GeoLibre liep tegen een onverwachte fout aan en kon niet verder. Uw werk is mogelijk niet opgeslagen — probeer het te herstellen voordat u herlaadt.",
+    "description": "GeoSpaX liep tegen een onverwachte fout aan en kon niet verder. Uw werk is mogelijk niet opgeslagen — probeer het te herstellen voordat u herlaadt.",
     "tryAgain": "Opnieuw proberen",
     "reload": "App herladen",
-    "sectionFailed": "{{label}} kon niet worden weergegeven. De rest van GeoLibre is nog beschikbaar."
+    "sectionFailed": "{{label}} kon niet worden weergegeven. De rest van GeoSpaX is nog beschikbaar."
   },
   "commandPalette": {
     "title": "Opdrachtenpalet",
@@ -7768,7 +7768,7 @@
     "emptyNetworkError": "Geen netwerkfoutdiagnostiek vastgelegd."
   },
   "shell": {
-    "workspaceTitle": "GeoLibre-kaartwerkruimte",
+    "workspaceTitle": "GeoSpaX-kaartwerkruimte",
     "section": {
       "toolbar": "Werkbalk",
       "sharedLeftSidebar": "Gedeelde linkerzijbalk",
@@ -8041,7 +8041,7 @@
     "navigationButton": "1. Bronnen laden en navigatie tekenen",
     "navigationButtonAgain": "Nog een navigatielaag tekenen",
     "exportButton": "Getekende resultaten naar GeoJSON exporteren",
-    "addLayersButton": "Getekende resultaten aan de GeoLibre-lagen toevoegen",
+    "addLayersButton": "Getekende resultaten aan de GeoSpaX-lagen toevoegen",
     "clearButton": "NLDI-resultaat wissen",
     "noComid": "Er is geen COMID teruggegeven voor dit punt.",
     "requestingBasin": "Stroomopwaarts stroomgebied opvragen…",

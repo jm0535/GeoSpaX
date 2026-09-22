@@ -6,9 +6,9 @@
     "summary": "{{count}} layer · zoom {{zoom}}",
     "restore": "Pulihkan",
     "discard": "Buang",
-    "restoreError": "Snapshot ini tidak dapat dipulihkan. Mungkin rusak atau tidak kompatibel dengan versi GeoLibre ini.",
+    "restoreError": "Snapshot ini tidak dapat dipulihkan. Mungkin rusak atau tidak kompatibel dengan versi GeoSpaX ini.",
     "recoveryTitle": "Pulihkan pekerjaan yang belum disimpan?",
-    "recoveryDescription": "GeoLibre tidak ditutup dengan benar. Tersedia simpanan otomatis \"{{name}}\" yang lebih baru."
+    "recoveryDescription": "GeoSpaX tidak ditutup dengan benar. Tersedia simpanan otomatis \"{{name}}\" yang lebih baru."
   },
   "browser": {
     "title": "Browser",
@@ -47,14 +47,14 @@
     "libraryImportFailed": "Tidak dapat membaca berkas pustaka layer ini.",
     "libraryExportFailed": "Tidak dapat mengekspor pustaka layer.",
     "libraryLayerMissing": "Layer tersimpan itu sudah tidak ada.",
-    "libraryLayerNeedsDesktop": "Layer tersimpan ini membaca berkas dari disk, sehingga memerlukan GeoLibre Desktop. Tambahkan berkas itu lagi untuk menyimpan entri baru.",
+    "libraryLayerNeedsDesktop": "Layer tersimpan ini membaca berkas dari disk, sehingga memerlukan GeoSpaX Desktop. Tambahkan berkas itu lagi untuk menyimpan entri baru.",
     "libraryLayerConfigNotApplied": "Berkas untuk \"{{name}}\" telah ditambahkan, tetapi gaya yang tersimpan tidak dapat dicocokkan ke satu layer, sehingga tidak diterapkan kembali.",
     "libraryLayerJoinsUnresolved_other": "Layer telah ditambahkan, tetapi {{count}} join tersimpan tidak dapat diterapkan kembali: layer yang menjadi tujuan join tidak ada dalam proyek ini."
   },
   "about": {
     "trigger": "Tentang",
-    "title": "Tentang GeoLibre",
-    "description": "GeoLibre adalah platform GIS berbasis cloud yang ringan.",
+    "title": "Tentang GeoSpaX",
+    "description": "GeoSpaX adalah platform GIS berbasis cloud yang ringan.",
     "version": "Versi",
     "checkForUpdates": "Periksa pembaruan",
     "tryAgain": "Coba lagi",
@@ -73,7 +73,7 @@
     "steps": {
       "download": "Unduh installer untuk platform Anda dari halaman unduhan.",
       "install": "Jalankan installer. Proyek, pengaturan, dan kunci API lokal Anda tetap tersimpan.",
-      "reopen": "Buka kembali GeoLibre untuk menyelesaikan pembaruan."
+      "reopen": "Buka kembali GeoSpaX untuk menyelesaikan pembaruan."
     },
     "severity": {
       "major": "Rilis besar",
@@ -92,7 +92,7 @@
       "noTag": "Rilis terbaru tidak menyertakan tag versi.",
       "network": "Tidak dapat menjangkau GitHub. Periksa koneksi Anda dan coba lagi.",
       "viewDownloads": "Lihat unduhan",
-      "viewDownloadsHint": "Membuka halaman unduhan GeoLibre di browser Anda sehingga Anda dapat memeriksa versi terbaru secara manual."
+      "viewDownloadsHint": "Membuka halaman unduhan GeoSpaX di browser Anda sehingga Anda dapat memeriksa versi terbaru secara manual."
     },
     "startup": {
       "title": "Pembaruan tersedia",
@@ -105,7 +105,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "Fitur ini tidak tersedia pada GeoLibre Desktop versi Mac App Store."
+    "unavailable": "Fitur ini tidak tersedia pada GeoSpaX Desktop versi Mac App Store."
   },
   "bookmark": {
     "captureStateLabel": "Sertakan status layer lengkap (aktif, tidak aktif, dan urutan layer)",
@@ -122,7 +122,7 @@
     "trust": {
       "title": "Muat plugin dari proyek ini?",
       "description_other": "Proyek ini ingin memuat {{count}} plugin eksternal dari URL yang belum Anda pasang. Plugin menjalankan kode dengan akses penuh ke aplikasi.",
-      "warning": "Hanya muat plugin dari sumber yang Anda percayai. Plugin yang dimuat berjalan dengan hak akses yang sama seperti GeoLibre sendiri.",
+      "warning": "Hanya muat plugin dari sumber yang Anda percayai. Plugin yang dimuat berjalan dengan hak akses yang sama seperti GeoSpaX sendiri.",
       "trustButton": "Percayai dan muat",
       "dismissButton": "Jangan muat"
     },
@@ -141,7 +141,7 @@
     "openHomepageAria": "Buka beranda {{name}}",
     "byAuthor": "oleh {{author}}",
     "updateAvailable": "pembaruan tersedia",
-    "requiresVersion": "membutuhkan GeoLibre {{version}}+",
+    "requiresVersion": "membutuhkan GeoSpaX {{version}}+",
     "install": "Pasang",
     "installAria": "Pasang {{name}}",
     "removeConfirm": "Hapus?",
@@ -152,10 +152,10 @@
     "updateAria": "Perbarui {{name}}",
     "loading": "Memuat…",
     "installed": "Terpasang",
-    "settingsIntro": "GeoLibre selalu memindai direktori plugin di data aplikasinya. Pasang plugin terpaket (.zip) dari berkas, atau tambahkan direktori lokal lain (khusus desktop). URL manifest (termasuk pemasangan dari marketplace) dimuat lewat jaringan; perubahan di sini langsung berlaku.",
+    "settingsIntro": "GeoSpaX selalu memindai direktori plugin di data aplikasinya. Pasang plugin terpaket (.zip) dari berkas, atau tambahkan direktori lokal lain (khusus desktop). URL manifest (termasuk pemasangan dari marketplace) dimuat lewat jaringan; perubahan di sini langsung berlaku.",
     "installFromFile": "Pasang dari berkas",
     "chooseZip": "Pilih .zip…",
-    "installFromFileHintDesktop": "Menyalin arsip plugin terpaket ke direktori plugin GeoLibre.",
+    "installFromFileHintDesktop": "Menyalin arsip plugin terpaket ke direktori plugin GeoSpaX.",
     "installFromFileHintWeb": "Memuat arsip plugin terpaket; arsip disimpan di peramban Anda dan dimuat ulang pada kunjungan berikutnya.",
     "localDirectories": "Direktori lokal",
     "directoryAria": "Direktori plugin",
@@ -170,7 +170,7 @@
     "errorDirectoryPicker": "Tidak dapat membuka pemilih direktori.",
     "errorInstall": "Tidak dapat memasang plugin.",
     "errorUninstall": "Tidak dapat mencopot plugin.",
-    "description": "Jelajahi, pasang, perbarui, dan hapus plugin GeoLibre eksternal. Plugin terdaftar di <registryLink>registri plugin GeoLibre</registryLink>."
+    "description": "Jelajahi, pasang, perbarui, dan hapus plugin GeoSpaX eksternal. Plugin terdaftar di <registryLink>registri plugin GeoSpaX</registryLink>."
   },
   "viewState": {
     "panelTitle": "Info"
@@ -262,7 +262,7 @@
     "add": "Tambah",
     "ok": "OK",
     "done": "Selesai",
-    "openWebApp": "Buka aplikasi web GeoLibre"
+    "openWebApp": "Buka aplikasi web GeoSpaX"
   },
   "addData": {
     "title": "Tambah Data",
@@ -313,7 +313,7 @@
       },
       "gdb": {
         "label": "Tambahkan Layer File Geodatabase",
-        "description": "Tambahkan layer dari Esri File Geodatabase (folder .gdb). Layer dibaca dengan server GeoLibre lokal dan diproyeksikan ulang ke WGS84."
+        "description": "Tambahkan layer dari Esri File Geodatabase (folder .gdb). Layer dibaca dengan server GeoSpaX lokal dan diproyeksikan ulang ke WGS84."
       },
       "photos": {
         "label": "Tambahkan Foto Bertag Geo",
@@ -655,8 +655,8 @@
       "layerPlaceholder": "Pilih geodatabase terlebih dahulu",
       "readingLayers": "Membaca layer...",
       "layerOption": "{{name}} ({{type}}, {{count}} fitur)",
-      "help": "Tabel tanpa geometri tidak ditampilkan. Kelas fitur yang dipilih dimuat melalui server GeoLibre lokal dan diproyeksikan ulang ke WGS84.",
-      "desktopOnly": "Layer File Geodatabase hanya tersedia di GeoLibre Desktop. Fitur ini membaca folder .gdb lokal melalui server GeoLibre lokal, yang tidak dapat diakses aplikasi web.",
+      "help": "Tabel tanpa geometri tidak ditampilkan. Kelas fitur yang dipilih dimuat melalui server GeoSpaX lokal dan diproyeksikan ulang ke WGS84.",
+      "desktopOnly": "Layer File Geodatabase hanya tersedia di GeoSpaX Desktop. Fitur ini membaca folder .gdb lokal melalui server GeoSpaX lokal, yang tidak dapat diakses aplikasi web.",
       "readError": "Tidak dapat membaca File Geodatabase ini.",
       "convertError": "Tidak dapat memuat kelas fitur ini.",
       "errorNotGdb": "Pilih folder yang berakhiran .gdb (Esri File Geodatabase).",
@@ -741,7 +741,7 @@
     },
     "postgres": {
       "defaultName": "Layer PostgreSQL",
-      "errorDesktopOnly": "Layer PostgreSQL memerlukan GeoLibre Desktop.",
+      "errorDesktopOnly": "Layer PostgreSQL memerlukan GeoSpaX Desktop.",
       "errorConnectionString": "Masukkan string koneksi PostgreSQL.",
       "statusCheckingBinary": "Memeriksa biner Martin...",
       "statusDownloaded": "Martin diunduh. Memulai server lokal...",
@@ -755,7 +755,7 @@
       "errorConnectFirst": "Hubungkan ke PostgreSQL terlebih dahulu.",
       "errorNoVectorLayers": "Sumber Martin yang dipilih tidak memiliki layer vektor.",
       "errorSelectSource": "Pilih sumber Martin untuk ditambahkan.",
-      "desktopOnlyNotice": "Layer PostgreSQL hanya tersedia di GeoLibre Desktop. Fitur ini menjalankan server ubin Martin lokal, yang tidak dapat diluncurkan oleh aplikasi web dan seluler.",
+      "desktopOnlyNotice": "Layer PostgreSQL hanya tersedia di GeoSpaX Desktop. Fitur ini menjalankan server ubin Martin lokal, yang tidak dapat diluncurkan oleh aplikasi web dan seluler.",
       "savedConnection": "Koneksi tersimpan",
       "selectSavedConnection": "Pilih koneksi tersimpan",
       "connectionString": "String koneksi PostgreSQL",
@@ -979,7 +979,7 @@
         "format": "Cakupan tidak menawarkan keluaran GeoTIFF.",
         "crs": "Cakupan harus mendukung EPSG:4326 untuk permintaan dan keluaran.",
         "size": "Pilih dimensi 1 hingga 4096 piksel. Unduhan dibatasi hingga 128 MB.",
-        "metadata": "Layanan mengembalikan metadata lebih banyak daripada yang dapat dimuat GeoLibre. Respons metadata dibatasi hingga 32 MB.",
+        "metadata": "Layanan mengembalikan metadata lebih banyak daripada yang dapat dimuat GeoSpaX. Respons metadata dibatasi hingga 32 MB.",
         "response": "Layanan tidak mengembalikan GeoTIFF yang valid.",
         "bounds": "Masukkan kotak yang valid: barat/timur antara -180 hingga 180, selatan/utara antara -90 hingga 90, dengan barat < timur dan selatan < utara.",
         "url": "Masukkan URL layanan WCS."
@@ -1255,7 +1255,7 @@
     "nmeaConnectFailed": "Tidak dapat terhubung ke penerima.",
     "nmeaDisconnected": "Penerima terputus.",
     "nmeaUnsupportedDevice": "Tidak ditemukan layanan NMEA pada perangkat itu. Mungkin itu penerima Bluetooth klasik, yang harus dipasangkan di pengaturan sistem lalu dihubungkan di sini sebagai porta serial.",
-    "nmeaUnsupported": "Membaca penerima NMEA memerlukan API Web Serial atau Web Bluetooth, yang tidak disediakan peramban ini. Buka GeoLibre di peramban berbasis Chromium seperti Chrome atau Edge.",
+    "nmeaUnsupported": "Membaca penerima NMEA memerlukan API Web Serial atau Web Bluetooth, yang tidak disediakan peramban ini. Buka GeoSpaX di peramban berbasis Chromium seperti Chrome atau Edge.",
     "nmeaSerialUnsupported": "Web Serial tidak tersedia di sini, sehingga penerima serial tidak dapat dibuka.",
     "nmeaBluetoothUnsupported": "Web Bluetooth tidak tersedia di sini, sehingga penerima Bluetooth Low Energy tidak dapat dibuka.",
     "nmeaBluetoothHint": "Sebagian besar penerima GPS Bluetooth memakai Bluetooth klasik: pasangkan di pengaturan sistem dan perangkat akan muncul di sini sebagai porta serial. Gunakan \"Hubungkan Bluetooth\" hanya untuk penerima Bluetooth Low Energy.",
@@ -1389,7 +1389,7 @@
     "step1Title": "1. Dapatkan token API",
     "step1Description": "Masuk ke {{shareHost}}, lalu buat token di Settings → API tokens.",
     "getToken": "Dapatkan token API",
-    "step2Title": "2. Tambahkan token ke GeoLibre",
+    "step2Title": "2. Tambahkan token ke GeoSpaX",
     "step2Description": "Tempel token ke Settings → Environment Variables pada perangkat ini.",
     "configureToken": "Konfigurasi token lokal",
     "liveAt": "Proyek Anda aktif di:",
@@ -1437,7 +1437,7 @@
   },
   "gallery": {
     "title": "Galeri proyek",
-    "description": "Jelajahi proyek publik yang dibagikan di {{shareHost}} dan buka salah satunya di GeoLibre.",
+    "description": "Jelajahi proyek publik yang dibagikan di {{shareHost}} dan buka salah satunya di GeoSpaX.",
     "searchPlaceholder": "Filter proyek yang dimuat berdasarkan judul, penulis, atau tag",
     "loading": "Memuat proyek…",
     "loadingMore": "Memuat lebih banyak…",
@@ -1538,7 +1538,7 @@
       "groupNavigation": "Kelompokkan penunjuk utara & skala batang",
       "footer": "Teks footer",
       "date": "Tanggal",
-      "attribution": "Sertakan atribusi GeoLibre",
+      "attribution": "Sertakan atribusi GeoSpaX",
       "pageBorder": "Batas halaman",
       "infoBlock": "Blok info (blok judul)",
       "colorbar": "Bilah warna",
@@ -1816,9 +1816,9 @@
   },
   "auth": {
     "unavailableTitle": "Masuk tidak tersedia",
-    "unavailableDescription": "GeoLibre tidak dapat menjangkau layanan masuk, sehingga tidak dapat mengetahui apakah Anda sudah masuk. Ini biasanya bersifat sementara; jika terus terjadi, pengaturan autentikasi penerapan ini mungkin perlu diperiksa.",
+    "unavailableDescription": "GeoSpaX tidak dapat menjangkau layanan masuk, sehingga tidak dapat mengetahui apakah Anda sudah masuk. Ini biasanya bersifat sementara; jika terus terjadi, pengaturan autentikasi penerapan ini mungkin perlu diperiksa.",
     "retry": "Coba lagi",
-    "signInTitle": "Masuk ke GeoLibre",
+    "signInTitle": "Masuk ke GeoSpaX",
     "signInDescription": "Penerapan ini memerlukan akun. Anda akan dibawa ke halaman masuk yang aman lalu dikembalikan ke sini.",
     "signIn": "Masuk",
     "signOut": "Keluar",
@@ -1999,7 +1999,7 @@
     "noticeDesc": "Membuka kartu pengetahuan mengirimkan koordinat tempat yang Anda klik (dan judul artikel terdekat yang Anda buka) ke API publik Wikipedia untuk mengambil ringkasan dan foto — koordinat Anda meninggalkan perangkat untuk permintaan tersebut."
   },
   "onboarding": {
-    "title": "Selamat Datang di GeoLibre",
+    "title": "Selamat Datang di GeoSpaX",
     "description": "Pilih tingkat pengalaman Anda untuk menyesuaikan antarmuka. Anda dapat mengubah ini kapan saja di Pengaturan → Antarmuka.",
     "level": {
       "beginner": {
@@ -2012,7 +2012,7 @@
       },
       "advanced": {
         "title": "Lanjutan",
-        "description": "Tampilkan semua yang ditawarkan GeoLibre."
+        "description": "Tampilkan semua yang ditawarkan GeoSpaX."
       }
     },
     "showEverything": "Lewati — tampilkan semua"
@@ -2049,7 +2049,7 @@
     },
     "languagePack": {
       "title": "Paket bahasa",
-      "description": "Tambahkan terjemahan opsional untuk nama alat, parameter, dan teks bantuan Whitebox tanpa memperbesar setiap pemasangan GeoLibre.",
+      "description": "Tambahkan terjemahan opsional untuk nama alat, parameter, dan teks bantuan Whitebox tanpa memperbesar setiap pemasangan GeoSpaX.",
       "manage": "Kelola paket bahasa",
       "interfaceLanguage": "Bahasa antarmuka",
       "installed": "Paket bahasa Whitebox terpasang",
@@ -2071,10 +2071,10 @@
       "privacyLocalOnly": "Paket hanya disimpan di perangkat ini. Build ini tidak mengunduh apa pun: impor berkas paket bahasa sebagai gantinya.",
       "browse": "Jelajahi paket bahasa",
       "errorInvalidJson": "Berkas tersebut bukan JSON yang valid.",
-      "errorInvalidFormat": "Berkas tersebut bukan paket bahasa Whitebox GeoLibre yang valid.",
-      "errorUnsupportedVersion": "Versi paket bahasa ini tidak didukung oleh rilis GeoLibre ini.",
+      "errorInvalidFormat": "Berkas tersebut bukan paket bahasa Whitebox GeoSpaX yang valid.",
+      "errorUnsupportedVersion": "Versi paket bahasa ini tidak didukung oleh rilis GeoSpaX ini.",
       "errorInvalidLocale": "Paket bahasa memiliki lokal yang tidak valid atau tidak diharapkan.",
-      "errorUnsupportedLocale": "GeoLibre tidak menyertakan bahasa antarmuka dasar yang dibutuhkan paket ini.",
+      "errorUnsupportedLocale": "GeoSpaX tidak menyertakan bahasa antarmuka dasar yang dibutuhkan paket ini.",
       "errorTooLarge": "Paket bahasa melebihi batas keamanan 5 MB.",
       "errorNotFound": "Belum ada paket bahasa Whitebox resmi untuk bahasa ini.",
       "errorDownload": "Paket bahasa tidak dapat diunduh. Periksa koneksi Anda atau impor berkas lokal.",
@@ -2082,9 +2082,9 @@
     },
     "updates": {
       "title": "Pembaruan Perangkat Lunak",
-      "description": "Kontrol bagaimana GeoLibre memeriksa versi baru saat aplikasi desktop dimulai.",
+      "description": "Kontrol bagaimana GeoSpaX memeriksa versi baru saat aplikasi desktop dimulai.",
       "checkOnStartup": "Periksa pembaruan saat memulai",
-      "checkOnStartupHint": "Jika diaktifkan, GeoLibre memeriksa versi lebih baru setiap kali aplikasi dimulai. Nonaktifkan ini untuk alur kerja yang sepenuhnya offline.",
+      "checkOnStartupHint": "Jika diaktifkan, GeoSpaX memeriksa versi lebih baru setiap kali aplikasi dimulai. Nonaktifkan ini untuk alur kerja yang sepenuhnya offline.",
       "notificationLevel": "Beri tahu saya tentang",
       "notificationLevelHint": "Pilih jenis rilis mana yang memicu notifikasi saat memulai.",
       "level": {
@@ -2095,7 +2095,7 @@
     },
     "startup": {
       "title": "Proyek saat memulai",
-      "description": "Pilih ruang kerja yang dibuka GeoLibre saat aplikasi native dimulai.",
+      "description": "Pilih ruang kerja yang dibuka GeoSpaX saat aplikasi native dimulai.",
       "mode": {
         "default": "Buka ruang kerja bawaan",
         "last": "Buka kembali proyek terakhir",
@@ -2118,7 +2118,7 @@
       "viewUnavailable": "Tampilan peta saat ini tidak tersedia.",
       "selectError": "Proyek yang dipilih tidak dapat dibaca.",
       "restoring": "Membuka proyek saat memulai Anda…",
-      "loadWarning": "Proyek saat memulai tidak tersedia. GeoLibre membuka ruang kerja bawaan sebagai gantinya."
+      "loadWarning": "Proyek saat memulai tidak tersedia. GeoSpaX membuka ruang kerja bawaan sebagai gantinya."
     },
     "map": {
       "constraintsTitle": "Batasan peta",
@@ -2470,7 +2470,7 @@
       "smartPaste": "Tempel koordinat",
       "smartPasteInputLabel": "String koordinat",
       "smartPastePlaceholder": "mis. 51.5074, -0.1278 atau 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "Ketik atau tempel string koordinat lengkap dalam format DD, DMS, atau DDM, lalu jalankan Proses input. GeoLibre mendeteksi formatnya dan mengisi bidang bujur dan lintang di bawah. Sesuaikan zoom, kemiringan, dan arah secara terpisah sebelum berangkat.",
+      "smartPasteInfo": "Ketik atau tempel string koordinat lengkap dalam format DD, DMS, atau DDM, lalu jalankan Proses input. GeoSpaX mendeteksi formatnya dan mengisi bidang bujur dan lintang di bawah. Sesuaikan zoom, kemiringan, dan arah secara terpisah sebelum berangkat.",
       "smartPasteInfoLabel": "Tentang menempel koordinat",
       "smartPasteInvalid": "Tidak dapat membaca koordinat tersebut. Masukkan bujur dan lintang lengkap dalam format DD, DMS, atau DDM, misalnya 51.5074, -0.1278. String yang sebagian atau tidak lengkap tidak dapat diuraikan.",
       "processInput": "Proses input",
@@ -2607,8 +2607,8 @@
     },
     "conversion": {
       "vectorToVector": "Vektor ke Vektor",
-      "zipInputBrowserError": "Shapefile terzip hanya dapat dikonversi di aplikasi desktop GeoLibre. Di browser, pilih .shp yang tidak terzip beserta file .dbf, .shx, dan .prj-nya.",
-      "browserOutputUnsupported": "Di browser, keluaran dapat berupa GeoJSON, CSV, GeoParquet, GeoPackage, atau Shapefile (.zip). Keluaran \".{{extension}}\" memerlukan aplikasi desktop GeoLibre.",
+      "zipInputBrowserError": "Shapefile terzip hanya dapat dikonversi di aplikasi desktop GeoSpaX. Di browser, pilih .shp yang tidak terzip beserta file .dbf, .shx, dan .prj-nya.",
+      "browserOutputUnsupported": "Di browser, keluaran dapat berupa GeoJSON, CSV, GeoParquet, GeoPackage, atau Shapefile (.zip). Keluaran \".{{extension}}\" memerlukan aplikasi desktop GeoSpaX.",
       "outputExtensionRequired": "Tambahkan ekstensi file ke nama keluaran untuk memilih formatnya.",
       "readingWithDuckDb": "Membaca {{name}} dengan DuckDB-WASM",
       "readFeatures": "Membaca {{features}} fitur dari {{name}}",
@@ -2622,7 +2622,7 @@
       "vectorToPmtiles": "Vektor ke PMTiles",
       "rasterToCog": "Raster ke COG",
       "rasterToPmtiles": "Raster ke PMTiles",
-      "needsDesktop": "Konversi ini memerlukan aplikasi desktop GeoLibre atau sidecar yang sedang berjalan.",
+      "needsDesktop": "Konversi ini memerlukan aplikasi desktop GeoSpaX atau sidecar yang sedang berjalan.",
       "runsInBrowserDuckDb": "Konversi berjalan di browser Anda dengan DuckDB-WASM.",
       "runsInBrowserWriters": "Konversi berjalan di browser Anda dengan DuckDB-WASM dan penulis bawaan.",
       "runsInBrowserWasm": "Konversi berjalan di browser Anda dengan geolibre-wasm. Tidak memerlukan sidecar.",
@@ -2630,7 +2630,7 @@
       "rasterShape": "Membaca raster {{width}}×{{height}} dengan {{bands}} band",
       "wroteCog": "Menulis COG berubin dengan overview ({{compression}})",
       "notAGeoTiff": "File ini bukan GeoTIFF yang dapat dibaca. Di browser, Raster ke COG hanya membaca GeoTIFF; format lain memerlukan aplikasi desktop.",
-      "rasterTooLargeForBrowser": "Di browser, ini mendekode seluruh raster di WebAssembly yang dibatasi sekitar 4 GB, sehingga file ini tidak muat. Konversikan dengan aplikasi desktop GeoLibre, atau bangun COG terlebih dahulu dengan gdal_translate atau rio-cogeo.",
+      "rasterTooLargeForBrowser": "Di browser, ini mendekode seluruh raster di WebAssembly yang dibatasi sekitar 4 GB, sehingga file ini tidak muat. Konversikan dengan aplikasi desktop GeoSpaX, atau bangun COG terlebih dahulu dengan gdal_translate atau rio-cogeo.",
       "zoomRangeError": "Tingkat zoom harus memenuhi 0 ≤ min ≤ maks ≤ {{max}}.",
       "colormap": "Peta warna",
       "resampling": "Resampling",
@@ -2785,9 +2785,9 @@
       "outputFile": "Berkas keluaran",
       "noOutput": "Belum ada keluaran.",
       "errorConnect": "Tidak dapat terhubung ke sidecar.",
-      "needsDesktopSidecar": "Alat raster memerlukan aplikasi GeoLibre desktop dengan sidecar yang berjalan.",
+      "needsDesktopSidecar": "Alat raster memerlukan aplikasi GeoSpaX desktop dengan sidecar yang berjalan.",
       "errorPoll": "Tidak dapat memeriksa status pekerjaan.",
-      "errorStartSidecar": "Tidak dapat menjalankan sidecar GeoLibre.",
+      "errorStartSidecar": "Tidak dapat menjalankan sidecar GeoSpaX.",
       "errorStartTool": "Tidak dapat menjalankan alat raster."
     },
     "mapControl": {
@@ -2901,7 +2901,7 @@
       "terrain": "Medan",
       "remoteSensing": "Penginderaan Jauh",
       "projection": "Proyeksi",
-      "geolibre": "Kotak alat GeoLibre",
+      "geolibre": "Kotak alat GeoSpaX",
       "subGroupGeometry": "Geometri",
       "subGroupOverlay": "Overlay",
       "subGroupJoin": "Gabungan",
@@ -2980,12 +2980,12 @@
         "layer-type": "Tipe layer {{layerType}} tidak didukung.",
         "missing-source": "Layer tidak memiliki sumber data lokal yang dapat dibaca.",
         "format": "Format data layer tidak didukung.",
-        "file-geodatabase": "Sumber File Geodatabase (.gdb) tidak dimuat dari proyek. Di GeoLibre Desktop, tambahkan melalui Tambah Data → File Geodatabase (GDB).",
+        "file-geodatabase": "Sumber File Geodatabase (.gdb) tidak dimuat dari proyek. Di GeoSpaX Desktop, tambahkan melalui Tambah Data → File Geodatabase (GDB).",
         "file-geodatabase-raster": "Dataset raster yang disimpan dalam File Geodatabase (.gdb) tidak didukung. Ekspor raster ke GeoTIFF lalu tambahkan sebagai layer raster.",
         "network-path": "Jalur berbagi jaringan tidak dimuat karena alasan keamanan.",
         "service": "Layer layanan ArcGIS di dalam proyek belum didukung.",
-        "browser-local-file": "Berkas lokal dirujuk, tetapi peramban tidak dapat membuka kembali jalur data ArcGIS Pro. Gunakan GeoLibre Desktop untuk memuatnya.",
-        "map-extent": "Cakupan peta yang tersimpan memakai sistem koordinat yang tidak dapat dikonversi GeoLibre, sehingga peta dibuka pada tampilan bawaan.",
+        "browser-local-file": "Berkas lokal dirujuk, tetapi peramban tidak dapat membuka kembali jalur data ArcGIS Pro. Gunakan GeoSpaX Desktop untuk memuatnya.",
+        "map-extent": "Cakupan peta yang tersimpan memakai sistem koordinat yang tidak dapat dikonversi GeoSpaX, sehingga peta dibuka pada tampilan bawaan.",
         "nesting": "Grup ini bersarang terlalu dalam, atau proyek merujuk balik ke grup yang sudah memuatnya."
       },
       "qgisImportComplete": "Proyek QGIS diimpor",
@@ -2998,8 +2998,8 @@
         "format": "Format berkas layer tidak didukung.",
         "remote-file": "Sumber berkas QGIS jarak jauh belum didukung.",
         "network-path": "Jalur berbagi jaringan tidak dimuat karena alasan keamanan.",
-        "browser-local-file": "Berkas lokal dirujuk, tetapi peramban tidak dapat membuka kembali jalur data QGIS. Gunakan GeoLibre Desktop untuk memuatnya.",
-        "browser-local-raster": "Raster dirujuk melalui jalur lokal. Gunakan GeoLibre Desktop untuk memuatnya."
+        "browser-local-file": "Berkas lokal dirujuk, tetapi peramban tidak dapat membuka kembali jalur data QGIS. Gunakan GeoSpaX Desktop untuk memuatnya.",
+        "browser-local-raster": "Raster dirujuk melalui jalur lokal. Gunakan GeoSpaX Desktop untuk memuatnya."
       },
       "openProjectFromUrlDesc": "Muat proyek `.geolibre.json` dan tambahkan ke proyek terbaru.",
       "projectUrl": "URL proyek",
@@ -3013,7 +3013,7 @@
       "embedEditedGeometryDesc": "Proyek ini berisi geometri yang telah diedit. Sematkan data vektor (sekitar {{size}}) untuk mempertahankannya. Tanpa penyematan, layer referensi dibuka kembali dengan geometri aslinya dan data lokal mungkin tidak tersedia.",
       "embedVectorDesc": "Proyek ini memiliki {{count}} layer vektor lokal yang dimuat dari komputer Anda. Browser tidak dapat membaca ulang layer ini saat proyek dibuka kembali, sehingga datanya harus disematkan dalam file proyek untuk dipulihkan. Menyematkan menambah sekitar {{size}} ke file.",
       "embedVectorDescDesktop": "Proyek ini memiliki {{count}} layer vektor lokal yang dimuat dari komputer Anda. Sematkan datanya agar proyek mandiri (menambah sekitar {{size}}), atau simpan referensi file yang dimuat ulang dari disk saat proyek dibuka kembali. Referensi menjaga file tetap kecil tetapi rusak jika file sumber kemudian dipindahkan atau dihapus.",
-      "embedVectorDescMas": "Proyek ini memiliki {{count}} layer vektor lokal yang dimuat dari komputer Anda. Sandbox Mac App Store tidak dapat mempertahankan akses ke file tersebut setelah GeoLibre ditutup, sehingga datanya harus disematkan dalam file proyek agar dapat dipulihkan. Penyematan menambah sekitar {{size}} ke file.",
+      "embedVectorDescMas": "Proyek ini memiliki {{count}} layer vektor lokal yang dimuat dari komputer Anda. Sandbox Mac App Store tidak dapat mempertahankan akses ke file tersebut setelah GeoSpaX ditutup, sehingga datanya harus disematkan dalam file proyek agar dapat dipulihkan. Penyematan menambah sekitar {{size}} ke file.",
       "embedVectorLargeWarning": "Menyematkan sekitar {{size}} menghasilkan berkas proyek yang sangat besar. Membukanya kembali bisa lambat atau gagal sama sekali, karena setiap fitur harus diurai dan disimpan di memori sekaligus. Untuk data sebesar ini, konversikan lapisan ke PMTiles atau FlatGeobuf dan tambahkan sebagai lapisan jarak jauh alih-alih menyematkannya.",
       "embedVectorEmbedButton": "Sematkan data",
       "embedVectorReferenceButton": "Simpan referensi file",
@@ -3128,7 +3128,7 @@
     },
     "error": {
       "couldNotOpenProject": "Tidak dapat membuka proyek.",
-      "multipleProjectDrop": "Jatuhkan satu proyek GeoLibre saja dalam satu waktu, tanpa berkas lain.",
+      "multipleProjectDrop": "Jatuhkan satu proyek GeoSpaX saja dalam satu waktu, tanpa berkas lain.",
       "projectDropNotAllowed": "Deployment ini tidak mengizinkan pergantian proyek.",
       "couldNotImportQgisProject": "Tidak dapat mengimpor proyek QGIS.",
       "couldNotImportArcgisProject": "Tidak dapat mengimpor proyek ArcGIS Pro.",
@@ -3259,7 +3259,7 @@
     "filterSummary": "Filter layer diterapkan: {{matched}} dari {{total}} fitur cocok.",
     "evaluationErrors": "{{count}} fitur tidak dapat dievaluasi dan tidak dicocokkan.",
     "unevaluableDisjoint": "{{count}} fitur dikecualikan karena geometrinya tidak dapat dievaluasi.",
-    "tooManyPairs": "Perbandingan ini membutuhkan {{pairs}} pengujian pasangan fitur (batas {{limit}}). Gunakan Processing → GeoLibre → Vector → Select by location dengan mesin Sidecar sebagai gantinya.",
+    "tooManyPairs": "Perbandingan ini membutuhkan {{pairs}} pengujian pasangan fitur (batas {{limit}}). Gunakan Processing → GeoSpaX → Vector → Select by location dengan mesin Sidecar sebagai gantinya.",
     "exportedLayerName": "{{name}} (seleksi)"
   },
   "loadEditorFeatures": {
@@ -3791,11 +3791,11 @@
     "addIcechunkFailed": "Repositori Icechunk ini tidak dapat dibuka",
     "zarrProblemGroup": "Aset ini menunjuk ke sebuah grup array, bukan satu array yang dapat digambar",
     "zarrProblemMissing": "Penyimpanan ini tidak memuat variabel tersebut",
-    "zarrProblemUnauthorized": "Penyimpanan Zarr ini memerlukan kredensial yang belum dapat disediakan GeoLibre",
+    "zarrProblemUnauthorized": "Penyimpanan Zarr ini memerlukan kredensial yang belum dapat disediakan GeoSpaX",
     "zarrProblemUnsupportedUrl": "Alamat penyimpanan Zarr ini tidak dapat dibaca satu kunci per satu",
     "zarrProblemUnavailable": "Penyimpanan Zarr ini tidak dapat dibuka",
     "chooseTarget": "Pilih yang akan ditambahkan",
-    "cogUnsupported": "Host GeoLibre ini tidak dapat memvisualisasikan aset GeoTIFF jarak jauh",
+    "cogUnsupported": "Host GeoSpaX ini tidak dapat memvisualisasikan aset GeoTIFF jarak jauh",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3827,7 +3827,7 @@
     "filterWebMap": "Peta web",
     "webMapAdded_other": "{{count}} layer ditambahkan dari peta web ini.",
     "webMapAddedPartial": "{{added}} dari {{total}} layer ditambahkan dari peta web ini; sisanya tidak dapat dijangkau.",
-    "webMapEmpty": "peta web ini tidak memiliki layer yang dapat dirender GeoLibre.",
+    "webMapEmpty": "peta web ini tidak memiliki layer yang dapat dirender GeoSpaX.",
     "add": "Tambah",
     "adding": "Menambahkan…",
     "remove": "Hapus",
@@ -3909,7 +3909,7 @@
     "downloadTitle": "Unduh file ini",
     "copyUrlTitle": "Salin URL file ini",
     "openProductTitle": "Buka halaman produk ini di source.coop",
-    "unsupportedTitle": "GeoLibre tidak dapat merender format ini — unduh saja",
+    "unsupportedTitle": "GeoSpaX tidak dapat merender format ini — unduh saja",
     "addError": "Tidak dapat menambahkan file ini: {{message}}",
     "largeFileWarning": "File ini {{size}}. File di-stream dari sumber, sehingga hanya bagian yang terlihat yang dibaca.",
     "streamHint": "File ini {{size}}. Tambah menyalinnya ke memori; Stream hanya membaca bagian yang terlihat.",
@@ -3953,7 +3953,7 @@
     "downloadTitle": "Unduh file ini",
     "copyUrlTitle": "Salin URL file ini",
     "openDatasetTitle": "Buka halaman dataset ini di huggingface.co",
-    "unsupportedTitle": "GeoLibre tidak dapat merender format ini — unduh saja",
+    "unsupportedTitle": "GeoSpaX tidak dapat merender format ini — unduh saja",
     "addError": "Tidak dapat menambahkan file ini: {{message}}",
     "notRasterIndex": "File JSON ini tidak mengindeks raster apa pun, jadi tidak ada yang bisa ditaruh di peta. MosaicJSON dan koleksi STAC didukung.",
     "largeFileWarning": "File ini {{size}}. File di-stream dari sumber, sehingga hanya bagian yang terlihat yang dibaca.",
@@ -3995,7 +3995,7 @@
     "clearSelection": "Bersihkan",
     "selectedFiles_other": "{{count}} file dipilih ({{size}}).",
     "commitMessageLabel": "Pesan commit (opsional)",
-    "commitMessagePlaceholder": "Diunggah dengan GeoLibre",
+    "commitMessagePlaceholder": "Diunggah dengan GeoSpaX",
     "upload": "Unggah",
     "uploadPreparing": "Menyiapkan unggahan…",
     "uploadHashing": "Menghitung hash {{name}} ({{index}}/{{total}})…",
@@ -4506,7 +4506,7 @@
       "importedLog": "Mengimpor model dengan {{nodes}} simpul.",
       "importFailed": "Gagal mengimpor",
       "importInvalid": "Berkas itu tidak berisi graf model.",
-      "importUnsupported": "Berkas itu bukan model GeoLibre.",
+      "importUnsupported": "Berkas itu bukan model GeoSpaX.",
       "rasterOutputUnsupported": "\"{{name}}\" adalah hasil raster yang tidak dapat ditambahkan ke peta oleh versi ini.",
       "portNeedsVector": "\"{{port}}\" memerlukan data vektor, tetapi yang datang adalah raster.",
       "toolNoOutput": "\"{{tool}}\" tidak menghasilkan keluaran.",
@@ -4561,7 +4561,7 @@
       },
       "filterBySource": "Filter berdasarkan sumber",
       "allSources": "Semua sumber",
-      "geolibreTools": "Alat GeoLibre",
+      "geolibreTools": "Alat GeoSpaX",
       "whiteboxTools": "Alat Whitebox",
       "toolbox": "Kotak alat Whitebox",
       "checkingRuntime": "Memeriksa runtime.",
@@ -4615,8 +4615,8 @@
       "errorConnect": "Tidak dapat terhubung ke sidecar.",
       "errorPoll": "Tidak dapat memeriksa status pekerjaan.",
       "errorStartTool": "Tidak dapat menjalankan alat Whitebox.",
-      "errorStartSidecar": "Tidak dapat menjalankan sidecar GeoLibre.",
-      "errorStopSidecar": "Tidak dapat menghentikan sidecar GeoLibre.",
+      "errorStartSidecar": "Tidak dapat menjalankan sidecar GeoSpaX.",
+      "errorStopSidecar": "Tidak dapat menghentikan sidecar GeoSpaX.",
       "noToolsFound": "Tidak ada alat yang ditemukan.",
       "noParameters": "Alat ini tidak memiliki parameter.",
       "noOutput": "Belum ada keluaran.",
@@ -4645,9 +4645,9 @@
       "runLocallyButton": "Jalankan lokal (WASM)",
       "troubleshootingTitle": "Masih ingin menggunakan server?",
       "stepStartServerDesktop": "Klik \"Mulai server\" di panel daftar alat untuk meluncurkannya, lalu tunggu beberapa detik hingga aktif.",
-      "stepStartServerBrowser": "Server hanya dapat dimulai dari aplikasi desktop GeoLibre. Di browser, biarkan \"Jalankan lokal (WASM)\" tetap aktif.",
+      "stepStartServerBrowser": "Server hanya dapat dimulai dari aplikasi desktop GeoSpaX. Di browser, biarkan \"Jalankan lokal (WASM)\" tetap aktif.",
       "stepCheckPort": "Pastikan firewall, antivirus, atau kebijakan jaringan tidak memblokir port lokal {{port}}.",
-      "stepRestart": "Jika server berhenti secara tak terduga, mulai ulang aplikasi desktop GeoLibre dan buka kembali dialog ini."
+      "stepRestart": "Jika server berhenti secara tak terduga, mulai ulang aplikasi desktop GeoSpaX dan buka kembali dialog ini."
     },
     "vectorTools": {
       "title": "Alat vektor",
@@ -6260,13 +6260,13 @@
     "segment": "Segmentasikan",
     "status": {
       "checking": "Memeriksa layanan segmentasi AI…",
-      "unavailableDesktop": "Layanan segmentasi AI belum berjalan. Mulai server GeoLibre dengan segment-geospatial diaktifkan untuk menggunakannya.",
-      "unavailableWeb": "Segmentasi AI tidak tersedia di browser. Gunakan aplikasi desktop GeoLibre untuk menjalankannya."
+      "unavailableDesktop": "Layanan segmentasi AI belum berjalan. Mulai server GeoSpaX dengan segment-geospatial diaktifkan untuk menggunakannya.",
+      "unavailableWeb": "Segmentasi AI tidak tersedia di browser. Gunakan aplikasi desktop GeoSpaX untuk menjalankannya."
     },
     "error": {
       "chooseImage": "Pilih gambar (GeoTIFF) untuk disegmentasi.",
       "enterPrompt": "Masukkan perintah teks, mis. “pohon” atau “bangunan”.",
-      "startServer": "Tidak dapat memulai sidecar GeoLibre.",
+      "startServer": "Tidak dapat memulai sidecar GeoSpaX.",
       "failed": "Segmentasi gagal."
     },
     "noObjects": "Tidak ditemukan objek.",
@@ -6277,7 +6277,7 @@
       "title": "Tidak dapat memulai server segmentasi AI.",
       "intro": "Segmentasi AI berjalan di server helper lokal ({{sidecarUrl}}) yang menjalankan model SAM3 dari segment-geospatial. Server ini menjalankan Python di latar belakang, terpisah dari aplikasi, dan bukan bagian dari build browser.",
       "troubleshootingTitle": "Cara menjalankan server",
-      "stepInstall": "Pastikan server GeoLibre terpasang dengan backend segment-geospatial diaktifkan, sehingga model segmentasi tersedia.",
+      "stepInstall": "Pastikan server GeoSpaX terpasang dengan backend segment-geospatial diaktifkan, sehingga model segmentasi tersedia.",
       "stepStartServerDesktop": "Klik \"Mulai server\" di atas untuk meluncurkannya, lalu tunggu beberapa detik hingga model aktif."
     }
   },
@@ -6531,7 +6531,7 @@
     "import": "Impor…",
     "export": "Ekspor…",
     "importFilterName": "Pustaka gaya / QML / SLD",
-    "exportFilterName": "Pustaka gaya GeoLibre",
+    "exportFilterName": "Pustaka gaya GeoSpaX",
     "applied": "Menerapkan \"{{name}}\" ke {{layer}}.",
     "appliedRampHint": "Menerapkan \"{{name}}\". Alihkan layer ke gaya bertingkat atau terkategori untuk melihat gradasi.",
     "saved": "Menyimpan \"{{name}}\" ke pustaka.",
@@ -7220,7 +7220,7 @@
     "exportStyleDataNotReady": "Data layer belum siap. Coba lagi sesaat lagi.",
     "exportStyleNeedsFeatures": "Ekspor gaya memerlukan layer vektor dengan fitur.",
     "exportStyleError": "Tidak dapat mengekspor gaya layer ini.",
-    "importStyle": "Impor gaya (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "Impor gaya (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "openStyleManager": "Gaya tersimpan (Pengelola Gaya)…",
     "importStyleSuccess": "Gaya berhasil diimpor.",
     "importStyleInvalid": "File tersebut bukan JSON, SLD, atau QML yang valid.",
@@ -7634,10 +7634,10 @@
   },
   "errorBoundary": {
     "title": "Terjadi kesalahan",
-    "description": "GeoLibre mengalami kesalahan tak terduga dan tidak dapat melanjutkan. Pekerjaan Anda mungkin belum tersimpan — coba pulihkan sebelum memuat ulang.",
+    "description": "GeoSpaX mengalami kesalahan tak terduga dan tidak dapat melanjutkan. Pekerjaan Anda mungkin belum tersimpan — coba pulihkan sebelum memuat ulang.",
     "tryAgain": "Coba lagi",
     "reload": "Muat ulang aplikasi",
-    "sectionFailed": "{{label}} gagal ditampilkan. Bagian lain GeoLibre tetap tersedia."
+    "sectionFailed": "{{label}} gagal ditampilkan. Bagian lain GeoSpaX tetap tersedia."
   },
   "commandPalette": {
     "title": "Palet perintah",
@@ -7682,7 +7682,7 @@
     "emptyNetworkError": "Tidak ada diagnostik kesalahan jaringan yang terekam."
   },
   "shell": {
-    "workspaceTitle": "Ruang kerja peta GeoLibre",
+    "workspaceTitle": "Ruang kerja peta GeoSpaX",
     "section": {
       "toolbar": "Bilah alat",
       "sharedLeftSidebar": "Bilah sisi kiri bersama",
@@ -7955,7 +7955,7 @@
     "navigationButton": "1. Muat sumber & plot navigasi",
     "navigationButtonAgain": "Plot layer navigasi lain",
     "exportButton": "Ekspor hasil yang diplot ke GeoJSON",
-    "addLayersButton": "Tambahkan hasil yang diplot ke Layer GeoLibre",
+    "addLayersButton": "Tambahkan hasil yang diplot ke Layer GeoSpaX",
     "clearButton": "Bersihkan hasil NLDI",
     "noComid": "Tidak ada COMID yang dikembalikan untuk titik ini.",
     "requestingBasin": "Meminta daerah aliran hulu…",

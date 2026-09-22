@@ -1,1 +1,31 @@
-null
+{
+  "enabled": true,
+  "lock": false,
+  "hiddenPlugins": [
+    "gods-eye-view",
+    "geolibre-flight-simulator",
+    "geolibre-route-animation",
+    "maplibre-gl-streetview",
+    "maplibre-gl-mapillary",
+    "maplibre-gl-fema-wms",
+    "maplibre-gl-national-map",
+    "maplibre-gl-enviroatlas",
+    "geolibre-ign-lidar-hd",
+    "austin-capmetro",
+    "boston-bluebikes",
+    "capmetro-austin",
+    "chattanooga-bikechatt",
+    "chicago-divvy",
+    "dc-capital-bikeshare",
+    "entur-norway",
+    "honolulu-biki",
+    "hsl-helsinki",
+    "mbta",
+    "metrotransit-msp",
+    "nyc-citibike",
+    "ovapi-nl",
+    "portland-biketown",
+    "sf-bay-wheels",
+    "translink-seq"
+  ]
+}

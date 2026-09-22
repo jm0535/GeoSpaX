@@ -6,9 +6,9 @@
     "summary": "{{count}} lớp · thu phóng {{zoom}}",
     "restore": "Khôi phục",
     "discard": "Loại bỏ",
-    "restoreError": "Không thể khôi phục ảnh chụp nhanh này. Nó có thể bị hỏng hoặc không tương thích với phiên bản GeoLibre này.",
+    "restoreError": "Không thể khôi phục ảnh chụp nhanh này. Nó có thể bị hỏng hoặc không tương thích với phiên bản GeoSpaX này.",
     "recoveryTitle": "Khôi phục công việc chưa được lưu?",
-    "recoveryDescription": "GeoLibre không đóng sạch sẽ. Đã có sẵn tính năng tự động lưu mới hơn “{{name}}”."
+    "recoveryDescription": "GeoSpaX không đóng sạch sẽ. Đã có sẵn tính năng tự động lưu mới hơn “{{name}}”."
   },
   "browser": {
     "title": "Trình duyệt",
@@ -47,14 +47,14 @@
     "libraryImportFailed": "Không thể đọc tệp thư viện lớp này.",
     "libraryExportFailed": "Không thể xuất thư viện lớp.",
     "libraryLayerMissing": "Lớp đã lưu đó không còn tồn tại.",
-    "libraryLayerNeedsDesktop": "Lớp đã lưu này đọc một tệp từ ổ đĩa nên cần GeoLibre Desktop. Hãy thêm lại tệp đó để lưu một mục mới.",
+    "libraryLayerNeedsDesktop": "Lớp đã lưu này đọc một tệp từ ổ đĩa nên cần GeoSpaX Desktop. Hãy thêm lại tệp đó để lưu một mục mới.",
     "libraryLayerConfigNotApplied": "Đã thêm tệp cho “{{name}}”, nhưng kiểu đã lưu của nó không thể khớp với một lớp duy nhất nên nó không được áp dụng lại.",
     "libraryLayerJoinsUnresolved_other": "Đã thêm lớp nhưng không thể áp dụng lại các liên kết đã lưu {{count}}: các lớp mà chúng tham gia không có trong dự án này."
   },
   "about": {
     "trigger": "Về",
-    "title": "Giới thiệu về GeoLibre",
-    "description": "GeoLibre là một nền tảng GIS dựa trên nền tảng đám mây nhẹ.",
+    "title": "Giới thiệu về GeoSpaX",
+    "description": "GeoSpaX là một nền tảng GIS dựa trên nền tảng đám mây nhẹ.",
     "version": "Phiên bản",
     "checkForUpdates": "Kiểm tra các bản cập nhật",
     "tryAgain": "Thử lại",
@@ -73,7 +73,7 @@
     "steps": {
       "download": "Tải xuống trình cài đặt cho nền tảng của bạn từ trang tải xuống.",
       "install": "Chạy trình cài đặt. Các dự án, cài đặt và khóa API cục bộ của bạn sẽ được lưu giữ.",
-      "reopen": "Mở lại GeoLibre để hoàn tất cập nhật."
+      "reopen": "Mở lại GeoSpaX để hoàn tất cập nhật."
     },
     "severity": {
       "major": "Bản phát hành chính",
@@ -92,7 +92,7 @@
       "noTag": "Bản phát hành mới nhất không bao gồm thẻ phiên bản.",
       "network": "Không thể truy cập GitHub. Hãy kiểm tra kết nối của bạn và thử lại.",
       "viewDownloads": "Xem nội dung tải xuống",
-      "viewDownloadsHint": "Mở trang tải xuống GeoLibre trong trình duyệt của bạn để bạn có thể kiểm tra phiên bản mới nhất theo cách thủ công."
+      "viewDownloadsHint": "Mở trang tải xuống GeoSpaX trong trình duyệt của bạn để bạn có thể kiểm tra phiên bản mới nhất theo cách thủ công."
     },
     "startup": {
       "title": "Đã có bản cập nhật",
@@ -105,7 +105,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "Tính năng này không có trong phiên bản GeoLibre Desktop trên Mac App Store."
+    "unavailable": "Tính năng này không có trong phiên bản GeoSpaX Desktop trên Mac App Store."
   },
   "bookmark": {
     "captureStateLabel": "Bao gồm trạng thái lớp hoàn chỉnh (hoạt động, không hoạt động và thứ tự lớp)",
@@ -122,7 +122,7 @@
     "trust": {
       "title": "Tải plugin từ dự án này?",
       "description_other": "Dự án này muốn tải {{count}} plugin bên ngoài từ các URL bạn chưa cài đặt. Các plugin chạy mã có toàn quyền truy cập vào ứng dụng.",
-      "warning": "Chỉ tải plugin từ các nguồn bạn tin cậy. Các plugin đã tải sẽ chạy với các đặc quyền giống như chính GeoLibre.",
+      "warning": "Chỉ tải plugin từ các nguồn bạn tin cậy. Các plugin đã tải sẽ chạy với các đặc quyền giống như chính GeoSpaX.",
       "trustButton": "Tin tưởng và tải",
       "dismissButton": "Không tải"
     },
@@ -141,7 +141,7 @@
     "openHomepageAria": "Mở trang chủ {{name}}",
     "byAuthor": "bởi {{author}}",
     "updateAvailable": "cập nhật có sẵn",
-    "requiresVersion": "yêu cầu GeoLibre {{version}}+",
+    "requiresVersion": "yêu cầu GeoSpaX {{version}}+",
     "install": "Cài đặt",
     "installAria": "Cài đặt {{name}}",
     "removeConfirm": "Di dời?",
@@ -152,10 +152,10 @@
     "updateAria": "Cập nhật {{name}}",
     "loading": "Đang tải…",
     "installed": "Đã cài đặt",
-    "settingsIntro": "GeoLibre luôn quét thư mục plugin dữ liệu ứng dụng của nó. Cài đặt plugin đóng gói (.zip) từ một tệp hoặc thêm các thư mục cục bộ bổ sung (chỉ dành cho máy tính để bàn). URL kê khai (bao gồm cả lượt cài đặt trên thị trường) được tải qua mạng; những thay đổi ở đây sẽ được áp dụng ngay lập tức.",
+    "settingsIntro": "GeoSpaX luôn quét thư mục plugin dữ liệu ứng dụng của nó. Cài đặt plugin đóng gói (.zip) từ một tệp hoặc thêm các thư mục cục bộ bổ sung (chỉ dành cho máy tính để bàn). URL kê khai (bao gồm cả lượt cài đặt trên thị trường) được tải qua mạng; những thay đổi ở đây sẽ được áp dụng ngay lập tức.",
     "installFromFile": "Cài đặt từ tập tin",
     "chooseZip": "Chọn .zip…",
-    "installFromFileHintDesktop": "Sao chép kho lưu trữ plugin đã đóng gói vào thư mục plugin của GeoLibre.",
+    "installFromFileHintDesktop": "Sao chép kho lưu trữ plugin đã đóng gói vào thư mục plugin của GeoSpaX.",
     "installFromFileHintWeb": "Tải kho lưu trữ plugin đóng gói; nó được lưu trữ trong trình duyệt của bạn và tải lại vào lần truy cập tiếp theo.",
     "localDirectories": "Thư mục cục bộ",
     "directoryAria": "Thư mục plugin",
@@ -170,14 +170,14 @@
     "errorDirectoryPicker": "Không thể mở bộ chọn thư mục.",
     "errorInstall": "Không thể cài đặt plugin.",
     "errorUninstall": "Không thể gỡ cài đặt plugin.",
-    "description": "Duyệt, cài đặt, cập nhật và xóa các plugin GeoLibre bên ngoài. Các plugin được liệt kê trong sổ đăng ký plugin <registryLink>GeoLibre</registryLink>."
+    "description": "Duyệt, cài đặt, cập nhật và xóa các plugin GeoSpaX bên ngoài. Các plugin được liệt kê trong sổ đăng ký plugin <registryLink>GeoSpaX</registryLink>."
   },
   "viewState": {
     "panelTitle": "Thông tin"
   },
   "terrainMeasure": {
     "title": "Địa hình (3D)",
-    "surfaceDistance": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84.",
+    "surfaceDistance": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84.",
     "surfaceArea": "Diện tích bề mặt",
     "elevationGainLoss": "Được/lỗ",
     "elevationRange": "Độ cao tối thiểu / tối đa",
@@ -204,7 +204,7 @@
   "fileNamePrompt": {
     "title": "Lưu tập tin dưới dạng",
     "description": "Nhập tên tập tin. Tệp tải xuống thư mục tải xuống của trình duyệt của bạn.",
-    "label": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84."
+    "label": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84."
   },
   "newProject": {
     "doNotSave": "Không lưu",
@@ -243,7 +243,7 @@
     "venus": "sao Kim",
     "moon": "Mặt trăng",
     "mars": "Sao Hỏa",
-    "io": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84.",
+    "io": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84.",
     "europa": "Bản đồ nguyên mẫu",
     "ganymede": "Ganymede",
     "callisto": "Callisto",
@@ -259,7 +259,7 @@
     "add": "Thêm",
     "ok": "OK",
     "done": "Xong",
-    "openWebApp": "Mở ứng dụng web GeoLibre",
+    "openWebApp": "Mở ứng dụng web GeoSpaX",
     "pickColorFromScreen": "Chọn màu từ màn hình",
     "save": "Lưu",
     "cancel": "Hủy"
@@ -269,7 +269,7 @@
     "kind": {
       "xyz": {
         "label": "Thêm lớp XYZ",
-        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84."
+        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84."
       },
       "wms": {
         "label": "Mặt Trăng",
@@ -293,7 +293,7 @@
       },
       "ogcVectorTiles": {
         "label": "Thêm các ô vector OGC",
-        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84."
+        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84."
       },
       "gpx": {
         "label": "Thêm lớp GPX",
@@ -312,7 +312,7 @@
         "description": "Thêm bản vẽ AutoCAD DXF hoặc DWG dưới dạng lớp vectơ, chọn lớp nào sẽ tải và hệ quy chiếu tọa độ để chiếu lớp đó."
       },
       "gdb": {
-        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84.",
+        "description": "Thêm một lớp từ Cơ sở dữ liệu địa lý tệp Esri (thư mục .gdb). Lớp này được đọc bằng máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84.",
         "label": "Thêm lớp cơ sở dữ liệu địa lý tệp"
       },
       "photos": {
@@ -663,8 +663,8 @@
       "layerPlaceholder": "Chọn cơ sở dữ liệu địa lý trước",
       "readingLayers": "Đọc các lớp...",
       "layerOption": "{{name}} ({{type}}, {{count}} tính năng)",
-      "help": "Các bảng chỉ thuộc tính không được liệt kê. Lớp tính năng đã chọn sẽ được tải thông qua máy chủ GeoLibre cục bộ và được chuyển hướng sang WGS84.",
-      "desktopOnly": "Các lớp Cơ sở dữ liệu địa lý tệp chỉ có sẵn trong GeoLibre Desktop. Tính năng này đọc thư mục .gdb cục bộ thông qua máy chủ GeoLibre cục bộ mà ứng dụng web không thể truy cập.",
+      "help": "Các bảng chỉ thuộc tính không được liệt kê. Lớp tính năng đã chọn sẽ được tải thông qua máy chủ GeoSpaX cục bộ và được chuyển hướng sang WGS84.",
+      "desktopOnly": "Các lớp Cơ sở dữ liệu địa lý tệp chỉ có sẵn trong GeoSpaX Desktop. Tính năng này đọc thư mục .gdb cục bộ thông qua máy chủ GeoSpaX cục bộ mà ứng dụng web không thể truy cập.",
       "readError": "Không thể đọc Cơ sở dữ liệu địa lý tệp này.",
       "convertError": "Không thể tải lớp tính năng này.",
       "defaultName": "Lớp cơ sở dữ liệu địa lý"
@@ -741,7 +741,7 @@
     },
     "postgres": {
       "defaultName": "Lớp PostgreSQL",
-      "errorDesktopOnly": "Các lớp PostgreSQL yêu cầu GeoLibre Desktop.",
+      "errorDesktopOnly": "Các lớp PostgreSQL yêu cầu GeoSpaX Desktop.",
       "errorConnectionString": "Nhập chuỗi kết nối PostgreSQL.",
       "stop": "Dừng lại",
       "martinSource": "Nguồn Martin",
@@ -755,7 +755,7 @@
       "errorConnectFirst": "Trước tiên hãy kết nối với PostgreSQL.",
       "errorNoVectorLayers": "Nguồn Martin đã chọn không có lớp vectơ.",
       "errorSelectSource": "Đọc danh mục Martin...",
-      "desktopOnlyNotice": "Các lớp PostgreSQL chỉ có sẵn trong GeoLibre Desktop. Tính năng này chạy một máy chủ ô Martin cục bộ mà ứng dụng web và di động không thể khởi chạy.",
+      "desktopOnlyNotice": "Các lớp PostgreSQL chỉ có sẵn trong GeoSpaX Desktop. Tính năng này chạy một máy chủ ô Martin cục bộ mà ứng dụng web và di động không thể khởi chạy.",
       "savedConnection": "Kết nối đã lưu",
       "selectSavedConnection": "Chọn kết nối đã lưu",
       "connectionString": "Chuỗi kết nối PostgreSQL",
@@ -979,7 +979,7 @@
         "format": "Vùng phủ không công bố đầu ra GeoTIFF.",
         "crs": "Vùng phủ phải hỗ trợ EPSG:4326 cho cả yêu cầu và đầu ra.",
         "size": "Chọn kích thước từ 1 đến 4096 pixel. Giới hạn tải xuống là 128 MB.",
-        "metadata": "Dịch vụ trả về nhiều siêu dữ liệu hơn mức GeoLibre có thể tải. Giới hạn phản hồi siêu dữ liệu là 32 MB.",
+        "metadata": "Dịch vụ trả về nhiều siêu dữ liệu hơn mức GeoSpaX có thể tải. Giới hạn phản hồi siêu dữ liệu là 32 MB.",
         "response": "Dịch vụ không trả về GeoTIFF hợp lệ.",
         "bounds": "Nhập một ô hợp lệ: tây/đông trong khoảng -180 đến 180, nam/bắc trong khoảng -90 đến 90, với tây < đông và nam < bắc.",
         "url": "Nhập URL dịch vụ WCS."
@@ -1232,7 +1232,7 @@
       "rtk-fixed": "Đã sửa lỗi RTK",
       "rtk-float": "Phao RTK",
       "estimated": "Tính toán chết",
-      "manual": "Việc đọc bộ thu NMEA cần có API Web Serial hoặc Web Bluetooth mà trình duyệt này không cung cấp. Mở GeoLibre trong trình duyệt Chrome như Chrome hoặc Edge.",
+      "manual": "Việc đọc bộ thu NMEA cần có API Web Serial hoặc Web Bluetooth mà trình duyệt này không cung cấp. Mở GeoSpaX trong trình duyệt Chrome như Chrome hoặc Edge.",
       "simulation": "mô phỏng",
       "invalid": "Không sửa chữa",
       "gps": "sửa chữa GPS",
@@ -1266,7 +1266,7 @@
     "nmeaConnectFailed": "Không thể kết nối với máy thu.",
     "nmeaDisconnected": "Máy thu bị ngắt kết nối.",
     "nmeaUnsupportedDevice": "Không tìm thấy dịch vụ NMEA trên thiết bị đó. Nó có thể là một bộ thu Bluetooth cổ điển, phải được ghép nối trong cài đặt hệ thống của bạn và sau đó được kết nối ở đây dưới dạng cổng nối tiếp.",
-    "nmeaUnsupported": "Việc đọc bộ thu NMEA cần có API Web Serial hoặc Web Bluetooth mà trình duyệt này không cung cấp. Mở GeoLibre trong trình duyệt Chrome như Chrome hoặc Edge.",
+    "nmeaUnsupported": "Việc đọc bộ thu NMEA cần có API Web Serial hoặc Web Bluetooth mà trình duyệt này không cung cấp. Mở GeoSpaX trong trình duyệt Chrome như Chrome hoặc Edge.",
     "nmeaSerialUnsupported": "Web Serial không có ở đây nên không thể mở được bộ thu nối tiếp.",
     "nmeaBluetoothUnsupported": "Web Bluetooth không có ở đây nên không thể mở được bộ thu Bluetooth Low Energy.",
     "nmeaBluetoothHint": "Hầu hết các bộ thu GPS Bluetooth đều sử dụng Bluetooth cổ điển: ghép nối một bộ trong cài đặt hệ thống của bạn và nó xuất hiện ở đây dưới dạng cổng nối tiếp. Chỉ sử dụng Kết nối Bluetooth cho các bộ thu Bluetooth Low Energy."
@@ -1399,7 +1399,7 @@
     "readinessReasonUnchecked": "Không thể kiểm tra được.",
     "readinessAdviceCredential": "Công khai dịch vụ hoặc yêu cầu người nhận cung cấp thông tin xác thực của riêng họ.",
     "getToken": "Đặt tên cho dự án của bạn",
-    "step2Title": "2. Thêm mã thông báo vào GeoLibre",
+    "step2Title": "2. Thêm mã thông báo vào GeoSpaX",
     "step2Description": "Dán mã thông báo vào Cài đặt → Biến môi trường trên thiết bị này.",
     "configureToken": "Định cấu hình mã thông báo cục bộ",
     "liveAt": "Dự án của bạn đang hoạt động tại:",
@@ -1556,7 +1556,7 @@
       "groupNavigation": "Nhóm mũi tên hướng bắc và thanh tỷ lệ",
       "footer": "Văn bản chân trang",
       "date": "Ngày",
-      "attribution": "Bao gồm thuộc tính GeoLibre",
+      "attribution": "Bao gồm thuộc tính GeoSpaX",
       "pageBorder": "Đường viền trang",
       "infoBlock": "Khối thông tin (khối tiêu đề)",
       "colorbar": "Thanh màu",
@@ -1816,13 +1816,13 @@
   },
   "auth": {
     "retry": "Thử lại",
-    "signInTitle": "Đăng nhập vào GeoLibre",
+    "signInTitle": "Đăng nhập vào GeoSpaX",
     "signInDescription": "Việc triển khai này yêu cầu phải có tài khoản. Bạn sẽ được đưa đến trang đăng nhập an toàn và quay lại đây.",
     "signIn": "Đăng nhập",
     "signOut": "Đăng xuất",
     "account": "Tài khoản",
     "unavailableTitle": "Đăng nhập không khả dụng",
-    "unavailableDescription": "GeoLibre không thể truy cập dịch vụ đăng nhập nên không thể biết bạn đã đăng nhập hay chưa. Việc này thường là tạm thời; nếu tình trạng này vẫn tiếp diễn thì có thể cần chú ý đến cài đặt xác thực của triển khai này."
+    "unavailableDescription": "GeoSpaX không thể truy cập dịch vụ đăng nhập nên không thể biết bạn đã đăng nhập hay chưa. Việc này thường là tạm thời; nếu tình trạng này vẫn tiếp diễn thì có thể cần chú ý đến cài đặt xác thực của triển khai này."
   },
   "basemapExtract": {
     "confirmDelete": "Xóa bỏ?",
@@ -2011,11 +2011,11 @@
       },
       "advanced": {
         "title": "chỉ 2D",
-        "description": "Hiển thị mọi thứ GeoLibre cung cấp."
+        "description": "Hiển thị mọi thứ GeoSpaX cung cấp."
       }
     },
     "showEverything": "Bỏ qua - hiển thị mọi thứ",
-    "title": "Chào mừng đến với GeoLibre"
+    "title": "Chào mừng đến với GeoSpaX"
   },
   "settings": {
     "title": "Cài đặt",
@@ -2049,7 +2049,7 @@
     },
     "languagePack": {
       "title": "Gói ngôn ngữ",
-      "description": "Thêm bản dịch tùy chọn cho tên công cụ, tham số và văn bản trợ giúp của Whitebox mà không làm tăng dung lượng của mọi bản cài đặt GeoLibre.",
+      "description": "Thêm bản dịch tùy chọn cho tên công cụ, tham số và văn bản trợ giúp của Whitebox mà không làm tăng dung lượng của mọi bản cài đặt GeoSpaX.",
       "manage": "Quản lý gói ngôn ngữ",
       "interfaceLanguage": "Ngôn ngữ giao diện",
       "installed": "Đã cài đặt gói ngôn ngữ Whitebox",
@@ -2071,10 +2071,10 @@
       "privacyLocalOnly": "Các gói chỉ được lưu trên thiết bị này. Bản dựng này không tải xuống thứ gì: hãy nhập một tệp gói ngôn ngữ thay thế.",
       "browse": "Duyệt các gói ngôn ngữ",
       "errorInvalidJson": "Tệp đó không phải là JSON hợp lệ.",
-      "errorInvalidFormat": "Tệp đó không phải là gói ngôn ngữ Whitebox hợp lệ của GeoLibre.",
-      "errorUnsupportedVersion": "Bản phát hành GeoLibre này không hỗ trợ phiên bản gói ngôn ngữ đó.",
+      "errorInvalidFormat": "Tệp đó không phải là gói ngôn ngữ Whitebox hợp lệ của GeoSpaX.",
+      "errorUnsupportedVersion": "Bản phát hành GeoSpaX này không hỗ trợ phiên bản gói ngôn ngữ đó.",
       "errorInvalidLocale": "Gói ngôn ngữ có mã ngôn ngữ không hợp lệ hoặc không mong đợi.",
-      "errorUnsupportedLocale": "GeoLibre không bao gồm ngôn ngữ giao diện cơ sở mà gói này yêu cầu.",
+      "errorUnsupportedLocale": "GeoSpaX không bao gồm ngôn ngữ giao diện cơ sở mà gói này yêu cầu.",
       "errorTooLarge": "Gói ngôn ngữ vượt quá giới hạn an toàn 5 MB.",
       "errorNotFound": "Chưa có gói ngôn ngữ Whitebox chính thức nào cho ngôn ngữ này.",
       "errorDownload": "Không thể tải gói ngôn ngữ xuống. Hãy kiểm tra kết nối của bạn hoặc nhập một tệp cục bộ.",
@@ -2082,9 +2082,9 @@
     },
     "updates": {
       "title": "Cập nhật phần mềm",
-      "description": "Kiểm soát cách GeoLibre kiểm tra các phiên bản mới khi ứng dụng máy tính để bàn khởi động.",
+      "description": "Kiểm soát cách GeoSpaX kiểm tra các phiên bản mới khi ứng dụng máy tính để bàn khởi động.",
       "checkOnStartup": "Kiểm tra cập nhật khi khởi động",
-      "checkOnStartupHint": "Khi được bật, GeoLibre sẽ kiểm tra phiên bản mới hơn mỗi khi ứng dụng khởi động. Tắt tính năng này để có quy trình làm việc hoàn toàn ngoại tuyến.",
+      "checkOnStartupHint": "Khi được bật, GeoSpaX sẽ kiểm tra phiên bản mới hơn mỗi khi ứng dụng khởi động. Tắt tính năng này để có quy trình làm việc hoàn toàn ngoại tuyến.",
       "notificationLevel": "Thông báo cho tôi về",
       "notificationLevelHint": "Chọn loại bản phát hành sẽ kích hoạt thông báo khởi động.",
       "level": {
@@ -2095,7 +2095,7 @@
     },
     "startup": {
       "title": "Dự án khởi động",
-      "description": "Chọn không gian làm việc GeoLibre mở ra khi ứng dụng gốc khởi động.",
+      "description": "Chọn không gian làm việc GeoSpaX mở ra khi ứng dụng gốc khởi động.",
       "mode": {
         "default": "Mở không gian làm việc mặc định",
         "last": "Mở lại dự án cuối cùng",
@@ -2118,7 +2118,7 @@
       "viewUnavailable": "Chế độ xem bản đồ hiện tại không khả dụng.",
       "selectError": "Không thể đọc được dự án đã chọn.",
       "restoring": "Đang mở dự án khởi động của bạn…",
-      "loadWarning": "Dự án khởi động không có sẵn. Thay vào đó, GeoLibre đã mở không gian làm việc mặc định."
+      "loadWarning": "Dự án khởi động không có sẵn. Thay vào đó, GeoSpaX đã mở không gian làm việc mặc định."
     },
     "map": {
       "constraintsTitle": "Hạn chế về bản đồ",
@@ -2480,7 +2480,7 @@
       "longitude": "Kinh độ",
       "smartPasteInputLabel": "Chuỗi tọa độ",
       "smartPastePlaceholder": "ví dụ. 51.5074, -0.1278 hoặc 51°30'26\"B, 0°07'39\"W",
-      "smartPasteInfo": "Nhập hoặc dán chuỗi tọa độ đầy đủ trong DD, DMS hoặc DDM, sau đó chạy Nhập quy trình. GeoLibre phát hiện định dạng và điền vào các trường kinh độ và vĩ độ bên dưới. Điều chỉnh thu phóng, cao độ và phương vị riêng biệt trước khi đi.",
+      "smartPasteInfo": "Nhập hoặc dán chuỗi tọa độ đầy đủ trong DD, DMS hoặc DDM, sau đó chạy Nhập quy trình. GeoSpaX phát hiện định dạng và điền vào các trường kinh độ và vĩ độ bên dưới. Điều chỉnh thu phóng, cao độ và phương vị riêng biệt trước khi đi.",
       "smartPasteInfoLabel": "Về việc dán tọa độ",
       "smartPasteInvalid": "Không thể đọc được tọa độ đó. Nhập kinh độ và vĩ độ đầy đủ trong DD, DMS hoặc DDM, ví dụ: 51,5074, -0,1278. Không thể phân tích cú pháp một chuỗi hoặc chuỗi không đầy đủ.",
       "processInput": "Xử lý đầu vào",
@@ -2607,8 +2607,8 @@
     },
     "conversion": {
       "vectorToVector": "Vectơ sang Vectơ",
-      "zipInputBrowserError": "Shapefiles đã nén chỉ có thể được chuyển đổi trong ứng dụng máy tính để bàn GeoLibre. Trong trình duyệt, chọn tệp .shp đã giải nén cùng với các tệp .dbf, .shx và .prj của nó.",
-      "browserOutputUnsupported": "Trong trình duyệt, đầu ra có thể là GeoJSON, CSV, GeoParquet, GeoPackage, FlatGeobuf hoặc Shapefile (.zip). Đầu ra \".{{extension}}\" cần có ứng dụng máy tính để bàn GeoLibre.",
+      "zipInputBrowserError": "Shapefiles đã nén chỉ có thể được chuyển đổi trong ứng dụng máy tính để bàn GeoSpaX. Trong trình duyệt, chọn tệp .shp đã giải nén cùng với các tệp .dbf, .shx và .prj của nó.",
+      "browserOutputUnsupported": "Trong trình duyệt, đầu ra có thể là GeoJSON, CSV, GeoParquet, GeoPackage, FlatGeobuf hoặc Shapefile (.zip). Đầu ra \".{{extension}}\" cần có ứng dụng máy tính để bàn GeoSpaX.",
       "outputExtensionRequired": "Thêm phần mở rộng tệp vào tên đầu ra để chọn định dạng.",
       "readingWithDuckDb": "Đọc {{name}} với DuckDB-WASM",
       "readFeatures": "Đọc các tính năng {{features}} từ {{name}}",
@@ -2649,7 +2649,7 @@
       "rasterShape": "Đọc raster {{width}}×{{height}} với băng tần {{bands}}",
       "wroteCog": "Đã viết một COG xếp kề với các phần tổng quan ({{compression}})",
       "notAGeoTiff": "Tệp này không phải là GeoTIFF có thể đọc được. Trong trình duyệt, Raster to COG chỉ đọc GeoTIFF; các định dạng khác cần có ứng dụng dành cho máy tính để bàn.",
-      "rasterTooLargeForBrowser": "Trong trình duyệt, điều này giải mã toàn bộ raster trong WebAssembly, bị giới hạn ở khoảng 4 GB, vì vậy cái này không phù hợp. Chuyển đổi nó bằng ứng dụng GeoLibre dành cho máy tính để bàn hoặc tạo trước COG bằng gdal_translate hoặc rio-cogeo.",
+      "rasterTooLargeForBrowser": "Trong trình duyệt, điều này giải mã toàn bộ raster trong WebAssembly, bị giới hạn ở khoảng 4 GB, vì vậy cái này không phù hợp. Chuyển đổi nó bằng ứng dụng GeoSpaX dành cho máy tính để bàn hoặc tạo trước COG bằng gdal_translate hoặc rio-cogeo.",
       "zoomRangeError": "Mức thu phóng phải thỏa mãn 0 ≤ tối thiểu ≤ tối đa ≤ {{max}}.",
       "colormap": "Bản đồ màu",
       "resampling": "Ban nhạc",
@@ -2671,7 +2671,7 @@
       "vectorToPmtiles": "Vectơ sang PMTiles",
       "rasterToCog": "Raster sang COG",
       "rasterToPmtiles": "Raster sang PMTiles",
-      "needsDesktop": "Việc chuyển đổi này cần có ứng dụng máy tính để bàn GeoLibre hoặc một chiếc sidecar đang chạy.",
+      "needsDesktop": "Việc chuyển đổi này cần có ứng dụng máy tính để bàn GeoSpaX hoặc một chiếc sidecar đang chạy.",
       "vectorToFlatgeobufDesc": "Chuyển đổi tập dữ liệu vectơ thành FlatGeobuf được sắp xếp theo Hilbert với chỉ mục không gian được đóng gói để truy cập nhanh chóng trên nền tảng đám mây.",
       "vectorToFlatgeobufInputLabel": "Tệp vectơ đầu vào",
       "vectorToFlatgeobufOutputLabel": "Xuất ra tệp FlatGeobuf",
@@ -2776,9 +2776,9 @@
       "outputFile": "Tệp đầu ra",
       "noOutput": "Chưa có đầu ra.",
       "errorConnect": "Không thể kết nối với sidecar.",
-      "needsDesktopSidecar": "Các công cụ raster cần có ứng dụng máy tính để bàn GeoLibre với một sidecar đang chạy.",
+      "needsDesktopSidecar": "Các công cụ raster cần có ứng dụng máy tính để bàn GeoSpaX với một sidecar đang chạy.",
       "errorPoll": "Không thể thăm dò công việc.",
-      "errorStartSidecar": "Không thể khởi động sidecar GeoLibre.",
+      "errorStartSidecar": "Không thể khởi động sidecar GeoSpaX.",
       "useAddedLayerPlaceholder": "Không thể chạy công cụ raster.",
       "loadingLayer": "Đang tải lớp…",
       "layerLoadError": "Không thể tải lớp đã chọn.",
@@ -2901,7 +2901,7 @@
       "terrain": "Địa hình",
       "remoteSensing": "Viễn thám",
       "projection": "Phép chiếu",
-      "geolibre": "Hộp công cụ GeoLibre",
+      "geolibre": "Hộp công cụ GeoSpaX",
       "subGroupGeometry": "Hình học",
       "subGroupOverlay": "Lớp phủ",
       "subGroupJoin": "Nối",
@@ -2980,12 +2980,12 @@
         "layer-type": "Loại lớp {{layerType}} không được hỗ trợ.",
         "missing-source": "Lớp này không có nguồn dữ liệu cục bộ có thể đọc được.",
         "format": "Định dạng dữ liệu của lớp không được hỗ trợ.",
-        "file-geodatabase": "Nguồn File Geodatabase (.gdb) không được tải từ dự án. Trong GeoLibre Desktop, hãy thêm chúng bằng Thêm dữ liệu → Cơ sở dữ liệu địa lý tệp (GDB).",
+        "file-geodatabase": "Nguồn File Geodatabase (.gdb) không được tải từ dự án. Trong GeoSpaX Desktop, hãy thêm chúng bằng Thêm dữ liệu → Cơ sở dữ liệu địa lý tệp (GDB).",
         "file-geodatabase-raster": "Bộ dữ liệu raster lưu trong File Geodatabase (.gdb) không được hỗ trợ. Hãy xuất raster sang GeoTIFF rồi thêm dưới dạng lớp raster.",
         "network-path": "Đường dẫn chia sẻ mạng không được tải vì lý do bảo mật.",
         "service": "Các lớp dịch vụ ArcGIS trong các dự án chưa được hỗ trợ.",
-        "browser-local-file": "Tệp cục bộ được tham chiếu nhưng trình duyệt không thể mở lại đường dẫn dữ liệu ArcGIS Pro. Sử dụng GeoLibre Desktop để tải nó.",
-        "map-extent": "Phạm vi bản đồ đã lưu sử dụng hệ tọa độ GeoLibre không thể chuyển đổi, do đó bản đồ được mở ở chế độ xem mặc định.",
+        "browser-local-file": "Tệp cục bộ được tham chiếu nhưng trình duyệt không thể mở lại đường dẫn dữ liệu ArcGIS Pro. Sử dụng GeoSpaX Desktop để tải nó.",
+        "map-extent": "Phạm vi bản đồ đã lưu sử dụng hệ tọa độ GeoSpaX không thể chuyển đổi, do đó bản đồ được mở ở chế độ xem mặc định.",
         "nesting": "Nhóm được lồng quá sâu hoặc dự án sẽ quay lại một nhóm đã chứa nó."
       },
       "qgisImportComplete": "Dự án QGIS đã được nhập khẩu",
@@ -2993,8 +2993,8 @@
       "qgisUnknownProvider": "không rõ",
       "qgisImportReason": {
         "network-path": "Đường dẫn chia sẻ mạng không được tải vì lý do bảo mật.",
-        "browser-local-file": "Tệp cục bộ được tham chiếu nhưng trình duyệt không thể mở lại đường dẫn dữ liệu QGIS. Sử dụng GeoLibre Desktop để tải nó.",
-        "browser-local-raster": "Raster được tham chiếu bởi một đường dẫn cục bộ. Sử dụng GeoLibre Desktop để tải nó.",
+        "browser-local-file": "Tệp cục bộ được tham chiếu nhưng trình duyệt không thể mở lại đường dẫn dữ liệu QGIS. Sử dụng GeoSpaX Desktop để tải nó.",
+        "browser-local-raster": "Raster được tham chiếu bởi một đường dẫn cục bộ. Sử dụng GeoSpaX Desktop để tải nó.",
         "non-vector": "Phiên bản đầu tiên này chỉ hỗ trợ các lớp vectơ dựa trên tệp.",
         "provider": "Nhà cung cấp dữ liệu {{provider}} không được hỗ trợ.",
         "missing-source": "Lớp này không có nguồn dữ liệu có thể đọc được.",
@@ -3013,7 +3013,7 @@
       "embedEditedGeometryDesc": "Dự án này chứa các hình học đã chỉnh sửa. Nhúng dữ liệu vectơ (khoảng {{size}}) để giữ lại các thay đổi. Nếu không nhúng, các lớp tham chiếu sẽ mở lại với hình học gốc và dữ liệu cục bộ có thể không khả dụng.",
       "embedVectorDesc": "Dự án này có {{count}} lớp vectơ cục bộ được tải từ máy tính của bạn. Trình duyệt không thể đọc lại chúng khi dự án được mở lại, do đó dữ liệu của chúng phải được nhúng vào tệp dự án để được khôi phục. Việc nhúng sẽ thêm khoảng {{size}} vào tệp.",
       "embedVectorDescDesktop": "Dự án này có {{count}} lớp vectơ cục bộ được tải từ máy tính của bạn. Nhúng dữ liệu của họ để làm cho dự án trở nên độc lập (thêm khoảng {{size}}) hoặc lưu các tham chiếu tệp sẽ tải lại từ đĩa khi dự án được mở lại. Các tham chiếu giữ cho tệp có kích thước nhỏ nhưng sẽ bị hỏng nếu tệp nguồn sau đó bị di chuyển hoặc xóa.",
-      "embedVectorDescMas": "Dự án này có {{count}} lớp vectơ cục bộ được tải từ máy tính của bạn. Hộp cát Mac App Store không thể duy trì quyền truy cập vào các tệp đó sau khi GeoLibre đóng, vì vậy dữ liệu phải được nhúng vào tệp dự án để có thể khôi phục. Việc nhúng sẽ thêm khoảng {{size}} vào tệp.",
+      "embedVectorDescMas": "Dự án này có {{count}} lớp vectơ cục bộ được tải từ máy tính của bạn. Hộp cát Mac App Store không thể duy trì quyền truy cập vào các tệp đó sau khi GeoSpaX đóng, vì vậy dữ liệu phải được nhúng vào tệp dự án để có thể khôi phục. Việc nhúng sẽ thêm khoảng {{size}} vào tệp.",
       "embedVectorLargeWarning": "Việc nhúng {{size}} sẽ tạo ra một tệp dự án rất lớn. Việc mở lại nó có thể chậm hoặc thất bại hoàn toàn vì mọi tính năng phải được phân tích cú pháp và lưu trong bộ nhớ cùng một lúc. Đối với dữ liệu có kích thước này, hãy chuyển đổi các lớp thành PMTiles hoặc FlatGeobuf và thêm chúng dưới dạng các lớp từ xa thay vì nhúng chúng.",
       "embedVectorEmbedButton": "Nhúng dữ liệu",
       "embedVectorReferenceButton": "Lưu tài liệu tham khảo tập tin",
@@ -3135,7 +3135,7 @@
       "scenegraphOutOfRange": "Kinh độ phải nằm trong khoảng từ -180 đến 180 và vĩ độ nằm trong khoảng từ -90 đến 90.",
       "scenegraphNoPointFeatures": "GeoJSON không có tính năng điểm nào để đặt mô hình.",
       "couldNotOpenProject": "Không thể mở dự án.",
-      "multipleProjectDrop": "Chỉ thả một dự án GeoLibre mỗi lần, không kèm tệp khác.",
+      "multipleProjectDrop": "Chỉ thả một dự án GeoSpaX mỗi lần, không kèm tệp khác.",
       "projectDropNotAllowed": "Bản triển khai này không cho phép chuyển đổi dự án.",
       "couldNotImportQgisProject": "Không thể nhập dự án QGIS.",
       "couldNotImportArcgisProject": "Không thể nhập dự án ArcGIS Pro.",
@@ -3235,7 +3235,7 @@
     "filterSummary": "Đã áp dụng bộ lọc lớp: {{matched}} trong số {{total}} đối tượng khớp.",
     "evaluationErrors": "{{count}} tính năng không thể được đánh giá và không khớp.",
     "unevaluableDisjoint": "{{count}} đặc điểm đã bị loại trừ vì không thể đánh giá hình học của chúng.",
-    "tooManyPairs": "Sự so sánh này cần {{pairs}} thử nghiệm cặp tính năng (giới hạn {{limit}}). Thay vào đó, hãy sử dụng Xử lý → GeoLibre → Vector → Chọn theo vị trí bằng công cụ Sidecar.",
+    "tooManyPairs": "Sự so sánh này cần {{pairs}} thử nghiệm cặp tính năng (giới hạn {{limit}}). Thay vào đó, hãy sử dụng Xử lý → GeoSpaX → Vector → Chọn theo vị trí bằng công cụ Sidecar.",
     "exportedLayerName": "{{name}} (lựa chọn)",
     "modeAdd": "Thêm vào lựa chọn hiện tại",
     "modeRemove": "Xóa khỏi lựa chọn hiện tại",
@@ -3791,11 +3791,11 @@
     "addIcechunkFailed": "Không thể mở kho Icechunk này",
     "zarrProblemGroup": "Tài sản này chỉ đến một nhóm mảng, không phải một mảng có thể vẽ được",
     "zarrProblemMissing": "Kho này không chứa biến đó",
-    "zarrProblemUnauthorized": "Kho Zarr này cần thông tin xác thực mà GeoLibre chưa thể cung cấp",
+    "zarrProblemUnauthorized": "Kho Zarr này cần thông tin xác thực mà GeoSpaX chưa thể cung cấp",
     "zarrProblemUnsupportedUrl": "Địa chỉ của kho Zarr này không thể đọc theo từng khóa",
     "zarrProblemUnavailable": "Không thể mở kho Zarr này",
     "chooseTarget": "Chọn nội dung cần thêm",
-    "cogUnsupported": "Máy chủ GeoLibre này không thể hiển thị nội dung GeoTIFF từ xa",
+    "cogUnsupported": "Máy chủ GeoSpaX này không thể hiển thị nội dung GeoTIFF từ xa",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -3827,7 +3827,7 @@
     "filterWebMap": "Bản đồ web",
     "webMapAdded_other": "Đã thêm lớp {{count}} từ bản đồ web này.",
     "webMapAddedPartial": "Đã thêm {{added}} trong số {{total}} lớp từ bản đồ web này; phần còn lại không thể đạt được.",
-    "webMapEmpty": "bản đồ web này không có lớp nào mà GeoLibre có thể hiển thị.",
+    "webMapEmpty": "bản đồ web này không có lớp nào mà GeoSpaX có thể hiển thị.",
     "add": "Thêm vào",
     "adding": "Đang thêm…",
     "remove": "Di dời",
@@ -3910,7 +3910,7 @@
     "downloadTitle": "Tải tập tin này",
     "copyUrlTitle": "Sao chép URL của tập tin này",
     "openProductTitle": "Mở trang của sản phẩm này trên source.coop",
-    "unsupportedTitle": "GeoLibre không thể hiển thị định dạng này - thay vào đó hãy tải xuống",
+    "unsupportedTitle": "GeoSpaX không thể hiển thị định dạng này - thay vào đó hãy tải xuống",
     "addError": "Không thể thêm tệp này: {{message}}",
     "largeFileWarning": "Tệp này là {{size}}. Nó truyền phát từ nguồn nên chỉ những phần trong chế độ xem mới được đọc.",
     "streamHint": "Tệp này là {{size}}. Thêm bản sao vào bộ nhớ; Luồng chỉ đọc các phần trong chế độ xem."
@@ -3984,7 +3984,7 @@
     "downloadTitle": "Tải tập tin này",
     "copyUrlTitle": "Sao chép URL của tập tin này",
     "openDatasetTitle": "dữ liệu địa lý của tôi",
-    "unsupportedTitle": "GeoLibre không thể hiển thị định dạng này - thay vào đó hãy tải xuống",
+    "unsupportedTitle": "GeoSpaX không thể hiển thị định dạng này - thay vào đó hãy tải xuống",
     "chooseLayer": "Chọn lớp",
     "chooseLayerTitle": "Tải các đặc điểm của lớp bản đồ lên dưới dạng tệp GeoJSON",
     "layerPickerHeading": "Tải lên một lớp dưới dạng GeoJSON",
@@ -3996,7 +3996,7 @@
     "clearSelection": "Thông thoáng",
     "selectedFiles_other": "Đã chọn {{count}} tệp ({{size}}).",
     "commitMessageLabel": "Thông báo cam kết (tùy chọn)",
-    "commitMessagePlaceholder": "Tải lên bằng GeoLibre",
+    "commitMessagePlaceholder": "Tải lên bằng GeoSpaX",
     "upload": "Tải lên",
     "uploadPreparing": "Đang chuẩn bị tải lên…",
     "uploadHashing": "Đang băm {{name}} ({{index}}/{{total}})…",
@@ -4506,7 +4506,7 @@
       "importedLog": "Đã nhập một mô hình có {{nodes}} nút.",
       "importFailed": "Nhập thất bại",
       "importInvalid": "Tệp đó không chứa đồ thị mô hình.",
-      "importUnsupported": "Tệp đó không phải là mô hình GeoLibre.",
+      "importUnsupported": "Tệp đó không phải là mô hình GeoSpaX.",
       "rasterOutputUnsupported": "\"{{name}}\" là kết quả raster mà bản dựng này không thể thêm vào bản đồ.",
       "portNeedsVector": "\"{{port}}\" cần dữ liệu vector, nhưng lại nhận được raster.",
       "toolNoOutput": "\"{{tool}}\" không tạo ra kết quả nào.",
@@ -4561,7 +4561,7 @@
       },
       "filterBySource": "Lọc theo nguồn",
       "allSources": "Tất cả các nguồn",
-      "geolibreTools": "Công cụ GeoLibre",
+      "geolibreTools": "Công cụ GeoSpaX",
       "whiteboxTools": "Công cụ Whitebox",
       "toolbox": "Hộp công cụ Whitebox",
       "checkingRuntime": "Kiểm tra thời gian chạy.",
@@ -4615,8 +4615,8 @@
       "errorConnect": "Không thể kết nối tới sidecar.",
       "errorPoll": "Không thể thăm dò công việc.",
       "errorStartTool": "Không thể khởi động công cụ Whitebox.",
-      "errorStartSidecar": "Không thể khởi động sidecar GeoLibre.",
-      "errorStopSidecar": "Không thể dừng sidecar GeoLibre.",
+      "errorStartSidecar": "Không thể khởi động sidecar GeoSpaX.",
+      "errorStopSidecar": "Không thể dừng sidecar GeoSpaX.",
       "noToolsFound": "Không tìm thấy công cụ nào.",
       "noParameters": "Công cụ này không có tham số.",
       "noOutput": "Chưa có đầu ra.",
@@ -4639,9 +4639,9 @@
       "runLocallyButton": "Chạy cục bộ (WASM)",
       "troubleshootingTitle": "Bạn vẫn muốn sử dụng máy chủ?",
       "stepStartServerDesktop": "Nhấp vào \"Khởi động máy chủ\" trong bảng danh sách công cụ để khởi chạy nó, sau đó đợi vài giây để nó trực tuyến.",
-      "stepStartServerBrowser": "Máy chủ chỉ có thể được khởi động từ ứng dụng máy tính để bàn GeoLibre. Trong trình duyệt, thay vào đó hãy bật \"Chạy cục bộ (WASM)\".",
+      "stepStartServerBrowser": "Máy chủ chỉ có thể được khởi động từ ứng dụng máy tính để bàn GeoSpaX. Trong trình duyệt, thay vào đó hãy bật \"Chạy cục bộ (WASM)\".",
       "stepCheckPort": "Đảm bảo chính sách tường lửa, chống vi-rút hoặc mạng không chặn cổng cục bộ {{port}}.",
-      "stepRestart": "Nếu máy chủ dừng đột ngột, hãy khởi động lại ứng dụng GeoLibre trên máy tính để bàn và mở lại hộp thoại này.",
+      "stepRestart": "Nếu máy chủ dừng đột ngột, hãy khởi động lại ứng dụng GeoSpaX trên máy tính để bàn và mở lại hộp thoại này.",
       "unavailableTitle": "Máy chủ xử lý không có sẵn.",
       "showHelp": "Cho biết điều này có nghĩa là gì và cách khắc phục",
       "hideHelp": "Ẩn chi tiết",
@@ -6262,7 +6262,7 @@
       "title": "Kích thước tối thiểu %",
       "intro": "Phân đoạn AI chạy trong máy chủ trợ giúp cục bộ ({{sidecarUrl}}) lưu trữ mô hình SAM3 từ phân đoạn không gian địa lý. Nó chạy Python ở chế độ nền, tách biệt với ứng dụng và không phải là một phần của bản dựng trình duyệt.",
       "troubleshootingTitle": "Làm thế nào để máy chủ chạy",
-      "stepInstall": "Đảm bảo máy chủ GeoLibre được cài đặt với phần phụ trợ không gian địa lý phân đoạn được bật để mô hình phân đoạn có sẵn.",
+      "stepInstall": "Đảm bảo máy chủ GeoSpaX được cài đặt với phần phụ trợ không gian địa lý phân đoạn được bật để mô hình phân đoạn có sẵn.",
       "stepStartServerDesktop": "Nhấp vào \"Khởi động máy chủ\" ở trên để khởi chạy, sau đó đợi vài giây để mô hình trực tuyến."
     },
     "title": "Phân đoạn AI",
@@ -6271,13 +6271,13 @@
     "segment": "Phân đoạn",
     "status": {
       "checking": "Đang kiểm tra dịch vụ phân đoạn AI…",
-      "unavailableDesktop": "Dịch vụ phân đoạn AI chưa chạy. Khởi động máy chủ GeoLibre với kích hoạt phân đoạn không gian địa lý để sử dụng nó.",
-      "unavailableWeb": "Phân đoạn AI không có sẵn trong trình duyệt. Sử dụng ứng dụng máy tính để bàn GeoLibre để chạy nó."
+      "unavailableDesktop": "Dịch vụ phân đoạn AI chưa chạy. Khởi động máy chủ GeoSpaX với kích hoạt phân đoạn không gian địa lý để sử dụng nó.",
+      "unavailableWeb": "Phân đoạn AI không có sẵn trong trình duyệt. Sử dụng ứng dụng máy tính để bàn GeoSpaX để chạy nó."
     },
     "error": {
       "chooseImage": "Chọn một hình ảnh (GeoTIFF) để phân đoạn.",
       "enterPrompt": "Nhập lời nhắc văn bản, ví dụ: “cây” hoặc “tòa nhà”.",
-      "startServer": "Không thể khởi động sidecar GeoLibre.",
+      "startServer": "Không thể khởi động sidecar GeoSpaX.",
       "failed": "Phân đoạn không thành công."
     }
   },
@@ -6510,7 +6510,7 @@
     "import": "Nhập khẩu…",
     "export": "Xuất khẩu…",
     "importFilterName": "Thư viện kiểu/QML/SLD",
-    "exportFilterName": "Thư viện phong cách GeoLibre",
+    "exportFilterName": "Thư viện phong cách GeoSpaX",
     "applied": "Đã áp dụng \"{{name}}\" cho {{layer}}.",
     "appliedRampHint": "Đã áp dụng \"{{name}}\". Chuyển lớp sang kiểu chia độ hoặc phân loại để xem đoạn đường nối.",
     "saved": "Đã lưu \"{{name}}\" vào thư viện.",
@@ -7220,7 +7220,7 @@
     "exportStyleDataNotReady": "Dữ liệu lớp chưa sẵn sàng. Hãy thử lại sau giây lát.",
     "exportStyleNeedsFeatures": "Dán kiểu từ \"__PH0__\"",
     "exportStyleError": "Không thể xuất kiểu của lớp này.",
-    "importStyle": "Kiểu nhập (URL GeoLibre / Mapbox GL / SLD / QML)…",
+    "importStyle": "Kiểu nhập (URL GeoSpaX / Mapbox GL / SLD / QML)…",
     "openStyleManager": "Kiểu đã lưu (Trình quản lý kiểu)…",
     "importStyleSuccess": "Phong cách nhập khẩu.",
     "importStyleInvalid": "Tệp đó không phải là JSON, SLD hoặc QML hợp lệ.",
@@ -7634,10 +7634,10 @@
   },
   "errorBoundary": {
     "title": "Đã xảy ra lỗi",
-    "description": "GeoLibre gặp phải lỗi không mong muốn và không thể tiếp tục. Tác phẩm của bạn có thể chưa được lưu — hãy thử khôi phục trước khi tải lại.",
+    "description": "GeoSpaX gặp phải lỗi không mong muốn và không thể tiếp tục. Tác phẩm của bạn có thể chưa được lưu — hãy thử khôi phục trước khi tải lại.",
     "tryAgain": "Thử lại",
     "reload": "Tải lại ứng dụng",
-    "sectionFailed": "{{label}} không hiển thị được. Phần còn lại của GeoLibre vẫn có sẵn."
+    "sectionFailed": "{{label}} không hiển thị được. Phần còn lại của GeoSpaX vẫn có sẵn."
   },
   "commandPalette": {
     "title": "Bảng lệnh",
@@ -7708,7 +7708,7 @@
       "flightSimulatorPanel": "Bảng mô phỏng chuyến bay",
       "modelBuilder": "Trình dựng mô hình"
     },
-    "workspaceTitle": "Không gian làm việc của bản đồ GeoLibre"
+    "workspaceTitle": "Không gian làm việc của bản đồ GeoSpaX"
   },
   "attributeStats": {
     "title": "Thống kê hiện trường",
@@ -7955,7 +7955,7 @@
     "navigationButton": "1. Nạp nguồn và vẽ dẫn hướng",
     "navigationButtonAgain": "Vẽ thêm một lớp dẫn hướng",
     "exportButton": "Xuất kết quả đã vẽ sang GeoJSON",
-    "addLayersButton": "Thêm kết quả đã vẽ vào Lớp của GeoLibre",
+    "addLayersButton": "Thêm kết quả đã vẽ vào Lớp của GeoSpaX",
     "clearButton": "Xóa kết quả NLDI",
     "noComid": "Không có COMID nào được trả về cho điểm này.",
     "requestingBasin": "Đang yêu cầu lưu vực thượng lưu…",
