@@ -1,0 +1,107 @@
+{
+  "name": "GeoSpaX sample datasets",
+  "description": "Papua New Guinea / Oceania teaching and demonstration datasets imported from GeoSpaX v1 (jm0535/map-kit, MIT). Provenance per file below; verify primary sources and licences before research or publication use.",
+  "imported": "2026-09-22",
+  "importedFrom": "https://github.com/jm0535/map-kit (samples/, v1.4.2)",
+  "datasets": [
+    {
+      "file": "paradisaea_occurrences.geojson",
+      "title": "Emperor Bird-of-paradise occurrences (PNG)",
+      "kind": "vector/points",
+      "provenance": "128 GBIF-mediated occurrence records with environmental fields; designed for the full FR422 workflow (convex hull, graduated symbology, Gi*, calculate field, protection gap).",
+      "licence": "GBIF data licence varies per source dataset - cite GBIF and the publishing datasets when used.",
+      "citation": "GBIF.org (occurrence download) - see https://www.gbif.org/citation-guidelines"
+    },
+    {
+      "file": "png_provinces.geojson",
+      "title": "Papua New Guinea provinces",
+      "kind": "vector/polygons",
+      "provenance": "Administrative boundaries, GeoSpaX v1 teaching sample.",
+      "licence": "Check primary boundary source before publication use."
+    },
+    {
+      "file": "png_protected_areas.geojson",
+      "title": "PNG protected areas (teaching sample)",
+      "kind": "vector/polygons",
+      "provenance": "GeoSpaX v1 teaching sample. For authoritative gap analysis use the WDPA (api.protectedplanet.net, token-gated, citation required).",
+      "licence": "Teaching sample - not authoritative."
+    },
+    {
+      "file": "forest_patches.geojson",
+      "title": "Forest patches",
+      "kind": "vector/polygons",
+      "provenance": "GeoSpaX v1 teaching sample for fragmentation/patch-metric and connectivity exercises.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "habitat_survey_grid.geojson",
+      "title": "Habitat survey grid",
+      "kind": "vector/polygons",
+      "provenance": "GeoSpaX v1 teaching sample for survey design and hotspot-grid exercises.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "stream_water_sources.geojson",
+      "title": "Stream / water sources",
+      "kind": "vector",
+      "provenance": "GeoSpaX v1 teaching sample for distance-to-water suitability criteria.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "butterfly_presences.geojson",
+      "title": "Butterfly presences",
+      "kind": "vector/points",
+      "provenance": "GeoSpaX v1 teaching sample for SDM exercises.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "vine_host_plants.geojson",
+      "title": "Vine host plants",
+      "kind": "vector/points",
+      "provenance": "GeoSpaX v1 teaching sample.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "sample_species_richness.geojson",
+      "title": "Species richness (sample)",
+      "kind": "vector",
+      "provenance": "GeoSpaX v1 teaching sample for richness mapping exercises.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "species_occurrences.csv",
+      "title": "Species occurrences (tabular)",
+      "kind": "delimited-text",
+      "provenance": "GeoSpaX v1 teaching sample for lat/lon import via the delimited-text workflow.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "species_occurrences.xlsx",
+      "title": "Species occurrences (workbook)",
+      "kind": "delimited-text",
+      "provenance": "XLSX twin of species_occurrences.csv.",
+      "licence": "MIT (GeoSpaX v1)."
+    },
+    {
+      "file": "PNG_BIO1_30s.tif",
+      "title": "BIO1 annual mean temperature (PNG extent)",
+      "kind": "raster/GeoTIFF",
+      "provenance": "Derived from WorldClim bioclimatic variables at 30s resolution, clipped to PNG.",
+      "licence": "WorldClim data are licensed CC-BY 4.0 - cite WorldClim when used."
+    },
+    {
+      "file": "PNG_BIO12_precip.tif",
+      "title": "BIO12 annual precipitation (PNG extent)",
+      "kind": "raster/GeoTIFF",
+      "provenance": "Derived from WorldClim bioclimatic variables, clipped to PNG.",
+      "licence": "WorldClim data are licensed CC-BY 4.0 - cite WorldClim when used."
+    },
+    {
+      "file": "PNG_tree_cover_pct.tif",
+      "title": "Tree cover % (PNG extent)",
+      "kind": "raster/GeoTIFF",
+      "provenance": "Derived from Hansen/Global Forest Watch tree-cover product, clipped to PNG.",
+      "licence": "Hansen/Global Forest Watch data are licensed CC-BY 4.0 - cite Hansen et al. (2013) when used."
+    }
+  ]
+}
