@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // vite/client supplies the *.css and *?url module declarations that the
+    // @geolibre/* source packages rely on (the app resolves them the same
+    // way), so this package typechecks standalone without upstream noise.
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+}

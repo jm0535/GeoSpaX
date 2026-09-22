@@ -1,0 +1,20 @@
+{
+  "name": "@geospax/plugins",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GeoSpaX domain plugins, built as bundled drop-ins for apps/geolibre-desktop/public/plugins/ (plugin.json + dist/). No upstream GeoLibre file is touched by these plugins.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@geospax/analysis": "*"
+  },
+  "devDependencies": {
+    "@geolibre/plugins": "*",
+    "@types/geojson": "^7946.0.16",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}
