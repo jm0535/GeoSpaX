@@ -3,7 +3,7 @@
 // GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountDistanceDecayTool,
   mountProvenanceTool,
@@ -26,6 +26,7 @@ export function mountClimatePanel(container: HTMLElement, app: GeoLibreAppAPI): 
     intro:
       "Map moisture and thermal stress from satellite bands, build transparent climate-exposure and vulnerability surfaces, and quantify change between two dates.",
     accent: "#2e6f95",
+    guideUrl: `${GSX_GUIDE_BASE}/climate/`,
   });
 
   const stress = shell.addSection({

@@ -3,7 +3,7 @@
 // and field/validation overlays. Outputs always use GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountOverlayTool,
   mountProvenanceTool,
@@ -26,6 +26,7 @@ export function mountLulcPanel(container: HTMLElement, app: GeoLibreAppAPI): () 
     intro:
       "Derive land-use and land-cover maps: extract cover indices from satellite bands, reclassify them into class maps, quantify transitions between two dates and validate against field polygons.",
     accent: "#8a7a2e",
+    guideUrl: `${GSX_GUIDE_BASE}/lulc/`,
   });
 
   const cover = shell.addSection({

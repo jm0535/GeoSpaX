@@ -2,7 +2,7 @@
 // metrics/connectivity, explicit two-date change and protection reporting.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountConnectivityTool,
   mountFragmentationTool,
@@ -26,6 +26,7 @@ export function mountForestryPanel(container: HTMLElement, app: GeoLibreAppAPI):
     intro:
       "Derive forest or disturbance extents, quantify fragmentation and structural connectivity, detect two-date loss/gain, and report overlap with protected areas.",
     accent: "#2f704b",
+    guideUrl: `${GSX_GUIDE_BASE}/forestry/`,
   });
 
   const extent = shell.addSection({

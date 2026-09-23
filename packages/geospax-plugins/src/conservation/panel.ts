@@ -4,7 +4,7 @@
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
 import type { AreaMethod } from "@geospax/analysis";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountConnectivityTool,
   mountDbscanTool,
@@ -55,6 +55,7 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     intro:
       "Overlay, prioritise, model suitability, quantify protection gaps, measure landscape structure and derive change—using audit-fixed methods with provenance attached to every output.",
     accent: "#5b8c51",
+    guideUrl: `${GSX_GUIDE_BASE}/conservation/`,
   });
 
   const overlay = shell.addSection({
