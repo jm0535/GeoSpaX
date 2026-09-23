@@ -2,7 +2,7 @@
 // community indices, point patterns, priority surfaces, SDM and protection gaps.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import { mountDiversityTool, mountOccurrenceTool } from "../shared/data-tools";
 import {
   mountDbscanTool,
@@ -24,6 +24,7 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
     intro:
       "Bring in citable species records, quantify taxonomic diversity and spatial pattern, model environmental suitability, and test priorities against protected-area coverage.",
     accent: "#7b4e9d",
+    guideUrl: `${GSX_GUIDE_BASE}/biodiversity/`,
   });
 
   const data = shell.addSection({

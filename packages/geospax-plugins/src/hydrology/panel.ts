@@ -3,7 +3,7 @@
 // two-date water-extent change. Outputs always use GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountDistanceDecayTool,
   mountOverlayTool,
@@ -28,6 +28,7 @@ export function mountHydrologyPanel(container: HTMLElement, app: GeoLibreAppAPI)
     intro:
       "Map surface water and wetness, derive runoff-relevant terrain constraints, weight catchment characteristics, and quantify water-extent change between two dates.",
     accent: "#1f7a8c",
+    guideUrl: `${GSX_GUIDE_BASE}/hydrology/`,
   });
 
   const water = shell.addSection({

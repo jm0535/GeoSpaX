@@ -2,7 +2,7 @@
 // occurrence patterns, marine SDM, weighted priorities and MPA gap reporting.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import { mountDiversityTool, mountGebcoTool, mountOccurrenceTool } from "../shared/data-tools";
 import {
   mountDbscanTool,
@@ -24,6 +24,7 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
     intro:
       "Query citable marine records, add bathymetric context, quantify diversity and spatial pattern, model habitat suitability, and compare priority habitat with MPA coverage.",
     accent: "#217c91",
+    guideUrl: `${GSX_GUIDE_BASE}/marine/`,
   });
 
   const data = shell.addSection({

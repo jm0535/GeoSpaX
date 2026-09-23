@@ -3,7 +3,7 @@
 // and surface change. Outputs always use GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountOverlayTool,
   mountProvenanceTool,
@@ -27,6 +27,7 @@ export function mountGeosciencePanel(container: HTMLElement, app: GeoLibreAppAPI
     intro:
       "Analyse terrain form, map lithological and alteration indicators from spectral ratios, run geological overlays and prospectivity surfaces, and quantify surface change.",
     accent: "#6b5b95",
+    guideUrl: `${GSX_GUIDE_BASE}/geoscience/`,
   });
 
   const terrain = shell.addSection({

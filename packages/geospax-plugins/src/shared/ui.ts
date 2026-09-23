@@ -40,7 +40,13 @@ export interface PanelShellOptions {
   eyebrow: string;
   intro: string;
   accent: string;
+  /** URL of this workbench's user guide, linked under the intro. */
+  guideUrl?: string;
 }
+
+/** Base of the published GSX workbench guides (GitHub Pages docs site). */
+export const GSX_GUIDE_BASE =
+  "https://jm0535.github.io/GeoSpaX/user-guide/gsx-plugins";
 
 export interface SectionOptions {
   id: string;
@@ -91,6 +97,13 @@ export function createPanelShell(
   const title = el("h2", "gsp-shell__title", options.title);
   const intro = el("p", "gsp-shell__intro", options.intro);
   header.append(eyebrow, title, intro);
+  if (options.guideUrl) {
+    const guide = el("a", "gsp-shell__guide", t("geospax.guideLink", "User guide ↗"));
+    guide.href = options.guideUrl;
+    guide.target = "_blank";
+    guide.rel = "noreferrer";
+    header.appendChild(guide);
+  }
 
   const nav = el("nav", "gsp-shell__nav");
   nav.setAttribute("aria-label", `${options.title} analyses`);

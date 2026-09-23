@@ -2,7 +2,7 @@
 // proximity decay and two-date change. Outputs always use GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountDistanceDecayTool,
   mountProvenanceTool,
@@ -26,6 +26,7 @@ export function mountAgriculturePanel(container: HTMLElement, app: GeoLibreAppAP
     intro:
       "Assess crop condition, terrain constraints and multi-criteria suitability; convert distance costs transparently and compare cover or index surfaces through time.",
     accent: "#b47724",
+    guideUrl: `${GSX_GUIDE_BASE}/agriculture/`,
   });
 
   const condition = shell.addSection({

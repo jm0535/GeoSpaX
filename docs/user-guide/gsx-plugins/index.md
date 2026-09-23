@@ -38,6 +38,9 @@ Closing a workbench's panel (the **×** in its header) also **deactivates the
 plugin** — it is unchecked in Plugins → Manage Plugins and its rail icon is
 removed. Activate it again whenever you need it back.
 
+Every panel header has a **User guide ↗** link that opens that workbench's
+guide (one of the pages listed above) in a new tab.
+
 ## Common concepts
 
 - **Layers first.** Every tool reads from the layers already on your map and

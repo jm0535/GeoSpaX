@@ -28,6 +28,7 @@ interface PanelPluginSource {
   id: string;
   name: string;
   source: string;
+  panelSource: string;
 }
 
 /** Remove comments so an example or explanation cannot satisfy the audit. */
@@ -43,13 +44,17 @@ function panelPluginSources(): PanelPluginSource[] {
     .flatMap((entry) => {
       const indexPath = join(PLUGIN_ROOT, entry.name, "index.ts");
       const manifestPath = join(PLUGIN_ROOT, entry.name, "plugin.json");
+      const panelPath = join(PLUGIN_ROOT, entry.name, "panel.ts");
       if (!existsSync(indexPath) || !existsSync(manifestPath)) return [];
 
       const source = withoutComments(readFileSync(indexPath, "utf8"));
       if (!source.includes("registerRightPanel")) return [];
       const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as { id?: unknown };
       assert.equal(typeof manifest.id, "string", `${entry.name}/plugin.json needs an id`);
-      return [{ id: manifest.id, name: entry.name, source }];
+      const panelSource = existsSync(panelPath)
+        ? withoutComments(readFileSync(panelPath, "utf8"))
+        : "";
+      return [{ id: manifest.id, name: entry.name, source, panelSource }];
     });
 }
 
@@ -72,7 +77,7 @@ describe("GeoSpaX plugin panel rail contract", () => {
     assert.deepEqual(panelPlugins.map(({ id }) => id).sort(), [...EXPECTED_PANEL_IDS].sort());
   });
 
-  for (const { id, name, source } of panelPlugins) {
+  for (const { id, name, source, panelSource } of panelPlugins) {
     it(`${name} opens the panel it registers`, () => {
       assert.deepEqual(registeredPanelIds(source), [id]);
       assert.deepEqual(openedPanelIds(source), [id]);
@@ -86,6 +91,13 @@ describe("GeoSpaX plugin panel rail contract", () => {
       assert.ok(
         source.includes('dock: "right-of-style"'),
         `${id} must declare dock: "right-of-style" so the panel opens on the right side`,
+      );
+    });
+
+    it(`${name} links its published user guide`, () => {
+      assert.ok(
+        panelSource.includes("guideUrl") && panelSource.includes(`/${name}/`),
+        `${name} must pass guideUrl pointing at docs/user-guide/gsx-plugins/${name}`,
       );
     });
 

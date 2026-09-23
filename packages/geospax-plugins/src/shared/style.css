@@ -56,6 +56,19 @@
   line-height: 1.5;
 }
 
+.gsp-shell__guide {
+  display: inline-block;
+  margin-top: 7px;
+  color: var(--gsp-accent);
+  font-size: 11.5px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.gsp-shell__guide:hover {
+  text-decoration: underline;
+}
+
 .gsp-shell__nav {
   position: sticky;
   z-index: 3;

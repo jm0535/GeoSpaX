@@ -3,7 +3,7 @@
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
 import { INDEX_PRESETS, type IndexPresetId } from "@geospax/analysis";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import { mountOverlayTool, mountProvenanceTool } from "../shared/vector-tools";
 import {
   mountIndexTool,
@@ -68,6 +68,7 @@ export function mountEnvironmentPanel(container: HTMLElement, app: GeoLibreAppAP
     intro:
       "Analyse terrain and raster indicators over the current map view, derive threshold extents, compare dates, and overlay environmental zones—with sampled resolution and methods stated on every result.",
     accent: "#4c7893",
+    guideUrl: `${GSX_GUIDE_BASE}/environment/`,
   });
 
   const terrain = shell.addSection({

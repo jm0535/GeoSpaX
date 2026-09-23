@@ -3,7 +3,7 @@
 // use GeoLibre store APIs.
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
-import { createPanelShell } from "../shared/ui";
+import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
 import {
   mountDistanceDecayTool,
   mountOverlayTool,
@@ -27,6 +27,7 @@ export function mountSoilPanel(container: HTMLElement, app: GeoLibreAppAPI): () 
     intro:
       "Map soil condition from satellite wetness and salinity proxies, delineate capability classes, model land capability with weighted criteria and track soil-extent change through time.",
     accent: "#8a5a2e",
+    guideUrl: `${GSX_GUIDE_BASE}/soil/`,
   });
 
   const condition = shell.addSection({
