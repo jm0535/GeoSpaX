@@ -20,6 +20,7 @@ export const plugin: GeoLibrePlugin = {
         title: () =>
           app.translate?.("geospax.hydrology.title", "GSX Hydrology") ?? "GSX Hydrology",
         dock: "right-of-style",
+        deactivatePluginOnClose: true,
         defaultWidth: 400,
         render: (c: HTMLElement) => mountHydrologyPanel(c, app),
       }) ?? null;

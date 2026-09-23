@@ -35,6 +35,7 @@ export const plugin: GeoLibrePlugin = {
           app.translate?.("geospax.conservation.title", "Conservation Planning") ??
           "Conservation Planning",
         dock: "right-of-style",
+        deactivatePluginOnClose: true,
         defaultWidth: 400,
         render: (container: HTMLElement) => mountConservationPanel(container, app),
         onOpen: () => {
