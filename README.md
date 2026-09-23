@@ -58,9 +58,9 @@ capabilities, credentials, and current compatibility.
 
 > **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` remains live at `geospax.in4metrix.dev`; v2 is the forward path.
 
-GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **six bundled plugins** (`activeByDefault:true`, `public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins):
+GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **twelve bundled GSX workbenches** (`activeByDefault:true`, `public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
 
-| id | v2.0.0 contents |
+| Workbench | v2.0.0 contents |
 |---|---|
 | `geospax-conservation` | Full workbench: overlay, weighted priorities, haversine DBSCAN, unprotected sites, bounded exact/greedy SCP, BIOCLIM/Mahalanobis/explicit presence-background prediction, WLC, protection gaps, fragmentation/core metrics, connectivity, vector change, raster polygonization and provenance export |
 | `geospax-environment` | Horn slope zones; NDVI/NDWI/NDBI/NBR/custom extents; Otsu-assisted raster reclassification; aligned raster change; vector overlay |
@@ -68,6 +68,12 @@ GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-scie
 | `geospax-forestry` | Forest/index extent; complete fragmentation/core and connectivity reports; raster and polygon loss/gain change; protection gaps |
 | `geospax-marine` | Citable OBIS/WoRMS queries and GEBCO context; diversity/nearest-neighbour/DBSCAN patterns; SDM; NDWI/custom habitat extent; weighted priorities and MPA gaps |
 | `geospax-agriculture` | NDVI-family crop condition; raster reclassification; WLC and exponential distance decay; Horn slope; raster/vector crop change |
+| `geospax-climate` | NDWI/NBR moisture and thermal stress extents; WLC climate-vulnerability surfaces; distance decay; raster/vector signal change |
+| `geospax-disaster` | WLC multi-hazard susceptibility; Horn slope triggers; NBR/NDWI hazard footprints; response-access decay; priority sites; impact change and hotspot grids |
+| `geospax-geoscience` | Horn slope classes; NDBI/custom spectral-ratio lithology proxies; WLC prospectivity; geological overlays; surface change |
+| `geospax-hydrology` | NDWI open-water and wetness extents; runoff terrain; WLC catchment characteristics; riparian distance decay; water-extent change |
+| `geospax-lulc` | Land-use and land-cover mapping: NDVI/NDWI/NDBI cover indices; class reclassification; two-date transition analysis; field-validation overlays; WLC allocation |
+| `geospax-soil` | NDWI/custom moisture and salinity proxies; capability classes; WLC land capability; management-access decay; survey overlays |
 
 **Analysis core `@geospax/analysis` v2.0.0** (dependency-light, pure functions, provenance-stamped; ported and checked against `js/geospax-conservation*.js`, `geospax-sdm-fix.js`, and `geospax-raster.js`):
 

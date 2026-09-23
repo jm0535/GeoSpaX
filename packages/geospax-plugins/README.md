@@ -4,14 +4,16 @@
   <img src="../../docs/assets/geospax_logo_final.svg" width="120" alt="GeoSpaX logo — a teal X with a globe at its center" />
 </p>
 
-Six GeoSpaX domain workbenches built as **bundled GeoLibre drop-ins**. They are
-auto-discovered from `public/plugins/`; every vector result is returned through
-`app.addGeoJsonLayer`, raster/catalogue layers use the corresponding host API,
-and no plugin mutates MapLibre directly.
+Twelve GeoSpaX domain workbenches built as **bundled GeoLibre drop-ins**.
+They are auto-discovered from `public/plugins/`; every vector result is
+returned through `app.addGeoJsonLayer`, raster/catalogue layers use the
+corresponding host API, and no plugin mutates MapLibre directly. Every
+workbench ends with a **How to cite** section (APA + BibTeX) so results are
+citable, and each carries a [user guide](../../docs/user-guide/gsx-plugins/index.md).
 
 ## Domain workbenches (v2.0.0)
 
-All six panels share the same host-token-based UI system: sticky section
+All twelve panels share the same host-token-based UI system: sticky section
 navigation, accessible disclosure sections, labelled controls, validation,
 busy/success/warning/error states, result tables, empty states, method notes,
 provenance history and exports.
@@ -24,6 +26,12 @@ provenance history and exports.
 | `geospax-environment` | Horn slope zones; NDVI/NDWI/NDBI/NBR/custom normalized-difference extents; Otsu-assisted raster reclassification; aligned raster change; vector overlay; provenance export |
 | `geospax-forestry` | Forest/NBR extent derivation; raster reclassification; NP/CA/LPI/TE/ED/MSI/core/CAI/ENN metrics; connectivity components; raster and polygon loss/gain change; forest protection gap |
 | `geospax-marine` | Citation-carrying OBIS/WoRMS queries; GEBCO visual-context layer; richness/diversity, nearest-neighbour pattern and haversine DBSCAN; BIOCLIM/Mahalanobis/presence-background logistic prediction; NDWI/custom habitat extent; weighted priorities and MPA gap |
+| `geospax-climate` | NDWI/NBR moisture and thermal stress extents; raster reclassification; WLC climate-vulnerability surfaces; exponential distance decay; raster/vector signal change; provenance export |
+| `geospax-disaster` | WLC multi-hazard susceptibility; Horn slope triggers; NBR/NDWI hazard footprints; distance-decay response access; priority sites; raster/vector impact change; hotspot grids |
+| `geospax-geoscience` | Horn slope classes; NDBI/custom spectral-ratio lithology proxies; WLC prospectivity; geological overlay operations; raster/vector surface change |
+| `geospax-hydrology` | NDWI open-water and wetness extents; inundation reclassification; Horn slope runoff terrain; WLC catchment characteristics; riparian distance decay; catchment overlays; raster/vector water-extent change |
+| `geospax-lulc` | NDVI/NDWI/NDBI cover indices; discrete land-cover class reclassification; two-date transition analysis with hectares; field-validation overlays; WLC land-use allocation |
+| `geospax-soil` | NDWI/custom moisture and salinity proxies; capability-class reclassification; WLC land capability; distance-decay management access; survey overlays; raster/vector change |
 
 ## Original GeoSpaX parity baseline
 
@@ -98,5 +106,5 @@ node --import tsx --test \
 
 Package typechecking follows imports into upstream `@geolibre/*` source and
 currently reports one unrelated existing `WorkerGlobalScope` error from
-`packages/plugins/src/plugins/local-netcdf.ts`. The six bundles are therefore
+`packages/plugins/src/plugins/local-netcdf.ts`. The twelve bundles are therefore
 also compiled directly with the package build above.

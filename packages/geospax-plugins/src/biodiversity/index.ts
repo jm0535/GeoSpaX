@@ -6,7 +6,7 @@ export const PLUGIN_VERSION = "2.0.0";
 let unregister: (() => void) | null = null;
 export const plugin: GeoLibrePlugin = {
   id: "geospax-biodiversity",
-  name: "GeoSpaX Biodiversity",
+  name: "GSX Biodiversity",
   version: PLUGIN_VERSION,
   engines: ["maplibre"],
   activate(app: GeoLibreAppAPI) {
@@ -14,8 +14,8 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-biodiversity",
         title: () =>
-          app.translate?.("geospax.biodiversity.title", "GeoSpaX Biodiversity") ??
-          "GeoSpaX Biodiversity",
+          app.translate?.("geospax.biodiversity.title", "GSX Biodiversity") ??
+          "GSX Biodiversity",
         dock: "right-of-layers",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountBiodiversityPanel(c, app),

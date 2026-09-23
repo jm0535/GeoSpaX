@@ -525,3 +525,59 @@
     transition: none !important;
   }
 }
+
+/* How-to-Cite tool (shared by every GSX workbench). */
+.gsp-citation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gsp-citation__line {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.gsp-citation__box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.06);
+}
+.gsp-citation__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.gsp-citation__text {
+  margin: 0;
+  padding: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.gsp-citation__copy {
+  align-self: flex-start;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  background: rgba(127, 127, 127, 0.12);
+  cursor: pointer;
+}
+.gsp-citation__copy:hover {
+  background: rgba(127, 127, 127, 0.2);
+}
+.gsp-citation__links {
+  margin: 0;
+  font-size: 12px;
+}
+.gsp-citation__link {
+  color: inherit;
+}

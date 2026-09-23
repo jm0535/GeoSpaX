@@ -1,4 +1,4 @@
-// GeoSpaX Conservation Planning plugin - bundled drop-in entry.
+// GSX Conservation plugin - bundled drop-in entry.
 //
 // Registered automatically from apps/geolibre-desktop/public/plugins/ (see
 // scripts/build.mjs). Ships a right-sidebar panel; all heavy logic lives in
@@ -22,7 +22,7 @@ let appRef: GeoLibreAppAPI | null = null;
 
 export const plugin: GeoLibrePlugin = {
   id: "geospax-conservation",
-  name: "GeoSpaX Conservation Planning",
+  name: "GSX Conservation",
   version: PLUGIN_VERSION,
   engines: ["maplibre"],
 

@@ -1,0 +1,4 @@
+/* GSX Climate — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-climate"] .gsp-section__badge {
+  border-color: rgba(46, 111, 149, 0.4);
+}

@@ -1,6 +1,6 @@
 {
   "id": "geospax-biodiversity",
-  "name": "GeoSpaX Biodiversity",
+  "name": "GSX Biodiversity",
   "version": "2.0.0",
   "description": "Biodiversity workbench: citable GBIF/OBIS/iNaturalist/WoRMS queries, richness/diversity, nearest-neighbour/DBSCAN patterns, weighted grids, BIOCLIM/Mahalanobis/presence-background prediction, priorities and protection gaps.",
   "entry": "dist/index.js",

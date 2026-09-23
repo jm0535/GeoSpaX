@@ -12,10 +12,16 @@ const PLUGIN_ROOT = resolve(import.meta.dirname, "..", "packages", "geospax-plug
 const EXPECTED_PANEL_IDS = [
   "geospax-agriculture",
   "geospax-biodiversity",
+  "geospax-climate",
   "geospax-conservation",
+  "geospax-disaster",
   "geospax-environment",
   "geospax-forestry",
+  "geospax-geoscience",
+  "geospax-hydrology",
+  "geospax-lulc",
   "geospax-marine",
+  "geospax-soil",
 ];
 
 interface PanelPluginSource {

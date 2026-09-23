@@ -6,7 +6,7 @@ export const PLUGIN_VERSION = "2.0.0";
 let unregister: (() => void) | null = null;
 export const plugin: GeoLibrePlugin = {
   id: "geospax-agriculture",
-  name: "GeoSpaX Agriculture",
+  name: "GSX Agriculture",
   version: PLUGIN_VERSION,
   engines: ["maplibre"],
   activate(app: GeoLibreAppAPI) {
@@ -14,8 +14,8 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-agriculture",
         title: () =>
-          app.translate?.("geospax.agriculture.title", "GeoSpaX Agriculture") ??
-          "GeoSpaX Agriculture",
+          app.translate?.("geospax.agriculture.title", "GSX Agriculture") ??
+          "GSX Agriculture",
         dock: "right-of-layers",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountAgriculturePanel(c, app),

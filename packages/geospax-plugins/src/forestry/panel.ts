@@ -15,12 +15,14 @@ import {
   mountRasterChangeTool,
   mountRasterReclassTool,
 } from "../shared/raster-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export function mountForestryPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-forestry",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Forestry",
+    title: "GSX Forestry",
     intro:
       "Derive forest or disturbance extents, quantify fragmentation and structural connectivity, detect two-date loss/gain, and report overlap with protected areas.",
     accent: "#2f704b",
@@ -79,6 +81,14 @@ export function mountForestryPanel(container: HTMLElement, app: GeoLibreAppAPI):
     badge: "Export",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Forestry", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

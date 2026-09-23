@@ -1,0 +1,10 @@
+{
+  "id": "geospax-lulc",
+  "name": "GSX LULC",
+  "version": "2.0.0",
+  "description": "Land-use and land-cover mapping workbench: NDVI/NDWI/NDBI cover indices, discrete class reclassification, two-date transition analysis with hectares, field-validation overlays, WLC allocation and provenance exports.",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}
