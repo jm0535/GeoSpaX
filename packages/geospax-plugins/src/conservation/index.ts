@@ -32,8 +32,8 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-conservation",
         title: () =>
-          app.translate?.("geospax.conservation.title", "Conservation Planning") ??
-          "Conservation Planning",
+          app.translate?.("geospax.conservation.title", "GSX Conservation") ??
+          "GSX Conservation",
         dock: "right-of-style",
         deactivatePluginOnClose: true,
         defaultWidth: 400,
