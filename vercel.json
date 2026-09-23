@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm ci",
-  "buildCommand": "npm run build -w geolibre-desktop",
+  "buildCommand": "python3 -m venv /tmp/jl && /tmp/jl/bin/pip install -q -r apps/geolibre-desktop/jupyterlite/requirements.txt && PATH=/tmp/jl/bin:$PATH npm run build -w geolibre-desktop",
   "outputDirectory": "apps/geolibre-desktop/dist"
 }
