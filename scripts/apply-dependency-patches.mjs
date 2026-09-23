@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { resolve } from "node:path";
 
 // Workspace-scoped production installs, such as the collaboration worker
 // image, do not install the desktop app's dependencies (every patched package
@@ -10,9 +11,13 @@ if (!existsSync("node_modules/@cogeotiff/core/package.json")) {
   process.exit(0);
 }
 
-const result = spawnSync("patch-package", [], {
-  shell: process.platform === "win32",
-  stdio: "inherit",
-});
+// Invoke the CLI entry directly with node instead of relying on the
+// node_modules/.bin shim being on PATH — PATH is not guaranteed to include
+// .bin in every install environment (Vercel's build container ENOENTs).
+const result = spawnSync(
+  process.execPath,
+  [resolve("node_modules/patch-package/index.js")],
+  { stdio: "inherit" },
+);
 if (result.error) throw result.error;
 process.exit(result.status ?? 1);
