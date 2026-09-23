@@ -3,11 +3,7 @@
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
 import { createPanelShell } from "../shared/ui";
-import {
-  mountDiversityTool,
-  mountGebcoTool,
-  mountOccurrenceTool,
-} from "../shared/data-tools";
+import { mountDiversityTool, mountGebcoTool, mountOccurrenceTool } from "../shared/data-tools";
 import {
   mountDbscanTool,
   mountGapTool,
@@ -63,7 +59,11 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
       "Score environmental-space suitability and derive water/wetness or custom raster extents for habitat screening.",
   });
   mountSdmTool(shell, habitat, "marine species");
-  mountIndexTool(shell, habitat, { preset: "NDWI", threshold: 0, subject: "marine/coastal habitat" });
+  mountIndexTool(shell, habitat, {
+    preset: "NDWI",
+    threshold: 0,
+    subject: "marine/coastal habitat",
+  });
   mountRasterReclassTool(shell, habitat, "marine habitat zone");
 
   const protection = shell.addSection({

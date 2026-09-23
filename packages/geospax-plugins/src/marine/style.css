@@ -1,13 +1,69 @@
 /* GeoSpaX Marine — scoped .gsp-mar-* */
-.gsp-marine-root, .gsp-mar-root { padding: 10px 12px; font-size: 13px; display:flex; flex-direction:column; gap:8px; }
-.gsp-marine-hint, .gsp-mar-hint { opacity:0.75; font-size:11.5px; line-height:1.4; }
-.gsp-mar-title { margin:0; font-weight:700; font-size:13px; }
-.gsp-mar-row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-.gsp-mar-label { font-size:12px; font-weight:600; }
-.gsp-mar-input, .gsp-mar-select { font-size:12px; padding:4px 6px; border:1px solid rgba(128,128,128,0.3); border-radius:6px; }
-.gsp-mar-run { padding:6px 10px; font-size:12.5px; border-radius:6px; border:1px solid rgba(128,128,128,0.3); background:rgba(0,120,180,0.12); cursor:pointer; }
-.gsp-mar-run:hover { background:rgba(0,120,180,0.18); }
-.gsp-mar-status { font-size:12px; margin:4px 0; }
-.gsp-mar-warn { color:#9a3b0f; background:rgba(255,160,0,0.12); padding:4px 6px; border-radius:6px; }
-.gsp-mar-table { width:100%; border-collapse:collapse; font-size:12px; }
-.gsp-mar-table td, .gsp-mar-table th { border:1px solid rgba(128,128,128,0.2); padding:4px 6px; text-align:left; }
+.gsp-marine-root,
+.gsp-mar-root {
+  padding: 10px 12px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gsp-marine-hint,
+.gsp-mar-hint {
+  opacity: 0.75;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+.gsp-mar-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 13px;
+}
+.gsp-mar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.gsp-mar-label {
+  font-size: 12px;
+  font-weight: 600;
+}
+.gsp-mar-input,
+.gsp-mar-select {
+  font-size: 12px;
+  padding: 4px 6px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 6px;
+}
+.gsp-mar-run {
+  padding: 6px 10px;
+  font-size: 12.5px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  background: rgba(0, 120, 180, 0.12);
+  cursor: pointer;
+}
+.gsp-mar-run:hover {
+  background: rgba(0, 120, 180, 0.18);
+}
+.gsp-mar-status {
+  font-size: 12px;
+  margin: 4px 0;
+}
+.gsp-mar-warn {
+  color: #9a3b0f;
+  background: rgba(255, 160, 0, 0.12);
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+.gsp-mar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.gsp-mar-table td,
+.gsp-mar-table th {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  padding: 4px 6px;
+  text-align: left;
+}

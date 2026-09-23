@@ -14,7 +14,9 @@ function centroidOfPolygon(coords: number[][][]): [number, number] {
   if (!ring.length) return [Number.NaN, Number.NaN];
   // Ignore the duplicated closing vertex when present.
   const usable =
-    ring.length > 1 && ring[0][0] === ring[ring.length - 1][0] && ring[0][1] === ring[ring.length - 1][1]
+    ring.length > 1 &&
+    ring[0][0] === ring[ring.length - 1][0] &&
+    ring[0][1] === ring[ring.length - 1][1]
       ? ring.slice(0, -1)
       : ring;
   let sx = 0;
@@ -185,7 +187,8 @@ export function connectivityAnalysis(
     "EPSG:4326 (haversine distance)",
     {
       thresholdM,
-      distanceCaveat: "Links use centroid-to-centroid distance; this is not least-cost connectivity.",
+      distanceCaveat:
+        "Links use centroid-to-centroid distance; this is not least-cost connectivity.",
       skippedFeatures: source.skipped,
     },
   );

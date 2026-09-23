@@ -77,8 +77,7 @@ export function summarizeFragmentation(patches: PatchMetric[]): FragmentationSum
     totalAreaM2,
     totalAreaHa: totalAreaM2 / 10_000,
     meanAreaHa: totalAreaM2 / patches.length / 10_000,
-    meanShapeIndex:
-      patches.reduce((sum, patch) => sum + patch.shapeIndex, 0) / patches.length,
+    meanShapeIndex: patches.reduce((sum, patch) => sum + patch.shapeIndex, 0) / patches.length,
     totalPerimeterM,
   };
 }
@@ -107,9 +106,7 @@ function median(values: number[]): number {
   if (!values.length) return 0;
   const sorted = [...values].sort((a, b) => a - b);
   const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2
-    ? sorted[middle]
-    : (sorted[middle - 1] + sorted[middle]) / 2;
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
 export interface FragmentationOptions {
@@ -156,9 +153,8 @@ export function fragmentationAnalysis(
     return { ok: false, error: "Core-area edge depth must be zero or greater." };
   }
 
-  const patches: PolyFeature[] = options.explodeMultiPolygons === false
-    ? source.polys
-    : explodeParts(source.polys);
+  const patches: PolyFeature[] =
+    options.explodeMultiPolygons === false ? source.polys : explodeParts(source.polys);
   const areaMode = options.areaMode ?? "equalarea";
   const projection = areaMode === "equalarea" ? laeaFor(patches) : null;
   const areaOf = (feature: PolyFeature): number =>
@@ -188,7 +184,8 @@ export function fragmentationAnalysis(
     }
     let core: PolyFeature | null = null;
     try {
-      core = (buffer(patches[i], -coreDepthM, { units: "meters" }) as PolyFeature | undefined) ?? null;
+      core =
+        (buffer(patches[i], -coreDepthM, { units: "meters" }) as PolyFeature | undefined) ?? null;
     } catch {
       core = null;
     }
@@ -247,7 +244,8 @@ export function fragmentationAnalysis(
       areaMethod: areaInfo.method,
       coreDepthM,
       explodeMultiPolygons: options.explodeMultiPolygons !== false,
-      centroidDistanceCaveat: "Nearest-neighbour distance is centroid-to-centroid, not edge-to-edge.",
+      centroidDistanceCaveat:
+        "Nearest-neighbour distance is centroid-to-centroid, not edge-to-edge.",
       skippedFeatures: source.skipped,
     },
   );
@@ -265,13 +263,13 @@ export function fragmentationAnalysis(
     meanPatchM2: patches.length ? totalAreaM2 / patches.length : 0,
     medianPatchM2: median(areas),
     largestPatchM2,
-    largestPatchIndex: totalAreaM2 > 0 ? largestPatchM2 / totalAreaM2 * 100 : 0,
+    largestPatchIndex: totalAreaM2 > 0 ? (largestPatchM2 / totalAreaM2) * 100 : 0,
     totalEdgeM,
     edgeDensityMPerHa: totalAreaM2 > 0 ? totalEdgeM / (totalAreaM2 / 10_000) : 0,
     meanShapeIndex,
     coreDepthM,
     coreAreaM2,
-    coreAreaIndex: totalAreaM2 > 0 ? coreAreaM2 / totalAreaM2 * 100 : 0,
+    coreAreaIndex: totalAreaM2 > 0 ? (coreAreaM2 / totalAreaM2) * 100 : 0,
     patchesWithNoCore,
     meanNearestNeighbourM: nearest.length
       ? nearest.reduce((sum, value) => sum + value, 0) / nearest.length

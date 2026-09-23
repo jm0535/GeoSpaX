@@ -9,13 +9,7 @@ import booleanIntersects from "@turf/boolean-intersects";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import type { Feature, Geometry, MultiPolygon, Point, Polygon } from "geojson";
 import { areaM2 } from "./units";
-import {
-  fc,
-  isPolygonal,
-  polygonsOnly,
-  prefixProps,
-  type AnyFeature,
-} from "./geometry";
+import { fc, isPolygonal, polygonsOnly, prefixProps, type AnyFeature } from "./geometry";
 import { differencePair, intersectPair, unionAll } from "./overlay";
 import { makeProvenance, type ProvenanceStamp } from "./provenance";
 import { wlc, type WlcCriterion } from "./suitability";
@@ -309,7 +303,11 @@ export function featureSuitability(
 ): FeatureSuitabilityResult | PlanningFailure {
   if (!features?.length) return { ok: false, error: "The input layer has no features." };
   if (!criteria?.length) return { ok: false, error: "Add at least one criterion." };
-  if (criteria.some((criterion) => !criterion.field || !Number.isFinite(criterion.weight) || criterion.weight < 0)) {
+  if (
+    criteria.some(
+      (criterion) => !criterion.field || !Number.isFinite(criterion.weight) || criterion.weight < 0,
+    )
+  ) {
     return { ok: false, error: "Every criterion needs a field and a non-negative finite weight." };
   }
   if (criteria.reduce((sum, criterion) => sum + criterion.weight, 0) <= 0) {
@@ -349,7 +347,9 @@ export function featureSuitability(
     }
     return { ...criterion, id: criterion.id ?? criterion.field, min, max };
   });
-  if (resolved.some((criterion) => !Number.isFinite(criterion.min) || !Number.isFinite(criterion.max))) {
+  if (
+    resolved.some((criterion) => !Number.isFinite(criterion.min) || !Number.isFinite(criterion.max))
+  ) {
     return { ok: false, error: "At least one criterion has no numeric values in the input layer." };
   }
 
@@ -465,7 +465,8 @@ export function numericFields(features: AnyFeature[] | null | undefined): string
   const seen = new Set<string>();
   for (const feature of features ?? []) {
     for (const [key, value] of Object.entries(feature.properties ?? {})) {
-      if (typeof value === "number" && Number.isFinite(value) && !key.startsWith("_")) seen.add(key);
+      if (typeof value === "number" && Number.isFinite(value) && !key.startsWith("_"))
+        seen.add(key);
     }
   }
   return [...seen].sort((a, b) => a.localeCompare(b));

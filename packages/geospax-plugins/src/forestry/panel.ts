@@ -34,7 +34,11 @@ export function mountForestryPanel(container: HTMLElement, app: GeoLibreAppAPI):
     description:
       "Build auditable vegetation/burn indices or threshold a canopy-cover raster into polygons before landscape analysis.",
   });
-  mountIndexTool(shell, extent, { preset: "NBR", threshold: 0.2, subject: "forest / disturbance condition" });
+  mountIndexTool(shell, extent, {
+    preset: "NBR",
+    threshold: 0.2,
+    subject: "forest / disturbance condition",
+  });
   mountRasterReclassTool(shell, extent, "forest extent");
 
   const structure = shell.addSection({

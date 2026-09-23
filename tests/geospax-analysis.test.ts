@@ -116,10 +116,7 @@ describe("geospax units: equal-area reporting (v1 P1-4b)", () => {
     assert.ok(eq.crs.startsWith("LAEA centred"));
     assert.equal(sph.method, "Spherical (WGS84)");
     assert.equal(sph.crs, "EPSG:4326");
-    assert.ok(
-      Math.abs(eq.m2 - sph.m2) / sph.m2 < 0.02,
-      `LAEA ${eq.m2} vs spherical ${sph.m2}`,
-    );
+    assert.ok(Math.abs(eq.m2 - sph.m2) / sph.m2 < 0.02, `LAEA ${eq.m2} vs spherical ${sph.m2}`);
   });
 
   it("falls back honestly: no projection -> declares spherical, never LAEA", () => {

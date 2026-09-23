@@ -57,7 +57,9 @@ export function hotspotGrid(
   const weightTotal = active.reduce((sum, layer) => sum + layer.weight, 0);
   if (weightTotal <= 0) return { ok: false, error: "Layer weights must sum to more than zero." };
 
-  const allFeatures = active.flatMap((layer) => layer.features).filter((feature) => feature.geometry);
+  const allFeatures = active
+    .flatMap((layer) => layer.features)
+    .filter((feature) => feature.geometry);
   let bounds: [number, number, number, number];
   try {
     bounds = turfBbox(fc(allFeatures) as never) as [number, number, number, number];
@@ -72,7 +74,7 @@ export function hotspotGrid(
   // Turf's hex `cellSide` is the hex side/radius, so a one-cell frame needs
   // more than half a side around a small/degenerate input bbox. Two sides of
   // padding guarantees at least one square or hex cell for point-only inputs.
-  const padDegrees = options.cellSizeKm / 111.32 * 2;
+  const padDegrees = (options.cellSizeKm / 111.32) * 2;
   const padded: [number, number, number, number] = [
     bounds[0] - padDegrees,
     bounds[1] - padDegrees,
@@ -82,9 +84,12 @@ export function hotspotGrid(
 
   let grid: ReturnType<typeof squareGrid>;
   try {
-    grid = (options.gridType ?? "hex") === "hex"
-      ? (hexGrid(padded, options.cellSizeKm, { units: "kilometers" }) as ReturnType<typeof squareGrid>)
-      : squareGrid(padded, options.cellSizeKm, { units: "kilometers" });
+    grid =
+      (options.gridType ?? "hex") === "hex"
+        ? (hexGrid(padded, options.cellSizeKm, { units: "kilometers" }) as ReturnType<
+            typeof squareGrid
+          >)
+        : squareGrid(padded, options.cellSizeKm, { units: "kilometers" });
   } catch (error) {
     return {
       ok: false,
@@ -192,7 +197,8 @@ export function nearestNeighbourIndex(
   const points = (features ?? []).filter(
     (feature): feature is Feature<Point> => feature.geometry?.type === "Point",
   );
-  if (points.length < 2) return { ok: false, error: "Nearest-neighbour analysis needs at least two points." };
+  if (points.length < 2)
+    return { ok: false, error: "Nearest-neighbour analysis needs at least two points." };
   const coordinates = points.map((point) => point.geometry.coordinates as [number, number]);
   const nearest: number[] = [];
   for (let i = 0; i < coordinates.length; i++) {
@@ -213,18 +219,23 @@ export function nearestNeighbourIndex(
     properties: {},
     geometry: {
       type: "Polygon",
-      coordinates: [[
-        [minX, minY],
-        [maxX, minY],
-        [maxX, maxY],
-        [minX, maxY],
-        [minX, minY],
-      ]],
+      coordinates: [
+        [
+          [minX, minY],
+          [maxX, minY],
+          [maxX, maxY],
+          [minX, maxY],
+          [minX, minY],
+        ],
+      ],
     },
   };
   const studyAreaM2 = areaM2(studyPolygon);
   if (!(studyAreaM2 > 0)) {
-    return { ok: false, error: "The points have a zero-area bounding box; a 2D study area is required." };
+    return {
+      ok: false,
+      error: "The points have a zero-area bounding box; a 2D study area is required.",
+    };
   }
   const observedMeanM = nearest.reduce((sum, distance) => sum + distance, 0) / nearest.length;
   const density = points.length / studyAreaM2;
@@ -289,9 +300,7 @@ export interface DbscanResult {
 function median(values: number[]): number {
   const sorted = [...values].sort((a, b) => a - b);
   const middle = Math.floor(sorted.length / 2);
-  return sorted.length % 2 === 0
-    ? (sorted[middle - 1] + sorted[middle]) / 2
-    : sorted[middle];
+  return sorted.length % 2 === 0 ? (sorted[middle - 1] + sorted[middle]) / 2 : sorted[middle];
 }
 
 /**
@@ -327,11 +336,21 @@ export function dbscanClusters(
   }
 
   const coordinates = points.map((point) => point.geometry.coordinates as [number, number]);
-  if (coordinates.some(([longitude, latitude]) =>
-    !Number.isFinite(longitude) || !Number.isFinite(latitude) ||
-    longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90
-  )) {
-    return { ok: false, error: "DBSCAN point coordinates must contain finite longitude/latitude values." };
+  if (
+    coordinates.some(
+      ([longitude, latitude]) =>
+        !Number.isFinite(longitude) ||
+        !Number.isFinite(latitude) ||
+        longitude < -180 ||
+        longitude > 180 ||
+        latitude < -90 ||
+        latitude > 90,
+    )
+  ) {
+    return {
+      ok: false,
+      error: "DBSCAN point coordinates must contain finite longitude/latitude values.",
+    };
   }
   const nearest = new Array(points.length).fill(Number.POSITIVE_INFINITY);
   for (let left = 0; left < points.length; left++) {

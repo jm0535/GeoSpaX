@@ -4,10 +4,7 @@ import { describe, it } from "node:test";
 import type { Feature, Point, Polygon } from "geojson";
 import { parseHTML } from "linkedom";
 import type { GeoLibreAppAPI } from "../packages/plugins/src/types";
-import {
-  createPanelShell,
-  layerPicker,
-} from "../packages/geospax-plugins/src/shared/ui";
+import { createPanelShell, layerPicker } from "../packages/geospax-plugins/src/shared/ui";
 import {
   connectivityAnalysis,
   dbscanClusters,
@@ -40,13 +37,15 @@ function box(
     properties,
     geometry: {
       type: "Polygon",
-      coordinates: [[
-        [minX, minY],
-        [maxX, minY],
-        [maxX, maxY],
-        [minX, maxY],
-        [minX, minY],
-      ]],
+      coordinates: [
+        [
+          [minX, minY],
+          [maxX, minY],
+          [maxX, maxY],
+          [minX, maxY],
+          [minX, minY],
+        ],
+      ],
     },
   };
 }
@@ -71,7 +70,11 @@ describe("restored conservation planning workflows", () => {
 
   it("identifies high-score points outside protection", () => {
     const result = priorityAreas(
-      [point(0.25, 0.25, { quality: 10 }), point(2, 2, { quality: 9 }), point(3, 3, { quality: 1 })],
+      [
+        point(0.25, 0.25, { quality: 10 }),
+        point(2, 2, { quality: 9 }),
+        point(3, 3, { quality: 1 }),
+      ],
       [box(0, 0, 1, 1)],
       { scoreField: "quality", minScore: 5 },
     );
@@ -117,15 +120,18 @@ describe("restored conservation planning workflows", () => {
   });
 
   it("labels deterministic DBSCAN clusters and retains noise", () => {
-    const result = dbscanClusters([
-      point(0, 0, { site: "a1" }),
-      point(0.001, 0, { site: "a2" }),
-      point(0, 0.001, { site: "a3" }),
-      point(1, 1, { site: "b1" }),
-      point(1.001, 1, { site: "b2" }),
-      point(1, 1.001, { site: "b3" }),
-      point(5, 5, { site: "noise" }),
-    ], { epsilonM: 200, minPoints: 3 });
+    const result = dbscanClusters(
+      [
+        point(0, 0, { site: "a1" }),
+        point(0.001, 0, { site: "a2" }),
+        point(0, 0.001, { site: "a3" }),
+        point(1, 1, { site: "b1" }),
+        point(1.001, 1, { site: "b2" }),
+        point(1, 1.001, { site: "b3" }),
+        point(5, 5, { site: "noise" }),
+      ],
+      { epsilonM: 200, minPoints: 3 },
+    );
     assert.equal(result.ok, true);
     if (!result.ok) return;
     assert.equal(result.clusterCount, 2);
@@ -139,11 +145,9 @@ describe("restored conservation planning workflows", () => {
     assert.equal(result.features[6].properties?.dbscan_noise, true);
     assert.equal(result.provenance.params.minPointsIncludesSelf, true);
 
-    const automatic = dbscanClusters([
-      point(0, 0),
-      point(0.001, 0),
-      point(0.002, 0),
-    ], { minPoints: 2 });
+    const automatic = dbscanClusters([point(0, 0), point(0.001, 0), point(0.002, 0)], {
+      minPoints: 2,
+    });
     assert.equal(automatic.ok, true);
     if (!automatic.ok) return;
     assert.equal(automatic.epsilonWasAutomatic, true);
@@ -241,11 +245,21 @@ describe("SDM prediction, not fit-only stubs", () => {
     assert.equal(model!.invCov!.length, 3);
     const prediction = predictMahalanobis([3, 12, 100], model!, "chisq");
     assert.ok(prediction.d2 !== null);
-    assert.ok(prediction.suitability !== null && prediction.suitability >= 0 && prediction.suitability <= 1);
+    assert.ok(
+      prediction.suitability !== null && prediction.suitability >= 0 && prediction.suitability <= 1,
+    );
   });
 
   it("marks singular covariance regularisation instead of Euclidean fallback", () => {
-    const model = fitMahalanobis([[1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4, 4]], ["a", "b", "c"]);
+    const model = fitMahalanobis(
+      [
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3],
+        [4, 4, 4],
+      ],
+      ["a", "b", "c"],
+    );
     assert.ok(model);
     assert.equal(model!.singular, true);
     assert.equal(model!.regularized, true);
@@ -255,8 +269,23 @@ describe("SDM prediction, not fit-only stubs", () => {
 
   it("fits an explicit presence-background logistic fallback without claiming MaxEnt", () => {
     const model = fitPresenceBackgroundLogistic(
-      [[2, 2], [2.5, 2], [3, 2.5], [3.5, 3], [4, 4]],
-      [[-4, -3], [-3, -3], [-2.5, -2], [-2, -1], [-1.5, -2], [-1, -1], [0, -1], [0, 0]],
+      [
+        [2, 2],
+        [2.5, 2],
+        [3, 2.5],
+        [3.5, 3],
+        [4, 4],
+      ],
+      [
+        [-4, -3],
+        [-3, -3],
+        [-2.5, -2],
+        [-2, -1],
+        [-1.5, -2],
+        [-1, -1],
+        [0, -1],
+        [0, 0],
+      ],
       ["temperature", "rainfall"],
       { lambda: 0.05 },
     );
@@ -282,7 +311,14 @@ describe("domain panel capability and shared-design contract", () => {
   const read = (path: string) => readFileSync(new URL(path, root), "utf8");
 
   it("all six panels mount the shared GeoSpaX workbench", () => {
-    for (const domain of ["agriculture", "biodiversity", "conservation", "environment", "forestry", "marine"]) {
+    for (const domain of [
+      "agriculture",
+      "biodiversity",
+      "conservation",
+      "environment",
+      "forestry",
+      "marine",
+    ]) {
       assert.match(read(`${domain}/panel.ts`), /createPanelShell/);
       assert.match(read(`${domain}/index.ts`), /shared\/style\.css/);
       assert.match(read(`${domain}/index.ts`), /openRightPanel/);

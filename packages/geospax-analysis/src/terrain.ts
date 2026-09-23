@@ -62,7 +62,12 @@ export function pixelSizeAtCentre(
   // Haversine distances across the whole window at the centre
   const windowWidthM = haversineM([west, centreLat], [east, centreLat]);
   const windowHeightM = haversineM([normLon, south], [normLon, north]);
-  if (!Number.isFinite(windowWidthM) || !Number.isFinite(windowHeightM) || windowWidthM <= 0 || windowHeightM <= 0) {
+  if (
+    !Number.isFinite(windowWidthM) ||
+    !Number.isFinite(windowHeightM) ||
+    windowWidthM <= 0 ||
+    windowHeightM <= 0
+  ) {
     return null;
   }
   const pixelWidthM = windowWidthM / w;
@@ -135,7 +140,7 @@ export function hornSlopeAndAspect(opts: HornGridOptions): HornResult {
     slopeDeg[i] = Number.NaN;
     aspectDeg[i] = Number.NaN;
   }
-  const borderExcluded = w < 3 || h < 3 ? n : (w * 2 + (h - 2) * 2);
+  const borderExcluded = w < 3 || h < 3 ? n : w * 2 + (h - 2) * 2;
   let nodataExcluded = 0;
   let validCells = 0;
 
@@ -180,8 +185,8 @@ export function hornSlopeAndAspect(opts: HornGridOptions): HornResult {
         continue;
       }
 
-      const dzdx = ((c + 2 * f + i) - (a + 2 * d + g)) / dx;
-      const dzdy = ((g + 2 * h2 + i) - (a + 2 * b + c)) / dy;
+      const dzdx = (c + 2 * f + i - (a + 2 * d + g)) / dx;
+      const dzdy = (g + 2 * h2 + i - (a + 2 * b + c)) / dy;
 
       const slopeRad = Math.atan(Math.hypot(dzdx, dzdy));
       const sDeg = (slopeRad * 180) / Math.PI;
@@ -243,7 +248,9 @@ export function classifySlope(
   validMeta?: { borderExcluded: number; nodataExcluded: number },
 ): SlopeClasses {
   const [b0, b1] = [...breaks].sort((a, b) => a - b) as [number, number];
-  let c0 = 0, c1 = 0, c2 = 0;
+  let c0 = 0,
+    c1 = 0,
+    c2 = 0;
   let valid = 0;
   for (let i = 0; i < slopeDeg.length; i++) {
     const v = slopeDeg[i];
@@ -341,13 +348,15 @@ export function maskToPixelPolygons(
         properties: {},
         geometry: {
           type: "Polygon",
-          coordinates: [[
-            [l, top],
-            [r, top],
-            [r, bottom],
-            [l, bottom],
-            [l, top],
-          ]],
+          coordinates: [
+            [
+              [l, top],
+              [r, top],
+              [r, bottom],
+              [l, bottom],
+              [l, top],
+            ],
+          ],
         },
       });
     }

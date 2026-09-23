@@ -7,12 +7,21 @@ import { inatSearchUrl } from "../packages/geospax-data/src/connectors/inat";
 import { wormsAphiaUrl } from "../packages/geospax-data/src/connectors/worms";
 import { worldbankUrl } from "../packages/geospax-data/src/connectors/worldbank";
 import { GEBCO_META, gebcoTileUrl } from "../packages/geospax-data/src/catalogue/gebco";
-import { ECOREGION_CATALOGUE, ecoregionFeatureCount } from "../packages/geospax-data/src/catalogue/ecoregion";
+import {
+  ECOREGION_CATALOGUE,
+  ecoregionFeatureCount,
+} from "../packages/geospax-data/src/catalogue/ecoregion";
 import { CONNECTORS, CATALOGUE_TIERS, ALL_SOURCES } from "../packages/geospax-data/src/index";
 
 describe("geospax-data: citation string", () => {
   it("formats DOI", () => {
-    const s = citationString({title:"T",publisher:"P",year:2020,doi:"10.1/abc", accessedAt:"2024-01-01"});
+    const s = citationString({
+      title: "T",
+      publisher: "P",
+      year: 2020,
+      doi: "10.1/abc",
+      accessedAt: "2024-01-01",
+    });
     assert.ok(s.includes("DOI:10.1/abc"));
     assert.ok(s.includes("2020"));
   });
@@ -20,7 +29,7 @@ describe("geospax-data: citation string", () => {
 
 describe("gbif connector", () => {
   it("builds URL with taxon and bbox", () => {
-    const u = gbifSearchUrl("Paradisaea apoda", [140,-10,150,0], 50);
+    const u = gbifSearchUrl("Paradisaea apoda", [140, -10, 150, 0], 50);
     assert.ok(u.includes("api.gbif.org"));
     assert.ok(u.includes("Paradisaea"));
     assert.ok(u.includes("decimalLongitude"));
@@ -34,7 +43,7 @@ describe("gbif connector", () => {
 
 describe("obis connector", () => {
   it("builds geometry polygon for bbox", () => {
-    const u = obisSearchUrl("Thunnus", [140,-5,145,0]);
+    const u = obisSearchUrl("Thunnus", [140, -5, 145, 0]);
     assert.ok(u.includes("api.obis.org"));
     assert.ok(u.includes("POLYGON"));
   });
@@ -42,7 +51,7 @@ describe("obis connector", () => {
 
 describe("inat connector", () => {
   it("research grade and bbox", () => {
-    const u = inatSearchUrl("Myrmecodia", [140,-10,150,0], 10);
+    const u = inatSearchUrl("Myrmecodia", [140, -10, 150, 0], 10);
     assert.ok(u.includes("inaturalist.org"));
     assert.ok(u.includes("quality_grade=research"));
     assert.ok(u.includes("nelat=0"));
@@ -59,7 +68,7 @@ describe("worms connector", () => {
 
 describe("worldbank connector", () => {
   it("country/indicator URL", () => {
-    const u = worldbankUrl("PG","SP.POP.TOTL",2018,2022);
+    const u = worldbankUrl("PG", "SP.POP.TOTL", 2018, 2022);
     assert.ok(u.includes("worldbank.org"));
     assert.ok(u.includes("PG"));
     assert.ok(u.includes("SP.POP.TOTL"));
@@ -68,32 +77,34 @@ describe("worldbank connector", () => {
 
 describe("GEBCO catalogue", () => {
   it("tile URL and meta", () => {
-    assert.equal(gebcoTileUrl(0,0,0), "https://tiles.gebco.net/gebco/0/0/0.png");
-    assert.equal(GEBCO_META.tier,"catalogue");
+    assert.equal(gebcoTileUrl(0, 0, 0), "https://tiles.gebco.net/gebco/0/0/0.png");
+    assert.equal(GEBCO_META.tier, "catalogue");
   });
 });
 
 describe("ecoregion catalogue", () => {
   it("counts 846 + 232", () => {
-    assert.equal(ecoregionFeatureCount("teow-846"),846);
-    assert.equal(ecoregionFeatureCount("meow-232"),232);
-    assert.equal(ECOREGION_CATALOGUE.length,3);
+    assert.equal(ecoregionFeatureCount("teow-846"), 846);
+    assert.equal(ecoregionFeatureCount("meow-232"), 232);
+    assert.equal(ECOREGION_CATALOGUE.length, 3);
   });
-  it("null on unknown", () => { assert.equal(ecoregionFeatureCount("unknown"),null); });
+  it("null on unknown", () => {
+    assert.equal(ecoregionFeatureCount("unknown"), null);
+  });
 });
 
 describe("data package tiers", () => {
   it("5 live +5 catalogue =10", () => {
-    assert.equal(CONNECTORS.length,5);
-    assert.equal(CATALOGUE_TIERS.length,5);
-    assert.equal(ALL_SOURCES.length,10);
-    assert.ok(CONNECTORS.every(c=>c.tier==="live"));
-    assert.ok(CATALOGUE_TIERS.every(c=>c.tier==="catalogue"));
+    assert.equal(CONNECTORS.length, 5);
+    assert.equal(CATALOGUE_TIERS.length, 5);
+    assert.equal(ALL_SOURCES.length, 10);
+    assert.ok(CONNECTORS.every((c) => c.tier === "live"));
+    assert.ok(CATALOGUE_TIERS.every((c) => c.tier === "catalogue"));
   });
   it("citations carry DOI/URL", () => {
     for (const c of ALL_SOURCES) {
-      assert.ok(c.citation.title.length>5);
-      assert.ok(c.citation.publisher.length>2);
+      assert.ok(c.citation.title.length > 5);
+      assert.ok(c.citation.publisher.length > 2);
       assert.ok(c.citation.accessedAt);
     }
   });

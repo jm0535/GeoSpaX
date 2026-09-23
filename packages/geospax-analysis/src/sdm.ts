@@ -155,7 +155,10 @@ function gaussJordan(matrix: number[][], tolerance = 1e-12): number[][] | null {
         pivotRow = row;
       }
     }
-    if (!Number.isFinite(augmented[pivotRow][column]) || Math.abs(augmented[pivotRow][column]) <= tolerance) {
+    if (
+      !Number.isFinite(augmented[pivotRow][column]) ||
+      Math.abs(augmented[pivotRow][column]) <= tolerance
+    ) {
       return null;
     }
     if (pivotRow !== column) {
@@ -180,8 +183,7 @@ export function invertMatrixSafe(matrix: number[][]): MatrixInverseResult {
   if (direct) return { inverse: direct, singular: false, ridge: 0 };
   const n = matrix.length;
   if (!n) return { inverse: null, singular: true, ridge: 0 };
-  const diagonalScale =
-    matrix.reduce((sum, row, index) => sum + Math.abs(row[index] ?? 0), 0) / n;
+  const diagonalScale = matrix.reduce((sum, row, index) => sum + Math.abs(row[index] ?? 0), 0) / n;
   let ridge = Math.max(1e-10, diagonalScale * 1e-8);
   for (let attempt = 0; attempt < 8; attempt++) {
     const regularized = matrix.map((row, rowIndex) =>
@@ -263,7 +265,11 @@ export function fitMahalanobis(
 
 /** Squared Mahalanobis distance, or null when the fitted inverse is unavailable. */
 export function mahalanobisD2(values: number[], model: MahalanobisModel): number | null {
-  if (!model.invCov || values.length !== model.mean.length || values.some((value) => !Number.isFinite(value))) {
+  if (
+    !model.invCov ||
+    values.length !== model.mean.length ||
+    values.some((value) => !Number.isFinite(value))
+  ) {
     return null;
   }
   const delta = values.map((value, index) => value - model.mean[index]);
@@ -279,14 +285,8 @@ export function mahalanobisD2(values: number[], model: MahalanobisModel): number
 
 function logGamma(z: number): number {
   const coefficients = [
-    676.5203681218851,
-    -1259.1392167224028,
-    771.3234287776531,
-    -176.6150291621406,
-    12.507343278686905,
-    -0.13857109526572012,
-    9.984369578019572e-6,
-    1.5056327351493116e-7,
+    676.5203681218851, -1259.1392167224028, 771.3234287776531, -176.6150291621406,
+    12.507343278686905, -0.13857109526572012, 9.984369578019572e-6, 1.5056327351493116e-7,
   ];
   if (z < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * z)) - logGamma(1 - z);
   const shifted = z - 1;
@@ -360,9 +360,7 @@ export function predictMahalanobis(
     d2,
     output,
     suitability:
-      output === "chisq"
-        ? chiSquareSurvival(d2, model.mean.length)
-        : 1 / (1 + Math.sqrt(d2)),
+      output === "chisq" ? chiSquareSurvival(d2, model.mean.length) : 1 / (1 + Math.sqrt(d2)),
   };
 }
 
@@ -407,9 +405,7 @@ function logistic(value: number): number {
 }
 
 function softplus(value: number): number {
-  return value > 0
-    ? value + Math.log1p(Math.exp(-value))
-    : Math.log1p(Math.exp(value));
+  return value > 0 ? value + Math.log1p(Math.exp(-value)) : Math.log1p(Math.exp(value));
 }
 
 function logisticObjective(
@@ -471,14 +467,12 @@ export function fitPresenceBackgroundLogistic(
     return null;
   }
 
-  const variables = variableNames.length === width
-    ? variableNames
-    : Array.from({ length: width }, (_, index) => `var${index + 1}`);
+  const variables =
+    variableNames.length === width
+      ? variableNames
+      : Array.from({ length: width }, (_, index) => `var${index + 1}`);
   const rawRows = [...presences, ...background];
-  const labels = [
-    ...new Array(presences.length).fill(1),
-    ...new Array(background.length).fill(0),
-  ];
+  const labels = [...new Array(presences.length).fill(1), ...new Array(background.length).fill(0)];
   // Equal class totals prevent an arbitrary background count from changing the
   // fitted intercept and swamping the presence class.
   const weights = [
@@ -494,8 +488,7 @@ export function fitPresenceBackgroundLogistic(
   const variance = new Array(width).fill(0);
   for (let row = 0; row < rawRows.length; row++) {
     for (let variable = 0; variable < width; variable++) {
-      variance[variable] +=
-        weights[row] * (rawRows[row][variable] - mean[variable]) ** 2;
+      variance[variable] += weights[row] * (rawRows[row][variable] - mean[variable]) ** 2;
     }
   }
   const constantVariables: string[] = [];
@@ -566,10 +559,7 @@ export function fitPresenceBackgroundLogistic(
     parameters = accepted;
     loss = nextLoss;
     iterations = iteration + 1;
-    if (
-      step * maxDelta <= tolerance ||
-      lossChange <= tolerance * Math.max(1, Math.abs(loss))
-    ) {
+    if (step * maxDelta <= tolerance || lossChange <= tolerance * Math.max(1, Math.abs(loss))) {
       converged = true;
       break;
     }

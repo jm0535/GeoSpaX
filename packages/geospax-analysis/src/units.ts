@@ -60,7 +60,9 @@ export function formatArea(m2: number, unit: AreaUnitId = "ha"): FormattedArea {
  * Spherical (WGS84) area of a Feature, FeatureCollection or geometry in m\u00b2,
  * via Turf's spherical-excess computation. Returns 0 for null/invalid input.
  */
-export function areaM2(gj: AnyFeature | FeatureCollectionLike | Geometry | null | undefined): number {
+export function areaM2(
+  gj: AnyFeature | FeatureCollectionLike | Geometry | null | undefined,
+): number {
   if (!gj) return 0;
   try {
     return turfArea(gj as never);
@@ -117,20 +119,13 @@ function projectRing(ring: number[][], projDef: string): number[][] {
  * Area of one polygonal feature under an equal-area projection (v1
  * GSX.areaEqualAreaM2): outer ring minus interior rings, per polygon part.
  */
-export function areaEqualAreaM2(
-  feature: AnyFeature | null | undefined,
-  projDef: string,
-): number {
+export function areaEqualAreaM2(feature: AnyFeature | null | undefined, projDef: string): number {
   if (!feature || !feature.geometry) return 0;
   const g = feature.geometry;
   // Polygon: one polygon part; MultiPolygon: the parts themselves. Either
   // way `polys` is a list of ring-lists (number[][][] per part).
   const polys: number[][][][] =
-    g.type === "Polygon"
-      ? [g.coordinates]
-      : g.type === "MultiPolygon"
-        ? g.coordinates
-        : [];
+    g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
   let total = 0;
   for (const rings of polys) {
     rings.forEach((ring, ri) => {
@@ -174,7 +169,10 @@ export interface AreaMeasurement {
  * (e.g. no finite bbox) the returned measurement honestly reports the
  * spherical method instead of claiming equal-area.
  */
-export function measureArea(features: AnyFeature[], mode: AreaMethod = "spherical"): AreaMeasurement {
+export function measureArea(
+  features: AnyFeature[],
+  mode: AreaMethod = "spherical",
+): AreaMeasurement {
   const list = [...(features ?? [])];
   if (mode === "equalarea") {
     const p = laeaFor(list);
@@ -187,6 +185,8 @@ export function measureArea(features: AnyFeature[], mode: AreaMethod = "spherica
 }
 
 /** Convenience: measurement rendered in hectares with the method declared. */
-export function measurementHectares(m: AreaMeasurement): FormattedArea & { method: string; crs: string } {
+export function measurementHectares(
+  m: AreaMeasurement,
+): FormattedArea & { method: string; crs: string } {
   return { ...formatArea(m.m2, "ha"), method: m.method, crs: m.crs };
 }
