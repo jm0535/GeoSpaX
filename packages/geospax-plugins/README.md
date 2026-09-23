@@ -14,12 +14,12 @@ provenance history and exports.
 
 | Plugin | Exposed workflows |
 |---|---|
-| `geospax-conservation` | Vector intersect/erase/union; descriptive weighted hotspot grid; unprotected priority sites; bounded minimum-cost representation (exact branch-and-bound where proved, labelled greedy otherwise); BIOCLIM and Mahalanobis fit **and prediction**; feature WLC; protection gap; complete fragmentation/core report; connectivity components; vector change; raster reclass/polygonize; provenance/project export |
+| `geospax-conservation` | Vector intersect/erase/union; descriptive weighted hotspot grid; haversine DBSCAN; unprotected priority sites; bounded minimum-cost representation (exact branch-and-bound where proved, labelled greedy otherwise); BIOCLIM, Mahalanobis and explicit presence-background logistic fit **and prediction**; feature WLC; protection gap; complete fragmentation/core report; connectivity components; vector change; raster reclass/polygonize; provenance/project export |
 | `geospax-agriculture` | NDVI-family crop-condition extents; raster reclassification; feature WLC; exponential distance decay; Horn slope zones; aligned raster and polygon crop-change workflows; provenance export |
-| `geospax-biodiversity` | Citation-carrying GBIF/OBIS/iNaturalist occurrence and WoRMS taxonomy queries; taxon-frequency richness/Shannon/Simpson/evenness; Clark–Evans point pattern; weighted grid; BIOCLIM/Mahalanobis prediction; priority sites and protection gaps |
+| `geospax-biodiversity` | Citation-carrying GBIF/OBIS/iNaturalist occurrence and WoRMS taxonomy queries; taxon-frequency richness/Shannon/Simpson/evenness; Clark–Evans point pattern and haversine DBSCAN; weighted grid; BIOCLIM/Mahalanobis/presence-background logistic prediction; priority sites and protection gaps |
 | `geospax-environment` | Horn slope zones; NDVI/NDWI/NDBI/NBR/custom normalized-difference extents; Otsu-assisted raster reclassification; aligned raster change; vector overlay; provenance export |
 | `geospax-forestry` | Forest/NBR extent derivation; raster reclassification; NP/CA/LPI/TE/ED/MSI/core/CAI/ENN metrics; connectivity components; raster and polygon loss/gain change; forest protection gap |
-| `geospax-marine` | Citation-carrying OBIS/WoRMS queries; GEBCO visual-context layer; richness/diversity and point pattern; BIOCLIM/Mahalanobis prediction; NDWI/custom habitat extent; weighted priorities and MPA gap |
+| `geospax-marine` | Citation-carrying OBIS/WoRMS queries; GEBCO visual-context layer; richness/diversity, nearest-neighbour pattern and haversine DBSCAN; BIOCLIM/Mahalanobis/presence-background logistic prediction; NDWI/custom habitat extent; weighted priorities and MPA gap |
 
 ## Original GeoSpaX parity baseline
 
@@ -30,8 +30,10 @@ parity statement alone.
 |---|---|
 | `geospax-conservation.js`: overlay, protection gap, priority areas, WLC | `planning.ts`, `gap.ts`, `suitability.ts` + Conservation sections Overlay, Prioritization, Suitability and Gap |
 | Multi-criteria hotspot grid | `spatial.ts` + Conservation/Biodiversity/Marine weighted-grid tools; explicitly labelled descriptive, not Getis-Ord Gi* |
+| Point-pattern DBSCAN | `spatial.ts` + Conservation/Biodiversity/Marine DBSCAN tools; haversine metres, standard minimum-points-includes-self semantics, automatic or explicit epsilon, retained noise |
 | `geospax-conservation-m2.js`: fragmentation, connectivity, polygon change | complete `fragmentation.ts`, `connectivity.ts`, `change.ts` workflows + Conservation/Forestry panels |
-| `geospax-sdm-fix.js`: BIOCLIM and Mahalanobis | `sdm.ts` now performs prediction, general p-variable covariance inversion and disclosed ridge regularisation; Conservation/Biodiversity/Marine SDM tools |
+| `geospax-sdm-fix.js`: BIOCLIM and Mahalanobis | `sdm.ts` performs prediction, general p-variable covariance inversion and disclosed ridge regularisation; Conservation/Biodiversity/Marine SDM tools |
+| Original MaxEnt API fallback | bounded client-side presence-background logistic model with explicit environmental background, equal class weighting and L2 regularisation; honestly labelled a linear fallback, **not** elapid/true MaxEnt |
 | `geospax-raster.js`: histogram/Otsu, threshold and polygonize | `raster.ts`/`terrain.ts` + Conservation/Environment/Agriculture/Forestry/Marine raster tools |
 | Provenance/project tools | shared run ledger, `_geospax` feature stamps and host project-snapshot export |
 
@@ -43,7 +45,13 @@ parity statement alone.
   least-cost corridors.
 - SDM environmental variables must be numeric attributes already present on
   both the presence and prediction feature layers; missing rows are excluded,
-  never filled with zero or coordinates.
+  never filled with zero or coordinates. The presence-background option is a
+  class-balanced, L2-regularised **linear logistic fallback**, not elapid or
+  true MaxEnt; scores are relative to the explicitly selected background.
+- DBSCAN uses pairwise haversine distances and is bounded to 2,000 points in
+  the browser. Its automatic epsilon is median nearest-neighbour distance ×
+  1.5 by default (with a disclosed 1 m floor for coincident-only inputs);
+  outputs retain noise (`cluster = -1`) and report all settings.
 - The SCP exact path is an in-browser deterministic branch-and-bound solver for
   at most 28 planning units with a two-million-node safety bound. Larger or
   interrupted searches return a result labelled `greedy`, `optimal: false`.

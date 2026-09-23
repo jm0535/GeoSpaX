@@ -9,6 +9,7 @@ import {
   mountOccurrenceTool,
 } from "../shared/data-tools";
 import {
+  mountDbscanTool,
   mountGapTool,
   mountHotspotTool,
   mountPointPatternTool,
@@ -46,17 +47,18 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
   const observation = shell.addSection({
     id: "observation",
     title: "Diversity & pattern",
-    badge: "S / H′ / R",
+    badge: "S / H′ / NNI / DBSCAN",
     description:
-      "Summarise taxa in occurrence records and screen point spacing before interpreting survey concentrations.",
+      "Summarise taxa in occurrence records and screen nearest-neighbour spacing and density-connected clusters before interpreting survey concentrations.",
   });
   mountDiversityTool(shell, observation, "marine taxon");
   mountPointPatternTool(shell, observation, "marine occurrences");
+  mountDbscanTool(shell, observation, "marine occurrences");
 
   const habitat = shell.addSection({
     id: "habitat",
     title: "Habitat modelling",
-    badge: "SDM / Index",
+    badge: "BIOCLIM / D² / Logistic / Index",
     description:
       "Score environmental-space suitability and derive water/wetness or custom raster extents for habitat screening.",
   });

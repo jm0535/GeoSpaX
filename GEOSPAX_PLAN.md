@@ -36,34 +36,38 @@ than inferred from the earlier README claim. The six bundled workbenches now
 share one accessible, host-token-based panel system and expose the following
 implemented workflows:
 
-- **Conservation:** overlay; descriptive weighted hotspot grid; unprotected
-  priority sites; bounded exact/explicit-greedy minimum-cost representation;
-  BIOCLIM and Mahalanobis fit **and prediction**; WLC; protection gap;
-  NP/CA/LPI/TE/ED/MSI/core/CAI/ENN fragmentation report; connectivity
-  components; vector change; raster threshold/polygonize; run-ledger/project
-  provenance export.
+- **Conservation:** overlay; descriptive weighted hotspot grid; haversine
+  DBSCAN with retained noise; unprotected priority sites; bounded
+  exact/explicit-greedy minimum-cost representation; BIOCLIM, Mahalanobis and
+  explicit presence-background logistic fit **and prediction**; WLC;
+  protection gap; NP/CA/LPI/TE/ED/MSI/core/CAI/ENN fragmentation report;
+  connectivity components; vector change; raster threshold/polygonize;
+  run-ledger/project provenance export.
 - **Agriculture:** real NDVI-family raster workflow, reclassification, WLC,
   exponential distance decay, slope constraints, raster/vector change.
 - **Biodiversity:** GBIF/OBIS/iNaturalist/WoRMS, actual taxon-frequency
-  richness/diversity, point pattern, weighted grid, SDM and gap/priority tools.
+  richness/diversity, nearest-neighbour pattern, DBSCAN, weighted grid, SDM
+  and gap/priority tools.
 - **Environment:** slope, normalized-difference indices, Otsu-assisted
   reclassification, aligned raster change and vector overlay.
 - **Forestry:** extent derivation, complete fragmentation/connectivity,
   raster/vector forest change and protection gaps.
-- **Marine:** OBIS/WoRMS, GEBCO visual context, diversity/pattern, SDM,
-  NDWI/custom extents, weighted priorities and MPA gaps.
+- **Marine:** OBIS/WoRMS, GEBCO visual context, diversity/nearest-neighbour
+  pattern/DBSCAN, SDM, NDWI/custom extents, weighted priorities and MPA gaps.
 
 Correctness claims were narrowed where the prior implementation overstated
 capability: SDM no longer stops at model fitting or silently loses covariance
-inversion above two variables; SCP does not claim HiGHS-WASM. Exact SCP uses a
-bounded deterministic branch-and-bound solver and returns an explicitly
-non-optimal greedy result when its browser safety limits prevent proof.
+inversion above two variables; the client-side presence-background method uses
+explicit environmental rows and is labelled a linear logistic fallback—not
+elapid/true MaxEnt; SCP does not claim HiGHS-WASM. Exact SCP uses a bounded
+deterministic branch-and-bound solver and returns an explicitly non-optimal
+greedy result when its browser safety limits prevent proof.
 
-Still outside this completed panel audit are the optional/originally separate
-MaxEnt sidecar (G5), generic How-to-Cite formats (G12), one-click assessment
+Still outside this completed panel audit are the optional true-MaxEnt/elapid
+sidecar portion of G5, generic How-to-Cite formats (G12), one-click assessment
 report (G13), starter-project catalogue/templates (the remaining G14 work),
-DBSCAN (G15), and `.gspx` shell alias (G16). Those remain roadmap items rather
-than being represented as implemented parity.
+and `.gspx` shell alias (G16). Those remain roadmap items rather than being
+represented as implemented parity.
 
 ---
 
@@ -171,7 +175,7 @@ missing.
 | G2 | **WWF Terrestrial Ecoregions (846) + MEOW marine (232)** | `js/geospax-opendata.js` | Bundled plugin `geospax-ecoregions` (static GeoJSON assets or hosted tiles; layer-library entries) |
 | G3 | **World Bank indicators** | `js/geospax-opendata.js` | Small plugin or fold into G1's "Open Data" panel |
 | G4 | **SDM: BIOCLIM (limiting-factor), Mahalanobis (chi-square D²)** — the *fixed* versions with fallback guards | `js/geospax-sdm-fix.js` (655 lines, dep-free) | TS module in `packages/geospax-analysis` + plugin panel; env extraction via `readRasterWindow`/COG sampling |
-| G5 | **MaxEnt** (elapid server-side; logistic fallback) | `api/sdm.py` (208 lines) | Phase A: client-side logistic GLM in TS/Pyodide; Phase B: sidecar route `backend/geolibre_server/.../sdm.py` behind an optional extra, or keep the Vercel serverless function |
+| G5 | **MaxEnt** (elapid server-side; logistic fallback) | `api/sdm.py` (208 lines) | **Phase A implemented:** deterministic client-side class-balanced, L2-regularised presence-background logistic model over explicit environmental rows, labelled as a fallback rather than MaxEnt. Phase B remains an optional elapid sidecar route behind a dependency extra. |
 | G6 | **WLC suitability** (graded scoring, metre cell size, distance decay, cost/benefit, constraint mask) | `js/geospax-conservation.js` (WLC engine) | Plugin panel + TS algorithm; raster math on client grids, or Whitebox weighted-overlay composition |
 | G7 | **Protection gap analysis + quantified gap report** | `js/geospax-conservation.js` | Plugin panel; composes existing `intersectionTool`/`spatialJoinTool` + equal-area (G9) |
 | G8 | **Fragmentation/patch metrics + connectivity graph** | `js/geospax-conservation-m2.js` | TS algorithms in `packages/geospax-analysis`; Whitebox Patch Orientation/Edge Proportion as complements |
@@ -181,7 +185,7 @@ missing.
 | G12 | **How-to-Cite panel** (APA/Chicago/Harvard/BibTeX, copy-to-clipboard) | `index.html` citation tab | Small plugin panel or shell About-section addition |
 | G13 | **One-click assessment report** (roadmap P3-11: methods + figures + provenance + citations → PDF/HTML) | Not yet built in GeoSpaX either | New plugin composing G7/G9/G11 + Print Layout; *the flagship differentiator* |
 | G14 | **Sample dataset catalog** (PNG provinces, protected areas, paradisea occurrences, BIO1/BIO12/tree-cover, forest patches, habitat grid) | `samples/` (9 files) | Copy into `public/samples/geospax/`; register in layer-library / a "GeoSpaX Data" panel; ship FR422 starter **project templates** (`.geolibre.json` with preloaded layers + plugin state) |
-| G15 | **DBSCAN clustering** (GeoSpaX point-pattern section) | `index.html` analysis switch | Small TS addition to statistics tools (Gap: not in GeoLibre's statistics registry) |
+| G15 | **DBSCAN clustering** (GeoSpaX point-pattern section) | `index.html` analysis switch | **Implemented** in `spatial.ts` and Conservation/Biodiversity/Marine: haversine metres, explicit/automatic epsilon, standard minimum-points semantics, deterministic IDs, retained noise, provenance and 2,000-point bound. |
 | G16 | **`.gspx` extension branding** for saved projects | `.gspx` in `geospax-project.js` | Additive patch: accept `.gspx` alongside `.geolibre` in file dialogs/associations (or keep `.geolibre` internally and alias the display name) |
 
 **🎁 GeoSpaX gains for free (new capabilities the current app could never build alone):**
@@ -298,7 +302,8 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
   - vector overlay/change and sampled-raster slope, normalized difference, reclassification/Otsu/polygonization, and aligned raster change (G10).
 - [x] Replace the single gap-only conservation panel with an eight-section workbench and add consistent Agriculture, Biodiversity, Environment, Forestry, and Marine workbenches.
 - [x] Route output layers through `addGeoJsonLayer`, mirror bounded native GeoJSON imports for `getLayerFeatures`, and stamp method parameters/provenance on analysis outputs and the run ledger.
-- [ ] Add DBSCAN (G15), optional MaxEnt (Phase 4), and any higher-scale worker-backed raster WLC required beyond the current bounded browser methods.
+- [x] Add bounded, provenance-rich DBSCAN (G15) and the honest client-side presence-background logistic phase of G5.
+- [ ] Add optional true-MaxEnt/elapid execution (Phase 4) and any higher-scale worker-backed raster WLC required beyond the current bounded browser methods.
 - [ ] Wire change-detection outputs to the Time Slider for the animation story.
 - **Current verification:** focused GeoSpaX/store suites pass; all six drop-ins build; representative vector/raster workflows and all six mounted panels pass browser smoke validation. Full FR422 guide reproduction and rewritten screenshots remain Phase 5.
 
@@ -311,7 +316,7 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
 - **Exit criterion:** a student produces the Part B conservation plan document from the app in one click.
 
 ### Phase 4 — Server-side SDM & scale (S–M, optional)
-- [ ] MaxEnt: add `sdm.py` to `backend/geolibre_server` behind an optional `[sdm]` extra (elapid + logistic fallback), mirroring `/vector`'s status-endpoint pattern so the plugin degrades gracefully to client-side logistic GLM; or run scikit-learn GLM in the existing Pyodide worker (no server at all); or keep the Vercel function as a hosted endpoint the plugin calls (fastest, already written).
+- [ ] True MaxEnt: add `sdm.py` to `backend/geolibre_server` behind an optional `[sdm]` extra (elapid), mirroring `/vector`'s status-endpoint pattern so the plugin degrades gracefully to the now-implemented client-side presence-background logistic model; alternatively keep the Vercel function as a hosted endpoint. Never relabel the linear fallback as elapid MaxEnt.
 - [ ] Model evaluation everywhere: AUC/TSS/k-fold on all SDMs (the roadmap flagged its absence; make it a headline rigour feature).
 - [ ] Docker compose for self-hosted GeoSpaX (web + sidecar), documented in `docs/self-hosting` style.
 - **Exit criterion:** MaxEnt-class models available with honest evaluation metrics, server or no server.

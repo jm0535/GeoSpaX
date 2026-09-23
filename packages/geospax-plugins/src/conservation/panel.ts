@@ -7,6 +7,7 @@ import type { AreaMethod } from "@geospax/analysis";
 import { createPanelShell } from "../shared/ui";
 import {
   mountConnectivityTool,
+  mountDbscanTool,
   mountFragmentationTool,
   mountGapTool,
   mountHotspotTool,
@@ -67,20 +68,21 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
   const prioritization = shell.addSection({
     id: "prioritization",
     title: "Prioritization",
-    badge: "MCE / SCP",
+    badge: "MCE / DBSCAN / SCP",
     description:
-      "Build descriptive multi-criteria priority surfaces, identify unprotected high-quality sites, and solve bounded minimum-cost representation problems.",
+      "Build descriptive priority surfaces, screen density-connected occurrence/candidate-site clusters, identify unprotected high-quality sites, and solve bounded minimum-cost representation problems.",
   });
   mountHotspotTool(shell, prioritization);
+  mountDbscanTool(shell, prioritization, "occurrence / candidate-site points");
   mountPriorityTool(shell, prioritization);
   mountScpTool(shell, prioritization);
 
   const sdm = shell.addSection({
     id: "sdm",
     title: "Species models",
-    badge: "BIOCLIM / D²",
+    badge: "BIOCLIM / D² / Logistic",
     description:
-      "Fit corrected environmental-space models without silently substituting coordinates or zero-filled predictors.",
+      "Fit corrected environmental-space models, including an explicitly labelled presence-background logistic fallback, without substituting coordinates or zero-filled predictors.",
   });
   mountSdmTool(shell, sdm, "species");
 

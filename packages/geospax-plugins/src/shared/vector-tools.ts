@@ -1,10 +1,12 @@
 import type { Feature, Geometry, MultiPolygon, Point, Polygon } from "geojson";
 import {
   connectivityAnalysis,
+  dbscanClusters,
   distanceDecay,
   featureSuitability,
   fitBioclim,
   fitMahalanobis,
+  fitPresenceBackgroundLogistic,
   formatArea,
   fragmentationAnalysis,
   hotspotGrid,
@@ -12,6 +14,7 @@ import {
   nearestNeighbourIndex,
   predictBioclim,
   predictMahalanobis,
+  predictPresenceBackgroundLogistic,
   priorityAreas,
   protectionGap,
   provenanceForSdm,
@@ -880,27 +883,134 @@ export function mountPointPatternTool(shell: PanelShell, parent: HTMLElement, su
   });
 }
 
+export function mountDbscanTool(shell: PanelShell, parent: HTMLElement, subject = "occurrences"): void {
+  const card = shell.addTool(parent, {
+    id: "dbscan",
+    title: "DBSCAN clusters",
+    description: `Identify density-connected groups and noise among ${subject} without pre-selecting a cluster count.`,
+    method: "Haversine-distance DBSCAN. Minimum points includes the point itself; automatic epsilon is median nearest-neighbour distance × the declared multiplier.",
+  });
+  const source = layerPicker(shell, { kind: "point", placeholder: "— point layer —" });
+  const epsilonMode = selectInput([
+    { value: "auto", label: "Automatic from nearest neighbours" },
+    { value: "manual", label: "Manual radius" },
+  ]);
+  const epsilon = numberInput(1_000, { min: 0.01, step: 100 });
+  const multiplier = numberInput(1.5, { min: 0.01, step: 0.1 });
+  const minPoints = numberInput(4, { min: 2, step: 1 });
+  const manualEpsilonField = field("Manual epsilon (m)", epsilon);
+  const multiplierField = field("Auto epsilon multiplier", multiplier);
+  const updateMode = () => {
+    const manual = epsilonMode.value === "manual";
+    manualEpsilonField.hidden = !manual;
+    multiplierField.hidden = manual;
+    epsilon.disabled = !manual;
+    multiplier.disabled = manual;
+  };
+  epsilonMode.addEventListener("change", updateMode);
+  updateMode();
+  card.append(
+    field("Point layer", source.select),
+    field("Epsilon mode", epsilonMode),
+    fieldGrid(
+      manualEpsilonField,
+      multiplierField,
+      field("Minimum points (includes self)", minPoints),
+    ),
+  );
+  const run = button("Run DBSCAN");
+  const status = statusRegion();
+  const results = resultRegion();
+  card.append(buttonRow(run), status, results);
+  run.addEventListener("click", () => {
+    void withBusy(run, status, "Finding density-connected point clusters…", () => {
+      if (!source.select.value) throw new Error("Select a point layer.");
+      const minimum = parseFinite(minPoints, "Minimum points");
+      if (!Number.isInteger(minimum) || minimum < 2) {
+        throw new Error("Minimum points must be an integer of at least two.");
+      }
+      const output = dbscanClusters(source.features(), {
+        minPoints: minimum,
+        ...(epsilonMode.value === "manual"
+          ? { epsilonM: parsePositive(epsilon, "Manual epsilon") }
+          : { epsilonMultiplier: parsePositive(multiplier, "Auto epsilon multiplier") }),
+      });
+      if (!output.ok) throw new Error(output.error);
+      const provenance = {
+        ...output.provenance,
+        params: {
+          ...output.provenance.params,
+          sourceLayer: source.select.value,
+          sourceLayerName: layerName(shell, source.select.value),
+        },
+      };
+      const outputId = addOutputLayer(shell, `DBSCAN clusters — ${layerName(shell, source.select.value)}`, output.features, provenance);
+      setStatus(
+        status,
+        output.clusterCount ? "success" : "warning",
+        output.clusterCount
+          ? `Found ${output.clusterCount} cluster(s); ${output.noiseCount} point(s) are noise.`
+          : `No clusters met the selected density rule; all ${output.noiseCount} point(s) are labelled noise.`,
+      );
+      renderKeyValueTable(results, [
+        ["Input points", output.pointCount],
+        ["Clusters", output.clusterCount],
+        ["Cluster sizes", output.clusterSizes.length ? output.clusterSizes.join(", ") : "None"],
+        ["Core points", output.corePointCount],
+        ["Noise points", output.noiseCount],
+        ["Median nearest-neighbour", `${formatNumber(output.medianNearestNeighbourM, 1)} m`],
+        ["Epsilon", `${formatNumber(output.epsilonM, 1)} m${output.epsilonWasAutomatic ? " (automatic)" : " (manual)"}`],
+        ["Minimum points", `${output.minPoints} (includes self)`],
+      ], "DBSCAN result");
+      appendNotice(results, "DBSCAN results are scale-dependent. Report epsilon and minimum points, and re-run sensitivity checks before treating clusters as ecological units.", "warning");
+      if (output.automaticEpsilonFloorApplied) {
+        appendNotice(results, "All median nearest-neighbour distances were zero, so automatic epsilon used its disclosed 1 m floor.", "warning");
+      }
+      shell.recordRun(runRecord("dbscan-clustering", "DBSCAN clusters", provenance, [outputId], {
+        points: output.pointCount,
+        clusters: output.clusterCount,
+        noise: output.noiseCount,
+        epsilonM: output.epsilonM,
+        medianNearestNeighbourM: output.medianNearestNeighbourM,
+        minPoints: output.minPoints,
+      }));
+    });
+  });
+}
+
 interface SdmVariableRow {
   wrapper: HTMLDivElement;
   field: HTMLSelectElement;
 }
 
 function valuesForFields(feature: Feature<Geometry | null>, fields: string[]): number[] {
-  return fields.map((fieldName) => Number(feature.properties?.[fieldName]));
+  return fields.map((fieldName) => {
+    const value = feature.properties?.[fieldName];
+    return typeof value === "number" && Number.isFinite(value) ? value : Number.NaN;
+  });
+}
+
+function deterministicRowSample(rows: number[][], limit: number): number[][] {
+  if (rows.length <= limit) return rows;
+  if (limit === 1) return [rows[0]];
+  return Array.from({ length: limit }, (_, index) =>
+    rows[Math.round(index * (rows.length - 1) / (limit - 1))],
+  );
 }
 
 export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "species"): void {
   const card = shell.addTool(parent, {
     id: "sdm",
     title: "Species distribution model",
-    description: `Fit BIOCLIM or Mahalanobis environmental-space models to ${subject} presence records, then score a prediction feature layer.`,
-    method: "Environmental values must already be numeric attributes on both layers. Missing rows are excluded—not replaced with zero—and the model never falls back to coordinates.",
+    description: `Fit BIOCLIM, Mahalanobis, or an explicit presence-background logistic fallback to ${subject} records, then score a prediction feature layer.`,
+    method: "Environmental values must already be numeric attributes on both layers. Missing rows are excluded—not replaced with zero—and no model falls back to coordinates. The logistic option is a declared linear fallback, not elapid MaxEnt.",
   });
   const presences = layerPicker(shell, { kind: "point", placeholder: "— presence points —" });
   const prediction = layerPicker(shell, { kind: "vector", placeholder: "— prediction features —" });
   const modelType = selectInput([
     { value: "bioclim", label: "BIOCLIM percentile envelope" },
     { value: "mahalanobis", label: "Mahalanobis D²" },
+    { value: "logistic", label: "Presence-background logistic (not elapid MaxEnt)" },
   ]);
   const bioclimMode = selectInput([
     { value: "limiting", label: "Limiting factor (true envelope)" },
@@ -911,6 +1021,8 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
     { value: "chisq", label: "Chi-square survival probability" },
     { value: "index", label: "1/(1+D) relative index" },
   ]);
+  const logisticLambda = numberInput(0.01, { min: 0, step: 0.01 });
+  const backgroundLimit = numberInput(2_000, { min: 10, max: 5_000, step: 10 });
   card.append(
     fieldGrid(field("Presence points", presences.select), field("Prediction layer", prediction.select)),
     field("Model", modelType),
@@ -948,10 +1060,29 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
   presences.select.addEventListener("change", refreshVariables);
   prediction.select.addEventListener("change", refreshVariables);
   shell.onLayersChanged(refreshVariables);
-  card.append(
-    fieldGrid(field("BIOCLIM tail trim (%)", percentile), field("BIOCLIM output", bioclimMode)),
-    field("Mahalanobis output", mahalanobisOutput),
+  const bioclimControls = fieldGrid(
+    field("BIOCLIM tail trim (%)", percentile),
+    field("BIOCLIM output", bioclimMode),
   );
+  const mahalanobisControls = field("Mahalanobis output", mahalanobisOutput);
+  const logisticControls = fieldGrid(
+    field("Logistic L2 penalty", logisticLambda),
+    field("Maximum background rows", backgroundLimit),
+  );
+  const updateModelControls = () => {
+    const model = modelType.value;
+    bioclimControls.hidden = model !== "bioclim";
+    mahalanobisControls.hidden = model !== "mahalanobis";
+    logisticControls.hidden = model !== "logistic";
+    percentile.disabled = model !== "bioclim";
+    bioclimMode.disabled = model !== "bioclim";
+    mahalanobisOutput.disabled = model !== "mahalanobis";
+    logisticLambda.disabled = model !== "logistic";
+    backgroundLimit.disabled = model !== "logistic";
+  };
+  modelType.addEventListener("change", updateModelControls);
+  updateModelControls();
+  card.append(bioclimControls, mahalanobisControls, logisticControls);
   const add = button("Add variable", "secondary");
   const run = button("Fit and predict SDM");
   const status = statusRegion();
@@ -980,14 +1111,28 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
       const outputFeatures: Feature<Geometry | null>[] = [];
       let validPredictions = 0;
       let missingPredictions = 0;
-      let provenance;
+      let provenance: ReturnType<typeof provenanceForSdm>;
       let regularized = false;
+      let modelLabel = "";
+      let logisticConverged: boolean | null = null;
+      let logisticIterations: number | null = null;
+      let logisticBackground = 0;
+      let logisticCoefficientSummary = "";
+      let logisticConstantVariables: string[] = [];
+      const sourceLineage = {
+        presenceLayer: presences.select.value,
+        presenceLayerName: layerName(shell, presences.select.value),
+        predictionLayer: prediction.select.value,
+        predictionLayerName: layerName(shell, prediction.select.value),
+      };
       if (modelType.value === "bioclim") {
+        modelLabel = "BIOCLIM";
         const trim = parseFinite(percentile, "BIOCLIM tail trim");
         const model = fitBioclim(completeTraining, fields, { percentile: trim });
         if (!model) throw new Error("BIOCLIM could not fit the supplied complete records and percentile.");
         provenance = provenanceForSdm("bioclim", {
           variables: fields,
+          ...sourceLineage,
           recordsUsed: model.n,
           recordsDropped: dropped,
           percentile: trim,
@@ -1012,12 +1157,14 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
             },
           });
         });
-      } else {
+      } else if (modelType.value === "mahalanobis") {
+        modelLabel = "Mahalanobis D²";
         const model = fitMahalanobis(completeTraining, fields);
         if (!model?.invCov) throw new Error("The covariance matrix could not be inverted, even with disclosed ridge regularisation.");
         regularized = model.regularized;
         provenance = provenanceForSdm("mahalanobis", {
           variables: fields,
+          ...sourceLineage,
           recordsUsed: model.n,
           recordsDropped: dropped,
           output: mahalanobisOutput.value,
@@ -1043,23 +1190,114 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
             },
           });
         });
+      } else {
+        modelLabel = "Presence-background logistic";
+        const lambda = parseFinite(logisticLambda, "Logistic L2 penalty");
+        if (lambda < 0) throw new Error("Logistic L2 penalty cannot be negative.");
+        const limit = parseFinite(backgroundLimit, "Maximum background rows");
+        if (!Number.isInteger(limit) || limit < 10 || limit > 5_000) {
+          throw new Error("Maximum background rows must be an integer from 10 to 5,000.");
+        }
+        const completeBackground = predictionFeatures
+          .map((feature) => valuesForFields(feature, fields))
+          .filter((row) => row.every(Number.isFinite));
+        if (completeBackground.length < 10) {
+          throw new Error(`Presence-background logistic needs at least 10 complete background/prediction rows; found ${completeBackground.length}.`);
+        }
+        const background = deterministicRowSample(completeBackground, limit);
+        const model = fitPresenceBackgroundLogistic(completeTraining, background, fields, { lambda });
+        if (!model) throw new Error("Presence-background logistic fitting failed for the supplied complete rows and parameters.");
+        logisticConverged = model.converged;
+        logisticIterations = model.iterations;
+        logisticBackground = model.nBackground;
+        logisticCoefficientSummary = [
+          `intercept: ${formatNumber(model.intercept, 4)}`,
+          ...fields.map((fieldName, index) => `${fieldName}: ${formatNumber(model.coefficients[index], 4)}`),
+        ].join("; ");
+        logisticConstantVariables = model.constantVariables;
+        provenance = provenanceForSdm("presence-background-logistic", {
+          variables: fields,
+          ...sourceLineage,
+          recordsUsed: model.nPresences,
+          recordsDropped: dropped,
+          backgroundLayer: prediction.select.value,
+          completeBackgroundRows: completeBackground.length,
+          backgroundRowsUsed: model.nBackground,
+          backgroundSampling: completeBackground.length > model.nBackground
+            ? "deterministic evenly spaced sample in feature order"
+            : "all complete prediction rows",
+          classWeighting: "equal total weight for presence and background",
+          linearFeaturesOnly: true,
+          l2Penalty: model.lambda,
+          converged: model.converged,
+          iterations: model.iterations,
+          loss: model.loss,
+          optimizerRidge: model.optimizerRidge,
+          intercept: model.intercept,
+          coefficients: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.coefficients[index]])),
+          standardizationMean: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.mean[index]])),
+          standardizationScale: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.scale[index]])),
+          constantVariables: model.constantVariables,
+          trueMaxentOrElapid: false,
+          predictionInput: "numeric feature attributes",
+        });
+        predictionFeatures.forEach((feature) => {
+          const suitability = predictPresenceBackgroundLogistic(valuesForFields(feature, fields), model);
+          if (suitability === null) missingPredictions++;
+          else validPredictions++;
+          outputFeatures.push({
+            type: "Feature",
+            id: feature.id,
+            bbox: feature.bbox,
+            geometry: feature.geometry,
+            properties: {
+              ...(feature.properties ?? {}),
+              sdm_model: "Presence-background logistic",
+              sdm_suitability: suitability,
+              sdm_nodata: suitability === null,
+            },
+          });
+        });
       }
       const outputId = addOutputLayer(shell, `${subject} SDM — ${modelType.value}`, outputFeatures, provenance);
-      setStatus(status, "success", `Scored ${validPredictions.toLocaleString()} prediction feature(s).`);
-      renderKeyValueTable(results, [
-        ["Model", modelType.value === "bioclim" ? "BIOCLIM" : "Mahalanobis D²"],
+      setStatus(
+        status,
+        logisticConverged === false ? "warning" : "success",
+        logisticConverged === false
+          ? `Scored ${validPredictions.toLocaleString()} feature(s), but logistic optimisation reached its iteration/step limit.`
+          : `Scored ${validPredictions.toLocaleString()} prediction feature(s).`,
+      );
+      const resultRows: Array<[string, string | number]> = [
+        ["Model", modelLabel],
         ["Variables", fields.join(", ")],
         ["Presence records used", completeTraining.length],
         ["Presence records dropped", dropped],
         ["Valid predictions", validPredictions],
         ["Prediction rows with missing data", missingPredictions],
         ["Covariance regularised", modelType.value === "mahalanobis" ? (regularized ? "Yes" : "No") : "Not applicable"],
-      ], "SDM result");
+      ];
+      if (modelType.value === "logistic") {
+        resultRows.push(
+          ["Background rows used", logisticBackground],
+          ["Optimiser converged", logisticConverged ? "Yes" : "No"],
+          ["Optimiser iterations", logisticIterations ?? 0],
+          ["Standardised coefficients", logisticCoefficientSummary],
+          ["Constant predictors", logisticConstantVariables.length ? logisticConstantVariables.join(", ") : "None"],
+        );
+      }
+      renderKeyValueTable(results, resultRows, "SDM result");
       if (dropped) appendNotice(results, `${dropped} incomplete presence record(s) were excluded, not filled with zero.`, "warning");
       if (missingPredictions) appendNotice(results, `${missingPredictions} prediction feature(s) have no score because at least one selected variable is missing.`, "warning");
       if (regularized) appendNotice(results, "The covariance was singular/near-singular; ridge regularisation was applied and recorded in provenance.", "warning");
       if (modelType.value === "bioclim" && bioclimMode.value === "proportion") {
         appendNotice(results, "Proportion-in-envelope is a non-standard BIOCLIM index, not true limiting-factor BIOCLIM.", "warning");
+      }
+      if (modelType.value === "logistic") {
+        appendNotice(results, "This is a class-balanced, linear presence-background logistic fallback—not elapid MaxEnt. Scores are relative suitability against the selected background layer, not calibrated occurrence probabilities.", "warning");
+        appendNotice(results, "The prediction layer also defines environmental background availability; changing its extent or sampling changes the fitted model.");
+        if (logisticConstantVariables.length) {
+          appendNotice(results, `Constant predictor(s) carry no discrimination: ${logisticConstantVariables.join(", ")}.`, "warning");
+        }
       }
       shell.recordRun(runRecord(modelType.value, `${subject} SDM`, provenance, [outputId], {
         recordsUsed: completeTraining.length,
@@ -1067,6 +1305,8 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
         validPredictions,
         missingPredictions,
         regularized,
+        logisticBackground: modelType.value === "logistic" ? logisticBackground : null,
+        logisticConverged: modelType.value === "logistic" ? logisticConverged : null,
       }));
     });
   });

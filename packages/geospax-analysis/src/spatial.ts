@@ -258,4 +258,217 @@ export function nearestNeighbourIndex(
   };
 }
 
+export interface DbscanOptions {
+  /** Neighbourhood radius in metres. Omit to derive it from nearest neighbours. */
+  epsilonM?: number;
+  /** Multiplier applied to the median nearest-neighbour distance (default 1.5). */
+  epsilonMultiplier?: number;
+  /** Minimum points in a core neighbourhood, including the point itself (default 4). */
+  minPoints?: number;
+  /** Browser safety bound (default 2,000 points). */
+  maxPoints?: number;
+}
+
+export interface DbscanResult {
+  ok: true;
+  features: Feature<Point>[];
+  pointCount: number;
+  clusterCount: number;
+  noiseCount: number;
+  corePointCount: number;
+  clusterSizes: number[];
+  epsilonM: number;
+  epsilonWasAutomatic: boolean;
+  epsilonMultiplier: number;
+  medianNearestNeighbourM: number;
+  automaticEpsilonFloorApplied: boolean;
+  minPoints: number;
+  provenance: ProvenanceStamp;
+}
+
+function median(values: number[]): number {
+  const sorted = [...values].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0
+    ? (sorted[middle - 1] + sorted[middle]) / 2
+    : sorted[middle];
+}
+
+/**
+ * Density-based point clustering with haversine distances. Cluster IDs are
+ * deterministic for a fixed input order; noise is retained with ID -1 rather
+ * than silently dropped from the result layer.
+ */
+export function dbscanClusters(
+  features: AnyFeature[] | null | undefined,
+  options: DbscanOptions = {},
+): DbscanResult | { ok: false; error: string } {
+  const points = (features ?? []).filter(
+    (feature): feature is Feature<Point> => feature.geometry?.type === "Point",
+  );
+  if (points.length < 2) return { ok: false, error: "DBSCAN needs at least two point features." };
+  const maxPoints = options.maxPoints ?? 2_000;
+  if (!Number.isInteger(maxPoints) || maxPoints < 2 || maxPoints > 2_000) {
+    return { ok: false, error: "DBSCAN maxPoints must be an integer from two to 2,000." };
+  }
+  if (points.length > maxPoints) {
+    return {
+      ok: false,
+      error: `DBSCAN is bounded to ${maxPoints.toLocaleString()} points in-browser; filter or sample the ${points.length.toLocaleString()} input points.`,
+    };
+  }
+  const minPoints = options.minPoints ?? 4;
+  if (!Number.isInteger(minPoints) || minPoints < 2) {
+    return { ok: false, error: "DBSCAN minimum points must be an integer of at least two." };
+  }
+  const epsilonMultiplier = options.epsilonMultiplier ?? 1.5;
+  if (!Number.isFinite(epsilonMultiplier) || epsilonMultiplier <= 0) {
+    return { ok: false, error: "DBSCAN epsilon multiplier must be greater than zero." };
+  }
+
+  const coordinates = points.map((point) => point.geometry.coordinates as [number, number]);
+  if (coordinates.some(([longitude, latitude]) =>
+    !Number.isFinite(longitude) || !Number.isFinite(latitude) ||
+    longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90
+  )) {
+    return { ok: false, error: "DBSCAN point coordinates must contain finite longitude/latitude values." };
+  }
+  const nearest = new Array(points.length).fill(Number.POSITIVE_INFINITY);
+  for (let left = 0; left < points.length; left++) {
+    for (let right = left + 1; right < points.length; right++) {
+      const distance = haversineM(coordinates[left], coordinates[right]);
+      if (distance < nearest[left]) nearest[left] = distance;
+      if (distance < nearest[right]) nearest[right] = distance;
+    }
+  }
+
+  const epsilonWasAutomatic = options.epsilonM === undefined;
+  const medianNearestNeighbourM = median(nearest);
+  let epsilonM = options.epsilonM ?? medianNearestNeighbourM * epsilonMultiplier;
+  // Coincident-only inputs have a zero nearest-neighbour median. One metre is
+  // an explicit deterministic floor, not a change of distance method.
+  const automaticEpsilonFloorApplied = epsilonWasAutomatic && epsilonM === 0;
+  if (automaticEpsilonFloorApplied) epsilonM = 1;
+  if (!Number.isFinite(epsilonM) || epsilonM <= 0) {
+    return { ok: false, error: "DBSCAN epsilon must be a finite distance greater than zero." };
+  }
+
+  const neighbourhoodCache = new Map<number, number[]>();
+  const neighbours = (index: number): number[] => {
+    const cached = neighbourhoodCache.get(index);
+    if (cached) return cached;
+    const matches: number[] = [];
+    for (let candidate = 0; candidate < points.length; candidate++) {
+      if (
+        candidate === index ||
+        haversineM(coordinates[index], coordinates[candidate]) <= epsilonM
+      ) {
+        matches.push(candidate);
+      }
+    }
+    neighbourhoodCache.set(index, matches);
+    return matches;
+  };
+
+  const unclassified = -2;
+  const noise = -1;
+  const labels = new Array(points.length).fill(unclassified);
+  const visited = new Uint8Array(points.length);
+  const core = new Uint8Array(points.length);
+  let clusterCount = 0;
+
+  for (let index = 0; index < points.length; index++) {
+    if (visited[index]) continue;
+    visited[index] = 1;
+    const seedNeighbours = neighbours(index);
+    if (seedNeighbours.length < minPoints) {
+      labels[index] = noise;
+      continue;
+    }
+
+    core[index] = 1;
+    labels[index] = clusterCount;
+    const queue = [...seedNeighbours];
+    const queued = new Set(seedNeighbours);
+    for (let cursor = 0; cursor < queue.length; cursor++) {
+      const candidate = queue[cursor];
+      if (!visited[candidate]) {
+        visited[candidate] = 1;
+        const candidateNeighbours = neighbours(candidate);
+        if (candidateNeighbours.length >= minPoints) {
+          core[candidate] = 1;
+          for (const neighbour of candidateNeighbours) {
+            if (!queued.has(neighbour)) {
+              queued.add(neighbour);
+              queue.push(neighbour);
+            }
+          }
+        }
+      }
+      if (labels[candidate] === unclassified || labels[candidate] === noise) {
+        labels[candidate] = clusterCount;
+      }
+    }
+    clusterCount++;
+  }
+
+  const clusterSizes = new Array(clusterCount).fill(0);
+  labels.forEach((label) => {
+    if (label >= 0) clusterSizes[label]++;
+  });
+  const noiseCount = labels.filter((label) => label === noise).length;
+  const corePointCount = core.reduce((sum, value) => sum + value, 0);
+  const provenance = makeProvenance(
+    "dbscan-clustering",
+    "DBSCAN with haversine neighbourhood distances",
+    "EPSG:4326 point coordinates; great-circle distances in metres",
+    {
+      pointCount: points.length,
+      epsilonM,
+      epsilonWasAutomatic,
+      epsilonMultiplier: epsilonWasAutomatic ? epsilonMultiplier : null,
+      medianNearestNeighbourM,
+      automaticEpsilonRule: epsilonWasAutomatic
+        ? "median nearest-neighbour distance × multiplier; 1 m floor when the median is zero"
+        : null,
+      automaticEpsilonFloorApplied,
+      minPoints,
+      minPointsIncludesSelf: true,
+      clusterCount,
+      noiseCount,
+      browserPointLimit: maxPoints,
+    },
+  );
+  const output = points.map((point, index) => ({
+    type: "Feature" as const,
+    id: point.id,
+    bbox: point.bbox,
+    geometry: point.geometry,
+    properties: {
+      ...(point.properties ?? {}),
+      dbscan_cluster: labels[index] >= 0 ? labels[index] + 1 : -1,
+      dbscan_noise: labels[index] === noise,
+      dbscan_core: Boolean(core[index]),
+      _geospax: provenance,
+    },
+  }));
+
+  return {
+    ok: true,
+    features: output,
+    pointCount: points.length,
+    clusterCount,
+    noiseCount,
+    corePointCount,
+    clusterSizes,
+    epsilonM,
+    epsilonWasAutomatic,
+    epsilonMultiplier,
+    medianNearestNeighbourM,
+    automaticEpsilonFloorApplied,
+    minPoints,
+    provenance,
+  };
+}
+
 void (null as MultiPolygon | null);
