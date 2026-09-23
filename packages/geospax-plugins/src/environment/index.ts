@@ -35,6 +35,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-environment",
         title: () => app.translate?.("geospax.environment.title", "Environment") ?? "Environment",
         dock: "right-of-style",
+        deactivatePluginOnClose: true,
         defaultWidth: 400,
         render: (container: HTMLElement) => mountEnvironmentPanel(container, app),
         onOpen: () => {

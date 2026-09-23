@@ -15,6 +15,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-marine",
         title: () => app.translate?.("geospax.marine.title", "GSX Marine") ?? "GSX Marine",
         dock: "right-of-style",
+        deactivatePluginOnClose: true,
         defaultWidth: 400,
         render: (c: HTMLElement) => mountMarinePanel(c, app),
       }) ?? null;

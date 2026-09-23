@@ -34,6 +34,10 @@ workbench once and it stays active across sessions:
 4. The panel docks on the **far-right edge** of the map, beside the Style
    rail. Its sections are collapsible — click a section header to expand it.
 
+Closing a workbench's panel (the **×** in its header) also **deactivates the
+plugin** — it is unchecked in Plugins → Manage Plugins and its rail icon is
+removed. Activate it again whenever you need it back.
+
 ## Common concepts
 
 - **Layers first.** Every tool reads from the layers already on your map and
