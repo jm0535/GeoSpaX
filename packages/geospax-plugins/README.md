@@ -10,10 +10,10 @@ with no upstream source edits (see `docs/plugin-api.md` §External plugins →
 | id | Version | Contents |
 |---|---|---|
 | `geospax-conservation` | v0.1.0 | Right-panel “Conservation Planning”: protection gap analysis with equal-area hectares, method declarations, closure checks, provenance-stamped result layers |
-| `geospax-biodiversity` | v0.1.0 | **Biodiversity** domain pack — GBIF/OBIS/iNat/WoRMS connectors, H3/DGGS gridding, richness & SDM tools (stub; full pack ships with analysis v0.4.0) |
-| `geospax-forestry` | v0.1.0 | **Forestry** domain pack — GFW / Hansen / canopy-height, fragmentation & connectivity stubs (full pack ships with analysis v0.4.0) |
-| `geospax-marine` | v0.1.0 | **Marine** domain pack — OBIS/GBIF marine, World Bank/SPREP + GEBCO bathymetry, ecoregion catalogue stubs |
-| `geospax-agriculture` | v0.1.0 | **Agriculture** domain pack — crop-suitability WLC, NDVI phenology & agriculture indices stubs |
+| `geospax-biodiversity` | v0.1.0 | **Biodiversity** domain pack — live GBIF/OBIS/iNaturalist fetch (taxon+bbox→GeoJSON, citation + `_geospax` provenance), WoRMS Aphia lookup, plus layer-based richness / Shannon / Simpson indices (counts per community) |
+| `geospax-forestry` | v0.1.0 | **Forestry** domain pack — polygon patch fragmentation (`patchMetrics` + `summarizeFragmentation`, equal-area ha) + thresholded connectivity graph (`connectivityGraph` at distance m, components/isolated), centroids + edges added as stamped layers; catalogue citation GFW/Hansen |
+| `geospax-marine` | v0.1.0 | **Marine** domain pack — OBIS marine occurrence fetch, GEBCO bathymetry tile-pattern helper + XYZ layer, WWF ecoregion (846/232/62) & Allen Coral / mangrove catalogue, SPREP Pacific — all citation-carried |
+| `geospax-agriculture` | v0.1.0 | **Agriculture** domain pack — WLC crop suitability (graded 0–1, benefit/cost, /100 auto-normalise, distance-decay half-life helper) with provenance-stamped suitability point/polygon; optional context polygon ha reporting |
 | `geospax-environment` | **v0.1.0 — sixth drop-in** | Right-panel “Environment”: **Slope zones** — any DEM + band + two class breaks → Horn slope/aspect over the current view (pixel metres computed at the window's centre latitude) → steep-class polygons with equal-area area tables, pixel size and excluded-cell counts shown, resolution warning surfaced; **Index extent** — NDVI / NDWI / NDBI / NBR presets or a custom band pair → normalized-difference grid → stats table (range, mean, valid cells), histogram with Otsu-suggested threshold, dissolve-polygonized extent layer stamped `_geospax` — with the band-assignment caveat printed on every result |
 
 ## Build

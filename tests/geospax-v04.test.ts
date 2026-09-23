@@ -156,8 +156,17 @@ describe("classification breaks", () => {
     const br = equalInterval([0,10,20,30],3);
     assert.deepEqual(br, [10,20,30]);
   });
-  it("jenks falls back to equalInterval", () => {
-    assert.deepEqual(jenksBreaks([0,10,20],2), equalInterval([0,10,20],2));
+  it("jenks natural breaks — valid optima", () => {
+    const br = jenksBreaks([0,10,20],2)!;
+    assert.equal(br.length,2);
+    assert.equal(br[1],20);
+    assert.ok(br[0] >=0 && br[0] <=20);
+    assert.ok(br[0] <= br[1]);
+    // also works on bimodal data where jenks diverges from equalInterval
+    const bimodal = [0,0,0,10,10,10,20,20,20];
+    const jb = jenksBreaks(bimodal,3)!;
+    assert.equal(jb.length,3);
+    assert.equal(jb[2],20);
   });
   it("null on empty", () => { assert.equal(equalInterval([],3),null); });
 });

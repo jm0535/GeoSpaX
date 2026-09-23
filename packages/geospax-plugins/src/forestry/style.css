@@ -1,2 +1,13 @@
-.gsp-forestry-root { padding: 10px 12px; font-size: 13px; display:flex; flex-direction:column; gap:8px; }
-.gsp-forestry-hint { opacity:0.75; font-size:11.5px; line-height:1.4; }
+/* GeoSpaX Forestry — scoped .gsp-for-* */
+.gsp-forestry-root, .gsp-for-root { padding: 10px 12px; font-size: 13px; display:flex; flex-direction:column; gap:8px; }
+.gsp-forestry-hint, .gsp-for-hint { opacity:0.75; font-size:11.5px; line-height:1.4; }
+.gsp-for-title { margin:0; font-weight:700; font-size:13px; }
+.gsp-for-row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.gsp-for-label { font-size:12px; font-weight:600; }
+.gsp-for-input, .gsp-for-select { font-size:12px; padding:4px 6px; border:1px solid rgba(128,128,128,0.3); border-radius:6px; }
+.gsp-for-run { padding:6px 10px; font-size:12.5px; border-radius:6px; border:1px solid rgba(128,128,128,0.3); background:rgba(34,139,34,0.12); cursor:pointer; }
+.gsp-for-run:hover { background:rgba(34,139,34,0.18); }
+.gsp-for-status { font-size:12px; margin:4px 0; }
+.gsp-for-warn { color:#9a3b0f; background:rgba(255,160,0,0.12); padding:4px 6px; border-radius:6px; }
+.gsp-for-table { width:100%; border-collapse:collapse; font-size:12px; }
+.gsp-for-table td, .gsp-for-table th { border:1px solid rgba(128,128,128,0.2); padding:4px 6px; text-align:left; }
