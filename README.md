@@ -1,5 +1,10 @@
-# GeoLibre
+# GeoSpaX 2.0.0 — Conservation & Ecology GIS
 
+> **GeoSpaX 2.0.0** is a conservation & ecology specialisation of **[GeoLibre 3.0.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* six conservation domain plugins.
+
+[![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)
+[![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.0.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
+[![GeoSpaX docs](https://img.shields.io/badge/Docs-GeoSpaX%20plugins%20%E2%86%92%20packages%2Fgeospax--plugins%2FREADME.md-green.svg)](packages/geospax-plugins/README.md)
 [![Launch GeoLibre Web](https://img.shields.io/badge/Launch-GeoLibre%20Web-green.svg)](https://web.geolibre.app/)
 [![GeoLibre shared project](https://img.shields.io/badge/GeoLibre-share-green.svg)](https://share.geolibre.app)
 [![GeoLibre plugins](https://img.shields.io/badge/GeoLibre-plugins-green.svg)](https://plugins.geolibre.app)
@@ -44,6 +49,41 @@ capabilities, credentials, and current compatibility.
 - **[Get started](https://geolibre.app/getting-started/)** — install, run from source, and configure
 - **[Features](https://geolibre.app/features/)** — the complete feature list
 - **[Rendering engines](https://geolibre.app/user-guide/rendering-engines/)** — compare MapLibre, Mapbox, Cesium, and ArcGIS and learn how to switch or combine them.
+
+## GeoSpaX — what's new in 2.0.0
+
+> **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` remains live at `geospax.in4metrix.dev`; v2 is the forward path.
+
+GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **six bundled plugins** (`activeByDefault:true`, `public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins):
+
+| id | v2.0.0 contents |
+|---|---|
+| `geospax-conservation` | Protection gap (equal-area ha, honest method/crs, closure check, `_geospax` provenance) |
+| `geospax-environment` | **Slope zones** (Horn slope/aspect sampling, pixel metres at view centre, resolution warning) + **Index extent** (NDVI/NDWI/NDBI/NBR/custom → stats, histogram, Otsu, dissolve polygons, `BAND_ASSIGNMENT_CAVEAT` printed on every result) |
+| `geospax-biodiversity` | Live **GBIF/OBIS/iNaturalist** (taxon+bbox→GeoJSON, citation) + **WoRMS** taxonomy, plus **richness/Shannon/Simpson** over your layers |
+| `geospax-forestry` | **Fragmentation** (`patchMetrics`, `summarizeFragmentation` equal-area ha) + **connectivity** (haversine threshold graph, components/isolated) → stamped centroids/edges |
+| `geospax-marine` | **OBIS marine**, **GEBCO** tile helper, **WWF ecoregions** 846/232/62 + Allen Coral, **SPREP** Pacific — all citation-carried |
+| `geospax-agriculture` | **WLC** crop suitability (graded 0–1, benefit/cost, `/100` auto-normalise, exponential distance-decay half-life) |
+
+**Analysis core `@geospax/analysis` v2.0.0** (18 modules, dependency-light, pure functions, provenance-stamped; ported from `js/geospax-conservation*.js` / `geospax-sdm-fix.js` / `geospax-raster.js`):
+
+`gap` · `geometry` · `overlay` · `provenance` · `units` · `terrain` · `raster` · `sdm` (BIOCLIM/Mahalanobis) · `suitability` (WLC) · `fragmentation` · `connectivity` · `statistics` · `change` · `hydrology` (D8) · `biodiversity` · `indices` · `classification` (equal-interval + **Fisher-Jenks** natural breaks) · `scp` (greedy + **HiGHS-WASM exact** with graceful fallback — browser-native, beyond v1).
+
+**Data `@geospax/data` v2.0.0** (10 citation-carrying tiers: 5 live `CONNECTORS` + 5 `CATALOGUE_TIERS` = `ALL_SOURCES` 10):
+
+- Live: GBIF, OBIS, iNaturalist, WoRMS, World Bank — `gbifSearchUrl`/`fetchGbifOccurrences` etc, `citationString`
+- Catalogue: GEBCO, WWF ecoregions, Hansen/GFW forest, Allen Coral marine, SPREP Pacific
+
+Build drop-ins: `npm run build -w @geospax/plugins` → `apps/geolibre-desktop/public/plugins/<id>/` (`plugin.json` + `dist/`). Typecheck: `npx tsc --noEmit -p packages/geospax-*/tsconfig.json` — zero errors in geospax sources (upstream `WorkerGlobalScope` is pre-existing).
+
+**v1 parity formally superseded:**
+
+| v1 bundle | Now lives in | Status |
+|---|---|---|
+| `geospax-conservation.js` | analysis core + Conservation §1–6 | superseded |
+| `geospax-conservation-m2.js` | raster pipeline + Conservation §8 | superseded |
+| `geospax-sdm-fix.js` | `sdm.ts` + Conservation §7 | superseded |
+| `geospax-raster.js` | `raster.ts` + Conservation/Environment panels | superseded |
 
 ## Demos
 
@@ -199,15 +239,21 @@ GeoLibre is built on the free and open-source geospatial and web communities —
 - **Community contributors** — thanks to [**Ryanphoenix**](https://github.com/Ryanphoenix) for many valued contributions, including issue reports, feedback, and improvements.
 - **Beta testers** — thanks to [**René van der Velde**](https://github.com/renevandervelde) (Netherlands) for early testing, detailed bug reports, and feature requests.
 
-## Citation
+## Citation — GeoSpaX + GeoLibre
 
-If you use GeoLibre in your work, please cite it. GeoLibre is archived on [Zenodo](https://zenodo.org/), which mints a DOI for every release. The concept DOI below always resolves to the latest version.
+If you use **GeoSpaX** in your work, cite **both** GeoSpaX (the conservation extension) and GeoLibre (the platform). `CITATION.cff` at the repo root is for GeoSpaX 2.0.0; GeoLibre's own citation is on [geolibre.app/citation](https://geolibre.app/citation/).
+
+**GeoSpaX 2.0.0** (this fork — `jm0535/GeoSpaX`, lineage `jm0535/map-kit` v1.4.3 → v2.0.0):
+
+> GeoSpaX contributors (2026). GeoSpaX 2.0.0 — Conservation & ecology GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
+
+**GeoLibre 3.0.0** (upstream — `opengeos/GeoLibre`):
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20785400.svg)](https://doi.org/10.5281/zenodo.20785400)
 
 > Wu, Q. (2026). GeoLibre: A lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data. Zenodo. <https://doi.org/10.5281/zenodo.20785400>
 
-You can also use GitHub's **"Cite this repository"** button (which reads [`CITATION.cff`](CITATION.cff)) to copy a ready-made APA or BibTeX entry. See the [How to Cite](https://geolibre.app/citation/) page for more formats.
+See [How to Cite](https://geolibre.app/citation/) for APA/BibTeX and `cffconvert` usage.
 
 ## License
 

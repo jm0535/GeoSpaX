@@ -16,7 +16,7 @@ import {
 import "./style.css";
 
 /** Must match plugin.json "version" — the loader validates the pair. */
-export const PLUGIN_VERSION = "0.1.0";
+export const PLUGIN_VERSION = "2.0.0";
 
 let unregisterPanel: (() => void) | null = null;
 let appRef: GeoLibreAppAPI | null = null;

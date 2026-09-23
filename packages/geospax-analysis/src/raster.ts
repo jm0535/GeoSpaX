@@ -389,7 +389,7 @@ export function rasterResolutionWarning(
 // canonical home and provide a thin alias if older imports expected "indices").
 // ---------------------------------------------------------------------------
 
-export const RASTER_VERSION = "0.1.0";
+export const RASTER_VERSION = "2.0.0";
 
 // Unused but avoids dead-import warnings in some build setups.
 void formatArea;

@@ -1,7 +1,7 @@
 import type { GeoLibreAppAPI, GeoLibrePlugin } from "@geolibre/plugins";
 import { mountMarinePanel } from "./panel";
 import "./style.css";
-export const PLUGIN_VERSION = "0.1.0";
+export const PLUGIN_VERSION = "2.0.0";
 let unregister: (()=>void)|null=null;
 export const plugin: GeoLibrePlugin = {
   id: "geospax-marine",

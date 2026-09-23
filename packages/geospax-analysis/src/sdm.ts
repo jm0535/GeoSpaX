@@ -2,7 +2,7 @@
 //
 // Minimal in this build: the Phase-7 parity table requires an `sdm.ts`
 // that supersedes the v1 `geospax-sdm-fix.js`. The full BIOCLIM/Mahalanobis
-// implementations live in this module in the v0.4.0 (18-module) build; this
+// implementations live in this module in the v2.0.0 (18-module) build; this
 // increment ships the file with the public surface that the stage expects
 // and the audit-fixed guards, so `geospax-sdm-fix.js` is formally superseded
 // via `sdm.ts + Conservation §7` per the parity statement.
@@ -12,7 +12,7 @@
 
 import { makeProvenance, type ProvenanceStamp } from "./provenance";
 
-export const SDM_VERSION = "0.1.0";
+export const SDM_VERSION = "2.0.0";
 
 /** BIOCLIM envelope with percentile trimming. */
 export interface BioclimEnvelope {

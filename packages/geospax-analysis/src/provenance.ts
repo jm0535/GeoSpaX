@@ -6,8 +6,8 @@
 // project files cannot lose the methodology, and a result can never claim a
 // method it did not use.
 
-/** Bumped with packages/geospax-analysis/package.json. */
-export const GEOSPAX_ANALYSIS_VERSION = "0.4.0";
+/** Bumped with packages/geospax-analysis/package.json — GeoSpaX v2 lineage (v1.4.3 → 2.0.0 platform rewrite). */
+export const GEOSPAX_ANALYSIS_VERSION = "2.0.0";
 
 export interface ProvenanceStamp {
   /** Tool identifier, e.g. "protection-gap". */

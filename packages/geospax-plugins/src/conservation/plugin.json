@@ -1,7 +1,7 @@
 {
   "id": "geospax-conservation",
   "name": "GeoSpaX Conservation Planning",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Conservation planning tools with equal-area hectares, honest method declarations and provenance. Increment 1: protection gap analysis (habitat vs protected areas).",
   "entry": "dist/index.js",
   "style": "dist/style.css",

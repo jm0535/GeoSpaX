@@ -1,6 +1,6 @@
 {
   "name": "@geospax/plugins",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "description": "GeoSpaX domain plugins, built as bundled drop-ins for apps/geolibre-desktop/public/plugins/ (plugin.json + dist/). No upstream GeoLibre file is touched by these plugins.",
   "type": "module",
