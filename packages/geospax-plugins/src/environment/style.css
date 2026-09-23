@@ -1,0 +1,202 @@
+/* GeoSpaX Environment panel — scoped styles (.gsp-env- prefix only). */
+
+.gsp-env-root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.gsp-env-intro {
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.45;
+  font-size: 12.5px;
+}
+
+.gsp-env-section {
+  border: 1px solid rgba(128, 128, 128, 0.22);
+  border-radius: 8px;
+  padding: 10px 10px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(128, 128, 128, 0.04);
+}
+
+.gsp-env-section-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.gsp-env-hint {
+  margin: 0;
+  font-size: 11.5px;
+  opacity: 0.75;
+  line-height: 1.35;
+}
+
+.gsp-env-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gsp-env-row-inline {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.gsp-env-row-inline > * {
+  flex: 1;
+}
+
+.gsp-env-label {
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
+}
+
+.gsp-env-select,
+.gsp-env-input {
+  width: 100%;
+  padding: 5px 6px;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 12.5px;
+  box-sizing: border-box;
+}
+
+.gsp-env-input-narrow {
+  max-width: 96px;
+}
+
+.gsp-env-run {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #97bc62;
+  color: #1c2410;
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.gsp-env-run:hover {
+  filter: brightness(1.06);
+}
+
+.gsp-env-run:disabled {
+  opacity: 0.55;
+  cursor: default;
+  filter: none;
+}
+
+.gsp-env-status {
+  min-height: 1.15em;
+  font-size: 11.5px;
+  opacity: 0.85;
+}
+
+.gsp-env-results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gsp-env-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+
+.gsp-env-table th,
+.gsp-env-table td {
+  text-align: start;
+  padding: 4px 6px;
+  border-top: 1px solid rgba(128, 128, 128, 0.22);
+}
+
+.gsp-env-method,
+.gsp-env-caveat,
+.gsp-env-pixels,
+.gsp-env-warn {
+  font-size: 11px;
+  line-height: 1.35;
+  padding-inline-start: 8px;
+  border-inline-start: 3px solid transparent;
+}
+
+.gsp-env-method {
+  opacity: 0.9;
+  border-inline-start-color: #97bc62;
+}
+
+.gsp-env-pixels {
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+.gsp-env-caveat {
+  opacity: 0.88;
+  border-inline-start-color: #d6a21a;
+  background: rgba(214, 162, 26, 0.07);
+  padding-block: 4px;
+  border-radius: 0 4px 4px 0;
+}
+
+.gsp-env-warn {
+  color: #b3541e;
+  border-inline-start-color: #b3541e;
+}
+
+.gsp-env-ok {
+  color: #4c8c2b;
+}
+
+.gsp-env-hist-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.gsp-env-hist-title {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.gsp-env-canvas {
+  width: 100%;
+  height: 84px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.gsp-env-hr {
+  border: none;
+  border-top: 1px solid rgba(128, 128, 128, 0.14);
+  margin: 2px 0;
+}
+
+.gsp-env-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(151, 188, 98, 0.2);
+  color: #2f4b12;
+}

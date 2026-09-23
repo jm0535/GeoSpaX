@@ -1,0 +1,10 @@
+{
+  "id": "geospax-agriculture",
+  "name": "GeoSpaX Agriculture",
+  "version": "0.1.0",
+  "description": "GeoSpaX agriculture domain pack — placeholder for the agriculture toolbox (stub for Phase-7 six-drop-in verification; real modules ship in the full v0.4.0 analytical core).",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}

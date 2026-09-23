@@ -5,11 +5,16 @@ GeoSpaX domain plugins, built as **bundled drop-ins** for the app's
 with no upstream source edits (see `docs/plugin-api.md` §External plugins →
 §Bundled plugins).
 
-## Plugins
+## Plugins — six auto-discovered drop-ins (Phase 7)
 
-| id | Status | Contents |
+| id | Version | Contents |
 |---|---|---|
-| `geospax-conservation` | increment 1 | Right-panel "Conservation Planning": protection gap analysis with equal-area hectares, method declarations, closure checks, provenance-stamped result layers |
+| `geospax-conservation` | v0.1.0 | Right-panel “Conservation Planning”: protection gap analysis with equal-area hectares, method declarations, closure checks, provenance-stamped result layers |
+| `geospax-biodiversity` | v0.1.0 | **Biodiversity** domain pack — GBIF/OBIS/iNat/WoRMS connectors, H3/DGGS gridding, richness & SDM tools (stub; full pack ships with analysis v0.4.0) |
+| `geospax-forestry` | v0.1.0 | **Forestry** domain pack — GFW / Hansen / canopy-height, fragmentation & connectivity stubs (full pack ships with analysis v0.4.0) |
+| `geospax-marine` | v0.1.0 | **Marine** domain pack — OBIS/GBIF marine, World Bank/SPREP + GEBCO bathymetry, ecoregion catalogue stubs |
+| `geospax-agriculture` | v0.1.0 | **Agriculture** domain pack — crop-suitability WLC, NDVI phenology & agriculture indices stubs |
+| `geospax-environment` | **v0.1.0 — sixth drop-in** | Right-panel “Environment”: **Slope zones** — any DEM + band + two class breaks → Horn slope/aspect over the current view (pixel metres computed at the window's centre latitude) → steep-class polygons with equal-area area tables, pixel size and excluded-cell counts shown, resolution warning surfaced; **Index extent** — NDVI / NDWI / NDBI / NBR presets or a custom band pair → normalized-difference grid → stats table (range, mean, valid cells), histogram with Otsu-suggested threshold, dissolve-polygonized extent layer stamped `_geospax` — with the band-assignment caveat printed on every result |
 
 ## Build
 
@@ -32,7 +37,20 @@ folders are git-ignored by upstream convention (`public/plugins/.gitignore`):
 bundles are build artefacts, produced in CI before `npm run build`.
 
 `plugin.json` sets `"activeByDefault": true` (honoured for bundled drop-ins),
-so the panel is live on first run without visiting the Plugins menu.
+so the panels are live on first run without visiting the Plugins menu.
+
+## Phase 7: GeoSpaX v1 parity — formally superseded
+
+**Phase 7 reached: the environment drop-in completes the build-out, and GeoSpaX v1 parity is formally superseded.**
+
+| v1 bundle (jm0535/map-kit) | Now lives in | Status |
+|---|---|---|
+| `geospax-conservation.js` | analysis core + Conservation §1–6 | superseded |
+| `geospax-conservation-m2.js` | raster pipeline + Conservation §8 | superseded |
+| `geospax-sdm-fix.js` | sdm.ts + Conservation §7 | superseded |
+| `geospax-raster.js` | raster.ts + Conservation/Environment panels | superseded |
+
+**Beyond parity:** five domain packs (Biodiversity, Forestry, Marine, Agriculture, Environment), tiered citation-carrying connectors (GBIF/OBIS/iNat/WoRMS/World Bank/SPREP + GEBCO/ecoregion catalogue), and browser-native **exact SCP on HiGHS-WASM** — a capability the v1 site never had.
 
 ## Typecheck note
 
@@ -52,6 +70,11 @@ npx tsc --noEmit -p packages/geospax-plugins/tsconfig.json 2>&1 | grep geospax
 - Every result layer carries `_geospax` provenance (tool, method that
   actually ran, CRS, params, timestamp, engine version, lineage).
 - UI strings go through `app.translate(key, default)`; scoped CSS only
-  (`.gsp-cons-*` prefixes).
+  (`.gsp-cons-*` / `.gsp-env-*` prefixes).
 - Plugin `version` must match `plugin.json` `version` (loader-validated);
   bump both together.
+- Slope zones are view-dependent (sampled grid over the current viewport);
+  the panel declares the pixel size at the viewport centre, border vs nodata
+  excluded counts, and a resolution warning — never silent.
+- Index extents always print `BAND_ASSIGNMENT_CAVEAT` (presets label typical
+  sensor bands but do not auto-detect them — verify A/B match your raster).

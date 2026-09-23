@@ -9,3 +9,6 @@ export * from "./overlay";
 export * from "./provenance";
 export * from "./units";
 export * from "./gap";
+export * from "./terrain";
+export * from "./raster";
+export * from "./sdm";
