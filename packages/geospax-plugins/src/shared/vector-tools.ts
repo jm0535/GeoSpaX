@@ -63,8 +63,10 @@ export function mountOverlayTool(shell: PanelShell, parent: HTMLElement): void {
   const card = shell.addTool(parent, {
     id: "vector-overlay",
     title: "Vector overlay",
-    description: "Intersect, erase, or dissolve-union two polygon layers. Result properties are prefixed to prevent collisions.",
-    method: "Turf constructive geometry; difference is A minus dissolved B. Invalid/non-polygon features are counted and reported.",
+    description:
+      "Intersect, erase, or dissolve-union two polygon layers. Result properties are prefixed to prevent collisions.",
+    method:
+      "Turf constructive geometry; difference is A minus dissolved B. Invalid/non-polygon features are counted and reported.",
   });
   const a = layerPicker(shell, { kind: "polygon", placeholder: "— Layer A —" });
   const b = layerPicker(shell, { kind: "polygon", placeholder: "— Layer B —" });
@@ -86,10 +88,18 @@ export function mountOverlayTool(shell: PanelShell, parent: HTMLElement): void {
     void withBusy(run, status, "Running polygon overlay…", () => {
       if (!a.select.value || !b.select.value) throw new Error("Select both polygon layers.");
       if (a.select.value === b.select.value) throw new Error("Select two different layers.");
-      const output = vectorOverlay(a.features(), b.features(), operation.value as "intersect" | "difference" | "union");
+      const output = vectorOverlay(
+        a.features(),
+        b.features(),
+        operation.value as "intersect" | "difference" | "union",
+      );
       if (!output.ok) throw new Error(output.error);
       if (!output.features.length) {
-        setStatus(status, "warning", "The operation produced no polygon geometry. The layers may not overlap.");
+        setStatus(
+          status,
+          "warning",
+          "The operation produced no polygon geometry. The layers may not overlap.",
+        );
         renderKeyValueTable(results, [
           ["Pairs tested", output.pairsTested],
           ["Output features", 0],
@@ -102,20 +112,30 @@ export function mountOverlayTool(shell: PanelShell, parent: HTMLElement): void {
         output.features,
         output.provenance,
       );
-      setStatus(status, "success", `Created ${output.featureCount.toLocaleString()} overlay feature(s).`);
-      renderKeyValueTable(results, [
-        ["Operation", operation.value],
-        ["Output features", output.featureCount],
-        ["Area", formatArea(output.totalAreaM2).display],
-        ["Pairs tested", output.pairsTested],
-        ["Constructed", output.pairsConstructed],
-        ["Skipped A / B", `${output.skippedA} / ${output.skippedB}`],
-      ], "Overlay result");
-      shell.recordRun(runRecord("vector-overlay", "Vector overlay", output.provenance, [outputId], {
-        operation: operation.value,
-        features: output.featureCount,
-        areaM2: output.totalAreaM2,
-      }));
+      setStatus(
+        status,
+        "success",
+        `Created ${output.featureCount.toLocaleString()} overlay feature(s).`,
+      );
+      renderKeyValueTable(
+        results,
+        [
+          ["Operation", operation.value],
+          ["Output features", output.featureCount],
+          ["Area", formatArea(output.totalAreaM2).display],
+          ["Pairs tested", output.pairsTested],
+          ["Constructed", output.pairsConstructed],
+          ["Skipped A / B", `${output.skippedA} / ${output.skippedB}`],
+        ],
+        "Overlay result",
+      );
+      shell.recordRun(
+        runRecord("vector-overlay", "Vector overlay", output.provenance, [outputId], {
+          operation: operation.value,
+          features: output.featureCount,
+          areaM2: output.totalAreaM2,
+        }),
+      );
     });
   });
 }
@@ -130,8 +150,10 @@ export function mountHotspotTool(shell: PanelShell, parent: HTMLElement): void {
   const card = shell.addTool(parent, {
     id: "hotspot-grid",
     title: "Weighted hotspot grid",
-    description: "Combine counts, presence, or feature density from multiple layers into a weighted square or hexagonal priority surface.",
-    method: "Descriptive weighted grid. This is not inferential Getis-Ord Gi* and does not produce p-values.",
+    description:
+      "Combine counts, presence, or feature density from multiple layers into a weighted square or hexagonal priority surface.",
+    method:
+      "Descriptive weighted grid. This is not inferential Getis-Ord Gi* and does not produce p-values.",
   });
   const gridType = selectInput([
     { value: "hex", label: "Hexagons" },
@@ -143,11 +165,13 @@ export function mountHotspotTool(shell: PanelShell, parent: HTMLElement): void {
     { value: "density", label: "Features per km²" },
   ]);
   const cellSize = numberInput(10, { min: 0.01, step: 1 });
-  card.append(fieldGrid(
-    field("Grid geometry", gridType),
-    field("Score", scoreMethod),
-    field("Cell size (km)", cellSize),
-  ));
+  card.append(
+    fieldGrid(
+      field("Grid geometry", gridType),
+      field("Score", scoreMethod),
+      field("Cell size (km)", cellSize),
+    ),
+  );
   const rowsHost = el("div", "gsp-criteria");
   card.appendChild(rowsHost);
   const rows: HotspotRow[] = [];
@@ -193,21 +217,32 @@ export function mountHotspotTool(shell: PanelShell, parent: HTMLElement): void {
         cellSizeKm: parsePositive(cellSize, "Cell size"),
       });
       if (!output.ok) throw new Error(output.error);
-      const outputId = addOutputLayer(shell, `Weighted hotspot grid (${cellSize.value} km)`, output.grid.features, output.provenance);
+      const outputId = addOutputLayer(
+        shell,
+        `Weighted hotspot grid (${cellSize.value} km)`,
+        output.grid.features,
+        output.provenance,
+      );
       setStatus(status, "success", `Created ${output.cellCount.toLocaleString()} grid cells.`);
-      renderKeyValueTable(results, [
-        ["Grid cells", output.cellCount],
-        ["Non-empty cells", output.nonEmptyCells],
-        ["Input features", output.inputFeatureCount],
-        ["Maximum raw score", formatNumber(output.maxRawScore, 3)],
-        ["Method", `${scoreMethod.value}; descriptive only`],
-      ], "Weighted priority surface");
+      renderKeyValueTable(
+        results,
+        [
+          ["Grid cells", output.cellCount],
+          ["Non-empty cells", output.nonEmptyCells],
+          ["Input features", output.inputFeatureCount],
+          ["Maximum raw score", formatNumber(output.maxRawScore, 3)],
+          ["Method", `${scoreMethod.value}; descriptive only`],
+        ],
+        "Weighted priority surface",
+      );
       appendNotice(results, output.methodNote, "warning");
-      shell.recordRun(runRecord("weighted-hotspot-grid", "Weighted hotspot grid", output.provenance, [outputId], {
-        cells: output.cellCount,
-        nonEmptyCells: output.nonEmptyCells,
-        cellSizeKm: Number(cellSize.value),
-      }));
+      shell.recordRun(
+        runRecord("weighted-hotspot-grid", "Weighted hotspot grid", output.provenance, [outputId], {
+          cells: output.cellCount,
+          nonEmptyCells: output.nonEmptyCells,
+          cellSizeKm: Number(cellSize.value),
+        }),
+      );
     });
   });
 }
@@ -216,11 +251,19 @@ export function mountPriorityTool(shell: PanelShell, parent: HTMLElement): void 
   const card = shell.addTool(parent, {
     id: "priority-areas",
     title: "Unprotected priority sites",
-    description: "Select high-scoring habitat points that lie outside existing protected-area polygons.",
-    method: "Numeric score threshold followed by point-in-polygon exclusion. No ranking is inferred from missing values.",
+    description:
+      "Select high-scoring habitat points that lie outside existing protected-area polygons.",
+    method:
+      "Numeric score threshold followed by point-in-polygon exclusion. No ranking is inferred from missing values.",
   });
-  const habitat = layerPicker(shell, { kind: "point", placeholder: "— habitat / occurrence points —" });
-  const protectedAreas = layerPicker(shell, { kind: "polygon", placeholder: "— protected areas —" });
+  const habitat = layerPicker(shell, {
+    kind: "point",
+    placeholder: "— habitat / occurrence points —",
+  });
+  const protectedAreas = layerPicker(shell, {
+    kind: "polygon",
+    placeholder: "— protected areas —",
+  });
   const scoreField = selectInput([]);
   const minScore = numberInput(1, { step: 0.1 });
   const refreshFields = () => populateFieldSelect(scoreField, numericFields(habitat.features()));
@@ -228,7 +271,10 @@ export function mountPriorityTool(shell: PanelShell, parent: HTMLElement): void 
   shell.onLayersChanged(refreshFields);
   refreshFields();
   card.append(
-    fieldGrid(field("Habitat points", habitat.select), field("Protected areas", protectedAreas.select)),
+    fieldGrid(
+      field("Habitat points", habitat.select),
+      field("Protected areas", protectedAreas.select),
+    ),
     fieldGrid(field("Score field", scoreField), field("Minimum score", minScore)),
   );
   const run = button("Identify priority sites");
@@ -247,7 +293,14 @@ export function mountPriorityTool(shell: PanelShell, parent: HTMLElement): void 
       if (!output.ok) throw new Error(output.error);
       const outputIds: string[] = [];
       if (output.priorityFeatures.length) {
-        outputIds.push(addOutputLayer(shell, "Unprotected priority sites", output.priorityFeatures, output.provenance));
+        outputIds.push(
+          addOutputLayer(
+            shell,
+            "Unprotected priority sites",
+            output.priorityFeatures,
+            output.provenance,
+          ),
+        );
       }
       setStatus(
         status,
@@ -256,19 +309,25 @@ export function mountPriorityTool(shell: PanelShell, parent: HTMLElement): void 
           ? `Found ${output.priorityCount.toLocaleString()} unprotected high-score site(s).`
           : "No unprotected sites met the selected score threshold.",
       );
-      renderKeyValueTable(results, [
-        ["Point records", output.totalPoints],
-        ["Unprotected priorities", output.priorityCount],
-        ["High-score, protected", output.protectedHighCount],
-        ["Below / invalid score", output.lowScoreCount],
-        ["Invalid numeric scores", output.invalidScoreCount],
-        ["Threshold", `${output.scoreField} ≥ ${output.minScore}`],
-      ], "Priority-site result");
-      shell.recordRun(runRecord("priority-areas", "Unprotected priority sites", output.provenance, outputIds, {
-        priorityCount: output.priorityCount,
-        protectedHighCount: output.protectedHighCount,
-        minScore: output.minScore,
-      }));
+      renderKeyValueTable(
+        results,
+        [
+          ["Point records", output.totalPoints],
+          ["Unprotected priorities", output.priorityCount],
+          ["High-score, protected", output.protectedHighCount],
+          ["Below / invalid score", output.lowScoreCount],
+          ["Invalid numeric scores", output.invalidScoreCount],
+          ["Threshold", `${output.scoreField} ≥ ${output.minScore}`],
+        ],
+        "Priority-site result",
+      );
+      shell.recordRun(
+        runRecord("priority-areas", "Unprotected priority sites", output.provenance, outputIds, {
+          priorityCount: output.priorityCount,
+          protectedHighCount: output.protectedHighCount,
+          minScore: output.minScore,
+        }),
+      );
     });
   });
 }
@@ -280,12 +339,17 @@ interface CriterionRow {
   direction: HTMLSelectElement;
 }
 
-export function mountSuitabilityTool(shell: PanelShell, parent: HTMLElement, noun = "suitability"): void {
+export function mountSuitabilityTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  noun = "suitability",
+): void {
   const card = shell.addTool(parent, {
     id: "weighted-linear-combination",
     title: "Weighted suitability (WLC)",
     description: `Standardise numeric attributes to 0–1 and combine benefit/cost criteria into a ${noun} score on every input feature.`,
-    method: "Per-field min–max standardisation plus normalised weighted linear combination. Constant criteria contribute a neutral 0.5 and are warned.",
+    method:
+      "Per-field min–max standardisation plus normalised weighted linear combination. Constant criteria contribute a neutral 0.5 and are warned.",
   });
   const source = layerPicker(shell, { kind: "vector", placeholder: "— features to score —" });
   const constraint = selectInput([]);
@@ -306,7 +370,12 @@ export function mountSuitabilityTool(shell: PanelShell, parent: HTMLElement, nou
     const remove = button("×", "secondary");
     remove.classList.add("gsp-criterion__remove");
     remove.setAttribute("aria-label", "Remove WLC criterion");
-    wrapper.append(field("Criterion", fieldSelect), field("Weight", weight), field("Direction", direction), remove);
+    wrapper.append(
+      field("Criterion", fieldSelect),
+      field("Weight", weight),
+      field("Direction", direction),
+      remove,
+    );
     const row = { wrapper, field: fieldSelect, weight, direction };
     remove.addEventListener("click", () => {
       if (rows.length <= 1) return;
@@ -327,7 +396,13 @@ export function mountSuitabilityTool(shell: PanelShell, parent: HTMLElement, nou
   shell.onLayersChanged(refreshFields);
   const addCriterion = button("Add criterion", "secondary");
   const run = button("Run weighted suitability");
-  card.append(field("Constraint field (truthy = unsuitable)", constraint, "Optional. A truthy value forces suitability to zero."));
+  card.append(
+    field(
+      "Constraint field (truthy = unsuitable)",
+      constraint,
+      "Optional. A truthy value forces suitability to zero.",
+    ),
+  );
   const status = statusRegion();
   const results = resultRegion();
   card.append(buttonRow(addCriterion, run), status, results);
@@ -358,46 +433,76 @@ export function mountSuitabilityTool(shell: PanelShell, parent: HTMLElement, nou
         output.provenance,
       );
       setStatus(status, "success", `Scored ${output.scoredCount.toLocaleString()} feature(s).`);
-      renderKeyValueTable(results, [
-        ["Scored features", output.scoredCount],
-        ["Missing criteria", output.missingCount],
-        ["Constrained to zero", output.constrainedCount],
-        ["Minimum", formatNumber(output.minSuitability, 3)],
-        ["Mean", formatNumber(output.meanSuitability, 3)],
-        ["Maximum", formatNumber(output.maxSuitability, 3)],
-      ], "WLC result");
+      renderKeyValueTable(
+        results,
+        [
+          ["Scored features", output.scoredCount],
+          ["Missing criteria", output.missingCount],
+          ["Constrained to zero", output.constrainedCount],
+          ["Minimum", formatNumber(output.minSuitability, 3)],
+          ["Mean", formatNumber(output.meanSuitability, 3)],
+          ["Maximum", formatNumber(output.maxSuitability, 3)],
+        ],
+        "WLC result",
+      );
       for (const warning of output.warnings) appendNotice(results, warning, "warning");
-      shell.recordRun(runRecord("weighted-linear-combination", "Weighted suitability", output.provenance, [outputId], {
-        scoredCount: output.scoredCount,
-        missingCount: output.missingCount,
-        meanSuitability: output.meanSuitability,
-      }));
+      shell.recordRun(
+        runRecord(
+          "weighted-linear-combination",
+          "Weighted suitability",
+          output.provenance,
+          [outputId],
+          {
+            scoredCount: output.scoredCount,
+            missingCount: output.missingCount,
+            meanSuitability: output.meanSuitability,
+          },
+        ),
+      );
     });
   });
 }
 
-export function mountDistanceDecayTool(shell: PanelShell, parent: HTMLElement, subject = "accessibility"): void {
+export function mountDistanceDecayTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "accessibility",
+): void {
   const card = shell.addTool(parent, {
     id: "distance-decay",
     title: "Distance-decay suitability",
     description: `Convert a numeric distance attribute into an exponential ${subject} score from 1 at zero to 0.5 at the selected half-life.`,
-    method: "score = exp(−ln(2) × distance / half-life). Distances must already be in metres; no hidden geometry-distance approximation is applied.",
+    method:
+      "score = exp(−ln(2) × distance / half-life). Distances must already be in metres; no hidden geometry-distance approximation is applied.",
   });
   const source = layerPicker(shell, { kind: "vector", placeholder: "— feature layer —" });
   const distanceField = selectInput([]);
   const halfLife = numberInput(1000, { min: 0.01, step: 100 });
-  const refresh = () => populateFieldSelect(distanceField, numericFields(source.features()), distanceField.value, "— distance field (metres) —");
+  const refresh = () =>
+    populateFieldSelect(
+      distanceField,
+      numericFields(source.features()),
+      distanceField.value,
+      "— distance field (metres) —",
+    );
   source.select.addEventListener("change", refresh);
   shell.onLayersChanged(refresh);
   refresh();
-  card.append(field("Input feature layer", source.select), fieldGrid(field("Distance field (m)", distanceField), field("Half-life distance (m)", halfLife)));
+  card.append(
+    field("Input feature layer", source.select),
+    fieldGrid(
+      field("Distance field (m)", distanceField),
+      field("Half-life distance (m)", halfLife),
+    ),
+  );
   const run = button("Create distance-decay scores");
   const status = statusRegion();
   const results = resultRegion();
   card.append(buttonRow(run), status, results);
   run.addEventListener("click", () => {
     void withBusy(run, status, "Applying exponential distance decay…", () => {
-      if (!source.select.value || !distanceField.value) throw new Error("Select an input layer and distance field.");
+      if (!source.select.value || !distanceField.value)
+        throw new Error("Select an input layer and distance field.");
       const halfLifeM = parsePositive(halfLife, "Half-life distance");
       let valid = 0;
       let missing = 0;
@@ -422,7 +527,8 @@ export function mountDistanceDecayTool(shell: PanelShell, parent: HTMLElement, s
           },
         };
       });
-      if (!valid) throw new Error("The selected distance field has no finite, non-negative values.");
+      if (!valid)
+        throw new Error("The selected distance field has no finite, non-negative values.");
       const provenance = makeProvenance(
         "distance-decay-suitability",
         "Exponential distance-decay with stated half-life",
@@ -435,21 +541,41 @@ export function mountDistanceDecayTool(shell: PanelShell, parent: HTMLElement, s
           missingFeatures: missing,
         },
       );
-      const outputId = addOutputLayer(shell, `${layerName(shell, source.select.value)} — distance decay`, output, provenance);
+      const outputId = addOutputLayer(
+        shell,
+        `${layerName(shell, source.select.value)} — distance decay`,
+        output,
+        provenance,
+      );
       setStatus(status, "success", `Scored ${valid.toLocaleString()} feature(s).`);
-      renderKeyValueTable(results, [
-        ["Distance field", distanceField.value],
-        ["Half-life", `${formatNumber(halfLifeM, 0)} m`],
-        ["Valid / missing", `${valid} / ${missing}`],
-        ["Minimum score", formatNumber(Math.min(...scores), 3)],
-        ["Mean score", formatNumber(scores.reduce((sum, value) => sum + value, 0) / scores.length, 3)],
-        ["Maximum score", formatNumber(Math.max(...scores), 3)],
-      ], "Distance-decay result");
-      shell.recordRun(runRecord("distance-decay-suitability", "Distance-decay suitability", provenance, [outputId], {
-        halfLifeM,
-        valid,
-        missing,
-      }));
+      renderKeyValueTable(
+        results,
+        [
+          ["Distance field", distanceField.value],
+          ["Half-life", `${formatNumber(halfLifeM, 0)} m`],
+          ["Valid / missing", `${valid} / ${missing}`],
+          ["Minimum score", formatNumber(Math.min(...scores), 3)],
+          [
+            "Mean score",
+            formatNumber(scores.reduce((sum, value) => sum + value, 0) / scores.length, 3),
+          ],
+          ["Maximum score", formatNumber(Math.max(...scores), 3)],
+        ],
+        "Distance-decay result",
+      );
+      shell.recordRun(
+        runRecord(
+          "distance-decay-suitability",
+          "Distance-decay suitability",
+          provenance,
+          [outputId],
+          {
+            halfLifeM,
+            valid,
+            missing,
+          },
+        ),
+      );
     });
   });
 }
@@ -464,12 +590,16 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
   const card = shell.addTool(parent, {
     id: "systematic-conservation-planning",
     title: "Minimum-cost representation",
-    description: "Select planning units that meet feature-representation targets at minimum cost. Small problems are solved exactly; bounded fallbacks are labelled greedy and never claimed optimal.",
-    method: "Deterministic branch-and-bound up to 28 planning units (2,000,000-node safety cap), with an explicitly non-optimal greedy fallback beyond that bound.",
+    description:
+      "Select planning units that meet feature-representation targets at minimum cost. Small problems are solved exactly; bounded fallbacks are labelled greedy and never claimed optimal.",
+    method:
+      "Deterministic branch-and-bound up to 28 planning units (2,000,000-node safety cap), with an explicitly non-optimal greedy fallback beyond that bound.",
   });
   const source = layerPicker(shell, { kind: "polygon", placeholder: "— planning-unit polygons —" });
   const costField = selectInput([]);
-  card.append(fieldGrid(field("Planning-unit layer", source.select), field("Cost field", costField)));
+  card.append(
+    fieldGrid(field("Planning-unit layer", source.select), field("Cost field", costField)),
+  );
   const targetsHost = el("div", "gsp-criteria");
   card.appendChild(targetsHost);
   const rows: ScpTargetRow[] = [];
@@ -482,7 +612,12 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
     const remove = button("×", "secondary");
     remove.classList.add("gsp-criterion__remove");
     remove.setAttribute("aria-label", "Remove representation target");
-    wrapper.append(field("Feature field", featureField), field("Target", target), el("span"), remove);
+    wrapper.append(
+      field("Feature field", featureField),
+      field("Target", target),
+      el("span"),
+      remove,
+    );
     const row = { wrapper, field: featureField, target };
     remove.addEventListener("click", () => {
       if (rows.length <= 1) return;
@@ -496,7 +631,8 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
   const refresh = () => {
     const available = fields();
     populateFieldSelect(costField, available, costField.value, "— numeric cost field —");
-    for (const row of rows) populateFieldSelect(row.field, available, row.field.value, "— representation field —");
+    for (const row of rows)
+      populateFieldSelect(row.field, available, row.field.value, "— representation field —");
   };
   source.select.addEventListener("change", refresh);
   shell.onLayersChanged(refresh);
@@ -508,9 +644,11 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
   add.addEventListener("click", addTarget);
   run.addEventListener("click", () => {
     void withBusy(run, status, "Solving the minimum-cost representation problem…", async () => {
-      if (!source.select.value || !costField.value) throw new Error("Select planning units and a numeric cost field.");
+      if (!source.select.value || !costField.value)
+        throw new Error("Select planning units and a numeric cost field.");
       const activeTargets = rows.filter((row) => row.field.value);
-      if (!activeTargets.length) throw new Error("Add at least one representation field and target.");
+      if (!activeTargets.length)
+        throw new Error("Add at least one representation field and target.");
       if (new Set(activeTargets.map((row) => row.field.value)).size !== activeTargets.length) {
         throw new Error("Each representation target must use a different field.");
       }
@@ -522,13 +660,23 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
       const speciesCoverage = activeTargets.map((row) =>
         features.map((feature) => Number(feature.properties?.[row.field.value])),
       );
-      if (speciesCoverage.some((coverage) => coverage.some((value) => !Number.isFinite(value) || value < 0))) {
-        throw new Error("Every selected representation field must be finite and non-negative on every planning unit.");
+      if (
+        speciesCoverage.some((coverage) =>
+          coverage.some((value) => !Number.isFinite(value) || value < 0),
+        )
+      ) {
+        throw new Error(
+          "Every selected representation field must be finite and non-negative on every planning unit.",
+        );
       }
-      const targets = activeTargets.map((row) => parseFinite(row.target, `Target for ${row.field.value}`));
-      if (targets.some((target) => target < 0)) throw new Error("Representation targets cannot be negative.");
+      const targets = activeTargets.map((row) =>
+        parseFinite(row.target, `Target for ${row.field.value}`),
+      );
+      if (targets.some((target) => target < 0))
+        throw new Error("Representation targets cannot be negative.");
       const solution = await solveScpExact({ costs, speciesCoverage, targets });
-      if (!solution.feasible) throw new Error(solution.warning ?? "The supplied representation targets are infeasible.");
+      if (!solution.feasible)
+        throw new Error(solution.warning ?? "The supplied representation targets are infeasible.");
       const selectedSet = new Set(solution.selected);
       const selectedFeatures = features
         .map((feature, index) => ({ feature, index }))
@@ -562,7 +710,12 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
           warning: solution.warning ?? null,
         },
       );
-      const outputId = addOutputLayer(shell, `Selected planning units (${solution.selected.length})`, selectedFeatures, provenance);
+      const outputId = addOutputLayer(
+        shell,
+        `Selected planning units (${solution.selected.length})`,
+        selectedFeatures,
+        provenance,
+      );
       setStatus(
         status,
         solution.optimal ? "success" : "warning",
@@ -570,23 +723,43 @@ export function mountScpTool(shell: PanelShell, parent: HTMLElement): void {
           ? `Proved an optimal selection of ${solution.selected.length} planning unit(s).`
           : `Returned a feasible greedy selection of ${solution.selected.length} unit(s); optimality was not claimed.`,
       );
-      renderKeyValueTable(results, [
-        ["Planning units", features.length],
-        ["Selected units", solution.selected.length],
-        ["Total cost", formatNumber(solution.cost, 3)],
-        ["Method", solution.method],
-        ["Optimality proved", solution.optimal ? "Yes" : "No"],
-        ["Search nodes", solution.nodesVisited ?? "Not applicable"],
-        ["Coverage achieved", solution.coverage.map((value, index) => `${activeTargets[index].field.value}: ${formatNumber(value, 2)} / ${formatNumber(targets[index], 2)}`).join("; ")],
-      ], "Planning-unit solution");
+      renderKeyValueTable(
+        results,
+        [
+          ["Planning units", features.length],
+          ["Selected units", solution.selected.length],
+          ["Total cost", formatNumber(solution.cost, 3)],
+          ["Method", solution.method],
+          ["Optimality proved", solution.optimal ? "Yes" : "No"],
+          ["Search nodes", solution.nodesVisited ?? "Not applicable"],
+          [
+            "Coverage achieved",
+            solution.coverage
+              .map(
+                (value, index) =>
+                  `${activeTargets[index].field.value}: ${formatNumber(value, 2)} / ${formatNumber(targets[index], 2)}`,
+              )
+              .join("; "),
+          ],
+        ],
+        "Planning-unit solution",
+      );
       if (solution.warning) appendNotice(results, solution.warning, "warning");
-      shell.recordRun(runRecord("systematic-conservation-planning", "Minimum-cost representation", provenance, [outputId], {
-        planningUnits: features.length,
-        selectedUnits: solution.selected.length,
-        cost: solution.cost,
-        method: solution.method,
-        optimal: solution.optimal,
-      }));
+      shell.recordRun(
+        runRecord(
+          "systematic-conservation-planning",
+          "Minimum-cost representation",
+          provenance,
+          [outputId],
+          {
+            planningUnits: features.length,
+            selectedUnits: solution.selected.length,
+            cost: solution.cost,
+            method: solution.method,
+            optimal: solution.optimal,
+          },
+        ),
+      );
     });
   });
 }
@@ -611,7 +784,8 @@ export function mountGapTool(
     id: "protection-gap",
     title: "Protection gap",
     description: `Measure how much of ${labels.habitat ?? "a mapped habitat extent"} is inside and outside ${labels.network ?? "the protected-area network"}.`,
-    method: "Dissolved polygon intersection/difference with equal-area LAEA reporting by default; closure residual is reported.",
+    method:
+      "Dissolved polygon intersection/difference with equal-area LAEA reporting by default; closure residual is reported.",
   });
   const habitat = layerPicker(shell, {
     kind: "polygon",
@@ -623,20 +797,27 @@ export function mountGapTool(
     placeholder: `— ${labels.network ?? "protected areas"} —`,
     selectedName: labels.networkLayerName,
   });
-  const areaMode = selectInput([
-    { value: "equalarea", label: "Equal-area (LAEA, auto-centred)" },
-    { value: "spherical", label: "Spherical WGS84" },
-  ], labels.areaMode ?? "equalarea");
-  const reportState = () => labels.onStateChange?.({
-    habitatLayerName: habitat.layer()?.name ?? null,
-    networkLayerName: network.layer()?.name ?? null,
-    areaMode: areaMode.value as "equalarea" | "spherical",
-  });
+  const areaMode = selectInput(
+    [
+      { value: "equalarea", label: "Equal-area (LAEA, auto-centred)" },
+      { value: "spherical", label: "Spherical WGS84" },
+    ],
+    labels.areaMode ?? "equalarea",
+  );
+  const reportState = () =>
+    labels.onStateChange?.({
+      habitatLayerName: habitat.layer()?.name ?? null,
+      networkLayerName: network.layer()?.name ?? null,
+      areaMode: areaMode.value as "equalarea" | "spherical",
+    });
   habitat.select.addEventListener("change", reportState);
   network.select.addEventListener("change", reportState);
   areaMode.addEventListener("change", reportState);
   card.append(
-    fieldGrid(field(labels.habitat ?? "Habitat extent", habitat.select), field(labels.network ?? "Protected areas", network.select)),
+    fieldGrid(
+      field(labels.habitat ?? "Habitat extent", habitat.select),
+      field(labels.network ?? "Protected areas", network.select),
+    ),
     field("Area method", areaMode),
   );
   const run = button("Run protection gap");
@@ -645,7 +826,8 @@ export function mountGapTool(
   card.append(buttonRow(run), status, results);
   run.addEventListener("click", () => {
     void withBusy(run, status, "Computing protected and unprotected extent…", () => {
-      if (!habitat.select.value || !network.select.value) throw new Error("Select both polygon layers.");
+      if (!habitat.select.value || !network.select.value)
+        throw new Error("Select both polygon layers.");
       const output = protectionGap(habitat.features(), network.features(), {
         areaMode: areaMode.value as "equalarea" | "spherical",
         habitatLayerName: layerName(shell, habitat.select.value),
@@ -654,37 +836,67 @@ export function mountGapTool(
       if (!output.ok) throw new Error(output.error);
       const outputIds: string[] = [];
       if (output.protectedGeom) {
-        outputIds.push(addOutputLayer(shell, "Habitat — protected", [output.protectedGeom], output.provenance));
+        outputIds.push(
+          addOutputLayer(shell, "Habitat — protected", [output.protectedGeom], output.provenance),
+        );
       }
       if (output.gapGeom) {
-        outputIds.push(addOutputLayer(shell, "Habitat — protection gap", [output.gapGeom], output.provenance));
+        outputIds.push(
+          addOutputLayer(shell, "Habitat — protection gap", [output.gapGeom], output.provenance),
+        );
       }
-      setStatus(status, "success", `${output.protectedPct.toFixed(1)}% of mapped habitat is protected.`);
-      renderKeyValueTable(results, [
-        ["Total habitat", formatArea(output.totalAreaM2).display],
-        ["Protected", `${formatArea(output.protectedAreaM2).display} (${formatPercent(output.protectedPct)})`],
-        ["Gap", `${formatArea(output.gapAreaM2).display} (${formatPercent(output.gapPct)})`],
-        ["Intersecting protected areas", output.paCount],
-        ["Geometry closure residual", formatPercent(output.residualPct, 2)],
-        ["Area method", `${output.measurement.total.method} — ${output.measurement.total.crs}`],
-      ], "Protection-gap result");
-      appendNotice(results, "Mapped designation overlap does not measure management effectiveness.");
-      if (output.residualPct > 0.5) appendNotice(results, "Closure residual exceeds 0.5%; inspect input geometry validity.", "warning");
-      shell.recordRun(runRecord("protection-gap", "Protection gap", output.provenance, outputIds, {
-        protectedPct: output.protectedPct,
-        gapPct: output.gapPct,
-        residualPct: output.residualPct,
-      }));
+      setStatus(
+        status,
+        "success",
+        `${output.protectedPct.toFixed(1)}% of mapped habitat is protected.`,
+      );
+      renderKeyValueTable(
+        results,
+        [
+          ["Total habitat", formatArea(output.totalAreaM2).display],
+          [
+            "Protected",
+            `${formatArea(output.protectedAreaM2).display} (${formatPercent(output.protectedPct)})`,
+          ],
+          ["Gap", `${formatArea(output.gapAreaM2).display} (${formatPercent(output.gapPct)})`],
+          ["Intersecting protected areas", output.paCount],
+          ["Geometry closure residual", formatPercent(output.residualPct, 2)],
+          ["Area method", `${output.measurement.total.method} — ${output.measurement.total.crs}`],
+        ],
+        "Protection-gap result",
+      );
+      appendNotice(
+        results,
+        "Mapped designation overlap does not measure management effectiveness.",
+      );
+      if (output.residualPct > 0.5)
+        appendNotice(
+          results,
+          "Closure residual exceeds 0.5%; inspect input geometry validity.",
+          "warning",
+        );
+      shell.recordRun(
+        runRecord("protection-gap", "Protection gap", output.provenance, outputIds, {
+          protectedPct: output.protectedPct,
+          gapPct: output.gapPct,
+          residualPct: output.residualPct,
+        }),
+      );
     });
   });
 }
 
-export function mountFragmentationTool(shell: PanelShell, parent: HTMLElement, subject = "land-cover"): void {
+export function mountFragmentationTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "land-cover",
+): void {
   const card = shell.addTool(parent, {
     id: "fragmentation",
     title: "Fragmentation & patch metrics",
     description: `Summarise ${subject} patches, edge, shape, core area and nearest-neighbour separation.`,
-    method: "Polygon patch metrics; core is a negative buffer at the stated depth. ENN is centroid-to-centroid, not edge-to-edge.",
+    method:
+      "Polygon patch metrics; core is a negative buffer at the stated depth. ENN is centroid-to-centroid, not edge-to-edge.",
   });
   const source = layerPicker(shell, { kind: "polygon", placeholder: "— patch layer —" });
   const depth = numberInput(100, { min: 0, step: 10 });
@@ -693,7 +905,11 @@ export function mountFragmentationTool(shell: PanelShell, parent: HTMLElement, s
     { value: "spherical", label: "Spherical WGS84" },
   ]);
   const explode = checkbox("Treat each MultiPolygon part as a separate patch", true);
-  card.append(field("Patch layer", source.select), fieldGrid(field("Core edge depth (m)", depth), field("Area method", areaMode)), explode.wrapper);
+  card.append(
+    field("Patch layer", source.select),
+    fieldGrid(field("Core edge depth (m)", depth), field("Area method", areaMode)),
+    explode.wrapper,
+  );
   const run = button("Compute patch metrics");
   const status = statusRegion();
   const results = resultRegion();
@@ -709,40 +925,72 @@ export function mountFragmentationTool(shell: PanelShell, parent: HTMLElement, s
       if (!output.ok) throw new Error(output.error);
       const outputIds: string[] = [];
       if (output.coreFeatures.length) {
-        outputIds.push(addOutputLayer(shell, `Core areas (${output.coreDepthM} m edge)`, output.coreFeatures, output.provenance));
+        outputIds.push(
+          addOutputLayer(
+            shell,
+            `Core areas (${output.coreDepthM} m edge)`,
+            output.coreFeatures,
+            output.provenance,
+          ),
+        );
       }
       setStatus(status, "success", `Measured ${output.numPatches.toLocaleString()} patch(es).`);
-      renderKeyValueTable(results, [
-        ["Number of patches (NP)", output.numPatches],
-        ["Class area (CA)", formatArea(output.totalAreaM2).display],
-        ["Mean / median patch", `${formatArea(output.meanPatchM2).display} / ${formatArea(output.medianPatchM2).display}`],
-        ["Largest patch index (LPI)", formatPercent(output.largestPatchIndex)],
-        ["Total edge (TE)", `${formatNumber(output.totalEdgeM / 1000, 2)} km`],
-        ["Edge density (ED)", `${formatNumber(output.edgeDensityMPerHa, 2)} m/ha`],
-        ["Mean shape index (MSI)", formatNumber(output.meanShapeIndex, 3)],
-        ["Core area / CAI", `${formatArea(output.coreAreaM2).display} / ${formatPercent(output.coreAreaIndex)}`],
-        ["Patches without core", output.patchesWithNoCore],
-        ["Mean nearest neighbour", output.meanNearestNeighbourM === null ? "—" : `${formatNumber(output.meanNearestNeighbourM, 0)} m`],
-        ["Area method", `${output.areaMethod} — ${output.areaCrs}`],
-      ], "Landscape metrics");
-      appendNotice(results, `Core-area results depend on the selected ${output.coreDepthM} m edge depth; report and justify it.`);
+      renderKeyValueTable(
+        results,
+        [
+          ["Number of patches (NP)", output.numPatches],
+          ["Class area (CA)", formatArea(output.totalAreaM2).display],
+          [
+            "Mean / median patch",
+            `${formatArea(output.meanPatchM2).display} / ${formatArea(output.medianPatchM2).display}`,
+          ],
+          ["Largest patch index (LPI)", formatPercent(output.largestPatchIndex)],
+          ["Total edge (TE)", `${formatNumber(output.totalEdgeM / 1000, 2)} km`],
+          ["Edge density (ED)", `${formatNumber(output.edgeDensityMPerHa, 2)} m/ha`],
+          ["Mean shape index (MSI)", formatNumber(output.meanShapeIndex, 3)],
+          [
+            "Core area / CAI",
+            `${formatArea(output.coreAreaM2).display} / ${formatPercent(output.coreAreaIndex)}`,
+          ],
+          ["Patches without core", output.patchesWithNoCore],
+          [
+            "Mean nearest neighbour",
+            output.meanNearestNeighbourM === null
+              ? "—"
+              : `${formatNumber(output.meanNearestNeighbourM, 0)} m`,
+          ],
+          ["Area method", `${output.areaMethod} — ${output.areaCrs}`],
+        ],
+        "Landscape metrics",
+      );
+      appendNotice(
+        results,
+        `Core-area results depend on the selected ${output.coreDepthM} m edge depth; report and justify it.`,
+      );
       for (const warning of output.warnings) appendNotice(results, warning, "warning");
-      shell.recordRun(runRecord("fragmentation", "Fragmentation & patch metrics", output.provenance, outputIds, {
-        patches: output.numPatches,
-        totalAreaM2: output.totalAreaM2,
-        largestPatchIndex: output.largestPatchIndex,
-        coreAreaIndex: output.coreAreaIndex,
-      }));
+      shell.recordRun(
+        runRecord("fragmentation", "Fragmentation & patch metrics", output.provenance, outputIds, {
+          patches: output.numPatches,
+          totalAreaM2: output.totalAreaM2,
+          largestPatchIndex: output.largestPatchIndex,
+          coreAreaIndex: output.coreAreaIndex,
+        }),
+      );
     });
   });
 }
 
-export function mountConnectivityTool(shell: PanelShell, parent: HTMLElement, subject = "patches"): void {
+export function mountConnectivityTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "patches",
+): void {
   const card = shell.addTool(parent, {
     id: "connectivity",
     title: "Patch connectivity graph",
     description: `Link ${subject} whose centroids fall within a selected threshold and label connected components.`,
-    method: "Haversine centroid-distance threshold graph. This does not model resistance, terrain, currents, or least-cost corridors.",
+    method:
+      "Haversine centroid-distance threshold graph. This does not model resistance, terrain, currents, or least-cost corridors.",
   });
   const source = layerPicker(shell, { kind: "polygon", placeholder: "— patch layer —" });
   const threshold = numberInput(500, { min: 1, step: 100 });
@@ -754,37 +1002,76 @@ export function mountConnectivityTool(shell: PanelShell, parent: HTMLElement, su
   run.addEventListener("click", () => {
     void withBusy(run, status, "Building connectivity graph…", () => {
       if (!source.select.value) throw new Error("Select a polygon patch layer.");
-      const output = connectivityAnalysis(source.features(), parsePositive(threshold, "Link threshold"));
+      const output = connectivityAnalysis(
+        source.features(),
+        parsePositive(threshold, "Link threshold"),
+      );
       if (!output.ok) throw new Error(output.error);
-      const outputIds = [addOutputLayer(shell, "Patches by connectivity component", output.taggedFeatures, output.provenance)];
+      const outputIds = [
+        addOutputLayer(
+          shell,
+          "Patches by connectivity component",
+          output.taggedFeatures,
+          output.provenance,
+        ),
+      ];
       if (output.linkFeatures.length) {
-        outputIds.push(addOutputLayer(shell, `Connectivity links (≤ ${threshold.value} m)`, output.linkFeatures, output.provenance));
+        outputIds.push(
+          addOutputLayer(
+            shell,
+            `Connectivity links (≤ ${threshold.value} m)`,
+            output.linkFeatures,
+            output.provenance,
+          ),
+        );
       }
-      setStatus(status, "success", `${output.componentCount} component(s); ${output.isolatedPatches} isolated patch(es).`);
-      renderKeyValueTable(results, [
-        ["Threshold", `${formatNumber(output.thresholdM, 0)} m`],
-        ["Patches", output.numPatches],
-        ["Links", output.linkCount],
-        ["Connected components", output.componentCount],
-        ["Largest component", `${output.largestComponentPatches} patches; ${formatArea(output.largestComponentAreaM2).display}`],
-        ["Isolated patches", output.isolatedPatches],
-      ], "Connectivity result");
-      appendNotice(results, "Centroid links are a structural screening metric, not ecological least-cost corridors.", "warning");
-      shell.recordRun(runRecord("connectivity", "Patch connectivity graph", output.provenance, outputIds, {
-        components: output.componentCount,
-        links: output.linkCount,
-        isolatedPatches: output.isolatedPatches,
-      }));
+      setStatus(
+        status,
+        "success",
+        `${output.componentCount} component(s); ${output.isolatedPatches} isolated patch(es).`,
+      );
+      renderKeyValueTable(
+        results,
+        [
+          ["Threshold", `${formatNumber(output.thresholdM, 0)} m`],
+          ["Patches", output.numPatches],
+          ["Links", output.linkCount],
+          ["Connected components", output.componentCount],
+          [
+            "Largest component",
+            `${output.largestComponentPatches} patches; ${formatArea(output.largestComponentAreaM2).display}`,
+          ],
+          ["Isolated patches", output.isolatedPatches],
+        ],
+        "Connectivity result",
+      );
+      appendNotice(
+        results,
+        "Centroid links are a structural screening metric, not ecological least-cost corridors.",
+        "warning",
+      );
+      shell.recordRun(
+        runRecord("connectivity", "Patch connectivity graph", output.provenance, outputIds, {
+          components: output.componentCount,
+          links: output.linkCount,
+          isolatedPatches: output.isolatedPatches,
+        }),
+      );
     });
   });
 }
 
-export function mountVectorChangeTool(shell: PanelShell, parent: HTMLElement, subject = "extent"): void {
+export function mountVectorChangeTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "extent",
+): void {
   const card = shell.addTool(parent, {
     id: "vector-change",
     title: "Two-date change detection",
     description: `Compare an earlier and later polygon ${subject} to derive loss, gain and persistence.`,
-    method: "Dissolve both dates; loss=T1−T2, gain=T2−T1, persistence=T1∩T2. Equal-area reporting and closure are explicit.",
+    method:
+      "Dissolve both dates; loss=T1−T2, gain=T2−T1, persistence=T1∩T2. Equal-area reporting and closure are explicit.",
   });
   const t1 = layerPicker(shell, { kind: "polygon", placeholder: "— earlier extent (T1) —" });
   const t2 = layerPicker(shell, { kind: "polygon", placeholder: "— later extent (T2) —" });
@@ -816,40 +1103,75 @@ export function mountVectorChangeTool(shell: PanelShell, parent: HTMLElement, su
       if (!output.ok) throw new Error(output.error);
       const outputIds: string[] = [];
       if (output.features.length) {
-        outputIds.push(addOutputLayer(shell, `${subject} change ${year1.value}–${year2.value}`, output.features, output.provenance));
+        outputIds.push(
+          addOutputLayer(
+            shell,
+            `${subject} change ${year1.value}–${year2.value}`,
+            output.features,
+            output.provenance,
+          ),
+        );
       }
-      setStatus(status, "success", `Net change ${formatPercent(output.netChangePct)} across ${output.years ?? "the selected dates"}.`);
+      setStatus(
+        status,
+        "success",
+        `Net change ${formatPercent(output.netChangePct)} across ${output.years ?? "the selected dates"}.`,
+      );
       const rows: Array<[string, string | number]> = [
         [`T1 extent (${year1.value})`, formatArea(output.t1AreaM2).display],
         [`T2 extent (${year2.value})`, formatArea(output.t2AreaM2).display],
         ["Loss", `${formatArea(output.lossAreaM2).display} (${formatPercent(output.lossPctOfT1)})`],
         ["Gain", `${formatArea(output.gainAreaM2).display} (${formatPercent(output.gainPctOfT1)})`],
         ["Persistence", formatArea(output.persistenceAreaM2).display],
-        ["Net change", `${formatArea(output.netChangeM2).display} (${formatPercent(output.netChangePct)})`],
+        [
+          "Net change",
+          `${formatArea(output.netChangeM2).display} (${formatPercent(output.netChangePct)})`,
+        ],
         ["Closure residual", formatPercent(output.residualPct, 2)],
         ["Area method", `${output.areaMethod} — ${output.areaCrs}`],
       ];
       if (output.annualHaPerYear !== null) {
-        rows.splice(6, 0, ["Annualised net rate", `${formatNumber(output.annualHaPerYear, 2)} ha/year (${formatPercent(output.annualPctPerYear, 2)}/year)`]);
+        rows.splice(6, 0, [
+          "Annualised net rate",
+          `${formatNumber(output.annualHaPerYear, 2)} ha/year (${formatPercent(output.annualPctPerYear, 2)}/year)`,
+        ]);
       }
       renderKeyValueTable(results, rows, "Change result");
-      if (output.residualPct > 0.5) appendNotice(results, "Closure residual exceeds 0.5%; inspect input geometry validity.", "warning");
-      shell.recordRun(runRecord("vector-change-detection", "Two-date change detection", output.provenance, outputIds, {
-        lossAreaM2: output.lossAreaM2,
-        gainAreaM2: output.gainAreaM2,
-        netChangePct: output.netChangePct,
-        annualHaPerYear: output.annualHaPerYear,
-      }));
+      if (output.residualPct > 0.5)
+        appendNotice(
+          results,
+          "Closure residual exceeds 0.5%; inspect input geometry validity.",
+          "warning",
+        );
+      shell.recordRun(
+        runRecord(
+          "vector-change-detection",
+          "Two-date change detection",
+          output.provenance,
+          outputIds,
+          {
+            lossAreaM2: output.lossAreaM2,
+            gainAreaM2: output.gainAreaM2,
+            netChangePct: output.netChangePct,
+            annualHaPerYear: output.annualHaPerYear,
+          },
+        ),
+      );
     });
   });
 }
 
-export function mountPointPatternTool(shell: PanelShell, parent: HTMLElement, subject = "occurrences"): void {
+export function mountPointPatternTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "occurrences",
+): void {
   const card = shell.addTool(parent, {
     id: "nearest-neighbour",
     title: "Occurrence pattern",
     description: `Measure nearest-neighbour spacing and the Clark–Evans ratio for ${subject}.`,
-    method: "Haversine nearest-neighbour distances; CSR expectation uses the input points’ bounding-box area with no edge correction.",
+    method:
+      "Haversine nearest-neighbour distances; CSR expectation uses the input points’ bounding-box area with no edge correction.",
   });
   const source = layerPicker(shell, { kind: "point", placeholder: "— point layer —" });
   card.append(field("Point layer", source.select));
@@ -862,33 +1184,48 @@ export function mountPointPatternTool(shell: PanelShell, parent: HTMLElement, su
       if (!source.select.value) throw new Error("Select a point layer.");
       const output = nearestNeighbourIndex(source.features());
       if (!output.ok) throw new Error(output.error);
-      setStatus(status, "success", `Pattern is ${output.interpretation} at the bounding-box study scale.`);
-      renderKeyValueTable(results, [
-        ["Points", output.pointCount],
-        ["Study area", formatArea(output.studyAreaM2).display],
-        ["Observed mean NN", `${formatNumber(output.observedMeanM, 1)} m`],
-        ["CSR expected mean", `${formatNumber(output.expectedMeanM, 1)} m`],
-        ["Clark–Evans R", formatNumber(output.ratio, 3)],
-        ["Approximate z-score", formatNumber(output.zScore, 3)],
-        ["Interpretation", output.interpretation],
-      ], "Nearest-neighbour result");
+      setStatus(
+        status,
+        "success",
+        `Pattern is ${output.interpretation} at the bounding-box study scale.`,
+      );
+      renderKeyValueTable(
+        results,
+        [
+          ["Points", output.pointCount],
+          ["Study area", formatArea(output.studyAreaM2).display],
+          ["Observed mean NN", `${formatNumber(output.observedMeanM, 1)} m`],
+          ["CSR expected mean", `${formatNumber(output.expectedMeanM, 1)} m`],
+          ["Clark–Evans R", formatNumber(output.ratio, 3)],
+          ["Approximate z-score", formatNumber(output.zScore, 3)],
+          ["Interpretation", output.interpretation],
+        ],
+        "Nearest-neighbour result",
+      );
       appendNotice(results, output.methodNote, "warning");
-      shell.recordRun(runRecord("nearest-neighbour-index", "Occurrence pattern", output.provenance, [], {
-        points: output.pointCount,
-        ratio: output.ratio,
-        zScore: output.zScore,
-        interpretation: output.interpretation,
-      }));
+      shell.recordRun(
+        runRecord("nearest-neighbour-index", "Occurrence pattern", output.provenance, [], {
+          points: output.pointCount,
+          ratio: output.ratio,
+          zScore: output.zScore,
+          interpretation: output.interpretation,
+        }),
+      );
     });
   });
 }
 
-export function mountDbscanTool(shell: PanelShell, parent: HTMLElement, subject = "occurrences"): void {
+export function mountDbscanTool(
+  shell: PanelShell,
+  parent: HTMLElement,
+  subject = "occurrences",
+): void {
   const card = shell.addTool(parent, {
     id: "dbscan",
     title: "DBSCAN clusters",
     description: `Identify density-connected groups and noise among ${subject} without pre-selecting a cluster count.`,
-    method: "Haversine-distance DBSCAN. Minimum points includes the point itself; automatic epsilon is median nearest-neighbour distance × the declared multiplier.",
+    method:
+      "Haversine-distance DBSCAN. Minimum points includes the point itself; automatic epsilon is median nearest-neighbour distance × the declared multiplier.",
   });
   const source = layerPicker(shell, { kind: "point", placeholder: "— point layer —" });
   const epsilonMode = selectInput([
@@ -944,7 +1281,12 @@ export function mountDbscanTool(shell: PanelShell, parent: HTMLElement, subject 
           sourceLayerName: layerName(shell, source.select.value),
         },
       };
-      const outputId = addOutputLayer(shell, `DBSCAN clusters — ${layerName(shell, source.select.value)}`, output.features, provenance);
+      const outputId = addOutputLayer(
+        shell,
+        `DBSCAN clusters — ${layerName(shell, source.select.value)}`,
+        output.features,
+        provenance,
+      );
       setStatus(
         status,
         output.clusterCount ? "success" : "warning",
@@ -952,28 +1294,45 @@ export function mountDbscanTool(shell: PanelShell, parent: HTMLElement, subject 
           ? `Found ${output.clusterCount} cluster(s); ${output.noiseCount} point(s) are noise.`
           : `No clusters met the selected density rule; all ${output.noiseCount} point(s) are labelled noise.`,
       );
-      renderKeyValueTable(results, [
-        ["Input points", output.pointCount],
-        ["Clusters", output.clusterCount],
-        ["Cluster sizes", output.clusterSizes.length ? output.clusterSizes.join(", ") : "None"],
-        ["Core points", output.corePointCount],
-        ["Noise points", output.noiseCount],
-        ["Median nearest-neighbour", `${formatNumber(output.medianNearestNeighbourM, 1)} m`],
-        ["Epsilon", `${formatNumber(output.epsilonM, 1)} m${output.epsilonWasAutomatic ? " (automatic)" : " (manual)"}`],
-        ["Minimum points", `${output.minPoints} (includes self)`],
-      ], "DBSCAN result");
-      appendNotice(results, "DBSCAN results are scale-dependent. Report epsilon and minimum points, and re-run sensitivity checks before treating clusters as ecological units.", "warning");
+      renderKeyValueTable(
+        results,
+        [
+          ["Input points", output.pointCount],
+          ["Clusters", output.clusterCount],
+          ["Cluster sizes", output.clusterSizes.length ? output.clusterSizes.join(", ") : "None"],
+          ["Core points", output.corePointCount],
+          ["Noise points", output.noiseCount],
+          ["Median nearest-neighbour", `${formatNumber(output.medianNearestNeighbourM, 1)} m`],
+          [
+            "Epsilon",
+            `${formatNumber(output.epsilonM, 1)} m${output.epsilonWasAutomatic ? " (automatic)" : " (manual)"}`,
+          ],
+          ["Minimum points", `${output.minPoints} (includes self)`],
+        ],
+        "DBSCAN result",
+      );
+      appendNotice(
+        results,
+        "DBSCAN results are scale-dependent. Report epsilon and minimum points, and re-run sensitivity checks before treating clusters as ecological units.",
+        "warning",
+      );
       if (output.automaticEpsilonFloorApplied) {
-        appendNotice(results, "All median nearest-neighbour distances were zero, so automatic epsilon used its disclosed 1 m floor.", "warning");
+        appendNotice(
+          results,
+          "All median nearest-neighbour distances were zero, so automatic epsilon used its disclosed 1 m floor.",
+          "warning",
+        );
       }
-      shell.recordRun(runRecord("dbscan-clustering", "DBSCAN clusters", provenance, [outputId], {
-        points: output.pointCount,
-        clusters: output.clusterCount,
-        noise: output.noiseCount,
-        epsilonM: output.epsilonM,
-        medianNearestNeighbourM: output.medianNearestNeighbourM,
-        minPoints: output.minPoints,
-      }));
+      shell.recordRun(
+        runRecord("dbscan-clustering", "DBSCAN clusters", provenance, [outputId], {
+          points: output.pointCount,
+          clusters: output.clusterCount,
+          noise: output.noiseCount,
+          epsilonM: output.epsilonM,
+          medianNearestNeighbourM: output.medianNearestNeighbourM,
+          minPoints: output.minPoints,
+        }),
+      );
     });
   });
 }
@@ -993,8 +1352,9 @@ function valuesForFields(feature: Feature<Geometry | null>, fields: string[]): n
 function deterministicRowSample(rows: number[][], limit: number): number[][] {
   if (rows.length <= limit) return rows;
   if (limit === 1) return [rows[0]];
-  return Array.from({ length: limit }, (_, index) =>
-    rows[Math.round(index * (rows.length - 1) / (limit - 1))],
+  return Array.from(
+    { length: limit },
+    (_, index) => rows[Math.round((index * (rows.length - 1)) / (limit - 1))],
   );
 }
 
@@ -1003,7 +1363,8 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
     id: "sdm",
     title: "Species distribution model",
     description: `Fit BIOCLIM, Mahalanobis, or an explicit presence-background logistic fallback to ${subject} records, then score a prediction feature layer.`,
-    method: "Environmental values must already be numeric attributes on both layers. Missing rows are excluded—not replaced with zero—and no model falls back to coordinates. The logistic option is a declared linear fallback, not elapid MaxEnt.",
+    method:
+      "Environmental values must already be numeric attributes on both layers. Missing rows are excluded—not replaced with zero—and no model falls back to coordinates. The logistic option is a declared linear fallback, not elapid MaxEnt.",
   });
   const presences = layerPicker(shell, { kind: "point", placeholder: "— presence points —" });
   const prediction = layerPicker(shell, { kind: "vector", placeholder: "— prediction features —" });
@@ -1024,7 +1385,10 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
   const logisticLambda = numberInput(0.01, { min: 0, step: 0.01 });
   const backgroundLimit = numberInput(2_000, { min: 10, max: 5_000, step: 10 });
   card.append(
-    fieldGrid(field("Presence points", presences.select), field("Prediction layer", prediction.select)),
+    fieldGrid(
+      field("Presence points", presences.select),
+      field("Prediction layer", prediction.select),
+    ),
     field("Model", modelType),
   );
   const variablesHost = el("div", "gsp-criteria");
@@ -1055,7 +1419,8 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
   addVariable();
   const refreshVariables = () => {
     const fields = sharedFields();
-    for (const row of rows) populateFieldSelect(row.field, fields, row.field.value, "— shared environmental field —");
+    for (const row of rows)
+      populateFieldSelect(row.field, fields, row.field.value, "— shared environmental field —");
   };
   presences.select.addEventListener("change", refreshVariables);
   prediction.select.addEventListener("change", refreshVariables);
@@ -1091,10 +1456,12 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
   add.addEventListener("click", () => addVariable());
   run.addEventListener("click", () => {
     void withBusy(run, status, "Fitting environmental model and scoring features…", () => {
-      if (!presences.select.value || !prediction.select.value) throw new Error("Select presence and prediction layers.");
+      if (!presences.select.value || !prediction.select.value)
+        throw new Error("Select presence and prediction layers.");
       const fields = rows.map((row) => row.field.value).filter(Boolean);
       if (!fields.length) throw new Error("Select at least one shared environmental field.");
-      if (new Set(fields).size !== fields.length) throw new Error("Each environmental variable must be unique.");
+      if (new Set(fields).size !== fields.length)
+        throw new Error("Each environmental variable must be unique.");
       if (modelType.value === "mahalanobis" && fields.length < 2) {
         throw new Error("Mahalanobis requires at least two environmental variables.");
       }
@@ -1103,9 +1470,14 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
       const trainingMatrix = presenceFeatures.map((feature) => valuesForFields(feature, fields));
       const completeTraining = trainingMatrix.filter((row) => row.every(Number.isFinite));
       const dropped = trainingMatrix.length - completeTraining.length;
-      if (completeTraining.length < 5) throw new Error(`At least five complete presence records are required; found ${completeTraining.length}.`);
+      if (completeTraining.length < 5)
+        throw new Error(
+          `At least five complete presence records are required; found ${completeTraining.length}.`,
+        );
       if (modelType.value === "mahalanobis" && completeTraining.length < fields.length + 2) {
-        throw new Error(`Mahalanobis needs at least variables + 2 complete records (${fields.length + 2}); found ${completeTraining.length}.`);
+        throw new Error(
+          `Mahalanobis needs at least variables + 2 complete records (${fields.length + 2}); found ${completeTraining.length}.`,
+        );
       }
 
       const outputFeatures: Feature<Geometry | null>[] = [];
@@ -1129,7 +1501,8 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
         modelLabel = "BIOCLIM";
         const trim = parseFinite(percentile, "BIOCLIM tail trim");
         const model = fitBioclim(completeTraining, fields, { percentile: trim });
-        if (!model) throw new Error("BIOCLIM could not fit the supplied complete records and percentile.");
+        if (!model)
+          throw new Error("BIOCLIM could not fit the supplied complete records and percentile.");
         provenance = provenanceForSdm("bioclim", {
           variables: fields,
           ...sourceLineage,
@@ -1140,7 +1513,11 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           predictionInput: "numeric feature attributes",
         });
         predictionFeatures.forEach((feature) => {
-          const predictionResult = predictBioclim(valuesForFields(feature, fields), model, bioclimMode.value as "limiting" | "proportion");
+          const predictionResult = predictBioclim(
+            valuesForFields(feature, fields),
+            model,
+            bioclimMode.value as "limiting" | "proportion",
+          );
           if (predictionResult.suitability === null) missingPredictions++;
           else validPredictions++;
           outputFeatures.push({
@@ -1160,7 +1537,10 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
       } else if (modelType.value === "mahalanobis") {
         modelLabel = "Mahalanobis D²";
         const model = fitMahalanobis(completeTraining, fields);
-        if (!model?.invCov) throw new Error("The covariance matrix could not be inverted, even with disclosed ridge regularisation.");
+        if (!model?.invCov)
+          throw new Error(
+            "The covariance matrix could not be inverted, even with disclosed ridge regularisation.",
+          );
         regularized = model.regularized;
         provenance = provenanceForSdm("mahalanobis", {
           variables: fields,
@@ -1173,7 +1553,11 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           predictionInput: "numeric feature attributes",
         });
         predictionFeatures.forEach((feature) => {
-          const predictionResult = predictMahalanobis(valuesForFields(feature, fields), model, mahalanobisOutput.value as "chisq" | "index");
+          const predictionResult = predictMahalanobis(
+            valuesForFields(feature, fields),
+            model,
+            mahalanobisOutput.value as "chisq" | "index",
+          );
           if (predictionResult.suitability === null) missingPredictions++;
           else validPredictions++;
           outputFeatures.push({
@@ -1202,17 +1586,26 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           .map((feature) => valuesForFields(feature, fields))
           .filter((row) => row.every(Number.isFinite));
         if (completeBackground.length < 10) {
-          throw new Error(`Presence-background logistic needs at least 10 complete background/prediction rows; found ${completeBackground.length}.`);
+          throw new Error(
+            `Presence-background logistic needs at least 10 complete background/prediction rows; found ${completeBackground.length}.`,
+          );
         }
         const background = deterministicRowSample(completeBackground, limit);
-        const model = fitPresenceBackgroundLogistic(completeTraining, background, fields, { lambda });
-        if (!model) throw new Error("Presence-background logistic fitting failed for the supplied complete rows and parameters.");
+        const model = fitPresenceBackgroundLogistic(completeTraining, background, fields, {
+          lambda,
+        });
+        if (!model)
+          throw new Error(
+            "Presence-background logistic fitting failed for the supplied complete rows and parameters.",
+          );
         logisticConverged = model.converged;
         logisticIterations = model.iterations;
         logisticBackground = model.nBackground;
         logisticCoefficientSummary = [
           `intercept: ${formatNumber(model.intercept, 4)}`,
-          ...fields.map((fieldName, index) => `${fieldName}: ${formatNumber(model.coefficients[index], 4)}`),
+          ...fields.map(
+            (fieldName, index) => `${fieldName}: ${formatNumber(model.coefficients[index], 4)}`,
+          ),
         ].join("; ");
         logisticConstantVariables = model.constantVariables;
         provenance = provenanceForSdm("presence-background-logistic", {
@@ -1223,9 +1616,10 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           backgroundLayer: prediction.select.value,
           completeBackgroundRows: completeBackground.length,
           backgroundRowsUsed: model.nBackground,
-          backgroundSampling: completeBackground.length > model.nBackground
-            ? "deterministic evenly spaced sample in feature order"
-            : "all complete prediction rows",
+          backgroundSampling:
+            completeBackground.length > model.nBackground
+              ? "deterministic evenly spaced sample in feature order"
+              : "all complete prediction rows",
           classWeighting: "equal total weight for presence and background",
           linearFeaturesOnly: true,
           l2Penalty: model.lambda,
@@ -1234,15 +1628,24 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           loss: model.loss,
           optimizerRidge: model.optimizerRidge,
           intercept: model.intercept,
-          coefficients: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.coefficients[index]])),
-          standardizationMean: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.mean[index]])),
-          standardizationScale: Object.fromEntries(fields.map((fieldName, index) => [fieldName, model.scale[index]])),
+          coefficients: Object.fromEntries(
+            fields.map((fieldName, index) => [fieldName, model.coefficients[index]]),
+          ),
+          standardizationMean: Object.fromEntries(
+            fields.map((fieldName, index) => [fieldName, model.mean[index]]),
+          ),
+          standardizationScale: Object.fromEntries(
+            fields.map((fieldName, index) => [fieldName, model.scale[index]]),
+          ),
           constantVariables: model.constantVariables,
           trueMaxentOrElapid: false,
           predictionInput: "numeric feature attributes",
         });
         predictionFeatures.forEach((feature) => {
-          const suitability = predictPresenceBackgroundLogistic(valuesForFields(feature, fields), model);
+          const suitability = predictPresenceBackgroundLogistic(
+            valuesForFields(feature, fields),
+            model,
+          );
           if (suitability === null) missingPredictions++;
           else validPredictions++;
           outputFeatures.push({
@@ -1259,7 +1662,12 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           });
         });
       }
-      const outputId = addOutputLayer(shell, `${subject} SDM — ${modelType.value}`, outputFeatures, provenance);
+      const outputId = addOutputLayer(
+        shell,
+        `${subject} SDM — ${modelType.value}`,
+        outputFeatures,
+        provenance,
+      );
       setStatus(
         status,
         logisticConverged === false ? "warning" : "success",
@@ -1274,7 +1682,10 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
         ["Presence records dropped", dropped],
         ["Valid predictions", validPredictions],
         ["Prediction rows with missing data", missingPredictions],
-        ["Covariance regularised", modelType.value === "mahalanobis" ? (regularized ? "Yes" : "No") : "Not applicable"],
+        [
+          "Covariance regularised",
+          modelType.value === "mahalanobis" ? (regularized ? "Yes" : "No") : "Not applicable",
+        ],
       ];
       if (modelType.value === "logistic") {
         resultRows.push(
@@ -1282,32 +1693,67 @@ export function mountSdmTool(shell: PanelShell, parent: HTMLElement, subject = "
           ["Optimiser converged", logisticConverged ? "Yes" : "No"],
           ["Optimiser iterations", logisticIterations ?? 0],
           ["Standardised coefficients", logisticCoefficientSummary],
-          ["Constant predictors", logisticConstantVariables.length ? logisticConstantVariables.join(", ") : "None"],
+          [
+            "Constant predictors",
+            logisticConstantVariables.length ? logisticConstantVariables.join(", ") : "None",
+          ],
         );
       }
       renderKeyValueTable(results, resultRows, "SDM result");
-      if (dropped) appendNotice(results, `${dropped} incomplete presence record(s) were excluded, not filled with zero.`, "warning");
-      if (missingPredictions) appendNotice(results, `${missingPredictions} prediction feature(s) have no score because at least one selected variable is missing.`, "warning");
-      if (regularized) appendNotice(results, "The covariance was singular/near-singular; ridge regularisation was applied and recorded in provenance.", "warning");
+      if (dropped)
+        appendNotice(
+          results,
+          `${dropped} incomplete presence record(s) were excluded, not filled with zero.`,
+          "warning",
+        );
+      if (missingPredictions)
+        appendNotice(
+          results,
+          `${missingPredictions} prediction feature(s) have no score because at least one selected variable is missing.`,
+          "warning",
+        );
+      if (regularized)
+        appendNotice(
+          results,
+          "The covariance was singular/near-singular; ridge regularisation was applied and recorded in provenance.",
+          "warning",
+        );
       if (modelType.value === "bioclim" && bioclimMode.value === "proportion") {
-        appendNotice(results, "Proportion-in-envelope is a non-standard BIOCLIM index, not true limiting-factor BIOCLIM.", "warning");
+        appendNotice(
+          results,
+          "Proportion-in-envelope is a non-standard BIOCLIM index, not true limiting-factor BIOCLIM.",
+          "warning",
+        );
       }
       if (modelType.value === "logistic") {
-        appendNotice(results, "This is a class-balanced, linear presence-background logistic fallback—not elapid MaxEnt. Scores are relative suitability against the selected background layer, not calibrated occurrence probabilities.", "warning");
-        appendNotice(results, "The prediction layer also defines environmental background availability; changing its extent or sampling changes the fitted model.");
+        appendNotice(
+          results,
+          "This is a class-balanced, linear presence-background logistic fallback—not elapid MaxEnt. Scores are relative suitability against the selected background layer, not calibrated occurrence probabilities.",
+          "warning",
+        );
+        appendNotice(
+          results,
+          "The prediction layer also defines environmental background availability; changing its extent or sampling changes the fitted model.",
+        );
         if (logisticConstantVariables.length) {
-          appendNotice(results, `Constant predictor(s) carry no discrimination: ${logisticConstantVariables.join(", ")}.`, "warning");
+          appendNotice(
+            results,
+            `Constant predictor(s) carry no discrimination: ${logisticConstantVariables.join(", ")}.`,
+            "warning",
+          );
         }
       }
-      shell.recordRun(runRecord(modelType.value, `${subject} SDM`, provenance, [outputId], {
-        recordsUsed: completeTraining.length,
-        recordsDropped: dropped,
-        validPredictions,
-        missingPredictions,
-        regularized,
-        logisticBackground: modelType.value === "logistic" ? logisticBackground : null,
-        logisticConverged: modelType.value === "logistic" ? logisticConverged : null,
-      }));
+      shell.recordRun(
+        runRecord(modelType.value, `${subject} SDM`, provenance, [outputId], {
+          recordsUsed: completeTraining.length,
+          recordsDropped: dropped,
+          validPredictions,
+          missingPredictions,
+          regularized,
+          logisticBackground: modelType.value === "logistic" ? logisticBackground : null,
+          logisticConverged: modelType.value === "logistic" ? logisticConverged : null,
+        }),
+      );
     });
   });
 }
@@ -1316,8 +1762,10 @@ export function mountProvenanceTool(shell: PanelShell, parent: HTMLElement): voi
   const card = shell.addTool(parent, {
     id: "provenance",
     title: "Provenance & project",
-    description: "Review methods that actually ran and export a portable run ledger. Result-layer _geospax stamps remain attached in GeoJSON/project exports.",
-    method: "Run history is session-local; every generated feature also carries an immutable _geospax stamp with parameters, engine, lineage, method and timestamp.",
+    description:
+      "Review methods that actually ran and export a portable run ledger. Result-layer _geospax stamps remain attached in GeoJSON/project exports.",
+    method:
+      "Run history is session-local; every generated feature also carries an immutable _geospax stamp with parameters, engine, lineage, method and timestamp.",
   });
   const results = resultRegion("No analyses have run in this panel yet.");
   const exportJson = button("Export run ledger (JSON)", "secondary");
@@ -1336,7 +1784,11 @@ export function mountProvenanceTool(shell: PanelShell, parent: HTMLElement): voi
       const block = el("div", "gsp-notice");
       block.dataset.tone = "info";
       const heading = el("strong", undefined, `${index + 1}. ${record.title}`);
-      const meta = el("div", undefined, `${record.method} · ${new Date(record.runAt).toLocaleString()}`);
+      const meta = el(
+        "div",
+        undefined,
+        `${record.method} · ${new Date(record.runAt).toLocaleString()}`,
+      );
       block.append(heading, meta);
       results.appendChild(block);
     });
@@ -1345,7 +1797,11 @@ export function mountProvenanceTool(shell: PanelShell, parent: HTMLElement): voi
   render();
 
   exportJson.addEventListener("click", () => {
-    const content = JSON.stringify({ schema: "geospax-run-ledger/1", exportedAt: new Date().toISOString(), runs: shell.history }, null, 2);
+    const content = JSON.stringify(
+      { schema: "geospax-run-ledger/1", exportedAt: new Date().toISOString(), runs: shell.history },
+      null,
+      2,
+    );
     shell.app.exportTextFile?.("geospax-run-ledger.json", content, {
       description: "GeoSpaX run ledger",
       extensions: ["json"],
@@ -1357,14 +1813,16 @@ export function mountProvenanceTool(shell: PanelShell, parent: HTMLElement): voi
     const quote = (value: unknown) => `"${String(value ?? "").replaceAll('"', '""')}"`;
     const rows = ["tool,title,method,run_at,output_layer_ids,summary_json"];
     for (const record of shell.history) {
-      rows.push([
-        quote(record.tool),
-        quote(record.title),
-        quote(record.method),
-        quote(record.runAt),
-        quote(record.outputLayerIds.join(";")),
-        quote(JSON.stringify(record.summary)),
-      ].join(","));
+      rows.push(
+        [
+          quote(record.tool),
+          quote(record.title),
+          quote(record.method),
+          quote(record.runAt),
+          quote(record.outputLayerIds.join(";")),
+          quote(JSON.stringify(record.summary)),
+        ].join(","),
+      );
     }
     shell.app.exportTextFile?.("geospax-run-ledger.csv", rows.join("\n"), {
       description: "GeoSpaX run ledger",

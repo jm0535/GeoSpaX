@@ -15,9 +15,7 @@ import type { Feature, FeatureCollection, Geometry, MultiPolygon, Polygon } from
 export type AnyFeature = Feature<Geometry | null>;
 
 /** Wrap a feature list in a FeatureCollection (null geometries allowed). */
-export function fc(
-  features: AnyFeature[] | null | undefined,
-): FeatureCollection<Geometry | null> {
+export function fc(features: AnyFeature[] | null | undefined): FeatureCollection<Geometry | null> {
   return { type: "FeatureCollection", features: features ?? [] };
 }
 
@@ -26,9 +24,7 @@ export function isPolygonal(
   f: AnyFeature | null | undefined,
 ): f is Feature<Polygon | MultiPolygon> {
   return (
-    !!f &&
-    !!f.geometry &&
-    (f.geometry.type === "Polygon" || f.geometry.type === "MultiPolygon")
+    !!f && !!f.geometry && (f.geometry.type === "Polygon" || f.geometry.type === "MultiPolygon")
   );
 }
 

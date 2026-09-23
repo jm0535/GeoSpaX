@@ -39,15 +39,23 @@ export function getPanelState(): EnvironmentPanelState {
 }
 
 export function applyPanelState(next: EnvironmentPanelState): void {
-  if (typeof next.slopeLayerName === "string" || next.slopeLayerName === null) state.slopeLayerName = next.slopeLayerName;
-  if (typeof next.slopeBand === "number" && Number.isFinite(next.slopeBand)) state.slopeBand = Math.max(1, Math.round(next.slopeBand));
-  if (typeof next.slopeBreak1 === "number" && Number.isFinite(next.slopeBreak1)) state.slopeBreak1 = next.slopeBreak1;
-  if (typeof next.slopeBreak2 === "number" && Number.isFinite(next.slopeBreak2)) state.slopeBreak2 = next.slopeBreak2;
-  if (typeof next.indexLayerName === "string" || next.indexLayerName === null) state.indexLayerName = next.indexLayerName;
+  if (typeof next.slopeLayerName === "string" || next.slopeLayerName === null)
+    state.slopeLayerName = next.slopeLayerName;
+  if (typeof next.slopeBand === "number" && Number.isFinite(next.slopeBand))
+    state.slopeBand = Math.max(1, Math.round(next.slopeBand));
+  if (typeof next.slopeBreak1 === "number" && Number.isFinite(next.slopeBreak1))
+    state.slopeBreak1 = next.slopeBreak1;
+  if (typeof next.slopeBreak2 === "number" && Number.isFinite(next.slopeBreak2))
+    state.slopeBreak2 = next.slopeBreak2;
+  if (typeof next.indexLayerName === "string" || next.indexLayerName === null)
+    state.indexLayerName = next.indexLayerName;
   if (next.indexPreset && INDEX_PRESETS[next.indexPreset]) state.indexPreset = next.indexPreset;
-  if (typeof next.indexBandA === "number" && Number.isFinite(next.indexBandA)) state.indexBandA = Math.max(1, Math.round(next.indexBandA));
-  if (typeof next.indexBandB === "number" && Number.isFinite(next.indexBandB)) state.indexBandB = Math.max(1, Math.round(next.indexBandB));
-  if (typeof next.indexThreshold === "number" && Number.isFinite(next.indexThreshold)) state.indexThreshold = next.indexThreshold;
+  if (typeof next.indexBandA === "number" && Number.isFinite(next.indexBandA))
+    state.indexBandA = Math.max(1, Math.round(next.indexBandA));
+  if (typeof next.indexBandB === "number" && Number.isFinite(next.indexBandB))
+    state.indexBandB = Math.max(1, Math.round(next.indexBandB));
+  if (typeof next.indexThreshold === "number" && Number.isFinite(next.indexThreshold))
+    state.indexThreshold = next.indexThreshold;
 }
 
 export function mountEnvironmentPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {

@@ -168,16 +168,25 @@ export function vectorChangeDetection(
       ? (options.yearT2 as number) - (options.yearT1 as number)
       : null;
   const net = m2.m2 - m1.m2;
-  const provenance = makeProvenance("vector-change-detection", "Dissolved polygon overlay", m1.crs, {
-    areaMethod: m1.method,
-    yearT1: options.yearT1 ?? null,
-    yearT2: options.yearT2 ?? null,
-    years,
-    differenceConvention: "loss=T1−T2; gain=T2−T1; persistence=T1∩T2",
-  });
+  const provenance = makeProvenance(
+    "vector-change-detection",
+    "Dissolved polygon overlay",
+    m1.crs,
+    {
+      areaMethod: m1.method,
+      yearT1: options.yearT1 ?? null,
+      yearT2: options.yearT2 ?? null,
+      years,
+      differenceConvention: "loss=T1−T2; gain=T2−T1; persistence=T1∩T2",
+    },
+  );
 
   const features: PolyFeature[] = [];
-  const stamp = (feature: PolyFeature | null, change: "loss" | "gain" | "persistence", m2Value: number) => {
+  const stamp = (
+    feature: PolyFeature | null,
+    change: "loss" | "gain" | "persistence",
+    m2Value: number,
+  ) => {
     if (!feature) return;
     feature.properties = {
       change,
@@ -209,10 +218,10 @@ export function vectorChangeDetection(
     netChangePct: m1.m2 > 0 ? (net / m1.m2) * 100 : 0,
     years,
     annualHaPerYear: years ? net / 10_000 / years : null,
-    annualPctPerYear: years && m1.m2 > 0 ? (net / m1.m2) * 100 / years : null,
+    annualPctPerYear: years && m1.m2 > 0 ? ((net / m1.m2) * 100) / years : null,
     areaMethod: m1.method,
     areaCrs: m1.crs,
-    residualPct: m1.m2 > 0 ? Math.abs(ml.m2 + mp.m2 - m1.m2) / m1.m2 * 100 : 0,
+    residualPct: m1.m2 > 0 ? (Math.abs(ml.m2 + mp.m2 - m1.m2) / m1.m2) * 100 : 0,
     provenance,
   };
 }

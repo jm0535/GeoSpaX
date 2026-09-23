@@ -24,7 +24,11 @@
   padding: 16px 16px 14px;
   border-bottom: 1px solid hsl(var(--border));
   background:
-    linear-gradient(140deg, color-mix(in srgb, var(--gsp-accent) 12%, transparent), transparent 56%),
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--gsp-accent) 12%, transparent),
+      transparent 56%
+    ),
     hsl(var(--background));
 }
 

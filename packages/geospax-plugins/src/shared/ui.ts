@@ -125,11 +125,16 @@ export function createPanelShell(
       details.open = sectionOptions.open ?? sections.childElementCount === 0;
       const summary = el("summary", "gsp-section__summary");
       const summaryText = el("span", "gsp-section__summary-text");
-      const index = el("span", "gsp-section__index", String(sections.childElementCount + 1).padStart(2, "0"));
+      const index = el(
+        "span",
+        "gsp-section__index",
+        String(sections.childElementCount + 1).padStart(2, "0"),
+      );
       const label = el("span", "gsp-section__label", sectionOptions.title);
       summaryText.append(index, label);
       summary.appendChild(summaryText);
-      if (sectionOptions.badge) summary.appendChild(el("span", "gsp-section__badge", sectionOptions.badge));
+      if (sectionOptions.badge)
+        summary.appendChild(el("span", "gsp-section__badge", sectionOptions.badge));
       const body = el("div", "gsp-section__body");
       if (sectionOptions.description) {
         body.appendChild(el("p", "gsp-section__description", sectionOptions.description));
@@ -156,7 +161,10 @@ export function createPanelShell(
       card.append(heading, description);
       if (toolOptions.method) {
         const method = el("div", "gsp-method");
-        method.append(el("span", "gsp-method__label", "Method"), document.createTextNode(toolOptions.method));
+        method.append(
+          el("span", "gsp-method__label", "Method"),
+          document.createTextNode(toolOptions.method),
+        );
         card.appendChild(method);
       }
       parent.appendChild(card);
@@ -192,11 +200,7 @@ export function createPanelShell(
   return shell;
 }
 
-export function field(
-  labelText: string,
-  control: HTMLElement,
-  hint?: string,
-): HTMLDivElement {
+export function field(labelText: string, control: HTMLElement, hint?: string): HTMLDivElement {
   const wrapper = el("div", "gsp-field");
   const id = control.id || controlId("field");
   control.id = id;
@@ -253,7 +257,10 @@ export function selectInput(
   return select;
 }
 
-export function checkbox(labelText: string, checked = false): { wrapper: HTMLLabelElement; input: HTMLInputElement } {
+export function checkbox(
+  labelText: string,
+  checked = false,
+): { wrapper: HTMLLabelElement; input: HTMLInputElement } {
   const wrapper = el("label", "gsp-check") as HTMLLabelElement;
   const input = el("input") as HTMLInputElement;
   input.type = "checkbox";
@@ -359,7 +366,10 @@ export function appendNotice(
 
 export function formatNumber(value: number | null | undefined, digits = 2): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return "—";
-  return value.toLocaleString("en", { maximumFractionDigits: digits, minimumFractionDigits: digits });
+  return value.toLocaleString("en", {
+    maximumFractionDigits: digits,
+    minimumFractionDigits: digits,
+  });
 }
 
 export function formatPercent(value: number | null | undefined, digits = 1): string {
@@ -386,7 +396,8 @@ export function listLayers(app: GeoLibreAppAPI, kind: LayerKind = "any"): GeoLib
     const features = app.getLayerFeatures?.(layer.id) ?? [];
     if (kind === "point") return features.some((feature) => feature.geometry?.type === "Point");
     return features.some(
-      (feature) => feature.geometry?.type === "Polygon" || feature.geometry?.type === "MultiPolygon",
+      (feature) =>
+        feature.geometry?.type === "Polygon" || feature.geometry?.type === "MultiPolygon",
     );
   });
 }
@@ -413,7 +424,8 @@ export function layerPicker(
   let preferredName = options.selectedName ?? null;
   const refresh = () => {
     const previousId = select.value;
-    const previousName = shell.app.listLayers?.().find((layer) => layer.id === previousId)?.name ?? preferredName;
+    const previousName =
+      shell.app.listLayers?.().find((layer) => layer.id === previousId)?.name ?? preferredName;
     select.innerHTML = "";
     const placeholder = el("option", undefined, options.placeholder ?? "— select layer —");
     placeholder.value = "";
@@ -435,7 +447,8 @@ export function layerPicker(
   refresh();
   const unregister = shell.onLayersChanged(refresh);
   select.addEventListener("change", () => {
-    preferredName = shell.app.listLayers?.().find((layer) => layer.id === select.value)?.name ?? null;
+    preferredName =
+      shell.app.listLayers?.().find((layer) => layer.id === select.value)?.name ?? null;
   });
   return {
     select,
@@ -447,7 +460,7 @@ export function layerPicker(
     features: () =>
       !select.value || select.value === "__none__"
         ? []
-        : shell.app.getLayerFeatures?.(select.value) ?? [],
+        : (shell.app.getLayerFeatures?.(select.value) ?? []),
     destroy: unregister,
   };
 }
@@ -456,7 +469,8 @@ export function numericFields(features: Feature<Geometry | null>[]): string[] {
   const fields = new Set<string>();
   for (const feature of features) {
     for (const [key, value] of Object.entries(feature.properties ?? {})) {
-      if (typeof value === "number" && Number.isFinite(value) && !key.startsWith("_")) fields.add(key);
+      if (typeof value === "number" && Number.isFinite(value) && !key.startsWith("_"))
+        fields.add(key);
     }
   }
   return [...fields].sort((a, b) => a.localeCompare(b));
@@ -527,7 +541,7 @@ export function chooseRasterGrid(
   const heightScale = Math.max(1e-6, Math.abs(north - south));
   return {
     width: targetWidth,
-    height: Math.max(64, Math.min(512, Math.round(targetWidth * heightScale / widthScale))),
+    height: Math.max(64, Math.min(512, Math.round((targetWidth * heightScale) / widthScale))),
   };
 }
 
@@ -542,7 +556,8 @@ export async function readCurrentRasterWindow(
   band: number,
   width = 256,
 ): Promise<SampledRasterWindow> {
-  if (!app.readRasterWindow) throw new Error("This GeoLibre host does not expose raster-window reads.");
+  if (!app.readRasterWindow)
+    throw new Error("This GeoLibre host does not expose raster-window reads.");
   const bounds = currentBounds(app);
   if (!bounds) throw new Error("The current map view has no finite raster sampling extent.");
   const grid = chooseRasterGrid(bounds, width);
@@ -552,7 +567,8 @@ export async function readCurrentRasterWindow(
     height: grid.height,
     band,
   });
-  if (!reading) throw new Error("The selected layer could not be read as a raster in the current view.");
+  if (!reading)
+    throw new Error("The selected layer could not be read as a raster in the current view.");
   return { bounds, reading };
 }
 

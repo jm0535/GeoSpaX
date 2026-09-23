@@ -1,7 +1,7 @@
 // Builds all geospax-* drop-ins and copies their manifests next to the bundle,
 // producing the layout the app's bundled-plugin discovery scans:
 //
-//   apps/geolibre-desktop/public/plugins/geospax-*/ 
+//   apps/geolibre-desktop/public/plugins/geospax-*/
 //     plugin.json
 //     dist/index.js
 //     dist/style.css
@@ -23,7 +23,11 @@ const outBase = resolve(pkgRoot, "../../apps/geolibre-desktop/public/plugins");
 const srcDirNames = readdirSync(srcRoot, { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .map((d) => d.name)
-  .filter((name) => existsSync(resolve(srcRoot, name, "index.ts")) && existsSync(resolve(srcRoot, name, "plugin.json")));
+  .filter(
+    (name) =>
+      existsSync(resolve(srcRoot, name, "index.ts")) &&
+      existsSync(resolve(srcRoot, name, "plugin.json")),
+  );
 
 if (srcDirNames.length === 0) {
   console.error("[geospax] no plugins found under", srcRoot);

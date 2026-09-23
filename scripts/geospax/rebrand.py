@@ -34,9 +34,7 @@ REPO = Path(__file__).resolve().parents[2]
 APP = REPO / "apps/geolibre-desktop"
 
 # Matches standalone "GeoLibre" except the three keep-list cases.
-BRAND_RE = re.compile(
-    r"(?<!Share\.)GeoLibre(?! plugin registry)(?! Whitebox language pack)"
-)
+BRAND_RE = re.compile(r"(?<!Share\.)GeoLibre(?! plugin registry)(?! Whitebox language pack)")
 NEW_BRAND = "GeoSpaX"
 
 ABOUT_DESCRIPTION = (

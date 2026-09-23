@@ -7,13 +7,7 @@ import { describe, it } from "node:test";
 // without appearing in the panel rail. The rail is populated only when the
 // plugin also calls openRightPanel. Audit every GeoSpaX right-panel entry point
 // so those two parts of the activation contract cannot drift apart again.
-const PLUGIN_ROOT = resolve(
-  import.meta.dirname,
-  "..",
-  "packages",
-  "geospax-plugins",
-  "src",
-);
+const PLUGIN_ROOT = resolve(import.meta.dirname, "..", "packages", "geospax-plugins", "src");
 
 const EXPECTED_PANEL_IDS = [
   "geospax-agriculture",
@@ -55,26 +49,21 @@ function panelPluginSources(): PanelPluginSource[] {
 
 function registeredPanelIds(source: string): string[] {
   return [
-    ...source.matchAll(
-      /\bapp\.registerRightPanel\?\.\(\s*\{[\s\S]*?\bid:\s*["']([^"']+)["']/g,
-    ),
+    ...source.matchAll(/\bapp\.registerRightPanel\?\.\(\s*\{[\s\S]*?\bid:\s*["']([^"']+)["']/g),
   ].map((match) => match[1]);
 }
 
 function openedPanelIds(source: string): string[] {
-  return [
-    ...source.matchAll(/\bapp\.openRightPanel\?\.\(\s*["']([^"']+)["']\s*\)/g),
-  ].map((match) => match[1]);
+  return [...source.matchAll(/\bapp\.openRightPanel\?\.\(\s*["']([^"']+)["']\s*\)/g)].map(
+    (match) => match[1],
+  );
 }
 
 const panelPlugins = panelPluginSources();
 
 describe("GeoSpaX plugin panel rail contract", () => {
   it("audits all six domain panel plugins", () => {
-    assert.deepEqual(
-      panelPlugins.map(({ id }) => id).sort(),
-      [...EXPECTED_PANEL_IDS].sort(),
-    );
+    assert.deepEqual(panelPlugins.map(({ id }) => id).sort(), [...EXPECTED_PANEL_IDS].sort());
   });
 
   for (const { id, name, source } of panelPlugins) {

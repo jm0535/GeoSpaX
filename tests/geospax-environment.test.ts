@@ -39,9 +39,15 @@ describe("geospax-environment: pixelSizeAtCentre (centre-latitude metres)", () =
     const eq = pixelSizeAtCentre([0, 0, 1, 1], 100, 100)!;
     const high = pixelSizeAtCentre([0, 60, 1, 61], 100, 100)!;
     // At 60°N a degree of longitude is cos60 = 0.5 × equatorial
-    assert.ok(high.pixelWidthM < eq.pixelWidthM * 0.6, `high ${high.pixelWidthM} vs eq ${eq.pixelWidthM}`);
+    assert.ok(
+      high.pixelWidthM < eq.pixelWidthM * 0.6,
+      `high ${high.pixelWidthM} vs eq ${eq.pixelWidthM}`,
+    );
     // Latitude distance is roughly latitude-invariant (allow small haversine curvature)
-    assert.ok(Math.abs(high.pixelHeightM - eq.pixelHeightM) < 150, `lat height high ${high.pixelHeightM} vs eq ${eq.pixelHeightM}`);
+    assert.ok(
+      Math.abs(high.pixelHeightM - eq.pixelHeightM) < 150,
+      `lat height high ${high.pixelHeightM} vs eq ${eq.pixelHeightM}`,
+    );
   });
 
   it("keeps pixelArea as product", () => {
@@ -59,19 +65,28 @@ describe("geospax-environment: pixelSizeAtCentre (centre-latitude metres)", () =
 
 describe("geospax-environment: Horn slope/aspect", () => {
   // Flat 5×5 grid elevation = 100 everywhere → slope 0
-  const w = 5, h = 5;
+  const w = 5,
+    h = 5;
   const flat = new Array(w * h).fill(100);
   it("flat terrain yields ~0° slope interior, NaN border", () => {
     const pix = pixelSizeAtCentre([0, 0, 1, 1], w, h)!;
-    const res = hornSlopeAndAspect({ values: flat, width: w, height: h, pixelWidthM: pix.pixelWidthM, pixelHeightM: pix.pixelHeightM, nodata: null });
+    const res = hornSlopeAndAspect({
+      values: flat,
+      width: w,
+      height: h,
+      pixelWidthM: pix.pixelWidthM,
+      pixelHeightM: pix.pixelHeightM,
+      nodata: null,
+    });
     assert.equal(res.totalCells, w * h);
     assert.equal(res.borderExcluded, w * 2 + (h - 2) * 2);
     assert.equal(res.validCells, 9); // 3×3 interior
     assert.equal(res.nodataExcluded, 0);
-    for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
-      const v = res.slopeDeg[y * w + x];
-      assert.ok(Math.abs(v) < 1e-6, `flat slope ${v} at ${x},${y}`);
-    }
+    for (let y = 1; y < h - 1; y++)
+      for (let x = 1; x < w - 1; x++) {
+        const v = res.slopeDeg[y * w + x];
+        assert.ok(Math.abs(v) < 1e-6, `flat slope ${v} at ${x},${y}`);
+      }
     // border is NaN
     assert.ok(!Number.isFinite(res.slopeDeg[0]));
   });
@@ -81,18 +96,32 @@ describe("geospax-environment: Horn slope/aspect", () => {
     const ramp: number[] = [];
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) ramp.push(x * 10);
     const pix = pixelSizeAtCentre([0, 0, 1, 1], w, h)!;
-    const res = hornSlopeAndAspect({ values: ramp, width: w, height: h, pixelWidthM: pix.pixelWidthM, pixelHeightM: pix.pixelHeightM, nodata: null });
+    const res = hornSlopeAndAspect({
+      values: ramp,
+      width: w,
+      height: h,
+      pixelWidthM: pix.pixelWidthM,
+      pixelHeightM: pix.pixelHeightM,
+      nodata: null,
+    });
     // dzdx ≈ 10 / pixelWidthM, so slope = atan(10/dx) in degrees
-    const expected = Math.atan(10 / pix.pixelWidthM) * 180 / Math.PI;
-    const centre = res.slopeDeg[Math.floor(h/2)*w + Math.floor(w/2)];
+    const expected = (Math.atan(10 / pix.pixelWidthM) * 180) / Math.PI;
+    const centre = res.slopeDeg[Math.floor(h / 2) * w + Math.floor(w / 2)];
     assert.ok(Math.abs(centre - expected) < 0.5, `centre slope ${centre} vs expected ${expected}`);
   });
 
   it("excludes nodata neighbourhoods and counts them", () => {
     const g = [...flat];
     g[12] = -9999; // centre nodata
-    const pix = pixelSizeAtCentre([0,0,1,1], w, h)!;
-    const res = hornSlopeAndAspect({ values: g, width: w, height: h, pixelWidthM: pix.pixelWidthM, pixelHeightM: pix.pixelHeightM, nodata: -9999 });
+    const pix = pixelSizeAtCentre([0, 0, 1, 1], w, h)!;
+    const res = hornSlopeAndAspect({
+      values: g,
+      width: w,
+      height: h,
+      pixelWidthM: pix.pixelWidthM,
+      pixelHeightM: pix.pixelHeightM,
+      nodata: -9999,
+    });
     // Any interior cell whose 3×3 touches centre is excluded — at least 9 cells
     assert.ok(res.nodataExcluded >= 1);
     assert.ok(res.validCells < 9);
@@ -100,8 +129,15 @@ describe("geospax-environment: Horn slope/aspect", () => {
   });
 
   it("handles too-small grid (no interior)", () => {
-    const pix = pixelSizeAtCentre([0,0,1,1], 2, 2)!;
-    const res = hornSlopeAndAspect({ values: [0,0,0,0], width: 2, height: 2, pixelWidthM: pix.pixelWidthM, pixelHeightM: pix.pixelHeightM, nodata: null });
+    const pix = pixelSizeAtCentre([0, 0, 1, 1], 2, 2)!;
+    const res = hornSlopeAndAspect({
+      values: [0, 0, 0, 0],
+      width: 2,
+      height: 2,
+      pixelWidthM: pix.pixelWidthM,
+      pixelHeightM: pix.pixelHeightM,
+      nodata: null,
+    });
     assert.equal(res.validCells, 0);
     assert.equal(res.borderExcluded, 4);
   });
@@ -144,7 +180,8 @@ describe("geospax-environment: slope classification", () => {
 
 describe("geospax-environment: mask→polygons", () => {
   it("one steep cell becomes one pixel rectangle inside bounds", () => {
-    const w = 2, h = 2;
+    const w = 2,
+      h = 2;
     const bounds: [number, number, number, number] = [0, 0, 2, 2];
     const slopes = new Float32Array([10, 40, 5, 35]);
     const mask = steepMask(slopes, [15, 30], 2);
@@ -160,10 +197,11 @@ describe("geospax-environment: mask→polygons", () => {
 
 describe("geospax-environment: normalized-difference grid", () => {
   it("ND = (A−B)/(A+B) with valid cells", () => {
-    const w=3,h=2;
-    const A=[10,20,30, 10,10,10];
-    const B=[5,10,10, 10,0,10];
-    const g = normalizedDifferenceGrid(A,B,w,h,null,null);
+    const w = 3,
+      h = 2;
+    const A = [10, 20, 30, 10, 10, 10];
+    const B = [5, 10, 10, 10, 0, 10];
+    const g = normalizedDifferenceGrid(A, B, w, h, null, null);
     // (10-5)/(15)=0.333..., (20-10)/30=0.333..., (30-10)/40=0.5, (10-10)/20=0, (10-0)/10=1, (10-10)/20=0
     assert.ok(Math.abs(g.nd[0] - 0.333333) < 0.001);
     assert.ok(Math.abs(g.nd[2] - 0.5) < 0.001);
@@ -171,13 +209,15 @@ describe("geospax-environment: normalized-difference grid", () => {
     assert.equal(g.validCells, 6);
     assert.equal(g.nodataCells, 0);
     assert.ok(Number.isFinite(g.min) && Number.isFinite(g.max));
-    assert.ok(Math.abs(g.mean - ((0.3333+0.3333+0.5+0+1+0)/6)) < 0.001);
+    assert.ok(Math.abs(g.mean - (0.3333 + 0.3333 + 0.5 + 0 + 1 + 0) / 6) < 0.001);
   });
 
   it("nodata and zero-denom are NaN and counted", () => {
-    const w=2,h=1;
-    const A=[1,5], B=[-1,5]; // first has denom 0 => NaN, second (5-5)/10=0
-    const g = normalizedDifferenceGrid(A,B,w,h,null,null);
+    const w = 2,
+      h = 1;
+    const A = [1, 5],
+      B = [-1, 5]; // first has denom 0 => NaN, second (5-5)/10=0
+    const g = normalizedDifferenceGrid(A, B, w, h, null, null);
     assert.ok(!Number.isFinite(g.nd[0]));
     assert.equal(g.nodataCells, 1);
     assert.equal(g.validCells, 1);
@@ -193,7 +233,7 @@ describe("geospax-environment: normalized-difference grid", () => {
   });
 
   it("mismatched lengths → all nodata", () => {
-    const g = normalizedDifferenceGrid([1,2,3],[1,2], 3,1,null,null);
+    const g = normalizedDifferenceGrid([1, 2, 3], [1, 2], 3, 1, null, null);
     assert.equal(g.validCells, 0);
     assert.equal(g.nodataCells, 3);
   });
@@ -202,7 +242,7 @@ describe("geospax-environment: normalized-difference grid", () => {
 describe("geospax-environment: histogram + Otsu + stats", () => {
   it("histogram bins ND values into [-1,1]", () => {
     const nd = new Float32Array([-1, -0.5, 0, 0.5, 1, 0.9, Number.NaN]);
-    const hist = histogramND(nd, 4, [-1,1]);
+    const hist = histogramND(nd, 4, [-1, 1]);
     assert.equal(hist.binCount, 4);
     assert.equal(hist.totalValid, 6);
     // bins: [-1,-0.5),[-0.5,0),[0,0.5),[0.5,1] — expect distribution
@@ -217,12 +257,18 @@ describe("geospax-environment: histogram + Otsu + stats", () => {
     // land somewhere between the peaks — not at an extreme. Allow a wide
     // band because the exact bin depends on histogram discretisation.
     const nd = new Float32Array([...new Array(50).fill(-0.8), ...new Array(50).fill(0.7)]);
-    const hist = histogramND(nd, 64, [-1,1]);
+    const hist = histogramND(nd, 64, [-1, 1]);
     const otsu = otsuThreshold(hist);
     assert.ok(otsu.threshold !== null, "Otsu should find a threshold for bimodal data");
     if (otsu.threshold !== null) {
-      assert.ok(otsu.threshold > -0.9 && otsu.threshold < 0.9, `otsu ${otsu.threshold} not in [-0.9,0.9]`);
-      assert.ok(otsu.threshold > -0.8 && otsu.threshold < 0.7, `otsu ${otsu.threshold} not between peaks`);
+      assert.ok(
+        otsu.threshold > -0.9 && otsu.threshold < 0.9,
+        `otsu ${otsu.threshold} not in [-0.9,0.9]`,
+      );
+      assert.ok(
+        otsu.threshold > -0.8 && otsu.threshold < 0.7,
+        `otsu ${otsu.threshold} not between peaks`,
+      );
       assert.ok(otsu.binIndex !== null);
       assert.ok((otsu.betweenVariance ?? 0) > 0);
     }
@@ -230,14 +276,24 @@ describe("geospax-environment: histogram + Otsu + stats", () => {
 
   it("Otsu unimodal (single occupied bin) → null", () => {
     const nd = new Float32Array(new Array(20).fill(0.5));
-    const hist = histogramND(nd, 64, [-1,1]);
+    const hist = histogramND(nd, 64, [-1, 1]);
     const otsu = otsuThreshold(hist);
     assert.equal(otsu.threshold, null);
   });
 
   it("stats row: range, mean, valid cells", () => {
     const nd = new Float32Array([0.1, 0.2, 0.3, Number.NaN]);
-    const g = { nd, validCells: 3, nodataCells: 1, min: 0.1, max: 0.3, mean: 0.2, width: 2, height: 2, rawNodata: null } as ReturnType<typeof normalizedDifferenceGrid>;
+    const g = {
+      nd,
+      validCells: 3,
+      nodataCells: 1,
+      min: 0.1,
+      max: 0.3,
+      mean: 0.2,
+      width: 2,
+      height: 2,
+      rawNodata: null,
+    } as ReturnType<typeof normalizedDifferenceGrid>;
     const row = indexStatsRow(g);
     assert.equal(row.min, 0.1);
     assert.equal(row.max, 0.3);
@@ -247,8 +303,8 @@ describe("geospax-environment: histogram + Otsu + stats", () => {
   });
 
   it("rasterResolutionWarning mirrors terrain logic for ND", () => {
-    assert.ok(rasterResolutionWarning(110,110,256,256)?.includes("Coarse"));
-    assert.equal(rasterResolutionWarning(20,20,256,256), null);
+    assert.ok(rasterResolutionWarning(110, 110, 256, 256)?.includes("Coarse"));
+    assert.equal(rasterResolutionWarning(20, 20, 256, 256), null);
   });
 
   it("INDEX_PRESETS has 5 entries and BAND caveat is verbatim", () => {
@@ -266,7 +322,7 @@ describe("geospax-environment: histogram + Otsu + stats", () => {
     const pixArea = 100; // 10×10m
     assert.equal(areaM2ForPixelCount(5, pixArea), 500);
     const nd = new Float32Array([0.5, 0.1, 0.3, 0.8]);
-    const polys = extentPolygonsForThreshold(nd, 2, 2, [0,0,2,2], 0.3);
+    const polys = extentPolygonsForThreshold(nd, 2, 2, [0, 0, 2, 2], 0.3);
     // 0.5≥0.3, 0.3≥0.3, 0.8≥0.3 => 3 rects
     assert.equal(polys.length, 3);
   });

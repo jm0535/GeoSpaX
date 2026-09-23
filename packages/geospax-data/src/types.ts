@@ -1,7 +1,17 @@
 // Shared connector types — tiered citation-carrying design.
 
 export type ConnectorTier = "live" | "catalogue" | "token";
-export type ConnectorId = "gbif" | "obis" | "inat" | "worms" | "worldbank" | "sprep" | "gebco" | "ecoregion" | "forest" | "marine";
+export type ConnectorId =
+  | "gbif"
+  | "obis"
+  | "inat"
+  | "worms"
+  | "worldbank"
+  | "sprep"
+  | "gebco"
+  | "ecoregion"
+  | "forest"
+  | "marine";
 
 export interface Citation {
   title: string;

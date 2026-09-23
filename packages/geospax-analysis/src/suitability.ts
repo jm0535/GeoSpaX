@@ -6,9 +6,9 @@
 
 export interface WlcCriterion {
   id: string;
-  weight: number;       // raw weight — normalised internally (must sum > 0)
-  score: number;        // graded 0–1 (or 0–100, normalised on entry)
-  benefit: boolean;     // true = benefit, false = cost (score is inverted)
+  weight: number; // raw weight — normalised internally (must sum > 0)
+  score: number; // graded 0–1 (or 0–100, normalised on entry)
+  benefit: boolean; // true = benefit, false = cost (score is inverted)
 }
 
 export interface WlcOptions {
@@ -17,7 +17,7 @@ export interface WlcOptions {
 }
 
 export interface WlcResult {
-  suitability: number;   // 0–1
+  suitability: number; // 0–1
   weightedSum: number;
   weightTotal: number;
   normalized: boolean;
@@ -28,10 +28,7 @@ export interface WlcResult {
  * Returns null on degenerate input (no criteria, zero weight total, non-finite scores)
  * — audit rule: never silently falls back to an unweighted mean.
  */
-export function wlc(
-  criteria: WlcCriterion[],
-  options: WlcOptions = {},
-): WlcResult | null {
+export function wlc(criteria: WlcCriterion[], options: WlcOptions = {}): WlcResult | null {
   if (!criteria || criteria.length === 0) return null;
   const normalizeScores = options.normalizeScores ?? true;
   const clamp01 = options.clamp01 ?? true;

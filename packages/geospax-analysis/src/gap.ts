@@ -151,8 +151,7 @@ export function protectionGap(
     gapPct: totalM2 > 0 ? (gapM2 / totalM2) * 100 : 0,
     paCount: paNames.length,
     paNames,
-    residualPct:
-      totalM2 > 0 ? (Math.abs(protM2 + gapM2 - totalM2) / totalM2) * 100 : 0,
+    residualPct: totalM2 > 0 ? (Math.abs(protM2 + gapM2 - totalM2) / totalM2) * 100 : 0,
     skipped: {
       habitat: polygonsOnly(habitatFeatures).skipped,
       pa: polygonsOnly(paFeatures).skipped,

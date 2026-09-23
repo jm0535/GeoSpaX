@@ -22,10 +22,7 @@ export default defineConfig({
       fileName: () => "index.js",
       cssFileName: "style",
     },
-    outDir: resolve(
-      pkgRoot,
-      `../../apps/geolibre-desktop/public/plugins/${pluginId}/dist`,
-    ),
+    outDir: resolve(pkgRoot, `../../apps/geolibre-desktop/public/plugins/${pluginId}/dist`),
     emptyOutDir: true,
     sourcemap: true,
     target: "es2022",

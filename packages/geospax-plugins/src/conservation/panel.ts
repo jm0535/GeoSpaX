@@ -139,8 +139,7 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     id: "provenance",
     title: "Provenance",
     badge: "Export",
-    description:
-      "Review methods and export the run ledger or host project snapshot.",
+    description: "Review methods and export the run ledger or host project snapshot.",
   });
   mountProvenanceTool(shell, provenance);
 

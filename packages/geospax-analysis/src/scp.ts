@@ -37,8 +37,7 @@ function validProblem(problem: ScpProblem): boolean {
     problem.speciesCoverage.length === problem.targets.length &&
     problem.speciesCoverage.every(
       (row) =>
-        row.length === unitCount &&
-        row.every((amount) => Number.isFinite(amount) && amount >= 0),
+        row.length === unitCount && row.every((amount) => Number.isFinite(amount) && amount >= 0),
     )
   );
 }
@@ -56,7 +55,8 @@ function greedy(problem: ScpProblem): ScpSolution {
       optimal: false,
       feasible: false,
       method: "greedy",
-      warning: "Invalid SCP problem: costs, targets and coverage must be finite, non-negative and rectangular.",
+      warning:
+        "Invalid SCP problem: costs, targets and coverage must be finite, non-negative and rectangular.",
     };
   }
   const { costs, speciesCoverage, targets } = problem;
@@ -114,8 +114,7 @@ export async function solveScpExact(
   optionsOrLegacyHighs: ScpExactOptions | { solve: (lp: unknown) => unknown } = {},
 ): Promise<ScpSolution> {
   if (!validProblem(problem)) return greedy(problem);
-  const options: ScpExactOptions =
-    "solve" in optionsOrLegacyHighs ? {} : optionsOrLegacyHighs;
+  const options: ScpExactOptions = "solve" in optionsOrLegacyHighs ? {} : optionsOrLegacyHighs;
   const maxUnits = options.maxUnits ?? 28;
   const maxNodes = options.maxNodes ?? 2_000_000;
   const baseline = greedy(problem);
@@ -151,8 +150,7 @@ export async function solveScpExact(
   for (let depth = units.length - 1; depth >= 0; depth--) {
     const unit = units[depth].original;
     for (let species = 0; species < speciesCount; species++) {
-      suffix[depth][species] =
-        suffix[depth + 1][species] + problem.speciesCoverage[species][unit];
+      suffix[depth][species] = suffix[depth + 1][species] + problem.speciesCoverage[species][unit];
     }
   }
 

@@ -125,11 +125,23 @@ export function normalizedDifferenceGrid(
   const nd = new Float32Array(n);
   let validCells = 0;
   let nodataCells = 0;
-  let min = Infinity, max = -Infinity, sum = 0;
+  let min = Infinity,
+    max = -Infinity,
+    sum = 0;
 
   if (!aValues || !bValues || aValues.length !== n || bValues.length !== n) {
     nd.fill(Number.NaN);
-    return { nd, width: w, height: h, validCells: 0, nodataCells: n, min: Number.NaN, max: Number.NaN, mean: Number.NaN, rawNodata: null };
+    return {
+      nd,
+      width: w,
+      height: h,
+      validCells: 0,
+      nodataCells: n,
+      min: Number.NaN,
+      max: Number.NaN,
+      mean: Number.NaN,
+      rawNodata: null,
+    };
   }
 
   for (let i = 0; i < n; i++) {
@@ -308,10 +320,7 @@ import { maskToPixelPolygons } from "./terrain";
 /**
  * Mask for ND >= threshold (or > if strict). NaN is always false.
  */
-export function maskForThreshold(
-  nd: Float32Array,
-  threshold: number,
-): Uint8Array {
+export function maskForThreshold(nd: Float32Array, threshold: number): Uint8Array {
   const mask = new Uint8Array(nd.length);
   for (let i = 0; i < nd.length; i++) {
     const v = nd[i];
