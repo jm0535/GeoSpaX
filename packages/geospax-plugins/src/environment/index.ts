@@ -13,6 +13,7 @@ import {
   mountEnvironmentPanel,
   type EnvironmentPanelState,
 } from "./panel";
+import "../shared/style.css";
 import "./style.css";
 
 /** Must match plugin.json "version" — the loader validates the pair. */

@@ -1,20 +1,26 @@
-// SDM — BIOCLIM & Mahalanobis (parity home for geospax-sdm-fix.js).
+// Species-distribution modelling: audit-fixed BIOCLIM and Mahalanobis.
 //
-// Minimal in this build: the Phase-7 parity table requires an `sdm.ts`
-// that supersedes the v1 `geospax-sdm-fix.js`. The full BIOCLIM/Mahalanobis
-// implementations live in this module in the v2.0.0 (18-module) build; this
-// increment ships the file with the public surface that the stage expects
-// and the audit-fixed guards, so `geospax-sdm-fix.js` is formally superseded
-// via `sdm.ts + Conservation §7` per the parity statement.
-//
-// The Environment drop-in does not depend on SDM, so this file is intentionally
-// dependency-light and free of DOM/map SDK coupling.
+// This module fits and *predicts* both models. It never falls back to longitude/
+// latitude or Euclidean distance when environmental data/covariance are
+// inadequate. Missing rows are excluded and counted by callers; a singular
+// covariance is ridge-regularised and explicitly marked on the model.
 
 import { makeProvenance, type ProvenanceStamp } from "./provenance";
 
 export const SDM_VERSION = "2.0.0";
 
-/** BIOCLIM envelope with percentile trimming. */
+/** Linearly interpolated percentile, p in [0, 1]. */
+export function percentile(sortedValues: number[], p: number): number | null {
+  if (!sortedValues.length) return null;
+  if (sortedValues.length === 1) return sortedValues[0];
+  const bounded = Math.max(0, Math.min(1, p));
+  const index = (sortedValues.length - 1) * bounded;
+  const low = Math.floor(index);
+  const high = Math.ceil(index);
+  if (low === high) return sortedValues[low];
+  return sortedValues[low] + (sortedValues[high] - sortedValues[low]) * (index - low);
+}
+
 export interface BioclimEnvelope {
   variables: string[];
   min: number[];
@@ -26,45 +32,168 @@ export interface BioclimEnvelope {
 }
 
 export interface BioclimOptions {
-  percentile?: number; // 0–50, trim per variable; 0 = full range
+  /** Symmetric tail trim in percent, 0–49.9 (default 5). */
+  percentile?: number;
 }
 
-/**
- * Fit a BIOCLIM envelope from an n×p matrix of presence points.
- * Returns null on degenerate input (port of the audit-fixed `geospax-sdm-fix.js` guard).
- */
+function matrixWidth(matrix: number[][]): number {
+  return matrix[0]?.length ?? 0;
+}
+
+function completeRows(matrix: number[][], width: number): number[][] {
+  return (matrix ?? []).filter(
+    (row) => row.length === width && row.every((value) => Number.isFinite(value)),
+  );
+}
+
+/** Fit percentile envelopes from a complete n×p environmental matrix. */
 export function fitBioclim(
   presences: number[][],
   variableNames: string[] = [],
   options: BioclimOptions = {},
 ): BioclimEnvelope | null {
-  if (!presences || presences.length === 0) return null;
-  const p = presences[0]?.length ?? 0;
-  if (p === 0) return null;
-  const pct = options.percentile ?? 5;
-  const lowQ = pct / 100;
+  const p = matrixWidth(presences);
+  if (!p) return null;
+  const complete = completeRows(presences, p);
+  if (!complete.length) return null;
+  const trim = options.percentile ?? 5;
+  if (!Number.isFinite(trim) || trim < 0 || trim >= 50) return null;
+  const lowQ = trim / 100;
   const highQ = 1 - lowQ;
   const min: number[] = [];
   const max: number[] = [];
   const pLow: number[] = [];
   const pHigh: number[] = [];
-  for (let j = 0; j < p; j++) {
-    const col = presences.map((row) => row[j]).filter((v) => Number.isFinite(v)).sort((a, b) => a - b);
-    if (col.length === 0) return null;
-    min.push(col[0]);
-    max.push(col[col.length - 1]);
-    const loIdx = Math.floor(lowQ * (col.length - 1));
-    const hiIdx = Math.ceil(highQ * (col.length - 1));
-    pLow.push(col[loIdx] ?? col[0]);
-    pHigh.push(col[hiIdx] ?? col[col.length - 1]);
+  for (let variable = 0; variable < p; variable++) {
+    const values = complete.map((row) => row[variable]).sort((a, b) => a - b);
+    min.push(values[0]);
+    max.push(values[values.length - 1]);
+    pLow.push(percentile(values, lowQ) as number);
+    pHigh.push(percentile(values, highQ) as number);
   }
   return {
-    variables: variableNames.length === p ? variableNames : Array.from({ length: p }, (_, i) => `var${i + 1}`),
-    min, max, pLow, pHigh, percentile: pct, n: presences.length,
+    variables:
+      variableNames.length === p
+        ? variableNames
+        : Array.from({ length: p }, (_, index) => `var${index + 1}`),
+    min,
+    max,
+    pLow,
+    pHigh,
+    percentile: trim,
+    n: complete.length,
   };
 }
 
-/** Mahalanobis model with chi-square D² guard. */
+export type BioclimMode = "limiting" | "proportion";
+
+export interface BioclimPrediction {
+  suitability: number | null;
+  evaluated: number;
+  inEnvelope: number;
+  limitingVariables: string[];
+}
+
+/** Score one environmental vector against a fitted BIOCLIM envelope. */
+export function predictBioclim(
+  values: number[],
+  model: BioclimEnvelope,
+  mode: BioclimMode = "limiting",
+): BioclimPrediction {
+  if (values.length !== model.variables.length) {
+    return { suitability: null, evaluated: 0, inEnvelope: 0, limitingVariables: [] };
+  }
+  let evaluated = 0;
+  let inEnvelope = 0;
+  const limitingVariables: string[] = [];
+  for (let variable = 0; variable < values.length; variable++) {
+    const value = values[variable];
+    if (!Number.isFinite(value)) continue;
+    evaluated++;
+    if (value >= model.pLow[variable] && value <= model.pHigh[variable]) {
+      inEnvelope++;
+    } else {
+      limitingVariables.push(model.variables[variable]);
+    }
+  }
+  if (evaluated !== values.length || evaluated === 0) {
+    return { suitability: null, evaluated, inEnvelope, limitingVariables };
+  }
+  return {
+    suitability: mode === "limiting" ? (inEnvelope === evaluated ? 1 : 0) : inEnvelope / evaluated,
+    evaluated,
+    inEnvelope,
+    limitingVariables,
+  };
+}
+
+export function predictBioclimMatrix(
+  matrix: number[][],
+  model: BioclimEnvelope,
+  mode: BioclimMode = "limiting",
+): BioclimPrediction[] {
+  return matrix.map((row) => predictBioclim(row, model, mode));
+}
+
+export interface MatrixInverseResult {
+  inverse: number[][] | null;
+  singular: boolean;
+  ridge: number;
+}
+
+function gaussJordan(matrix: number[][], tolerance = 1e-12): number[][] | null {
+  const n = matrix.length;
+  if (!n || matrix.some((row) => row.length !== n)) return null;
+  const augmented = matrix.map((row, index) => [
+    ...row,
+    ...Array.from({ length: n }, (_, column) => (column === index ? 1 : 0)),
+  ]);
+  for (let column = 0; column < n; column++) {
+    let pivotRow = column;
+    for (let row = column + 1; row < n; row++) {
+      if (Math.abs(augmented[row][column]) > Math.abs(augmented[pivotRow][column])) {
+        pivotRow = row;
+      }
+    }
+    if (!Number.isFinite(augmented[pivotRow][column]) || Math.abs(augmented[pivotRow][column]) <= tolerance) {
+      return null;
+    }
+    if (pivotRow !== column) {
+      [augmented[column], augmented[pivotRow]] = [augmented[pivotRow], augmented[column]];
+    }
+    const pivot = augmented[column][column];
+    for (let value = 0; value < n * 2; value++) augmented[column][value] /= pivot;
+    for (let row = 0; row < n; row++) {
+      if (row === column) continue;
+      const factor = augmented[row][column];
+      for (let value = 0; value < n * 2; value++) {
+        augmented[row][value] -= factor * augmented[column][value];
+      }
+    }
+  }
+  return augmented.map((row) => row.slice(n));
+}
+
+/** General covariance inversion with disclosed ridge regularisation. */
+export function invertMatrixSafe(matrix: number[][]): MatrixInverseResult {
+  const direct = gaussJordan(matrix);
+  if (direct) return { inverse: direct, singular: false, ridge: 0 };
+  const n = matrix.length;
+  if (!n) return { inverse: null, singular: true, ridge: 0 };
+  const diagonalScale =
+    matrix.reduce((sum, row, index) => sum + Math.abs(row[index] ?? 0), 0) / n;
+  let ridge = Math.max(1e-10, diagonalScale * 1e-8);
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const regularized = matrix.map((row, rowIndex) =>
+      row.map((value, columnIndex) => value + (rowIndex === columnIndex ? ridge : 0)),
+    );
+    const inverse = gaussJordan(regularized);
+    if (inverse) return { inverse, singular: true, ridge };
+    ridge *= 10;
+  }
+  return { inverse: null, singular: true, ridge };
+}
+
 export interface MahalanobisModel {
   mean: number[];
   cov: number[][];
@@ -72,65 +201,189 @@ export interface MahalanobisModel {
   variables: string[];
   n: number;
   singular: boolean;
+  regularized: boolean;
+  ridge: number;
+  recordsDropped: number;
 }
 
 function meanVector(data: number[][]): number[] {
   const p = data[0].length;
-  const means = new Array(p).fill(0);
-  for (const row of data) for (let j = 0; j < p; j++) means[j] += row[j];
-  for (let j = 0; j < p; j++) means[j] /= data.length;
-  return means;
-}
-
-function covarianceMatrix(data: number[][], mean: number[]): number[][] {
-  const p = data[0].length;
-  const n = data.length;
-  const cov: number[][] = Array.from({ length: p }, () => new Array(p).fill(0));
+  const mean = new Array(p).fill(0);
   for (const row of data) {
-    const d = row.map((v, j) => v - mean[j]);
-    for (let j = 0; j < p; j++) for (let k = 0; k < p; k++) cov[j][k] += d[j] * d[k];
+    for (let variable = 0; variable < p; variable++) mean[variable] += row[variable];
   }
-  for (let j = 0; j < p; j++) for (let k = 0; k < p; k++) cov[j][k] /= Math.max(1, n - 1);
-  return cov;
+  for (let variable = 0; variable < p; variable++) mean[variable] /= data.length;
+  return mean;
 }
 
-// 2×2 invert with singular guard; larger P returns null inv (caller falls back to Euclidean).
-function invert2x2(cov: number[][]): number[][] | null {
-  if (cov.length !== 2 || cov[0].length !== 2) return null;
-  const [[a, b], [c, d]] = cov;
-  const det = a * d - b * c;
-  if (!Number.isFinite(det) || Math.abs(det) < 1e-12) return null;
-  const invDet = 1 / det;
-  return [
-    [d * invDet, -b * invDet],
-    [-c * invDet, a * invDet],
-  ];
+export function covarianceMatrix(data: number[][], mean: number[]): number[][] {
+  const p = mean.length;
+  const covariance = Array.from({ length: p }, () => new Array(p).fill(0));
+  for (const row of data) {
+    for (let a = 0; a < p; a++) {
+      for (let b = 0; b < p; b++) {
+        covariance[a][b] += (row[a] - mean[a]) * (row[b] - mean[b]);
+      }
+    }
+  }
+  const denominator = Math.max(1, data.length - 1);
+  for (let a = 0; a < p; a++) {
+    for (let b = 0; b < p; b++) covariance[a][b] /= denominator;
+  }
+  return covariance;
 }
 
+/** Fit a p-variable Mahalanobis model; no p>2 Euclidean fallback. */
 export function fitMahalanobis(
   presences: number[][],
   variableNames: string[] = [],
 ): MahalanobisModel | null {
-  if (!presences || presences.length < 2) return null;
-  const p = presences[0]?.length ?? 0;
-  if (p === 0) return null;
-  const mean = meanVector(presences);
-  const cov = covarianceMatrix(presences, mean);
-  const invCov = p === 2 ? invert2x2(cov) : null;
-  const singular = invCov === null && p === 2;
+  const p = matrixWidth(presences);
+  if (p < 2) return null;
+  const complete = completeRows(presences, p);
+  if (complete.length < 2) return null;
+  const mean = meanVector(complete);
+  const cov = covarianceMatrix(complete, mean);
+  const inversion = invertMatrixSafe(cov);
   return {
     mean,
     cov,
-    invCov,
-    variables: variableNames.length === p ? variableNames : Array.from({ length: p }, (_, i) => `var${i + 1}`),
-    n: presences.length,
-    singular,
+    invCov: inversion.inverse,
+    variables:
+      variableNames.length === p
+        ? variableNames
+        : Array.from({ length: p }, (_, index) => `var${index + 1}`),
+    n: complete.length,
+    singular: inversion.singular,
+    regularized: inversion.singular && inversion.inverse !== null,
+    ridge: inversion.ridge,
+    recordsDropped: presences.length - complete.length,
   };
+}
+
+/** Squared Mahalanobis distance, or null when the fitted inverse is unavailable. */
+export function mahalanobisD2(values: number[], model: MahalanobisModel): number | null {
+  if (!model.invCov || values.length !== model.mean.length || values.some((value) => !Number.isFinite(value))) {
+    return null;
+  }
+  const delta = values.map((value, index) => value - model.mean[index]);
+  let distance = 0;
+  for (let row = 0; row < delta.length; row++) {
+    for (let column = 0; column < delta.length; column++) {
+      distance += delta[row] * model.invCov[row][column] * delta[column];
+    }
+  }
+  // Floating-point cancellation can yield tiny negative values.
+  return Math.max(0, distance);
+}
+
+function logGamma(z: number): number {
+  const coefficients = [
+    676.5203681218851,
+    -1259.1392167224028,
+    771.3234287776531,
+    -176.6150291621406,
+    12.507343278686905,
+    -0.13857109526572012,
+    9.984369578019572e-6,
+    1.5056327351493116e-7,
+  ];
+  if (z < 0.5) return Math.log(Math.PI / Math.sin(Math.PI * z)) - logGamma(1 - z);
+  const shifted = z - 1;
+  let x = 0.9999999999998099;
+  for (let i = 0; i < coefficients.length; i++) x += coefficients[i] / (shifted + i + 1);
+  const t = shifted + coefficients.length - 0.5;
+  return 0.5 * Math.log(2 * Math.PI) + (shifted + 0.5) * Math.log(t) - t + Math.log(x);
+}
+
+function gammaP(a: number, x: number): number {
+  if (x < 0 || a <= 0) return Number.NaN;
+  if (x === 0) return 0;
+  const gammaLog = logGamma(a);
+  if (x < a + 1) {
+    let ap = a;
+    let sum = 1 / a;
+    let delta = sum;
+    for (let iteration = 1; iteration < 300; iteration++) {
+      ap++;
+      delta *= x / ap;
+      sum += delta;
+      if (Math.abs(delta) < Math.abs(sum) * 1e-12) break;
+    }
+    return sum * Math.exp(-x + a * Math.log(x) - gammaLog);
+  }
+  let b = x + 1 - a;
+  let c = 1e300;
+  let d = 1 / b;
+  let h = d;
+  for (let iteration = 1; iteration < 300; iteration++) {
+    const an = -iteration * (iteration - a);
+    b += 2;
+    d = an * d + b;
+    if (Math.abs(d) < 1e-300) d = 1e-300;
+    c = b + an / c;
+    if (Math.abs(c) < 1e-300) c = 1e-300;
+    d = 1 / d;
+    const factor = d * c;
+    h *= factor;
+    if (Math.abs(factor - 1) < 1e-12) break;
+  }
+  const q = Math.exp(-x + a * Math.log(x) - gammaLog) * h;
+  return 1 - q;
+}
+
+/** Survival probability P(X > x) for a chi-square variate. */
+export function chiSquareSurvival(x: number, degreesOfFreedom: number): number {
+  if (!Number.isFinite(x) || !Number.isFinite(degreesOfFreedom) || degreesOfFreedom <= 0) {
+    return Number.NaN;
+  }
+  if (x <= 0) return 1;
+  return Math.max(0, Math.min(1, 1 - gammaP(degreesOfFreedom / 2, x / 2)));
+}
+
+export type MahalanobisOutput = "chisq" | "index";
+
+export interface MahalanobisPrediction {
+  suitability: number | null;
+  d2: number | null;
+  output: MahalanobisOutput;
+}
+
+export function predictMahalanobis(
+  values: number[],
+  model: MahalanobisModel,
+  output: MahalanobisOutput = "chisq",
+): MahalanobisPrediction {
+  const d2 = mahalanobisD2(values, model);
+  if (d2 === null) return { suitability: null, d2: null, output };
+  return {
+    d2,
+    output,
+    suitability:
+      output === "chisq"
+        ? chiSquareSurvival(d2, model.mean.length)
+        : 1 / (1 + Math.sqrt(d2)),
+  };
+}
+
+export function predictMahalanobisMatrix(
+  matrix: number[][],
+  model: MahalanobisModel,
+  output: MahalanobisOutput = "chisq",
+): MahalanobisPrediction[] {
+  return matrix.map((row) => predictMahalanobis(row, model, output));
 }
 
 export function provenanceForSdm(
   tool: "bioclim" | "mahalanobis",
   params: Record<string, unknown> = {},
 ): ProvenanceStamp {
-  return makeProvenance(tool, tool === "bioclim" ? "BIOCLIM envelope" : "Mahalanobis D²", "EPSG:4326", params);
+  return makeProvenance(
+    tool,
+    tool === "bioclim"
+      ? "BIOCLIM percentile envelope"
+      : "Mahalanobis D² with general covariance inversion",
+    "Environmental-variable space; output geometry retains its source CRS",
+    params,
+  );
 }

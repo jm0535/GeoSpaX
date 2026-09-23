@@ -28,6 +28,7 @@ import {
   resumeVectorStoreSync,
   runWithVectorStoreSyncSuspended,
   savedVectorState,
+  setVectorGeometryReader,
   suspendVectorStoreSync,
   syncVectorLayersToStore,
   unwireVectorStoreSync,
@@ -427,6 +428,25 @@ describe("syncVectorLayersToStore", () => {
     assert.ok(layers.some((layer) => layer.id === "vector-1"));
     assert.ok(layers.some((layer) => layer.id === "vector-2"));
     assert.ok(layers.some((layer) => layer.id === "unrelated"));
+  });
+
+  it("mirrors registered GeoJSON geometry for synchronous plugin queries", () => {
+    const { control } = fakeControl([vectorInfo()]);
+    const collection = {
+      type: "FeatureCollection" as const,
+      features: [
+        {
+          type: "Feature" as const,
+          properties: { habitat: "forest" },
+          geometry: { type: "Point" as const, coordinates: [147, -6] },
+        },
+      ],
+    };
+    setVectorGeometryReader(control, () => collection);
+
+    syncVectorLayersToStore(control);
+
+    assert.equal(useAppStore.getState().layers[0].geojson, collection);
   });
 
   it("preserves geometry edits through control synchronization without repeated updates", () => {

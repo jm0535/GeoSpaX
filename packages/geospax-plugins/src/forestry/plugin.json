@@ -2,7 +2,7 @@
   "id": "geospax-forestry",
   "name": "GeoSpaX Forestry",
   "version": "2.0.0",
-  "description": "GeoSpaX forestry domain pack — placeholder for the forestry toolbox (stub for Phase-7 six-drop-in verification; real modules ship in the full v2.0.0 analytical core).",
+  "description": "Forestry workbench: forest/index extent derivation, complete fragmentation/core metrics, connectivity components, raster and vector loss/gain change, protection gaps and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
   "activeByDefault": true,

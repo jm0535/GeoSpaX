@@ -2,7 +2,7 @@
   "id": "geospax-agriculture",
   "name": "GeoSpaX Agriculture",
   "version": "2.0.0",
-  "description": "GeoSpaX agriculture domain pack — placeholder for the agriculture toolbox (stub for Phase-7 six-drop-in verification; real modules ship in the full v2.0.0 analytical core).",
+  "description": "Agriculture workbench: NDVI-family crop-condition extents, raster reclassification, WLC land suitability, exponential distance decay, Horn slope constraints, raster/vector change and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
   "activeByDefault": true,
