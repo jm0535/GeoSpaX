@@ -10,15 +10,19 @@ import {
 } from "../packages/geospax-plugins/src/shared/ui";
 import {
   connectivityAnalysis,
+  dbscanClusters,
   featureSuitability,
   fitBioclim,
   fitMahalanobis,
+  fitPresenceBackgroundLogistic,
   fragmentationAnalysis,
   hotspotGrid,
   nearestNeighbourIndex,
   predictBioclim,
   predictMahalanobis,
+  predictPresenceBackgroundLogistic,
   priorityAreas,
+  provenanceForSdm,
   solveScpExact,
   vectorChangeDetection,
   vectorOverlay,
@@ -110,6 +114,41 @@ describe("restored conservation planning workflows", () => {
     assert.ok(result.nonEmptyCells > 0);
     assert.match(result.methodNote, /not p-values|not Getis-Ord/i);
     assert.equal(result.provenance.params.statisticalSignificance, false);
+  });
+
+  it("labels deterministic DBSCAN clusters and retains noise", () => {
+    const result = dbscanClusters([
+      point(0, 0, { site: "a1" }),
+      point(0.001, 0, { site: "a2" }),
+      point(0, 0.001, { site: "a3" }),
+      point(1, 1, { site: "b1" }),
+      point(1.001, 1, { site: "b2" }),
+      point(1, 1.001, { site: "b3" }),
+      point(5, 5, { site: "noise" }),
+    ], { epsilonM: 200, minPoints: 3 });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.clusterCount, 2);
+    assert.equal(result.noiseCount, 1);
+    assert.deepEqual(result.clusterSizes, [3, 3]);
+    assert.equal(result.features.length, 7);
+    assert.deepEqual(
+      result.features.map((feature) => feature.properties?.dbscan_cluster),
+      [1, 1, 1, 2, 2, 2, -1],
+    );
+    assert.equal(result.features[6].properties?.dbscan_noise, true);
+    assert.equal(result.provenance.params.minPointsIncludesSelf, true);
+
+    const automatic = dbscanClusters([
+      point(0, 0),
+      point(0.001, 0),
+      point(0.002, 0),
+    ], { minPoints: 2 });
+    assert.equal(automatic.ok, true);
+    if (!automatic.ok) return;
+    assert.equal(automatic.epsilonWasAutomatic, true);
+    assert.equal(automatic.epsilonMultiplier, 1.5);
+    assert.ok(automatic.epsilonM > 160 && automatic.epsilonM < 170);
   });
 
   it("solves bounded minimum-cost representation exactly", async () => {
@@ -213,6 +252,29 @@ describe("SDM prediction, not fit-only stubs", () => {
     assert.ok(model!.ridge > 0);
     assert.ok(model!.invCov);
   });
+
+  it("fits an explicit presence-background logistic fallback without claiming MaxEnt", () => {
+    const model = fitPresenceBackgroundLogistic(
+      [[2, 2], [2.5, 2], [3, 2.5], [3.5, 3], [4, 4]],
+      [[-4, -3], [-3, -3], [-2.5, -2], [-2, -1], [-1.5, -2], [-1, -1], [0, -1], [0, 0]],
+      ["temperature", "rainfall"],
+      { lambda: 0.05 },
+    );
+    assert.ok(model);
+    assert.equal(model!.method, "presence-background-logistic");
+    assert.equal(model!.nPresences, 5);
+    assert.equal(model!.nBackground, 8);
+    assert.equal(model!.converged, true);
+    assert.ok(model!.iterations > 0);
+    const suitable = predictPresenceBackgroundLogistic([3.5, 3.5], model!);
+    const unsuitable = predictPresenceBackgroundLogistic([-3, -3], model!);
+    assert.ok(suitable !== null && unsuitable !== null);
+    assert.ok(suitable! > unsuitable!);
+    assert.ok(suitable! > 0.5);
+    assert.ok(unsuitable! < 0.5);
+    const provenance = provenanceForSdm("presence-background-logistic");
+    assert.match(provenance.method, /not elapid MaxEnt/);
+  });
 });
 
 describe("domain panel capability and shared-design contract", () => {
@@ -259,6 +321,7 @@ describe("domain panel capability and shared-design contract", () => {
     for (const mount of [
       "mountOverlayTool",
       "mountHotspotTool",
+      "mountDbscanTool",
       "mountPriorityTool",
       "mountScpTool",
       "mountSdmTool",
@@ -281,6 +344,8 @@ describe("domain panel capability and shared-design contract", () => {
     assert.match(read("marine/panel.ts"), /mountSdmTool/);
     assert.match(read("marine/panel.ts"), /mountGapTool/);
     assert.match(read("biodiversity/panel.ts"), /mountPointPatternTool/);
+    assert.match(read("biodiversity/panel.ts"), /mountDbscanTool/);
+    assert.match(read("marine/panel.ts"), /mountDbscanTool/);
     assert.match(read("environment/panel.ts"), /mountRasterReclassTool/);
   });
 });

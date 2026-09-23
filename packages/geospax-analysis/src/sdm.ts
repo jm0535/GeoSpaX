@@ -374,15 +374,263 @@ export function predictMahalanobisMatrix(
   return matrix.map((row) => predictMahalanobis(row, model, output));
 }
 
+export interface PresenceBackgroundLogisticOptions {
+  /** L2 penalty on standardised predictor coefficients (default 0.01). */
+  lambda?: number;
+  /** Newton iterations (default 100). */
+  maxIterations?: number;
+  /** Parameter/loss convergence tolerance (default 1e-7). */
+  tolerance?: number;
+}
+
+export interface PresenceBackgroundLogisticModel {
+  variables: string[];
+  mean: number[];
+  scale: number[];
+  coefficients: number[];
+  intercept: number;
+  lambda: number;
+  nPresences: number;
+  nBackground: number;
+  iterations: number;
+  converged: boolean;
+  loss: number;
+  constantVariables: string[];
+  optimizerRidge: number;
+  method: "presence-background-logistic";
+}
+
+function logistic(value: number): number {
+  if (value >= 0) return 1 / (1 + Math.exp(-value));
+  const exponential = Math.exp(value);
+  return exponential / (1 + exponential);
+}
+
+function softplus(value: number): number {
+  return value > 0
+    ? value + Math.log1p(Math.exp(-value))
+    : Math.log1p(Math.exp(value));
+}
+
+function logisticObjective(
+  rows: number[][],
+  labels: number[],
+  weights: number[],
+  parameters: number[],
+  lambda: number,
+): number {
+  let loss = 0;
+  for (let row = 0; row < rows.length; row++) {
+    let linear = parameters[0];
+    for (let variable = 0; variable < rows[row].length; variable++) {
+      linear += parameters[variable + 1] * rows[row][variable];
+    }
+    loss += weights[row] * (softplus(linear) - labels[row] * linear);
+  }
+  for (let parameter = 1; parameter < parameters.length; parameter++) {
+    loss += 0.5 * lambda * parameters[parameter] ** 2;
+  }
+  return loss;
+}
+
+/**
+ * Fit the deterministic linear logistic fallback used when full elapid MaxEnt
+ * is unavailable. Unlike the original v1 fallback, this requires explicit
+ * environmental background rows; it never invents pseudo-absence values from
+ * the presence range or interpolates a prediction grid from presence points.
+ *
+ * The two classes receive equal total weight. Scores are therefore relative
+ * presence-versus-background suitability, not calibrated occurrence
+ * probabilities and not a claim that elapid/MaxEnt ran.
+ */
+export function fitPresenceBackgroundLogistic(
+  presences: number[][],
+  background: number[][],
+  variableNames: string[] = [],
+  options: PresenceBackgroundLogisticOptions = {},
+): PresenceBackgroundLogisticModel | null {
+  const width = matrixWidth(presences);
+  if (!width || presences.length < 2 || background.length < 2) return null;
+  if (
+    presences.some((row) => row.length !== width || row.some((value) => !Number.isFinite(value))) ||
+    background.some((row) => row.length !== width || row.some((value) => !Number.isFinite(value)))
+  ) {
+    return null;
+  }
+  const lambda = options.lambda ?? 0.01;
+  const maxIterations = options.maxIterations ?? 100;
+  const tolerance = options.tolerance ?? 1e-7;
+  if (
+    !Number.isFinite(lambda) ||
+    lambda < 0 ||
+    !Number.isInteger(maxIterations) ||
+    maxIterations < 1 ||
+    !Number.isFinite(tolerance) ||
+    tolerance <= 0
+  ) {
+    return null;
+  }
+
+  const variables = variableNames.length === width
+    ? variableNames
+    : Array.from({ length: width }, (_, index) => `var${index + 1}`);
+  const rawRows = [...presences, ...background];
+  const labels = [
+    ...new Array(presences.length).fill(1),
+    ...new Array(background.length).fill(0),
+  ];
+  // Equal class totals prevent an arbitrary background count from changing the
+  // fitted intercept and swamping the presence class.
+  const weights = [
+    ...new Array(presences.length).fill(0.5 / presences.length),
+    ...new Array(background.length).fill(0.5 / background.length),
+  ];
+  const mean = new Array(width).fill(0);
+  for (let row = 0; row < rawRows.length; row++) {
+    for (let variable = 0; variable < width; variable++) {
+      mean[variable] += weights[row] * rawRows[row][variable];
+    }
+  }
+  const variance = new Array(width).fill(0);
+  for (let row = 0; row < rawRows.length; row++) {
+    for (let variable = 0; variable < width; variable++) {
+      variance[variable] +=
+        weights[row] * (rawRows[row][variable] - mean[variable]) ** 2;
+    }
+  }
+  const constantVariables: string[] = [];
+  const scale = variance.map((value, index) => {
+    const deviation = Math.sqrt(Math.max(0, value));
+    if (!(deviation > 1e-12)) {
+      constantVariables.push(variables[index]);
+      return 1;
+    }
+    return deviation;
+  });
+  const rows = rawRows.map((row) =>
+    row.map((value, variable) => (value - mean[variable]) / scale[variable]),
+  );
+
+  let parameters = new Array(width + 1).fill(0);
+  let loss = logisticObjective(rows, labels, weights, parameters, lambda);
+  let converged = false;
+  let iterations = 0;
+  let optimizerRidge = 0;
+
+  for (let iteration = 0; iteration < maxIterations; iteration++) {
+    const gradient = new Array(width + 1).fill(0);
+    const hessian = Array.from({ length: width + 1 }, () => new Array(width + 1).fill(0));
+    for (let row = 0; row < rows.length; row++) {
+      const augmented = [1, ...rows[row]];
+      let linear = parameters[0];
+      for (let variable = 0; variable < width; variable++) {
+        linear += parameters[variable + 1] * rows[row][variable];
+      }
+      const probability = logistic(linear);
+      const gradientWeight = weights[row] * (probability - labels[row]);
+      const hessianWeight = weights[row] * probability * (1 - probability);
+      for (let left = 0; left <= width; left++) {
+        gradient[left] += gradientWeight * augmented[left];
+        for (let right = 0; right <= width; right++) {
+          hessian[left][right] += hessianWeight * augmented[left] * augmented[right];
+        }
+      }
+    }
+    for (let parameter = 1; parameter <= width; parameter++) {
+      gradient[parameter] += lambda * parameters[parameter];
+      hessian[parameter][parameter] += lambda;
+    }
+    const inversion = invertMatrixSafe(hessian);
+    if (!inversion.inverse) break;
+    optimizerRidge = Math.max(optimizerRidge, inversion.ridge);
+    const delta = inversion.inverse.map((row) =>
+      row.reduce((sum, value, index) => sum + value * gradient[index], 0),
+    );
+    const maxDelta = Math.max(...delta.map(Math.abs));
+
+    let step = 1;
+    let accepted: number[] | null = null;
+    let nextLoss = loss;
+    while (step >= 1 / 4096) {
+      const candidate = parameters.map((value, index) => value - step * delta[index]);
+      const candidateLoss = logisticObjective(rows, labels, weights, candidate, lambda);
+      if (Number.isFinite(candidateLoss) && candidateLoss <= loss + 1e-12) {
+        accepted = candidate;
+        nextLoss = candidateLoss;
+        break;
+      }
+      step /= 2;
+    }
+    if (!accepted) break;
+    const lossChange = Math.abs(loss - nextLoss);
+    parameters = accepted;
+    loss = nextLoss;
+    iterations = iteration + 1;
+    if (
+      step * maxDelta <= tolerance ||
+      lossChange <= tolerance * Math.max(1, Math.abs(loss))
+    ) {
+      converged = true;
+      break;
+    }
+  }
+
+  return {
+    variables,
+    mean,
+    scale,
+    coefficients: parameters.slice(1),
+    intercept: parameters[0],
+    lambda,
+    nPresences: presences.length,
+    nBackground: background.length,
+    iterations,
+    converged,
+    loss,
+    constantVariables,
+    optimizerRidge,
+    method: "presence-background-logistic",
+  };
+}
+
+/** Relative presence-versus-background logistic score in [0,1]. */
+export function predictPresenceBackgroundLogistic(
+  values: number[],
+  model: PresenceBackgroundLogisticModel,
+): number | null {
+  if (
+    values.length !== model.coefficients.length ||
+    values.some((value) => !Number.isFinite(value))
+  ) {
+    return null;
+  }
+  let linear = model.intercept;
+  for (let variable = 0; variable < values.length; variable++) {
+    linear +=
+      model.coefficients[variable] *
+      ((values[variable] - model.mean[variable]) / model.scale[variable]);
+  }
+  return logistic(linear);
+}
+
+export function predictPresenceBackgroundLogisticMatrix(
+  matrix: number[][],
+  model: PresenceBackgroundLogisticModel,
+): Array<number | null> {
+  return matrix.map((row) => predictPresenceBackgroundLogistic(row, model));
+}
+
 export function provenanceForSdm(
-  tool: "bioclim" | "mahalanobis",
+  tool: "bioclim" | "mahalanobis" | "presence-background-logistic",
   params: Record<string, unknown> = {},
 ): ProvenanceStamp {
   return makeProvenance(
     tool,
     tool === "bioclim"
       ? "BIOCLIM percentile envelope"
-      : "Mahalanobis D² with general covariance inversion",
+      : tool === "mahalanobis"
+        ? "Mahalanobis D² with general covariance inversion"
+        : "Class-balanced L2-regularised presence-background logistic regression (linear MaxEnt fallback; not elapid MaxEnt)",
     "Environmental-variable space; output geometry retains its source CRS",
     params,
   );

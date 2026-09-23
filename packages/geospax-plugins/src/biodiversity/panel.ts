@@ -5,6 +5,7 @@ import type { GeoLibreAppAPI } from "@geolibre/plugins";
 import { createPanelShell } from "../shared/ui";
 import { mountDiversityTool, mountOccurrenceTool } from "../shared/data-tools";
 import {
+  mountDbscanTool,
   mountGapTool,
   mountHotspotTool,
   mountPointPatternTool,
@@ -49,19 +50,20 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
   const pattern = shell.addSection({
     id: "pattern",
     title: "Spatial pattern",
-    badge: "Points / Grid",
+    badge: "NNI / DBSCAN / Grid",
     description:
       "Screen occurrence clustering and construct transparent weighted density/count surfaces for survey or conservation targeting.",
   });
   mountPointPatternTool(shell, pattern, "species occurrences");
+  mountDbscanTool(shell, pattern, "species occurrences");
   mountHotspotTool(shell, pattern);
 
   const sdm = shell.addSection({
     id: "sdm",
     title: "Distribution models",
-    badge: "BIOCLIM / D²",
+    badge: "BIOCLIM / D² / Logistic",
     description:
-      "Fit and predict audit-fixed environmental-space models from complete occurrence attributes.",
+      "Fit and predict audit-fixed environmental-space models, including an explicitly labelled presence-background logistic fallback, from complete occurrence attributes.",
   });
   mountSdmTool(shell, sdm, "species");
 

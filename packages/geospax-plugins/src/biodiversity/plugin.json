@@ -2,7 +2,7 @@
   "id": "geospax-biodiversity",
   "name": "GeoSpaX Biodiversity",
   "version": "2.0.0",
-  "description": "Biodiversity workbench: citable GBIF/OBIS/iNaturalist/WoRMS queries, richness/Shannon/Simpson/evenness, point patterns, weighted grids, BIOCLIM/Mahalanobis prediction, priorities and protection gaps.",
+  "description": "Biodiversity workbench: citable GBIF/OBIS/iNaturalist/WoRMS queries, richness/diversity, nearest-neighbour/DBSCAN patterns, weighted grids, BIOCLIM/Mahalanobis/presence-background prediction, priorities and protection gaps.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
   "activeByDefault": true,

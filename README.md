@@ -58,16 +58,16 @@ GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-scie
 
 | id | v2.0.0 contents |
 |---|---|
-| `geospax-conservation` | Full workbench: overlay, weighted priorities, unprotected sites, bounded exact/greedy SCP, BIOCLIM/Mahalanobis prediction, WLC, protection gaps, fragmentation/core metrics, connectivity, vector change, raster polygonization and provenance export |
+| `geospax-conservation` | Full workbench: overlay, weighted priorities, haversine DBSCAN, unprotected sites, bounded exact/greedy SCP, BIOCLIM/Mahalanobis/explicit presence-background prediction, WLC, protection gaps, fragmentation/core metrics, connectivity, vector change, raster polygonization and provenance export |
 | `geospax-environment` | Horn slope zones; NDVI/NDWI/NDBI/NBR/custom extents; Otsu-assisted raster reclassification; aligned raster change; vector overlay |
-| `geospax-biodiversity` | Citable GBIF/OBIS/iNaturalist/WoRMS queries; richness/Shannon/Simpson/evenness; point pattern and weighted grid; SDM; priorities and protection gaps |
+| `geospax-biodiversity` | Citable GBIF/OBIS/iNaturalist/WoRMS queries; richness/Shannon/Simpson/evenness; nearest-neighbour pattern, DBSCAN and weighted grid; SDM; priorities and protection gaps |
 | `geospax-forestry` | Forest/index extent; complete fragmentation/core and connectivity reports; raster and polygon loss/gain change; protection gaps |
-| `geospax-marine` | Citable OBIS/WoRMS queries and GEBCO context; diversity/pattern; SDM; NDWI/custom habitat extent; weighted priorities and MPA gaps |
+| `geospax-marine` | Citable OBIS/WoRMS queries and GEBCO context; diversity/nearest-neighbour/DBSCAN patterns; SDM; NDWI/custom habitat extent; weighted priorities and MPA gaps |
 | `geospax-agriculture` | NDVI-family crop condition; raster reclassification; WLC and exponential distance decay; Horn slope; raster/vector crop change |
 
 **Analysis core `@geospax/analysis` v2.0.0** (dependency-light, pure functions, provenance-stamped; ported and checked against `js/geospax-conservation*.js`, `geospax-sdm-fix.js`, and `geospax-raster.js`):
 
-`gap` · `geometry` · `overlay` · `planning` · `spatial` · `provenance` · `units` · `terrain` · `raster` · `sdm` (BIOCLIM/Mahalanobis fit **and prediction**, general covariance inversion) · `suitability` · `fragmentation` · `connectivity` · `statistics` · `change` · `hydrology` · `biodiversity` · `indices` · `classification` · `scp` (bounded exact branch-and-bound; explicitly labelled greedy fallback). GeoSpaX does not claim HiGHS-WASM execution.
+`gap` · `geometry` · `overlay` · `planning` · `spatial` (descriptive grids plus bounded haversine DBSCAN) · `provenance` · `units` · `terrain` · `raster` · `sdm` (BIOCLIM, Mahalanobis and class-balanced presence-background logistic fit **and prediction**; the logistic option is explicitly not elapid/true MaxEnt) · `suitability` · `fragmentation` · `connectivity` · `statistics` · `change` · `hydrology` · `biodiversity` · `indices` · `classification` · `scp` (bounded exact branch-and-bound; explicitly labelled greedy fallback). GeoSpaX does not claim HiGHS-WASM execution.
 
 **Data `@geospax/data` v2.0.0** (10 citation-carrying tiers: 5 live `CONNECTORS` + 5 `CATALOGUE_TIERS` = `ALL_SOURCES` 10):
 
