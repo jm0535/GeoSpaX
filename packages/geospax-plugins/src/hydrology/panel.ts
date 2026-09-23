@@ -28,7 +28,7 @@ export function mountHydrologyPanel(container: HTMLElement, app: GeoLibreAppAPI)
     intro:
       "Map surface water and wetness, derive runoff-relevant terrain constraints, weight catchment characteristics, and quantify water-extent change between two dates.",
     accent: "#1f7a8c",
-    guideUrl: `${GSX_GUIDE_BASE}/hydrology/`,
+    guideUrl: `${GSX_GUIDE_BASE}/hydrology.md`,
   });
 
   const water = shell.addSection({

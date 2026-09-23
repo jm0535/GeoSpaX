@@ -26,7 +26,7 @@ export function mountLulcPanel(container: HTMLElement, app: GeoLibreAppAPI): () 
     intro:
       "Derive land-use and land-cover maps: extract cover indices from satellite bands, reclassify them into class maps, quantify transitions between two dates and validate against field polygons.",
     accent: "#8a7a2e",
-    guideUrl: `${GSX_GUIDE_BASE}/lulc/`,
+    guideUrl: `${GSX_GUIDE_BASE}/lulc.md`,
   });
 
   const cover = shell.addSection({

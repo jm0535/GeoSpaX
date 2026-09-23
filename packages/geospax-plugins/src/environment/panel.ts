@@ -68,7 +68,7 @@ export function mountEnvironmentPanel(container: HTMLElement, app: GeoLibreAppAP
     intro:
       "Analyse terrain and raster indicators over the current map view, derive threshold extents, compare dates, and overlay environmental zones—with sampled resolution and methods stated on every result.",
     accent: "#4c7893",
-    guideUrl: `${GSX_GUIDE_BASE}/environment/`,
+    guideUrl: `${GSX_GUIDE_BASE}/environment.md`,
   });
 
   const terrain = shell.addSection({

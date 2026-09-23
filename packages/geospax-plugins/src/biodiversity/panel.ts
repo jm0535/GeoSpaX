@@ -24,7 +24,7 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
     intro:
       "Bring in citable species records, quantify taxonomic diversity and spatial pattern, model environmental suitability, and test priorities against protected-area coverage.",
     accent: "#7b4e9d",
-    guideUrl: `${GSX_GUIDE_BASE}/biodiversity/`,
+    guideUrl: `${GSX_GUIDE_BASE}/biodiversity.md`,
   });
 
   const data = shell.addSection({

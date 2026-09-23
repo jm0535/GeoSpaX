@@ -24,7 +24,7 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
     intro:
       "Query citable marine records, add bathymetric context, quantify diversity and spatial pattern, model habitat suitability, and compare priority habitat with MPA coverage.",
     accent: "#217c91",
-    guideUrl: `${GSX_GUIDE_BASE}/marine/`,
+    guideUrl: `${GSX_GUIDE_BASE}/marine.md`,
   });
 
   const data = shell.addSection({
