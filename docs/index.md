@@ -7,6 +7,7 @@ hide:
 <section class="hero">
   <div class="hero__content">
     <p class="eyebrow">Cloud-native GIS platform</p>
+    <img class="hero__logo" src="assets/geospax_logo_final.svg" alt="GeoSpaX logo" />
     <h1>A free and open-source, lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data.</h1>
     <p class="hero__lead">
       GeoLibre runs everywhere you do, in the web browser, on the desktop, on

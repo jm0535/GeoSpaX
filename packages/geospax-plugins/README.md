@@ -1,5 +1,9 @@
 # @geospax/plugins
 
+<p align="center">
+  <img src="../../docs/assets/geospax_logo_final.svg" width="120" alt="GeoSpaX logo — a teal X with a globe at its center" />
+</p>
+
 Six GeoSpaX domain workbenches built as **bundled GeoLibre drop-ins**. They are
 auto-discovered from `public/plugins/`; every vector result is returned through
 `app.addGeoJsonLayer`, raster/catalogue layers use the corresponding host API,

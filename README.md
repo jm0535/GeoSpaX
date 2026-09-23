@@ -1,5 +1,9 @@
 # GeoSpaX 2.0.0 — Conservation & Ecology GIS
 
+<p align="center">
+  <img src="docs/assets/geospax_logo_final.svg" width="220" alt="GeoSpaX logo — a teal X with a globe at its center" />
+</p>
+
 > **GeoSpaX 2.0.0** is a conservation & ecology specialisation of **[GeoLibre 3.0.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* six conservation domain plugins.
 
 [![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)

@@ -1,5 +1,9 @@
 # Contributing to GeoLibre
 
+<p align="center">
+  <img src="docs/assets/geospax_logo_final.svg" width="140" alt="GeoSpaX logo — a teal X with a globe at its center" />
+</p>
+
 Thanks for your interest in improving GeoLibre. The full contributing guide,
 including development setup, the repository layout, the quality gate, and the
 pull request workflow, lives in the documentation:
