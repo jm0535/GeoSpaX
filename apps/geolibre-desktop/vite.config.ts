@@ -1198,8 +1198,8 @@ function pwaPlugin(): Plugin[] {
     injectRegister: false,
     includeAssets: ["favicon.ico", "favicon.png", "apple-touch-icon.png"],
     manifest: {
-      name: "GeoLibre",
-      short_name: "GeoLibre",
+      name: "GeoSpaX",
+      short_name: "GeoSpaX",
       description:
         "A free and open-source, lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data, running in the browser, on the desktop, on mobile, and inside Jupyter notebooks while keeping your data local and private.",
       theme_color: "#2f8f85",

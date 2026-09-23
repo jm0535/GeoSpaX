@@ -1,8 +1,8 @@
-site_name: GeoLibre
+site_name: GeoSpaX
 site_description: A lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data across desktop and web environments, with a responsive layout for mobile screens.
 site_url: https://geolibre.app
-repo_name: opengeos/GeoLibre
-repo_url: https://github.com/opengeos/GeoLibre
+repo_name: jm0535/GeoSpaX
+repo_url: https://github.com/jm0535/GeoSpaX
 edit_uri: edit/main/docs/
 # Output directory, set explicitly so the build target stays pinned to `site/`
 # (matching the Pages upload paths) rather than relying on the tool's

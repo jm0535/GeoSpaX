@@ -104,7 +104,7 @@ export interface BrowserTreeInput {
    * Saved database (PostGIS) connections to list under the Databases section.
    * Omitted (undefined) hides the section entirely; an empty array still renders
    * it (with its "New connection" action). The app always passes it — the
-   * PostgreSQL add flow itself reports when it needs GeoLibre Desktop.
+   * PostgreSQL add flow itself reports when it needs GeoSpaX Desktop.
    */
   databaseConnections?: readonly { connectionString: string; label: string }[];
   /**

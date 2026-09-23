@@ -157,7 +157,7 @@ export function BrowserPanel({
       if (connFetchedRef.current.has(connectionString)) return;
       connFetchedRef.current.add(connectionString);
       // PostGIS browsing needs the desktop sidecar/Martin, so outside the
-      // desktop shell show the same localized "requires GeoLibre Desktop"
+      // desktop shell show the same localized "requires GeoSpaX Desktop"
       // message the Add Data dialog gives rather than letting
       // startGeoLibreSidecar/fetch fail with a raw network error. The gate is
       // isDesktopRuntime(), not isTauri(): the packaged mobile apps are Tauri

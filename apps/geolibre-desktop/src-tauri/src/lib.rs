@@ -450,7 +450,7 @@ pub fn run() {
             Ok(())
         })
         .build(tauri::generate_context!())
-        .expect("error while building GeoLibre Desktop");
+        .expect("error while building GeoSpaX Desktop");
 
     app.run(|_app, _event| {
         // macOS delivers associated files as native open events instead
@@ -1332,7 +1332,7 @@ fn build_guarded_http_client_with_redirects(
         .connect_timeout(Duration::from_secs(REMOTE_TILE_CONNECT_TIMEOUT_SECS))
         .redirect(redirects)
         .dns_resolver(std::sync::Arc::new(GuardedDnsResolver))
-        .user_agent("GeoLibre Desktop");
+        .user_agent("GeoSpaX Desktop");
 
     for certificate in extra_ca_certificates()? {
         builder = builder.add_root_certificate(certificate);
@@ -2477,7 +2477,7 @@ fn start_jupyter_server_blocking(app: tauri::AppHandle) -> Result<JupyterServerI
         // Read the bundled uv.lock as-is. Without this uv re-locks whenever it
         // thinks the lock is stale and WRITES uv.lock back into the project
         // directory — which in an installed build is the read-only resource dir
-        // (C:\Program Files\..., /usr/lib/GeoLibre Desktop/...). That write fails
+        // (C:\Program Files\..., /usr/lib/GeoSpaX Desktop/...). That write fails
         // with "Permission denied" and uv exits 2, which reached the user as the
         // opaque "Jupyter server exited before it was ready (exit code: 2)".
         // `--frozen` also keeps a released build pinned to the versions it was
@@ -3654,7 +3654,7 @@ fn download_uv_installer(app: &tauri::AppHandle) -> Result<PathBuf, String> {
         format!("{UV_INSTALL_BASE_URL}/install.sh")
     };
     let response = reqwest::blocking::Client::builder()
-        .user_agent("GeoLibre Desktop")
+        .user_agent("GeoSpaX Desktop")
         .build()
         .map_err(|error| format!("Could not create HTTP client: {error}"))?
         .get(url)
@@ -3797,7 +3797,7 @@ fn martin_executable_name() -> &'static str {
 fn download_martin_asset(asset_name: &str) -> Result<Vec<u8>, String> {
     let url = format!("{MARTIN_RELEASE_BASE_URL}/{MARTIN_VERSION}/{asset_name}");
     let response = reqwest::blocking::Client::builder()
-        .user_agent("GeoLibre Desktop")
+        .user_agent("GeoSpaX Desktop")
         .build()
         .map_err(|error| format!("Could not create HTTP client: {error}"))?
         .get(url)
@@ -4242,7 +4242,7 @@ fn create_main_window(app: &mut tauri::App) -> tauri::Result<()> {
         .windows
         .first()
         .cloned()
-        .expect("GeoLibre Desktop requires a main window config");
+        .expect("GeoSpaX Desktop requires a main window config");
 
     let builder = tauri::WebviewWindowBuilder::from_config(app, &window_config)?;
 

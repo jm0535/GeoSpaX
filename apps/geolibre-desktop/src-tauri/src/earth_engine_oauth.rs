@@ -301,7 +301,7 @@ fn auth_page(client_id: &str, state: &str) -> String {
 <body>
   <main>
     <h1>Sign in to Earth Engine</h1>
-    <p>Continue with Google to authorize GeoLibre Desktop to request Earth Engine map tiles.</p>
+    <p>Continue with Google to authorize GeoSpaX Desktop to request Earth Engine map tiles.</p>
     <button id="sign-in" type="button">Continue with Google</button>
     <div id="status"></div>
   </main>

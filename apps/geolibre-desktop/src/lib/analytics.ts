@@ -111,7 +111,7 @@ export function installAnalytics(id: string, doc: Document = document): void {
     dataLayer.push(arguments);
   }
   // What gets reported as the page: origin + path, never the query string. A
-  // GeoLibre URL carries the visitor's work in its parameters (`?url=` a project,
+  // GeoSpaX URL carries the visitor's work in its parameters (`?url=` a project,
   // `?data=` an inline dataset, a collaboration session id, a shared-settings
   // URL), and gtag would otherwise send the whole address as `page_location`.
   // The privacy policy promises analytics never see the data you load, so the
