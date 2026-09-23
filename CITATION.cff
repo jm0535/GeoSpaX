@@ -4,14 +4,14 @@ message: "If you use GeoSpaX, please cite it. GeoSpaX is built on GeoLibre — c
 type: software
 abstract: "GeoSpaX 2.0.0 — Conservation & ecology GIS built on GeoLibre 3.0.0. A specialised fork of opengeos/GeoLibre for conservation planning and species ecology (FR422 habitat-assessment workflow, PNG University of Technology lineage jm0535/map-kit v1.4.3 → GeoSpaX v2.0.0 platform rewrite). Adds twelve bundled GSX domain workbenches (Conservation, Environment, Biodiversity, Forestry, Marine, Agriculture, Climate, Disaster, Geoscience, Hydrology, LULC, Soil), each with a built-in How-to-Cite section and user guide, @geospax/analysis v2.0.0 (18 dependency-light modules: protection gap, WLC suitability, fragmentation/connectivity, SDM BIOCLIM/Mahalanobis, change, hydrology, diversity indices, Jenks, SCP HiGHS-WASM) and @geospax/data v2.0.0 (GBIF/OBIS/iNat/WoRMS/WorldBank + GEBCO/ecoregion/forest/marine/SPREP, citation-carried), while retaining GeoLibre's 1,000+ WebAssembly geoprocessing tools, Tauri desktop/mobile, and Jupyter."
 authors:
+  - given-names: J.
+    family-names: Moses
+    affiliation: "PNG University of Technology — FR422"
   - given-names: Qiusheng
     family-names: Wu
     email: giswqs@gmail.com
     affiliation: "University of Tennessee, Knoxville, USA"
     orcid: "https://orcid.org/0000-0001-5437-4073"
-  - given-names: Jm0535
-    family-names: GeoSpaX
-    affiliation: "PNG University of Technology — FR422"
 version: 2.0.0
 date-released: 2026-09-23
 doi: "10.5281/zenodo.20785400"

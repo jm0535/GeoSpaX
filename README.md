@@ -255,7 +255,7 @@ If you use **GeoSpaX** in your work, cite **both** GeoSpaX (the conservation ext
 
 **GeoSpaX 2.0.0** (this fork — `jm0535/GeoSpaX`, lineage `jm0535/map-kit` v1.4.3 → v2.0.0):
 
-> GeoSpaX contributors (2026). GeoSpaX 2.0.0 — Conservation & ecology GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
+> Moses, J. (2026). GeoSpaX 2.0.0 — Conservation & ecology GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
 
 **GeoLibre 3.0.0** (upstream — `opengeos/GeoLibre`):
 

@@ -16,10 +16,10 @@ export const GSX_PLUGIN_VERSION = "2.0.0";
 export const GSX_REPOSITORY_URL = "https://github.com/jm0535/GeoSpaX";
 export const GSX_PLATFORM_URL = "https://github.com/opengeos/GeoLibre";
 
-export const GSX_CITATION_TEXT = `GeoSpaX (2026). GeoSpaX ${GSX_PLUGIN_VERSION} — GSX domain workbenches for conservation and environmental GIS [Computer software]. ${GSX_REPOSITORY_URL}. Built on GeoLibre (Wu, Q., ${GSX_PLATFORM_URL}); cite both when the platform is used.`;
+export const GSX_CITATION_TEXT = `Moses, J. (2026). GeoSpaX ${GSX_PLUGIN_VERSION} — GSX domain workbenches for conservation and environmental GIS [Computer software]. ${GSX_REPOSITORY_URL}. Built on GeoLibre (Wu, Q., ${GSX_PLATFORM_URL}); cite both when the platform is used.`;
 
 export const GSX_CITATION_BIBTEX = `@software{geospax_gsx_workbenches,
-  author = {{GeoSpaX contributors}},
+  author = {Moses, J.},
   title = {GeoSpaX ${GSX_PLUGIN_VERSION}: GSX domain workbenches for conservation and environmental GIS},
   year = {2026},
   url = {${GSX_REPOSITORY_URL}},
