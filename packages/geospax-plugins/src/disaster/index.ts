@@ -19,7 +19,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-disaster",
         title: () =>
           app.translate?.("geospax.disaster.title", "GSX Disaster") ?? "GSX Disaster",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountDisasterPanel(c, app),
       }) ?? null;

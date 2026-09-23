@@ -81,5 +81,12 @@ describe("GeoSpaX plugin panel rail contract", () => {
         `${id} must open only after registering its panel`,
       );
     });
+
+    it(`${name} docks on the right edge`, () => {
+      assert.ok(
+        source.includes('dock: "right-of-style"'),
+        `${id} must declare dock: "right-of-style" so the panel opens on the right side`,
+      );
+    });
   }
 });

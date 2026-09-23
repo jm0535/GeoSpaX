@@ -16,7 +16,7 @@ export const plugin: GeoLibrePlugin = {
         title: () =>
           app.translate?.("geospax.biodiversity.title", "GSX Biodiversity") ??
           "GSX Biodiversity",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountBiodiversityPanel(c, app),
       }) ?? null;

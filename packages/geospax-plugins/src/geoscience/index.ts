@@ -19,7 +19,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-geoscience",
         title: () =>
           app.translate?.("geospax.geoscience.title", "GSX Geoscience") ?? "GSX Geoscience",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountGeosciencePanel(c, app),
       }) ?? null;
