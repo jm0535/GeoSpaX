@@ -1,6 +1,6 @@
 {
   "name": "@geospax/analysis",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "private": true,
   "description": "GeoSpaX analysis core - dependency-light, framework-free conservation & natural-resource algorithms (ported from GeoSpaX v1, jm0535/map-kit, with the v1 audit fixes preserved).",
   "type": "module",

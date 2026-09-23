@@ -7,7 +7,7 @@
 // method it did not use.
 
 /** Bumped with packages/geospax-analysis/package.json. */
-export const GEOSPAX_ANALYSIS_VERSION = "0.1.0";
+export const GEOSPAX_ANALYSIS_VERSION = "0.4.0";
 
 export interface ProvenanceStamp {
   /** Tool identifier, e.g. "protection-gap". */
