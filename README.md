@@ -60,6 +60,20 @@ capabilities, credentials, and current compatibility.
 
 GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a domain-analysis layer as **twelve bundled GSX workbenches** (`public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Workbenches are opt-in: activate the ones you want under **Plugins → Manage Plugins**. Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
 
+![GeoSpaX with the GSX Conservation workbench docked on the right](docs/assets/gsx/gsx-overview.png)
+
+<details>
+<summary><strong>Screenshots — all twelve GSX workbenches</strong> (click to expand)</summary>
+
+| | | |
+|---|---|---|
+| ![GSX Agriculture](docs/assets/gsx/gsx-agriculture.png)<br>**GSX Agriculture** | ![GSX Biodiversity](docs/assets/gsx/gsx-biodiversity.png)<br>**GSX Biodiversity** | ![GSX Climate](docs/assets/gsx/gsx-climate.png)<br>**GSX Climate** |
+| ![GSX Conservation](docs/assets/gsx/gsx-conservation.png)<br>**GSX Conservation** | ![GSX Disaster](docs/assets/gsx/gsx-disaster.png)<br>**GSX Disaster** | ![GSX Environment](docs/assets/gsx/gsx-environment.png)<br>**GSX Environment** |
+| ![GSX Forestry](docs/assets/gsx/gsx-forestry.png)<br>**GSX Forestry** | ![GSX Geoscience](docs/assets/gsx/gsx-geoscience.png)<br>**GSX Geoscience** | ![GSX Hydrology](docs/assets/gsx/gsx-hydrology.png)<br>**GSX Hydrology** |
+| ![GSX LULC](docs/assets/gsx/gsx-lulc.png)<br>**GSX LULC** | ![GSX Marine](docs/assets/gsx/gsx-marine.png)<br>**GSX Marine** | ![GSX Soil](docs/assets/gsx/gsx-soil.png)<br>**GSX Soil** |
+
+</details>
+
 | Workbench | v2.0.0 contents |
 |---|---|
 | `geospax-conservation` | Full workbench: overlay, weighted priorities, haversine DBSCAN, unprotected sites, bounded exact/greedy SCP, BIOCLIM/Mahalanobis/explicit presence-background prediction, WLC, protection gaps, fragmentation/core metrics, connectivity, vector change, raster polygonization and provenance export |

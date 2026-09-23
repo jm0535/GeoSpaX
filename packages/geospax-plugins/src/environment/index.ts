@@ -33,7 +33,9 @@ export const plugin: GeoLibrePlugin = {
     unregisterPanel =
       app.registerRightPanel?.({
         id: "geospax-environment",
-        title: () => app.translate?.("geospax.environment.title", "Environment") ?? "Environment",
+        title: () =>
+          app.translate?.("geospax.environment.title", "GSX Environment") ??
+          "GSX Environment",
         dock: "right-of-style",
         deactivatePluginOnClose: true,
         defaultWidth: 400,
