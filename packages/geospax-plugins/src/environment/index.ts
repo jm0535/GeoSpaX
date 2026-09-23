@@ -34,7 +34,7 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-environment",
         title: () => app.translate?.("geospax.environment.title", "Environment") ?? "Environment",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (container: HTMLElement) => mountEnvironmentPanel(container, app),
         onOpen: () => {

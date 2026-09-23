@@ -18,7 +18,7 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-lulc",
         title: () => app.translate?.("geospax.lulc.title", "GSX LULC") ?? "GSX LULC",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountLulcPanel(c, app),
       }) ?? null;

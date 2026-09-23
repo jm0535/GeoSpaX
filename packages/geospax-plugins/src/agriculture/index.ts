@@ -16,7 +16,7 @@ export const plugin: GeoLibrePlugin = {
         title: () =>
           app.translate?.("geospax.agriculture.title", "GSX Agriculture") ??
           "GSX Agriculture",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountAgriculturePanel(c, app),
       }) ?? null;

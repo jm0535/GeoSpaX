@@ -31,8 +31,8 @@ workbench once and it stays active across sessions:
    activate it.
 3. Click the workbench's icon in the **panel rail** on the right edge of the
    map, or open **View → Panels** and tick it.
-4. The panel docks as a **right-side panel** next to Layers. Its sections are
-   collapsible — click a section header to expand it.
+4. The panel docks on the **far-right edge** of the map, beside the Style
+   rail. Its sections are collapsible — click a section header to expand it.
 
 ## Common concepts
 

@@ -19,7 +19,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-climate",
         title: () =>
           app.translate?.("geospax.climate.title", "GSX Climate") ?? "GSX Climate",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountClimatePanel(c, app),
       }) ?? null;

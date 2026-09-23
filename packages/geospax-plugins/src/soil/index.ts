@@ -18,7 +18,7 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-soil",
         title: () => app.translate?.("geospax.soil.title", "GSX Soil") ?? "GSX Soil",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountSoilPanel(c, app),
       }) ?? null;

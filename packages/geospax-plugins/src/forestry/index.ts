@@ -15,7 +15,7 @@ export const plugin: GeoLibrePlugin = {
         id: "geospax-forestry",
         title: () =>
           app.translate?.("geospax.forestry.title", "GSX Forestry") ?? "GSX Forestry",
-        dock: "right-of-layers",
+        dock: "right-of-style",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountForestryPanel(c, app),
       }) ?? null;
