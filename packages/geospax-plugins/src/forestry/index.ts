@@ -16,6 +16,7 @@ export const plugin: GeoLibrePlugin = {
       render: (c: HTMLElement) => mountForestryPanel(c, app),
     }) ?? null;
     if (!unregister) return false;
+    app.openRightPanel?.("geospax-forestry");
     return true;
   },
   deactivate() { unregister?.(); unregister=null; },

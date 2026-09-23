@@ -16,6 +16,7 @@ export const plugin: GeoLibrePlugin = {
       render: (c: HTMLElement) => mountBiodiversityPanel(c, app),
     }) ?? null;
     if (!unregister) return false;
+    app.openRightPanel?.("geospax-biodiversity");
     return true;
   },
   deactivate() { unregister?.(); unregister=null; },

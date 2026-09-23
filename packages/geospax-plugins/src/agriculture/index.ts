@@ -16,6 +16,7 @@ export const plugin: GeoLibrePlugin = {
       render: (c: HTMLElement) => mountAgriculturePanel(c, app),
     }) ?? null;
     if (!unregister) return false;
+    app.openRightPanel?.("geospax-agriculture");
     return true;
   },
   deactivate() { unregister?.(); unregister=null; },

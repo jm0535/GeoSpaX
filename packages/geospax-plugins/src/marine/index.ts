@@ -16,6 +16,7 @@ export const plugin: GeoLibrePlugin = {
       render: (c: HTMLElement) => mountMarinePanel(c, app),
     }) ?? null;
     if (!unregister) return false;
+    app.openRightPanel?.("geospax-marine");
     return true;
   },
   deactivate() { unregister?.(); unregister=null; },
