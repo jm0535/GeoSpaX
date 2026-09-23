@@ -15,12 +15,14 @@ import {
   mountRasterReclassTool,
   mountSlopeTool,
 } from "../shared/raster-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export function mountAgriculturePanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-agriculture",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Agriculture",
+    title: "GSX Agriculture",
     intro:
       "Assess crop condition, terrain constraints and multi-criteria suitability; convert distance costs transparently and compare cover or index surfaces through time.",
     accent: "#b47724",
@@ -72,6 +74,14 @@ export function mountAgriculturePanel(container: HTMLElement, app: GeoLibreAppAP
     badge: "Export",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Agriculture", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

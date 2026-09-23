@@ -1,0 +1,10 @@
+{
+  "id": "geospax-soil",
+  "name": "GSX Soil",
+  "version": "2.0.0",
+  "description": "Soil workbench: NDWI/custom moisture and salinity proxies, capability-class reclassification, WLC land capability, distance-decay management access, survey overlays, raster/vector change and provenance exports.",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}

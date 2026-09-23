@@ -1,0 +1,4 @@
+/* GSX Geoscience — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-geoscience"] .gsp-section__badge {
+  border-color: rgba(107, 91, 149, 0.4);
+}

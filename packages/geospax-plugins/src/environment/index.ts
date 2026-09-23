@@ -1,4 +1,4 @@
-// GeoSpaX Environment plugin — bundled drop-in entry.
+// GSX Environment plugin — bundled drop-in entry.
 //
 // Terrain (Horn slope/zones) + spectral index (NDVI/NDWI/NDBI/NBR, Otsu,
 // polygonized extent). Registers a right-sidebar panel that samples the
@@ -24,7 +24,7 @@ let appRef: GeoLibreAppAPI | null = null;
 
 export const plugin: GeoLibrePlugin = {
   id: "geospax-environment",
-  name: "GeoSpaX Environment",
+  name: "GSX Environment",
   version: PLUGIN_VERSION,
   engines: ["maplibre"],
 

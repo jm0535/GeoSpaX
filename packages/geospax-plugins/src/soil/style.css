@@ -1,0 +1,4 @@
+/* GSX Soil — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-soil"] .gsp-section__badge {
+  border-color: rgba(138, 90, 46, 0.4);
+}

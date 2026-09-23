@@ -66,6 +66,20 @@ nav:
       - AI Assistant: user-guide/ai-assistant.md
       - Data Integrations: user-guide/data-integrations.md
       - Plugins & Marketplace: user-guide/plugins.md
+      - GSX Domain Plugins:
+          - Overview: user-guide/gsx-plugins/index.md
+          - GSX Agriculture: user-guide/gsx-plugins/agriculture.md
+          - GSX Biodiversity: user-guide/gsx-plugins/biodiversity.md
+          - GSX Climate: user-guide/gsx-plugins/climate.md
+          - GSX Conservation: user-guide/gsx-plugins/conservation.md
+          - GSX Disaster: user-guide/gsx-plugins/disaster.md
+          - GSX Environment: user-guide/gsx-plugins/environment.md
+          - GSX Forestry: user-guide/gsx-plugins/forestry.md
+          - GSX Geoscience: user-guide/gsx-plugins/geoscience.md
+          - GSX Hydrology: user-guide/gsx-plugins/hydrology.md
+          - GSX LULC: user-guide/gsx-plugins/lulc.md
+          - GSX Marine: user-guide/gsx-plugins/marine.md
+          - GSX Soil: user-guide/gsx-plugins/soil.md
       - Web Services: user-guide/web-services.md
       - Settings & Preferences: user-guide/settings.md
       - Story Maps: user-guide/storymaps.md

@@ -6,7 +6,7 @@ export const PLUGIN_VERSION = "2.0.0";
 let unregister: (() => void) | null = null;
 export const plugin: GeoLibrePlugin = {
   id: "geospax-forestry",
-  name: "GeoSpaX Forestry",
+  name: "GSX Forestry",
   version: PLUGIN_VERSION,
   engines: ["maplibre"],
   activate(app: GeoLibreAppAPI) {
@@ -14,7 +14,7 @@ export const plugin: GeoLibrePlugin = {
       app.registerRightPanel?.({
         id: "geospax-forestry",
         title: () =>
-          app.translate?.("geospax.forestry.title", "GeoSpaX Forestry") ?? "GeoSpaX Forestry",
+          app.translate?.("geospax.forestry.title", "GSX Forestry") ?? "GSX Forestry",
         dock: "right-of-layers",
         defaultWidth: 400,
         render: (c: HTMLElement) => mountForestryPanel(c, app),

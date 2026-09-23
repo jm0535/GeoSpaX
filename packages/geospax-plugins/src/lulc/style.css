@@ -1,0 +1,4 @@
+/* GSX LULC — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-lulc"] .gsp-section__badge {
+  border-color: rgba(138, 122, 46, 0.4);
+}

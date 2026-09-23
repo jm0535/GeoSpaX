@@ -1,6 +1,6 @@
 {
   "id": "geospax-environment",
-  "name": "GeoSpaX Environment",
+  "name": "GSX Environment",
   "version": "2.0.0",
   "description": "Environment workbench: Horn slope zones, NDVI/NDWI/NDBI/NBR/custom indices, Otsu-assisted raster reclassification, aligned raster change, vector overlay, equal-area reporting and provenance exports.",
   "entry": "dist/index.js",

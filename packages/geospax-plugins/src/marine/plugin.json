@@ -1,6 +1,6 @@
 {
   "id": "geospax-marine",
-  "name": "GeoSpaX Marine",
+  "name": "GSX Marine",
   "version": "2.0.0",
   "description": "Marine workbench: citable OBIS/WoRMS queries, GEBCO context, diversity and nearest-neighbour/DBSCAN patterns, BIOCLIM/Mahalanobis/presence-background prediction, NDWI/custom extents, weighted priorities and MPA gaps.",
   "entry": "dist/index.js",

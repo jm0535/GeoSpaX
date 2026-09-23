@@ -20,6 +20,8 @@ import {
   mountVectorChangeTool,
 } from "../shared/vector-tools";
 import { mountRasterReclassTool } from "../shared/raster-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export interface ConservationPanelState {
   habitatLayerName?: string | null;
@@ -49,7 +51,7 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
   const shell = createPanelShell(container, app, {
     id: "geospax-conservation",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Conservation Planning",
+    title: "GSX Conservation",
     intro:
       "Overlay, prioritise, model suitability, quantify protection gaps, measure landscape structure and derive change—using audit-fixed methods with provenance attached to every output.",
     accent: "#5b8c51",
@@ -142,6 +144,14 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     description: "Review methods and export the run ledger or host project snapshot.",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Conservation", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

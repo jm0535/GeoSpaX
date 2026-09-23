@@ -1,0 +1,4 @@
+/* GSX Disaster — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-disaster"] .gsp-section__badge {
+  border-color: rgba(163, 64, 46, 0.4);
+}

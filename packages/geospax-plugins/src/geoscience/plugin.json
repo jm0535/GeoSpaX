@@ -1,0 +1,10 @@
+{
+  "id": "geospax-geoscience",
+  "name": "GSX Geoscience",
+  "version": "2.0.0",
+  "description": "Geoscience workbench: Horn slope classes, NDBI/custom spectral ratio lithology proxies, WLC prospectivity, geological overlay operations, raster/vector surface change and provenance exports.",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}

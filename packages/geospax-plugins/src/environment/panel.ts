@@ -11,6 +11,8 @@ import {
   mountRasterReclassTool,
   mountSlopeTool,
 } from "../shared/raster-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export interface EnvironmentPanelState {
   slopeLayerName?: string | null;
@@ -62,7 +64,7 @@ export function mountEnvironmentPanel(container: HTMLElement, app: GeoLibreAppAP
   const shell = createPanelShell(container, app, {
     id: "geospax-environment",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Environment",
+    title: "GSX Environment",
     intro:
       "Analyse terrain and raster indicators over the current map view, derive threshold extents, compare dates, and overlay environmental zones—with sampled resolution and methods stated on every result.",
     accent: "#4c7893",
@@ -137,6 +139,14 @@ export function mountEnvironmentPanel(container: HTMLElement, app: GeoLibreAppAP
     badge: "Export",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Environment", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

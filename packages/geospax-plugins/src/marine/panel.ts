@@ -13,12 +13,14 @@ import {
   mountSdmTool,
 } from "../shared/vector-tools";
 import { mountIndexTool, mountRasterReclassTool } from "../shared/raster-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-marine",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Marine",
+    title: "GSX Marine",
     intro:
       "Query citable marine records, add bathymetric context, quantify diversity and spatial pattern, model habitat suitability, and compare priority habitat with MPA coverage.",
     accent: "#217c91",
@@ -85,6 +87,14 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
     badge: "Export",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Marine", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

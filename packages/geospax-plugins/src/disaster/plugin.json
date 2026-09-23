@@ -1,0 +1,10 @@
+{
+  "id": "geospax-disaster",
+  "name": "GSX Disaster",
+  "version": "2.0.0",
+  "description": "Disaster workbench: WLC multi-hazard susceptibility, Horn slope triggers, NBR/NDWI hazard footprints, distance-decay response access, priority sites, raster/vector impact change, hotspot grids and provenance exports.",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}

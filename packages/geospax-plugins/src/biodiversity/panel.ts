@@ -13,12 +13,14 @@ import {
   mountProvenanceTool,
   mountSdmTool,
 } from "../shared/vector-tools";
+import { mountCitationTool } from "../shared/citation";
+import { PLUGIN_VERSION } from "./index";
 
 export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-biodiversity",
     eyebrow: "GeoSpaX domain workbench",
-    title: "Biodiversity",
+    title: "GSX Biodiversity",
     intro:
       "Bring in citable species records, quantify taxonomic diversity and spatial pattern, model environmental suitability, and test priorities against protected-area coverage.",
     accent: "#7b4e9d",
@@ -86,6 +88,14 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
     badge: "Export",
   });
   mountProvenanceTool(shell, provenance);
+
+  const citation = shell.addSection({
+    id: "citation",
+    title: "How to cite",
+    badge: "Citation",
+    description: "Academic and institutional use requires an appropriate citation.",
+  });
+  mountCitationTool(shell, citation, { pluginLabel: "GSX Biodiversity", version: PLUGIN_VERSION });
 
   return () => shell.destroy();
 }

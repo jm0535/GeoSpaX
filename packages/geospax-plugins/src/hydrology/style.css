@@ -1,0 +1,4 @@
+/* GSX Hydrology — accent scope. Panel chrome is shared (../shared/style.css). */
+.gsp-shell[data-plugin="geospax-hydrology"] .gsp-section__badge {
+  border-color: rgba(31, 122, 140, 0.4);
+}
