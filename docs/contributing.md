@@ -130,6 +130,32 @@ You only need the toolchains for the areas you touched. A docs-only or
 frontend-only change does not require Rust or Python, though the full `npm run
 ci` gate does.
 
+### Local CI receipts
+
+When hosted Actions are unavailable, `scripts/ci-local.sh` runs the CI stages
+individually and can write a durable Markdown receipt:
+
+```bash
+scripts/ci-local.sh --receipt ci-local-receipt.md
+```
+
+The verifier reports a missing optional toolchain as **SKIP**, never PASS, and
+returns non-zero if any stage fails. Use `--only` while iterating, and point it
+at the virtual environment containing the editable backend test installs when
+needed:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -e "backend/geolibre_server[test]"
+.venv/bin/python -m pip install -e "backend/geolibre_server_api[test]"
+scripts/ci-local.sh --python .venv/bin/python --only backend-api,backend
+```
+
+Run `scripts/ci-local.sh --list` for all stage keys. Receipts state the tested
+commit or worktree, command, toolchain versions, per-stage duration, and every
+skip; they are evidence for a PR description, not a replacement for the
+platform-specific release lanes.
+
 ### End-to-end smoke tests
 
 `npm run test:e2e` runs the Playwright suite in `e2e/` against the built web app
