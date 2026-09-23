@@ -58,7 +58,7 @@ capabilities, credentials, and current compatibility.
 
 > **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` remains live at `geospax.in4metrix.dev`; v2 is the forward path.
 
-GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **twelve bundled GSX workbenches** (`activeByDefault:true`, `public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
+GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **twelve bundled GSX workbenches** (`public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Workbenches are opt-in: activate the ones you want under **Plugins → Manage Plugins**. Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
 
 | Workbench | v2.0.0 contents |
 |---|---|

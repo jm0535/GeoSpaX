@@ -22,13 +22,16 @@ locally in your browser (or desktop app).
 
 ## Opening a workbench
 
-Every workbench opens as a **right-side panel** next to the Layers panel:
+Workbenches are **opt-in** — none of them activate at startup. Activate a
+workbench once and it stays active across sessions:
 
 1. Launch GeoSpaX (web or desktop).
-2. Click the workbench's icon in the **panel rail** on the right edge of the
-   map, or open **View → Panels** and tick the workbench you want.
-3. The panel docks beside Layers. Its sections are collapsible — click a
-   section header to expand it.
+2. Open **Plugins → Manage Plugins**, find the GSX workbench you want, and
+   activate it.
+3. Click the workbench's icon in the **panel rail** on the right edge of the
+   map, or open **View → Panels** and tick it.
+4. The panel docks as a **right-side panel** next to Layers. Its sections are
+   collapsible — click a section header to expand it.
 
 ## Common concepts
 

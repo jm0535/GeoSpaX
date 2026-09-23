@@ -5,6 +5,6 @@
   "description": "Hydrology workbench: NDWI open-water and wetness extents, inundation reclassification, Horn slope runoff terrain, WLC catchment characteristics, riparian distance decay, catchment overlays, raster/vector water-extent change and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
-  "activeByDefault": true,
+  "activeByDefault": false,
   "engines": ["maplibre"]
 }
