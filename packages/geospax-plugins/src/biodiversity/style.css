@@ -1,0 +1,15 @@
+/* GeoSpaX Biodiversity — scoped .gsp-bio-* and legacy .gsp-biodiversity-* */
+.gsp-biodiversity-root, .gsp-bio-root { padding: 10px 12px; font-size: 13px; display:flex; flex-direction:column; gap:8px; }
+.gsp-biodiversity-hint, .gsp-bio-hint { opacity:0.75; font-size:11.5px; line-height:1.4; }
+.gsp-bio-title, .gsp-bio-subtitle { margin:0; font-weight:700; font-size:13px; }
+.gsp-bio-row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.gsp-bio-label { font-size:12px; font-weight:600; }
+.gsp-bio-input, .gsp-bio-select { font-size:12px; padding:4px 6px; border:1px solid rgba(128,128,128,0.3); border-radius:6px; }
+.gsp-bio-run, .gsp-bio-add { padding:6px 10px; font-size:12.5px; border-radius:6px; border:1px solid rgba(128,128,128,0.3); background:rgba(88,120,255,0.12); cursor:pointer; }
+.gsp-bio-run:hover { background:rgba(88,120,255,0.18); }
+.gsp-bio-status { font-size:12px; margin:4px 0; }
+.gsp-bio-warn { color:#9a3b0f; background:rgba(255,160,0,0.12); padding:4px 6px; border-radius:6px; }
+.gsp-bio-table { width:100%; border-collapse:collapse; font-size:12px; }
+.gsp-bio-table td, .gsp-bio-table th { border:1px solid rgba(128,128,128,0.2); padding:4px 6px; text-align:left; }
+.gsp-bio-citation { background:rgba(128,128,128,0.08); padding:6px; border-radius:6px; word-break:break-word; }
+.gsp-bio-url { background:rgba(128,128,128,0.06); padding:4px 6px; border-radius:6px; }

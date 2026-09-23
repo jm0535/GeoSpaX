@@ -1,0 +1,10 @@
+{
+  "id": "geospax-biodiversity",
+  "name": "GeoSpaX Biodiversity",
+  "version": "2.0.0",
+  "description": "GeoSpaX biodiversity domain pack — placeholder for the biodiversity toolbox (stub for Phase-7 six-drop-in verification; real modules ship in the full v2.0.0 analytical core).",
+  "entry": "dist/index.js",
+  "style": "dist/style.css",
+  "activeByDefault": true,
+  "engines": ["maplibre"]
+}

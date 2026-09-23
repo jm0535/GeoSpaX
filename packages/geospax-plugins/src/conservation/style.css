@@ -1,0 +1,101 @@
+/* GeoSpaX Conservation Planning panel - scoped styles.
+   External plugin CSS is injected globally, so every selector is prefixed
+   with .gsp-cons- (plugin-API styling rule). */
+
+.gsp-cons-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.gsp-cons-intro {
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.45;
+}
+
+.gsp-cons-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gsp-cons-label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.gsp-cons-select {
+  width: 100%;
+  padding: 5px 6px;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+}
+
+.gsp-cons-run {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #97bc62; /* GeoSpaX accent (v1 --accent) */
+  color: #1c2410;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gsp-cons-run:hover {
+  filter: brightness(1.06);
+}
+
+.gsp-cons-status {
+  min-height: 1.2em;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.gsp-cons-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.gsp-cons-table th,
+.gsp-cons-table td {
+  text-align: start;
+  padding: 4px 6px;
+  border-top: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+.gsp-cons-method {
+  margin-top: 6px;
+  font-size: 11.5px;
+  opacity: 0.85;
+  border-inline-start: 3px solid #97bc62;
+  padding-inline-start: 8px;
+}
+
+.gsp-cons-closure {
+  margin-top: 4px;
+  font-size: 11.5px;
+}
+
+.gsp-cons-pas {
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.gsp-cons-ok {
+  color: #4c8c2b;
+}
+
+.gsp-cons-warn {
+  color: #b3541e;
+}
