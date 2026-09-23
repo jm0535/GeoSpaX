@@ -37,6 +37,6 @@ function assertSidecarAllowed(): void {
     throw new Error(i18next.t("masBuild.unavailable"));
   }
   if (!isTauri()) {
-    throw new Error("Starting the processing server requires GeoLibre Desktop.");
+    throw new Error("Starting the processing server requires GeoSpaX Desktop.");
   }
 }

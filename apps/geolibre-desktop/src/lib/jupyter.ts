@@ -78,6 +78,6 @@ function assertJupyterAllowed(): void {
     throw new Error(i18next.t("masBuild.unavailable"));
   }
   if (!isTauri()) {
-    throw new Error("Running a Jupyter server requires GeoLibre Desktop.");
+    throw new Error("Running a Jupyter server requires GeoSpaX Desktop.");
   }
 }

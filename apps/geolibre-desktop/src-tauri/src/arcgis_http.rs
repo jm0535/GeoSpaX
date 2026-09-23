@@ -55,7 +55,7 @@ fn client() -> Result<reqwest::Client, String> {
             let mut builder = reqwest::Client::builder()
                 .connect_timeout(Duration::from_secs(super::REMOTE_TILE_CONNECT_TIMEOUT_SECS))
                 .dns_resolver(Arc::new(GuardedDnsResolver))
-                .user_agent("GeoLibre Desktop")
+                .user_agent("GeoSpaX Desktop")
                 .redirect(Policy::custom(|attempt| {
                     if attempt.previous().iter().any(|url| url.path().ends_with("/applyEdits")) {
                         return attempt.error("ArcGIS write redirects are not allowed.");

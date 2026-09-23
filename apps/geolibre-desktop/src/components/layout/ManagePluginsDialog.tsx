@@ -330,7 +330,7 @@ export function ManagePluginsDialog({
         // Desktop: pick a path and let the backend validate and copy the zip
         // into the app-data plugins directory (persisted via the startup scan).
         const path = await pickLocalPathWithFallback({
-          filters: [{ name: "GeoLibre plugin", extensions: ["zip"] }],
+          filters: [{ name: "GeoSpaX plugin", extensions: ["zip"] }],
         });
         if (!path) return;
         setInstalling(true);
@@ -341,7 +341,7 @@ export function ManagePluginsDialog({
         // persist the bundle in IndexedDB so it reloads on the next visit.
         const picked = await openLocalDataFileWithFallback({
           accept: ".zip",
-          filters: [{ name: "GeoLibre plugin", extensions: ["zip"] }],
+          filters: [{ name: "GeoSpaX plugin", extensions: ["zip"] }],
           readBinary: true,
         });
         if (!picked?.data) return;

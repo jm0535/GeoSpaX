@@ -20,7 +20,7 @@ param(
   [string] $Name = "OpenGeospatialSolutions.GeoLibre",
   # Package display name (Properties/DisplayName). For a Microsoft Store
   # submission it must be a name you reserved in Partner Center ("GeoLibre"),
-  # which differs from the Tauri productName ("GeoLibre Desktop"). Pass "" to
+  # which differs from the Tauri productName ("GeoSpaX Desktop"). Pass "" to
   # fall back to the productName for a non-Store build.
   [string] $DisplayName = "GeoLibre",
   # Default package language. Required by the Store; every MSIX must declare one.

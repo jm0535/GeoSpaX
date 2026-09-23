@@ -1888,10 +1888,10 @@ export function LayerPanel({
           defaultName: `${sanitizeExportFileName(
             geoLibreStyleSourceName(layer),
           )}.geolibre.style.json`,
-          filters: [{ name: "GeoLibre URL style", extensions: ["json"] }],
+          filters: [{ name: "GeoSpaX URL style", extensions: ["json"] }],
           browserTypes: [
             {
-              description: "GeoLibre URL style",
+              description: "GeoSpaX URL style",
               accept: { "application/json": [".json"] },
             },
           ],
@@ -1954,7 +1954,7 @@ export function LayerPanel({
     [exportLayerStyle],
   );
 
-  // Import a symbology file (including GeoLibre URL and Mapbox/MapLibre style
+  // Import a symbology file (including GeoSpaX URL and Mapbox/MapLibre style
   // JSON, or an OGC SLD/QGIS QML) and
   // apply it to a vector layer, so cartography authored elsewhere (QGIS,
   // GeoServer, another map, or a style exported from GeoLibre) can be brought
@@ -1988,7 +1988,7 @@ export function LayerPanel({
         const picked = await openLocalDataFileWithFallback({
           filters: [
             {
-              name: "Style (GeoLibre URL / Mapbox GL / SLD / QML)",
+              name: "Style (GeoSpaX URL / Mapbox GL / SLD / QML)",
               extensions: ["json", "sld", "qml", "xml"],
             },
           ],

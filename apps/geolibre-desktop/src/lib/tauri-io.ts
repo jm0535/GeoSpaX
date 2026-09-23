@@ -3289,7 +3289,7 @@ export async function openRecentProjectFile(
   }
 
   if (!isTauri()) {
-    throw new Error("Recent local projects can only be reopened in GeoLibre Desktop.");
+    throw new Error("Recent local projects can only be reopened in GeoSpaX Desktop.");
   }
 
   let text: string;

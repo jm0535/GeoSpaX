@@ -89,7 +89,7 @@ export function useBrowserTree(): BrowserTreeState {
     const services = listAllServices(readUserServices());
     const byId = new Map(services.map((entry) => [entry.id, entry]));
     // Shown on every platform for discovery; the PostgreSQL add flow itself
-    // reports when it needs GeoLibre Desktop (Martin has no mobile build).
+    // reports when it needs GeoSpaX Desktop (Martin has no mobile build).
     // Kept in the saved list's order (most-recently-used first), deliberately
     // unlike the alphabetized Services list — this mirrors the Recent section.
     // The Mac App Store build cannot run the sidecar/martin at all, so the
