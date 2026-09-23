@@ -14,10 +14,10 @@ const runtimeFiles = [
   "scanner.mjs",
   "service-scanner.mjs",
   "url-builder.mjs",
-  "icons/geolibre-16.png",
-  "icons/geolibre-32.png",
-  "icons/geolibre-48.png",
-  "icons/geolibre-128.png",
+  "icons/geospax-16.png",
+  "icons/geospax-32.png",
+  "icons/geospax-48.png",
+  "icons/geospax-128.png",
 ];
 
 const archive = {};

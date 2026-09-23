@@ -11,8 +11,8 @@ site_dir: site
 
 theme:
   name: material
-  logo: assets/geolibre-icon.png
-  favicon: assets/geolibre-icon.png
+  logo: assets/geospax_logo_final.svg
+  favicon: assets/geospax-icon.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
