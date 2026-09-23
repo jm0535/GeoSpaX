@@ -11,6 +11,7 @@ import {
   mountConservationPanel,
   type ConservationPanelState,
 } from "./panel";
+import "../shared/style.css";
 import "./style.css";
 
 /** Must match plugin.json "version" - the loader validates the pair. */
@@ -34,7 +35,7 @@ export const plugin: GeoLibrePlugin = {
           app.translate?.("geospax.conservation.title", "Conservation Planning") ??
           "Conservation Planning",
         dock: "right-of-layers",
-        defaultWidth: 380,
+        defaultWidth: 400,
         render: (container: HTMLElement) => mountConservationPanel(container, app),
         onOpen: () => {
           // Refresh the layer pickers whenever the panel is opened.

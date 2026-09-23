@@ -28,9 +28,9 @@
     },
     {
       "file": "forest_patches.geojson",
-      "title": "Forest patches",
-      "kind": "vector/polygons",
-      "provenance": "GeoSpaX v1 teaching sample for fragmentation/patch-metric and connectivity exercises.",
+      "title": "Forest patch centroids",
+      "kind": "vector/points",
+      "provenance": "GeoSpaX v1 teaching sample of attributed forest-patch centroids. It supports point/attribute exercises; use polygon forest extents for area, edge, core, fragmentation, or patch-connectivity geometry metrics.",
       "licence": "MIT (GeoSpaX v1)."
     },
     {

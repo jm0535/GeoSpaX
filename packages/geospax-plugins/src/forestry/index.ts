@@ -1,5 +1,6 @@
 import type { GeoLibreAppAPI, GeoLibrePlugin } from "@geolibre/plugins";
 import { mountForestryPanel } from "./panel";
+import "../shared/style.css";
 import "./style.css";
 export const PLUGIN_VERSION = "2.0.0";
 let unregister: (()=>void)|null=null;
@@ -13,6 +14,7 @@ export const plugin: GeoLibrePlugin = {
       id: "geospax-forestry",
       title: () => app.translate?.("geospax.forestry.title", "GeoSpaX Forestry") ?? "GeoSpaX Forestry",
       dock: "right-of-layers",
+      defaultWidth: 400,
       render: (c: HTMLElement) => mountForestryPanel(c, app),
     }) ?? null;
     if (!unregister) return false;

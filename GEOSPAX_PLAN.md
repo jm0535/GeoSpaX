@@ -1,8 +1,8 @@
 # GeoSpaX on GeoLibre — Research & Transformation Plan
 
-**Date:** 2026-09-22
+**Date:** 2026-09-23 (implementation audit; original research drafted 2026-09-22)
 **Scope:** Turn the `jm0535/GeoLibre` fork into **GeoSpaX** — a specialised conservation-science & ecology web GIS — by combining the GeoLibre platform with the domain capabilities of GeoSpaX (`jm0535/map-kit`).
-**Status:** Review & plan only. No code has been written to `map-kit`; nothing in this document changes GeoSpaX's live app.
+**Status:** Active implementation plan. The original `map-kit` remains unchanged; additive `packages/geospax-*` analysis/data/plugin code now implements the Phase-2 conservation workbench and six domain panels described below.
 
 ---
 
@@ -26,6 +26,44 @@ You have built two things that fit together almost perfectly:
 6. Retire `map-kit` only after feature parity for the FR422 workflow; keep it live during migration.
 
 The payoff is not a lateral move: GeoSpaX would gain Earth Engine / Planetary Computer / STAC data access (a step-change for conservation monitoring), the full Whitebox toolbox (terrain, hydrology, LiDAR, ML classification, 10 change-detection tools), time-slider animation of forest change, spatial SQL on GeoParquet, 3D globe, desktop/mobile builds, project sharing for assignment submission, and an AI assistant that can be re-skinned as a conservation copilot — while keeping its unique Oceania/ecology identity that no other web GIS has.
+
+---
+
+## 1.1 Implementation audit (2026-09-23)
+
+The parity baseline was re-checked directly against `jm0535/map-kit` rather
+than inferred from the earlier README claim. The six bundled workbenches now
+share one accessible, host-token-based panel system and expose the following
+implemented workflows:
+
+- **Conservation:** overlay; descriptive weighted hotspot grid; unprotected
+  priority sites; bounded exact/explicit-greedy minimum-cost representation;
+  BIOCLIM and Mahalanobis fit **and prediction**; WLC; protection gap;
+  NP/CA/LPI/TE/ED/MSI/core/CAI/ENN fragmentation report; connectivity
+  components; vector change; raster threshold/polygonize; run-ledger/project
+  provenance export.
+- **Agriculture:** real NDVI-family raster workflow, reclassification, WLC,
+  exponential distance decay, slope constraints, raster/vector change.
+- **Biodiversity:** GBIF/OBIS/iNaturalist/WoRMS, actual taxon-frequency
+  richness/diversity, point pattern, weighted grid, SDM and gap/priority tools.
+- **Environment:** slope, normalized-difference indices, Otsu-assisted
+  reclassification, aligned raster change and vector overlay.
+- **Forestry:** extent derivation, complete fragmentation/connectivity,
+  raster/vector forest change and protection gaps.
+- **Marine:** OBIS/WoRMS, GEBCO visual context, diversity/pattern, SDM,
+  NDWI/custom extents, weighted priorities and MPA gaps.
+
+Correctness claims were narrowed where the prior implementation overstated
+capability: SDM no longer stops at model fitting or silently loses covariance
+inversion above two variables; SCP does not claim HiGHS-WASM. Exact SCP uses a
+bounded deterministic branch-and-bound solver and returns an explicitly
+non-optimal greedy result when its browser safety limits prevent proof.
+
+Still outside this completed panel audit are the optional/originally separate
+MaxEnt sidecar (G5), generic How-to-Cite formats (G12), one-click assessment
+report (G13), starter-project catalogue/templates (the remaining G14 work),
+DBSCAN (G15), and `.gspx` shell alias (G16). Those remain roadmap items rather
+than being represented as implemented parity.
 
 ---
 
@@ -120,7 +158,12 @@ npm-workspaces monorepo (`apps/*`, `packages/*`, `workers/*`) + FastAPI sidecar 
 | Basemaps (10 free) | Larger catalog: basemap control plugin, regional basemaps (`regional-basemaps.ts`), planetary basemaps (`ellipsoids.ts`), Esri Wayback plugin, OpenFreeMap/CARTO |
 | Keyboard shortcuts, i18n, RTL | `useGlobalShortcuts`, react-i18next with 19 locales |
 
-**❌ Missing from GeoLibre — the GeoSpaX specialisation to build (the actual work):**
+**Original GeoLibre gap register (plan-inception baseline):**
+
+Several entries below are now implemented by the six domain workbenches; use
+§1.1 as the current status record. The table is retained to preserve the
+source-to-target migration rationale, not as a claim that every row remains
+missing.
 
 | # | Capability | GeoSpaX source to port | Build vehicle |
 |---|---|---|---|
@@ -240,27 +283,31 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
 - [ ] Branding patch-set: HTML title/meta/PWA name, favicons/logo, i18n app-name strings (en first; machine-prepare the other 18 catalogs), About dialog with dual attribution.
 - [ ] `admin-profile.json`: hide generalist plugins/data sources (flight sim, gods-eye-view CCTV, street view, ArcGIS Hub, …); keep Layer Control, Components, Elevation Profile, Natural Earth, OSM Downloader, Time Slider, Earth Engine/Planetary Computer (they *are* the conservation stack); optionally `lock: true` for lab deployments.
 - [ ] Deployment-capability presets documented for classroom/kiosk use.
-- [ ] Sample data: copy map-kit `samples/` → `public/samples/geospax/`; author 2–3 FR422 starter projects (paradisea workflow: GBIF points → hull → graduated symbology → Gi* → gap analysis) as `.geolibre.json` templates.
+- [x] Copy the map-kit teaching datasets into `public/samples/geospax/` with a source/licence manifest (including an explicit correction that `forest_patches.geojson` contains point centroids, not patch polygons).
+- [ ] Author 2–3 FR422 starter projects (paradisea workflow: GBIF points → hull → graduated symbology → Gi* → gap analysis) as `.geolibre.json` templates.
 - [ ] `.gspx` alias decision & (if wanted) additive patch to save dialogs.
 - [ ] Deploy the preview to a staging URL (Vercel with `lite:build` — designed for per-asset caps — or GH Pages; Docker/nginx later for the sidecar era).
 - **Exit criterion:** a stranger opens the URL and sees "GeoSpaX — conservation & ecology GIS", not GeoLibre.
 
 ### Phase 2 — Analysis core port (M–L) → *the substance*
-- [ ] Stand up `packages/geospax-analysis` (TS, zero UI deps) + `packages/geospax-plugins` (vite lib build → drop-in folders; `npm run build:geospax-plugins` wires into root scripts).
-- [ ] Port, with tests (reuse the 302-assertion logic as `node --test` specs under `tests/`):
-  - equal-area units & reporting (G9) — first, everything else consumes it;
-  - SDM: BIOCLIM + Mahalanobis with the `geospax-sdm-fix.js` guards (G4); env extraction via `readRasterWindow`;
-  - WLC engine: graded scoring, decay functions, constraint mask, metre cell size (G6);
-  - protection gap (G7); fragmentation & patch metrics + connectivity graph (G8);
-  - reclassify/Otsu/polygonize (G10); DBSCAN (G15); hotspot-grid convenience wrapper over H3/DGGS (curation of existing tools).
-- [ ] Plugin panels: one right-panel plugin `geospax-conservation` (sections mirror the current Analysis drawer: Overlay → Hotspots → SDM → Suitability → Gap → Fragmentation → Change) + toolbar menu "Conservation".
-- [ ] Wire change detection UX onto Whitebox tools + Time Slider for the animation story.
-- **Exit criterion:** the FR422 Part A outputs (A1–A5) reproducible inside GeoSpaX-on-GeoLibre, with provenance on every result layer.
+- [x] Stand up `packages/geospax-analysis` (pure TS) and `packages/geospax-plugins` (Vite library builds to six drop-in folders).
+- [x] Port and test the bounded browser methods delivered in this audit:
+  - equal-area units/reporting (G9), protection gap (G7), complete polygon fragmentation and structural connectivity (G8);
+  - BIOCLIM and general Mahalanobis fitting **plus prediction** with explicit missing-row and covariance-regularisation handling (G4);
+  - per-feature WLC, exponential distance decay, descriptive weighted hotspot grids, unprotected priorities, and bounded exact/greedy minimum-cost representation;
+  - vector overlay/change and sampled-raster slope, normalized difference, reclassification/Otsu/polygonization, and aligned raster change (G10).
+- [x] Replace the single gap-only conservation panel with an eight-section workbench and add consistent Agriculture, Biodiversity, Environment, Forestry, and Marine workbenches.
+- [x] Route output layers through `addGeoJsonLayer`, mirror bounded native GeoJSON imports for `getLayerFeatures`, and stamp method parameters/provenance on analysis outputs and the run ledger.
+- [ ] Add DBSCAN (G15), optional MaxEnt (Phase 4), and any higher-scale worker-backed raster WLC required beyond the current bounded browser methods.
+- [ ] Wire change-detection outputs to the Time Slider for the animation story.
+- **Current verification:** focused GeoSpaX/store suites pass; all six drop-ins build; representative vector/raster workflows and all six mounted panels pass browser smoke validation. Full FR422 guide reproduction and rewritten screenshots remain Phase 5.
 
 ### Phase 3 — Data & academic layer (M)
-- [ ] `geospax-opendata` plugin: GBIF (G1), WWF/MEOW ecoregions (G2), World Bank (G3) — port fetch/pagination logic; render via `addGeoJsonLayer`; ecoregions optionally as pre-tiled PMTiles for speed.
-- [ ] `geospax-academic` plugin: How-to-Cite panel (G12), provenance table view (G11), **one-click assessment report** (G13) — HTML/PDF via the print-layout export path; report embeds methods, parameters, figures, data licences, and both citations.
-- [ ] i18n: new plugin strings through `app.translate()` with `en` catalogs (GeoLibre's i18n rules in `docs/i18n.md` — read before touching).
+- [x] Add citation-carrying GBIF, OBIS, iNaturalist and WoRMS queries to the Biodiversity/Marine workbenches; georeferenced results use `addGeoJsonLayer`.
+- [x] Add per-run method/provenance views and JSON run-ledger/project-state export (implemented G11 scope).
+- [ ] Add WWF/MEOW catalogue delivery (G2), World Bank indicators (G3), and any desired large-result pagination/cache UX.
+- [ ] Add generic How-to-Cite formats (G12) and the **one-click assessment report** (G13) through the print-layout export path.
+- [ ] Complete string-catalog i18n beyond the shared host translation hook.
 - **Exit criterion:** a student produces the Part B conservation plan document from the app in one click.
 
 ### Phase 4 — Server-side SDM & scale (S–M, optional)
@@ -270,7 +317,8 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
 - **Exit criterion:** MaxEnt-class models available with honest evaluation metrics, server or no server.
 
 ### Phase 5 — Migration, parity, retirement of map-kit (ongoing)
-- [ ] Parity checklist vs §2.2 crown jewels; run the FR422 guide end-to-end on the new app; rewrite the step-by-step guides/screenshots.
+- [x] Re-audit exposed `map-kit` workflows directly and record implemented/remaining parity honestly in §1.1 (without relying on old README parity claims).
+- [ ] Run the FR422 guide end-to-end on the new app and rewrite the step-by-step guides/screenshots.
 - [ ] Port the critical Playwright paths from map-kit's 677 tests into GeoLibre's `e2e/` harness (build + `vite preview` + Playwright already wired).
 - [ ] `geospax.in4metrix.dev` cutover (keep map-kit at a `/classic` path or the GH Pages mirror for one semester).
 - [ ] Keep `src/geospax/` Python static-map package in map-kit as a separate artefact (or later fold into GeoLibre's `python/` package) — it serves a different audience (publication figures).
@@ -281,7 +329,7 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
 
 ## 7. Upstream sync & maintenance strategy
 
-1. **Branches:** `main` = pristine mirror of upstream; `geospax` = long-lived product branch (this Arena session's branch is separate and only holds planning artefacts). Merge direction is always `upstream/main → main → geospax`.
+1. **Branches:** keep `main` as the stable integration line and land the specialisation through reviewed topic branches. This Arena implementation lives on `arena/01a0cc13-geospax`; it now contains the analysis/plugin work as well as this plan, so it is not a planning-only branch. Reconcile any future upstream-remote ritual with the repository owner's actual branch policy before automating it.
 2. **Conflict budget:** with Option C the expected conflict surface per upstream merge is the branding patch-set only (HTML title, i18n name strings, About, CITATION, README). Everything else is new files. Re-apply branding via a `scripts/geospax-brand.sh` or committed `.patch` to make merges mechanical.
 3. **Guardrails from `CLAUDE.md`/`docs/maintenance.md`:** run `npm run ci` after each sync; never edit `node_modules`; maplibre bumps need the mirrored-manuals check; regenerate generated files (Whitebox catalog, `npm run i18n:tools`) when upstream says so; coverage floors are a ratchet — the new `packages/geospax-*` tests should *raise* the frontend floor, not trip it.
 4. **Contribute back where sensible:** genuinely generic fixes (e.g., DBSCAN statistics tool, equal-area reporting mode, GBIF connector) can go to `opengeos/GeoLibre` as PRs — reducing your fork surface and building standing in the community. Keep conservation-*workflow* UX in the fork.

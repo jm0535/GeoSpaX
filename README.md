@@ -58,16 +58,16 @@ GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-scie
 
 | id | v2.0.0 contents |
 |---|---|
-| `geospax-conservation` | Protection gap (equal-area ha, honest method/crs, closure check, `_geospax` provenance) |
-| `geospax-environment` | **Slope zones** (Horn slope/aspect sampling, pixel metres at view centre, resolution warning) + **Index extent** (NDVI/NDWI/NDBI/NBR/custom → stats, histogram, Otsu, dissolve polygons, `BAND_ASSIGNMENT_CAVEAT` printed on every result) |
-| `geospax-biodiversity` | Live **GBIF/OBIS/iNaturalist** (taxon+bbox→GeoJSON, citation) + **WoRMS** taxonomy, plus **richness/Shannon/Simpson** over your layers |
-| `geospax-forestry` | **Fragmentation** (`patchMetrics`, `summarizeFragmentation` equal-area ha) + **connectivity** (haversine threshold graph, components/isolated) → stamped centroids/edges |
-| `geospax-marine` | **OBIS marine**, **GEBCO** tile helper, **WWF ecoregions** 846/232/62 + Allen Coral, **SPREP** Pacific — all citation-carried |
-| `geospax-agriculture` | **WLC** crop suitability (graded 0–1, benefit/cost, `/100` auto-normalise, exponential distance-decay half-life) |
+| `geospax-conservation` | Full workbench: overlay, weighted priorities, unprotected sites, bounded exact/greedy SCP, BIOCLIM/Mahalanobis prediction, WLC, protection gaps, fragmentation/core metrics, connectivity, vector change, raster polygonization and provenance export |
+| `geospax-environment` | Horn slope zones; NDVI/NDWI/NDBI/NBR/custom extents; Otsu-assisted raster reclassification; aligned raster change; vector overlay |
+| `geospax-biodiversity` | Citable GBIF/OBIS/iNaturalist/WoRMS queries; richness/Shannon/Simpson/evenness; point pattern and weighted grid; SDM; priorities and protection gaps |
+| `geospax-forestry` | Forest/index extent; complete fragmentation/core and connectivity reports; raster and polygon loss/gain change; protection gaps |
+| `geospax-marine` | Citable OBIS/WoRMS queries and GEBCO context; diversity/pattern; SDM; NDWI/custom habitat extent; weighted priorities and MPA gaps |
+| `geospax-agriculture` | NDVI-family crop condition; raster reclassification; WLC and exponential distance decay; Horn slope; raster/vector crop change |
 
-**Analysis core `@geospax/analysis` v2.0.0** (18 modules, dependency-light, pure functions, provenance-stamped; ported from `js/geospax-conservation*.js` / `geospax-sdm-fix.js` / `geospax-raster.js`):
+**Analysis core `@geospax/analysis` v2.0.0** (dependency-light, pure functions, provenance-stamped; ported and checked against `js/geospax-conservation*.js`, `geospax-sdm-fix.js`, and `geospax-raster.js`):
 
-`gap` · `geometry` · `overlay` · `provenance` · `units` · `terrain` · `raster` · `sdm` (BIOCLIM/Mahalanobis) · `suitability` (WLC) · `fragmentation` · `connectivity` · `statistics` · `change` · `hydrology` (D8) · `biodiversity` · `indices` · `classification` (equal-interval + **Fisher-Jenks** natural breaks) · `scp` (greedy + **HiGHS-WASM exact** with graceful fallback — browser-native, beyond v1).
+`gap` · `geometry` · `overlay` · `planning` · `spatial` · `provenance` · `units` · `terrain` · `raster` · `sdm` (BIOCLIM/Mahalanobis fit **and prediction**, general covariance inversion) · `suitability` · `fragmentation` · `connectivity` · `statistics` · `change` · `hydrology` · `biodiversity` · `indices` · `classification` · `scp` (bounded exact branch-and-bound; explicitly labelled greedy fallback). GeoSpaX does not claim HiGHS-WASM execution.
 
 **Data `@geospax/data` v2.0.0** (10 citation-carrying tiers: 5 live `CONNECTORS` + 5 `CATALOGUE_TIERS` = `ALL_SOURCES` 10):
 

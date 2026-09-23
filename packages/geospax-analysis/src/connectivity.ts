@@ -1,26 +1,50 @@
-// Connectivity — graph metrics for patch networks.
+// Connectivity — centroid-threshold graph metrics for polygon patch networks.
 //
-// Lightweight in-browser complement to Whitebox connectivity tools.
-// Uses haversine distances between patch centroids; no proj4 needed for
-// graph topology (equal-area is applied only when reporting areas).
+// This is deliberately not a least-cost corridor model.  The method and its
+// centroid-distance limitation are carried in provenance and surfaced by every
+// domain panel that uses it.
 
-import { haversineM } from "./geometry";
-import type { Feature, Point, Polygon, MultiPolygon } from "geojson";
+import type { Feature, LineString, MultiPolygon, Polygon } from "geojson";
+import { haversineM, polygonsOnly, type AnyFeature } from "./geometry";
 import { areaM2 } from "./units";
+import { makeProvenance, type ProvenanceStamp } from "./provenance";
 
 function centroidOfPolygon(coords: number[][][]): [number, number] {
-  // Simple arithmetic centroid of outer ring (good enough for connectivity).
-  const ring = coords[0];
-  let sx = 0, sy = 0;
-  for (const [x, y] of ring) { sx += x; sy += y; }
-  return [sx / ring.length, sy / ring.length];
+  const ring = coords[0] ?? [];
+  if (!ring.length) return [Number.NaN, Number.NaN];
+  // Ignore the duplicated closing vertex when present.
+  const usable =
+    ring.length > 1 && ring[0][0] === ring[ring.length - 1][0] && ring[0][1] === ring[ring.length - 1][1]
+      ? ring.slice(0, -1)
+      : ring;
+  let sx = 0;
+  let sy = 0;
+  for (const [x, y] of usable) {
+    sx += x;
+    sy += y;
+  }
+  return [sx / usable.length, sy / usable.length];
 }
 
-function centroid(f: Feature<Polygon | MultiPolygon>): [number, number] {
-  const g = f.geometry;
-  if (g.type === "Polygon") return centroidOfPolygon(g.coordinates as number[][][]);
-  const first = (g.coordinates as number[][][][])[0];
-  return centroidOfPolygon(first as number[][][]);
+function centroidCoordinate(feature: Feature<Polygon | MultiPolygon>): [number, number] {
+  const geometry = feature.geometry;
+  if (geometry.type === "Polygon") return centroidOfPolygon(geometry.coordinates as number[][][]);
+  // Choose the largest part rather than the first arbitrary part.
+  let best = geometry.coordinates[0] as number[][][];
+  let bestArea = -1;
+  for (const coordinates of geometry.coordinates as number[][][][]) {
+    const candidate: Feature<Polygon> = {
+      type: "Feature",
+      properties: {},
+      geometry: { type: "Polygon", coordinates },
+    };
+    const candidateArea = areaM2(candidate);
+    if (candidateArea > bestArea) {
+      best = coordinates;
+      bestArea = candidateArea;
+    }
+  }
+  return centroidOfPolygon(best);
 }
 
 export interface ConnectivityEdge {
@@ -35,43 +59,182 @@ export interface ConnectivityGraph {
 }
 
 export interface ConnectivityOptions {
-  maxDistanceM: number; // threshold to draw an edge
+  maxDistanceM: number;
 }
 
-/** Build a thresholded proximity graph. */
+/** Build a thresholded centroid-proximity graph. */
 export function connectivityGraph(
   patches: Feature<Polygon | MultiPolygon>[],
   options: ConnectivityOptions,
 ): ConnectivityGraph | null {
-  if (!patches || patches.length === 0) return null;
+  if (!patches?.length) return null;
   if (!Number.isFinite(options.maxDistanceM) || options.maxDistanceM <= 0) return null;
-  const nodes = patches.map((f, i) => {
-    const c = centroid(f);
-    const aHa = areaM2(f) / 10000;
-    return { id: i, areaHa: Number.isFinite(aHa) ? aHa : 0, centroid: c };
+  const nodes = patches.map((feature, index) => {
+    const centroid = centroidCoordinate(feature);
+    const areaHa = areaM2(feature) / 10_000;
+    return { id: index, areaHa: Number.isFinite(areaHa) ? areaHa : 0, centroid };
   });
   const edges: ConnectivityEdge[] = [];
   for (let i = 0; i < nodes.length; i++) {
     for (let j = i + 1; j < nodes.length; j++) {
-      const d = haversineM(nodes[i].centroid, nodes[j].centroid);
-      if (d <= options.maxDistanceM) edges.push({ from: i, to: j, distanceM: d });
+      const distanceM = haversineM(nodes[i].centroid, nodes[j].centroid);
+      if (distanceM <= options.maxDistanceM) edges.push({ from: i, to: j, distanceM });
     }
   }
   return { nodes, edges };
 }
 
-export function connectivitySummary(graph: ConnectivityGraph): { componentCount: number; edgeCount: number; isolatedCount: number } {
+export interface ConnectivitySummary {
+  componentCount: number;
+  edgeCount: number;
+  isolatedCount: number;
+}
+
+export function connectivitySummary(graph: ConnectivityGraph): ConnectivitySummary {
   if (!graph) return { componentCount: 0, edgeCount: 0, isolatedCount: 0 };
   const n = graph.nodes.length;
-  const adj = new Map<number, Set<number>>();
-  for (let i = 0; i < n; i++) adj.set(i, new Set());
-  for (const e of graph.edges) { adj.get(e.from)!.add(e.to); adj.get(e.to)!.add(e.from); }
-  const visited = new Set<number>();
-  let components = 0;
-  for (let i = 0; i < n; i++) if (!visited.has(i)) {
-    components++; const stack = [i]; visited.add(i);
-    while (stack.length) { const cur = stack.pop()!; for (const nb of adj.get(cur)!) if (!visited.has(nb)) { visited.add(nb); stack.push(nb); } }
+  const adjacency = new Map<number, Set<number>>();
+  for (let i = 0; i < n; i++) adjacency.set(i, new Set());
+  for (const edge of graph.edges) {
+    adjacency.get(edge.from)?.add(edge.to);
+    adjacency.get(edge.to)?.add(edge.from);
   }
-  const isolatedCount = [...adj.values()].filter((s) => s.size === 0).length;
-  return { componentCount: components, edgeCount: graph.edges.length, isolatedCount };
+  const visited = new Set<number>();
+  let componentCount = 0;
+  for (let i = 0; i < n; i++) {
+    if (visited.has(i)) continue;
+    componentCount++;
+    const stack = [i];
+    visited.add(i);
+    while (stack.length) {
+      const current = stack.pop() as number;
+      for (const neighbour of adjacency.get(current) ?? []) {
+        if (!visited.has(neighbour)) {
+          visited.add(neighbour);
+          stack.push(neighbour);
+        }
+      }
+    }
+  }
+  return {
+    componentCount,
+    edgeCount: graph.edges.length,
+    isolatedCount: [...adjacency.values()].filter((neighbours) => neighbours.size === 0).length,
+  };
+}
+
+export interface ConnectivityAnalysisResult {
+  ok: true;
+  thresholdM: number;
+  numPatches: number;
+  componentCount: number;
+  largestComponentPatches: number;
+  largestComponentAreaM2: number;
+  isolatedPatches: number;
+  linkCount: number;
+  linkFeatures: Feature<LineString>[];
+  taggedFeatures: Feature<Polygon | MultiPolygon>[];
+  components: number[][];
+  skipped: number;
+  provenance: ProvenanceStamp;
+}
+
+/** Complete output geometry and report for the original connectivity tool. */
+export function connectivityAnalysis(
+  features: AnyFeature[] | null | undefined,
+  thresholdM: number,
+): ConnectivityAnalysisResult | { ok: false; error: string } {
+  if (!Number.isFinite(thresholdM) || thresholdM <= 0) {
+    return { ok: false, error: "Link threshold must be greater than zero metres." };
+  }
+  const source = polygonsOnly(features);
+  if (!source.polys.length) return { ok: false, error: "Layer contains no polygons." };
+  const graph = connectivityGraph(source.polys, { maxDistanceM: thresholdM });
+  if (!graph) return { ok: false, error: "Could not build a connectivity graph." };
+
+  const parent = graph.nodes.map((node) => node.id);
+  const find = (value: number): number => {
+    let current = value;
+    while (parent[current] !== current) {
+      parent[current] = parent[parent[current]];
+      current = parent[current];
+    }
+    return current;
+  };
+  const join = (a: number, b: number) => {
+    const rootA = find(a);
+    const rootB = find(b);
+    if (rootA !== rootB) parent[rootB] = rootA;
+  };
+  for (const edge of graph.edges) join(edge.from, edge.to);
+
+  const groups = new Map<number, number[]>();
+  for (const node of graph.nodes) {
+    const root = find(node.id);
+    groups.set(root, [...(groups.get(root) ?? []), node.id]);
+  }
+  const components = [...groups.values()].sort((a, b) => b.length - a.length);
+  const componentOf = new Map<number, number>();
+  components.forEach((members, componentIndex) => {
+    for (const member of members) componentOf.set(member, componentIndex);
+  });
+
+  const provenance = makeProvenance(
+    "connectivity",
+    "Centroid-distance threshold graph",
+    "EPSG:4326 (haversine distance)",
+    {
+      thresholdM,
+      distanceCaveat: "Links use centroid-to-centroid distance; this is not least-cost connectivity.",
+      skippedFeatures: source.skipped,
+    },
+  );
+  const linkFeatures: Feature<LineString>[] = graph.edges.map((edge) => ({
+    type: "Feature",
+    geometry: {
+      type: "LineString",
+      coordinates: [graph.nodes[edge.from].centroid, graph.nodes[edge.to].centroid],
+    },
+    properties: {
+      from: edge.from,
+      to: edge.to,
+      distance_m: edge.distanceM,
+      threshold_m: thresholdM,
+      _geospax: provenance,
+    },
+  }));
+  const taggedFeatures = source.polys.map((feature, index) => {
+    const component = componentOf.get(index) ?? index;
+    return {
+      type: "Feature" as const,
+      geometry: feature.geometry,
+      properties: {
+        ...(feature.properties ?? {}),
+        patch_index: index,
+        component,
+        component_size: components[component]?.length ?? 1,
+        _geospax: provenance,
+      },
+    };
+  });
+  const largest = components[0] ?? [];
+
+  return {
+    ok: true,
+    thresholdM,
+    numPatches: source.polys.length,
+    componentCount: components.length,
+    largestComponentPatches: largest.length,
+    largestComponentAreaM2: largest.reduce(
+      (sum, patchIndex) => sum + areaM2(source.polys[patchIndex]),
+      0,
+    ),
+    isolatedPatches: components.filter((members) => members.length === 1).length,
+    linkCount: linkFeatures.length,
+    linkFeatures,
+    taggedFeatures,
+    components,
+    skipped: source.skipped,
+    provenance,
+  };
 }

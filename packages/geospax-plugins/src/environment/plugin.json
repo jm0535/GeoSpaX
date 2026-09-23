@@ -2,7 +2,7 @@
   "id": "geospax-environment",
   "name": "GeoSpaX Environment",
   "version": "2.0.0",
-  "description": "Terrain (Horn slope/aspect slope-zones over the current view) and spectral-index extent (NDVI/NDWI/NDBI/NBR or custom pair → stats, histogram, Otsu threshold, dissolve-polygonized extent) with equal-area hectares, pixel-metre ground truth and band-assignment caveats.",
+  "description": "Environment workbench: Horn slope zones, NDVI/NDWI/NDBI/NBR/custom indices, Otsu-assisted raster reclassification, aligned raster change, vector overlay, equal-area reporting and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
   "activeByDefault": true,

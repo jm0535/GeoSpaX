@@ -6,6 +6,8 @@
 
 export * from "./geometry";
 export * from "./overlay";
+export * from "./planning";
+export * from "./spatial";
 export * from "./provenance";
 export * from "./units";
 export * from "./gap";

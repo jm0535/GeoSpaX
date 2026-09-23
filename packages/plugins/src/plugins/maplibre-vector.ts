@@ -31,6 +31,7 @@ import {
   resetVectorStoreSyncSuspension,
   resumeVectorStoreSync,
   savedVectorState,
+  setVectorGeometryReader,
   suspendVectorStoreSync,
   syncVectorLayersToStore,
   unwireVectorStoreSync,
@@ -924,8 +925,32 @@ function createVectorControl(
     },
   });
 
-  if (["cesium", "mapbox", "arcgis"].includes(app.getMapRenderer?.() ?? ""))
+  if (["cesium", "mapbox", "arcgis"].includes(app.getMapRenderer?.() ?? "")) {
     bridgeVectorControlToStore(control, app);
+  } else {
+    // In the native MapLibre renderer the control owns its source, but plugin
+    // analyses read vectors through GeoLibre's synchronous store API. Mirror
+    // bounded GeoJSON-mode sources into the store so getLayerFeatures works
+    // for ordinary Add Vector Layer imports as well as app-created outputs.
+    // Tiled/streamed layers remain unmaterialized and therefore keep their
+    // existing memory bounds.
+    setVectorGeometryReader(control, (info) => {
+      const source = app.getMap?.()?.getSource(info.sourceId) as
+        | { serialize?: () => unknown }
+        | undefined;
+      const serialized = source?.serialize?.();
+      if (!serialized || typeof serialized !== "object" || Array.isArray(serialized)) {
+        return undefined;
+      }
+      const specification = serialized as { type?: unknown; data?: unknown };
+      const data = specification.data as Partial<FeatureCollection> | undefined;
+      return specification.type === "geojson" &&
+        data?.type === "FeatureCollection" &&
+        Array.isArray(data.features)
+        ? (data as FeatureCollection)
+        : undefined;
+    });
+  }
 
   for (const event of ["layeradded", "layerremoved", "layerupdated"] as const) {
     control.on(event, () => syncVectorLayersToStore(control));
