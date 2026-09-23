@@ -291,7 +291,7 @@ Effort is one experienced dev + AI assistance; T-shirt sizes: XS ≤ 1 day, S �
 - [ ] Author 2–3 FR422 starter projects (paradisea workflow: GBIF points → hull → graduated symbology → Gi* → gap analysis) as `.geolibre.json` templates.
 - [ ] `.gspx` alias decision & (if wanted) additive patch to save dialogs.
 - [ ] Deploy the preview to a staging URL (Vercel with `lite:build` — designed for per-asset caps — or GH Pages; Docker/nginx later for the sidecar era).
-- **Exit criterion:** a stranger opens the URL and sees "GeoSpaX — conservation & ecology GIS", not GeoLibre.
+- **Exit criterion:** a stranger opens the URL and sees "GeoSpaX — multi-domain geospatial analysis GIS", not GeoLibre.
 
 ### Phase 2 — Analysis core port (M–L) → *the substance*
 - [x] Stand up `packages/geospax-analysis` (pure TS) and `packages/geospax-plugins` (Vite library builds to six drop-in folders).

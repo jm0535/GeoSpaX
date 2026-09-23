@@ -1,9 +1,10 @@
 # GSX domain plugins
 
 GeoSpaX ships **twelve GSX domain workbenches** — specialised analysis
-panels for conservation, environmental and geospatial work. They are
-bundled drop-ins: no installation, no account, and every computation runs
-locally in your browser (or desktop app).
+panels spanning agriculture, biodiversity, climate, conservation, disaster,
+environment, forestry, geoscience, hydrology, land cover, marine and soil.
+They are bundled drop-ins: no installation, no account, and every
+computation runs locally in your browser (or desktop app).
 
 | Workbench | Use it for |
 |---|---|

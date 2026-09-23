@@ -1,10 +1,10 @@
-# GeoSpaX 2.0.0 — Conservation & Ecology GIS
+# GeoSpaX 2.0.0 — Multi-Domain Geospatial Analysis GIS
 
 <p align="center">
   <img src="docs/assets/geospax_logo_final.svg" width="220" alt="GeoSpaX logo — a teal X with a globe at its center" />
 </p>
 
-> **GeoSpaX 2.0.0** is a conservation & ecology specialisation of **[GeoLibre 3.0.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* six conservation domain plugins.
+> **GeoSpaX 2.0.0** is a multi-domain geospatial analysis specialisation of **[GeoLibre 3.0.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* twelve GSX domain workbenches spanning agriculture, biodiversity, climate, conservation, disaster, environment, forestry, geoscience, hydrology, land cover, marine and soil.
 
 [![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)
 [![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.0.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
@@ -58,7 +58,7 @@ capabilities, credentials, and current compatibility.
 
 > **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` remains live at `geospax.in4metrix.dev`; v2 is the forward path.
 
-GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a conservation-science layer as **twelve bundled GSX workbenches** (`public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Workbenches are opt-in: activate the ones you want under **Plugins → Manage Plugins**. Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
+GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a domain-analysis layer as **twelve bundled GSX workbenches** (`public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Workbenches are opt-in: activate the ones you want under **Plugins → Manage Plugins**. Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
 
 | Workbench | v2.0.0 contents |
 |---|---|
@@ -255,7 +255,7 @@ If you use **GeoSpaX** in your work, cite **both** GeoSpaX (the conservation ext
 
 **GeoSpaX 2.0.0** (this fork — `jm0535/GeoSpaX`, lineage `jm0535/map-kit` v1.4.3 → v2.0.0):
 
-> Moses, J. (2026). GeoSpaX 2.0.0 — Conservation & ecology GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
+> Moses, J. (2026). GeoSpaX 2.0.0 — Multi-domain geospatial analysis GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
 
 **GeoLibre 3.0.0** (upstream — `opengeos/GeoLibre`):
 

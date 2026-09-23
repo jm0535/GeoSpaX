@@ -36,8 +36,8 @@
     "fileAssociations": [
       {
         "ext": ["geolibre"],
-        "name": "GeoLibre Project",
-        "description": "GeoLibre Project",
+        "name": "GeoSpaX Project",
+        "description": "GeoSpaX Project",
         "mimeType": "application/vnd.geolibre.project+json",
         "role": "Editor",
         "rank": "Owner",

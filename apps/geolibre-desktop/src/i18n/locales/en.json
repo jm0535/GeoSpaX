@@ -55,7 +55,7 @@
   "about": {
     "trigger": "About",
     "title": "About GeoSpaX",
-    "description": "GeoSpaX is a specialised natural-resources and environmental-science GIS for conservation, ecology, forestry, marine, agriculture and environmental analysis, built on the open-source GeoLibre platform.",
+    "description": "GeoSpaX is a multi-domain geospatial analysis GIS — twelve GSX workbenches spanning agriculture, biodiversity, climate, conservation, disaster, environment, forestry, geoscience, hydrology, land cover, marine and soil — built on the open-source GeoLibre platform.",
     "version": "Version",
     "checkForUpdates": "Check for updates",
     "tryAgain": "Try again",

@@ -2,10 +2,10 @@
 
 Status: **v2 plan — researched, validated, awaiting confirmation.**
 
-This folder holds the product plan for **GeoSpaX** — a specialised natural-resources,
-ecology and environmental-science web GIS built on the full GeoLibre platform, combining
-everything GeoLibre offers with every specialised tool from GeoSpaX v1 (`jm0535/map-kit`)
-plus new domain packs for agriculture, marine ecology, terrestrial ecology, environmental
+This folder holds the product plan for **GeoSpaX** — a multi-domain geospatial
+analysis GIS built on the full GeoLibre platform, combining everything GeoLibre
+offers with every specialised tool from GeoSpaX v1 (`jm0535/map-kit`) plus new
+domain packs for agriculture, marine ecology, terrestrial ecology, environmental
 science, geography, forestry, biology, and conservation.
 
 | Document | Contents |
