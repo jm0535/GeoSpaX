@@ -55,6 +55,12 @@ Load local and remote vector and raster data, then inspect and edit attributes i
 </div>
 
 <div class="feature-card" markdown>
+### Twelve GSX domain workbenches
+
+GeoSpaX adds twelve opt-in analysis workbenches on top of the platform — **GSX Agriculture, Biodiversity, Climate, Conservation, Disaster, Environment, Forestry, Geoscience, Hydrology, LULC, Marine and Soil** — each a right-side panel with validated tools, provenance exports and a built-in How-to-Cite section. Activate the ones you need under Plugins → Manage Plugins, then follow the [GSX plugin guides](user-guide/gsx-plugins/index.md).
+</div>
+
+<div class="feature-card" markdown>
 ### Plugins and marketplace
 
 Activate built-in plugins for layer control, basemaps, MapLibre components, swipe, street view, time slider, Overture Maps, LiDAR, GeoAgent, GeoEditor, and atmosphere effects, and install, update, or remove external plugins from the built-in marketplace.

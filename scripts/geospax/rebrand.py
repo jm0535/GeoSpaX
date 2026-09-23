@@ -38,16 +38,17 @@ BRAND_RE = re.compile(r"(?<!Share\.)GeoLibre(?! plugin registry)(?! Whitebox lan
 NEW_BRAND = "GeoSpaX"
 
 ABOUT_DESCRIPTION = (
-    "GeoSpaX is a specialised natural-resources and environmental-science GIS "
-    "for conservation, ecology, forestry, marine, agriculture and environmental "
-    "analysis, built on the open-source GeoLibre platform."
+    "GeoSpaX is a multi-domain geospatial analysis GIS — twelve GSX workbenches "
+    "spanning agriculture, biodiversity, climate, conservation, disaster, "
+    "environment, forestry, geoscience, hydrology, land cover, marine and soil "
+    "— built on the open-source GeoLibre platform."
 )
 HTML_DESCRIPTION = (
-    "GeoSpaX is a free and open-source, specialised web GIS for natural-resource "
-    "and environmental science: conservation planning, species distribution "
-    "modelling, ecology, forestry, marine, agriculture and environmental "
-    "analysis, built on the GeoLibre platform while keeping your data local and "
-    "private."
+    "GeoSpaX is a free and open-source, multi-domain geospatial analysis GIS — "
+    "twelve GSX workbenches for agriculture, biodiversity, climate, "
+    "conservation, disaster, environment, forestry, geoscience, hydrology, "
+    "land cover, marine and soil — built on the GeoLibre platform while "
+    "keeping your data local and private."
 )
 
 INDEX_HTML = APP / "index.html"

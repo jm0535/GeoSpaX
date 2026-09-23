@@ -2,7 +2,7 @@
   "name": "@geospax/analysis",
   "version": "2.0.0",
   "private": true,
-  "description": "GeoSpaX analysis core - dependency-light, framework-free conservation & natural-resource algorithms (ported from GeoSpaX v1, jm0535/map-kit, with the v1 audit fixes preserved).",
+  "description": "GeoSpaX analysis core - dependency-light, framework-free environmental & geospatial analysis algorithms powering the twelve GSX workbenches (ported from GeoSpaX v1, jm0535/map-kit, with the v1 audit fixes preserved).",
   "type": "module",
   "exports": {
     ".": "./src/index.ts"

@@ -15,8 +15,8 @@ DOI shown for that release.
 
 ## Recommended citation
 
-> Moses, J. (2026). GeoSpaX 2.0.0 — GSX domain workbenches for conservation
-> and environmental GIS [Computer software].
+> Moses, J. (2026). GeoSpaX 2.0.0 — GSX domain workbenches for environmental
+> and geospatial analysis [Computer software].
 > <https://github.com/jm0535/GeoSpaX>
 
 ## BibTeX
@@ -24,7 +24,7 @@ DOI shown for that release.
 ```bibtex
 @software{moses_geospax,
   author    = {Moses, J.},
-  title     = {{GeoSpaX 2.0.0: GSX domain workbenches for conservation and environmental GIS}},
+  title     = {{GeoSpaX 2.0.0: GSX domain workbenches for environmental and geospatial analysis}},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.20785400},
@@ -34,8 +34,8 @@ DOI shown for that release.
 
 ## APA
 
-> Moses, J. (2026). GeoSpaX 2.0.0 — GSX domain workbenches for conservation
-> and environmental GIS [Computer software]. Zenodo.
+> Moses, J. (2026). GeoSpaX 2.0.0 — GSX domain workbenches for environmental
+> and geospatial analysis [Computer software]. Zenodo.
 > <https://doi.org/10.5281/zenodo.20785400>
 
 ## Citing the GeoLibre platform

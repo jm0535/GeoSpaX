@@ -1,7 +1,7 @@
 # GeoSpaX Product Plan — v2 (researched & validated)
 
 **Date:** 2026-09-22
-**Product:** GeoSpaX — specialised natural-resources & environmental-science web GIS
+**Product:** GeoSpaX — multi-domain geospatial analysis GIS (environmental & applied sciences)
 **Platform:** GeoLibre (full stack, unmodified internals) — `opengeos/GeoLibre`
 **Lineage:** GeoSpaX v1.4.2 (`jm0535/map-kit`, Leaflet/vanilla-JS) → GeoSpaX v2 (this plan)
 **Target repo:** `jm0535/geospax` (to be seeded per §4.2)
