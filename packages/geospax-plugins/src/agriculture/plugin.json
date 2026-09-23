@@ -5,6 +5,6 @@
   "description": "Agriculture workbench: NDVI-family crop-condition extents, raster reclassification, WLC land suitability, exponential distance decay, Horn slope constraints, raster/vector change and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
-  "activeByDefault": true,
+  "activeByDefault": false,
   "engines": ["maplibre"]
 }

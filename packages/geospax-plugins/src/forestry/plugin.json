@@ -5,6 +5,6 @@
   "description": "Forestry workbench: forest/index extent derivation, complete fragmentation/core metrics, connectivity components, raster and vector loss/gain change, protection gaps and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
-  "activeByDefault": true,
+  "activeByDefault": false,
   "engines": ["maplibre"]
 }

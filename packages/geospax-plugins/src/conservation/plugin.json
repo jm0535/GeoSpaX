@@ -5,6 +5,6 @@
   "description": "Full conservation-planning workbench: overlay, weighted priorities, bounded exact/greedy SCP, DBSCAN, BIOCLIM/Mahalanobis/presence-background prediction, WLC, protection gaps, fragmentation, connectivity, two-date change, raster polygonization and provenance exports.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
-  "activeByDefault": true,
+  "activeByDefault": false,
   "engines": ["maplibre"]
 }

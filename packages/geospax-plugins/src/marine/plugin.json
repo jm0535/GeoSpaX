@@ -5,6 +5,6 @@
   "description": "Marine workbench: citable OBIS/WoRMS queries, GEBCO context, diversity and nearest-neighbour/DBSCAN patterns, BIOCLIM/Mahalanobis/presence-background prediction, NDWI/custom extents, weighted priorities and MPA gaps.",
   "entry": "dist/index.js",
   "style": "dist/style.css",
-  "activeByDefault": true,
+  "activeByDefault": false,
   "engines": ["maplibre"]
 }
