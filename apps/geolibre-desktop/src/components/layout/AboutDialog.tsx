@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@geolibre/ui";
-import { CheckCircle2, ExternalLink, Info, Map, RefreshCw } from "lucide-react";
+import { CheckCircle2, ExternalLink, Info, RefreshCw } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { openExternalLink } from "../../lib/open-external";
@@ -177,7 +177,11 @@ export function AboutDialog({
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Map className="h-5 w-5 text-primary" />
+            <img
+              src={`${import.meta.env.BASE_URL}geospax-logo.svg`}
+              alt=""
+              className="h-5 w-5 object-contain"
+            />
             {t("about.title")}
           </DialogTitle>
           <DialogDescription>{t("about.description")}</DialogDescription>

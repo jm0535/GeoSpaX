@@ -88,7 +88,6 @@ import {
   Info,
   Keyboard,
   Link2,
-  Map,
   MapPin,
   MessageSquare,
   Moon,
@@ -2171,7 +2170,11 @@ export function TopToolbar({
       )}
     >
       <span className="me-1 flex shrink-0 items-center gap-1.5 text-sm font-semibold text-primary md:me-2">
-        <Map className="h-4 w-4" />
+        <img
+          src={`${import.meta.env.BASE_URL}geospax-logo.svg`}
+          alt=""
+          className="h-4 w-4 object-contain"
+        />
         {showProjectInfo ? <span className="hidden sm:inline">{appTitle}</span> : null}
       </span>
       {!viewer && isMenuVisible(uiProfile, "project") && (
