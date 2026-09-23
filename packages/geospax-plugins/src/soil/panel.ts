@@ -27,7 +27,7 @@ export function mountSoilPanel(container: HTMLElement, app: GeoLibreAppAPI): () 
     intro:
       "Map soil condition from satellite wetness and salinity proxies, delineate capability classes, model land capability with weighted criteria and track soil-extent change through time.",
     accent: "#8a5a2e",
-    guideUrl: `${GSX_GUIDE_BASE}/soil/`,
+    guideUrl: `${GSX_GUIDE_BASE}/soil.md`,
   });
 
   const condition = shell.addSection({

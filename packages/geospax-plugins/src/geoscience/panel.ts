@@ -27,7 +27,7 @@ export function mountGeosciencePanel(container: HTMLElement, app: GeoLibreAppAPI
     intro:
       "Analyse terrain form, map lithological and alteration indicators from spectral ratios, run geological overlays and prospectivity surfaces, and quantify surface change.",
     accent: "#6b5b95",
-    guideUrl: `${GSX_GUIDE_BASE}/geoscience/`,
+    guideUrl: `${GSX_GUIDE_BASE}/geoscience.md`,
   });
 
   const terrain = shell.addSection({

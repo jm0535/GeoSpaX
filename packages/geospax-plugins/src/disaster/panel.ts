@@ -28,7 +28,7 @@ export function mountDisasterPanel(container: HTMLElement, app: GeoLibreAppAPI):
     intro:
       "Build transparent multi-hazard susceptibility surfaces, map burn or inundation footprints from satellite bands, assess access for response planning, and quantify impact between two dates.",
     accent: "#a3402e",
-    guideUrl: `${GSX_GUIDE_BASE}/disaster/`,
+    guideUrl: `${GSX_GUIDE_BASE}/disaster.md`,
   });
 
   const hazard = shell.addSection({

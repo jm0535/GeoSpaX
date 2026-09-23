@@ -55,7 +55,7 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     intro:
       "Overlay, prioritise, model suitability, quantify protection gaps, measure landscape structure and derive change—using audit-fixed methods with provenance attached to every output.",
     accent: "#5b8c51",
-    guideUrl: `${GSX_GUIDE_BASE}/conservation/`,
+    guideUrl: `${GSX_GUIDE_BASE}/conservation.md`,
   });
 
   const overlay = shell.addSection({

@@ -26,7 +26,7 @@ export function mountClimatePanel(container: HTMLElement, app: GeoLibreAppAPI): 
     intro:
       "Map moisture and thermal stress from satellite bands, build transparent climate-exposure and vulnerability surfaces, and quantify change between two dates.",
     accent: "#2e6f95",
-    guideUrl: `${GSX_GUIDE_BASE}/climate/`,
+    guideUrl: `${GSX_GUIDE_BASE}/climate.md`,
   });
 
   const stress = shell.addSection({

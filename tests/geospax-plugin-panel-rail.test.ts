@@ -94,10 +94,10 @@ describe("GeoSpaX plugin panel rail contract", () => {
       );
     });
 
-    it(`${name} links its published user guide`, () => {
+    it(`${name} links its user guide`, () => {
       assert.ok(
-        panelSource.includes("guideUrl") && panelSource.includes(`/${name}/`),
-        `${name} must pass guideUrl pointing at docs/user-guide/gsx-plugins/${name}`,
+        panelSource.includes("guideUrl") && panelSource.includes(`/${name}.md`),
+        `${name} must pass guideUrl pointing at docs/user-guide/gsx-plugins/${name}.md`,
       );
     });
 

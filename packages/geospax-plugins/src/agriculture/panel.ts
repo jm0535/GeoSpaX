@@ -26,7 +26,7 @@ export function mountAgriculturePanel(container: HTMLElement, app: GeoLibreAppAP
     intro:
       "Assess crop condition, terrain constraints and multi-criteria suitability; convert distance costs transparently and compare cover or index surfaces through time.",
     accent: "#b47724",
-    guideUrl: `${GSX_GUIDE_BASE}/agriculture/`,
+    guideUrl: `${GSX_GUIDE_BASE}/agriculture.md`,
   });
 
   const condition = shell.addSection({

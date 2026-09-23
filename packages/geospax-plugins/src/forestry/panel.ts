@@ -26,7 +26,7 @@ export function mountForestryPanel(container: HTMLElement, app: GeoLibreAppAPI):
     intro:
       "Derive forest or disturbance extents, quantify fragmentation and structural connectivity, detect two-date loss/gain, and report overlap with protected areas.",
     accent: "#2f704b",
-    guideUrl: `${GSX_GUIDE_BASE}/forestry/`,
+    guideUrl: `${GSX_GUIDE_BASE}/forestry.md`,
   });
 
   const extent = shell.addSection({

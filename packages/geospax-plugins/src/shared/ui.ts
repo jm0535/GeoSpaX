@@ -44,9 +44,13 @@ export interface PanelShellOptions {
   guideUrl?: string;
 }
 
-/** Base of the published GSX workbench guides (GitHub Pages docs site). */
+/**
+ * Base of the GSX workbench guides. Today this is the GitHub-rendered
+ * markdown (append `/<slug>.md`); once the Pages docs site deploys, switch to
+ * `https://jm0535.github.io/GeoSpaX/user-guide/gsx-plugins` and link `/<slug>/`.
+ */
 export const GSX_GUIDE_BASE =
-  "https://jm0535.github.io/GeoSpaX/user-guide/gsx-plugins";
+  "https://github.com/jm0535/GeoSpaX/blob/main/docs/user-guide/gsx-plugins";
 
 export interface SectionOptions {
   id: string;
