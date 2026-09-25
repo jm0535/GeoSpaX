@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd ../.. && GEOSPAX_DEFER_PATCHES=1 npm ci --include=dev",
+  "buildCommand": "cd ../.. && node scripts/apply-dependency-patches.mjs --required && python3 -m venv /tmp/jl && /tmp/jl/bin/pip install -q -r apps/geolibre-desktop/jupyterlite/requirements.txt && PATH=/tmp/jl/bin:$PATH npm run build -w geolibre-desktop",
+  "outputDirectory": "dist"
+}

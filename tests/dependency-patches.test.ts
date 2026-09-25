@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
@@ -33,6 +33,20 @@ function run(root: string, args: string[], env: Record<string, string> = {}) {
 }
 
 describe("dependency patch lifecycle", () => {
+  it("configures both Vercel project roots to defer installation and require patches on build", () => {
+    const repo = fileURLToPath(new URL("..", import.meta.url));
+    const rootConfig = JSON.parse(readFileSync(join(repo, "vercel.json"), "utf8"));
+    const appConfig = JSON.parse(
+      readFileSync(join(repo, "apps/geolibre-desktop/vercel.json"), "utf8"),
+    );
+    for (const config of [rootConfig, appConfig]) {
+      assert.match(config.installCommand, /GEOSPAX_DEFER_PATCHES=1/);
+      assert.match(config.buildCommand, /apply-dependency-patches\.mjs --required &&/);
+    }
+    assert.equal(rootConfig.outputDirectory, "apps/geolibre-desktop/dist");
+    assert.equal(appConfig.outputDirectory, "dist");
+  });
+
   it("never runs the patch CLI during a Vercel npm postinstall", () => {
     const { root, tool, marker } = fixture();
     try {
