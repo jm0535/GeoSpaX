@@ -6,26 +6,37 @@ import { resolve } from "node:path";
 //
 // Two modes:
 //
-//   (default)  Best-effort — invoked from the root `postinstall`. A plain
-//   `npm ci` must never be aborted just because the install environment
-//   does not need the patches (workspace-scoped production installs such as
-//   the collaboration worker image install none of the patched packages,
-//   and some build machines — Vercel observed — finish `npm ci` without
-//   `patch-package` in the tree). In those cases log and exit 0; the build
-//   step (which runs `--required`) is responsible for guaranteeing the
-//   patches are actually applied before anything ships.
+//   (default)  Invoked from the root `postinstall`. On Vercel, defer patching
+//   entirely until the build step: during `npm ci` its install tree is not
+//   reliable enough to run the patch CLI (even checking that index.js exists
+//   before spawning it has failed there). For other installs, skip when the
+//   desktop dependencies or patch tool are absent, e.g. workspace-scoped
+//   worker image installs. The build step must apply patches before shipping.
 //
 //   --required  Fatal — invoked from vercel.json's buildCommand. If
-//   `patch-package` is missing from node_modules, self-heal by reifying the
-//   lockfile (`npm install --no-save` materializes whatever is missing),
-//   then apply the patches. If they still cannot be applied, fail the build:
-//   shipping unpatched dependencies is not an option.
+//   `patch-package` is missing, reify from the lockfile with scripts disabled
+//   (so recovery cannot recursively run this postinstall), then apply the
+//   patches. If they cannot be applied, fail the build: never ship unpatched.
 //
 // The CLI entry is invoked directly with node instead of relying on the
 // node_modules/.bin shim being on PATH — PATH is not guaranteed to include
 // .bin in every install environment.
 
 const REQUIRED = process.argv.includes("--required");
+
+// Vercel's npm lifecycle can observe a transient/partial node_modules tree.
+// Do not invoke *any* dependency CLI from its postinstall. vercel.json runs
+// --required after npm ci finishes, when it is safe to apply the patches.
+// The explicit flag in installCommand also covers builds without VERCEL=1.
+if (
+  !REQUIRED &&
+  (process.env.GEOSPAX_DEFER_PATCHES === "1" ||
+    process.env.VERCEL === "1" ||
+    Boolean(process.env.VERCEL_ENV))
+) {
+  console.log("[apply-dependency-patches] Deferring patches until the Vercel build step.");
+  process.exit(0);
+}
 
 const patchTool = "node_modules/patch-package/index.js";
 // One of the patched packages; doubles as the "is this a full install?"
@@ -44,11 +55,11 @@ function runPatchPackage() {
 function recoverPatchPackage() {
   console.log(
     "[apply-dependency-patches] patch-package is missing from node_modules; " +
-      "reifying the lockfile (npm install --no-save) to restore it...",
+      "reifying the lockfile (npm install --no-save --ignore-scripts) to restore it...",
   );
   const result = spawnSync(
     "npm",
-    ["install", "--no-save", "--no-audit", "--no-fund", "--include=dev"],
+    ["install", "--no-save", "--no-audit", "--no-fund", "--include=dev", "--ignore-scripts"],
     { stdio: "inherit" },
   );
   if (result.error) throw result.error;
