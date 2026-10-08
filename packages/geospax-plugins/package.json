@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@geospax/analysis": "*",
-    "@geospax/data": "*"
+    "@geospax/data": "*",
+    "geotiff": "^3.0.5"
   },
   "devDependencies": {
     "@geolibre/plugins": "*",
