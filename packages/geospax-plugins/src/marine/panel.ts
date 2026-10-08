@@ -3,7 +3,11 @@
 
 import type { GeoLibreAppAPI } from "@geolibre/plugins";
 import { createPanelShell, GSX_GUIDE_BASE } from "../shared/ui";
-import { mountDiversityTool, mountGebcoTool, mountOccurrenceTool } from "../shared/data-tools";
+import {
+  mountDiversityTool,
+  mountGebcoTool,
+  mountOccurrenceTool,
+} from "../shared/data-tools";
 import {
   mountDbscanTool,
   mountGapTool,
@@ -12,11 +16,15 @@ import {
   mountProvenanceTool,
   mountSdmTool,
 } from "../shared/vector-tools";
+import { mountCovariateTool } from "../shared/covariate-tools";
 import { mountIndexTool, mountRasterReclassTool } from "../shared/raster-tools";
 import { mountCitationTool } from "../shared/citation";
 import { PLUGIN_VERSION } from "./index";
 
-export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
+export function mountMarinePanel(
+  container: HTMLElement,
+  app: GeoLibreAppAPI
+): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-marine",
     eyebrow: "GeoSpaX domain workbench",
@@ -61,6 +69,7 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
     description:
       "Score environmental-space suitability and derive water/wetness or custom raster extents for habitat screening.",
   });
+  mountCovariateTool(shell, habitat, "marine species");
   mountSdmTool(shell, habitat, "marine species");
   mountIndexTool(shell, habitat, {
     preset: "NDWI",
@@ -93,9 +102,13 @@ export function mountMarinePanel(container: HTMLElement, app: GeoLibreAppAPI): (
     id: "citation",
     title: "How to cite",
     badge: "Citation",
-    description: "Academic and institutional use requires an appropriate citation.",
+    description:
+      "Academic and institutional use requires an appropriate citation.",
   });
-  mountCitationTool(shell, citation, { pluginLabel: "GSX Marine", version: PLUGIN_VERSION });
+  mountCitationTool(shell, citation, {
+    pluginLabel: "GSX Marine",
+    version: PLUGIN_VERSION,
+  });
 
   return () => shell.destroy();
 }

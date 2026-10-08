@@ -36,7 +36,12 @@ for (let lon = 140; lon < 150; lon += 0.25) {
 let restoreDocument: () => void;
 before(() => {
   const original = Object.getOwnPropertyDescriptor(globalThis, "document");
-  const { document } = parseHTML("<html><body></body></html>");
+  const originalCustomEvent = globalThis.CustomEvent;
+  const { document, CustomEvent: DomCustomEvent } = parseHTML(
+    "<html><body></body></html>"
+  );
+  // recordRun dispatches a CustomEvent; Node's own cannot be dispatched on linkedom nodes.
+  globalThis.CustomEvent = DomCustomEvent as unknown as typeof CustomEvent;
   Object.defineProperty(globalThis, "document", {
     configurable: true,
     value: document,
@@ -60,6 +65,7 @@ before(() => {
     return body;
   };
   restoreDocument = () => {
+    globalThis.CustomEvent = originalCustomEvent;
     if (original) Object.defineProperty(globalThis, "document", original);
     else Reflect.deleteProperty(globalThis, "document");
   };
@@ -147,6 +153,7 @@ describe("SDM panel spatial cross-validation", () => {
         /Cross-validation needs|could not be configured/
       );
       assert.match(text, /Spatially blocked cross-validation/);
+      assert.doesNotMatch(text, /eventPhase/);
       assert.match(text, /ROC AUC \(presence vs background\)/);
       assert.match(text, /Per-fold results/);
       assert.equal(added.length, 1);
