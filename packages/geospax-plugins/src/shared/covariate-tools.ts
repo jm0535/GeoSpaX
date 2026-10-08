@@ -3,6 +3,7 @@ import {
   covariateGridFor,
   sampleCovariates,
   MAX_COVARIATE_GRID_SIDE,
+  type CovariateGridSpec,
   type CovariateRaster,
 } from "@geospax/analysis";
 import {
@@ -30,7 +31,7 @@ import {
   type PanelShell,
 } from "./ui";
 
-/** CHELSA v2.1 bioclimatic variables, 1981–2010, 30 arc-second COGs. */
+/** CHELSA v2.1 bioclimatic variables, 1981–2010, 30 arc-second GeoTIFFs (striped, not COG). */
 export const CHELSA_BIOCLIM = [
   { id: "bio1", label: "BIO1 Annual mean temperature" },
   { id: "bio2", label: "BIO2 Mean diurnal range" },
@@ -88,13 +89,101 @@ export function suggestFieldName(layerName: string): string {
   );
 }
 
-function mountChelsaLoader(shell: PanelShell, card: HTMLElement): void {
+/** Full-resolution pixels read per variable; ~25° × 25° of CHELSA at 30″. */
+const MAX_REMOTE_WINDOW_PIXELS = 9_000_000;
+
+/** Pixel window [x0, y0, x1, y1] of a north-up raster covering `bounds`, or null if it does not. */
+export function pixelWindowFor(
+  bounds: [number, number, number, number],
+  origin: [number, number],
+  resolution: [number, number],
+  size: [number, number]
+): [number, number, number, number] | null {
+  const [west, south, east, north] = bounds;
+  const [originX, originY] = origin;
+  const [resX, resY] = resolution;
+  if (!(resX > 0) || !(resY < 0)) return null;
+  const x0 = Math.round((west - originX) / resX);
+  const x1 = Math.round((east - originX) / resX);
+  const y0 = Math.round((north - originY) / resY);
+  const y1 = Math.round((south - originY) / resY);
+  if (x0 < 0 || y0 < 0 || x1 > size[0] || y1 > size[1] || x1 <= x0 || y1 <= y0)
+    return null;
+  return [x0, y0, x1, y1];
+}
+
+/**
+ * Read one band of a remote GeoTIFF over the grid with HTTP range requests.
+ * Works for striped files (like CHELSA v2.1) as well as tiled COGs: only the
+ * strips/tiles intersecting the window are fetched; each grid cell takes the
+ * pixel at its centre, row 0 = north.
+ */
+export async function readRemoteGrid(
+  url: string,
+  grid: CovariateGridSpec
+): Promise<{ values: number[]; nodata: number | null }> {
+  const { fromUrl } = await import("geotiff");
+  const tiff = await fromUrl(url, { allowFullFile: false });
+  const image = await tiff.getImage();
+  const origin = image.getOrigin();
+  const resolution = image.getResolution();
+  const window = pixelWindowFor(
+    grid.bounds,
+    [origin[0], origin[1]],
+    [resolution[0], resolution[1]],
+    [image.getWidth(), image.getHeight()]
+  );
+  if (!window) throw new Error("The grid extent is outside this raster.");
+  const pixels = (window[2] - window[0]) * (window[3] - window[1]);
+  if (pixels > MAX_REMOTE_WINDOW_PIXELS)
+    throw new Error(
+      `The study extent covers ${Math.round(
+        pixels / 1e6
+      )} million source pixels; reduce the buffer or split the area (limit ${
+        MAX_REMOTE_WINDOW_PIXELS / 1e6
+      } million).`
+    );
+  // Read at full resolution and pick each cell's centre pixel ourselves:
+  // geotiff's "nearest" resampling samples cell corners, half a cell off.
+  const raster = (await image.readRasters({
+    window,
+    samples: [0],
+    interleave: true,
+  })) as unknown as ArrayLike<number>;
+  const windowWidth = window[2] - window[0];
+  const windowHeight = window[3] - window[1];
+  const values = new Array<number>(grid.width * grid.height);
+  for (let row = 0; row < grid.height; row++) {
+    const sourceRow = Math.min(
+      windowHeight - 1,
+      Math.floor(((row + 0.5) * windowHeight) / grid.height)
+    );
+    for (let col = 0; col < grid.width; col++) {
+      const sourceCol = Math.min(
+        windowWidth - 1,
+        Math.floor(((col + 0.5) * windowWidth) / grid.width)
+      );
+      values[row * grid.width + col] =
+        raster[sourceRow * windowWidth + sourceCol];
+    }
+  }
+  return { values, nodata: image.getGDALNoData() };
+}
+
+function mountChelsaPicker(card: HTMLElement): {
+  chosen: () => string[];
+  base: HTMLInputElement;
+} {
   const host = el("details", "gsp-subsection");
+  host.open = true;
+  host.appendChild(
+    el("summary", undefined, "CHELSA v2.1 bioclim (1981–2010, ~1 km)")
+  );
   host.appendChild(
     el(
-      "summary",
-      undefined,
-      "Load CHELSA v2.1 bioclim layers (1981–2010, ~1 km)"
+      "p",
+      "gsp-field__hint",
+      "Read directly from CHELSA over your records' extent only (a few MB per variable); no map layer is needed. Untick all to use only rasters on the map."
     )
   );
   const picks = CHELSA_BIOCLIM.map((variable) => ({
@@ -104,44 +193,20 @@ function mountChelsaLoader(shell: PanelShell, card: HTMLElement): void {
   const list = el("div", "gsp-checklist");
   for (const pick of picks) list.appendChild(pick.box.wrapper);
   const base = textInput(defaultChelsaBase());
-  const load = button("Add selected CHELSA layers", "secondary");
-  const status = statusRegion("Choose variables, then add them as map layers.");
   host.append(
     list,
     field(
       "CHELSA base URL",
       base,
       "On the web app this goes through the site's same-origin proxy; the desktop app reads CHELSA directly."
-    ),
-    buttonRow(load),
-    status
+    )
   );
   card.appendChild(host);
-  load.addEventListener("click", () => {
-    void withBusy(load, status, "Adding CHELSA layers…", async () => {
-      if (!shell.app.addCogLayer)
-        throw new Error("This host cannot add COG layers.");
-      const chosen = picks
-        .filter((pick) => pick.box.input.checked)
-        .map((pick) => pick.id);
-      if (!chosen.length)
-        throw new Error("Select at least one CHELSA variable.");
-      for (const variable of chosen) {
-        await shell.app.addCogLayer(
-          `CHELSA ${variable}`,
-          chelsaUrl(base.value, variable),
-          {
-            colormap: "viridis",
-          }
-        );
-      }
-      setStatus(
-        status,
-        "success",
-        `Added ${chosen.length} CHELSA layer(s). Values are CHELSA's stored integers (scale/offset per the CHELSA v2.1 technical specification); the models are unaffected by that linear scaling.`
-      );
-    });
-  });
+  return {
+    chosen: () =>
+      picks.filter((pick) => pick.box.input.checked).map((pick) => pick.id),
+    base,
+  };
 }
 
 interface RasterRow {
@@ -168,7 +233,7 @@ export function mountCovariateTool(
     method:
       "A regular lon/lat grid covers the records' extent plus a buffer. Each raster is read once over that grid; presences take the value of the cell they fall in. Background cells with any NoData are dropped, never zero-filled. Rasters must cover the whole grid extent.",
   });
-  mountChelsaLoader(shell, card);
+  const chelsa = mountChelsaPicker(card);
 
   const presences = layerPicker(shell, {
     kind: "point",
@@ -188,14 +253,17 @@ export function mountCovariateTool(
     )
   );
   const rastersHost = el("div", "gsp-criteria");
-  card.append(el("div", "gsp-label", "Raster covariates"), rastersHost);
+  card.append(
+    el("div", "gsp-label", "Raster layers on the map (optional)"),
+    rastersHost
+  );
   let rows: RasterRow[] = [];
   const refreshRasters = () => {
     const previous = new Map(rows.map((row) => [row.id, row]));
     rastersHost.innerHTML = "";
     rows = listLayers(shell.app, "raster").map((layer) => {
       const before = previous.get(layer.id);
-      const use = checkbox(layer.name, before ? before.use.checked : true);
+      const use = checkbox(layer.name, before ? before.use.checked : false);
       const name = textInput(
         before?.field.value ?? suggestFieldName(layer.name)
       );
@@ -210,7 +278,7 @@ export function mountCovariateTool(
         el(
           "p",
           "gsp-empty",
-          "No raster layers yet — load CHELSA above or add a GeoTIFF/COG."
+          "No raster layers on the map. Add a GeoTIFF/COG (e.g. a DEM) to use it as a covariate."
         )
       );
   };
@@ -229,18 +297,26 @@ export function mountCovariateTool(
       async () => {
         if (!presences.select.value)
           throw new Error("Select the occurrence point layer.");
-        if (!shell.app.readRasterWindow)
-          throw new Error("This host cannot read raster values.");
+        const chelsaVars = chelsa.chosen();
         const selected = rows.filter((row) => row.use.checked);
-        if (!selected.length)
-          throw new Error("Select at least one raster covariate.");
-        const fields = selected.map((row) => row.field.value.trim());
+        if (!chelsaVars.length && !selected.length)
+          throw new Error(
+            "Select at least one CHELSA variable or raster layer."
+          );
+        if (selected.length && !shell.app.readRasterWindow)
+          throw new Error("This host cannot read raster layer values.");
+        const fields = [
+          ...chelsaVars,
+          ...selected.map((row) => row.field.value.trim()),
+        ];
         if (fields.some((name) => !/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)))
           throw new Error(
             "Attribute names must start with a letter and use letters, digits or _."
           );
         if (new Set(fields).size !== fields.length)
-          throw new Error("Attribute names must be unique.");
+          throw new Error(
+            "Attribute names must be unique (a map layer may duplicate a ticked CHELSA variable)."
+          );
 
         const points = presences
           .features()
@@ -269,14 +345,36 @@ export function mountCovariateTool(
             `The grid would exceed ${MAX_COVARIATE_GRID_SIDE} cells per side; increase the cell size or reduce the buffer.`
           );
 
+        const total = fields.length;
         const rasters: CovariateRaster[] = [];
+        const sources: Record<string, string> = {};
+        for (const variable of chelsaVars) {
+          setStatus(
+            status,
+            "busy",
+            `Reading CHELSA ${variable} (${rasters.length + 1}/${total})…`
+          );
+          const url = chelsaUrl(chelsa.base.value, variable);
+          let reading: { values: number[]; nodata: number | null };
+          try {
+            reading = await readRemoteGrid(url, grid);
+          } catch (error) {
+            throw new Error(
+              `Could not read CHELSA ${variable}: ${
+                error instanceof Error ? error.message : String(error)
+              }`
+            );
+          }
+          rasters.push({ field: variable, ...reading });
+          sources[variable] = `CHELSA v2.1 ${variable} (${url})`;
+        }
         for (const [index, row] of selected.entries()) {
           setStatus(
             status,
             "busy",
-            `Reading ${row.name} (${index + 1}/${selected.length})…`
+            `Reading ${row.name} (${rasters.length + 1}/${total})…`
           );
-          const reading = await shell.app.readRasterWindow(row.id, {
+          const reading = await shell.app.readRasterWindow!(row.id, {
             bounds: grid.bounds,
             width: grid.width,
             height: grid.height,
@@ -285,11 +383,13 @@ export function mountCovariateTool(
             throw new Error(
               `${row.name} returned no values over the grid extent. Check it covers the records and has finished loading.`
             );
+          const name = fields[chelsaVars.length + index];
           rasters.push({
-            field: fields[index],
+            field: name,
             values: reading.values,
             nodata: reading.nodata,
           });
+          sources[name] = row.name;
         }
 
         const sourceName =
@@ -299,9 +399,9 @@ export function mountCovariateTool(
           subject;
         const result = sampleCovariates(grid, rasters, points, {
           presenceLayer: sourceName,
-          rasterLayers: Object.fromEntries(
-            selected.map((row, i) => [fields[i], row.name])
-          ),
+          sources,
+          valueScaling:
+            "CHELSA values are the stored integers (apply the CHELSA v2.1 scale/offset for physical units)",
           bufferDeg: pad,
         });
         if (!result)

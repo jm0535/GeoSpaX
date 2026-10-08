@@ -15,9 +15,14 @@ import {
   gridCellIndex,
   sampleCovariates,
 } from "../packages/geospax-analysis/src/index";
+import { createServer } from "node:http";
+import type { AddressInfo } from "node:net";
+import { writeArrayBuffer } from "geotiff";
 import {
   chelsaUrl,
   mountCovariateTool,
+  pixelWindowFor,
+  readRemoteGrid,
   suggestFieldName,
 } from "../packages/geospax-plugins/src/shared/covariate-tools";
 import { createPanelShell } from "../packages/geospax-plugins/src/shared/ui";
@@ -272,6 +277,11 @@ describe("covariate tool → SDM panel", () => {
       fieldInputs.map((input) => (input as HTMLInputElement).value),
       ["bio1", "bio12"]
     );
+    // Use only the map rasters here: untick CHELSA, tick the map layers.
+    for (const box of covariateCard.querySelectorAll("input[type=checkbox]")) {
+      const label = box.parentElement?.textContent ?? "";
+      (box as HTMLInputElement).checked = label.startsWith("CHELSA bio");
+    }
     const build = [...covariateCard.querySelectorAll("button")].find((b) =>
       b.textContent?.startsWith("Build covariates")
     ) as HTMLButtonElement;
@@ -311,5 +321,95 @@ describe("covariate tool → SDM panel", () => {
     const text = sdmCard.textContent ?? "";
     assert.match(text, /Spatially blocked cross-validation/, text.slice(-400));
     assert.match(text, /ROC AUC/);
+  });
+});
+
+describe("pixelWindowFor", () => {
+  // CHELSA-like global grid: 1/120° pixels, origin at (-180, 84).
+  const origin: [number, number] = [-180, 84];
+  const res: [number, number] = [1 / 120, -1 / 120];
+  const size: [number, number] = [43200, 20880];
+  it("maps lon/lat bounds to pixel columns and rows", () => {
+    assert.deepEqual(
+      pixelWindowFor([140, -12, 156, -1], origin, res, size),
+      [38400, 10200, 40320, 11520]
+    );
+  });
+  it("rejects bounds outside the raster or south-up rasters", () => {
+    assert.equal(pixelWindowFor([140, 80, 150, 89], origin, res, size), null);
+    assert.equal(pixelWindowFor([0, 0, 1, 1], origin, [1, 1], size), null);
+  });
+});
+
+describe("readRemoteGrid over HTTP range requests", () => {
+  it("reads a window of a remote GeoTIFF onto the grid, north row first", async () => {
+    // 40 × 20 raster covering lon 0..4, lat 0..2 at 0.1°; value = 5·row + col (fits the writer's 8-bit default).
+    const width = 40;
+    const height = 20;
+    const values = Array.from(
+      { length: width * height },
+      (_, i) => 5 * Math.floor(i / width) + (i % width)
+    );
+    const buffer = writeArrayBuffer(values, {
+      width,
+      height,
+      ModelPixelScale: [0.1, 0.1, 0],
+      ModelTiepoint: [0, 0, 0, 0, 2, 0],
+      GeographicTypeGeoKey: 4326,
+      GTModelTypeGeoKey: 2,
+      GDAL_NODATA: "255",
+    }) as ArrayBuffer;
+    const bytes = Buffer.from(buffer);
+    let rangeRequests = 0;
+    const server = createServer((req, res) => {
+      const range = /bytes=(\d+)-(\d*)/.exec(req.headers.range ?? "");
+      if (!range) {
+        res.writeHead(200, { "Content-Length": bytes.length });
+        res.end(bytes);
+        return;
+      }
+      rangeRequests++;
+      const start = Number(range[1]);
+      const end = Math.min(
+        bytes.length - 1,
+        range[2] ? Number(range[2]) : bytes.length - 1
+      );
+      res.writeHead(206, {
+        "Content-Range": `bytes ${start}-${end}/${bytes.length}`,
+        "Content-Length": end - start + 1,
+        "Accept-Ranges": "bytes",
+      });
+      res.end(bytes.subarray(start, end + 1));
+    });
+    await new Promise<void>((resolve) =>
+      server.listen(0, "127.0.0.1", resolve)
+    );
+    try {
+      const { port } = server.address() as AddressInfo;
+      // Window lon 1..3, lat 0.5..1.5 → source cols 10..29, rows 5..14; 4 × 2 output cells.
+      const grid = {
+        bounds: [1, 0.5, 3, 1.5] as [number, number, number, number],
+        width: 4,
+        height: 2,
+      };
+      const result = await readRemoteGrid(
+        `http://127.0.0.1:${port}/test.tif`,
+        grid
+      );
+      assert.ok(rangeRequests > 0, "expected HTTP range requests");
+      assert.equal(result.nodata, 255);
+      // Nearest neighbour at output cell centres: cols 12,17,22,27; rows 7 (north) and 12.
+      assert.deepEqual(result.values, [47, 52, 57, 62, 72, 77, 82, 87]);
+      await assert.rejects(
+        readRemoteGrid(`http://127.0.0.1:${port}/test.tif`, {
+          bounds: [3, 1, 5, 3],
+          width: 2,
+          height: 2,
+        }),
+        /outside this raster/
+      );
+    } finally {
+      server.close();
+    }
   });
 });
