@@ -26,7 +26,7 @@ const srcDirNames = readdirSync(srcRoot, { withFileTypes: true })
   .filter(
     (name) =>
       existsSync(resolve(srcRoot, name, "index.ts")) &&
-      existsSync(resolve(srcRoot, name, "plugin.json")),
+      existsSync(resolve(srcRoot, name, "plugin.json"))
   );
 
 if (srcDirNames.length === 0) {
@@ -36,7 +36,9 @@ if (srcDirNames.length === 0) {
 
 for (const srcDir of srcDirNames) {
   const manifestPath = resolve(srcRoot, srcDir, "plugin.json");
-  const manifest = JSON.parse((await import("node:fs")).readFileSync(manifestPath, "utf8"));
+  const manifest = JSON.parse(
+    (await import("node:fs")).readFileSync(manifestPath, "utf8")
+  );
   const pluginId = manifest.id || srcDir;
   const entry = resolve(srcRoot, srcDir, "index.ts");
   const outDir = resolve(outBase, pluginId, "dist");
@@ -53,10 +55,25 @@ for (const srcDir of srcDirNames) {
       emptyOutDir: true,
       sourcemap: true,
       target: "es2022",
+      // The host loads only dist/index.js, so every plugin must be one file:
+      // inline dynamic imports (e.g. geotiff and its decoders) instead of
+      // emitting sibling chunks the loader never fetches.
+      rolldownOptions: { output: { codeSplitting: false } },
     },
   };
   console.log(`[geospax] building ${srcDir} (${pluginId}) → ${outDir}`);
   await build(viteConfig);
+  const strays = readdirSync(outDir).filter(
+    (file) => !/^(index\.js|style\.css)(\.map)?$/.test(file)
+  );
+  if (strays.length) {
+    console.error(
+      `[geospax] ${pluginId} emitted extra files the host never loads: ${strays.join(
+        ", "
+      )}`
+    );
+    process.exit(1);
+  }
   const destDir = resolve(outBase, pluginId);
   mkdirSync(destDir, { recursive: true });
   cpSync(manifestPath, resolve(destDir, "plugin.json"));
