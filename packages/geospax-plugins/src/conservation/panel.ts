@@ -19,6 +19,7 @@ import {
   mountSuitabilityTool,
   mountVectorChangeTool,
 } from "../shared/vector-tools";
+import { mountCovariateTool } from "../shared/covariate-tools";
 import { mountRasterReclassTool } from "../shared/raster-tools";
 import { mountCitationTool } from "../shared/citation";
 import { PLUGIN_VERSION } from "./index";
@@ -36,7 +37,10 @@ export function getPanelState(): ConservationPanelState {
 }
 
 export function applyPanelState(next: ConservationPanelState): void {
-  if (typeof next.habitatLayerName === "string" || next.habitatLayerName === null) {
+  if (
+    typeof next.habitatLayerName === "string" ||
+    next.habitatLayerName === null
+  ) {
     state.habitatLayerName = next.habitatLayerName;
   }
   if (typeof next.paLayerName === "string" || next.paLayerName === null) {
@@ -47,7 +51,10 @@ export function applyPanelState(next: ConservationPanelState): void {
   }
 }
 
-export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
+export function mountConservationPanel(
+  container: HTMLElement,
+  app: GeoLibreAppAPI
+): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-conservation",
     eyebrow: "GeoSpaX domain workbench",
@@ -87,6 +94,7 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     description:
       "Fit corrected environmental-space models, including an explicitly labelled presence-background logistic fallback, without substituting coordinates or zero-filled predictors.",
   });
+  mountCovariateTool(shell, sdm, "species");
   mountSdmTool(shell, sdm, "species");
 
   const suitability = shell.addSection({
@@ -142,7 +150,8 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     id: "provenance",
     title: "Provenance",
     badge: "Export",
-    description: "Review methods and export the run ledger or host project snapshot.",
+    description:
+      "Review methods and export the run ledger or host project snapshot.",
   });
   mountProvenanceTool(shell, provenance);
 
@@ -150,9 +159,13 @@ export function mountConservationPanel(container: HTMLElement, app: GeoLibreAppA
     id: "citation",
     title: "How to cite",
     badge: "Citation",
-    description: "Academic and institutional use requires an appropriate citation.",
+    description:
+      "Academic and institutional use requires an appropriate citation.",
   });
-  mountCitationTool(shell, citation, { pluginLabel: "GSX Conservation", version: PLUGIN_VERSION });
+  mountCitationTool(shell, citation, {
+    pluginLabel: "GSX Conservation",
+    version: PLUGIN_VERSION,
+  });
 
   return () => shell.destroy();
 }

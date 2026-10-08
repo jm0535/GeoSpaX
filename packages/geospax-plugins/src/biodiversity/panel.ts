@@ -13,10 +13,14 @@ import {
   mountProvenanceTool,
   mountSdmTool,
 } from "../shared/vector-tools";
+import { mountCovariateTool } from "../shared/covariate-tools";
 import { mountCitationTool } from "../shared/citation";
 import { PLUGIN_VERSION } from "./index";
 
-export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
+export function mountBiodiversityPanel(
+  container: HTMLElement,
+  app: GeoLibreAppAPI
+): () => void {
   const shell = createPanelShell(container, app, {
     id: "geospax-biodiversity",
     eyebrow: "GeoSpaX domain workbench",
@@ -68,6 +72,7 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
     description:
       "Fit and predict audit-fixed environmental-space models, including an explicitly labelled presence-background logistic fallback, from complete occurrence attributes.",
   });
+  mountCovariateTool(shell, sdm, "species");
   mountSdmTool(shell, sdm, "species");
 
   const priorities = shell.addSection({
@@ -94,9 +99,13 @@ export function mountBiodiversityPanel(container: HTMLElement, app: GeoLibreAppA
     id: "citation",
     title: "How to cite",
     badge: "Citation",
-    description: "Academic and institutional use requires an appropriate citation.",
+    description:
+      "Academic and institutional use requires an appropriate citation.",
   });
-  mountCitationTool(shell, citation, { pluginLabel: "GSX Biodiversity", version: PLUGIN_VERSION });
+  mountCitationTool(shell, citation, {
+    pluginLabel: "GSX Biodiversity",
+    version: PLUGIN_VERSION,
+  });
 
   return () => shell.destroy();
 }
