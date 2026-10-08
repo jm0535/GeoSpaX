@@ -14,6 +14,7 @@ export * from "./gap";
 export * from "./terrain";
 export * from "./raster";
 export * from "./sdm";
+export * from "./evaluation";
 export * from "./suitability";
 export * from "./fragmentation";
 export * from "./connectivity";
