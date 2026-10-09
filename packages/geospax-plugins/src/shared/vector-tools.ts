@@ -1,7 +1,9 @@
 import type { Feature, Geometry, MultiPolygon, Point, Polygon } from "geojson";
 import {
   connectivityAnalysis,
+  covariateGridFromFeatures,
   crossValidateSdm,
+  gridFromCellScores,
   dbscanClusters,
   distanceDecay,
   featureSuitability,
@@ -52,6 +54,11 @@ import {
   withBusy,
   type PanelShell,
 } from "./ui";
+import {
+  addGridRasterLayer,
+  downloadBytes,
+  writeGridGeoTiff,
+} from "./raster-output";
 
 function layerName(shell: PanelShell, id: string): string {
   return (
@@ -2278,6 +2285,47 @@ export function mountSdmTool(
             "The covariance was singular/near-singular; ridge regularisation was applied and recorded in provenance.",
             "warning"
           );
+        // Prediction layers built by the covariate tool are a regular grid:
+        // rebuild it as a raster map layer plus a GeoTIFF download.
+        const grid = covariateGridFromFeatures(predictionFeatures);
+        if (grid) {
+          const { values, filled } = gridFromCellScores(
+            grid,
+            outputFeatures,
+            "sdm_suitability"
+          );
+          const rasterName = `${subject} SDM — ${modelType.value} (raster)`;
+          const rasterId = filled
+            ? addGridRasterLayer(shell, rasterName, grid, values)
+            : null;
+          const download = button("Download suitability GeoTIFF", "secondary");
+          download.addEventListener("click", () => {
+            void withBusy(download, status, "Writing GeoTIFF…", async () => {
+              const bytes = await writeGridGeoTiff(grid, values);
+              downloadBytes(
+                bytes,
+                `${subject.replace(/\W+/g, "_")}_sdm_${modelType.value}.tif`
+              );
+              setStatus(
+                status,
+                "success",
+                "GeoTIFF written: Float32, EPSG:4326, NoData −9999."
+              );
+            });
+          });
+          results.appendChild(buttonRow(download));
+          appendNotice(
+            results,
+            rasterId
+              ? `Added “${rasterName}”: ${filled.toLocaleString()} cells of ${
+                  grid.width
+                } × ${
+                  grid.height
+                }, viridis 0 → 1 (cells without a score are transparent). The point layer is kept for inspection.`
+              : "This map renderer cannot show the raster layer; use the GeoTIFF download instead.",
+            rasterId ? "info" : "warning"
+          );
+        }
         if (evaluation) {
           renderSdmEvaluation(results, evaluation);
           appendNotice(
