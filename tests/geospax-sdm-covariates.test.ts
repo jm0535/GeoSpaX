@@ -323,6 +323,9 @@ describe("covariate tool → SDM panel", () => {
     const text = sdmCard.textContent ?? "";
     assert.match(text, /Spatially blocked cross-validation/, text.slice(-400));
     assert.match(text, /ROC AUC/);
+    // Grid-backed prediction layer → raster output controls.
+    assert.match(text, /Download suitability GeoTIFF/);
+    assert.match(text, /use the GeoTIFF download instead/); // test host has no MapLibre map
   });
 });
 

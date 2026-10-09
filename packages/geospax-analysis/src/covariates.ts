@@ -6,7 +6,14 @@
 // Raster windows are row-major with row 0 at the northern edge (image order),
 // matching the host's readRasterWindow.
 
-import type { Feature, MultiPolygon, Point, Polygon, Position } from "geojson";
+import type {
+  Feature,
+  Geometry,
+  MultiPolygon,
+  Point,
+  Polygon,
+  Position,
+} from "geojson";
 import { makeProvenance, type ProvenanceStamp } from "./provenance";
 
 export interface CovariateGridSpec {
@@ -279,4 +286,69 @@ export function sampleCovariates(
       }
     ),
   };
+}
+
+/**
+ * Recover the covariate grid from a background-grid feature's provenance
+ * stamp (`_geospax.params` written by {@link sampleCovariates}), or null when
+ * the features did not come from the covariate tool.
+ */
+export function covariateGridFromFeatures(
+  features: Array<Feature<Geometry | null>>
+): CovariateGridSpec | null {
+  for (const feature of features) {
+    const params = (
+      feature.properties?._geospax as
+        | { params?: Record<string, unknown> }
+        | undefined
+    )?.params;
+    const bounds = params?.bounds;
+    const width = params?.width;
+    const height = params?.height;
+    if (
+      Array.isArray(bounds) &&
+      bounds.length === 4 &&
+      bounds.every((value) => Number.isFinite(value)) &&
+      Number.isInteger(width) &&
+      Number.isInteger(height) &&
+      (width as number) > 0 &&
+      (height as number) > 0
+    ) {
+      return {
+        bounds: bounds as [number, number, number, number],
+        width: width as number,
+        height: height as number,
+      };
+    }
+  }
+  return null;
+}
+
+/**
+ * Rasterise a per-cell score back onto the covariate grid: each feature's
+ * `cell` index (row-major, row 0 = north) receives its `field` value; cells
+ * with no feature or a non-finite score are NaN.
+ */
+export function gridFromCellScores(
+  grid: CovariateGridSpec,
+  features: Array<Feature<Geometry | null>>,
+  field: string
+): { values: Float32Array; filled: number } {
+  const values = new Float32Array(grid.width * grid.height).fill(Number.NaN);
+  let filled = 0;
+  for (const feature of features) {
+    const cell = feature.properties?.cell;
+    const score = feature.properties?.[field];
+    if (
+      Number.isInteger(cell) &&
+      (cell as number) >= 0 &&
+      (cell as number) < values.length &&
+      typeof score === "number" &&
+      Number.isFinite(score)
+    ) {
+      values[cell as number] = score;
+      filled++;
+    }
+  }
+  return { values, filled };
 }
