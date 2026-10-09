@@ -96,6 +96,12 @@ describe("boyceIndex", () => {
     assert.equal(boyceIndex([0.5], [0.5, 0.5]).index, null);
     assert.equal(boyceIndex([], [0.1, 0.9]).index, null);
   });
+
+  it("is not computed for binary or near-binary scores", () => {
+    // Limiting-factor BIOCLIM output: only 0 and 1.
+    const background = [...Array(50).fill(0), ...Array(50).fill(1)];
+    assert.equal(boyceIndex([1, 1, 0, 1], background).index, null);
+  });
 });
 
 describe("spatialBlockFolds", () => {

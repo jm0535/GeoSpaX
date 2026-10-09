@@ -130,6 +130,9 @@ export function spearman(x: number[], y: number[]): number | null {
   return sxy / Math.sqrt(sxx * syy);
 }
 
+/** Fewest distinct scores for which the continuous Boyce index is meaningful. */
+export const BOYCE_MIN_DISTINCT_SCORES = 5;
+
 export interface BoyceOptions {
   /** Moving-window width as a fraction of the score range (default 0.1). */
   windowFraction?: number;
@@ -169,6 +172,11 @@ export function boyceIndex(
   const min = Math.min(...background);
   const max = Math.max(...background);
   if (max === min) return empty;
+  // A moving-window P/E curve needs a continuous score. With only a few
+  // distinct values (e.g. binary limiting-factor BIOCLIM) the windows collapse
+  // and Spearman returns an artefactual ±1, so report it as not computed.
+  if (new Set([...presence, ...background]).size < BOYCE_MIN_DISTINCT_SCORES)
+    return empty;
   const width = (max - min) * fraction;
   const centers: number[] = [];
   const ratios: number[] = [];
