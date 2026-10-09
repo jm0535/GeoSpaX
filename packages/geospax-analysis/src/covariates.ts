@@ -6,7 +6,7 @@
 // Raster windows are row-major with row 0 at the northern edge (image order),
 // matching the host's readRasterWindow.
 
-import type { Feature, Point } from "geojson";
+import type { Feature, MultiPolygon, Point, Polygon, Position } from "geojson";
 import { makeProvenance, type ProvenanceStamp } from "./provenance";
 
 export interface CovariateGridSpec {
@@ -94,10 +94,82 @@ export interface CovariateSampleResult {
   /** Input presences with covariate fields added (null where missing). */
   presences: Feature<Point>[];
   backgroundCells: number;
+  /** Cells inside the mask (or all cells) dropped for missing covariates. */
   backgroundDropped: number;
+  /** Cells whose centre falls outside the mask polygons. */
+  backgroundMasked: number;
   presencesComplete: number;
   presencesOutside: number;
+  /** Presences outside the mask polygons (kept; they still carry values). */
+  presencesOutsideMask: number;
   provenance: ProvenanceStamp;
+}
+
+export type MaskGeometry = Polygon | MultiPolygon;
+
+function inRing(lon: number, lat: number, ring: Position[]): boolean {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if (
+      yi > lat !== yj > lat &&
+      lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi
+    )
+      inside = !inside;
+  }
+  return inside;
+}
+
+interface PreparedPolygon {
+  rings: Position[][];
+  bbox: [number, number, number, number];
+}
+
+function preparePolygons(geometries: MaskGeometry[]): PreparedPolygon[] {
+  const polygons = geometries.flatMap((geometry) =>
+    geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates
+  );
+  return polygons
+    .filter((rings) => rings.length && rings[0].length >= 4)
+    .map((rings) => {
+      const xs = rings[0].map((p) => p[0]);
+      const ys = rings[0].map((p) => p[1]);
+      return {
+        rings,
+        bbox: [
+          Math.min(...xs),
+          Math.min(...ys),
+          Math.max(...xs),
+          Math.max(...ys),
+        ],
+      };
+    });
+}
+
+function inPrepared(
+  lon: number,
+  lat: number,
+  polygons: PreparedPolygon[]
+): boolean {
+  return polygons.some(
+    ({ rings, bbox }) =>
+      lon >= bbox[0] &&
+      lon <= bbox[2] &&
+      lat >= bbox[1] &&
+      lat <= bbox[3] &&
+      inRing(lon, lat, rings[0]) &&
+      !rings.slice(1).some((hole) => inRing(lon, lat, hole))
+  );
+}
+
+/** True when [lon, lat] lies inside any polygon (holes excluded). */
+export function pointInMask(
+  lon: number,
+  lat: number,
+  mask: MaskGeometry[]
+): boolean {
+  return inPrepared(lon, lat, preparePolygons(mask));
 }
 
 /**
@@ -109,7 +181,8 @@ export function sampleCovariates(
   grid: CovariateGridSpec,
   rasters: CovariateRaster[],
   presences: Feature<Point>[],
-  params: Record<string, unknown> = {}
+  params: Record<string, unknown> = {},
+  mask?: MaskGeometry[]
 ): CovariateSampleResult | null {
   const cells = grid.width * grid.height;
   if (!rasters.length || rasters.some((r) => r.values.length !== cells))
@@ -119,12 +192,22 @@ export function sampleCovariates(
   const dx = (east - west) / grid.width;
   const dy = (north - south) / grid.height;
 
+  const prepared = mask?.length ? preparePolygons(mask) : null;
+  if (mask?.length && !prepared?.length) return null;
   const background: Feature<Point>[] = [];
+  let backgroundMasked = 0;
   for (let index = 0; index < cells; index++) {
-    const values = rasters.map((raster) => cellValue(raster, index));
-    if (values.some((value) => value === null)) continue;
     const row = Math.floor(index / grid.width);
     const col = index % grid.width;
+    if (
+      prepared &&
+      !inPrepared(west + (col + 0.5) * dx, north - (row + 0.5) * dy, prepared)
+    ) {
+      backgroundMasked++;
+      continue;
+    }
+    const values = rasters.map((raster) => cellValue(raster, index));
+    if (values.some((value) => value === null)) continue;
     background.push({
       type: "Feature",
       geometry: {
@@ -165,9 +248,20 @@ export function sampleCovariates(
     background,
     presences: annotated,
     backgroundCells: background.length,
-    backgroundDropped: cells - background.length,
+    backgroundDropped: cells - backgroundMasked - background.length,
+    backgroundMasked,
     presencesComplete,
     presencesOutside,
+    presencesOutsideMask: prepared
+      ? presences.filter(
+          (feature) =>
+            !inPrepared(
+              feature.geometry.coordinates[0],
+              feature.geometry.coordinates[1],
+              prepared
+            )
+        ).length
+      : 0,
     provenance: makeProvenance(
       "sdm-covariates",
       "Regular lon/lat background grid; presences take the value of the grid cell containing them (nearest raster sample at cell centre); cells with any NoData dropped",
@@ -178,6 +272,9 @@ export function sampleCovariates(
         height: grid.height,
         cellSizeDeg: dx,
         variables: rasters.map((r) => r.field),
+        backgroundMask: prepared
+          ? `${prepared.length} polygon(s); cell centres outside dropped`
+          : "none (full rectangle)",
         ...params,
       }
     ),

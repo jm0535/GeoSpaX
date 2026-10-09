@@ -13,6 +13,7 @@ import type {
 import {
   covariateGridFor,
   gridCellIndex,
+  pointInMask,
   sampleCovariates,
 } from "../packages/geospax-analysis/src/index";
 import { createServer } from "node:http";
@@ -24,6 +25,7 @@ import {
   pixelWindowFor,
   readRemoteGrid,
   suggestFieldName,
+  undeclaredIntegerNodata,
 } from "../packages/geospax-plugins/src/shared/covariate-tools";
 import { createPanelShell } from "../packages/geospax-plugins/src/shared/ui";
 import { mountSdmTool } from "../packages/geospax-plugins/src/shared/vector-tools";
@@ -411,5 +413,94 @@ describe("readRemoteGrid over HTTP range requests", () => {
     } finally {
       server.close();
     }
+  });
+});
+
+describe("background mask", () => {
+  // Land square 0..2 × 0..2 with a lake (hole) 0.5..1 × 0.5..1, plus an island at 3..4.
+  const land = {
+    type: "MultiPolygon" as const,
+    coordinates: [
+      [
+        [
+          [0, 0],
+          [2, 0],
+          [2, 2],
+          [0, 2],
+          [0, 0],
+        ],
+        [
+          [0.5, 0.5],
+          [1, 0.5],
+          [1, 1],
+          [0.5, 1],
+          [0.5, 0.5],
+        ],
+      ],
+      [
+        [
+          [3, 0],
+          [4, 0],
+          [4, 1],
+          [3, 1],
+          [3, 0],
+        ],
+      ],
+    ],
+  };
+
+  it("tests points against polygons, holes and multipolygon parts", () => {
+    assert.equal(pointInMask(1.5, 1.5, [land]), true);
+    assert.equal(pointInMask(0.75, 0.75, [land]), false); // lake
+    assert.equal(pointInMask(3.5, 0.5, [land]), true); // island
+    assert.equal(pointInMask(2.5, 0.5, [land]), false); // sea
+  });
+
+  it("drops background cells whose centre is outside the mask", () => {
+    // 4 × 2 grid over lon 0..4, lat 0..2; centres at x 0.5,1.5,2.5,3.5 and y 1.5,0.5.
+    const grid = {
+      bounds: [0, 0, 4, 2] as [number, number, number, number],
+      width: 4,
+      height: 2,
+    };
+    const values = [1, 2, 3, 4, 5, 6, 7, 8];
+    const result = sampleCovariates(
+      grid,
+      [{ field: "a", values, nodata: null }],
+      [pt(2.5, 1.5), pt(1.5, 1.5)],
+      {},
+      [land]
+    )!;
+    // Land centres: (0.5,1.5) (1.5,1.5) (1.5,0.5) and the island (3.5,0.5). Sea centres:
+    // (2.5,1.5) (3.5,1.5) (2.5,0.5). (0.5,0.5) sits on the lake's corner, so either side is fine.
+    const kept = result.background.map((f) => f.properties?.a);
+    assert.ok(
+      kept.includes(1) &&
+        kept.includes(2) &&
+        kept.includes(6) &&
+        kept.includes(8)
+    );
+    assert.ok(!kept.includes(3) && !kept.includes(4) && !kept.includes(7)); // sea cells
+    assert.equal(
+      result.backgroundMasked +
+        result.backgroundCells +
+        result.backgroundDropped,
+      8
+    );
+    assert.equal(result.presencesOutsideMask, 1); // the presence at sea
+    assert.match(String(result.provenance.params.backgroundMask), /polygon/);
+  });
+});
+
+describe("undeclaredIntegerNodata", () => {
+  const image = (bits: number, format: number) => ({
+    getBitsPerSample: () => bits,
+    getSampleFormat: () => format,
+  });
+  it("uses the integer type's sentinel and leaves floats alone", () => {
+    assert.equal(undeclaredIntegerNodata(image(16, 1)), 65535);
+    assert.equal(undeclaredIntegerNodata(image(8, 1)), 255);
+    assert.equal(undeclaredIntegerNodata(image(16, 2)), -32768);
+    assert.equal(undeclaredIntegerNodata(image(32, 3)), null);
   });
 });

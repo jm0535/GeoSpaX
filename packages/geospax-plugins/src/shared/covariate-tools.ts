@@ -4,6 +4,7 @@ import {
   sampleCovariates,
   MAX_COVARIATE_GRID_SIDE,
   type CovariateGridSpec,
+  type MaskGeometry,
   type CovariateRaster,
 } from "@geospax/analysis";
 import {
@@ -92,6 +93,23 @@ export function suggestFieldName(layerName: string): string {
 /** Full-resolution pixels read per variable; ~25° × 25° of CHELSA at 30″. */
 const MAX_REMOTE_WINDOW_PIXELS = 9_000_000;
 
+/**
+ * NoData for an integer GeoTIFF that declares none: the type's sentinel
+ * (max for unsigned, min for signed). CHELSA v2.1 uint16 files, for example,
+ * carry 65535 in cells without a valid value but no GDAL_NODATA tag.
+ */
+export function undeclaredIntegerNodata(image: {
+  getSampleFormat: (sample?: number) => number;
+  getBitsPerSample: (sample?: number) => number;
+}): number | null {
+  const bits = image.getBitsPerSample(0);
+  const format = image.getSampleFormat(0); // 1 unsigned, 2 signed, 3 float
+  if (!(bits === 8 || bits === 16 || bits === 32)) return null;
+  if (format === 1) return 2 ** bits - 1;
+  if (format === 2) return -(2 ** (bits - 1));
+  return null;
+}
+
 /** Pixel window [x0, y0, x1, y1] of a north-up raster covering `bounds`, or null if it does not. */
 export function pixelWindowFor(
   bounds: [number, number, number, number],
@@ -167,7 +185,10 @@ export async function readRemoteGrid(
         raster[sourceRow * windowWidth + sourceCol];
     }
   }
-  return { values, nodata: image.getGDALNoData() };
+  return {
+    values,
+    nodata: image.getGDALNoData() ?? undeclaredIntegerNodata(image),
+  };
 }
 
 function mountChelsaPicker(card: HTMLElement): {
@@ -241,8 +262,19 @@ export function mountCovariateTool(
   });
   const cellSize = numberInput(0.05, { min: 0.005, step: 0.01 });
   const buffer = numberInput(0.5, { min: 0, step: 0.1 });
+  const mask = layerPicker(shell, {
+    kind: "polygon",
+    includeNone: true,
+    noneLabel: "— none: whole rectangle (includes sea) —",
+    placeholder: "— none: whole rectangle (includes sea) —",
+  });
   card.append(
     field("Occurrence points", presences.select),
+    field(
+      "Restrict background to polygons (recommended)",
+      mask.select,
+      "CHELSA has climate values over the ocean too. Choose a land, country or study-area polygon layer so background points only cover the area the species can reach."
+    ),
     fieldGrid(
       field(
         "Grid cell size (degrees)",
@@ -397,13 +429,40 @@ export function mountCovariateTool(
             .listLayers?.()
             .find((layer) => layer.id === presences.select.value)?.name ??
           subject;
-        const result = sampleCovariates(grid, rasters, points, {
-          presenceLayer: sourceName,
-          sources,
-          valueScaling:
-            "CHELSA values are the stored integers (apply the CHELSA v2.1 scale/offset for physical units)",
-          bufferDeg: pad,
-        });
+        const maskLayerId =
+          mask.select.value && mask.select.value !== "__none__"
+            ? mask.select.value
+            : null;
+        const maskGeometries = maskLayerId
+          ? mask
+              .features()
+              .map((feature) => feature.geometry)
+              .filter(
+                (geometry): geometry is MaskGeometry =>
+                  geometry?.type === "Polygon" ||
+                  geometry?.type === "MultiPolygon"
+              )
+          : undefined;
+        if (maskLayerId && !maskGeometries?.length)
+          throw new Error("The mask layer has no polygon features.");
+        const maskName = maskLayerId
+          ? shell.app.listLayers?.().find((layer) => layer.id === maskLayerId)
+              ?.name ?? "mask"
+          : null;
+        const result = sampleCovariates(
+          grid,
+          rasters,
+          points,
+          {
+            maskLayer: maskName,
+            presenceLayer: sourceName,
+            sources,
+            valueScaling:
+              "CHELSA values are the stored integers (apply the CHELSA v2.1 scale/offset for physical units)",
+            bufferDeg: pad,
+          },
+          maskGeometries
+        );
         if (!result)
           throw new Error(
             "Covariate sampling failed for the selected rasters."
@@ -442,6 +501,12 @@ export function mountCovariateTool(
               )}°`,
             ],
             ["Background cells with all values", result.backgroundCells],
+            [
+              "Background cells outside mask",
+              maskName
+                ? `${result.backgroundMasked} (mask: ${maskName})`
+                : "No mask",
+            ],
             ["Background cells dropped (NoData)", result.backgroundDropped],
             [
               "Presences with all values",
@@ -455,6 +520,18 @@ export function mountCovariateTool(
           appendNotice(
             results,
             `${incomplete} record(s) have a missing value (sea, NoData or outside the grid); the SDM excludes them rather than filling with zero.`,
+            "warning"
+          );
+        if (!maskName)
+          appendNotice(
+            results,
+            "No mask: the background grid covers the whole rectangle, including sea, because CHELSA has values over the ocean. For a terrestrial or coastal species, rebuild with a land or study-area polygon layer.",
+            "warning"
+          );
+        if (result.presencesOutsideMask)
+          appendNotice(
+            results,
+            `${result.presencesOutsideMask} record(s) lie outside the mask polygons (e.g. just offshore). They are kept as presences; check the mask covers them.`,
             "warning"
           );
         appendNotice(
@@ -472,6 +549,8 @@ export function mountCovariateTool(
               backgroundCells: result.backgroundCells,
               presencesComplete: result.presencesComplete,
               presencesOutside: result.presencesOutside,
+              backgroundMasked: result.backgroundMasked,
+              mask: maskName,
             }
           )
         );
