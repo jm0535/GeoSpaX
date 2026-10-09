@@ -31,6 +31,12 @@ import {
   withBusy,
   type PanelShell,
 } from "./ui";
+import {
+  COPERNICUS_DEM_ATTRIBUTION,
+  defaultDemBase,
+  readCopernicusDemGrid,
+  type DemGridResult,
+} from "./dem-source";
 
 /** CHELSA v2.1 bioclimatic variables, 1981–2010, 30 arc-second GeoTIFFs (striped, not COG). */
 export const CHELSA_BIOCLIM = [
@@ -194,6 +200,8 @@ export async function readRemoteGrid(
 function mountChelsaPicker(card: HTMLElement): {
   chosen: () => string[];
   base: HTMLInputElement;
+  elevation: () => boolean;
+  demBase: HTMLInputElement;
 } {
   const host = el("details", "gsp-subsection");
   host.open = true;
@@ -222,11 +230,27 @@ function mountChelsaPicker(card: HTMLElement): {
       "On the web app this goes through the site's same-origin proxy; the desktop app reads CHELSA directly."
     )
   );
+  const elevation = checkbox(
+    "Elevation (Copernicus DEM GLO-90, metres) → attribute “elev”",
+    true
+  );
+  const demBase = textInput(defaultDemBase());
+  host.append(
+    el("div", "gsp-label", "Terrain"),
+    elevation.wrapper,
+    field(
+      "Copernicus DEM base URL",
+      demBase,
+      "Read from the public 1° COG tiles (overviews only, a few hundred KB per tile); ocean has no tiles, so sea cells stay empty."
+    )
+  );
   card.appendChild(host);
   return {
     chosen: () =>
       picks.filter((pick) => pick.box.input.checked).map((pick) => pick.id),
     base,
+    elevation: () => elevation.input.checked,
+    demBase,
   };
 }
 
@@ -330,8 +354,9 @@ export function mountCovariateTool(
         if (!presences.select.value)
           throw new Error("Select the occurrence point layer.");
         const chelsaVars = chelsa.chosen();
+        const demVars = chelsa.elevation() ? ["elev"] : [];
         const selected = rows.filter((row) => row.use.checked);
-        if (!chelsaVars.length && !selected.length)
+        if (!chelsaVars.length && !demVars.length && !selected.length)
           throw new Error(
             "Select at least one CHELSA variable or raster layer."
           );
@@ -339,6 +364,7 @@ export function mountCovariateTool(
           throw new Error("This host cannot read raster layer values.");
         const fields = [
           ...chelsaVars,
+          ...demVars,
           ...selected.map((row) => row.field.value.trim()),
         ];
         if (fields.some((name) => !/^[A-Za-z_][A-Za-z0-9_]*$/.test(name)))
@@ -378,6 +404,7 @@ export function mountCovariateTool(
           );
 
         const total = fields.length;
+        let demWarning: string | null = null;
         const rasters: CovariateRaster[] = [];
         const sources: Record<string, string> = {};
         for (const variable of chelsaVars) {
@@ -400,6 +427,42 @@ export function mountCovariateTool(
           rasters.push({ field: variable, ...reading });
           sources[variable] = `CHELSA v2.1 ${variable} (${url})`;
         }
+        if (demVars.length) {
+          setStatus(
+            status,
+            "busy",
+            `Reading Copernicus DEM tiles (${rasters.length + 1}/${total})…`
+          );
+          let dem: DemGridResult;
+          try {
+            dem = await readCopernicusDemGrid(
+              chelsa.demBase.value,
+              grid,
+              (done, all) =>
+                setStatus(
+                  status,
+                  "busy",
+                  `Reading Copernicus DEM tiles ${done}/${all} (${
+                    rasters.length + 1
+                  }/${total})…`
+                )
+            );
+          } catch (error) {
+            throw new Error(
+              `Could not read elevation: ${
+                error instanceof Error ? error.message : String(error)
+              }`
+            );
+          }
+          rasters.push({
+            field: "elev",
+            values: dem.values,
+            nodata: dem.nodata,
+          });
+          sources.elev = `${COPERNICUS_DEM_ATTRIBUTION}; ${dem.tilesRead} tile(s) read, ${dem.tilesMissing} absent (ocean)`;
+          if (dem.tilesFailed)
+            demWarning = `${dem.tilesFailed} Copernicus DEM tile(s) could not be read after retries, so elevation is missing (and those background cells dropped) there. Rebuild to retry.`;
+        }
         for (const [index, row] of selected.entries()) {
           setStatus(
             status,
@@ -415,7 +478,7 @@ export function mountCovariateTool(
             throw new Error(
               `${row.name} returned no values over the grid extent. Check it covers the records and has finished loading.`
             );
-          const name = fields[chelsaVars.length + index];
+          const name = fields[chelsaVars.length + demVars.length + index];
           rasters.push({
             field: name,
             values: reading.values,
@@ -522,6 +585,7 @@ export function mountCovariateTool(
             `${incomplete} record(s) have a missing value (sea, NoData or outside the grid); the SDM excludes them rather than filling with zero.`,
             "warning"
           );
+        if (demWarning) appendNotice(results, demWarning, "warning");
         if (!maskName)
           appendNotice(
             results,
