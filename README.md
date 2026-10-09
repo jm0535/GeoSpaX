@@ -4,10 +4,10 @@
   <img src="docs/assets/geospax_logo_final.svg" width="220" alt="GeoSpaX logo — a teal X with a globe at its center" />
 </p>
 
-> **GeoSpaX 2.0.0** is a multi-domain geospatial analysis specialisation of **[GeoLibre 3.0.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* twelve GSX domain workbenches spanning agriculture, biodiversity, climate, conservation, disaster, environment, forestry, geoscience, hydrology, land cover, marine and soil.
+> **GeoSpaX 2.0.0** is a multi-domain geospatial analysis specialisation of **[GeoLibre 3.3.0](https://github.com/opengeos/GeoLibre)** — the lightweight, cloud-native GIS platform. Fork `jm0535/GeoSpaX` lineage: `jm0535/map-kit` **v1.4.3** (`geospax.in4metrix.dev`) → **v2.0.0 platform rewrite** on GeoLibre (Tauri + MapLibre + DuckDB-WASM + Whitebox). This repo at `jm0535/GeoSpaX` builds the **GeoSpaX desktop/web app** — all 1,000+ GeoLibre tools *plus* twelve GSX domain workbenches spanning agriculture, biodiversity, climate, conservation, disaster, environment, forestry, geoscience, hydrology, land cover, marine and soil.
 
 [![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)
-[![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.0.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
+[![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.3.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
 [![GeoSpaX docs](https://img.shields.io/badge/Docs-GeoSpaX%20plugins%20%E2%86%92%20packages%2Fgeospax--plugins%2FREADME.md-green.svg)](packages/geospax-plugins/README.md)
 [![Launch GeoLibre Web](https://img.shields.io/badge/Launch-GeoLibre%20Web-green.svg)](https://web.geolibre.app/)
 [![GeoLibre shared project](https://img.shields.io/badge/GeoLibre-share-green.svg)](https://share.geolibre.app)
@@ -53,6 +53,7 @@ capabilities, credentials, and current compatibility.
 - **[Get started](https://geolibre.app/getting-started/)** — install, run from source, and configure
 - **[Features](https://geolibre.app/features/)** — the complete feature list
 - **[Rendering engines](https://geolibre.app/user-guide/rendering-engines/)** — compare MapLibre, Mapbox, Cesium, and ArcGIS and learn how to switch or combine them.
+- **[Open data gallery](https://geolibre.app/gallery/)** — 100 live projects built from public open data, grouped by theme: health, natural hazards, climate, oceans and water, nature, transport, cities, energy, space, history and culture, society and economy, and food.
 
 ## GeoSpaX — what's new in 2.0.0
 
@@ -129,7 +130,7 @@ The animation below runs the Time Slider along the buildings' construction year,
 
 [![Animation of Manhattan buildings appearing by construction year as the Time Slider advances from 1850 to 2025](https://assets.geolibre.app/demos/nyc-buildings-gif.gif)](https://assets.geolibre.app/demos/nyc-buildings.webm)
 
-[Open the live project](https://share.geolibre.app/giswqs/nyc-buildings-and-subways)
+[Open the live project](https://share.geolibre.app/giswqs/manhattan-buildings-through-time)
 
 ### Planetary basemaps
 
@@ -181,6 +182,7 @@ Switch bodies from the planet switcher in the Layers panel. See [Demos](https://
 - [Mapping the 2026 Nepal Floods with Free High-Resolution Satellite Imagery](https://youtu.be/UDO1BCwOAAc)
 - [Building Cloud-Native GIS Workflows with GeoLibre](https://youtu.be/RgNoKsvZ5Hk)
 - [Image Georeferencing Using GeoLibre in the Browser](https://youtu.be/lbioujkDSG0)
+- [100 Interactive Maps from Open Data: Explore, Fork, and Build Your Own with GeoLibre](https://youtu.be/2r5OhvEa3AA)
 
 All of them, with chapters and summaries, are on the [Video Tutorials](https://geolibre.app/tutorials/videos/) page.
 
@@ -235,7 +237,7 @@ Full documentation, including the User Guide and Tutorials, is published at
   - [Plugin API](docs/plugin-api.md)
   - [UI Profiles](docs/ui-profiles.md)
   - [Internationalization](docs/i18n.md)
-  - [Python package (Jupyter)](docs/python.md) — also supports `from geolibre import DashMap` for Dash (install `geolibre[dash]`)
+  - [Python package (Jupyter)](docs/python.md)
   - [R package (RStudio, Quarto, and Shiny)](docs/r.md)
   - [Notebook Panel](docs/notebook.md)
   - [Roadmap](docs/roadmap.md)
@@ -269,9 +271,9 @@ If you use **GeoSpaX** in your work, cite **both** GeoSpaX (the conservation ext
 
 **GeoSpaX 2.0.0** (this fork — `jm0535/GeoSpaX`, lineage `jm0535/map-kit` v1.4.3 → v2.0.0):
 
-> Moses, J. (2026). GeoSpaX 2.0.0 — Multi-domain geospatial analysis GIS built on GeoLibre 3.0.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
+> Moses, J. (2026). GeoSpaX 2.0.0 — Multi-domain geospatial analysis GIS built on GeoLibre 3.3.0 (FR422, PNG University of Technology). Zenodo. <https://doi.org/10.5281/zenodo.20785400> — `CITATION.cff` powers GitHub's **"Cite this repository"** button.
 
-**GeoLibre 3.0.0** (upstream — `opengeos/GeoLibre`):
+**GeoLibre 3.3.0** (upstream — `opengeos/GeoLibre`):
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20785400.svg)](https://doi.org/10.5281/zenodo.20785400)
 

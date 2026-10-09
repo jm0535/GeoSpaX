@@ -7,6 +7,7 @@ import {
   type MapViewState,
   type StoryChapterAnimation,
   type StoryChapterLocation,
+  storyLocationView,
 } from "@geolibre/core";
 import type { Cartesian2, CesiumWidget, PointPrimitiveCollection } from "@cesium/engine";
 import type { FeatureCollection, Point, Polygon } from "geojson";
@@ -28,11 +29,16 @@ import { getPrimaryCesiumControlHost } from "./cesium-control-host";
 import { pickDrawingLocation, placeCesiumPin, suspendCesiumNavigation } from "./cesium-drawing";
 import { drawExtentOnCanvas } from "./extent-drawing";
 import { captureEngineImage } from "./map-capture";
+import type { MapDiagnosticEvent } from "./map-diagnostic";
 import { TerrariumTerrainProvider } from "./cesium-terrarium";
 import { registerCogDemSource, type CogDemSourceRegistration } from "./cog-dem-source";
 import type { MapRenderSurface } from "./map-engine";
 import type { ExtentDrawingOptions, MapExtent } from "./map-engine";
-import { CesiumLayerSync, type MovingPointFeatureDescription } from "./cesium-layer-sync";
+import {
+  CESIUM_SUPPORTED_LAYER_KINDS,
+  CesiumLayerSync,
+  type MovingPointFeatureDescription,
+} from "./cesium-layer-sync";
 import { getLayerBounds } from "./geojson-loader";
 import type {
   BuiltInMapControl,
@@ -77,6 +83,14 @@ export const CESIUM_CAPABILITIES: MapEngineCapabilities = Object.freeze({
   screenOverlays: false,
   flatProjection: false,
   terrainSource: true,
+  // Zarr cubes, KML/KMZ, CZML and ion assets load through the globe's own
+  // imagery and data-source loaders.
+  nativeZarr: true,
+  nativeDataSources: true,
+  deferredEngineReady: false,
+  measureTool: true,
+  controlLayerPanels: true,
+  supportedLayerKinds: CESIUM_SUPPORTED_LAYER_KINDS,
 });
 
 /**
@@ -209,6 +223,13 @@ export interface CesiumEngineOptions {
    * and whether per-pane visibility overrides apply — see `CesiumCanvas`.
    */
   viewId?: string;
+  /**
+   * Forwards a renderer failure to the app's Diagnostics panel, the way
+   * `MapCanvas` and `MapboxCanvas` forward theirs. The globe's own failures are
+   * layer loads: an Ion asset the account cannot stream, a tileset URL that
+   * 404s, a KML that will not parse.
+   */
+  onDiagnostic?: (event: MapDiagnosticEvent) => void;
 }
 
 /**
@@ -312,12 +333,21 @@ export class CesiumEngine implements MapEngine {
    */
   private userMoved = false;
   /**
-   * Whether the camera's current position came from the user rather than from
-   * {@link applyView}. Unlike {@link userMoved} (which `moveEnd` consumes) this
-   * stays set until the next programmatic apply, and it is what stops the
-   * terrain correction from fighting live navigation.
+   * Whether something other than {@link applyView} has moved the camera since
+   * its last placement: user input, a scene-mode morph, or an animated flight
+   * (fly-to-layer, Set View, zoom in/out). Unlike {@link userMoved} (which
+   * `moveEnd` consumes) this stays set until the next `applyView` or until a
+   * flight lands untouched, and it is what stops the terrain correction from
+   * re-applying a placement the camera has already left. See
+   * {@link supersedePlacement}.
    */
-  private userOwnsCamera = false;
+  private placementSuperseded = false;
+  /**
+   * Whether an animated flight from {@link startFlight} has not landed yet.
+   * The `moveEnd` that ends it hands the landed view back to the terrain
+   * correction (see {@link adoptLandedFlight}).
+   */
+  private flightPending = false;
 
   /**
    * Zoom bounds from the project's `MapPreferences`, in MapLibre zoom levels.
@@ -333,6 +363,12 @@ export class CesiumEngine implements MapEngine {
    */
   private minZoom = 0;
   private maxZoom = 24;
+  /**
+   * A projection preference that arrived mid-morph. It is applied once that
+   * morph lands; only a deferred change is replayed, so a scene-mode picker
+   * morph is never undone by the (unchanged) stored preference.
+   */
+  private pendingProjection: MapProjection | null = null;
 
   private readonly worldTerrainAvailable: boolean;
   private terrainEnabled = false;
@@ -356,8 +392,21 @@ export class CesiumEngine implements MapEngine {
     this.worldTerrainAvailable = options.worldTerrainAvailable ?? true;
     this.capabilities =
       options.viewId === undefined ? CESIUM_CAPABILITIES : CESIUM_PANE_CAPABILITIES;
+    const onDiagnostic = options.onDiagnostic;
     this.layerSync = new CesiumLayerSync(Cesium, viewer, undefined, {
       onTilesetFields: publishTilesetFields,
+      onFlyTo: () => this.startFlight(),
+      onFlyToComplete: () => this.settleStillFlight(),
+      onLayerError: ({ layerId, layerName, message }) =>
+        onDiagnostic?.({ message: `${layerName}: ${message}`, source: "cesium", layerId }),
+      onTileFailure: ({ layerId, layerName, message, status, loaded, failed }) =>
+        onDiagnostic?.({
+          message: `${layerName}: ${message}`,
+          source: "cesium",
+          layerId,
+          status,
+          tiles: { loaded, failed },
+        }),
     });
     this.terrainExaggeration = viewer.scene.verticalExaggeration ?? 1;
     this.installInputTracking();
@@ -420,12 +469,16 @@ export class CesiumEngine implements MapEngine {
     if (!viewer || this.isMorphing()) return;
     this.lastApplied = view;
     // This placement is ours, so the terrain correction may adjust it.
-    this.userOwnsCamera = false;
+    this.placementSuperseded = false;
+    this.flightPending = false;
     this.lastGroundHeight = groundHeightAt(this.Cesium, viewer, view.center[0], view.center[1]);
     applyMapViewToCamera(this.Cesium, viewer, view);
     return new Promise((resolve) => {
       const remove = viewer.scene.postRender.addEventListener(() => {
         remove();
+        if (this.isPrimary && !useAppStore.getState().ui.storymapPresenting) {
+          useAppStore.getState().setCameraAltitude(this.readCameraAltitude());
+        }
         resolve();
       });
       viewer.scene.requestRender();
@@ -466,7 +519,7 @@ export class CesiumEngine implements MapEngine {
 
   /** Animate to a story-chapter location. See {@link easeToView} on the arc. */
   flyToView(location: StoryChapterLocation): void {
-    this.animateTo(location, FLY_SECONDS);
+    this.animateTo(storyLocationView(location, this.readView()), FLY_SECONDS);
   }
 
   applyStoryChapterCamera(
@@ -476,11 +529,13 @@ export class CesiumEngine implements MapEngine {
   ): void {
     // Auto-rotation is MapLibre-only for now: it drives a per-frame bearing tick
     // against the 2D map, and the globe has no equivalent hook yet.
+    // An absent pitch/bearing keeps the current one, as MapLibre does.
+    const view = storyLocationView(location, this.readView());
     if (animation === "jumpTo") {
-      this.applyView(location);
+      this.applyView(view);
       return;
     }
-    this.animateTo(location, animation === "easeTo" ? EASE_SECONDS : FLY_SECONDS);
+    this.animateTo(view, animation === "easeTo" ? EASE_SECONDS : FLY_SECONDS);
   }
 
   flyTo(camera: FlyToCamera): void {
@@ -520,7 +575,8 @@ export class CesiumEngine implements MapEngine {
 
   fitBounds(bounds: [number, number, number, number]): void {
     const viewer = this.live();
-    if (!viewer) return;
+    // Cesium throws from `flyTo` mid-morph; skip the fit as `animateTo` does.
+    if (!viewer || this.isMorphing()) return;
     const [west, south, east, north] = bounds;
     if (![west, south, east, north].every((value) => Number.isFinite(value))) return;
     // A degenerate point-sized box cannot be fit; fly to the point instead.
@@ -528,7 +584,7 @@ export class CesiumEngine implements MapEngine {
     // zero-area Rectangle has no "zoom to fit" — Cesium would derive a
     // nonsensical camera distance from it. Mirrors MapController.fitBounds,
     // including its zoom floor, so a single marker frames the same on both
-    // engines.
+    // engines. `animateTo` starts its own flight (or none, mid-morph).
     if (west === east && south === north) {
       this.animateTo(
         {
@@ -541,15 +597,26 @@ export class CesiumEngine implements MapEngine {
       );
       return;
     }
+    this.startFlight();
     viewer.camera.flyTo({
       destination: this.Cesium.Rectangle.fromDegrees(west, south, east, north),
       duration: FLY_SECONDS,
+      complete: () => this.settleStillFlight(),
     });
   }
 
   fitLayer(layer: GeoLibreLayer): void {
     const bounds = getLayerBounds(layer);
-    if (bounds) this.fitBounds(bounds);
+    if (bounds) {
+      this.fitBounds(bounds);
+      return;
+    }
+    // An Ion asset, a tileset by URL, CZML and KML keep no bounds in the store:
+    // their extent belongs to the Cesium object the sync loads. Hand the fit
+    // over, including for a layer added a moment ago whose object is still
+    // loading — the sync flies as soon as it has one, and reports that flight
+    // through `onFlyTo`.
+    this.layerSync.zoomToLayer(layer.id);
   }
 
   readCameraAltitude(): number | null {
@@ -569,6 +636,37 @@ export class CesiumEngine implements MapEngine {
     return carto.height - ground;
   }
 
+  /**
+   * Morph the scene to a projection preference, deferring it while another
+   * morph is running (Cesium would otherwise cut that one short).
+   *
+   * Args:
+   *   projection: The preferred projection, if any.
+   */
+  private applyProjection(projection: MapProjection | undefined): void {
+    const viewer = this.live();
+    if (!viewer || !projection) return;
+    if (this.isMorphing()) {
+      this.pendingProjection = projection;
+      return;
+    }
+    this.pendingProjection = null;
+    const scene = viewer.scene as {
+      morphTo2D?: (duration: number) => void;
+      morphTo3D?: (duration: number) => void;
+    };
+    if (projection === "mercator") {
+      // Any settled non-2D mode (3D or Columbus view) morphs to 2D.
+      if (viewer.scene.mode === this.Cesium.SceneMode.SCENE2D) return;
+      if (typeof scene.morphTo2D === "function") scene.morphTo2D(0);
+      else viewer.scene.mode = this.Cesium.SceneMode.SCENE2D;
+    } else if (projection === "globe") {
+      if (viewer.scene.mode === this.Cesium.SceneMode.SCENE3D) return;
+      if (typeof scene.morphTo3D === "function") scene.morphTo3D(0);
+      else viewer.scene.mode = this.Cesium.SceneMode.SCENE3D;
+    }
+  }
+
   /** Both flat scene modes use the projected map instead of the 3D ellipsoid. */
   readProjection(): MapProjection {
     const mode = this.live()?.scene.mode;
@@ -580,6 +678,9 @@ export class CesiumEngine implements MapEngine {
   applyMapPreferences(preferences: MapPreferences): void {
     const viewer = this.live();
     if (!viewer) return;
+
+    this.applyProjection(preferences.projection);
+
     // MapLibre's min/max zoom become camera distance limits, which is the
     // closest Cesium analogue. The latitude the conversion needs is the camera's
     // own, so the limits track the scale the user actually sees. Bounds and
@@ -610,6 +711,19 @@ export class CesiumEngine implements MapEngine {
         1,
       );
     }
+    // A projection morph is still running; `installMorphHandling` clamps once
+    // it lands.
+    if (!this.isMorphing()) this.clampCameraToZoomRange();
+  }
+
+  /**
+   * The controller limits only bound user input, so pull a camera already
+   * outside the zoom range (a saved view, or a lowered maxZoom) back inside.
+   */
+  private clampCameraToZoomRange(): void {
+    const view = this.readView();
+    const zoom = Math.min(this.maxZoom, Math.max(this.minZoom, view.zoom));
+    if (zoom !== view.zoom) void this.applyView({ ...view, zoom });
   }
 
   // ------------------------------------------------------------------- layers
@@ -934,6 +1048,7 @@ export class CesiumEngine implements MapEngine {
   }
   stopCamera(): void {
     this.live()?.camera.cancelFlight();
+    this.settleStillFlight();
   }
   suspendNavigation(): () => void {
     const viewer = this.live();
@@ -1319,7 +1434,62 @@ export class CesiumEngine implements MapEngine {
    */
   private markUserDriven(): void {
     this.userMoved = true;
-    this.userOwnsCamera = true;
+    this.supersedePlacement();
+  }
+
+  /**
+   * Stop the terrain correction from re-applying the last {@link applyView}
+   * placement, because the camera is leaving it.
+   *
+   * The correction re-applies `lastApplied` when terrain settles at a new
+   * height. That is right only while the camera still sits on that placement.
+   * A flight loads terrain all along its path, so the tile queue drains mid-air,
+   * and re-applying the old placement then `lookAt`s the camera back where it
+   * started: the fly-to-layer after a drop, or a Set View, would land at the
+   * seed view instead, with nothing published to say so (#2878).
+   */
+  private supersedePlacement(): void {
+    this.placementSuperseded = true;
+  }
+
+  /**
+   * Note that an animated flight is leaving the current placement. The terrain
+   * correction stands down until it lands, then takes over the landed view.
+   */
+  private startFlight(): void {
+    this.supersedePlacement();
+    this.flightPending = true;
+  }
+
+  /**
+   * Make a landed flight's view the placement the terrain correction keeps
+   * honest. A flight converts its target zoom to a distance against whatever
+   * ground had loaded when it started, so it can land too close over terrain
+   * that streams in afterwards; correcting the landed view fixes that the same
+   * way it fixes an `applyView`.
+   */
+  private adoptLandedFlight(): void {
+    const viewer = this.live();
+    const view = this.lastApplied;
+    if (!viewer || !view) return;
+    this.lastGroundHeight = groundHeightAt(this.Cesium, viewer, view.center[0], view.center[1]);
+    this.placementSuperseded = false;
+  }
+
+  /**
+   * End a flight that finished, or was stopped, without moving the camera.
+   *
+   * The `moveEnd` handler lands a flight that moved. One that did not (a zoom
+   * in already at the project's max zoom, a reset north on a north-up globe, a
+   * stop before the first frame) gets no `moveEnd`: Cesium completes a flight
+   * with nowhere to go at once, and raises `moveStart`/`moveEnd` only for real
+   * camera motion. Without this the terrain correction would stay off until
+   * the next `applyView`. A flight that is still moving is left to `moveEnd`.
+   */
+  private settleStillFlight(): void {
+    if (!this.flightPending || this.cameraMoving) return;
+    this.flightPending = false;
+    if (!this.userMoved) this.adoptLandedFlight();
   }
 
   /**
@@ -1337,6 +1507,7 @@ export class CesiumEngine implements MapEngine {
   private animateTo(view: MapViewState, seconds?: number): void {
     const viewer = this.live();
     if (!viewer || this.isMorphing()) return;
+    this.startFlight();
     // Cesium has no "ease to a MapLibre view" primitive, so the flight is
     // expressed the same way applyView expresses a placement — a lookAt in the
     // target's local frame — with `flyTo`'s duration doing the animating.
@@ -1381,6 +1552,7 @@ export class CesiumEngine implements MapEngine {
           range,
         ),
         duration: seconds ?? EASE_SECONDS,
+        complete: () => this.settleStillFlight(),
       },
     );
   }
@@ -1424,13 +1596,14 @@ export class CesiumEngine implements MapEngine {
    * makes this a no-op without terrain (height stays 0) and stops it recursing:
    * the re-apply's own load settles at the same height.
    *
-   * It corrects a *programmatic* placement only. Navigating loads finer terrain,
+   * It corrects an `applyView` placement only. Navigating loads finer terrain,
    * which drains the queue at a new height mid-gesture; without the
-   * `userOwnsCamera` guard that re-applied the last settled view and yanked the
-   * camera back, so a wheel zoom over terrain snapped straight back to where it
-   * started and the store never saw the move (the yank's own `moveEnd` read as
-   * the suppressed echo). Once the user is driving, their camera is
-   * authoritative and Cesium's own navigation already keeps it above terrain.
+   * `placementSuperseded` guard that re-applied the last settled view and
+   * yanked the camera back, so a wheel zoom over terrain snapped straight back
+   * to where it started and the store never saw the move (the yank's own
+   * `moveEnd` read as the suppressed echo). An animated flight hits the same
+   * guard for the same reason (#2878). Once the user or a flight is driving,
+   * that camera is authoritative and Cesium already keeps it above terrain.
    */
   private installTerrainCorrection(): void {
     const viewer = this.live();
@@ -1439,7 +1612,7 @@ export class CesiumEngine implements MapEngine {
       const live = this.live();
       const view = this.lastApplied;
       if (queued > 0 || !live || !view) return;
-      if (this.userOwnsCamera) return;
+      if (this.placementSuperseded) return;
       const height = groundHeightAt(this.Cesium, live, view.center[0], view.center[1]);
       if (Math.abs(height - this.lastGroundHeight) < 1) return;
       this.applyView(view);
@@ -1457,8 +1630,11 @@ export class CesiumEngine implements MapEngine {
     if (!viewer) return;
     const onMorphComplete = () => {
       // The native animation owns this camera, including any terrain settling.
-      this.userOwnsCamera = true;
+      this.supersedePlacement();
+      this.clampCameraToZoomRange();
       this.publishCameraView();
+      // A projection preference that landed mid-morph is applied now.
+      if (this.pendingProjection) this.applyProjection(this.pendingProjection);
     };
     viewer.scene.morphComplete.addEventListener(onMorphComplete);
     this.disposers.push(() => {
@@ -1479,7 +1655,11 @@ export class CesiumEngine implements MapEngine {
     };
     const onMoveEnd = () => {
       this.cameraMoving = false;
+      // A flight the user took over mid-air stays theirs.
+      const landedFlight = this.flightPending && !this.userMoved;
+      this.flightPending = false;
       this.publishCameraView();
+      if (landedFlight) this.adoptLandedFlight();
     };
     viewer.camera.moveStart.addEventListener(onMoveStart);
     viewer.camera.moveEnd.addEventListener(onMoveEnd);
@@ -1511,6 +1691,7 @@ export class CesiumEngine implements MapEngine {
     const userDriven = this.userMoved;
     this.userMoved = false;
     const store = useAppStore.getState();
+    if (store.ui.storymapPresenting) return;
     // Write only when the view actually differs from the stored camera:
     // `setMapView` has no same-camera guard in the store, and
     // `setSecondaryMapView`'s guard uses exact equality (which Cesium's lossy
@@ -1521,6 +1702,7 @@ export class CesiumEngine implements MapEngine {
       // toggle governs the secondary panes, and the primary map is the camera
       // they follow.
       if (!isSameView(view, store.mapView)) store.setMapView(view, userDriven);
+      store.setCameraAltitude(this.readCameraAltitude());
       return;
     }
     if (store.mapLayout.syncView && !isSameView(view, store.mapView)) {

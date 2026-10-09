@@ -35,6 +35,29 @@ export const TRANSIT_UPSTREAMS = {
   "translink-seq": "https://gtfsrt.api.translink.com.au/api/realtime/seq/VehiclePositions",
 } as const;
 
+/**
+ * NASA FIRMS' keyless global 24-hour VIIRS active-fire files. The keyed area
+ * API is not needed for a whole-world snapshot, but these files send no CORS
+ * header, so the browser build reads them through `/firms/viirs/<satellite>`.
+ */
+export const FIRMS_UPSTREAMS = {
+  "noaa-20":
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_24h.csv",
+  "noaa-21":
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/csv/J2_VIIRS_C2_Global_24h.csv",
+  "suomi-npp":
+    "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv",
+} as const;
+
+/**
+ * HUB Ocean's Ocean Data Platform. Its vector tile and OGC API Features
+ * endpoints only send CORS headers for `app.hubocean.earth`, so every GeoLibre
+ * host reads them through `/odp/...`. The STAC catalog is CORS-open and is read
+ * directly, never through the Worker.
+ */
+export const ODP_TILE_UPSTREAM = "https://api.hubocean.earth/api/table/v2/tile/";
+export const ODP_FEATURES_UPSTREAM = "https://api.hubocean.earth/api/features/collections/";
+
 export const TILES_ALLOWED_URL_PREFIXES = [
   "https://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/",
   "https://s3.us-east-2.amazonaws.com/opmmarstiles/",
@@ -55,6 +78,7 @@ export const TILES_ALLOWED_URL_PREFIXES = [
   NSW_CCTV_FRAME_UPSTREAM,
   CALTRANS_CCTV_UPSTREAM,
   ...Object.values(TRANSIT_UPSTREAMS),
+  ...Object.values(FIRMS_UPSTREAMS),
   // CapMetro's fixed Socrata download endpoint redirects to a versioned file
   // path on the same public-data host.
   "https://data.texas.gov/api/views/",
@@ -65,6 +89,8 @@ export const TILES_ALLOWED_URL_PREFIXES = [
   "https://celestrak.org/NORAD/elements/supplemental/sup-gp.php",
   "https://ll.thespacedevs.com/2.3.0/launches/",
   "https://raw.githubusercontent.com/",
+  ODP_TILE_UPSTREAM,
+  ODP_FEATURES_UPSTREAM,
 ] as const;
 
 /** @deprecated Prefer {@link TILES_ALLOWED_URL_PREFIXES}; kept for tests/docs. */
