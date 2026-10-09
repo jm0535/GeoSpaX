@@ -8,6 +8,10 @@
     {
       "source": "/chelsa/:path*",
       "destination": "https://os.zhdk.cloud.switch.ch/chelsav2/:path*"
+    },
+    {
+      "source": "/copdem/:path*",
+      "destination": "https://copernicus-dem-90m.s3.amazonaws.com/:path*"
     }
   ]
 }
