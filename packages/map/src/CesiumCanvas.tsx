@@ -15,6 +15,7 @@ import { isSameView } from "./cesium-camera";
 import { installCesiumInteractions } from "./cesium-interactions";
 import { CesiumEngine } from "./cesium-engine";
 import { consumePendingIdentifyRestore } from "./map-identify-lifecycle";
+import type { MapDiagnosticEvent } from "./map-diagnostic";
 import type { BuiltInMapControl, MapEngine } from "./map-engine";
 import { applySelectionHighlight, selectionFitKey } from "./map-selection";
 import { CesiumControlHost, setPrimaryCesiumControlHost } from "./cesium-control-host";
@@ -114,6 +115,11 @@ export interface CesiumCanvasProps {
   controlLabels?: CesiumWidgetControlLabels;
   /** Translated accessible label for the Identify popup close button. */
   popupCloseLabel?: string;
+  /**
+   * Forwards a layer that failed to load to the app's Diagnostics panel, the
+   * way `MapCanvas` and `MapboxCanvas` forward their renderer failures.
+   */
+  onMapDiagnosticEvent?: (event: MapDiagnosticEvent) => void;
 }
 
 /**
@@ -160,6 +166,7 @@ export const CesiumCanvas = memo(function CesiumCanvas({
   onEngineReady,
   controlLabels,
   popupCloseLabel,
+  onMapDiagnosticEvent,
 }: CesiumCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<CesiumWidget | null>(null);
@@ -194,6 +201,8 @@ export const CesiumCanvas = memo(function CesiumCanvas({
   popupCloseLabelRef.current = popupCloseLabel;
   const controlLabelsRef = useRef(controlLabels);
   controlLabelsRef.current = controlLabels;
+  const onMapDiagnosticEventRef = useRef(onMapDiagnosticEvent);
+  onMapDiagnosticEventRef.current = onMapDiagnosticEvent;
 
   // No pane id means this globe *is* the primary map area, not a pane beside it.
   const isPrimary = viewId === undefined;
@@ -246,6 +255,11 @@ export const CesiumCanvas = memo(function CesiumCanvas({
   const basemapStyleUrl = useAppStore((s) => s.basemapStyleUrl);
   const cesiumBasemap = useAppStore((s) => s.preferences.map.cesiumBasemap);
   const terrainEnabled = useAppStore((s) => s.preferences.map.terrainEnabled);
+  // Select only the fields the globe applies: setPreferences replaces the whole
+  // preferences tree, so the `map` object changes on unrelated saves too.
+  const mapProjection = useAppStore((s) => s.preferences.map.projection);
+  const mapMinZoom = useAppStore((s) => s.preferences.map.minZoom);
+  const mapMaxZoom = useAppStore((s) => s.preferences.map.maxZoom);
   const basemapImagery = useMemo(
     () =>
       basemapToCesiumImagery(
@@ -400,6 +414,7 @@ export const CesiumCanvas = memo(function CesiumCanvas({
         const engine = new CesiumEngine(Cesium, viewer, {
           viewId: viewIdRef.current,
           worldTerrainAvailable: Boolean(token),
+          onDiagnostic: (event) => onMapDiagnosticEventRef.current?.(event),
         });
         engineInstanceRef.current = engine;
 
@@ -482,6 +497,7 @@ export const CesiumCanvas = memo(function CesiumCanvas({
         // first frame. Basemap first so it lands at the bottom of an empty
         // imagery stack rather than having to be lowered past the data layers.
         applyBasemap();
+        engine.applyMapPreferences(state.preferences.map);
         engine.syncLayers(paneLayersRef.current);
         if (isPrimaryRef.current)
           interactionCleanup.current = installCesiumInteractions(
@@ -514,8 +530,11 @@ export const CesiumCanvas = memo(function CesiumCanvas({
       // Clear the published ref before the engine is torn down, so nothing can
       // reach a destroyed engine through it. Only ours is cleared: a pane never
       // published one.
-      if (isPrimaryRef.current && engineRefProp.current?.current === engineInstanceRef.current) {
-        engineRefProp.current.current = null;
+      if (isPrimaryRef.current) {
+        useAppStore.getState().setCameraAltitude(null);
+        if (engineRefProp.current?.current === engineInstanceRef.current) {
+          engineRefProp.current.current = null;
+        }
       }
       engineInstanceRef.current = null;
       // The viewer's destroy() below tears the imagery down with it; just drop
@@ -558,6 +577,12 @@ export const CesiumCanvas = memo(function CesiumCanvas({
     const enabled = terrainEnabled;
     if (engine.isTerrainEnabled() !== enabled) engine.setTerrainEnabled(enabled);
   }, [ready, terrainEnabled, ionToken]);
+
+  // Push project map preferences (min/max zoom, projection) onto the engine.
+  useEffect(() => {
+    if (!ready) return;
+    engineInstanceRef.current?.applyMapPreferences(useAppStore.getState().preferences.map);
+  }, [ready, mapProjection, mapMinZoom, mapMaxZoom]);
 
   // Hiding or fading the background is a live appearance change, so it re-styles
   // the existing layers rather than rebuilding them.

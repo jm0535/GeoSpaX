@@ -4,7 +4,7 @@ import { parseHTML } from "linkedom";
 import { Cartesian2, Event as CesiumEvent, ScreenSpaceEventType } from "@cesium/engine";
 import { useAppStore } from "../packages/core/src/store";
 import { IDENTIFY_ALL_LAYERS_ID } from "../packages/core/src/store";
-import type { GeoLibreLayer } from "../packages/core/src/types";
+import { DEFAULT_LAYER_STYLE, type GeoLibreLayer } from "../packages/core/src/types";
 import { installCesiumInteractions } from "../packages/map/src/cesium-interactions";
 
 const original = {
@@ -81,7 +81,7 @@ function setup(options: { imagePopup?: boolean } = {}) {
       metadata: {},
       visible: true,
       opacity: 1,
-      style: {},
+      style: { ...DEFAULT_LAYER_STYLE },
       popup: {
         click,
         hover: true,
@@ -218,6 +218,36 @@ it("replaces the selection and popup on a second successful Identify click", () 
   assert.equal(f.document.querySelectorAll(".geolibre-identify-popup-root").length, 2);
 });
 
+it("keeps an identify-all popup open across unrelated store updates", () => {
+  const f = setup();
+  f.click();
+  useAppStore.setState({ selectedFeatureIds: [] });
+  useAppStore.getState().setPointerCoords([1, 2]);
+  assert.ok(f.document.querySelector(".geolibre-identify-popup"));
+});
+
+it("closes the identify popup when a layer or group it shows is hidden", () => {
+  const f = setup();
+  f.click();
+  const rename = useAppStore.getState().layers.map((layer) => ({ ...layer, name: "renamed" }));
+  useAppStore.setState({ layers: rename });
+  assert.ok(f.document.querySelector(".geolibre-identify-popup"));
+  useAppStore.setState({
+    layers: rename.map((layer) => (layer.id === "2" ? { ...layer, visible: false } : layer)),
+  });
+  assert.equal(f.document.querySelector(".geolibre-identify-popup"), null);
+
+  f.click();
+  useAppStore.setState({
+    layers: rename.map((layer) => (layer.id === "1" ? { ...layer, groupId: "g" } : layer)),
+    layerGroups: [{ id: "g", name: "G", collapsed: false, visible: true, opacity: 1 }],
+  });
+  assert.ok(f.document.querySelector(".geolibre-identify-popup"));
+  useAppStore.getState().setLayerGroupVisibility("g", false);
+  assert.equal(f.document.querySelector(".geolibre-identify-popup"), null);
+  useAppStore.setState({ layerGroups: [] });
+});
+
 it("flips a wide identify popup away from a point near the canvas edge", () => {
   const f = setup();
   f.clickAt(450, 250);
@@ -331,4 +361,40 @@ it("cancels queued hover and detaches handlers and subscriptions on teardown", (
   const before = f.highlights;
   useAppStore.getState().selectFeature("after-destroy");
   assert.equal(f.highlights, before);
+});
+
+it("clears the hover tooltip when the layer it shows is hidden", () => {
+  const f = setup();
+  useAppStore.setState({ identifyLayerId: null });
+  f.hover();
+  f.flush();
+  assert.ok(f.document.querySelector(".geolibre-hover-tooltip"));
+  const hide = (id: string) =>
+    useAppStore.setState({
+      layers: useAppStore
+        .getState()
+        .layers.map((layer) => (layer.id === id ? { ...layer, visible: false } : layer)),
+    });
+  // Hiding a layer the tooltip does not show leaves it in place.
+  hide("1");
+  assert.ok(f.document.querySelector(".geolibre-hover-tooltip"));
+  hide("0");
+  assert.equal(f.document.querySelector(".geolibre-hover-tooltip"), null);
+});
+
+it("turns hover off immediately and restores the configured layer on demand", () => {
+  const f = setup();
+  useAppStore.setState({ identifyLayerId: null });
+  f.hover();
+  f.flush();
+  assert.ok(f.document.querySelector(".geolibre-hover-tooltip"));
+  useAppStore.getState().setHoverTooltipsEnabled(false);
+  assert.equal(f.document.querySelector(".geolibre-hover-tooltip"), null);
+  f.hover();
+  f.flush();
+  assert.equal(f.document.querySelector(".geolibre-hover-tooltip"), null);
+  useAppStore.getState().setHoverTooltipsEnabled(true);
+  f.hover();
+  f.flush();
+  assert.ok(f.document.querySelector(".geolibre-hover-tooltip"));
 });

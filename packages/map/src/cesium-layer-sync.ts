@@ -1,11 +1,14 @@
 import { cesiumKmlSource, isCesiumKmlLayer } from "@geolibre/core";
 import { bindDocumentOpacity } from "./cesium-document-opacity";
+import { imageryColorAdjustments } from "./raster-color-adjustments";
 import {
+  allowsCredentialHeaders,
   cesiumIonAssetId,
   compileFeatureExpression,
   compileLayerFilters,
   czmlSource,
   DEFAULT_LAYER_STYLE,
+  extrusionColorValue,
   geojsonHasZCoordinates,
   getCesiumIonToken,
   isCzmlLayer,
@@ -13,12 +16,13 @@ import {
   resolveThreeDTilesRequestHeaders,
   ruleBasedVisibilityFilter,
   transformGeojsonElevation,
-  styleValue,
+  resolveProjectHeaderReferences,
+  useAppStore,
   type GeoLibreLayer,
   type LayerStyle,
 } from "@geolibre/core";
 import { featureFilter } from "@maplibre/maplibre-gl-style-spec";
-import type { Feature } from "geojson";
+import type { Feature, FeatureCollection } from "geojson";
 import { readMapViewFromCamera, zoomToDisplayDistance } from "./cesium-camera";
 import {
   cachingCogTiler,
@@ -28,7 +32,15 @@ import {
   type CogTilerModule,
 } from "./cesium-cog-imagery";
 import { drapeSignature, isDrapedLayer, MapLibreDrape } from "./cesium-drape";
-import { createFeatureStyleResolver, type FeatureStyleResolver } from "./cesium-feature-style";
+import {
+  applyZarrRender,
+  createZarrImageryProvider,
+  isZarrImageryProvider,
+  zarrOpenSignature,
+  type ZarrCesiumModule,
+} from "./cesium-zarr-imagery";
+import { getZarrStore } from "./zarr-source";
+import { createFeatureStyleResolver, type FeatureStyleResolver } from "./feature-style";
 import { createCesiumLabeler, pickLabelPart } from "./cesium-labels";
 import {
   buildPointCloudCollection,
@@ -49,11 +61,12 @@ import {
   type PointRenderPlan,
 } from "./cesium-points";
 import {
-  hasRegisteredProtocol,
+  mercatorBbox,
   ProtocolImageryProvider,
-  protocolScheme,
+  quadkey,
   webMercatorRectangle,
 } from "./cesium-protocol-imagery";
+import { hasRegisteredProtocol, protocolScheme } from "./protocol-tiles";
 import {
   compileTilesetStyle,
   tilesetStyleKey,
@@ -61,7 +74,14 @@ import {
 } from "./cesium-tileset-style";
 import { renderFillPatternCanvas } from "./fill-patterns";
 import { getLayerBounds } from "./geojson-loader";
-import { getPMTilesArchive } from "./layer-sync";
+import {
+  classifyLayer,
+  hasLayerKindSupport,
+  type LayerKind,
+  type SupportedLayerKinds,
+} from "./layer-kind";
+import { getPMTilesArchive } from "./pmtiles-archive";
+import { watchImageryTileHealth, type ImageryTileFailure } from "./cesium-imagery-tile-health";
 import { renderMarkerCanvas } from "./markers";
 import { normalizePMTilesUrl } from "./pmtiles-layer";
 import type { Header as PMTilesHeader } from "pmtiles";
@@ -82,9 +102,14 @@ import type {
   ImageryProvider,
   PointPrimitiveCollection,
   PointPrimitive,
+  Rectangle,
   Resource,
   TilingScheme,
 } from "@cesium/engine";
+
+// The imagery colour solve is shared with the ArcGIS engine
+// (raster-color-adjustments.ts); re-exported here for existing importers.
+export { imageryColorAdjustments };
 
 // Reconciles the store's `GeoLibreLayer[]` onto a Cesium globe, mirroring what
 // MapController.syncLayers does for MapLibre. M3 covers the layer kinds where
@@ -112,28 +137,41 @@ const SELECTED_ORBIT_STEPS = 180;
 /** Ground metres one fill-pattern tile spans on a draped polygon. */
 const PATTERN_TILE_METERS = 20;
 
+/** Flight time for a zoom-to-layer, matching the engine's own fits. */
+const ZOOM_TO_LAYER_SECONDS = 0.8;
+
+/**
+ * Entry kinds whose handle is one of the targets `Viewer.flyTo` frames. It
+ * reads their extent for us — a tileset's bounding sphere, an imagery layer's
+ * rectangle, a data source's entities — which is the whole reason a fit goes
+ * through the handle rather than the store. The two point kinds are left out:
+ * a `PointPrimitiveCollection` is not a flyTo target, and those layers carry
+ * bounds in the store anyway.
+ */
+const FLY_TO_KINDS = new Set<EntryKind>(["imagery", "geojson", "kml", "czml", "3dtiles"]);
+
 /** The subset of a Cesium `Event` the camera watch needs. */
 interface CameraEvent {
   addEventListener(listener: () => void): unknown;
   removeEventListener(listener: () => void): unknown;
 }
 
-/** Layer kinds this pass renders on the globe. */
-const IMAGERY_TYPES = new Set(["raster", "xyz", "wms", "wmts", "image"]);
-
 /**
- * Tile-archive kinds that render on the globe when the archive holds raster
- * tiles (issue #2283). Their vector form has no globe renderer (#2284), so the
- * predicate reads the archive's tile type rather than the layer type alone.
+ * Whether a PMTiles/MBTiles layer describes a raster archive. Tile archives
+ * render on the globe when the archive holds raster tiles (issue #2283); their
+ * vector form goes through the drape (#2284), so the predicate reads the
+ * archive's tile type rather than the layer type alone.
  */
-const RASTER_ARCHIVE_TYPES = new Set(["pmtiles", "mbtiles"]);
-
-/** Whether a PMTiles/MBTiles layer describes a raster archive. */
 function isRasterArchive(layer: GeoLibreLayer): boolean {
   return (
-    RASTER_ARCHIVE_TYPES.has(layer.type) &&
+    classifyLayer(layer) === "tile-archive" &&
     (layer.metadata?.tileType === "raster" || layer.source?.type === "raster")
   );
+}
+
+/** Whether this is a Zarr layer, which the globe draws through zarr-cesium (#2261). */
+function isZarrLayer(layer: GeoLibreLayer): boolean {
+  return layer.type === "zarr";
 }
 
 /** Whether this is a maplibre-gl-raster COG layer the globe can open itself. */
@@ -160,13 +198,13 @@ function isCogLayer(layer: GeoLibreLayer): boolean {
  * carrying a FeatureCollection renders through the GeoJSON path, so a producer
  * that starts populating `layer.geojson` needs no change here.
  */
-const NON_GEOJSON_TYPES = new Set([
-  ...IMAGERY_TYPES,
+const NON_GEOJSON_KINDS: ReadonlySet<LayerKind> = new Set<LayerKind>([
+  "raster-tiles",
+  "image",
   "3d-tiles",
   "cog",
   "vector-tiles",
-  "pmtiles",
-  "mbtiles",
+  "tile-archive",
   "deckgl-viz",
   "arcgis",
 ]);
@@ -258,12 +296,20 @@ interface LayerEntry {
   abort?: AbortController;
   /** Removes the one-shot tile listener that reads a tileset's attribute names. */
   fieldsListener?: () => void;
+  /** Stops counting an imagery entry's tile loads and failures. */
+  tileHealth?: () => void;
   documentCleanup?: () => void;
   overlayContainer?: HTMLElement;
   /** Static attribution registered for this layer while it is in the scene. */
   credit?: Credit;
   /** Set when the entry is removed mid-load so the resolved handle is discarded. */
   cancelled: boolean;
+  /**
+   * The request headers the entry was built with, resolved from `${NAME}`
+   * references (JSON). The layer keeps only the template, so a changed
+   * variable is detected by comparing this with a fresh resolution.
+   */
+  resolvedHeaders?: string;
   /**
    * Whether {@link handle} is actually in the scene. A geojson entry's handle is
    * assigned as soon as the data source loads, but the data source only joins
@@ -369,6 +415,12 @@ function str(value: unknown): string | undefined {
   return typeof value === "string" && value ? value : undefined;
 }
 
+/** A layer's attribution, escaped for a provider's `credit` option. */
+function layerCredit(layer: GeoLibreLayer): string | undefined {
+  const attribution = str(layer.source.attribution);
+  return attribution ? escapeCreditHtml(attribution) : undefined;
+}
+
 /** Treat project attribution as text before handing it to Cesium's HTML credit sink. */
 function escapeCreditHtml(value: string): string {
   return value.replace(/[&<>"']/g, (character) => {
@@ -382,28 +434,24 @@ function escapeCreditHtml(value: string): string {
   });
 }
 
+/** See {@link allowsCredentialHeaders}; shared with the 2D 3D Tiles renderers. */
+const allowsCredentials = allowsCredentialHeaders;
+
 /**
- * Whether credential-bearing request headers may be sent to this URL.
- *
- * The scheme is read off a parsed URL rather than matched as a prefix, so an
- * unusually-cased `HTTPS://` from a hand-authored or MCP-generated project is
- * normalized instead of being misread as plaintext. A relative or unparseable
- * URL throws and is refused, matching `isAllowedPluginManifestUrl` in
- * `@geolibre/core`.
+ * A Cesium proxy that refuses any request a credential-bearing resource would
+ * send to a non-secure URL. Cesium hands the proxy to every resource derived
+ * from the tileset's, so child tiles named by absolute `http:` URLs in the
+ * tileset JSON fail instead of receiving the headers.
  */
-function allowsCredentials(url: string): boolean {
-  try {
-    const { protocol, hostname } = new URL(url);
-    if (protocol === "https:") return true;
-    // Loopback over http so a local dev tile server still works.
-    return (
-      protocol === "http:" &&
-      (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]")
-    );
-  } catch {
-    return false;
-  }
-}
+const CREDENTIAL_PROXY = {
+  getURL(url: string): string {
+    // `data:`/`blob:` never leave the process (embedded glTF buffers).
+    if (!/^(?:data|blob):/i.test(url) && !allowsCredentials(url)) {
+      throw new Error(`Request headers are not sent over ${url}`);
+    }
+    return url;
+  },
+};
 
 function firstTile(layer: GeoLibreLayer): string | undefined {
   const tiles = layer.source.tiles;
@@ -415,7 +463,11 @@ function tilesetUrl(layer: GeoLibreLayer): string | undefined {
 }
 
 function hasGeoJsonCollection(layer: GeoLibreLayer): boolean {
-  return !NON_GEOJSON_TYPES.has(layer.type) && layer.geojson?.type === "FeatureCollection";
+  const kind = classifyLayer(layer);
+  return (
+    !(kind !== undefined && NON_GEOJSON_KINDS.has(kind)) &&
+    layer.geojson?.type === "FeatureCollection"
+  );
 }
 
 function hasRenderableGeoJson(layer: GeoLibreLayer): boolean {
@@ -532,23 +584,64 @@ function wmtsCapabilities(
 }
 
 /**
+ * What the globe's kind dispatch ({@link isCesiumSupportedLayerType}) does with
+ * each layer kind. The globe has no plugin controls, so every kind it draws is
+ * `"native"` (some only for certain data: a raster archive, a draped style, a
+ * tileset URL). The `"unsupported"` kinds stay in the 2D panes, unless their
+ * record carries a FeatureCollection, CZML or KML, which the globe draws
+ * whatever the kind.
+ */
+export const CESIUM_SUPPORTED_LAYER_KINDS = Object.freeze({
+  geojson: "native",
+  "raster-tiles": "native",
+  "vector-tiles": "native",
+  arcgis: "native",
+  "tile-archive": "native",
+  zarr: "native",
+  lidar: "native",
+  "gaussian-splat": "native",
+  "3d-tiles": "native",
+  cog: "native",
+  "vector-file": "unsupported",
+  "duckdb-query": "unsupported",
+  "deckgl-viz": "unsupported",
+  video: "unsupported",
+  image: "native",
+} as const satisfies SupportedLayerKinds);
+
+/**
  * Whether the globe can render this layer *kind* at all (regardless of whether
  * its data has loaded yet). Exported so the UI can flag "2D only" layers on a
  * globe pane. See the module header for the supported kinds.
  */
 export function isCesiumSupportedLayerType(layer: GeoLibreLayer): boolean {
-  return (
-    isCzmlLayer(layer) ||
-    isCesiumKmlLayer(layer) ||
-    hasGeoJsonCollection(layer) ||
-    layer.type === "geojson" ||
-    isTilesetLayer(layer) ||
-    isDecodedPointCloudLayer(layer) ||
-    IMAGERY_TYPES.has(layer.type) ||
-    isRasterArchive(layer) ||
-    isCogLayer(layer) ||
-    isDrapedLayer(layer)
-  );
+  // Decided by the data whatever the kind: a CZML or KML document, or a
+  // FeatureCollection on a kind that takes the GeoJSON path.
+  if (isCzmlLayer(layer) || isCesiumKmlLayer(layer) || hasGeoJsonCollection(layer)) return true;
+  const kind = classifyLayer(layer);
+  // No globe renderer (vector files, DuckDB queries, deck.gl, video), or an
+  // unknown type: these stay in the 2D panes.
+  if (hasLayerKindSupport(CESIUM_SUPPORTED_LAYER_KINDS, kind, "unsupported")) return false;
+  switch (kind) {
+    // GeoJSON (loaded or not yet), imagery (tile templates and a georeferenced
+    // image as a single-tile provider) and COGs, which the globe opens itself.
+    case "geojson":
+    case "raster-tiles":
+    case "image":
+    case "cog":
+    case "zarr":
+      return true;
+    case "3d-tiles":
+    case "gaussian-splat":
+      return isTilesetLayer(layer);
+    case "lidar":
+      return isTilesetLayer(layer) || isDecodedPointCloudLayer(layer);
+    case "tile-archive":
+      return isRasterArchive(layer) || isDrapedLayer(layer);
+    case "vector-tiles":
+    case "arcgis":
+      return isDrapedLayer(layer);
+  }
 }
 
 /** Whether this layer can render on the globe now (kind supported + data ready). */
@@ -595,6 +688,13 @@ function isSupported(layer: GeoLibreLayer): boolean {
     return Boolean(wmtsCapabilities(layer)) || Boolean(firstTile(layer));
   }
   if (isCogLayer(layer)) return Boolean(cogSourceUrl(layer));
+  // A registered store (a local folder, an Icechunk repository) stands in for
+  // the URL; zarr-cesium needs one or the other plus the variable.
+  if (isZarrLayer(layer))
+    return (
+      Boolean(str(layer.source.variable)) &&
+      (Boolean(str(layer.source.url)) || Boolean(getZarrStore(layer.id)))
+    );
   if (layer.type === "pmtiles") return Boolean(pmtilesArchiveUrl(layer));
   return Boolean(firstTile(layer));
 }
@@ -626,98 +726,6 @@ function tilesLoaded(handle: Cesium3DTileset | I3SDataProvider): boolean {
 function pmtilesArchiveUrl(layer: GeoLibreLayer): string | undefined {
   const raw = str(layer.source.url) ?? str(layer.sourcePath);
   return raw ? normalizePMTilesUrl(raw) : undefined;
-}
-
-// Floor for the contrast handed to Cesium. MapLibre can ask for a black point
-// at or above mid-grey, which Cesium's brightness/contrast pair cannot express
-// (see imageryColorAdjustments); flooring the contrast keeps the stretch exact
-// and degrades only the lift, instead of letting the brightness factor run away.
-const MIN_IMAGERY_CONTRAST = 0.1;
-
-/**
- * Cesium's `ImageryLayer` colour controls for a layer's raster symbology.
- *
- * MapLibre and Cesium run the same four operations, but with different curves,
- * different neutral points, and a different order, so this is not a
- * property-by-property rename. Writing MapLibre's raster shader in order (hue
- * spin, saturation, contrast, brightness) and Cesium's `sampleAndBlend` in
- * order (brightness, contrast, hue, saturation):
- *
- * | step       | MapLibre                       | Cesium                     |
- * | ---------- | ------------------------------ | -------------------------- |
- * | saturation | `rgb += (avg - rgb) * f`       | `luma + (rgb - luma) * a`  |
- * | contrast   | `(rgb - 0.5) * k + 0.5`        | `0.5 + (rgb - 0.5) * k'`   |
- * | brightness | `mix(min, max, rgb)`           | `rgb * b`                  |
- *
- * where MapLibre derives `f` and `k` through
- * `f = s > 0 ? 1 - 1 / (1.001 - s) : -s` and `k = c > 0 ? 1 / (1 - c) : 1 + c`.
- *
- * Two things follow. Both curves bend above 0, so `1 + value` tracks MapLibre
- * only on the negative half and would leave the globe visibly flatter than the
- * 2D map for any positive contrast or saturation; both are mirrored exactly
- * here. (MapLibre pivots saturation on the channel average and Cesium on
- * luminance. That pivot is not something `ImageryLayer` exposes; the multiplier
- * is the part that translates.)
- *
- * And MapLibre's brightness is a *window*, not a gain: it scales by the
- * window's width and lifts the black point to `min`. Mapping the window onto
- * `brightness` alone would drop the width, so the globe would miss the
- * flattening that a narrowed window produces on the 2D map. Cesium has no
- * window, but its brightness and contrast compose into the same shape of
- * affine map, so the two are solved for together. With MapLibre's composed
- * contrast and brightness written as `out = S * in + I`:
- *
- *     S = k * (max - min)          I = (min + max) / 2 - S / 2
- *
- * and Cesium's composed brightness and contrast as
- * `out = (b * k') * in + 0.5 * (1 - k')`, matching slope and intercept gives
- * `k' = 1 - 2I` and `b = S / k'`. The one shape Cesium cannot reach is
- * `I >= 0.5`, hence {@link MIN_IMAGERY_CONTRAST}.
- */
-export function imageryColorAdjustments(style: LayerStyle | undefined): {
-  brightness: number;
-  contrast: number;
-  saturation: number;
-  hue: number;
-} {
-  const s = style ?? DEFAULT_LAYER_STYLE;
-  const num = (value: unknown, fallback: number) =>
-    typeof value === "number" && Number.isFinite(value) ? value : fallback;
-  const unit = (value: unknown, fallback: number) =>
-    Math.min(1, Math.max(-1, num(value, fallback)));
-  const min = num(styleValue(s, "rasterBrightnessMin"), 0);
-  const max = num(styleValue(s, "rasterBrightnessMax"), 1);
-  // The raster paint spec bounds both to [-1, 1] and MapLibre clamps on parse,
-  // so a store value outside it would already be rendering differently in 2D.
-  const contrast = unit(styleValue(s, "rasterContrast"), 0);
-  const saturation = unit(styleValue(s, "rasterSaturation"), 0);
-
-  // MapLibre's own curve, `1 / (1 - contrast)`, is +Infinity at contrast 1,
-  // which is reachable: the Style panel's slider stops there. MapLibre hands that
-  // Infinity to the shader and the framebuffer clamps it into a hard threshold
-  // at mid-grey; here it would poison the slope/intercept solve below and set
-  // brightness to NaN. Flooring the denominator keeps the curve exact
-  // everywhere it is finite and turns the endpoint into the same very hard
-  // threshold, rather than bending the whole positive half to dodge one point.
-  const mapLibreContrast = contrast > 0 ? 1 / Math.max(1e-4, 1 - contrast) : 1 + contrast;
-  const slope = mapLibreContrast * (max - min);
-  const intercept = (min + max) / 2 - slope / 2;
-  // A flat result (contrast -1, or a zero-width window) wants a contrast of 0,
-  // which Cesium reaches exactly, so only floor the contrast when there is a
-  // slope to divide by. Flooring unconditionally would leave the fully
-  // flattened case a few percent off a target it can hit.
-  const exactContrast = 1 - 2 * intercept;
-  const cesiumContrast =
-    slope > 0 ? Math.max(MIN_IMAGERY_CONTRAST, exactContrast) : Math.max(0, exactContrast);
-
-  return {
-    brightness: slope > 0 ? slope / cesiumContrast : 0,
-    contrast: cesiumContrast,
-    // 1.001 is MapLibre's own constant in saturationFactor, not a guard added
-    // here; it is why this curve has no endpoint problem of its own.
-    saturation: saturation > 0 ? 1 / (1.001 - saturation) : Math.max(0, 1 + saturation),
-    hue: (num(styleValue(s, "rasterHueRotate"), 0) * Math.PI) / 180,
-  };
 }
 
 /**
@@ -819,6 +827,9 @@ function needsRebuild(prev: GeoLibreLayer, next: GeoLibreLayer): boolean {
       return (
         cesiumIonAssetId(prev) !== cesiumIonAssetId(next) ||
         (isCogLayer(next) && cogRenderSignature(prev) !== cogRenderSignature(next)) ||
+        // Selector, colour limits and ramp are applied to the live provider in
+        // sync(); only what the store is opened with rebuilds it.
+        (isZarrLayer(next) && zarrOpenSignature(prev) !== zarrOpenSignature(next)) ||
         str(prev.metadata?.tileType) !== str(next.metadata?.tileType) ||
         // The Y-axis convention and the coverage rectangle bake into the
         // bridged provider.
@@ -830,6 +841,8 @@ function needsRebuild(prev: GeoLibreLayer, next: GeoLibreLayer): boolean {
         prev.source.maxzoom !== next.source.maxzoom ||
         prev.source.minzoom !== next.source.minzoom ||
         str(prev.source.url) !== str(next.source.url) ||
+        // Provider credits are fixed at construction.
+        str(prev.source.attribution) !== str(next.source.attribution) ||
         str(prev.metadata?.sourceKind) !== str(next.metadata?.sourceKind) ||
         str(prev.sourcePath) !== str(next.sourcePath) ||
         str(prev.metadata?.arcgisSublayers) !== str(next.metadata?.arcgisSublayers) ||
@@ -900,6 +913,8 @@ export interface CesiumLayerSyncDeps {
   ionToken?: () => string | undefined;
   /** Loads the COG tiler module; defaults to `import("cog-tiler-wasm")`. */
   loadCogTiler?: () => Promise<CogTilerModule>;
+  /** Loads the Zarr imagery module; defaults to `import("zarr-cesium")`. */
+  loadZarrCesium?: () => Promise<ZarrCesiumModule>;
   /**
    * Reads a raster PMTiles archive's header; defaults to the shared
    * `pmtiles://` protocol's archive (a range request over HTTP).
@@ -926,11 +941,567 @@ export interface CesiumLayerSyncDeps {
    * control-managed vector layers; omitted, the discovery is skipped.
    */
   onTilesetFields?: (layerId: string, fields: string[]) => void;
+  /**
+   * Called when {@link CesiumLayerSync.zoomToLayer} actually starts a flight,
+   * which for a layer still loading is later than the request. The engine uses
+   * it to stop its terrain correction pulling the flight back (#2878), and only
+   * once the camera is really leaving its placement.
+   */
+  onFlyTo?: () => void;
+  /** Called when a flight started by `onFlyTo` completes (not when cancelled). */
+  onFlyToComplete?: () => void;
+  /**
+   * Reports a layer that failed to load, so the app can show it the way the 2D
+   * renderers show theirs (the Diagnostics panel). Without this a failure is
+   * invisible: the record stays in the Layers panel and the globe simply draws
+   * nothing — the shape an Ion asset takes when the account cannot stream it.
+   */
+  onLayerError?: (error: { layerId: string; layerName: string; message: string }) => void;
+  /**
+   * Reports one failed imagery tile with the layer's tile tallies so far, so
+   * the app can tell a broken URL or a rejected key (every tile fails) from a
+   * sparse tile set (some tiles are simply absent). Capped per layer; see
+   * `cesium-imagery-tile-health.ts`.
+   */
+  onTileFailure?: (failure: ImageryTileFailure & { layerId: string; layerName: string }) => void;
 }
 
 async function readSharedPMTilesHeader(url: string): Promise<PMTilesRasterHeader | undefined> {
   const archive = getPMTilesArchive(url);
   return archive ? archive.getHeader() : undefined;
+}
+
+// --- Imagery providers ------------------------------------------------------
+// The per-branch provider builders behind CesiumLayerSync.createImagery. Each
+// takes the layer and returns the provider (or the promise of one) exactly as
+// the branch it was lifted from built it.
+
+/**
+ * What {@link CesiumLayerSync} gets back when it starts building an imagery
+ * provider: the provider itself for the synchronous branches, or a pending
+ * one (`null` when the layer was removed before a provider existed).
+ */
+type ImageryProviderRequest =
+  | { isAsync: false; provider: ImageryProvider }
+  | { isAsync: true; pending: Promise<ImageryProvider | null> };
+
+/** Turns a provider URL into what the provider's `url` option takes. */
+type ImageryResourceFactory = (url: string) => string | Resource;
+
+/** Refuses (throws) when `what` cannot be sent to `url` over plaintext. */
+type RequireSecure = (url: string, what: string) => void;
+
+/** A layer's request headers with `${NAME}` resolved, as JSON for comparison. */
+function resolvedRequestHeaders(layer: GeoLibreLayer): string {
+  return JSON.stringify(
+    resolveProjectHeaderReferences(
+      layer.source.requestHeaders as Record<string, string> | undefined,
+    ) ?? null,
+  );
+}
+
+/**
+ * The credential guard and the URL → `Resource` wrapper every imagery branch
+ * builds its provider `url` with.
+ */
+function imageryResourceFactory(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+): { requireSecure: RequireSecure; makeResource: ImageryResourceFactory } {
+  const headers = resolveProjectHeaderReferences(
+    layer.source.requestHeaders as Record<string, string> | undefined,
+  );
+  const hasHeaders = Boolean(headers && Object.keys(headers).length);
+  // Credentials (request headers, an ArcGIS token) never go out over
+  // plaintext — loopback excepted, so a local dev tile server still works.
+  // Residual exposure: Cesium.Resource issues these through XHR/fetch, which
+  // give no redirect control, so a service that 3xx-redirects cross-origin
+  // still sees non-Authorization headers replayed (the browser strips only
+  // Authorization). CORS preflight means the redirect target must opt into
+  // the header by name, and the endpoint is user-configured, so this is
+  // accepted rather than proxied.
+  // Refusing the whole layer beats quietly stripping them: an
+  // unauthenticated request would look like a working layer that renders
+  // nothing. The outer catch turns this into the same best-effort skip a
+  // failing provider already gets.
+  const requireSecure = (url: string, what: string) => {
+    if (allowsCredentials(url)) return;
+    console.warn(
+      `[GeoLibre] skipping "${layer.name}" on the globe: ${what} cannot be sent over ${url}`,
+    );
+    throw new Error("credentials require https");
+  };
+  // Every provider's `url` option is typed `Resource | string`, so the
+  // union is passed through as-is rather than cast.
+  const makeResource = (url: string): string | Resource => {
+    if (!hasHeaders) return url;
+    requireSecure(url, "request headers");
+    return new Cesium.Resource({ url, headers });
+  };
+  return { requireSecure, makeResource };
+}
+
+/** An ArcGIS MapServer through its own REST surface (`/export`), not a tile template. */
+function arcgisMapServerImageryProvider(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+  makeResource: ImageryResourceFactory,
+  requireSecure: RequireSecure,
+): Promise<ImageryProvider> {
+  const url = String(layer.sourcePath);
+  const resource = makeResource(url);
+  const sublayers = str(layer.metadata?.arcgisSublayers);
+  // arcgis-layer.ts writes a bare id list ("0,2,5"); the `show:` prefix only
+  // ever appears in the tile URL's query string. Stripping it here is purely
+  // defensive, for a hand-authored or MCP project that copies the ArcGIS
+  // `layers=show:0,1` param form straight into the metadata field.
+  const cleanLayers = sublayers?.replace(/^show:/i, "").trim() || undefined;
+  const options: Record<string, unknown> = {};
+  if (cleanLayers) options.layers = cleanLayers;
+  const token = arcgisToken(layer);
+  if (token) {
+    requireSecure(url, "an access token");
+    options.token = token;
+  }
+
+  return Cesium.ArcGisMapServerImageryProvider.fromUrl(resource, options);
+}
+
+/** A georeferenced image as one tile stretched over its bounds. */
+function singleImageImageryProvider(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+  makeResource: ImageryResourceFactory,
+): Promise<ImageryProvider> {
+  const url = String(layer.source.url);
+  const bounds = imageBounds(layer);
+  if (!bounds) throw new Error("the image layer has no usable bounds");
+  const resource = makeResource(url);
+  const rectangle = Cesium.Rectangle.fromDegrees(bounds[0], bounds[1], bounds[2], bounds[3]);
+  const options = { rectangle };
+
+  return Cesium.SingleTileImageryProvider.fromUrl(resource, options);
+}
+
+/** A WMS endpoint queried directly (no tile template). */
+function wmsImageryProvider(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+  makeResource: ImageryResourceFactory,
+): ImageryProvider {
+  const url = String(layer.source.url);
+  const resource = makeResource(url);
+  return new Cesium.WebMapServiceImageryProvider({
+    url: resource,
+    layers: String(layer.source.layers ?? ""),
+    parameters: {
+      transparent: layer.source.transparent !== false,
+      format: str(layer.source.format) ?? "image/png",
+      styles: str(layer.source.styles) ?? "",
+      version: str(layer.source.version) ?? "1.1.1",
+    },
+    credit: layerCredit(layer),
+  });
+}
+
+/** A capabilities-driven WMTS layer (see {@link wmtsCapabilities}). */
+function wmtsImageryProvider(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+  wmtsCaps: NonNullable<ReturnType<typeof wmtsCapabilities>>,
+  makeResource: ImageryResourceFactory,
+): ImageryProvider {
+  const url = wmtsCaps.url;
+  const resource = makeResource(url);
+  const maxLevel = Number(layer.source.maxzoom);
+  const minLevel = Number(layer.source.minzoom);
+  // No UI writes `tilingScheme`/`tileMatrixLabels` today; they come from a
+  // hand-authored or MCP-generated `.geolibre.json` (`source` is a
+  // free-form record), which is how non-default WMTS matrix sets are
+  // expressed. Left in so those projects render on the globe.
+  const schemeId = str(layer.source.tilingScheme);
+  let tilingScheme: TilingScheme | undefined;
+  if (schemeId) {
+    if (schemeId === "GeographicTilingScheme") tilingScheme = new Cesium.GeographicTilingScheme();
+    else if (schemeId === "WebMercatorTilingScheme")
+      tilingScheme = new Cesium.WebMercatorTilingScheme();
+    else {
+      // Warn rather than bail silently: the layer still reads as
+      // globe-supported in the layer menu, so a mute skip looks like a
+      // broken renderer.
+      console.warn(
+        `[GeoLibre] skipping "${layer.name}" on the globe: unsupported WMTS tiling scheme "${schemeId}"`,
+      );
+      throw new Error(`unsupported WMTS tiling scheme "${schemeId}"`);
+    }
+  }
+  const labels = layer.source.tileMatrixLabels;
+  const tileMatrixLabels = Array.isArray(labels) ? labels.map(String) : undefined;
+
+  return new Cesium.WebMapTileServiceImageryProvider({
+    url: resource,
+    layer: wmtsCaps.layer,
+    style: str(layer.source.style) ?? str(layer.source.styles) ?? "",
+    // Cesium's own WebMapTileServiceImageryProvider default. The WMS
+    // branch above defaults to image/png instead because WMS overlays are
+    // usually drawn transparent over the globe, while WMTS sets are
+    // typically opaque base imagery — the asymmetry is deliberate.
+    format: str(layer.source.format) ?? "image/jpeg",
+    tileMatrixSetID: wmtsCaps.tileMatrixSetID,
+    maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
+    minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
+    tilingScheme,
+    tileMatrixLabels,
+    credit: layerCredit(layer),
+  });
+}
+
+/**
+ * The fallback: the layer's first tile template, over HTTP or through a
+ * custom protocol MapLibre registered.
+ */
+function tileTemplateImageryProvider(
+  Cesium: CesiumNs,
+  layer: GeoLibreLayer,
+  makeResource: ImageryResourceFactory,
+): ImageryProvider {
+  const url = firstTile(layer);
+  if (!url) throw new Error("no tile URL template");
+  const maxLevel = Number(layer.source.maxzoom);
+  const minLevel = Number(layer.source.minzoom);
+  const scheme = protocolScheme(url);
+  const bounds = layer.source.bounds;
+  const rectangle =
+    Array.isArray(bounds) &&
+    bounds.length === 4 &&
+    bounds.every((v) => typeof v === "number" && Number.isFinite(v))
+      ? webMercatorRectangle(Cesium, bounds as [number, number, number, number])
+      : undefined;
+  // The tile size drives Cesium's level selection the way it drives
+  // MapLibre's, so a 512 px source fetches the same zoom on both.
+  const tileSize = Number(layer.source.tileSize);
+  const tileWidth = Number.isFinite(tileSize) && tileSize > 0 ? tileSize : undefined;
+  if (scheme) {
+    // A custom-protocol template (local MBTiles, the desktop's native
+    // XYZ/WMS fetcher, a KML super-overlay, the COG DEM): the tiles come
+    // from the handler MapLibre registered, not from HTTP. An
+    // unregistered scheme is refused rather than rendered blank, so the
+    // layer reads as failed instead of as a working layer drawing
+    // nothing.
+    if (!hasRegisteredProtocol(scheme))
+      throw new Error(`no MapLibre protocol handler registered for "${scheme}://"`);
+    return new ProtocolImageryProvider(Cesium, {
+      template: url,
+      scheme: layer.source.scheme === "tms" ? "tms" : "xyz",
+      tileWidth,
+      tileHeight: tileWidth,
+      rectangle,
+      maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
+      minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
+      credit: layerCredit(layer),
+    });
+  }
+  let finalUrl = url;
+  if (layer.source.scheme === "tms") {
+    finalUrl = finalUrl.replace(/\{y\}/g, "{-y}");
+  }
+  const resource = makeResource(finalUrl);
+  return new Cesium.UrlTemplateImageryProvider({
+    url: resource,
+    tileWidth,
+    tileHeight: tileWidth,
+    rectangle,
+    maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
+    minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
+    credit: layerCredit(layer),
+    customTags: {
+      "bbox-epsg-3857": (_p: unknown, x: number, y: number, level: number) =>
+        mercatorBbox(level, x, y),
+      quadkey: (_p: unknown, x: number, y: number, level: number) => quadkey(level, x, y),
+      "-y": (_p: unknown, _x: number, y: number, level: number) => String(2 ** level - 1 - y),
+      ratio: () => "",
+    },
+  });
+}
+
+// --- GeoJSON entities -------------------------------------------------------
+// The per-entity passes behind CesiumLayerSync.createGeoJson.
+
+/**
+ * The private property that carries a feature's index onto its entities.
+ * Cesium splits multipart geometries into several entities. A private
+ * property survives that split; feature ids alone do not (Cesium suffixes them).
+ */
+const FEATURE_INDEX_KEY = "__geolibre_cesium_feature_index";
+
+/**
+ * A copy of `collection` whose features carry a stable id and their index
+ * (under {@link FEATURE_INDEX_KEY}), so each entity maps back to its feature.
+ */
+function indexedFeatureCollection(
+  layerId: string,
+  collection: FeatureCollection,
+): FeatureCollection {
+  return {
+    ...collection,
+    features: collection.features.map((feature, index) => ({
+      ...feature,
+      id: JSON.stringify([layerId, index]),
+      properties: { ...feature.properties, [FEATURE_INDEX_KEY]: index },
+    })),
+  };
+}
+
+/** The feature index an entity carries (see {@link indexedFeatureCollection}). */
+function entityFeatureIndex(viewer: CesiumWidget, entity: Entity): number {
+  const propIndex = entity.properties?.[FEATURE_INDEX_KEY];
+  return typeof propIndex?.getValue === "function"
+    ? propIndex.getValue(viewer.clock?.currentTime)
+    : propIndex;
+}
+
+/** How the height passes write entity graphics properties. */
+interface EntityHeightWriters {
+  /** `HeightReference.RELATIVE_TO_GROUND`. */
+  heightRef: number;
+  /** Wraps a value in a `ConstantProperty` when Cesium provides one. */
+  makeProp: (v: unknown) => unknown;
+  /** Wraps a colour in a `ColorMaterialProperty` when Cesium provides one. */
+  makeMat: (c: unknown) => unknown;
+  /** Whether a polygon keeps each vertex's own height (see below). */
+  perPositionHeight: (polygon: { perPositionHeight?: unknown }) => boolean;
+}
+
+/**
+ * The property writers the extrusion and 3D-elevation passes share.
+ *
+ * Cesium flags a polygon whose ring carries Z as perPositionHeight and then
+ * ignores height/heightReference on it (with a one-time console warning),
+ * keeping each vertex's own ellipsoid height. Only flat polygons take the
+ * terrain-relative references.
+ */
+function entityHeightWriters(Cesium: CesiumNs, viewer: CesiumWidget): EntityHeightWriters {
+  const heightRef = (Cesium.HeightReference?.RELATIVE_TO_GROUND ?? 2) as number;
+  const ConstantProperty = (Cesium as { ConstantProperty?: new (v: unknown) => unknown })
+    .ConstantProperty;
+  const ColorMaterialProperty = (
+    Cesium as {
+      ColorMaterialProperty?: new (c: unknown) => unknown;
+    }
+  ).ColorMaterialProperty;
+  const makeProp = (v: unknown) => (ConstantProperty ? new ConstantProperty(v) : v);
+  const makeMat = (c: unknown) =>
+    ColorMaterialProperty ? new ColorMaterialProperty(c) : { color: c };
+  const perPositionHeight = (polygon: { perPositionHeight?: unknown }): boolean => {
+    const prop = polygon.perPositionHeight as
+      | { getValue?: (time: unknown) => unknown }
+      | boolean
+      | undefined;
+    return Boolean(
+      typeof prop === "object" && typeof prop.getValue === "function"
+        ? prop.getValue(viewer.clock?.currentTime)
+        : prop,
+    );
+  };
+  return { heightRef, makeProp, makeMat, perPositionHeight };
+}
+
+/** Highest Z on a polygon feature's rings (0 when none carries a height). */
+function ringTopAltitude(feature: Feature | null): number {
+  const geometry = feature?.geometry;
+  const polygons =
+    geometry?.type === "Polygon"
+      ? [geometry.coordinates]
+      : geometry?.type === "MultiPolygon"
+        ? geometry.coordinates
+        : [];
+  let top = Number.NEGATIVE_INFINITY;
+  for (const rings of polygons)
+    for (const ring of rings)
+      for (const position of ring) {
+        const z = position[2];
+        if (typeof z === "number" && Number.isFinite(z) && z > top) top = z;
+      }
+  return Number.isFinite(top) ? top : 0;
+}
+
+/**
+ * The extrusion's optional per-feature height and colour expressions,
+ * compiled once per layer; either is undefined when unset or invalid.
+ */
+function compileExtrusionEvaluators(
+  style: LayerStyle,
+  extColorVal: ReturnType<typeof extrusionColorValue>,
+): {
+  heightEvaluator: ((f: Feature) => unknown) | undefined;
+  colorEvaluator: ((f: Feature) => unknown) | undefined;
+} {
+  let heightEvaluator: ((f: Feature) => unknown) | undefined;
+  if (style.extrusionAdvancedStyleEnabled && style.extrusionHeightExpression) {
+    const res = compileFeatureExpression(style.extrusionHeightExpression, {
+      expectedType: "number",
+    });
+    if (res.ok && res.evaluate) heightEvaluator = res.evaluate;
+  }
+
+  let colorEvaluator: ((f: Feature) => unknown) | undefined;
+  let colorExprStr: string | null = null;
+  if (typeof extColorVal !== "string") {
+    colorExprStr = JSON.stringify(extColorVal);
+  } else if (style.extrusionAdvancedStyleEnabled && style.extrusionColorExpression) {
+    colorExprStr = style.extrusionColorExpression;
+  }
+  if (colorExprStr) {
+    const res = compileFeatureExpression(colorExprStr, {
+      expectedType: "color",
+    });
+    if (res.ok && res.evaluate) colorEvaluator = res.evaluate;
+  }
+  return { heightEvaluator, colorEvaluator };
+}
+
+/**
+ * Extrude every polygon entity: its roof height from the height expression
+ * or property, its colour from the colour expression or the flat extrusion
+ * colour, both faded by the extrusion opacity.
+ */
+function applyGeoJsonExtrusion(
+  Cesium: CesiumNs,
+  viewer: CesiumWidget,
+  dataSource: DataSource,
+  style: LayerStyle,
+  features: FeatureCollection["features"],
+  extOpacity: number,
+  writers: EntityHeightWriters,
+): void {
+  const { heightRef, makeProp, makeMat, perPositionHeight } = writers;
+  const heightProp = style.extrusionHeightProperty?.trim() || "height";
+  const heightScale = Number.isFinite(style.extrusionHeightScale)
+    ? (style.extrusionHeightScale as number)
+    : 1;
+  const base = Number.isFinite(style.extrusionBase) ? (style.extrusionBase as number) : 0;
+  const extColorVal = extrusionColorValue(style);
+  const extColorStr =
+    typeof extColorVal === "string"
+      ? extColorVal
+      : style.extrusionColor || style.fillColor || "#3b82f6";
+  const { heightEvaluator, colorEvaluator } = compileExtrusionEvaluators(style, extColorVal);
+
+  // Parsed once: a full 3D-buildings layer would otherwise re-parse the
+  // same CSS string per polygon. withAlpha() below returns a fresh Color.
+  const baseColor = Cesium.Color.fromCssColorString(extColorStr);
+  for (const entity of dataSource.entities.values) {
+    if (!entity.polygon) continue;
+    const index = entityFeatureIndex(viewer, entity);
+    const feat = Number.isInteger(index) && features ? features[index] : null;
+
+    const height = extrusionFeatureHeight(viewer, entity, feat, heightEvaluator, heightProp);
+
+    // Never below the base: a negative height property or expression would
+    // otherwise put the roof under the floor.
+    const relativeTop = Math.max(base, height * heightScale + base);
+    // With perPositionHeight Cesium takes each vertex's own height as the
+    // base but reads extrudedHeight as an absolute altitude, so lift the
+    // roof by the ring's highest vertex; otherwise it would extrude down
+    // to `relativeTop` metres above the ellipsoid.
+    const extrudedHeight = perPositionHeight(entity.polygon)
+      ? ringTopAltitude(feat) + relativeTop
+      : relativeTop;
+
+    const resolvedColor = extrusionFeatureColor(Cesium, baseColor, feat, colorEvaluator);
+
+    entity.polygon.extrudedHeight = makeProp(extrudedHeight) as never;
+    if (!perPositionHeight(entity.polygon)) {
+      entity.polygon.height = makeProp(base) as never;
+      entity.polygon.heightReference = makeProp(heightRef) as never;
+      entity.polygon.extrudedHeightReference = makeProp(heightRef) as never;
+    }
+    entity.polygon.material = makeMat(resolvedColor.withAlpha(extOpacity)) as never;
+  }
+}
+
+/**
+ * A polygon entity's raw extrusion height (before scale and base): the height
+ * expression, else the feature's height property, else the entity's own
+ * property when the entity maps to no feature; 0 when none is a number.
+ */
+function extrusionFeatureHeight(
+  viewer: CesiumWidget,
+  entity: Entity,
+  feat: Feature | null,
+  heightEvaluator: ((f: Feature) => unknown) | undefined,
+  heightProp: string,
+): number {
+  let rawHeight: unknown;
+  if (feat && heightEvaluator) {
+    try {
+      rawHeight = heightEvaluator(feat);
+    } catch {
+      rawHeight = feat.properties?.[heightProp];
+    }
+  } else if (feat) {
+    rawHeight = feat.properties?.[heightProp];
+  } else {
+    const prop = entity.properties?.[heightProp];
+    rawHeight =
+      typeof prop?.getValue === "function" ? prop.getValue(viewer.clock?.currentTime) : prop;
+  }
+
+  const num =
+    typeof rawHeight === "number" && Number.isFinite(rawHeight) ? rawHeight : Number(rawHeight);
+  return Number.isFinite(num) ? num : 0;
+}
+
+/** A polygon entity's extrusion colour: the colour expression's, else `baseColor`. */
+function extrusionFeatureColor(
+  Cesium: CesiumNs,
+  baseColor: Color,
+  feat: Feature | null,
+  colorEvaluator: ((f: Feature) => unknown) | undefined,
+): Color {
+  let resolvedColor = baseColor;
+  if (feat && colorEvaluator) {
+    try {
+      const colVal = colorEvaluator(feat);
+      if (typeof colVal === "string") {
+        resolvedColor = Cesium.Color.fromCssColorString(colVal);
+      } else if (colVal && typeof (colVal as { toString?: () => string }).toString === "function") {
+        resolvedColor = Cesium.Color.fromCssColorString(
+          (colVal as { toString: () => string }).toString(),
+        );
+      }
+    } catch {
+      // fallback to extColorStr
+    }
+  }
+  return resolvedColor;
+}
+
+/**
+ * Give Z-carrying (or 3D-elevated) entities their terrain-relative height
+ * reference, which an unclamped load leaves unset. Extruded polygons were
+ * already handled by {@link applyGeoJsonExtrusion}.
+ */
+function applyElevationHeightReferences(
+  dataSource: DataSource,
+  style: LayerStyle,
+  writers: EntityHeightWriters,
+): void {
+  const { heightRef, makeProp, perPositionHeight } = writers;
+  for (const entity of dataSource.entities.values) {
+    if (entity.polygon && !style.extrusionEnabled && !perPositionHeight(entity.polygon)) {
+      entity.polygon.heightReference = makeProp(heightRef) as never;
+    }
+    if (entity.billboard) {
+      entity.billboard.heightReference = makeProp(heightRef) as never;
+    }
+    if (entity.point) {
+      entity.point.heightReference = makeProp(heightRef) as never;
+    }
+    if (entity.polyline) {
+      (entity.polyline as { clampToGround?: unknown }).clampToGround = makeProp(false);
+    }
+  }
 }
 
 export class CesiumLayerSync {
@@ -1427,6 +1998,72 @@ export class CesiumLayerSync {
 
   private readonly entries = new Map<string, LayerEntry>();
   private scratchBoundingSphere?: BoundingSphere;
+  /** Layer whose fit is waiting for its Cesium object to finish loading. */
+  private pendingZoomLayerId: string | null = null;
+
+  /**
+   * Fly the camera to a layer's own extent, for the layers that have no bounds
+   * in the store: an Ion asset, a tileset by URL, CZML, KML. Their extent is a
+   * property of the loaded Cesium object (a tileset's bounding sphere, an
+   * imagery layer's rectangle, a data source's entities), so `getLayerBounds`
+   * has nothing to offer and `CesiumEngine.fitLayer` hands the fit here.
+   *
+   * A layer added a moment ago has no handle yet, so the request is remembered
+   * and runs when that entry finishes loading. Only one is kept: a second
+   * request replaces the first rather than queueing a flight behind it.
+   *
+   * @param layerId - The store id of the layer to frame.
+   */
+  zoomToLayer(layerId: string): void {
+    this.pendingZoomLayerId = layerId;
+    const entry = this.entries.get(layerId);
+    if (entry) this.flushPendingZoom(entry);
+  }
+
+  /** Runs a pending {@link zoomToLayer} once `entry` has something to fly to. */
+  private flushPendingZoom(entry: LayerEntry): void {
+    if (this.pendingZoomLayerId !== entry.layer.id) return;
+    if (this.flyToHandle(entry)) this.pendingZoomLayerId = null;
+  }
+
+  /**
+   * Fly to whatever `entry` put in the scene. Returns false when there is
+   * nothing to frame yet (still loading, already removed, or a handle kind
+   * that carries no extent), so the caller can leave the request pending.
+   */
+  private flyToHandle(entry: LayerEntry): boolean {
+    const handle = entry.handle;
+    if (!handle || entry.cancelled || !FLY_TO_KINDS.has(entry.kind)) return false;
+    const viewer = this.viewer;
+    // Cesium throws from `flyTo` mid-morph. Drop the fit (reported as handled)
+    // the way the engine's own flights are skipped then.
+    if (viewer.scene.mode === this.Cesium.SceneMode.MORPHING) return true;
+    // An I3S scene layer is a `3dtiles` entry, but an I3SDataProvider is not a
+    // target `Viewer.flyTo` accepts; it publishes its footprint as a rectangle.
+    const extent = (handle as { extent?: Rectangle }).extent;
+    this.deps.onFlyTo?.();
+    if (extent) {
+      viewer.camera.flyTo({
+        destination: extent,
+        duration: ZOOM_TO_LAYER_SECONDS,
+        complete: () => this.deps.onFlyToComplete?.(),
+      });
+      return true;
+    }
+    void Promise.resolve(
+      viewer.flyTo(handle as ImageryLayer | DataSource | Cesium3DTileset, {
+        duration: ZOOM_TO_LAYER_SECONDS,
+      }),
+    )
+      // Resolves false when the flight was cancelled. A rejection still ends
+      // the flight the engine was told about, or its terrain correction would
+      // stay off.
+      .then((completed) => {
+        if (completed) this.deps.onFlyToComplete?.();
+      })
+      .catch(() => this.deps.onFlyToComplete?.());
+    return true;
+  }
 
   getRenderStatus(): { pending: string[]; errors: string[] } {
     const pending: string[] = [];
@@ -1434,7 +2071,7 @@ export class CesiumLayerSync {
     for (const layer of this.currentLayers) {
       if (!layer.visible || layer.opacity === 0) continue;
       if (hasGeoJsonCollection(layer) && !layer.geojson?.features.length) continue;
-      // "2D only" kinds (PMTiles, Zarr, LiDAR, deck.gl-viz, ...) are skipped on
+      // "2D only" kinds (vector files, DuckDB queries, deck.gl-viz, ...) are skipped on
       // the globe by design and flagged as such in the layer list, so they are
       // not load failures: reporting them in `errors` would make every capture
       // throw for an ordinary mixed project.
@@ -1528,6 +2165,28 @@ export class CesiumLayerSync {
     private readonly deps: CesiumLayerSyncDeps = {},
   ) {}
 
+  private unsubscribeEnvironment: (() => void) | null = null;
+
+  /**
+   * Rebuild the imagery and 3D Tiles entries whose `${NAME}` request headers
+   * now resolve differently. The layer records are unchanged when only a
+   * variable changes, so the regular store-driven sync never sees it.
+   */
+  private watchEnvironment(): void {
+    if (this.unsubscribeEnvironment) return;
+    this.unsubscribeEnvironment = useAppStore.subscribe((state, previous) => {
+      if (state.preferences.environmentVariables === previous.preferences.environmentVariables) {
+        return;
+      }
+      const stale = [...this.entries.values()].some(
+        (entry) =>
+          entry.resolvedHeaders !== undefined &&
+          entry.resolvedHeaders !== resolvedRequestHeaders(entry.layer),
+      );
+      if (stale) this.sync(this.currentLayers);
+    });
+  }
+
   /**
    * The Ion token an asset layer loads with. Read at load time rather than at
    * construction, so a token added in Settings reaches the next sync.
@@ -1578,6 +2237,7 @@ export class CesiumLayerSync {
   sync(layers: GeoLibreLayer[]): void {
     this.restoreHighlight();
     this.currentLayers = layers;
+    this.watchEnvironment();
     for (const layer of layers) {
       if (Array.isArray(layer.timeFilter) && layer.timeFilter.length > 0) {
         const d = extractTimeFilterDate(layer.timeFilter);
@@ -1624,7 +2284,11 @@ export class CesiumLayerSync {
       if (!existing) {
         this.createEntry(layer);
         if (entryKind(layer) === "imagery") imageryRebuilt = true;
-      } else if (needsRebuild(existing.layer, layer)) {
+      } else if (
+        needsRebuild(existing.layer, layer) ||
+        (existing.resolvedHeaders !== undefined &&
+          existing.resolvedHeaders !== resolvedRequestHeaders(layer))
+      ) {
         this.destroyEntry(existing);
         this.entries.delete(layer.id);
         // A COG whose source moved (a re-read blob URL, an authoring swap)
@@ -1638,6 +2302,8 @@ export class CesiumLayerSync {
         this.createEntry(layer);
         if (entryKind(layer) === "imagery") imageryRebuilt = true;
       } else {
+        if (isZarrLayer(layer) && existing.kind === "imagery")
+          this.refreshZarrImagery(existing, layer);
         existing.layer = layer;
         this.applyAppearance(existing);
       }
@@ -1702,6 +2368,8 @@ export class CesiumLayerSync {
     this.czmlClockOwner = undefined;
     for (const entry of this.entries.values()) this.destroyEntry(entry);
     this.entries.clear();
+    this.unsubscribeEnvironment?.();
+    this.unsubscribeEnvironment = null;
     this.removeDrapeLayer();
     this.drape?.destroy();
     this.drape = undefined;
@@ -2063,14 +2731,38 @@ export class CesiumLayerSync {
   private createEntry(layer: GeoLibreLayer): void {
     const kind = entryKind(layer);
     const entry: LayerEntry = { kind, layer, handle: null, cancelled: false };
+    if ((kind === "imagery" || kind === "3dtiles") && layer.source.requestHeaders) {
+      entry.resolvedHeaders = resolvedRequestHeaders(layer);
+    }
     this.entries.set(layer.id, entry);
-    if (kind === "imagery") void this.createImagery(entry);
-    else if (kind === "geojson") void this.createGeoJson(entry);
-    else if (kind === "kml") void this.createKml(entry);
-    else if (kind === "czml") void this.createCzml(entry);
-    else if (kind === "pointcloud") void this.createPointCloud(entry);
+    let created: Promise<void> | null = null;
+    if (kind === "imagery") created = this.createImagery(entry);
+    else if (kind === "geojson") created = this.createGeoJson(entry);
+    else if (kind === "kml") created = this.createKml(entry);
+    else if (kind === "czml") created = this.createCzml(entry);
+    else if (kind === "pointcloud") created = this.createPointCloud(entry);
     else if (kind === "points") this.createPointBatch(entry);
-    else void this.createTileset(entry);
+    else created = this.createTileset(entry);
+    // Every create funnels through here, so this is where a fit requested
+    // before the handle existed runs (see zoomToLayer) and where a load
+    // failure is reported.
+    if (created) void created.then(() => this.settleEntry(entry));
+    else this.settleEntry(entry);
+  }
+
+  /** Runs the once-loaded work for `entry`: a pending fit, or a load failure. */
+  private settleEntry(entry: LayerEntry): void {
+    this.flushPendingZoom(entry);
+    // Report a failure only while the entry is still the layer's current one:
+    // a removed or rebuilt entry is gone from `entries`. `cancelled` cannot
+    // decide this, since a failed imagery entry is parked as cancelled too.
+    if (entry.loadError && this.entries.get(entry.layer.id) === entry) {
+      this.deps.onLayerError?.({
+        layerId: entry.layer.id,
+        layerName: entry.layer.name,
+        message: entry.loadError,
+      });
+    }
   }
 
   /**
@@ -2193,290 +2885,268 @@ export class CesiumLayerSync {
   }
 
   private async createImagery(entry: LayerEntry): Promise<void> {
-    const { Cesium, viewer } = this;
-    const layer = entry.layer;
+    const { viewer } = this;
     try {
-      let provider: ImageryProvider | undefined;
-      let isAsync = false;
-      const headers = layer.source.requestHeaders as Record<string, string> | undefined;
-      const hasHeaders = Boolean(headers && Object.keys(headers).length);
-      // A tile template wins over the capabilities metadata: it needs no
-      // provider-side matrix-set negotiation.
-      const wmtsCaps =
-        layer.type === "wmts" && !firstTile(layer) ? wmtsCapabilities(layer) : undefined;
-      // Credentials (request headers, an ArcGIS token) never go out over
-      // plaintext — loopback excepted, so a local dev tile server still works.
-      // Residual exposure: Cesium.Resource issues these through XHR/fetch, which
-      // give no redirect control, so a service that 3xx-redirects cross-origin
-      // still sees non-Authorization headers replayed (the browser strips only
-      // Authorization). CORS preflight means the redirect target must opt into
-      // the header by name, and the endpoint is user-configured, so this is
-      // accepted rather than proxied.
-      // Refusing the whole layer beats quietly stripping them: an
-      // unauthenticated request would look like a working layer that renders
-      // nothing. The outer catch turns this into the same best-effort skip a
-      // failing provider already gets.
-      const requireSecure = (url: string, what: string) => {
-        if (allowsCredentials(url)) return;
-        console.warn(
-          `[GeoLibre] skipping "${layer.name}" on the globe: ${what} cannot be sent over ${url}`,
-        );
-        throw new Error("credentials require https");
-      };
-      // Every provider's `url` option is typed `Resource | string`, so the
-      // union is passed through as-is rather than cast.
-      const makeResource = (url: string): string | Resource => {
-        if (!hasHeaders) return url;
-        requireSecure(url, "request headers");
-        return new Cesium.Resource({ url, headers });
-      };
-
-      const ionAsset = cesiumIonAssetId(layer);
-      if (ionAsset !== null) {
-        isAsync = true;
-        provider = await Cesium.IonImageryProvider.fromAssetId(ionAsset, {
-          accessToken: this.ionAccessToken(),
-        });
-      } else if (
-        layer.type === "raster" &&
-        layer.metadata?.sourceKind === ARCGIS_MAP_SERVICE_KIND &&
-        str(layer.sourcePath)
-      ) {
-        isAsync = true;
-        const url = String(layer.sourcePath);
-        const resource = makeResource(url);
-        const sublayers = str(layer.metadata?.arcgisSublayers);
-        // arcgis-layer.ts writes a bare id list ("0,2,5"); the `show:` prefix only
-        // ever appears in the tile URL's query string. Stripping it here is purely
-        // defensive, for a hand-authored or MCP project that copies the ArcGIS
-        // `layers=show:0,1` param form straight into the metadata field.
-        const cleanLayers = sublayers?.replace(/^show:/i, "").trim() || undefined;
-        const options: Record<string, unknown> = {};
-        if (cleanLayers) options.layers = cleanLayers;
-        const token = arcgisToken(layer);
-        if (token) {
-          requireSecure(url, "an access token");
-          options.token = token;
-        }
-
-        provider = await Cesium.ArcGisMapServerImageryProvider.fromUrl(resource, options);
-      } else if (layer.type === "image" && str(layer.source.url)) {
-        isAsync = true;
-        const url = String(layer.source.url);
-        const bounds = imageBounds(layer);
-        if (!bounds) throw new Error("the image layer has no usable bounds");
-        const resource = makeResource(url);
-        const rectangle = Cesium.Rectangle.fromDegrees(bounds[0], bounds[1], bounds[2], bounds[3]);
-        const options = { rectangle };
-
-        provider = await Cesium.SingleTileImageryProvider.fromUrl(resource, options);
-      } else if (
-        layer.type === "wms" &&
-        str(layer.source.url) &&
-        // On desktop, routeWmsLayerThroughNativeProtocol rewrites `source.tiles`
-        // to a `geolibre-wms://` template but leaves `source.url` as the plain
-        // endpoint buildWmsLayer recorded. Matching on `source.url` alone would
-        // therefore always take this branch and fetch the service straight from
-        // the webview, which is the CORS failure the native fetcher exists to
-        // avoid. Defer to the tile template whenever it names a protocol, so the
-        // layer falls through to the bridge below (nothing between here and it
-        // matches a WMS layer).
-        !protocolScheme(firstTile(layer) ?? "")
-      ) {
-        const url = String(layer.source.url);
-        const resource = makeResource(url);
-        provider = new Cesium.WebMapServiceImageryProvider({
-          url: resource,
-          layers: String(layer.source.layers ?? ""),
-          parameters: {
-            transparent: layer.source.transparent !== false,
-            format: str(layer.source.format) ?? "image/png",
-            styles: str(layer.source.styles) ?? "",
-            version: str(layer.source.version) ?? "1.1.1",
-          },
-        });
-      } else if (wmtsCaps) {
-        const url = wmtsCaps.url;
-        const resource = makeResource(url);
-        const maxLevel = Number(layer.source.maxzoom);
-        const minLevel = Number(layer.source.minzoom);
-        // No UI writes `tilingScheme`/`tileMatrixLabels` today; they come from a
-        // hand-authored or MCP-generated `.geolibre.json` (`source` is a
-        // free-form record), which is how non-default WMTS matrix sets are
-        // expressed. Left in so those projects render on the globe.
-        const schemeId = str(layer.source.tilingScheme);
-        let tilingScheme: TilingScheme | undefined;
-        if (schemeId) {
-          if (schemeId === "GeographicTilingScheme")
-            tilingScheme = new Cesium.GeographicTilingScheme();
-          else if (schemeId === "WebMercatorTilingScheme")
-            tilingScheme = new Cesium.WebMercatorTilingScheme();
-          else {
-            // Warn rather than bail silently: the layer still reads as
-            // globe-supported in the layer menu, so a mute skip looks like a
-            // broken renderer.
-            console.warn(
-              `[GeoLibre] skipping "${layer.name}" on the globe: unsupported WMTS tiling scheme "${schemeId}"`,
-            );
-            throw new Error(`unsupported WMTS tiling scheme "${schemeId}"`);
-          }
-        }
-        const labels = layer.source.tileMatrixLabels;
-        const tileMatrixLabels = Array.isArray(labels) ? labels.map(String) : undefined;
-
-        provider = new Cesium.WebMapTileServiceImageryProvider({
-          url: resource,
-          layer: wmtsCaps.layer,
-          style: str(layer.source.style) ?? str(layer.source.styles) ?? "",
-          // Cesium's own WebMapTileServiceImageryProvider default. The WMS
-          // branch above defaults to image/png instead because WMS overlays are
-          // usually drawn transparent over the globe, while WMTS sets are
-          // typically opaque base imagery — the asymmetry is deliberate.
-          format: str(layer.source.format) ?? "image/jpeg",
-          tileMatrixSetID: wmtsCaps.tileMatrixSetID,
-          maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
-          minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
-          tilingScheme,
-          tileMatrixLabels,
-        });
-      } else if (isCogLayer(layer)) {
-        // The WASM tiler renders the tiles itself (issue #2283), so neither
-        // request headers nor a Resource apply: the COG is range-read by the
-        // tiler from the same URL the raster control opened it from.
-        isAsync = true;
-        provider = await createCogImageryProvider(Cesium, await this.loadCogTiler(), layer);
-      } else if (layer.type === "pmtiles" && pmtilesArchiveUrl(layer)) {
-        // Raster PMTiles ride the shared `pmtiles://` protocol the 2D map
-        // registers, through the same archive object, so a local (in-memory)
-        // archive and a remote one both answer. The header bounds the tile
-        // requests to what the archive actually holds.
-        isAsync = true;
-        const url = pmtilesArchiveUrl(layer)!;
-        const header = await (this.deps.readPMTilesHeader ?? readSharedPMTilesHeader)(url);
-        if (entry.cancelled) return;
-        const rectangle =
-          header &&
-          [header.minLon, header.minLat, header.maxLon, header.maxLat].every(Number.isFinite)
-            ? webMercatorRectangle(Cesium, [
-                header.minLon,
-                header.minLat,
-                header.maxLon,
-                header.maxLat,
-              ])
-            : undefined;
-        provider = new ProtocolImageryProvider(Cesium, {
-          template: `${url}/{z}/{x}/{y}`,
-          rectangle,
-          minimumLevel: Number.isFinite(header?.minZoom) ? header?.minZoom : undefined,
-          maximumLevel: Number.isFinite(header?.maxZoom) ? header?.maxZoom : undefined,
-          credit: str(layer.source.attribution),
-        });
-      } else {
-        const url = firstTile(layer);
-        if (!url) throw new Error("no tile URL template");
-        const maxLevel = Number(layer.source.maxzoom);
-        const minLevel = Number(layer.source.minzoom);
-        const scheme = protocolScheme(url);
-        if (scheme) {
-          // A custom-protocol template (local MBTiles, the desktop's native
-          // XYZ/WMS fetcher, a KML super-overlay, the COG DEM): the tiles come
-          // from the handler MapLibre registered, not from HTTP. An
-          // unregistered scheme is refused rather than rendered blank, so the
-          // layer reads as failed instead of as a working layer drawing
-          // nothing.
-          if (!hasRegisteredProtocol(scheme))
-            throw new Error(`no MapLibre protocol handler registered for "${scheme}://"`);
-          const bounds = layer.source.bounds;
-          const rectangle =
-            Array.isArray(bounds) &&
-            bounds.length === 4 &&
-            bounds.every((v) => typeof v === "number" && Number.isFinite(v))
-              ? webMercatorRectangle(Cesium, bounds as [number, number, number, number])
-              : undefined;
-          // The tile size drives Cesium's level selection the way it drives
-          // MapLibre's, so a 512 px source fetches the same zoom on both.
-          const tileSize = Number(layer.source.tileSize);
-          const tileWidth = Number.isFinite(tileSize) && tileSize > 0 ? tileSize : undefined;
-          provider = new ProtocolImageryProvider(Cesium, {
-            template: url,
-            scheme: layer.source.scheme === "tms" ? "tms" : "xyz",
-            tileWidth,
-            tileHeight: tileWidth,
-            rectangle,
-            maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
-            minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
-            credit: str(layer.source.attribution),
-          });
-        } else {
-          const resource = makeResource(url);
-          provider = new Cesium.UrlTemplateImageryProvider({
-            url: resource,
-            maximumLevel: Number.isFinite(maxLevel) ? maxLevel : undefined,
-            minimumLevel: Number.isFinite(minLevel) ? minLevel : undefined,
-          });
-        }
-      }
-
-      if (!provider || entry.cancelled) {
-        // Reachable: the branches above await (the COG tiler, the PMTiles
-        // header, ArcGIS/single-tile fromUrl), and the layer can be removed or
-        // rebuilt in that window. Nothing has requested a tile yet, but the
-        // provider still owns an abort controller, so tear it down rather than
-        // dropping it.
-        if (provider instanceof ProtocolImageryProvider) provider.destroy();
-        // Redundant today, and deliberately kept. A removal that races the
-        // (multi-megabyte) tiler import runs forgetCogSource against a cache
-        // this URL has not reached yet, so it only works because that forget is
-        // itself deferred through `this.cogTiler.then(...)` while openCog is
-        // reached synchronously from the earlier-queued continuation here: the
-        // open always lands first and the forget always finds it. Nothing
-        // enforces that ordering, and an await added before openCog in
-        // createCogImageryProvider would silently turn it into a leaked
-        // CogSource, so forget once more where the open has certainly happened.
-        if (isCogLayer(layer)) this.forgetCogSource(entry);
-        return;
-      }
-      // addImageryProvider appends above the base imagery (and earlier store
-      // layers), so store order maps to Cesium's bottom-to-top stacking.
-      const imageryLayer = viewer.imageryLayers.addImageryProvider(provider);
-      if (entry.cancelled) {
-        // Unreachable today: nothing awaits between the check above and here,
-        // so `cancelled` cannot flip. Kept as the guard it was written to be,
-        // and tearing the provider down the way destroyEntry does, so adding an
-        // await in between cannot silently start leaking a bridged provider's
-        // abort controller and the handler requests still in flight.
-        viewer.imageryLayers.remove(imageryLayer, true);
-        if (provider instanceof ProtocolImageryProvider) provider.destroy();
-        return;
-      }
-      this.imageryRefs.set(imageryLayer, layer.id);
-      entry.handle = imageryLayer;
-      this.applyAppearance(entry);
-      if (isAsync) {
-        // Unlike sync()'s reorder this one is unguarded, since the store order
-        // key can't tell whether an async layer has landed yet. Each resolve
-        // therefore costs its own O(n) raiseToTop sweep, so a project loading
-        // many ArcGIS/image layers at once pays O(n^2) overall. Fine for the
-        // handful a project typically has; worth coalescing into one deferred
-        // reorder if that stops being true.
-        this.reorderImagery();
-      }
+      // Synchronous providers are attached in this same turn; only the
+      // branches that fetch or import something await.
+      const request = this.requestImageryProvider(entry);
+      const provider = request.isAsync ? await request.pending : request.provider;
+      // The layer was removed while its PMTiles header was read, before any
+      // provider existed.
+      if (provider === null) return;
+      this.attachImageryProvider(entry, provider, request.isAsync);
     } catch (error) {
+      // The layer was removed or rebuilt while its provider loaded: a real
+      // cancellation, not a failure worth reporting.
+      if (entry.cancelled) return;
       // A provider that throws synchronously (e.g. malformed params) or rejects
+      // should not abort the sync pass; mirror createGeoJson/createTileset's
+      // best-effort. The failure is recorded so settleEntry reports it.
       entry.loadError = error instanceof Error ? error.message : String(error);
-      // should not abort the sync pass; mirror createGeoJson/createTileset's best-effort.
       // The entry stays registered with a null handle rather than being deleted:
       // sync() re-runs on every unrelated store change (an opacity drag, a
-      // reorder), so a deleted entry would be recreated — re-issuing the failing
-      // request and re-warning — on every pass. Retrying is left to needsRebuild,
-      // i.e. an actual change to this layer's source.
+      // reorder), so a deleted entry would be recreated (re-issuing the failing
+      // request and re-warning) on every pass. Retrying is left to needsRebuild,
+      // i.e. an actual change to this layer's source. Marking it cancelled keeps
+      // later passes off it, and any imagery layer it did add is taken off the
+      // globe, since an unready provider left there stops the whole globe
+      // drawing.
       if (this.entries.get(entry.layer.id) === entry) {
         entry.cancelled = true;
+        entry.tileHealth?.();
+        entry.tileHealth = undefined;
         if (entry.handle) {
           viewer.imageryLayers.remove(entry.handle as ImageryLayer, true);
           entry.handle = null;
         }
       }
+    }
+  }
+
+  /**
+   * Start building the imagery provider an imagery entry draws with, picking
+   * the branch its layer calls for: a Cesium Ion asset, an ArcGIS MapServer, a
+   * georeferenced image, WMS, capabilities-driven WMTS, a COG, a raster
+   * PMTiles archive, or (the fallback) a tile URL template. Throws what a
+   * branch refuses.
+   *
+   * @returns The provider itself for the synchronous branches, or a pending
+   *   one for the branches that await (so the imagery order must be
+   *   re-asserted once it lands); a pending `null` means the layer was removed
+   *   before a provider existed.
+   */
+  private requestImageryProvider(entry: LayerEntry): ImageryProviderRequest {
+    const { Cesium } = this;
+    const layer = entry.layer;
+    // A tile template wins over the capabilities metadata: it needs no
+    // provider-side matrix-set negotiation.
+    const wmtsCaps =
+      layer.type === "wmts" && !firstTile(layer) ? wmtsCapabilities(layer) : undefined;
+    const { requireSecure, makeResource } = imageryResourceFactory(Cesium, layer);
+
+    const ionAsset = cesiumIonAssetId(layer);
+    if (ionAsset !== null) {
+      return {
+        isAsync: true,
+        pending: Cesium.IonImageryProvider.fromAssetId(ionAsset, {
+          accessToken: this.ionAccessToken(),
+        }),
+      };
+    } else if (
+      layer.type === "raster" &&
+      layer.metadata?.sourceKind === ARCGIS_MAP_SERVICE_KIND &&
+      str(layer.sourcePath)
+    ) {
+      return {
+        isAsync: true,
+        pending: arcgisMapServerImageryProvider(Cesium, layer, makeResource, requireSecure),
+      };
+    } else if (layer.type === "image" && str(layer.source.url)) {
+      return { isAsync: true, pending: singleImageImageryProvider(Cesium, layer, makeResource) };
+    } else if (
+      layer.type === "wms" &&
+      str(layer.source.url) &&
+      // On desktop, routeWmsLayerThroughNativeProtocol rewrites `source.tiles`
+      // to a `geolibre-wms://` template but leaves `source.url` as the plain
+      // endpoint buildWmsLayer recorded. Matching on `source.url` alone would
+      // therefore always take this branch and fetch the service straight from
+      // the webview, which is the CORS failure the native fetcher exists to
+      // avoid. Defer to the tile template whenever it names a protocol, so the
+      // layer falls through to the bridge below (nothing between here and it
+      // matches a WMS layer).
+      !protocolScheme(firstTile(layer) ?? "")
+    ) {
+      return { isAsync: false, provider: wmsImageryProvider(Cesium, layer, makeResource) };
+    } else if (wmtsCaps) {
+      return {
+        isAsync: false,
+        provider: wmtsImageryProvider(Cesium, layer, wmtsCaps, makeResource),
+      };
+    } else if (isCogLayer(layer)) {
+      return { isAsync: true, pending: this.cogImageryProvider(layer) };
+    } else if (isZarrLayer(layer)) {
+      return { isAsync: true, pending: this.zarrImageryProvider(layer) };
+    } else if (layer.type === "pmtiles" && pmtilesArchiveUrl(layer)) {
+      return { isAsync: true, pending: this.pmtilesImageryProvider(entry) };
+    } else {
+      return {
+        isAsync: false,
+        provider: tileTemplateImageryProvider(Cesium, layer, makeResource),
+      };
+    }
+  }
+
+  /**
+   * The WASM tiler renders the tiles itself (issue #2283), so neither
+   * request headers nor a Resource apply: the COG is range-read by the
+   * tiler from the same URL the raster control opened it from.
+   */
+  private async cogImageryProvider(layer: GeoLibreLayer): Promise<ImageryProvider> {
+    return createCogImageryProvider(this.Cesium, await this.loadCogTiler(), layer);
+  }
+
+  /**
+   * zarr-cesium reads the store itself (zarrita), from the layer's URL or the
+   * store registered for it, so no Resource applies here either. The module
+   * carries its colormap tables and 3D providers, so it loads on the first
+   * Zarr layer the globe draws rather than with the globe.
+   */
+  private async zarrImageryProvider(layer: GeoLibreLayer): Promise<ImageryProvider> {
+    this.zarrCesium ??= (this.deps.loadZarrCesium ?? (() => import("zarr-cesium")))().catch(
+      (error: unknown) => {
+        // Let the next Zarr layer retry a failed chunk load.
+        this.zarrCesium = null;
+        throw error;
+      },
+    );
+    return createZarrImageryProvider(this.Cesium, await this.zarrCesium, layer);
+  }
+
+  private zarrCesium: Promise<ZarrCesiumModule> | null = null;
+
+  /**
+   * Draw the selector, colour limits and ramp `layer` asks for with the Zarr
+   * entry's live provider, instead of reopening the store: the Time Slider
+   * changes the selector on every step.
+   *
+   * Cesium caches the tiles an imagery layer has drawn, and a provider cannot
+   * invalidate them, so a change that alters pixels swaps in a fresh
+   * `ImageryLayer` over the same provider at the same stacking position — what
+   * zarr-cesium's own `softRefreshCurrentView` does.
+   */
+  private refreshZarrImagery(entry: LayerEntry, next: GeoLibreLayer): void {
+    const previous = entry.layer;
+    entry.layer = next;
+    const imagery = entry.handle as ImageryLayer | null;
+    // Still loading: attachImageryProvider applies the latest layer on arrival.
+    if (!imagery) return;
+    const provider = imagery.imageryProvider;
+    if (!isZarrImageryProvider(provider)) return;
+    if (!applyZarrRender(this.Cesium, provider, previous, next)) return;
+    const layers = this.viewer.imageryLayers;
+    const fresh = new this.Cesium.ImageryLayer(provider as unknown as ImageryProvider);
+    layers.add(fresh, layers.indexOf(imagery));
+    // Destroys the layer, not the provider, which the fresh layer now draws.
+    layers.remove(imagery, true);
+    this.imageryRefs.set(fresh, next.id);
+    entry.handle = fresh;
+  }
+
+  /**
+   * Raster PMTiles ride the shared `pmtiles://` protocol the 2D map
+   * registers, through the same archive object, so a local (in-memory)
+   * archive and a remote one both answer. The header bounds the tile
+   * requests to what the archive actually holds.
+   *
+   * @returns The provider, or null when the entry was cancelled while the
+   *   header was read.
+   */
+  private async pmtilesImageryProvider(entry: LayerEntry): Promise<ProtocolImageryProvider | null> {
+    const { Cesium } = this;
+    const layer = entry.layer;
+    const url = pmtilesArchiveUrl(layer)!;
+    const header = await (this.deps.readPMTilesHeader ?? readSharedPMTilesHeader)(url);
+    if (entry.cancelled) return null;
+    const rectangle =
+      header && [header.minLon, header.minLat, header.maxLon, header.maxLat].every(Number.isFinite)
+        ? webMercatorRectangle(Cesium, [header.minLon, header.minLat, header.maxLon, header.maxLat])
+        : undefined;
+    return new ProtocolImageryProvider(Cesium, {
+      template: `${url}/{z}/{x}/{y}`,
+      rectangle,
+      minimumLevel: Number.isFinite(header?.minZoom) ? header?.minZoom : undefined,
+      maximumLevel: Number.isFinite(header?.maxZoom) ? header?.maxZoom : undefined,
+      credit: layerCredit(layer),
+    });
+  }
+
+  /**
+   * Add a built provider to the globe and register it as the entry's handle,
+   * or tear it down when the entry was cancelled while it was being built.
+   */
+  private attachImageryProvider(
+    entry: LayerEntry,
+    provider: ImageryProvider | undefined,
+    isAsync: boolean,
+  ): void {
+    const { viewer } = this;
+    const layer = entry.layer;
+    if (!provider || entry.cancelled) {
+      // Reachable: the branches above await (the COG tiler, the PMTiles
+      // header, ArcGIS/single-tile fromUrl), and the layer can be removed or
+      // rebuilt in that window. Nothing has requested a tile yet, but the
+      // provider still owns an abort controller, so tear it down rather than
+      // dropping it.
+      if (provider instanceof ProtocolImageryProvider) provider.destroy();
+      if (isZarrImageryProvider(provider)) provider.destroy();
+      // Redundant today, and deliberately kept. A removal that races the
+      // (multi-megabyte) tiler import runs forgetCogSource against a cache
+      // this URL has not reached yet, so it only works because that forget is
+      // itself deferred through `this.cogTiler.then(...)` while openCog is
+      // reached synchronously from the earlier-queued continuation here: the
+      // open always lands first and the forget always finds it. Nothing
+      // enforces that ordering, and an await added before openCog in
+      // createCogImageryProvider would silently turn it into a leaked
+      // CogSource, so forget once more where the open has certainly happened.
+      if (isCogLayer(layer)) this.forgetCogSource(entry);
+      return;
+    }
+    // The provider was built from the layer as it was when the entry started;
+    // a Time Slider step or restyle in the meantime was recorded on the entry.
+    if (isZarrImageryProvider(provider)) applyZarrRender(this.Cesium, provider, undefined, layer);
+    // addImageryProvider appends above the base imagery (and earlier store
+    // layers), so store order maps to Cesium's bottom-to-top stacking.
+    const imageryLayer = viewer.imageryLayers.addImageryProvider(provider);
+    if (entry.cancelled) {
+      // Unreachable today: nothing awaits between the check above and here,
+      // so `cancelled` cannot flip. Kept as the guard it was written to be,
+      // and tearing the provider down the way destroyEntry does, so adding an
+      // await in between cannot silently start leaking a bridged provider's
+      // abort controller and the handler requests still in flight.
+      viewer.imageryLayers.remove(imageryLayer, true);
+      if (provider instanceof ProtocolImageryProvider) provider.destroy();
+      if (isZarrImageryProvider(provider)) provider.destroy();
+      return;
+    }
+    this.imageryRefs.set(imageryLayer, layer.id);
+    entry.handle = imageryLayer;
+    const onTileFailure = this.deps.onTileFailure;
+    if (onTileFailure)
+      entry.tileHealth = watchImageryTileHealth(provider, (failure) => {
+        // A rebuilt entry's provider can still settle tiles; only the current
+        // one speaks for the layer.
+        if (this.entries.get(layer.id) !== entry) return;
+        onTileFailure({ ...failure, layerId: layer.id, layerName: layer.name });
+      });
+    this.applyAppearance(entry);
+    if (isAsync) {
+      // Unlike sync()'s reorder this one is unguarded, since the store order
+      // key can't tell whether an async layer has landed yet. Each resolve
+      // therefore costs its own O(n) raiseToTop sweep, so a project loading
+      // many ArcGIS/image layers at once pays O(n^2) overall. Fine for the
+      // handful a project typically has; worth coalescing into one deferred
+      // reorder if that stops being true.
+      this.reorderImagery();
     }
   }
 
@@ -2512,17 +3182,7 @@ export class CesiumLayerSync {
       : layer.geojson;
 
     try {
-      // Cesium splits multipart geometries into several entities. A private
-      // property survives that split; feature ids alone do not (Cesium suffixes them).
-      const indexKey = "__geolibre_cesium_feature_index";
-      const data = {
-        ...sourceGeoJson,
-        features: sourceGeoJson.features.map((feature, index) => ({
-          ...feature,
-          id: JSON.stringify([layer.id, index]),
-          properties: { ...feature.properties, [indexKey]: index },
-        })),
-      };
+      const data = indexedFeatureCollection(layer.id, sourceGeoJson);
       // Pre-bake initial alpha into fill, stroke, and marker load options so
       // entities are created with their final initial materials.
       const dataSource = await Cesium.GeoJsonDataSource.load(data, {
@@ -2544,30 +3204,7 @@ export class CesiumLayerSync {
       // mutating a collection the visualizers never hear from again.
       (dataSource.entities as { suspendEvents?: () => void }).suspendEvents?.();
       try {
-        // A multipart feature arrives as several entities sharing one index; it
-        // gets one label, on its largest part (pickLabelPart), not one per part.
-        // The grouping (and pickLabelPart's geometry math) is skipped outright
-        // when the layer has no labels, so an unlabelled boundary set pays nothing.
-        const labelsEnabled = Boolean({ ...DEFAULT_LAYER_STYLE.labels, ...style.labels }.enabled);
-        const labelEntity = labelsEnabled ? createCesiumLabeler(Cesium, viewer, layer) : null;
-        const parts = new Map<number, Entity[]>();
-        for (const entity of dataSource.entities.values) {
-          const propIndex = entity.properties?.[indexKey];
-          const index =
-            typeof propIndex?.getValue === "function"
-              ? propIndex.getValue(viewer.clock?.currentTime)
-              : propIndex;
-          if (Number.isInteger(index)) {
-            this.featureRefs.set(entity, { layerId: layer.id, index });
-            if (!labelEntity) continue;
-            const group = parts.get(index);
-            if (group) group.push(entity);
-            else parts.set(index, [entity]);
-          }
-        }
-        if (labelEntity)
-          for (const [index, entities] of parts)
-            labelEntity(pickLabelPart(Cesium, viewer, entities), index);
+        this.indexGeoJsonEntities(entry, dataSource);
         // Per-feature symbology (issue #2278): the resolver evaluates the same
         // expressions the 2D map paints with, and the sprites it needs (marker
         // shapes per classified colour, the fill pattern tile) are rasterised
@@ -2587,169 +3224,24 @@ export class CesiumLayerSync {
         // match the 2D map instead of rendering fully opaque.
         this.applyAppearance(entry);
 
-        const heightRef = (Cesium.HeightReference?.RELATIVE_TO_GROUND ?? 2) as number;
-        const ConstantProperty = (Cesium as { ConstantProperty?: new (v: unknown) => unknown })
-          .ConstantProperty;
-        const ColorMaterialProperty = (
-          Cesium as {
-            ColorMaterialProperty?: new (c: unknown) => unknown;
-          }
-        ).ColorMaterialProperty;
-        const makeProp = (v: unknown) => (ConstantProperty ? new ConstantProperty(v) : v);
-        const makeMat = (c: unknown) =>
-          ColorMaterialProperty ? new ColorMaterialProperty(c) : { color: c };
-        // Cesium flags a polygon whose ring carries Z as perPositionHeight and then
-        // ignores height/heightReference on it (with a one-time console warning),
-        // keeping each vertex's own ellipsoid height. Only flat polygons take the
-        // terrain-relative references.
-        // Highest Z on a polygon feature's rings (0 when none carries a height).
-        const ringTopAltitude = (feature: Feature | null): number => {
-          const geometry = feature?.geometry;
-          const polygons =
-            geometry?.type === "Polygon"
-              ? [geometry.coordinates]
-              : geometry?.type === "MultiPolygon"
-                ? geometry.coordinates
-                : [];
-          let top = Number.NEGATIVE_INFINITY;
-          for (const rings of polygons)
-            for (const ring of rings)
-              for (const position of ring) {
-                const z = position[2];
-                if (typeof z === "number" && Number.isFinite(z) && z > top) top = z;
-              }
-          return Number.isFinite(top) ? top : 0;
-        };
-        const perPositionHeight = (polygon: { perPositionHeight?: unknown }): boolean => {
-          const prop = polygon.perPositionHeight as
-            | { getValue?: (time: unknown) => unknown }
-            | boolean
-            | undefined;
-          return Boolean(
-            typeof prop === "object" && typeof prop.getValue === "function"
-              ? prop.getValue(viewer.clock?.currentTime)
-              : prop,
-          );
-        };
-
+        const writers = entityHeightWriters(Cesium, viewer);
         if (style.extrusionEnabled) {
-          const heightProp = style.extrusionHeightProperty?.trim() || "height";
-          const heightScale = Number.isFinite(style.extrusionHeightScale)
-            ? (style.extrusionHeightScale as number)
-            : 1;
-          const base = Number.isFinite(style.extrusionBase) ? (style.extrusionBase as number) : 0;
-          const extColorStr = style.extrusionColor || style.fillColor || "#3b82f6";
-
-          let heightEvaluator: ((f: Feature) => unknown) | undefined;
-          if (style.extrusionAdvancedStyleEnabled && style.extrusionHeightExpression) {
-            const res = compileFeatureExpression(style.extrusionHeightExpression, {
-              expectedType: "number",
-            });
-            if (res.ok && res.evaluate) heightEvaluator = res.evaluate;
-          }
-
-          let colorEvaluator: ((f: Feature) => unknown) | undefined;
-          if (style.extrusionAdvancedStyleEnabled && style.extrusionColorExpression) {
-            const res = compileFeatureExpression(style.extrusionColorExpression, {
-              expectedType: "color",
-            });
-            if (res.ok && res.evaluate) colorEvaluator = res.evaluate;
-          }
-
-          // Parsed once: a full 3D-buildings layer would otherwise re-parse the
-          // same CSS string per polygon. withAlpha() below returns a fresh Color.
-          const baseColor = Cesium.Color.fromCssColorString(extColorStr);
-          const features = sourceGeoJson.features;
-          for (const entity of dataSource.entities.values) {
-            if (!entity.polygon) continue;
-            const propIndex = entity.properties?.[indexKey];
-            const index =
-              typeof propIndex?.getValue === "function"
-                ? propIndex.getValue(viewer.clock?.currentTime)
-                : propIndex;
-            const feat = Number.isInteger(index) && features ? features[index] : null;
-
-            let rawHeight: unknown;
-            if (feat && heightEvaluator) {
-              try {
-                rawHeight = heightEvaluator(feat);
-              } catch {
-                rawHeight = feat.properties?.[heightProp];
-              }
-            } else if (feat) {
-              rawHeight = feat.properties?.[heightProp];
-            } else {
-              const prop = entity.properties?.[heightProp];
-              rawHeight =
-                typeof prop?.getValue === "function"
-                  ? prop.getValue(viewer.clock?.currentTime)
-                  : prop;
-            }
-
-            const num =
-              typeof rawHeight === "number" && Number.isFinite(rawHeight)
-                ? rawHeight
-                : Number(rawHeight);
-            const height = Number.isFinite(num) ? num : 0;
-
-            // Never below the base: a negative height property or expression would
-            // otherwise put the roof under the floor.
-            const relativeTop = Math.max(base, height * heightScale + base);
-            // With perPositionHeight Cesium takes each vertex's own height as the
-            // base but reads extrudedHeight as an absolute altitude, so lift the
-            // roof by the ring's highest vertex; otherwise it would extrude down
-            // to `relativeTop` metres above the ellipsoid.
-            const extrudedHeight = perPositionHeight(entity.polygon)
-              ? ringTopAltitude(feat) + relativeTop
-              : relativeTop;
-
-            let resolvedColor = baseColor;
-            if (feat && colorEvaluator) {
-              try {
-                const colVal = colorEvaluator(feat);
-                if (typeof colVal === "string") {
-                  resolvedColor = Cesium.Color.fromCssColorString(colVal);
-                } else if (
-                  colVal &&
-                  typeof (colVal as { toString?: () => string }).toString === "function"
-                ) {
-                  resolvedColor = Cesium.Color.fromCssColorString(
-                    (colVal as { toString: () => string }).toString(),
-                  );
-                }
-              } catch {
-                // fallback to extColorStr
-              }
-            }
-
-            entity.polygon.extrudedHeight = makeProp(extrudedHeight) as never;
-            if (!perPositionHeight(entity.polygon)) {
-              entity.polygon.height = makeProp(base) as never;
-              entity.polygon.heightReference = makeProp(heightRef) as never;
-              entity.polygon.extrudedHeightReference = makeProp(heightRef) as never;
-            }
-            entity.polygon.material = makeMat(resolvedColor.withAlpha(extOpacity)) as never;
-          }
+          applyGeoJsonExtrusion(
+            Cesium,
+            viewer,
+            dataSource,
+            style,
+            sourceGeoJson.features,
+            extOpacity,
+            writers,
+          );
         }
         // Runs alongside extrusion too: a collection mixing extruded buildings
         // with Z-carrying points/lines loads unclamped (clampToGround is false
         // whenever either applies), so those entities still need their
         // terrain-relative reference; the polygons were handled above.
         if (has3dElevation) {
-          for (const entity of dataSource.entities.values) {
-            if (entity.polygon && !style.extrusionEnabled && !perPositionHeight(entity.polygon)) {
-              entity.polygon.heightReference = makeProp(heightRef) as never;
-            }
-            if (entity.billboard) {
-              entity.billboard.heightReference = makeProp(heightRef) as never;
-            }
-            if (entity.point) {
-              entity.point.heightReference = makeProp(heightRef) as never;
-            }
-            if (entity.polyline) {
-              (entity.polyline as { clampToGround?: unknown }).clampToGround = makeProp(false);
-            }
-          }
+          applyElevationHeightReferences(dataSource, style, writers);
         }
       } finally {
         (dataSource.entities as { resumeEvents?: () => void }).resumeEvents?.();
@@ -2774,6 +3266,36 @@ export class CesiumLayerSync {
       // A malformed FeatureCollection should not break the whole sync.
       entry.loadError = error instanceof Error ? error.message : String(error);
     }
+  }
+
+  /**
+   * Map each loaded entity back to its feature (for picking and filtering)
+   * and label each feature once when the layer has labels.
+   */
+  private indexGeoJsonEntities(entry: LayerEntry, dataSource: DataSource): void {
+    const { Cesium, viewer } = this;
+    const layer = entry.layer;
+    const style = layer.style ?? {};
+    // A multipart feature arrives as several entities sharing one index; it
+    // gets one label, on its largest part (pickLabelPart), not one per part.
+    // The grouping (and pickLabelPart's geometry math) is skipped outright
+    // when the layer has no labels, so an unlabelled boundary set pays nothing.
+    const labelsEnabled = Boolean({ ...DEFAULT_LAYER_STYLE.labels, ...style.labels }.enabled);
+    const labelEntity = labelsEnabled ? createCesiumLabeler(Cesium, viewer, layer) : null;
+    const parts = new Map<number, Entity[]>();
+    for (const entity of dataSource.entities.values) {
+      const index = entityFeatureIndex(viewer, entity);
+      if (Number.isInteger(index)) {
+        this.featureRefs.set(entity, { layerId: layer.id, index });
+        if (!labelEntity) continue;
+        const group = parts.get(index);
+        if (group) group.push(entity);
+        else parts.set(index, [entity]);
+      }
+    }
+    if (labelEntity)
+      for (const [index, entities] of parts)
+        labelEntity(pickLabelPart(Cesium, viewer, entities), index);
   }
 
   /** Load native KML/KMZ geometry, styles, overlays, and network links. */
@@ -2942,10 +3464,21 @@ export class CesiumLayerSync {
     // otherwise the tileset would silently 401/403 and never render on the globe.
     const headers = resolveThreeDTilesRequestHeaders(
       url,
-      layer.source.requestHeaders as Record<string, string> | undefined,
+      resolveProjectHeaderReferences(
+        layer.source.requestHeaders as Record<string, string> | undefined,
+      ),
     );
-    const resource =
-      headers && Object.keys(headers).length ? new Cesium.Resource({ url, headers }) : url;
+    const hasHeaders = Boolean(headers && Object.keys(headers).length);
+    if (hasHeaders && !allowsCredentials(url)) {
+      console.warn(
+        `[GeoLibre] skipping "${layer.name}" on the globe: request headers cannot be sent over ${url}`,
+      );
+      entry.loadError = "Request headers require an HTTPS tileset URL";
+      return;
+    }
+    const resource = hasHeaders
+      ? new Cesium.Resource({ url, headers, proxy: CREDENTIAL_PROXY })
+      : url;
     try {
       if (isI3sLayer(layer)) {
         // An ArcGIS scene layer: Cesium's own I3S provider converts the
@@ -3221,7 +3754,7 @@ export class CesiumLayerSync {
 
     const { viewer } = this;
     const currentTime = viewer.clock?.currentTime;
-    const indexKey = "__geolibre_cesium_feature_index";
+    const indexKey = FEATURE_INDEX_KEY;
     const features = entry.layer.geojson?.features;
 
     // The things to show or hide: entities of a data source, or the primitives
@@ -3387,10 +3920,16 @@ export class CesiumLayerSync {
     // white+alpha only fades them.
     const marker = Cesium.Color.WHITE.withAlpha(opacity);
     const isExtruded = Boolean(style.extrusionEnabled);
-    const extColorStr = style.extrusionColor || style.fillColor || "#3b82f6";
+    const extColorVal = isExtruded ? extrusionColorValue(style) : null;
+    const extColorStr =
+      typeof extColorVal === "string"
+        ? extColorVal
+        : style.extrusionColor || style.fillColor || "#3b82f6";
     const extFill = Cesium.Color.fromCssColorString(extColorStr).withAlpha(extOpacity);
     const hasColorExpr =
-      isExtruded && style.extrusionAdvancedStyleEnabled && Boolean(style.extrusionColorExpression);
+      isExtruded &&
+      (typeof extColorVal !== "string" ||
+        (style.extrusionAdvancedStyleEnabled && Boolean(style.extrusionColorExpression)));
     const arrow =
       style.lineDecoration === "arrow" &&
       Boolean(
@@ -3553,6 +4092,8 @@ export class CesiumLayerSync {
    */
   private destroyEntry(entry: LayerEntry): void {
     entry.cancelled = true;
+    // A fit still waiting on this entry has nothing left to frame.
+    if (this.pendingZoomLayerId === entry.layer.id) this.pendingZoomLayerId = null;
     entry.abort?.abort();
     entry.documentCleanup?.();
     entry.documentCleanup = undefined;
@@ -3564,6 +4105,8 @@ export class CesiumLayerSync {
     }
     entry.fieldsListener?.();
     entry.fieldsListener = undefined;
+    entry.tileHealth?.();
+    entry.tileHealth = undefined;
     this.storyOpacities.delete(entry.layer.id);
     const { handle } = entry;
     if (!handle) return;
@@ -3576,6 +4119,8 @@ export class CesiumLayerSync {
       const provider = imagery.imageryProvider as { destroy?: () => void } | undefined;
       this.viewer.imageryLayers.remove(imagery, true);
       if (provider instanceof ProtocolImageryProvider) provider.destroy();
+      // zarr-cesium aborts its pending chunk reads and drops its tile cache.
+      if (isZarrImageryProvider(provider)) provider.destroy();
     } else if (entry.kind === "geojson" || entry.kind === "czml" || entry.kind === "kml") {
       // `cancelled` is already set, so the election skips this entry.
       if (this.czmlClockOwner === entry.layer.id) this.electCzmlClockOwner();
