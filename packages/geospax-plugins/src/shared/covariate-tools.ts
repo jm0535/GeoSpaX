@@ -83,8 +83,14 @@ function defaultChelsaBase(): string {
 
 /** Suggest an attribute name from a raster layer name ("CHELSA bio12" → "bio12"). */
 export function suggestFieldName(layerName: string): string {
-  const bio = /bio_?(\d{1,2})\b/i.exec(layerName);
-  if (bio) return `bio${Number(bio[1])}`;
+  // "CHELSA bio12", "PNG_BIO1_30s", "wc2.1_30s_bio_01" → bio12 / bio1 / bio1.
+  const bio = /bio[_\s-]?(\d{1,2})(?!\d)/i.exec(layerName);
+  if (bio && Number(bio[1]) >= 1 && Number(bio[1]) <= 19)
+    return `bio${Number(bio[1])}`;
+  if (
+    /(^|[^a-z])(elev(ation)?|dem|srtm|altitude|alt)([^a-z]|$)/i.test(layerName)
+  )
+    return "elev";
   const cleaned = layerName
     .toLowerCase()
     .replace(/\.[a-z0-9]+$/, "")
@@ -114,6 +120,48 @@ export function undeclaredIntegerNodata(image: {
   if (format === 1) return 2 ** bits - 1;
   if (format === 2) return -(2 ** (bits - 1));
   return null;
+}
+
+type WindowReader = (
+  layerId: string,
+  options: {
+    bounds: [number, number, number, number];
+    width?: number;
+    height?: number;
+  }
+) => Promise<{ values: number[] } | null>;
+
+/**
+ * Corners of the grid that a map raster does not cover. The host's window
+ * reader spreads a request over the part of the raster it overlaps, so a
+ * raster smaller than the grid would return shifted values rather than gaps.
+ * A tiny read around each corner cell centre comes back empty when the raster
+ * does not reach that corner.
+ */
+export async function uncoveredGridCorners(
+  read: WindowReader,
+  layerId: string,
+  grid: CovariateGridSpec
+): Promise<string[]> {
+  const [west, south, east, north] = grid.bounds;
+  const dx = (east - west) / grid.width;
+  const dy = (north - south) / grid.height;
+  const corners: Array<[string, number, number]> = [
+    ["north-west", west + dx / 2, north - dy / 2],
+    ["north-east", east - dx / 2, north - dy / 2],
+    ["south-west", west + dx / 2, south + dy / 2],
+    ["south-east", east - dx / 2, south + dy / 2],
+  ];
+  const missing: string[] = [];
+  for (const [name, lon, lat] of corners) {
+    const reading = await read(layerId, {
+      bounds: [lon - dx / 4, lat - dy / 4, lon + dx / 4, lat + dy / 4],
+      width: 2,
+      height: 2,
+    });
+    if (!reading || !reading.values.length) missing.push(name);
+  }
+  return missing;
 }
 
 /** Pixel window [x0, y0, x1, y1] of a north-up raster covering `bounds`, or null if it does not. */
@@ -462,6 +510,23 @@ export function mountCovariateTool(
           sources.elev = `${COPERNICUS_DEM_ATTRIBUTION}; ${dem.tilesRead} tile(s) read, ${dem.tilesMissing} absent (ocean)`;
           if (dem.tilesFailed)
             demWarning = `${dem.tilesFailed} Copernicus DEM tile(s) could not be read after retries, so elevation is missing (and those background cells dropped) there. Rebuild to retry.`;
+        }
+        for (const row of selected) {
+          const missing = await uncoveredGridCorners(
+            shell.app.readRasterWindow! as WindowReader,
+            row.id,
+            grid
+          );
+          if (missing.length)
+            throw new Error(
+              `“${row.name}” does not cover the ${missing.join(
+                ", "
+              )} corner(s) of the grid (${grid.bounds
+                .map((value) => value.toFixed(2))
+                .join(
+                  ", "
+                )} W,S,E,N). Its values would be shifted, so nothing was sampled. Set the buffer to 0, or use a raster that extends past your records.`
+            );
         }
         for (const [index, row] of selected.entries()) {
           setStatus(

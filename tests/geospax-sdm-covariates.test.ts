@@ -25,6 +25,7 @@ import {
   pixelWindowFor,
   readRemoteGrid,
   suggestFieldName,
+  uncoveredGridCorners,
   undeclaredIntegerNodata,
 } from "../packages/geospax-plugins/src/shared/covariate-tools";
 import { createPanelShell } from "../packages/geospax-plugins/src/shared/ui";
@@ -137,7 +138,7 @@ describe("helpers", () => {
   it("suggests field names and CHELSA URLs", () => {
     assert.equal(suggestFieldName("CHELSA bio12"), "bio12");
     assert.equal(suggestFieldName("wc2.1_30s_bio_01.tif"), "bio1");
-    assert.equal(suggestFieldName("SRTM Elevation.tif"), "srtm_elevation");
+    assert.equal(suggestFieldName("SRTM Elevation.tif"), "elev");
     assert.equal(suggestFieldName("2020 cover"), "v_2020_cover");
     assert.equal(
       chelsaUrl("https://example.org/chelsa/", "bio1"),
@@ -505,5 +506,56 @@ describe("undeclaredIntegerNodata", () => {
     assert.equal(undeclaredIntegerNodata(image(8, 1)), 255);
     assert.equal(undeclaredIntegerNodata(image(16, 2)), -32768);
     assert.equal(undeclaredIntegerNodata(image(32, 3)), null);
+  });
+});
+
+describe("suggestFieldName for local rasters", () => {
+  it("recognises bioclim numbering in common file names", () => {
+    assert.equal(suggestFieldName("PNG_BIO1_30s.tif"), "bio1");
+    assert.equal(suggestFieldName("PNG_BIO12_30s"), "bio12");
+    assert.equal(suggestFieldName("wc2.1_30s_bio_15.tif"), "bio15");
+    assert.equal(suggestFieldName("CHELSA_bio04_1981-2010"), "bio4");
+    assert.equal(suggestFieldName("bio120_custom"), "bio120_custom"); // not a BIO index
+  });
+
+  it("recognises elevation rasters", () => {
+    assert.equal(suggestFieldName("PNG_elevation_30s.tif"), "elev");
+    assert.equal(suggestFieldName("SRTM_90m"), "elev");
+    assert.equal(suggestFieldName("png-dem"), "elev");
+    assert.equal(suggestFieldName("salt_marsh"), "salt_marsh"); // no false "alt"
+  });
+});
+
+describe("uncoveredGridCorners", () => {
+  // Raster covering lon 141–147, lat −10…−2; a reader returns nothing outside it.
+  const read = async (
+    _id: string,
+    options: { bounds: [number, number, number, number] }
+  ) => {
+    const [w, s, e, n] = options.bounds;
+    const overlaps = e > 141 && w < 147 && n > -10 && s < -2;
+    return { values: overlaps ? [1, 1, 1, 1] : [] };
+  };
+
+  it("passes when the raster covers the whole grid", async () => {
+    const grid = {
+      bounds: [141.5, -9, 146, -3] as [number, number, number, number],
+      width: 10,
+      height: 10,
+    };
+    assert.deepEqual(await uncoveredGridCorners(read, "r", grid), []);
+  });
+
+  it("names the corners a too-small raster misses", async () => {
+    // Buffer pushed the grid west of 141°E (into Indonesia).
+    const grid = {
+      bounds: [140.5, -9, 146, -3] as [number, number, number, number],
+      width: 11,
+      height: 12,
+    };
+    assert.deepEqual(await uncoveredGridCorners(read, "r", grid), [
+      "north-west",
+      "south-west",
+    ]);
   });
 });
