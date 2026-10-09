@@ -80,6 +80,7 @@ nav:
           - GSX LULC: user-guide/gsx-plugins/lulc.md
           - GSX Marine: user-guide/gsx-plugins/marine.md
           - GSX Soil: user-guide/gsx-plugins/soil.md
+          - Species Distribution Modelling: user-guide/gsx-plugins/species-distribution-modelling.md
       - Web Services: user-guide/web-services.md
       - Settings & Preferences: user-guide/settings.md
       - Story Maps: user-guide/storymaps.md

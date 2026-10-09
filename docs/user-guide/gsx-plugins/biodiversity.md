@@ -45,6 +45,8 @@ rasters:
 
 Each model predicts a suitability surface and reports its exact settings.
 
+See **[Species distribution modelling](species-distribution-modelling.md)** for the full workflow: preparing covariates (CHELSA bioclim, Copernicus elevation, your own rasters, land mask), fitting, spatially blocked cross-validation, raster/GeoTIFF output, extra-covariate recipes and troubleshooting.
+
 ## Priorities & gaps
 
 Combine the model or occurrence layer with protected-area polygons to find
