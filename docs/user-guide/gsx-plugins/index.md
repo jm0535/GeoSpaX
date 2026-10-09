@@ -21,6 +21,8 @@ computation runs locally in your browser (or desktop app).
 | [GSX Marine](marine.md) | OBIS/WoRMS, diversity, MPA gaps, marine SDM |
 | [GSX Soil](soil.md) | Moisture/salinity proxies, capability classes, land capability |
 
+**Cross-workbench guide:** [Species distribution modelling](species-distribution-modelling.md) — occurrences → covariates (CHELSA, Copernicus DEM, your rasters) → SDM → spatial cross-validation → suitability raster/GeoTIFF.
+
 ## Opening a workbench
 
 Workbenches are **opt-in** — none of them activate at startup. Activate a

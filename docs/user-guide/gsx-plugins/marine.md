@@ -32,6 +32,8 @@ BIOCLIM, Mahalanobis and presence-background logistic SDMs using
 environmental rasters (e.g. bathymetry, temperature) — each predicts a
 suitability surface with its exact settings reported.
 
+See **[Species distribution modelling](species-distribution-modelling.md)** for the full workflow: preparing covariates (CHELSA bioclim, Copernicus elevation, your own rasters, land mask), fitting, spatially blocked cross-validation, raster/GeoTIFF output, extra-covariate recipes and troubleshooting. Note that CHELSA and Copernicus DEM are terrestrial: for marine species add your own rasters (e.g. bathymetry, sea-surface temperature) under *Raster layers on the map*, untick the CHELSA and elevation boxes, and mask the background to the sea or your study area.
+
 ## Priorities & MPAs
 
 - **Weighted grid / priority sites** for candidate areas.

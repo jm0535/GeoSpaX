@@ -27,8 +27,9 @@ kept with the result.
 ## Species models
 
 BIOCLIM, Mahalanobis and presence-background logistic SDM **with
-prediction** — see [GSX Biodiversity](biodiversity.md) for the method
-notes; here they feed prioritisation directly.
+prediction**; here they feed prioritisation directly.
+
+See **[Species distribution modelling](species-distribution-modelling.md)** for the full workflow: preparing covariates (CHELSA bioclim, Copernicus elevation, your own rasters, land mask), fitting, spatially blocked cross-validation, raster/GeoTIFF output, extra-covariate recipes and troubleshooting.
 
 ## Suitability
 
