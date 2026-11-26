@@ -4,12 +4,12 @@ GeoSpaX's browser build can be embedded in any web page and configured through U
 
 ## The live viewer
 
-The browser build is hosted at `https://geospax2.in4metrix.dev/`. It is a static site deployed on GitHub Pages that runs entirely in your browser: there is no server account, and the data you load is processed client-side. The hosted site counts page visits with Google Analytics, which never sees the data you load (see the [GeoLibre Privacy Policy](https://geolibre.app/privacy/#website-analytics)); a copy you host yourself has no analytics at all. Data leaves your browser only when you add a remote URL or explicitly share a project.
+The browser build is hosted at `https://geospax.in4metrix.dev/`. It is a static site deployed on GitHub Pages that runs entirely in your browser: there is no server account, and the data you load is processed client-side. The hosted site counts page visits with Google Analytics, which never sees the data you load (see the [GeoLibre Privacy Policy](https://geolibre.app/privacy/#website-analytics)); a copy you host yourself has no analytics at all. Data leaves your browser only when you add a remote URL or explicitly share a project.
 
 Open a public project by passing its `.geolibre.json` URL with the `url` parameter:
 
 ```text
-https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json
+https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json
 ```
 
 A project URL like this comes from **Project → Share**. See [Projects](projects.md#share).
@@ -49,7 +49,7 @@ A chrome-free `maponly` embed shows only the map, as in this shared 3D Tiles pro
 Parameters combine. For a narrow, chrome-free, dark embed of a shared project:
 
 ```text
-https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json&maponly&theme=dark
+https://geospax.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json&maponly&theme=dark
 ```
 
 The settings document must be public or same-origin, return valid JSON, and
@@ -73,7 +73,7 @@ Any **additional** query parameters pre-fill that tool's form, using the tool's
 own parameter names, so a link can arrive ready to run:
 
 ```text
-https://geospax2.in4metrix.dev/?tool=extract_cog_subset&url=https%3A%2F%2Fdata.source.coop%2Fgiswqs%2Fopengeos%2Fdem.tif&bbox_crs=4326
+https://geospax.in4metrix.dev/?tool=extract_cog_subset&url=https%3A%2F%2Fdata.source.coop%2Fgiswqs%2Fopengeos%2Fdem.tif&bbox_crs=4326
 ```
 
 When `tool=` is present the app is in **tool mode**: `url` names a tool input
@@ -93,7 +93,7 @@ Use `plugin` to open the app with a built-in plugin already active, as if you
 had picked it from the **Plugins** menu:
 
 ```text
-https://geospax2.in4metrix.dev/?plugin=swipe
+https://geospax.in4metrix.dev/?plugin=swipe
 ```
 
 Name a plugin by its id (`maplibre-gl-time-slider`) or by its short name, the id
@@ -103,14 +103,14 @@ Short names are case-insensitive. The
 several plugins with commas, or repeat the parameter:
 
 ```text
-https://geospax2.in4metrix.dev/?plugin=graticule,h3-grid
+https://geospax.in4metrix.dev/?plugin=graticule,h3-grid
 ```
 
 It combines with `url`: the plugin opens once the shared project has loaded, on
 top of the plugins the project itself turns on.
 
 ```text
-https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&plugin=swipe
+https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&plugin=swipe
 ```
 
 A plugin from the official plugin registry works too, by its registry id
@@ -133,7 +133,7 @@ Add `&loading=true` to a project link to enable a machine-readable readiness
 signal without adding a visible overlay to the screenshot:
 
 ```text
-https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/giswqs/national-land-cover-database-nlcd.geolibre.json&maponly&loading=true
+https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/national-land-cover-database-nlcd.geolibre.json&maponly&loading=true
 ```
 
 The `<html>` element exposes three attributes:
@@ -186,7 +186,7 @@ Drop the viewer into an `<iframe>`:
 
 ```html
 <iframe
-  src="https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json&amp;maponly"
+  src="https://geospax.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json&amp;maponly"
   title="GeoSpaX map"
   width="100%"
   height="600"
@@ -221,7 +221,7 @@ toolbar in a smaller space, or `maponly` for a pure map.
 Use `data` to open public GeoJSON, GeoParquet, PMTiles, Cloud-Optimized GeoTIFF (COG), a LiDAR point cloud (LAS, LAZ, COPC, or an EPT `ept.json`), or a ZIP archive containing one or more `.geojson`/`.json` FeatureCollections. Each GeoJSON file in a ZIP becomes a separate layer. An optional `style` URL applies Mapbox/MapLibre style JSON to vector data:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 Repeat `data` to load multiple independent datasets on the same map. Repeat
@@ -229,7 +229,7 @@ Repeat `data` to load multiple independent datasets on the same map. Repeat
 placeholder when an earlier dataset should use its default style:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://example.com/roads.geojson&data=https://example.com/dem.tif&style=&style=https://example.com/dem.style.json
+https://geospax.in4metrix.dev/?data=https://example.com/roads.geojson&data=https://example.com/dem.tif&style=&style=https://example.com/dem.style.json
 ```
 
 GeoSpaX loads every entry and fits the map once to their combined stored
@@ -238,7 +238,7 @@ extents. A style applies only to the `data` value at the same position.
 `data` may also point to a REST API endpoint that returns either a GeoJSON `FeatureCollection` or a ZIP containing multiple GeoJSON files. ZIP API responses are recognized from their `Content-Type`/`Content-Disposition` headers or their ZIP file signature, so the endpoint does not need a `.zip` suffix. An endpoint that takes its own query parameters is the case that does need percent-encoding, so its `&` separators are not read as GeoSpaX's own:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https%3A%2F%2Fapi.example.com%2Ffeatures%3Fcategory%3Dparks%26limit%3D100
+https://geospax.in4metrix.dev/?data=https%3A%2F%2Fapi.example.com%2Ffeatures%3Fcategory%3Dparks%26limit%3D100
 ```
 
 The example API URL is illustrative. Use the hosted `places.geojson` example above for a directly runnable test.
@@ -246,17 +246,17 @@ The example API URL is illustrative. Use the hosted `places.geojson` example abo
 A hosted ZIP with per-file styles can be tested directly:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/multiple-layers.zip&style=https://assets.geolibre.app/data/multiple-layers.style.json
+https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/multiple-layers.zip&style=https://assets.geolibre.app/data/multiple-layers.style.json
 ```
 
 GeoParquet is loaded through GeoSpaX's DuckDB-backed vector reader. PMTiles is streamed with HTTP range requests and may contain either vector or raster tiles. These real vector examples also apply the hosted sample style:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/building_count_h3.parquet&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/building_count_h3.parquet&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/building_count_h3.pmtiles&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/building_count_h3.pmtiles&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 For a vector PMTiles archive, the style is applied to the layer after the archive's source layers are discovered. A raster PMTiles archive can be loaded with `data`, but it does not accept a MapLibre vector style through `style`.
@@ -264,19 +264,19 @@ For a vector PMTiles archive, the style is applied to the layer after the archiv
 A public DEM COG can be tested directly:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/dem.tif
+https://geospax.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/dem.tif
 ```
 
 A LiDAR point cloud opens in the LiDAR layer control. A COPC file (`.copc.laz`) or an EPT dataset (`ept.json`) streams the points in view on demand; a plain LAS or LAZ file is downloaded whole, and is refused if its server reports it larger than 250 MB (convert a larger file to COPC to stream it). A point cloud does not take a `style`:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://s3.amazonaws.com/hobu-lidar/autzen-classified.copc.laz
+https://geospax.in4metrix.dev/?data=https://s3.amazonaws.com/hobu-lidar/autzen-classified.copc.laz
 ```
 
 GeoSpaX recognizes a point cloud from its URL path. An API endpoint whose path has no `.las`/`.laz` suffix, such as `https://api.example.com/download/42?token=…`, needs `dataType=lidar` to say what it returns. Like `style`, `dataType` pairs with `data` by position, so repeat it (leaving earlier values empty) in a batch. A hinted endpoint is downloaded whole, since COPC streaming is chosen only for a `.copc.` URL. An access token passed in the query string is kept on every request, including the byte-range reads of a streamed COPC file; encode the whole `data` value when the endpoint has more than one query parameter:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https%3A%2F%2Fapi.example.com%2Fdownload%2F42%3Ftoken%3Dabc%26expires%3D3600&dataType=lidar
+https://geospax.in4metrix.dev/?data=https%3A%2F%2Fapi.example.com%2Fdownload%2F42%3Ftoken%3Dabc%26expires%3D3600&dataType=lidar
 ```
 
 A plain `https://…` URL can be passed as-is, as above: `:` and `/` are legal in a query value and need no escaping. Encode the nested data and style URLs with `encodeURIComponent` only when they contain a character that would be read as GeoSpaX's own query syntax — `&`, `+`, `%`, or `#`. A bare `=` inside the value is fine, since only the first `=` in each `&`-delimited pair separates the name from the value. Remote servers must permit browser cross-origin requests (CORS). COG, GeoParquet, PMTiles, and COPC servers should also support HTTP byte-range requests.
@@ -300,7 +300,7 @@ For a COG, `style` may point to a raster style JSON object. Supported fields are
 After hosting that JSON as `dem.style.json`, pass both URLs:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/dem.tif&style=https://assets.geolibre.app/data/dem.style.json
+https://geospax.in4metrix.dev/?data=https://data.source.coop/giswqs/opengeos/dem.tif&style=https://assets.geolibre.app/data/dem.style.json
 ```
 
 For a ZIP containing files of the same geometry type, assign different styles by setting each Mapbox style layer's `source` to the corresponding filename stem. For example, `source: "parks"` targets `parks.geojson`, while `source: "counties"` targets `counties.geojson`. Style layers without a `source` are shared by every imported file. GeoSpaX validates all filename/style matches before adding any ZIP layers.
@@ -314,7 +314,7 @@ The same file can be applied interactively to an existing vector layer through *
 Use `stac` to open the **STAC Catalogs** browser already connected to a catalog. It accepts a static catalog, the root of a STAC API, or one collection of a STAC API:
 
 ```text
-https://geospax2.in4metrix.dev/?stac=https://earth-search.aws.element84.com/v1/collections/naip
+https://geospax.in4metrix.dev/?stac=https://earth-search.aws.element84.com/v1/collections/naip
 ```
 
 A collection URL (`…/collections/{id}`) connects to the API it belongs to, found through the collection's `root` link, selects that collection, and runs a search on it. The map fits the collection's extent and the matching item footprints are added as a **STAC search footprints** layer. From the result list you can then add an item's assets (COG, GeoJSON, GeoParquet, PMTiles, or Zarr) as layers. A catalog or API root only connects, leaving the search to you.
@@ -327,30 +327,30 @@ If you publish a dataset — in a repository README, a data catalog, a paper's
 supplementary material — an **Open in GeoSpaX** badge turns it into a one-click
 interactive map. Copy one of these and swap in your own URL:
 
-[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson)
+[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson)
 
 ```markdown
-[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson)
+[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson)
 ```
 
 The same badge can open a shared project instead of a single file, using `url`:
 
 ```markdown
-[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json)
+[![Open in GeoSpaX](https://img.shields.io/badge/Open%20in-GeoLibre-green.svg)](https://geospax.in4metrix.dev/?url=https://share.geolibre.app/you/project.geolibre.json)
 ```
 
 In reStructuredText:
 
 ```rst
 .. image:: https://img.shields.io/badge/Open%20in-GeoLibre-green.svg
-   :target: https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson
+   :target: https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson
    :alt: Open in GeoSpaX
 ```
 
 In HTML:
 
 ```html
-<a href="https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson">
+<a href="https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson">
   <img src="https://img.shields.io/badge/Open%20in-GeoLibre-green.svg" alt="Open in GeoSpaX" />
 </a>
 ```
@@ -378,7 +378,7 @@ recommended typed client and handles origin checks and request correlation:
 import { connect } from "@geolibre/embed";
 
 const map = await connect(document.querySelector("iframe"), {
-  origin: "https://geospax2.in4metrix.dev",
+  origin: "https://geospax.in4metrix.dev",
 });
 await map.setView({ center: [-95.7, 37.1], zoom: 5 });
 await map.setLayerVisibility("roads", false);
@@ -457,7 +457,7 @@ without their answers getting crossed.
 import { connect } from "@geolibre/embed";
 
 const map = await connect(iframe, {
-  origin: "https://geospax2.in4metrix.dev", // exact origin hosting the iframe
+  origin: "https://geospax.in4metrix.dev", // exact origin hosting the iframe
   timeoutMs: 15_000, // wait for `ready`; default 15s
   requestTimeoutMs: 15_000, // wait for each `ack`; default 15s
 });

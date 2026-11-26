@@ -57,11 +57,11 @@ export function rebrandUrls(text) {
     text
       .replace(
         /(?<![\w.-])https?:\/\/web\.geolibre\.app(?![\w.-])/g,
-        "https://geospax2.in4metrix.dev"
+        "https://geospax.in4metrix.dev"
       )
       .replace(
         /(?<![\w.-])https?:\/\/geolibre\.app\/demo(?=\/|\b)/g,
-        "https://geospax2.in4metrix.dev"
+        "https://geospax.in4metrix.dev"
       )
       // Schema ids are identifiers that saved files are validated against, not
       // links: rebranding them would make GeoSpaX reject existing files.

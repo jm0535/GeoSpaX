@@ -49,11 +49,11 @@ describe("rebrandUrls", () => {
   it("points app, docs, issues and releases at GeoSpaX", () => {
     assert.equal(
       rebrandUrls("https://web.geolibre.app"),
-      "https://geospax2.in4metrix.dev"
+      "https://geospax.in4metrix.dev"
     );
     assert.equal(
       rebrandUrls("https://web.geolibre.app/"),
-      "https://geospax2.in4metrix.dev/"
+      "https://geospax.in4metrix.dev/"
     );
     assert.equal(
       rebrandUrls("https://geolibre.app/user-guide/"),

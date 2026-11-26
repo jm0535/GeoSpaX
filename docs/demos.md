@@ -155,6 +155,6 @@ All of them, with chapters and summaries, are on
 
 ## Try it yourself
 
-[Launch GeoSpaX Web](https://geospax2.in4metrix.dev/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax.in4metrix.dev/){ .md-button .md-button--primary }
 [Download the app](downloads.md){ .md-button }
 [Getting started](getting-started.md){ .md-button }

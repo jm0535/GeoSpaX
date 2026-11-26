@@ -13,13 +13,13 @@
 > Lineage: `jm0535/map-kit` v1.4.3 → GeoSpaX 2.0 platform rewrite, built on the
 > open-source [GeoLibre](https://github.com/opengeos/GeoLibre) platform (MIT).
 
-[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax2.in4metrix.dev/)
+[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax.in4metrix.dev/)
 [![Docs](https://img.shields.io/badge/Docs-GeoSpaX-2E7D32.svg)](https://jm0535.github.io/GeoSpaX/)
 [![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)
 [![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.3.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-- **[Launch GeoSpaX Web](https://geospax2.in4metrix.dev/)** — the full app in your browser, nothing to install
+- **[Launch GeoSpaX Web](https://geospax.in4metrix.dev/)** — the full app in your browser, nothing to install
 - **[Get GeoSpaX](https://jm0535.github.io/GeoSpaX/downloads/)** — web app, desktop installers built from source, and the Python package
 - **[GSX workbench guides](docs/user-guide/gsx-plugins/index.md)** — what each domain workbench does and how to use it
 - **[Species distribution modelling](docs/user-guide/gsx-plugins/species-distribution-modelling.md)** — occurrences → CHELSA / Copernicus covariates → SDM → spatial cross-validation → suitability raster

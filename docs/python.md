@@ -530,7 +530,7 @@ displaying it:
 from geospax import Map
 
 m = Map(center=(-100, 40), zoom=4)
-m._app_url = "https://geospax2.in4metrix.dev/"
+m._app_url = "https://geospax.in4metrix.dev/"
 m.add_basemap("dark")
 m.add_vector(
     "https://data.source.coop/giswqs/opengeos/world_cities.geojson",

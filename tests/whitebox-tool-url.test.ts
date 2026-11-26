@@ -112,7 +112,7 @@ describe("whiteboxToolFromSearch", () => {
 });
 
 describe("buildWhiteboxToolShareUrl", () => {
-  const BASE = "https://geospax2.in4metrix.dev/";
+  const BASE = "https://geospax.in4metrix.dev/";
 
   it("builds a ?tool= link with the tool id and each parameter", () => {
     const url = buildWhiteboxToolShareUrl(
@@ -139,13 +139,13 @@ describe("buildWhiteboxToolShareUrl", () => {
   it("emits just ?tool= when there are no parameters", () => {
     assert.equal(
       buildWhiteboxToolShareUrl("slope", {}, BASE),
-      "https://geospax2.in4metrix.dev/?tool=slope",
+      "https://geospax.in4metrix.dev/?tool=slope",
     );
   });
 
   it("drops any query and hash already on the base so the link is deterministic", () => {
     const url = buildWhiteboxToolShareUrl("slope", { z_factor: "2" }, `${BASE}?tool=old&x=1#frag`);
-    assert.equal(url, "https://geospax2.in4metrix.dev/?tool=slope&z_factor=2");
+    assert.equal(url, "https://geospax.in4metrix.dev/?tool=slope&z_factor=2");
   });
 });
 
