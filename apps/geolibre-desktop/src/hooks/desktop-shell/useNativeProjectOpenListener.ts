@@ -19,7 +19,7 @@ export function useNativeProjectOpenListener(
         else stopListening = unlisten;
       })
       .catch((error: unknown) => {
-        console.error("[GeoLibre] Could not listen for opened project files", error);
+        console.error("[GeoSpaX] Could not listen for opened project files", error);
       });
     return () => {
       disposed = true;

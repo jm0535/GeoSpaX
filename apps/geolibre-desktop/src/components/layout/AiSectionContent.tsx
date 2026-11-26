@@ -129,7 +129,7 @@ function useOllamaModels() {
                 message: cause instanceof Error ? cause.message : String(cause),
               }),
       );
-      console.error("[GeoLibre] Could not load Ollama models", cause);
+      console.error("[GeoSpaX] Could not load Ollama models", cause);
       return null;
     } finally {
       if (generation === requestGeneration.current) setLoading(false);

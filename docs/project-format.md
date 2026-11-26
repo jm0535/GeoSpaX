@@ -1,14 +1,14 @@
-# GeoLibre Project Format
+# GeoSpaX Project Format
 
-Projects are saved as **`.geolibre`** files. GeoLibre continues to open the
+Projects are saved as **`.geolibre`** files. GeoSpaX continues to open the
 earlier **`.geolibre.json`** name, but the single extension lets desktop
-installers associate projects with GeoLibre without taking ownership of every
+installers associate projects with GeoSpaX without taking ownership of every
 JSON file on the system.
 
 ## Desktop file opening
 
-Desktop installers register `.geolibre` as a GeoLibre Project document. Opening
-one from the file manager launches GeoLibre, or brings the existing GeoLibre
+Desktop installers register `.geolibre` as a GeoSpaX Project document. Opening
+one from the file manager launches GeoSpaX, or brings the existing GeoSpaX
 window forward, and loads the project. The desktop executable also accepts both
 supported names on the command line:
 
@@ -18,7 +18,7 @@ geolibre-desktop /path/to/legacy.geolibre.json
 ```
 
 Operating systems see only `.json` at the end of a `.geolibre.json` name. Those
-legacy files continue to open from inside GeoLibre and from the command line,
+legacy files continue to open from inside GeoSpaX and from the command line,
 but renaming one to `.geolibre` is required for file-manager association. The
 file contents do not change.
 
@@ -152,8 +152,8 @@ enter/exit. The section is omitted entirely when the project has no chapters.
 ```json
 {
   "title": "A Tour of Three Cities",
-  "subtitle": "Built with GeoLibre",
-  "byline": "By the GeoLibre team",
+  "subtitle": "Built with GeoSpaX",
+  "byline": "By the GeoSpaX team",
   "footer": "Source: OpenStreetMap",
   "theme": "dark",
   "showMarkers": true,
@@ -455,7 +455,7 @@ applied and do not track the map afterwards. Use the MapLibre `["zoom"]`
 operator instead when the filter should follow the current zoom.
 
 A point layer using the cluster renderer is worth noting, because MapLibre
-clusters at the source, before the renderer evaluates any filter. GeoLibre
+clusters at the source, before the renderer evaluates any filter. GeoSpaX
 therefore narrows a clustered layer's source data by the persistent expression
 filter and Quick Filters, so its bubbles and counts follow both. A Time Slider
 window, a rule filter, and an embed `setFilter` remain per-feature render
@@ -471,7 +471,7 @@ way of reading a shared map, not of editing it.
 
 When a `geojson` layer enables `style.simpleStyleEnabled`, individual features
 may override the layer style with [simplestyle-spec](https://github.com/mapbox/simplestyle-spec)
-properties (`stroke`, `fill`, `stroke-width`, `fill-opacity`, ...). GeoLibre also
+properties (`stroke`, `fill`, `stroke-width`, `fill-opacity`, ...). GeoSpaX also
 honors a per-feature `text-color` on text-marker points (used by the Annotations
 layer), falling back to `style.textColor` when a feature does not set it.
 
@@ -538,7 +538,7 @@ while one is set.
 popup design selects from what is visible, it cannot re-expose what the author
 hid. That holds for the expressions too: `titleExpression` and `bodyExpression`
 are evaluated against the visible properties only, so a `["get", …]` cannot
-pull back a hidden column or one of GeoLibre's internal ones. Raster pixel identify goes through a different path and ignores `popup`.
+pull back a hidden column or one of GeoSpaX's internal ones. Raster pixel identify goes through a different path and ignores `popup`.
 
 ### Descriptive metadata
 
@@ -626,7 +626,7 @@ import {
 A local project may contain credentials needed to restore authenticated data,
 including layer request headers, geocoding API keys, environment variables, and
 plugin settings. Any project leaving the local workspace must pass through
-`redactCredentials(project)` first. GeoLibre applies this invariant to Share,
+`redactCredentials(project)` first. GeoSpaX applies this invariant to Share,
 standalone HTML export, embed snapshots, and collaboration snapshots. On the
 desktop app, geocoding API keys and uniquely named secret environment
 variables move to the OS keychain rather than the file; see

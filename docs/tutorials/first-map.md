@@ -1,10 +1,10 @@
 # Your First Map
 
-This tutorial takes you from an empty workspace to a styled map with inspectable data, in a few minutes. You can do all of it in the [live viewer](https://web.geolibre.app/).
+This tutorial takes you from an empty workspace to a styled map with inspectable data, in a few minutes. You can do all of it in the [live viewer](https://geospax2.in4metrix.dev/).
 
-## 1. Open GeoLibre
+## 1. Open GeoSpaX
 
-Open [web.geolibre.app](https://web.geolibre.app/), or launch the desktop app. You start with a basemap and an empty [Layers panel](../user-guide/layers.md).
+Open [web.geolibre.app](https://geospax2.in4metrix.dev/), or launch the desktop app. You start with a basemap and an empty [Layers panel](../user-guide/layers.md).
 
 ## 2. Add a layer
 

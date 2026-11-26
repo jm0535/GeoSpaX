@@ -231,7 +231,7 @@ async function archiveFor(id: string): Promise<SuperOverlayArchive | null> {
         // path at all, and a session-only key from a dropped file names none.
         notifySuperOverlayUnreadable(id);
       } catch (error) {
-        console.warn(`[GeoLibre] Could not re-read the KML Super-Overlay from "${id}".`, error);
+        console.warn(`[GeoSpaX] Could not re-read the KML Super-Overlay from "${id}".`, error);
         notifySuperOverlayUnreadable(id);
       } finally {
         pendingResolutions.delete(id);

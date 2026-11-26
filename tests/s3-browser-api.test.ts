@@ -72,7 +72,7 @@ describe("S3 browser client", () => {
     );
   });
 
-  it("recognizes GeoLibre projects, which are not mosaic indexes", () => {
+  it("recognizes GeoSpaX projects, which are not mosaic indexes", () => {
     assert.equal(isProjectKey("maps/demo.geolibre.json"), true);
     assert.equal(isProjectKey("maps/DEMO.GEOLIBRE.JSON"), true);
     assert.equal(isProjectKey("maps/demo.geolibre"), true);

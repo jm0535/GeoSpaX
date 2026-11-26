@@ -1,19 +1,19 @@
 # Agent skill
 
-GeoLibre ships an **agent skill** — a `SKILL.md` that teaches an external AI
+GeoSpaX ships an **agent skill** — a `SKILL.md` that teaches an external AI
 coding agent (Claude Code, Claude Desktop, or any runtime that loads skills) how
-to build GeoLibre maps on your behalf.
+to build GeoSpaX maps on your behalf.
 
 It lives in the repository at
 [`skills/geolibre/`](https://github.com/opengeos/GeoLibre/tree/main/skills/geolibre).
 
 ## What it is for
 
-GeoLibre already has an in-app [AI Assistant](user-guide/ai-assistant.md), which
+GeoSpaX already has an in-app [AI Assistant](user-guide/ai-assistant.md), which
 chats with your data *inside* the running app and applies changes through the
 app's own store. The skill covers the other direction: an agent working
-**outside** GeoLibre — in your terminal, your editor, or a notebook — that
-should produce a GeoLibre map as its output.
+**outside** GeoSpaX — in your terminal, your editor, or a notebook — that
+should produce a GeoSpaX map as its output.
 
 | | AI Assistant | Agent skill |
 | --- | --- | --- |
@@ -22,7 +22,7 @@ should produce a GeoLibre map as its output.
 | Needs | A configured AI provider | An agent that loads skills |
 | Output | Edits you can undo with Ctrl/Cmd + Z | A project file and/or a standalone HTML page |
 
-They compose: an agent authors the project, you open it in GeoLibre and keep
+They compose: an agent authors the project, you open it in GeoSpaX and keep
 working with the Assistant. The MCP server's `live_*` tools are a third path:
 they move the map already open in Desktop, through the Notebook relay. See
 [MCP server](mcp.md).
@@ -44,7 +44,7 @@ they move the map already open in Desktop, through the Notebook relay. See
 ## Install
 
 ```bash
-git clone --depth 1 https://github.com/opengeos/GeoLibre /tmp/geolibre
+git clone --depth 1 https://github.com/jm0535/GeoSpaX /tmp/geolibre
 mkdir -p ~/.claude/skills
 cp -r /tmp/geolibre/skills/geolibre ~/.claude/skills/
 ```
@@ -56,8 +56,8 @@ itself when a request matches.
 For the shortest path, install the MCP server the skill prefers:
 
 ```bash
-pip install "geolibre[mcp]"
-claude mcp add geolibre -- geolibre-mcp --root ~/maps
+pip install "geospax[mcp]"
+claude mcp add geolibre -- geospax-mcp --root ~/maps
 ```
 
 The skill still works without it — it falls back to the Python API and to

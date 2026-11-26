@@ -69,14 +69,14 @@ describe("mergeWasmToolManifests", () => {
     );
   });
 
-  it("appends GeoLibre-authored tools absent from the catalog", () => {
+  it("appends GeoSpaX-authored tools absent from the catalog", () => {
     const merged = mergeWasmToolManifests(
       [catalogReprojectVector],
       [wasmReprojectVector, geolibreOnlyTool],
     );
     assert.ok(
       merged.some((tool) => tool.id === "write_geoparquet"),
-      "GeoLibre-only tool should be appended",
+      "GeoSpaX-only tool should be appended",
     );
     // The WASM whitebox match is consumed, not duplicated as a WASM-only entry.
     assert.equal(merged.filter((tool) => tool.id === "reproject_vector").length, 1);
@@ -106,7 +106,7 @@ describe("mergeWasmToolManifests", () => {
     assert.equal(merged.filter((tool) => tool.id === "reproject_vector").length, 1);
   });
 
-  it("consumes a matched GeoLibre tool once and preserves its source", () => {
+  it("consumes a matched GeoSpaX tool once and preserves its source", () => {
     // A GeoLibre-authored tool that also has a catalog stub must be merged once
     // (never appended a second time via the GeoLibre-only leftovers), take the
     // WASM manifest's params, and keep its "geolibre" source so the source

@@ -87,7 +87,7 @@ describe("fetchLatestRelease", () => {
         JSON.stringify({
           tag_name: "1.6.0",
           body: "  notes  ",
-          html_url: "https://github.com/opengeos/GeoLibre/releases/tag/v1.6.0",
+          html_url: "https://github.com/jm0535/GeoSpaX/releases/tag/v1.6.0",
         }),
         { status: 200 },
       ),
@@ -95,7 +95,7 @@ describe("fetchLatestRelease", () => {
     const release = await fetchLatestRelease();
     assert.equal(release.version, "v1.6.0");
     assert.equal(release.notes, "notes");
-    assert.equal(release.url, "https://github.com/opengeos/GeoLibre/releases/tag/v1.6.0");
+    assert.equal(release.url, "https://github.com/jm0535/GeoSpaX/releases/tag/v1.6.0");
   });
 
   it("falls back to the downloads page for a non-GitHub html_url", async () => {

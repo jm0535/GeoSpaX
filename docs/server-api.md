@@ -1,6 +1,6 @@
-# GeoLibre projects and identity API
+# GeoSpaX projects and identity API
 
-This document defines version 1 of the HTTP contract used by GeoLibre's
+This document defines version 1 of the HTTP contract used by GeoSpaX's
 Project Gallery and **Project → Share** flow. A compatible server may use any
 implementation or storage engine. The reference implementation lives in
 `backend/geolibre_server_api`.
@@ -25,7 +25,7 @@ implementation or storage engine. The reference implementation lives in
   Responses containing private, organization, or group-protected content must
   use `Cache-Control: private, no-store`, including metadata listings.
 - Cross-origin web deployments must allow `Authorization` and `Content-Type`
-  from the GeoLibre web origin. On self-hosted Tauri installations using browser
+  from the GeoSpaX web origin. On self-hosted Tauri installations using browser
   fetch, allow `tauri://localhost` and/or `http://tauri.localhost` explicitly.
   The shipped desktop HTTPS share origin uses native HTTP for authenticated
   requests; that transport does not depend on CORS.
@@ -135,7 +135,7 @@ token lifecycle (the token does not expire); the accepted explicit lifetime is
   "username": "ada",
   "password": "correct horse battery staple",
   "email": "ada@example.org",
-  "name": "GeoLibre desktop",
+  "name": "GeoSpaX desktop",
   "scopes": ["read:projects", "write:projects"],
   "expiresInDays": 30
 }
@@ -222,7 +222,7 @@ first, then ID for ties. Each row contains a public UUID, not a token:
   "id": "uuid",
   "kind": "oauth",
   "clientId": "geolibre-desktop",
-  "label": "GeoLibre Desktop",
+  "label": "GeoSpaX Desktop",
   "scopes": ["read:projects", "write:projects", "share:public"],
   "createdAt": "2026-08-03T12:00:00Z",
   "lastUsedAt": null,
@@ -890,7 +890,7 @@ Requires auth. Creates a project and its first immutable version.
 }
 ```
 
-`content` is a string containing a valid GeoLibre project JSON document.
+`content` is a string containing a valid GeoSpaX project JSON document.
 `filename` supplies a fallback title/slug; the project document's non-empty
 title is authoritative. `visibility` is optional and is `public`, `unlisted`,
 `private`, or `organization`. `organizationId` is required when `visibility`
@@ -1079,7 +1079,7 @@ and the organization's public sharing policy apply to it exactly as on create.
 - `GET /api/projects/{id}/versions/{version}` returns an immutable historical
   document.
 - `GET /{username}/{slug}` may return an HTML project page or redirect to the
-  configured GeoLibre viewer. It is the `projectUrl` advertised by the API.
+  configured GeoSpaX viewer. It is the `projectUrl` advertised by the API.
 - Organization-owned equivalents are
   `GET /org/{organizationSlug}/{slug}.geolibre.json` and
   `GET /org/{organizationSlug}/{slug}`.
@@ -1259,7 +1259,7 @@ submit the consent form.
 
 Web redirects must be absolute HTTPS URLs ending in `/oauth-callback.html`.
 Explicit-port loopback HTTP is allowed for development. Desktop redirects must
-be exactly `org.geolibre.desktop:/oauth/callback`. The installed Tauri desktop
+be exactly `geospax.in4metrix.dev:/oauth/callback`. The installed Tauri desktop
 app opens consent in the system browser and receives that URI through the OS
 protocol handler (on macOS, Windows, and Linux), not an inbound HTTP listener.
 It accepts a callback only for a live, matching state and issuer. A callback

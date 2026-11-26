@@ -426,7 +426,7 @@ async function openStandaloneDuckDBControl(app: GeoLibreAppAPI): Promise<boolean
         ?.renderLayer?.()
         .then(() => syncDuckDBRenderedLayersFromStore(useAppStore.getState().layers))
         .catch((error: unknown) => {
-          console.warn("[GeoLibre] duckdb: could not redraw cached layers after remount", error);
+          console.warn("[GeoSpaX] duckdb: could not redraw cached layers after remount", error);
         });
     }
   }

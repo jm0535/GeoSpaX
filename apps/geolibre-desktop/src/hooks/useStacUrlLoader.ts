@@ -32,7 +32,7 @@ export function useStacUrlLoader(
     requestStacCatalogUrl(url);
     void Promise.resolve(mapAppAPI.activatePlugin?.(STAC_PLUGIN_ID))
       .catch((error: unknown) => {
-        console.error("[GeoLibre] Could not open the STAC Catalogs browser", error);
+        console.error("[GeoSpaX] Could not open the STAC Catalogs browser", error);
       })
       // An activation that bailed out or threw leaves the request queued, and the next manual
       // open of the browser must not reconnect to this one-time link's catalog.

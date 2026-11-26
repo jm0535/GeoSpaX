@@ -535,7 +535,7 @@ pub fn run() {
             create_main_window(app)?;
             // Nothing on Linux claims the OAuth callback scheme for us.
             // `tauri-bundler` writes `Exec=` into the bundled .desktop with no
-            // field code, so `xdg-open org.geolibre.desktop:/oauth/callback?...`
+            // field code, so `xdg-open geospax.in4metrix.dev:/oauth/callback?...`
             // starts the app with an empty argv and the authorization code is
             // dropped on the floor; an AppImage installs no .desktop at all.
             // Registering at runtime writes a `%u`-qualified handler entry and
@@ -3592,7 +3592,7 @@ fn terminate_jupyter_listeners_on_port(
 // Helper TCP table, and "is it ours?" is answered by the process image path: we
 // only ever terminate a listener whose executable lives inside this user's own
 // GeoLibre runtime directory (the uv-managed environment under
-// `%APPDATA%\org.geolibre.desktop\runtime\`). A Jupyter the user installed
+// `%APPDATA%\geospax.in4metrix.dev\runtime\`). A Jupyter the user installed
 // themselves lives outside it and is left alone. The sidecar's port keeps its
 // no-op: unlike Jupyter it already reports an actionable message of its own
 // when the port stays busy (see start_geolibre_sidecar_blocking).
@@ -6149,24 +6149,24 @@ mod tests {
     #[test]
     fn recognizes_only_paths_inside_the_runtime_directory() {
         let root =
-            std::path::Path::new(r"C:\Users\me\AppData\Roaming\org.geolibre.desktop\runtime");
+            std::path::Path::new(r"C:\Users\me\AppData\Roaming\geospax.in4metrix.dev\runtime");
         assert!(path_is_under(
             std::path::Path::new(
-                r"C:\Users\me\AppData\Roaming\org.geolibre.desktop\runtime\jupyter-server\Scripts\python.exe"
+                r"C:\Users\me\AppData\Roaming\geospax.in4metrix.dev\runtime\jupyter-server\Scripts\python.exe"
             ),
             root
         ));
         // Case and separator differences are not a mismatch on Windows.
         assert!(path_is_under(
             std::path::Path::new(
-                r"c:\users\me\appdata\roaming\org.geolibre.desktop\RUNTIME/uv-bin/uv.exe"
+                r"c:\users\me\appdata\roaming\geospax.in4metrix.dev\RUNTIME/uv-bin/uv.exe"
             ),
             root
         ));
         // A sibling directory sharing the prefix is not inside it.
         assert!(!path_is_under(
             std::path::Path::new(
-                r"C:\Users\me\AppData\Roaming\org.geolibre.desktop\runtime-old\jupyter-server\python.exe"
+                r"C:\Users\me\AppData\Roaming\geospax.in4metrix.dev\runtime-old\jupyter-server\python.exe"
             ),
             root
         ));

@@ -39,7 +39,7 @@ export function useProjectInteractionRestore(
     if (!controls) return;
     const handlers = createScriptingHandlers({ getController: () => mapControllerRef.current });
     const report = (control: string, error: unknown) => {
-      console.warn(`[GeoLibre] could not apply the project's "${control}" control`, error);
+      console.warn(`[GeoSpaX] could not apply the project's "${control}" control`, error);
       notify.warning(i18next.t("notifications.projectControlFailed", { control }), {
         dedupeKey: `project-control:${control}`,
       });

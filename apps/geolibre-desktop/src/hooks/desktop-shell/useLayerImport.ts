@@ -151,7 +151,7 @@ export function useLayerImport({
         if (offRange) {
           nonGeographic.push(layerName);
           console.warn(
-            `[GeoLibre] "${layerName}" declares geographic coordinates but its values are out of range ` +
+            `[GeoSpaX] "${layerName}" declares geographic coordinates but its values are out of range ` +
               `(max |x| ${Math.round(offRange.maxAbsX).toLocaleString()}, max |y| ${Math.round(
                 offRange.maxAbsY,
               ).toLocaleString()} ` +

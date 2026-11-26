@@ -1384,9 +1384,9 @@ async function responseErrorMessage(response: Response, fallback: string): Promi
 }
 
 function sidecarConnectionError(baseUrl: string, error: unknown): Error {
-  console.debug("GeoLibre sidecar unreachable:", error);
+  console.debug("GeoSpaX sidecar unreachable:", error);
   return new Error(
-    `Could not connect to the GeoLibre sidecar at ${baseUrl}. ` +
+    `Could not connect to the GeoSpaX sidecar at ${baseUrl}. ` +
       "Start the sidecar to run processing tools.",
   );
 }

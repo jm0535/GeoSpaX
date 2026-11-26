@@ -1,10 +1,10 @@
 # Adding Data
 
-The **Add Data** menu is the main way to bring layers into GeoLibre. It groups sources into Files, Web services, Cloud formats, 3D layers, and Databases. You can also drag files straight onto the map.
+The **Add Data** menu is the main way to bring layers into GeoSpaX. It groups sources into Files, Web services, Cloud formats, 3D layers, and Databases. You can also drag files straight onto the map.
 
 For a consolidated list of file formats, service protocols, and platform limitations, see [Supported Data Formats](../data-formats.md).
 
-To collect supported dataset links from a catalog or other webpage and open several at once, use the [GeoLibre Chrome extension](chrome-extension.md), available from the [Chrome Web Store](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj).
+To collect supported dataset links from a catalog or other webpage and open several at once, use the [GeoSpaX Chrome extension](chrome-extension.md), available from the [Chrome Web Store](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj).
 
 ![The Add Data menu, grouped into Files, Web services, Cloud formats, 3D layers, and Databases](https://assets.geolibre.app/images/geolibre-add-data-menu.webp)
 
@@ -24,7 +24,7 @@ To collect supported dataset links from a catalog or other webpage and open seve
 | **MBTiles Layer** | Loads a local MBTiles tile archive (desktop app). |
 | **OSM PBF Layer** | Reads an OpenStreetMap `.osm.pbf` extract and adds the features you select from it. |
 
-A layer the Add Vector panel loads in GeoJSON mode, with up to 100,000 features, is handed over to GeoLibre once it has loaded, so it gets the same Style panel as a file dropped on the map: joins, virtual fields, the attribute form, popup design, editor tracking, diagrams, and geometry generators included. It then leaves the panel's own layer list and is managed from the Layers panel. The panel keeps the layers it draws as tiles, streamed GeoParquet, larger layers, and KML/KMZ layers with placemark icons; for those, the Style panel shows only the settings the panel can draw. A saved project still reopens a handed-over layer from its URL or file path, and a URL-backed one refreshes the same way.
+A layer the Add Vector panel loads in GeoJSON mode, with up to 100,000 features, is handed over to GeoSpaX once it has loaded, so it gets the same Style panel as a file dropped on the map: joins, virtual fields, the attribute form, popup design, editor tracking, diagrams, and geometry generators included. It then leaves the panel's own layer list and is managed from the Layers panel. The panel keeps the layers it draws as tiles, streamed GeoParquet, larger layers, and KML/KMZ layers with placemark icons; for those, the Style panel shows only the settings the panel can draw. A saved project still reopens a handed-over layer from its URL or file path, and a URL-backed one refreshes the same way.
 
 Vector files are reprojected to EPSG:4326 on load. In the browser, vector import relies on DuckDB-WASM Spatial, with direct handling for GeoJSON, zipped Shapefiles, and KMZ archives. The source CRS is read from the file itself — the layer metadata for the GDAL-read formats, a Shapefile's `.prj` sidecar, or a GeoParquet's `geo` metadata — so a national grid such as EPSG:2100 (GGRS87 / Greek Grid) lands in the right place with nothing to configure.
 
@@ -33,18 +33,18 @@ GeoParquet opens across its variants: 1.0 and 1.1 files (including one carrying 
 !!! warning "Large vector files"
     There is no fixed size limit. Files **under 100 MB** are read by the
     in-memory JavaScript readers, which are fastest for everyday data. At
-    **100 MB or larger**, GeoLibre streams the file through DuckDB instead —
+    **100 MB or larger**, GeoSpaX streams the file through DuckDB instead —
     off the main thread, so the interface keeps responding. For a zipped
     Shapefile the threshold applies to the *uncompressed* `.shp`, since
     shapefiles compress heavily and the archive's size says little about the
     parse cost. This happens automatically; nothing is asked of you.
 
     A separate check counts features once the source is open. Past
-    **100,000 features**, GeoLibre asks before converting every one to GeoJSON
+    **100,000 features**, GeoSpaX asks before converting every one to GeoJSON
     in memory, because that is where memory rather than file size becomes the
     limit — a small GeoParquet can hold millions of rows.
 
-    For very large data, converting first still pays: **Processing → GeoLibre
+    For very large data, converting first still pays: **Processing → GeoSpaX
     Toolbox → Conversion → Vector to PMTiles** writes a tiled format the map loads one tile at a
     time instead of reading the whole file. Converting to **GeoParquet**
     instead gives a compact columnar format that reads far faster than text,
@@ -55,7 +55,7 @@ GeoParquet opens across its variants: 1.0 and 1.1 files (including one carrying 
 !!! tip "KML and KMZ"
     KML is read by an in-house parser that keeps the file's own symbology, so styled KML renders the way it does in Google Earth. A file that parser cannot handle falls back to the DuckDB Spatial reader, which loads the geometry without the styling.
 
-    KML imports also render `GroundOverlay` images as map overlays (which animate through the Time Slider when they are time-tagged) and show embedded Collada `.dae` models. **Super-Overlays** — the tiled, `NetworkLink`-driven KML that large imagery exports use — are supported too: GeoLibre serves the archive's tiles to the map instead of trying to load the whole pyramid at once.
+    KML imports also render `GroundOverlay` images as map overlays (which animate through the Time Slider when they are time-tagged) and show embedded Collada `.dae` models. **Super-Overlays** — the tiled, `NetworkLink`-driven KML that large imagery exports use — are supported too: GeoSpaX serves the archive's tiles to the map instead of trying to load the whole pyramid at once.
 
 ## Web services
 
@@ -64,7 +64,7 @@ GeoParquet opens across its variants: 1.0 and 1.1 files (including one carrying 
 | **XYZ Layer** | A raster or vector tile service using a `{z}/{x}/{y}` URL template. |
 | **[WCS Layer](../data-formats.md#wcs-raster-subsets)** | Downloads numerical GeoTIFF subsets from WCS 1.0.0 services. |
 | **WMS Layer** | A Web Map Service layer, with click-to-identify through GetFeatureInfo where supported. In the desktop app, once the layers are retrieved, a layer can be requested in any coordinate reference system it offers; the tiles are reprojected to Web Mercator. |
-| **WFS Layer** | A Web Feature Service layer, with optional automatic refresh. GeoLibre asks for GeoJSON first and falls back to GML when the server offers no GeoJSON output, so GML-only services (MapServer, most INSPIRE services) load too. GML in WGS84, ETRS89, NAD83 or Web Mercator is read directly, and GML in any other EPSG coordinate system (a national grid, a UTM zone) is reprojected; a system GeoLibre does not know is reported as an error rather than drawn in the wrong place. In the desktop app, WFS requests go through the native HTTP client, so services that send no CORS headers load too. |
+| **WFS Layer** | A Web Feature Service layer, with optional automatic refresh. GeoSpaX asks for GeoJSON first and falls back to GML when the server offers no GeoJSON output, so GML-only services (MapServer, most INSPIRE services) load too. GML in WGS84, ETRS89, NAD83 or Web Mercator is read directly, and GML in any other EPSG coordinate system (a national grid, a UTM zone) is reprojected; a system GeoSpaX does not know is reported as an error rather than drawn in the wrong place. In the desktop app, WFS requests go through the native HTTP client, so services that send no CORS headers load too. |
 | **WMTS Layer** | A Web Map Tile Service layer. |
 | **OGC API - Features** | An OGC API - Features endpoint; pick a collection and add it as a vector layer. |
 | **OGC Vector Tiles** | An OGC API - Tiles vector tile service. |
@@ -144,7 +144,7 @@ The **Browser** tab on the left edge of the window opens a QGIS-style Data Sourc
 | Section | What it holds |
 | --- | --- |
 | **My Data** | Your personal layer library. **Layer actions → Save to My Data** stores a fully configured layer — source, style, labels, filters, joins, virtual fields, and attribute form — and one click here re-adds it to any later project. Import and export the library with the buttons on the section header. |
-| **Services** | Saved map services, grouped by kind (XYZ, WMS, WFS, WMTS, ArcGIS). GeoLibre ships a starter set; the **+** on a group adds a new connection of that kind. Expand a service to browse its layers and add one. Self-hosted deployments can add read-only organization-wide services here, marked with a *config* badge (see [Getting Started](../getting-started.md#deployment-service-library)); they are shared with every user, cannot be edited or deleted, and are never stored in your own service library. |
+| **Services** | Saved map services, grouped by kind (XYZ, WMS, WFS, WMTS, ArcGIS). GeoSpaX ships a starter set; the **+** on a group adds a new connection of that kind. Expand a service to browse its layers and add one. Self-hosted deployments can add read-only organization-wide services here, marked with a *config* badge (see [Getting Started](../getting-started.md#deployment-service-library)); they are shared with every user, cannot be edited or deleted, and are never stored in your own service library. |
 | **Recent** | The sources you added most recently, so a repeat is one click. |
 | **Databases** | PostGIS connections. Expand one to browse its schemas and tables; on a table that registers more than one geometry column, pick the column explicitly. |
 
@@ -158,7 +158,7 @@ The basemap sits at the bottom of the [Layers panel](layers.md) as the **Backgro
 
 ### Other celestial bodies
 
-GeoLibre can map worlds beyond Earth. The **Change basemap** dialog and the **New project** dialog group planetary basemaps into sections for **The Moon**, **Mars**, and a collapsible **Other celestial bodies** section covering **Mercury, Venus, the Galilean moons** (Io, Europa, Ganymede, Callisto), **Titan, Pluto,** and **Charon**. The Moon and Mars mosaics come from [OpenPlanetaryMap](https://www.openplanetary.org/opm); the other bodies come from [USGS Astrogeology](https://astrogeology.usgs.gov/) and are reprojected to Web Mercator on the fly so MapLibre can render them.
+GeoSpaX can map worlds beyond Earth. The **Change basemap** dialog and the **New project** dialog group planetary basemaps into sections for **The Moon**, **Mars**, and a collapsible **Other celestial bodies** section covering **Mercury, Venus, the Galilean moons** (Io, Europa, Ganymede, Callisto), **Titan, Pluto,** and **Charon**. The Moon and Mars mosaics come from [OpenPlanetaryMap](https://www.openplanetary.org/opm); the other bodies come from [USGS Astrogeology](https://astrogeology.usgs.gov/) and are reprojected to Web Mercator on the fly so MapLibre can render them.
 
 For quick switching, use the **planet switcher** (the orbit icon) in the Layers panel header. Selecting a body sets the project's **ellipsoid**, so distance, area, and scale-bar measurements use that body's radius instead of Earth's.
 

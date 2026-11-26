@@ -81,7 +81,7 @@ export function resolveHeaderReferences(
       if (!warnedMissing.has(warnKey)) {
         warnedMissing.add(warnKey);
         console.warn(
-          `[GeoLibre] Request header "${name}" references unset environment variable ${missing}; the header is not sent.`,
+          `[GeoSpaX] Request header "${name}" references unset environment variable ${missing}; the header is not sent.`,
         );
       }
       continue;

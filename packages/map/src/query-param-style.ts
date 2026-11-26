@@ -48,7 +48,7 @@ export function buildGeoLibreQueryStyle(
     warnings: result.warnings,
     style: {
       ...result.style,
-      name: `${layer.name} — GeoLibre URL style`,
+      name: `${layer.name} — GeoSpaX URL style`,
       sources: {
         [sourceName]: {
           type: "geojson",

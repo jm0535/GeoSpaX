@@ -297,7 +297,7 @@ function redactUrl(raw: string): string {
 // Capture browser URLs and the hostless desktop OAuth callback in free text.
 // Stop before whitespace or a closing delimiter so embedded URLs in quotes
 // or parentheses retain their surrounding punctuation.
-const EMBEDDED_URL = /(?:https?:\/\/|org\.geolibre\.desktop:\/)[^\s)"'<>]+/gi;
+const EMBEDDED_URL = /(?:https?:\/\/|geospax\.in4metrix\.dev:\/)[^\s)"'<>]+/gi;
 
 // Error strings may contain a full request or callback URL, including query
 // secrets. Redact embedded URLs in diagnostic text before storing/exporting it.

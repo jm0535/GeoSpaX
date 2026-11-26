@@ -1,92 +1,69 @@
 # Getting Started
 
-[![Launch GeoLibre Web](https://img.shields.io/badge/Launch-GeoLibre%20Web-green.svg)](https://web.geolibre.app/)
-[![GeoLibre shared project](https://img.shields.io/badge/GeoLibre-share-green.svg)](https://share.geolibre.app)
-[![GeoLibre plugins](https://img.shields.io/badge/GeoLibre-plugins-green.svg)](https://plugins.geolibre.app)
-[![image](https://img.shields.io/pypi/v/geolibre.svg)](https://pypi.python.org/pypi/geolibre)
-[![R package](https://img.shields.io/badge/R-package-276DC3?logo=r&logoColor=white)](https://r.geolibre.app/)
-[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/opengeos/GeoLibre/blob/main/python/examples/getting-started.ipynb)
-[![image](https://img.shields.io/conda/vn/conda-forge/geolibre.svg)](https://anaconda.org/conda-forge/geolibre)
-[![Conda Recipe](https://img.shields.io/badge/recipe-geolibre-green.svg)](https://github.com/conda-forge/geolibre-feedstock)
-[![Microsoft Store](https://img.shields.io/badge/Microsoft%20Store-GeoLibre-0078D4?logo=windows)](https://apps.microsoft.com/detail/9nwt67rv531x)
-[![Mac App Store](https://img.shields.io/badge/Mac%20App%20Store-GeoLibre-0D96F6?logo=apple&logoColor=white)](https://apps.apple.com/app/geolibre-desktop/id6796848769)
-[![App Store](https://img.shields.io/badge/App%20Store-GeoLibre-0D96F6?logo=appstore&logoColor=white)](https://apps.apple.com/app/geolibre/id6796039674)
-[![Google Play](https://img.shields.io/badge/Google%20Play-GeoLibre-01875F?logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=org.geolibre.app)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-GeoLibre-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj)
-[![AUR version](https://img.shields.io/aur/version/geolibre-bin?logo=archlinux&label=AUR)](https://aur.archlinux.org/packages/geolibre-bin)
-[![FlatPark](https://img.shields.io/badge/FlatPark-GeoLibre-4A90D9?logo=flatpak)](https://flatpark.org/apps/app.geolibre.GeoLibre/)
+[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax2.in4metrix.dev/)
+[![Docs](https://img.shields.io/badge/Docs-GeoSpaX-2E7D32.svg)](https://jm0535.github.io/GeoSpaX/)
+[![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20785400.svg)](https://doi.org/10.5281/zenodo.20785400)
 
-GeoLibre is a free and open-source, lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data. It runs everywhere you do, in the web browser, on the desktop, on mobile, and inside Jupyter notebooks, all while keeping your data local and private.
+GeoSpaX is a free and open-source, multi-domain geospatial analysis GIS: a
+cloud-native map workspace plus twelve GSX domain workbenches (agriculture,
+biodiversity, climate, conservation, disaster, environment, forestry,
+geoscience, hydrology, land cover, marine and soil). It keeps your data local
+and private, and is built on the open-source [GeoSpaX](https://github.com/opengeos/GeoLibre)
+platform.
 
-This page helps you start using GeoLibre. If you want to contribute to GeoLibre or run it from source, jump to [Run from source](#run-from-source) below or read the [Contributing](contributing.md) guide.
+This page helps you start using GeoSpaX. To contribute or run it from source,
+jump to [Run from source](#run-from-source) or read the
+[Contributing](contributing.md) guide.
 
-## Use GeoLibre
+## Use GeoSpaX
 
-Pick whichever fits how you work. The same app ships in every form, so `.geolibre` projects, including legacy `.geolibre.json` files, move between them.
+The same app ships in every form, so `.geolibre` projects (including legacy
+`.geolibre.json` files) move between them.
 
 ### On the web
 
-GeoLibre Web is the full app running in your browser, with nothing to install. It keeps your data local and private, processing everything client-side in your browser session.
+GeoSpaX Web is the full app in your browser, with nothing to install.
+Processing happens client-side in your browser session.
 
-[Launch GeoLibre Web](https://web.geolibre.app/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax2.in4metrix.dev/){ .md-button .md-button--primary }
 
-You can load browser-selected vector data supported by DuckDB-WASM Spatial, drag GeoTIFF/COG rasters onto the map, add URL-based services and datasets (XYZ, WMS, GeoJSON, vector tiles, COG, ArcGIS, FlatGeobuf, PMTiles, Zarr, LiDAR, and Gaussian splats), style layers, and test plugins. Desktop-only file dialogs, local MBTiles, local raster file reads, and project save/open need the desktop app.
+You can load vector data supported by DuckDB-WASM Spatial, drag GeoTIFF/COG
+rasters onto the map, add URL-based services and datasets (XYZ, WMS, GeoJSON,
+vector tiles, COG, ArcGIS, FlatGeobuf, PMTiles, Zarr, LiDAR, and Gaussian
+splats), style layers, and run the GSX workbenches. Desktop-only file dialogs,
+local MBTiles, local raster file reads, and project save/open need the desktop
+app.
 
 ### On the desktop
 
-The desktop app adds local filesystem dialogs, local MBTiles, local raster file reads, and project save/open. Installers are available for Windows, macOS, and Linux, including the Microsoft Store, the Mac App Store, Homebrew, winget, the AUR, COPR, and Flatpak. (The Mac App Store listing is the sandboxed *desktop* build; the [App Store](https://apps.apple.com/app/geolibre/id6796039674) listing is the iPhone and iPad app.)
-
-[Download the desktop app](downloads.md){ .md-button .md-button--primary }
-
-On macOS, prefer the Homebrew or DMG build: the [Mac App Store](https://apps.apple.com/app/geolibre-desktop/id6796848769) build is sandboxed, so it drops the Python sidecar engines, Add Data → PostgreSQL/PostGIS via martin, the local Jupyter server, Earth Engine sign-in, and external plugin installs. See [what the Store build leaves out](downloads.md#what-the-store-build-leaves-out).
+The desktop app adds local filesystem dialogs, local MBTiles, local raster file
+reads, project save/open, and the optional Python sidecar engines. GeoSpaX does
+not publish signed installers yet; build them for Windows, macOS or Linux from
+source (see [Build](#build) and [Get GeoSpaX](downloads.md)).
 
 ### In Jupyter
 
-The [`geolibre`](python.md) Python package embeds the full GeoLibre app in a Jupyter notebook and drives the map through an expanded leafmap-style API that syncs both ways, so UI edits read back from Python.
+The `geospax` Python package embeds the GeoSpaX app in a Jupyter notebook and
+drives the map through a leafmap-style API that syncs both ways. It is not on
+PyPI yet; build and install it from this repository:
 
 ```bash
-pip install geolibre
+npm install && npm run build:embed     # bundles the app into the package
+pip install ./python
 ```
 
-Or install it from conda-forge:
-
-```bash
-conda install -c conda-forge geolibre
+```python
+import geospax
+m = geospax.Map()
+m
 ```
 
-See the [Python Package](python.md) reference to get started.
-
-### In R
-
-The [`geolibre`](r.md) R package embeds GeoLibre as an interactive HTML widget
-in RStudio, Quarto, R Markdown, and Shiny. Install it from CRAN:
-
-```r
-install.packages("geolibre")
-```
-
-[Read the R package guide](r.md){ .md-button .md-button--primary }
-[Try the interactive example](https://r.geolibre.app/articles/interactive-map.html){ .md-button }
-
-### On Android
-
-GeoLibre ships as a native Android app built from the same codebase, with a responsive touch layout for phones. Install it from Google Play and it updates automatically:
-
-[Get GeoLibre on Google Play](https://play.google.com/store/apps/details?id=org.geolibre.app){ .md-button .md-button--primary }
-
-Signed APKs are also attached to each [GitHub release](https://github.com/opengeos/GeoLibre/releases) if you prefer to sideload. See [Android](android.md) for what runs on mobile, sideloading instructions, and build details.
-
-### On iOS
-
-GeoLibre ships as a native iOS app for iPhone and iPad, built from the same codebase, with the same responsive touch layout. Install it from the App Store and it updates automatically:
-
-[Get GeoLibre on the App Store](https://apps.apple.com/app/geolibre/id6796039674){ .md-button .md-button--primary }
-
-See [iOS](ios.md) for what runs on mobile and for build details.
+See the [Python Package](python.md) reference.
 
 ## Video tutorials
+
+These walkthroughs were recorded by the GeoSpaX project; GeoSpaX includes everything they show.
 
 - [GeoLibre 1.0: A Free, Open-Source Cloud-Native GIS That Runs Anywhere (Browser, Desktop & Jupyter)](https://youtu.be/87Cm0QagtxI)
 - [Geoprocessing in the Browser: 700+ Free GIS Tools in GeoLibre, Zero Install](https://youtu.be/W32bIQO_nG8)
@@ -103,7 +80,7 @@ All of them, with chapters and summaries, are on [Video Tutorials](tutorials/vid
 
 ## Run from source
 
-This section is for contributors and developers who want to clone GeoLibre and run it locally. Most users do not need it. For the full development workflow, project layout, and quality gate, see the [Contributing](contributing.md) guide. GeoLibre is an npm workspaces monorepo: the main app lives in `apps/geolibre-desktop` and is built with Tauri, React, TypeScript, and MapLibre GL JS.
+This section is for contributors and developers who want to clone GeoSpaX and run it locally. Most users do not need it. For the full development workflow, project layout, and quality gate, see the [Contributing](contributing.md) guide. GeoSpaX is an npm workspaces monorepo: the main app lives in `apps/geolibre-desktop` and is built with Tauri, React, TypeScript, and MapLibre GL JS.
 
 ### Prerequisites
 
@@ -114,8 +91,8 @@ This section is for contributors and developers who want to clone GeoLibre and r
 ### Install
 
 ```bash
-git clone https://github.com/opengeos/GeoLibre.git
-cd GeoLibre
+git clone https://github.com/jm0535/GeoSpaX.git
+cd GeoSpaX
 npm install
 ```
 
@@ -126,7 +103,7 @@ Bun users can run `bun install`. The root `trustedDependencies` list allows the 
 To update an existing source checkout to the latest version, pull the changes, reinstall dependencies (in case `package.json` changed), and rebuild:
 
 ```bash
-cd /path/to/GeoLibre   # your GeoLibre checkout
+cd /path/to/GeoLibre   # your GeoSpaX checkout
 git pull origin main
 npm install            # or: bun install
 ```
@@ -146,14 +123,14 @@ Desktop filesystem dialogs, local MBTiles, local raster file reads, project save
 ### Run with Docker
 
 !!! tip "Private deployments"
-    If you are deploying GeoLibre so a team can work with data that must stay on
+    If you are deploying GeoSpaX so a team can work with data that must stay on
     your own infrastructure, read
     [Self-Hosting & Private Data](self-hosting.md) alongside this section: it
     covers hosting the data (with [GeoLens](https://getgeolens.com)), putting
     both behind one sign-on layer, and why serving them from the same origin
     removes the CORS and cookie problems.
 
-The repository includes a Dockerfile for the browser version of GeoLibre. It builds the Vite app and serves the production files with nginx:
+The repository includes a Dockerfile for the browser version of GeoSpaX. It builds the Vite app and serves the production files with nginx:
 
 ```bash
 docker build -t geolibre .
@@ -322,7 +299,7 @@ docker run --rm -p 8080:80 \
   ghcr.io/opengeos/geolibre:latest
 ```
 
-Clerk is not loaded and GeoLibre behaves exactly as before when neither this
+Clerk is not loaded and GeoSpaX behaves exactly as before when neither this
 variable nor the build-time `VITE_GEOLIBRE_CLERK_PUBLISHABLE_KEY` is set; the
 runtime variable wins when both are.
 The gate applies only to the hosted web application; the separately built
@@ -334,14 +311,14 @@ Clerk before using a production key.
 
 ##### Approving users
 
-Who may sign in is decided in the Clerk Dashboard, not by GeoLibre:
+Who may sign in is decided in the Clerk Dashboard, not by GeoSpaX:
 
 - **Restrictions → Restricted** turns off self-service sign-up. You add people
   by invitation, through an enterprise connection, or by creating the user
   manually. This needs no extra configuration here.
 - **Waitlist** lets visitors request access, which you approve one at a time
   (**Waitlist** page → the menu next to a person → **Invite**, or **Revoke** to
-  decline). Enable the matching screen in GeoLibre so the sign-in card offers a
+  decline). Enable the matching screen in GeoSpaX so the sign-in card offers a
   "Join the waitlist" link instead of a dead end:
 
   ```bash
@@ -360,7 +337,7 @@ Who may sign in is decided in the Clerk Dashboard, not by GeoLibre:
   `GEOLIBRE_CLERK_PUBLISHABLE_KEY` is an error rather than a silently public
   app.
 
-This client-side gate controls access to the GeoLibre interface but is not a
+This client-side gate controls access to the GeoSpaX interface but is not a
 server authorization boundary by itself. Keep `/sidecar`, `/ai`, and any other
 sensitive upstream service behind nginx authentication, Cloudflare Access, or a
 backend that verifies Clerk session tokens on every request. Use the existing
@@ -403,20 +380,20 @@ value:
   is not matched and breaks the silent-authentication request that restores an
   existing session.
 
-Auth0 has no embedded sign-in card, so GeoLibre uses **Universal Login**: the
+Auth0 has no embedded sign-in card, so GeoSpaX uses **Universal Login**: the
 visitor clicks *Sign in*, is redirected to your tenant's hosted login page, and
 is returned to the app. The URL they arrived on is carried through the round
 trip, so a shared `?project=…` link still opens its project after signing in.
 
 ##### Approving users
 
-Who may sign in is decided in the Auth0 Dashboard, not by GeoLibre:
+Who may sign in is decided in the Auth0 Dashboard, not by GeoSpaX:
 
 - **Authentication → Database → Sign Ups** — turning off self-service sign-up
   makes the deployment invite-only; you then add people from **User Management
   → Users** or through an enterprise connection.
 - **Actions** — a post-login Action that calls `api.access.deny()` for anyone
-  outside your organization or role. GeoLibre shows the denial on its own error
+  outside your organization or role. GeoSpaX shows the denial on its own error
   screen with a way to try another account, rather than a blank page.
 
 There is no equivalent of Clerk's waitlist form, so `GEOLIBRE_CLERK_WAITLIST`
@@ -430,11 +407,11 @@ itself, and no refresh token is stored — once it expires, renewal goes back
 through a silent request to your tenant, which succeeds only while the Auth0
 session cookie is available to answer it (a browser blocking that cookie sends
 the visitor to the login page instead). But the cached entry does outlive the
-tab, and GeoLibre runs plugins on the same origin as the app — a plugin you
+tab, and GeoSpaX runs plugins on the same origin as the app — a plugin you
 install can read it, as it could any other same-origin storage. Install plugins
 you trust, and keep the server-side protections below in place regardless.
 
-Like the Clerk gate, this controls access to the GeoLibre interface but is not a
+Like the Clerk gate, this controls access to the GeoSpaX interface but is not a
 server authorization boundary. Keep `/sidecar`, `/ai`, and any other sensitive
 upstream service behind nginx authentication, Cloudflare Access, or a backend
 that verifies Auth0 tokens on every request, and use `GEOLIBRE_AUTH_USER` /
@@ -484,7 +461,7 @@ server-side protections above in place. See
 
 #### Custom app name
 
-Replace "GeoLibre" at the start of the toolbar and in the browser tab title with
+Replace "GeoSpaX" at the start of the toolbar and in the browser tab title with
 your own name:
 
 ```bash
@@ -555,7 +532,7 @@ does not satisfy this **fails the container boot** with an error naming the
 variable, rather than starting up and quietly using the public hosted service
 with your users' projects.
 
-GeoLibre includes reference implementations of both services. From the
+GeoSpaX includes reference implementations of both services. From the
 repository root, start the web app, projects server, Node collaboration relay,
 and Postgres together:
 
@@ -587,13 +564,13 @@ contains exact public client registrations. To enable server-side OAuth for a
 local web deployment:
 
 ```bash
-export GEOLIBRE_OAUTH_CLIENTS='[{"client_id":"geolibre-web","name":"GeoLibre Web","redirect_uris":["http://localhost:8080/oauth-callback.html"],"scopes":["read:projects","write:projects","share:public"]}]'
+export GEOLIBRE_OAUTH_CLIENTS='[{"client_id":"geolibre-web","name":"GeoSpaX Web","redirect_uris":["http://localhost:8080/oauth-callback.html"],"scopes":["read:projects","write:projects","share:public"]}]'
 POSTGRES_PASSWORD=choose-a-password docker compose up --build
 ```
 
 Production web callbacks require HTTPS and must end in
 `/oauth-callback.html`. The desktop client uses the exact callback
-`org.geolibre.desktop:/oauth/callback`. Add its separate
+`geospax.in4metrix.dev:/oauth/callback`. Add its separate
 `geolibre-desktop` registration to the same JSON array when desktop sign-in is
 required. The web app signs in through a popup to the server's consent page
 using this registration, so the `geolibre-web` callback URL must match the web
@@ -650,7 +627,7 @@ for Postgres and S3-compatible storage configuration.
 
 #### Deployment service library
 
-GeoLibre ships a small read-only service library (Sentinel-2 cloudless OSM,
+GeoSpaX ships a small read-only service library (Sentinel-2 cloudless OSM,
 GEBCO, GeoServer examples) so the Browser and the Add Data dialog are useful on
 first run. Self-hosted deployments can add their own organization-wide services
 to that library without rebuilding or forking the app, by mounting a service
@@ -672,7 +649,7 @@ boot so a typo cannot silently keep publishing the built-ins.
 The file is read at **container startup** — change it and restart the container
 (visitors refresh their browser tab) to repoint a prebuilt image, no rebuild.
 One catalog can mix the two endpoint styles: the relative entries below resolve
-against the GeoLibre origin itself (reverse-proxy your GIS services onto the
+against the GeoSpaX origin itself (reverse-proxy your GIS services onto the
 same host or path the app is served from, and no per-user URL configuration is
 needed), while the absolute `https://` entries point at services on their own
 host — the last three are the app's own starter services, kept as working
@@ -828,11 +805,11 @@ Where to find the output:
 | `GEOLIBRE_CEREUS_CDN` | `1` (CDN) | Set `0` to bundle CereusDB WASM (~40 MB) instead of loading from jsDelivr. |
 | `GEOLIBRE_GDAL_CDN` | `1` (CDN) | Set `0` to disable GDAL export (the ~40 MB WASM/data are not bundled, just unavailable). |
 | `GEOLIBRE_DUCKDB_WASM_CDN` | `0` (bundled) | Set `1` to move DuckDB-WASM to jsDelivr (required for Cloudflare Pages' 25 MiB per-file limit). |
-| `GEOLIBRE_NO_EXTERNAL_CDN` | unset | Set `1` to strip **all GeoLibre-controlled** external CDN references from the build. Forces all `*_CDN=0` flags (so PGlite, CereusDB and DuckDB-WASM are bundled rather than fetched) and disables features that embed CDN URLs (storymap HTML export, built-in detection models, ONNX WASM, 3D Tiles decoders, GDAL export). Pyodide is not hard-disabled: the flag drops only its default index URL, so point `VITE_PYODIDE_INDEX_URL` at an approved mirror to keep it working. Some third-party packages keep their own internal CDN URLs, which this flag cannot remove — see [architecture.md](architecture.md). Mutually exclusive with `npm run lite:build` (and so with Cloudflare Pages/Workers hosting), which needs `GEOLIBRE_DUCKDB_WASM_CDN=1` to stay under the 25 MiB per-file cap; the build rejects that combination outright. Intended for enterprise deployments that cannot reference untrusted CDNs. |
+| `GEOLIBRE_NO_EXTERNAL_CDN` | unset | Set `1` to strip **all GeoSpaX-controlled** external CDN references from the build. Forces all `*_CDN=0` flags (so PGlite, CereusDB and DuckDB-WASM are bundled rather than fetched) and disables features that embed CDN URLs (storymap HTML export, built-in detection models, ONNX WASM, 3D Tiles decoders, GDAL export). Pyodide is not hard-disabled: the flag drops only its default index URL, so point `VITE_PYODIDE_INDEX_URL` at an approved mirror to keep it working. Some third-party packages keep their own internal CDN URLs, which this flag cannot remove — see [architecture.md](architecture.md). Mutually exclusive with `npm run lite:build` (and so with Cloudflare Pages/Workers hosting), which needs `GEOLIBRE_DUCKDB_WASM_CDN=1` to stay under the 25 MiB per-file cap; the build rejects that combination outright. Intended for enterprise deployments that cannot reference untrusted CDNs. |
 | `GEOLIBRE_STORE_BUILD` | unset | Set `1` for Microsoft Store MSIX builds (removes in-app updater). |
 | `GEOLIBRE_MAS_BUILD` | unset | Set `1` for Mac App Store builds (removes sidecar/server features). |
 | `GEOLIBRE_EMBED` | unset | Set `1` for the Jupyter embed wheel build. |
-| `VITE_GEOLIBRE_GA_MEASUREMENT_ID` | unset | Set a GA4 measurement ID (`G-…`) to load Google Analytics in the **web** build. Unset ships no analytics code at all, which is the default for every build; the desktop and Jupyter embed builds ignore it entirely. Used only by the hosted geolibre.app and web.geolibre.app deploys; see [Privacy Policy](privacy.md#website-analytics). |
+| `VITE_GEOLIBRE_GA_MEASUREMENT_ID` | unset | Set a GA4 measurement ID (`G-…`) to load Google Analytics in the **web** build. Unset ships no analytics code at all, which is the default for every build; the desktop and Jupyter embed builds ignore it entirely. Used only by the hosted geolibre.app and web.geolibre.app deploys; see [GeoLibre Privacy Policy](https://geolibre.app/privacy/#website-analytics). |
 
 Example — build with no external CDN dependencies:
 
@@ -903,7 +880,7 @@ Protomaps reuses the key described in [Optional basemap credentials](#optional-b
 
 ## Basemaps in mainland China
 
-GeoLibre's default basemaps (OpenFreeMap, Protomaps) are hosted outside mainland China with no presence inside it, so from there they range from slow to unreachable, as does most of the Basemaps control's catalog. Two places offer basemaps served from inside China.
+GeoSpaX's default basemaps (OpenFreeMap, Protomaps) are hosted outside mainland China with no presence inside it, so from there they range from slow to unreachable, as does most of the Basemaps control's catalog. Two places offer basemaps served from inside China.
 
 ### The Regional section (no key)
 
@@ -929,7 +906,7 @@ Tianditu ships each basemap and its labels as separate layers. Turn on **Add bas
 | Amap (高德地图) | GCJ-02 | none | Regional section, Basemaps control |
 | Tencent Maps (腾讯地图) | GCJ-02 | none | Regional section, Basemaps control |
 
-**Prefer Tianditu whenever the map also carries your own data.** Chinese law requires public map services to publish in GCJ-02, an offset datum that displaces features by roughly 100 to 700 m from WGS84; nothing in GeoLibre or MapLibre applies the shift, so your layers will visibly misalign over Amap or Tencent. Tianditu publishes in CGCS2000, which is close enough to WGS84 that ordinary data lines up.
+**Prefer Tianditu whenever the map also carries your own data.** Chinese law requires public map services to publish in GCJ-02, an offset datum that displaces features by roughly 100 to 700 m from WGS84; nothing in GeoSpaX or MapLibre applies the shift, so your layers will visibly misalign over Amap or Tencent. Tianditu publishes in CGCS2000, which is close enough to WGS84 that ordinary data lines up.
 
 The Amap and Tencent tile endpoints are not documented public APIs. They are fine for exploration, but obtain a commercial key from the provider before building a product on either.
 
@@ -1017,11 +994,11 @@ separate `samgeo-api` model server.
 
 On x86-64 CPUs with no AVX (Intel Celeron and Pentium N-series, Atom, and
 anything older than Sandy Bridge), WebKitGTK can kill its own renderer as soon
-as GeoLibre puts WebAssembly to work, leaving a window that never paints.
+as GeoSpaX puts WebAssembly to work, leaving a window that never paints.
 The crash is a `SIGILL` in `WebKitWebProcess`: JavaScriptCore's WebAssembly
 tier-up runs a hand-written trampoline that spills the XMM registers with AVX
 instructions without checking whether the CPU has them
-([issue 2087](https://github.com/opengeos/GeoLibre/issues/2087)).
+([issue 2087](https://github.com/jm0535/GeoSpaX/issues/2087)).
 
 The desktop app works around this on its own. On Linux it checks for AVX at
 startup, and on a CPU without it pins two JavaScriptCore options off before the
@@ -1037,14 +1014,14 @@ that trampoline. WebAssembly still runs and is still baseline compiled, so the
 cost is bounded: on WebKitGTK 2.52.6 a DuckDB-WASM query took about 2x longer,
 against 34x with the WebAssembly JIT disabled outright.
 
-The two options only work as a pair, so GeoLibre treats them as one decision.
+The two options only work as a pair, so GeoSpaX treats them as one decision.
 Turning either one back on is the opt-out and leaves both alone:
 
 ```bash
 JSC_useWasmOSR=true geolibre
 ```
 
-Setting one of them to `false` yourself is not an opt-out: GeoLibre keeps your
+Setting one of them to `false` yourself is not an opt-out: GeoSpaX keeps your
 value and still applies the other half, since half the workaround costs
 WebAssembly performance without keeping the renderer alive.
 

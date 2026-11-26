@@ -1256,7 +1256,7 @@ function buildPanel(container: HTMLElement, app: GeoLibreAppAPI): () => void {
     fullFileNote.textContent = tr(
       app,
       "fullFileNote",
-      "Writes a local copy of this point cloud with every saved label applied, not only the points loaded here. Runs in the GeoLibre server.",
+      "Writes a local copy of this point cloud with every saved label applied, not only the points loaded here. Runs in the GeoSpaX server.",
     );
     fullFileInput.placeholder = tr(app, "fullFileInput", "Local copy (.las, .laz or .copc.laz)");
     fullFileInput.setAttribute("aria-label", fullFileInput.placeholder);

@@ -1,6 +1,6 @@
 # Demos
 
-A visual tour of what GeoLibre looks like in use. **Click any screenshot to open
+A visual tour of what GeoSpaX looks like in use. **Click any screenshot to open
 it at full resolution, or any animation to play the full-quality video.** For the
 complete capability list, see [Features](features.md); for hands-on
 walkthroughs, see the [Tutorials](tutorials/index.md).
@@ -11,7 +11,7 @@ Photogrammetry and mesh datasets stream in as [3D Tiles](user-guide/adding-data.
 and render on deck.gl over the MapLibre map, including authenticated tilesets via
 custom request headers.
 
-[![GeoLibre showing 3D Tiles rendered on a MapLibre map](https://assets.geolibre.app/images/GeoLibre-demo.webp)](https://assets.geolibre.app/images/GeoLibre-demo.webp)
+[![GeoSpaX showing 3D Tiles rendered on a MapLibre map](https://assets.geolibre.app/images/GeoLibre-demo.webp)](https://assets.geolibre.app/images/GeoLibre-demo.webp)
 
 [Open the live project](https://share.geolibre.app/giswqs/3d-tiles){ .md-button .md-button--primary }
 
@@ -34,7 +34,7 @@ full-quality video.
 
 ## Planetary basemaps
 
-GeoLibre is not limited to Earth. Planetary basemaps from
+GeoSpaX is not limited to Earth. Planetary basemaps from
 [OpenPlanetaryMap](https://openplanetary.org/) and
 [USGS Astrogeology](https://astrogeology.usgs.gov/) cover the Moon, Mars,
 Mercury, Venus, the Galilean moons (Io, Europa, Ganymede, Callisto), Titan,
@@ -48,9 +48,9 @@ The deep-space starfield behind each globe comes from the
 
 <table>
   <tr>
-    <td width="33%"><a href="https://assets.geolibre.app/images/earth.webp"><img src="https://assets.geolibre.app/images/earth.webp" alt="GeoLibre globe view of Earth over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/moon.webp"><img src="https://assets.geolibre.app/images/moon.webp" alt="GeoLibre globe view of the Moon over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/mars.webp"><img src="https://assets.geolibre.app/images/mars.webp" alt="GeoLibre globe view of Mars over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/earth.webp"><img src="https://assets.geolibre.app/images/earth.webp" alt="GeoSpaX globe view of Earth over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/moon.webp"><img src="https://assets.geolibre.app/images/moon.webp" alt="GeoSpaX globe view of the Moon over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/mars.webp"><img src="https://assets.geolibre.app/images/mars.webp" alt="GeoSpaX globe view of Mars over a starfield backdrop"></a></td>
   </tr>
   <tr>
     <td align="center"><b>Earth</b><br>Street, satellite, and cloudless imagery</td>
@@ -58,9 +58,9 @@ The deep-space starfield behind each globe comes from the
     <td align="center"><b>Mars</b><br>Colour MOLA Elevation (NASA / MOLA)</td>
   </tr>
   <tr>
-    <td width="33%"><a href="https://assets.geolibre.app/images/mercury.webp"><img src="https://assets.geolibre.app/images/mercury.webp" alt="GeoLibre globe view of Mercury over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/pluto.webp"><img src="https://assets.geolibre.app/images/pluto.webp" alt="GeoLibre globe view of Pluto over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/venus.webp"><img src="https://assets.geolibre.app/images/venus.webp" alt="GeoLibre globe view of Venus over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/mercury.webp"><img src="https://assets.geolibre.app/images/mercury.webp" alt="GeoSpaX globe view of Mercury over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/pluto.webp"><img src="https://assets.geolibre.app/images/pluto.webp" alt="GeoSpaX globe view of Pluto over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/venus.webp"><img src="https://assets.geolibre.app/images/venus.webp" alt="GeoSpaX globe view of Venus over a starfield backdrop"></a></td>
   </tr>
   <tr>
     <td align="center"><b>Mercury</b><br>MESSENGER Colour Mosaic (NASA / JHU APL / CIW)</td>
@@ -68,9 +68,9 @@ The deep-space starfield behind each globe comes from the
     <td align="center"><b>Venus</b><br>Magellan C3-MDIR Colour (NASA / JPL)</td>
   </tr>
   <tr>
-    <td width="33%"><a href="https://assets.geolibre.app/images/europa.webp"><img src="https://assets.geolibre.app/images/europa.webp" alt="GeoLibre globe view of Europa over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/callisto.webp"><img src="https://assets.geolibre.app/images/callisto.webp" alt="GeoLibre globe view of Callisto over a starfield backdrop"></a></td>
-    <td width="33%"><a href="https://assets.geolibre.app/images/charon.webp"><img src="https://assets.geolibre.app/images/charon.webp" alt="GeoLibre globe view of Charon over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/europa.webp"><img src="https://assets.geolibre.app/images/europa.webp" alt="GeoSpaX globe view of Europa over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/callisto.webp"><img src="https://assets.geolibre.app/images/callisto.webp" alt="GeoSpaX globe view of Callisto over a starfield backdrop"></a></td>
+    <td width="33%"><a href="https://assets.geolibre.app/images/charon.webp"><img src="https://assets.geolibre.app/images/charon.webp" alt="GeoSpaX globe view of Charon over a starfield backdrop"></a></td>
   </tr>
   <tr>
     <td align="center"><b>Europa</b><br>Galileo / Voyager (NASA / JPL)</td>
@@ -88,24 +88,24 @@ project you can open live, explore, and fork. A few highlights:
 
 <table>
   <tr>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/manhattan-buildings-through-time"><img src="https://assets.geolibre.app/images/manhattan-buildings-through-time.webp" alt="GeoLibre map: Manhattan buildings through time" loading="lazy"></a></td>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/the-global-flight-network"><img src="https://assets.geolibre.app/images/the-global-flight-network.webp" alt="GeoLibre map: The global flight network" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/manhattan-buildings-through-time"><img src="https://assets.geolibre.app/images/manhattan-buildings-through-time.webp" alt="GeoSpaX map: Manhattan buildings through time" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/the-global-flight-network"><img src="https://assets.geolibre.app/images/the-global-flight-network.webp" alt="GeoSpaX map: The global flight network" loading="lazy"></a></td>
   </tr>
   <tr>
     <td align="center"><b><a href="https://share.geolibre.app/giswqs/manhattan-buildings-through-time">Manhattan buildings through time</a></b><br>Urban growth · Buildings extruded at true height and replayed by construction year, 1850–2025, under the subway<br><small>Data: NYC Open Data, MTA</small></td>
     <td align="center"><b><a href="https://share.geolibre.app/giswqs/the-global-flight-network">The global flight network</a></b><br>Human mobility · The 4,000 busiest air corridors as great circles, hubs sized by routes<br><small>Data: OpenFlights</small></td>
   </tr>
   <tr>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/us-tornado-tracks-1950-2024"><img src="https://assets.geolibre.app/images/us-tornado-tracks-1950-2024.webp" alt="GeoLibre map: US tornado tracks, 1950–2024" loading="lazy"></a></td>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/the-vanishing-aral-sea"><img src="https://assets.geolibre.app/images/the-vanishing-aral-sea.webp" alt="GeoLibre map: The vanishing Aral Sea" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/us-tornado-tracks-1950-2024"><img src="https://assets.geolibre.app/images/us-tornado-tracks-1950-2024.webp" alt="GeoSpaX map: US tornado tracks, 1950–2024" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/the-vanishing-aral-sea"><img src="https://assets.geolibre.app/images/the-vanishing-aral-sea.webp" alt="GeoSpaX map: The vanishing Aral Sea" loading="lazy"></a></td>
   </tr>
   <tr>
     <td align="center"><b><a href="https://share.geolibre.app/giswqs/us-tornado-tracks-1950-2024">US tornado tracks, 1950–2024</a></b><br>Natural hazards · (E)F1+ tracks by rating on a time slider that accumulates year by year<br><small>Data: NOAA Storm Prediction Center</small></td>
     <td align="center"><b><a href="https://share.geolibre.app/giswqs/the-vanishing-aral-sea">The vanishing Aral Sea</a></b><br>Environmental change · Swipe between water occurrence and 1984–2021 transitions<br><small>Data: EC JRC Global Surface Water</small></td>
   </tr>
   <tr>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/roads-of-the-roman-empire"><img src="https://assets.geolibre.app/images/roads-of-the-roman-empire.webp" alt="GeoLibre map: Roads of the Roman Empire" loading="lazy"></a></td>
-    <td width="50%"><a href="https://share.geolibre.app/giswqs/aurora-forecast"><img src="https://assets.geolibre.app/images/aurora-forecast.webp" alt="GeoLibre map: Aurora forecast" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/roads-of-the-roman-empire"><img src="https://assets.geolibre.app/images/roads-of-the-roman-empire.webp" alt="GeoSpaX map: Roads of the Roman Empire" loading="lazy"></a></td>
+    <td width="50%"><a href="https://share.geolibre.app/giswqs/aurora-forecast"><img src="https://assets.geolibre.app/images/aurora-forecast.webp" alt="GeoSpaX map: Aurora forecast" loading="lazy"></a></td>
   </tr>
   <tr>
     <td align="center"><b><a href="https://share.geolibre.app/giswqs/roads-of-the-roman-empire">Roads of the Roman Empire</a></b><br>History · About 300,000 km of Roman roads by how certain the route is<br><small>Data: Itiner-e</small></td>
@@ -155,6 +155,6 @@ All of them, with chapters and summaries, are on
 
 ## Try it yourself
 
-[Launch GeoLibre Web](https://web.geolibre.app/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax2.in4metrix.dev/){ .md-button .md-button--primary }
 [Download the app](downloads.md){ .md-button }
 [Getting started](getting-started.md){ .md-button }

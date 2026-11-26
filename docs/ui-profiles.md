@@ -1,6 +1,6 @@
 # UI Profiles & Data Source Filtering
 
-GeoLibre can hide data sources, web services, and plugins to simplify the
+GeoSpaX can hide data sources, web services, and plugins to simplify the
 interface for beginners or to standardize a deployment across a team. Hiding is
 **non-destructive** — nothing is removed, and any item can be re-enabled at any
 time. Profile preferences are stored locally in the browser/app and never travel
@@ -16,13 +16,13 @@ inside a saved `.geolibre.json` project.
 
 ### Onboarding
 
-By default GeoLibre starts on the **Advanced** interface — everything visible —
+By default GeoSpaX starts on the **Advanced** interface — everything visible —
 and does not show a first-launch welcome dialog. Choose a simpler experience
 level at any time from **Settings → Interface** (see below):
 
 - **Beginner** — only the essential data sources and tools.
 - **Intermediate** — common data sources, services, and plugins.
-- **Advanced** — everything GeoLibre offers (the default).
+- **Advanced** — everything GeoSpaX offers (the default).
 
 An administrator can pre-configure the interface in the primary
 [`deployment.json` policy](deployment-policy.md), or use the legacy

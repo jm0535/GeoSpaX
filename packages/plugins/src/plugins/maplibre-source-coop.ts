@@ -144,7 +144,7 @@ export const DEFAULT_SOURCE_COOP_LABELS: SourceCoopLabels = {
   downloadTitle: "Download this file",
   copyUrlTitle: "Copy this file's URL",
   openProductTitle: "Open this product's page on source.coop",
-  unsupportedTitle: "GeoLibre cannot render this format — download it instead",
+  unsupportedTitle: "GeoSpaX cannot render this format — download it instead",
   addError: (message) => `Could not add this file: ${message}`,
   largeFileWarning: (size) =>
     `This file is ${size}. It streams from the source, so only the parts in view are read.`,

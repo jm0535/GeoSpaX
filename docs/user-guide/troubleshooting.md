@@ -1,12 +1,12 @@
 # Troubleshooting
 
-This page collects fixes for common problems in GeoLibre, and shows how to find
+This page collects fixes for common problems in GeoSpaX, and shows how to find
 out what went wrong and report it. Most display glitches in the browser after
 an update come down to a stale browser cache, so start there.
 
 ## Stale browser cache
 
-GeoLibre Web is a single-page app that browsers cache aggressively. After a new
+GeoSpaX Web is a single-page app that browsers cache aggressively. After a new
 version ships, an outdated cached copy can leave you with display errors,
 missing or non-responsive controls, plugins that appear not to load, or stale
 data. The fix is to clear the cache and reload so the browser fetches the latest
@@ -21,7 +21,7 @@ Try these in order:
 - **Open the app in a private / incognito window**. If it works there, the
   problem lies in your browser profile, most often the cache; clearing the
   site's data (next step) confirms it.
-- **Clear the cached files** for the GeoLibre site if a hard refresh is not
+- **Clear the cached files** for the GeoSpaX site if a hard refresh is not
   enough, then reload.
 
 !!! note "Safari users"
@@ -36,7 +36,7 @@ app looks broken after updating" reports.
 
 ## The Diagnostics dialog
 
-GeoLibre records what goes wrong while it runs. Open the record with
+GeoSpaX records what goes wrong while it runs. Open the record with
 **Help → Diagnostics**, the **Diagnostics: N** button at the right end of the
 status bar, or "Diagnostics" in the command palette (`Ctrl`/`Cmd` + `K`). The
 status bar button counts errors and warnings, and turns red when there are
@@ -48,7 +48,7 @@ categories:
 | Category | What lands there |
 | --- | --- |
 | `app` | Every error notification the app shows you (see [Notifications](interface.md#notifications)). |
-| `console` | Errors and warnings written to the browser console, by GeoLibre or by a library or plugin. |
+| `console` | Errors and warnings written to the browser console, by GeoSpaX or by a library or plugin. |
 | `map` | Errors raised by the map engine: a tile, source, style, or 3D layer that failed. |
 | `network` | Failed requests: an HTTP error status such as `GET 404 Not Found`, or a request that never completed (`request failed (network/TLS/CORS)` or `timed out`), with a hint about the likely cause. |
 | `runtime` | Uncaught exceptions and promise rejections, a part of the interface that crashed, and plugin failures. |
@@ -69,7 +69,7 @@ from the URLs it stores.
 ## Reporting a problem
 
 Error notifications, and error rows in the Diagnostics dialog, carry a
-**Report issue** button. It opens GeoLibre's bug report form on GitHub in your
+**Report issue** button. It opens GeoSpaX's bug report form on GitHub in your
 browser, filled in with:
 
 - the error message as the title,
@@ -95,10 +95,10 @@ A remote layer or service that fails with "Could not reach the service…", or a
 `network` diagnostic ending in `request failed (network/TLS/CORS)`, usually
 means one of:
 
-- **CORS.** In the browser, a server must allow GeoLibre's origin with an
+- **CORS.** In the browser, a server must allow GeoSpaX's origin with an
   `Access-Control-Allow-Origin` header, or the browser blocks the response. The
   desktop app is not subject to CORS, so loading the same URL there is the
-  quickest test. For an S3 bucket, GeoLibre says so directly when the bucket's
+  quickest test. For an S3 bucket, GeoSpaX says so directly when the bucket's
   CORS configuration does not list the app's origin; see
   [Cloud Storage](cloud-storage.md).
 - **Mixed content.** An `https://` page cannot load `http://` data. Use an
@@ -112,7 +112,7 @@ sparse tile sets return those for empty areas.
 
 ### A GeoTIFF that will not display
 
-A plain (striped) GeoTIFF cannot be streamed tile by tile. GeoLibre recognizes
+A plain (striped) GeoTIFF cannot be streamed tile by tile. GeoSpaX recognizes
 this and offers to convert it to a Cloud-Optimized GeoTIFF and load that
 instead. Conversion runs in the browser, so very large files are refused as too
 large to convert safely; convert those yourself with
@@ -131,7 +131,7 @@ See [Project history and crash recovery](projects.md#project-history-and-crash-r
 ### Sidecar messages
 
 Raster tools, format conversions, and the GeoPandas engine for vector tools use
-the optional Python sidecar. Messages such as "Raster tools need the GeoLibre
+the optional Python sidecar. Messages such as "Raster tools need the GeoSpaX
 desktop app with a running sidecar", "Could not connect to sidecar", or "The
 GeoPandas sidecar is not available" mean it is not running or lacks the extra a
 tool needs. Vector tools fall back to the in-browser engine. See
@@ -144,7 +144,7 @@ which extras each tool needs.
 
 - "Offline caching needs the installed web app" means the browser build is not
   running as an installed app, so tiles are not stored for offline use.
-- Some basemap sources do not allow offline downloading; GeoLibre lists them
+- Some basemap sources do not allow offline downloading; GeoSpaX lists them
   before the download, and their tiles will be missing.
 - A large area at many zoom levels can exceed the offline cache limit, and the
   oldest tiles are then evicted as new ones download. Pick a smaller area or
@@ -154,8 +154,8 @@ which extras each tool needs.
 
 ### "Something went wrong"
 
-If part of the interface crashes, GeoLibre shows "{name} failed to render. The
-rest of GeoLibre is still available." and keeps running. If the whole app
+If part of the interface crashes, GeoSpaX shows "{name} failed to render. The
+rest of GeoSpaX is still available." and keeps running. If the whole app
 crashes, a full-window "Something went wrong" panel offers **Try again** and
 **Reload app**. Try again first: it keeps your work. Your project is also kept
 in [project history](projects.md#project-history-and-crash-recovery), so it can
@@ -178,7 +178,7 @@ black, flickers, or 3D layers are missing:
 - **Look in Diagnostics** for `map` and `console` entries that name the failing
   layer or shader.
 
-GeoLibre does not detect a lost or missing WebGL context on its own, so a page
+GeoSpaX does not detect a lost or missing WebGL context on its own, so a page
 reload is the way to recover after the graphics driver resets.
 
 ### Linux desktop app
@@ -203,11 +203,11 @@ reported as a notification and in Diagnostics.
 
 ## The Processing menu shows the same category twice
 
-`Processing → Vector` and `Processing → GeoLibre Toolbox → Vector` are different
+`Processing → Vector` and `Processing → GeoSpaX Toolbox → Vector` are different
 things, and so are the two `Conversion`, `Network`, and `Raster` entries. The
 Processing menu carries two independent toolboxes: the Whitebox Toolbox, whose
-nine category submenus sit at the top of the menu, and the GeoLibre Toolbox,
-which holds GeoLibre's own built-in tools. Neither list is a subset of the
+nine category submenus sit at the top of the menu, and the GeoSpaX Toolbox,
+which holds GeoSpaX's own built-in tools. Neither list is a subset of the
 other. [Two toolboxes in one menu](processing.md#two-toolboxes-in-one-menu)
 explains which is which and when to use each.
 
@@ -215,13 +215,13 @@ explains which is which and when to use each.
 
 Some capabilities require the desktop app and are unavailable in the browser
 build: local filesystem dialogs, local MBTiles, local raster file reads, and
-project save/open. If one of these is missing, you are likely running GeoLibre
+project save/open. If one of these is missing, you are likely running GeoSpaX
 Web rather than the desktop app. See [Getting Started](../getting-started.md)
 for how the web, desktop, and Jupyter builds differ.
 
 ## Self-hosted deployments
 
-When you host GeoLibre yourself, most "it works on web.geolibre.app but not
+When you host GeoSpaX yourself, most "it works on web.geolibre.app but not
 here" problems come from the deployment's security settings rather than the app:
 
 - **Content Security Policy.** The Docker image's nginx configuration allows

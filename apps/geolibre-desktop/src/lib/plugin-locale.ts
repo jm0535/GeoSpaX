@@ -118,7 +118,7 @@ export function createPluginLocaleApi(i18n: PluginLocaleI18n): PluginLocaleApi {
         try {
           listener(locale);
         } catch (error) {
-          console.error("[GeoLibre] A plugin onLocaleChange listener threw.", error);
+          console.error("[GeoSpaX] A plugin onLocaleChange listener threw.", error);
         }
       };
       i18n.on("languageChanged", guarded);
@@ -149,7 +149,7 @@ export function createPluginLocaleApi(i18n: PluginLocaleI18n): PluginLocaleApi {
         const { tree, rejected } = nestPluginKeys(flat as Record<string, unknown>);
         if (rejected.length > 0) {
           console.warn(
-            `[GeoLibre] registerTranslations ignored ${rejected.length} key(s) for "${locale}" ` +
+            `[GeoSpaX] registerTranslations ignored ${rejected.length} key(s) for "${locale}" ` +
               `that are not strings under "plugin.<id>.": ${rejected.slice(0, 5).join(", ")}`,
           );
         }

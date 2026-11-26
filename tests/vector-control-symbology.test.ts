@@ -100,7 +100,7 @@ describe("vector-control point symbology overlay (#1311)", () => {
     );
   });
 
-  it("renders a GeoLibre marker symbol layer and hides the control's circle", () => {
+  it("renders a GeoSpaX marker symbol layer and hides the control's circle", () => {
     const { map, calls } = makeVectorControlMapStub("vecm");
     const layer = vectorControlLayer("vecm", {
       style: { ...DEFAULT_LAYER_STYLE, markerEnabled: true },

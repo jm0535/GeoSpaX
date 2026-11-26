@@ -396,13 +396,13 @@ export function ModelBuilderPanel({
       const wasmTools = wasmResult.status === "fulfilled" ? wasmResult.value : [];
       if (catalogResult.status === "rejected") {
         console.warn(
-          "[GeoLibre] Model Builder could not load the Whitebox catalog:",
+          "[GeoSpaX] Model Builder could not load the Whitebox catalog:",
           catalogResult.reason,
         );
       }
       if (wasmResult.status === "rejected") {
         console.warn(
-          "[GeoLibre] Model Builder could not enumerate WASM manifests:",
+          "[GeoSpaX] Model Builder could not enumerate WASM manifests:",
           wasmResult.reason,
         );
       }

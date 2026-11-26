@@ -1,6 +1,6 @@
 # Supported Data Formats
 
-This page lists GeoLibre's supported data formats, services, and database
+This page lists GeoSpaX's supported data formats, services, and database
 sources, including how to open them and the main limitations. The tables
 reflect the default MapLibre renderer; some specialized layers are unavailable
 with other renderers. See [Adding Data](user-guide/adding-data.md) for the menu
@@ -97,7 +97,7 @@ are described in [Web Services](user-guide/web-services.md) and
 
 | Format | Entry point | Notes |
 | --- | --- | --- |
-| GeoLibre project (`.geolibre.json`) | Project > Open | Layers, styles, groups, and map state; remote sources and local file references still need to be accessible. |
+| GeoSpaX project (`.geolibre.json`) | Project > Open | Layers, styles, groups, and map state; remote sources and local file references still need to be accessible. |
 | QGIS project (`.qgs`, `.qgz`) | Project > Import | Imports supported layers and settings; reports skipped sources. Local paths require desktop access. |
 | ArcGIS Pro project or map (`.aprx`, `.mapx`) | Project > Import | Imports supported layers and settings; see the [project import guide](user-guide/projects.md#importing-an-arcgis-pro-project) for requirements. |
 

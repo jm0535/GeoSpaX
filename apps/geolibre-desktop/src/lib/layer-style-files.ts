@@ -35,7 +35,7 @@ export function layerStylesFileName(path: string): string {
  */
 export async function pickLayerStylesFile(): Promise<PickedLayerStylesFile | null> {
   const result = await openLocalDataFileWithFallback({
-    filters: [{ name: "GeoLibre Layer Styles", extensions: ["json"] }],
+    filters: [{ name: "GeoSpaX Layer Styles", extensions: ["json"] }],
     accept: ".json,application/json",
     readText: true,
   });

@@ -395,13 +395,13 @@ function getAtlas(layer: GeoLibreLayer): DiagramAtlas | null {
   // style edits (each of which rebuilds the atlas) don't spam the console.
   if (diagramData.truncated && !cached?.truncated) {
     console.info(
-      `[GeoLibre] diagrams: layer exceeds ${MAX_DIAGRAM_FEATURES} features; ` +
+      `[GeoSpaX] diagrams: layer exceeds ${MAX_DIAGRAM_FEATURES} features; ` +
         `only the first ${MAX_DIAGRAM_FEATURES} are charted`,
     );
   }
   if (dropped > 0 && dropped !== cached?.dropped) {
     console.info(
-      `[GeoLibre] diagrams: atlas full, dropped ${dropped} of ` +
+      `[GeoSpaX] diagrams: atlas full, dropped ${dropped} of ` +
         `${diagramData.data.length} feature diagrams (reduce the diagram size ` +
         `to fit more)`,
     );

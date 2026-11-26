@@ -187,8 +187,8 @@
     "registryTrust": {
       "title_one": "¿Instalar este complemento?",
       "title_other": "¿Instalar estos complementos?",
-      "description_one": "Este enlace abre un complemento del registro oficial de complementos de GeoLibre que aún no está instalado. Al instalarlo, se añade a sus complementos y se activa.",
-      "description_other": "Este enlace abre {{count}} complementos del registro oficial de complementos de GeoLibre que aún no están instalados. Al instalarlos, se añaden a sus complementos y se activan."
+      "description_one": "Este enlace abre un complemento del registro oficial de complementos de GeoSpaX que aún no está instalado. Al instalarlo, se añade a sus complementos y se activa.",
+      "description_other": "Este enlace abre {{count}} complementos del registro oficial de complementos de GeoSpaX que aún no están instalados. Al instalarlos, se añaden a sus complementos y se activan."
     },
     "title": "Administrar complementos",
     "searchAria": "Buscar complementos",
@@ -737,7 +737,7 @@
       "errorUrl": "Introduzca una URL de LandXML.",
       "errorTooLarge": "El archivo LandXML remoto supera el límite de descarga de 100 MB.",
       "errorSelectType": "Seleccione al menos un tipo de objeto LandXML.",
-      "errorMissingCrs": "Este archivo LandXML usa coordenadas proyectadas. Introduzca su CRS de origen para que GeoLibre pueda reproyectarlo a WGS84.",
+      "errorMissingCrs": "Este archivo LandXML usa coordenadas proyectadas. Introduzca su CRS de origen para que GeoSpaX pueda reproyectarlo a WGS84.",
       "errorGeographicCrsBounds": "Las coordenadas quedan fuera de los límites geográficos de longitud y latitud. Elija el CRS de origen proyectado que usa este archivo LandXML.",
       "summary": "{{surfaces}} superficie(s), {{alignments}} eje(s), {{profiles}} perfil(es), {{points}} punto(s) topográfico(s)",
       "objectTypes": "Tipos de objeto",
@@ -884,12 +884,12 @@
     },
     "mssql": {
       "defaultName": "Capa de SQL Server",
-      "errorDesktopOnly": "Las capas de SQL Server requieren GeoLibre Desktop.",
+      "errorDesktopOnly": "Las capas de SQL Server requieren GeoSpaX Desktop.",
       "errorConnect": "No se pudo conectar con SQL Server.",
       "errorPort": "Introduzca un puerto de SQL Server válido (1–65535).",
       "errorConnectFirst": "Conéctese primero a SQL Server.",
       "errorSelectTable": "Seleccione una tabla espacial para cargar.",
-      "desktopOnlyNotice": "Las capas de SQL Server solo están disponibles en GeoLibre Desktop.",
+      "desktopOnlyNotice": "Las capas de SQL Server solo están disponibles en GeoSpaX Desktop.",
       "savedConnection": "Conexión guardada",
       "selectSavedConnection": "Nueva conexión",
       "server": "Servidor",
@@ -1629,13 +1629,13 @@
     "oauthFailed": "No se pudo iniciar sesión. Inténtelo de nuevo.",
     "oauthRefreshFailed": "No se pudo renovar su sesión. Compruebe su conexión e inténtelo de nuevo.",
     "oauthSetupFailed": "No se pudo iniciar el inicio de sesión de escritorio. Reinicie la aplicación y compruebe que la aplicación instalada puede abrir enlaces y acceder al servidor para compartir. Los tokens de API pegados siguen estando disponibles.",
-    "oauthRestartSignIn": "Este enlace de inicio de sesión se abrió después de reiniciar GeoLibre. Vuelva a iniciar sesión desde aquí; el código de autorización anterior ya no se puede usar.",
+    "oauthRestartSignIn": "Este enlace de inicio de sesión se abrió después de reiniciar GeoSpaX. Vuelva a iniciar sesión desde aquí; el código de autorización anterior ya no se puede usar.",
     "reauthBody": "Su sesión de {{shareHost}} ha caducado. Vuelva a iniciar sesión para seguir compartiendo.",
     "errorUnauthorized": "Su token de API de {{shareHost}} no es válido o ha caducado. Actualícelo en Configuración.",
     "reauthSignIn": "Volver a iniciar sesión",
     "liveAt": "Su proyecto está publicado en:",
     "credentialsRemoved": "No se incluyeron {{count}} campo(s) de credenciales. Los destinatarios deben proporcionar sus propias credenciales o usar una referencia intermediada.",
-    "oauthSignOutIncomplete": "Ha cerrado la sesión, pero el inicio de sesión guardado no se pudo quitar del llavero del sistema, por lo que podría restaurarse la próxima vez que se inicie GeoLibre. Compruebe que el llavero esté disponible y luego vuelva a iniciar y cerrar sesión.",
+    "oauthSignOutIncomplete": "Ha cerrado la sesión, pero el inicio de sesión guardado no se pudo quitar del llavero del sistema, por lo que podría restaurarse la próxima vez que se inicie GeoSpaX. Compruebe que el llavero esté disponible y luego vuelva a iniciar y cerrar sesión.",
     "copyLink": "Copiar enlace",
     "open": "Abrir",
     "done": "Listo",
@@ -2386,17 +2386,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Esperando al llavero del sistema…",
-    "keychainWaitDetail": "GeoLibre está cargando sus credenciales guardadas. Si el sistema le pidió una contraseña para desbloquear el llavero, responda a esa solicitud para continuar. Puede estar detrás de esta ventana."
+    "keychainWaitDetail": "GeoSpaX está cargando sus credenciales guardadas. Si el sistema le pidió una contraseña para desbloquear el llavero, responda a esa solicitud para continuar. Puede estar detrás de esta ventana."
   },
   "settings": {
     "title": "Configuración",
     "description": "Configure las preferencias del proyecto y los ajustes de tiempo de ejecución.",
     "saveButton": "Guardar configuración",
     "credentials": {
-      "keychain": "Los tokens y claves de API que guarde en GeoLibre se almacenan en el llavero del sistema.",
+      "keychain": "Los tokens y claves de API que guarde en GeoSpaX se almacenan en el llavero del sistema.",
       "projectKeychainUnavailable": "El almacenamiento de credenciales de proyecto en el llavero del sistema no está disponible. Las nuevas claves de proyecto se mantienen en esta sesión; al guardar un proyecto local se le preguntará si desea conservarlas en el archivo o eliminarlas.",
       "browser": "Los tokens y claves de API que guarde aquí se almacenan en el almacenamiento local de este navegador, donde los scripts que se ejecutan en este sitio pueden leerlos.",
-      "unavailable": "No se pudo usar el llavero del sistema ({{error}}). Las nuevas credenciales solo duran hasta que se cierre GeoLibre; las credenciales guardadas anteriormente pueden permanecer en el almacenamiento del navegador hasta que la migración se complete."
+      "unavailable": "No se pudo usar el llavero del sistema ({{error}}). Las nuevas credenciales solo duran hasta que se cierre GeoSpaX; las credenciales guardadas anteriormente pueden permanecer en el almacenamiento del navegador hasta que la migración se complete."
     },
     "section": {
       "language": "Idioma",
@@ -2440,11 +2440,11 @@
         "role": "asumir rol",
         "other": "otro"
       },
-      "environmentHelp": "Usa AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY y AWS_SESSION_TOKEN del entorno con el que se inició GeoLibre.",
-      "instanceHelp": "Usa el rol de IAM de la máquina en la que se ejecuta GeoLibre: un token de identidad web (EKS IRSA), credenciales de contenedor de ECS o EKS, o el perfil de instancia de EC2.",
+      "environmentHelp": "Usa AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY y AWS_SESSION_TOKEN del entorno con el que se inició GeoSpaX.",
+      "instanceHelp": "Usa el rol de IAM de la máquina en la que se ejecuta GeoSpaX: un token de identidad web (EKS IRSA), credenciales de contenedor de ECS o EKS, o el perfil de instancia de EC2.",
       "roleArn": "Rol que asumir",
       "externalId": "ID externo",
-      "roleHelp": "Opcional. GeoLibre llama a AWS STS AssumeRole con las credenciales anteriores y lee los buckets con este rol, p. ej., un rol de solo lectura entre cuentas.",
+      "roleHelp": "Opcional. GeoSpaX llama a AWS STS AssumeRole con las credenciales anteriores y lee los buckets con este rol, p. ej., un rol de solo lectura entre cuentas.",
       "accessKeyId": "ID de clave de acceso",
       "secretAccessKey": "Clave de acceso secreta",
       "sessionToken": "Token de sesión",
@@ -2548,7 +2548,7 @@
       "globeByDefault": "Activar el globo 3D de forma predeterminada",
       "globeByDefaultHint": "Se usa para el espacio de trabajo sin título cuando no se indica un proyecto de inicio ni un enlace de proyecto.",
       "openS3Browser": "Abrir el explorador de S3 al iniciar",
-      "openS3BrowserHint": "Muestra el panel del explorador de S3 cada vez que se inicia GeoLibre. Permanece abierto al abrir un proyecto.",
+      "openS3BrowserHint": "Muestra el panel del explorador de S3 cada vez que se inicia GeoSpaX. Permanece abierto al abrir un proyecto.",
       "defaultView": "Vista del mapa predeterminada",
       "defaultViewHint": "Establezca el centro y el zoom del espacio de trabajo sin título.",
       "longitude": "Longitud del centro",
@@ -2556,7 +2556,7 @@
       "zoom": "Nivel de zoom",
       "useCurrentView": "Usar la vista actual",
       "layerStyles": "Estilos de capa predeterminados",
-      "layerStylesHint": "Elija un archivo de estilos de capa (Proyecto → Exportar → Exportar estilos de capa). Cada capa que añada cuyo nombre coincida con un estilo del archivo recibe ese estilo automáticamente. Las capas de los proyectos abiertos conservan sus estilos guardados. GeoLibre guarda una copia del archivo, así que vuelva a elegirlo después de editarlo.",
+      "layerStylesHint": "Elija un archivo de estilos de capa (Proyecto → Exportar → Exportar estilos de capa). Cada capa que añada cuyo nombre coincida con un estilo del archivo recibe ese estilo automáticamente. Las capas de los proyectos abiertos conservan sus estilos guardados. GeoSpaX guarda una copia del archivo, así que vuelva a elegirlo después de editarlo.",
       "chooseLayerStyles": "Elegir archivo",
       "clearLayerStyles": "Borrar",
       "noLayerStylesSelected": "Ningún archivo de estilos de capa seleccionado",
@@ -2657,8 +2657,8 @@
       "oauthSigningIn": "Iniciando sesión…",
       "oauthSignOut": "Cerrar sesión",
       "oauthWebLifetime": "El token de acceso se guarda en memoria; la sesión de renovación se limita a esta pestaña del navegador. Al cerrar la pestaña deberá volver a iniciar sesión.",
-      "oauthDesktopKeychain": "Su inicio de sesión se guarda en el llavero del sistema, por lo que GeoLibre mantiene la sesión iniciada tras reiniciar hasta que la cierre.",
-      "oauthDesktopSessionOnly": "Este inicio de sesión no se pudo guardar en el llavero del sistema, por lo que solo dura hasta que se cierre GeoLibre.",
+      "oauthDesktopKeychain": "Su inicio de sesión se guarda en el llavero del sistema, por lo que GeoSpaX mantiene la sesión iniciada tras reiniciar hasta que la cierre.",
+      "oauthDesktopSessionOnly": "Este inicio de sesión no se pudo guardar en el llavero del sistema, por lo que solo dura hasta que se cierre GeoSpaX.",
       "accountLoading": "Cargando su cuenta…",
       "accountRetry": "Inténtelo de nuevo",
       "accountIdentity": "Cuenta: {{account}}",
@@ -2688,7 +2688,7 @@
       "sessionRevoke": "Revocar",
       "sessionRevoking": "Revocando…",
       "revokeSessionConfirm": "¿Revocar la sesión «{{label}}»? Se cerrará la sesión en ese dispositivo. Esta acción no se puede deshacer.",
-      "revokeCurrentConfirm": "¿Revocar esta sesión «{{label}}»? Se cerrará su sesión en GeoLibre inmediatamente.",
+      "revokeCurrentConfirm": "¿Revocar esta sesión «{{label}}»? Se cerrará su sesión en GeoSpaX inmediatamente.",
       "revokeTokenConfirm": "¿Revocar el token de API personal «{{label}}»? Los scripts y CI que lo usen dejarán de funcionar. Esta acción no se puede deshacer.",
       "revokeSessionConfirmButton": "Sí, revocar",
       "sessionCreated": "Creado: {{date}}",
@@ -2777,7 +2777,7 @@
       "statusReady": "{{provider}} está configurado y listo para usar.",
       "statusIncomplete": "Complete los campos obligatorios a continuación para activar {{provider}}.",
       "secretsNote": "Las credenciales se guardan localmente en este dispositivo, no en el archivo de proyecto que comparte, por lo que se conservan entre reinicios. Cualquiera con acceso a este dispositivo podría leerlas.",
-      "secretsNoteKeychain": "Las claves de API y otros campos secretos se guardan en el llavero del sistema, no en el archivo de proyecto que comparte, por lo que se conservan entre reinicios. Los demás campos, como los nombres de modelos y las URL, se guardan en la configuración de GeoLibre en este dispositivo.",
+      "secretsNoteKeychain": "Las claves de API y otros campos secretos se guardan en el llavero del sistema, no en el archivo de proyecto que comparte, por lo que se conservan entre reinicios. Los demás campos, como los nombres de modelos y las URL, se guardan en la configuración de GeoSpaX en este dispositivo.",
       "getCredentials": "Dónde obtener las credenciales de {{provider}}",
       "showValue": "Mostrar {{name}}",
       "hideValue": "Ocultar {{name}}",
@@ -2904,7 +2904,7 @@
         "notSet": "Sin configurar",
         "getKey": "Obtener una clave gratuita",
         "saveFailed": "No se pudo guardar la clave en este navegador.",
-        "saveFailedKeychain": "No se pudo guardar la clave en el llavero del sistema. Funcionará hasta que se cierre GeoLibre."
+        "saveFailedKeychain": "No se pudo guardar la clave en el llavero del sistema. Funcionará hasta que se cierre GeoSpaX."
       }
     }
   },
@@ -3608,7 +3608,7 @@
       "exportLayerStylesAsDesc": "Introduzca un nombre de archivo. El archivo de estilos se descargará en la carpeta de descargas de su navegador al hacer clic en Guardar.",
       "exportLayerStylesFileName": "Nombre de archivo",
       "exportLayerStylesFileNamePlaceholder": "mis-estilos-de-mapa.json",
-      "layerStylesFile": "Estilos de capa de GeoLibre",
+      "layerStylesFile": "Estilos de capa de GeoSpaX",
       "layerStylesImported": "Estilos de capa importados",
       "layerStylesImportedSummary_one": "Se cambió el estilo de {{count}} capa a partir de «{{file}}».",
       "layerStylesImportedSummary_other": "Se cambió el estilo de {{count}} capas a partir de «{{file}}».",
@@ -3732,7 +3732,7 @@
     },
     "windowClose": {
       "savePromptTitle": "¿Guardar los cambios antes de cerrar?",
-      "savePromptDescription": "El proyecto actual tiene cambios sin guardar. ¿Guardarlos antes de cerrar GeoLibre?"
+      "savePromptDescription": "El proyecto actual tiene cambios sin guardar. ¿Guardarlos antes de cerrar GeoSpaX?"
     },
     "error": {
       "couldNotOpenProject": "No se pudo abrir el proyecto.",
@@ -7979,7 +7979,7 @@
     "exportGeoTiff": "GeoTIFF (COG)",
     "extractSubset": "Extraer subconjunto…",
     "stylesMenu": "Estilos",
-    "exportGeoLibreStyle": "Exportar estilo URL de GeoLibre",
+    "exportGeoLibreStyle": "Exportar estilo URL de GeoSpaX",
     "exportMapboxStyle": "Exportar como estilo de Mapbox GL",
     "exportSldStyle": "Exportar como OGC SLD",
     "exportQmlStyle": "Exportar como QML de QGIS",
@@ -7989,7 +7989,7 @@
     "exportStyleError": "No se pudo exportar el estilo de esta capa.",
     "importStyle": "Importar estilo (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "Importar estilo desde texto…",
-    "importStyleFromTextDescription": "Pegue un estilo de GeoLibre, Mapbox GL, SLD o QML. El formato se detecta a partir del texto.",
+    "importStyleFromTextDescription": "Pegue un estilo de GeoSpaX, Mapbox GL, SLD o QML. El formato se detecta a partir del texto.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "Importar",
     "openStyleManager": "Estilos guardados (Administrador de estilos)…",
@@ -8548,7 +8548,7 @@
     "windowCloseGuardFailed": "Al cerrar la ventana no se le preguntará si desea guardar los cambios sin guardar. Guarde su trabajo antes de cerrar.",
     "windowCloseSaveFailed": "No se pudo guardar el proyecto antes de cerrar.",
     "windowCloseFailed": "No se pudo cerrar la ventana.",
-    "nativeProjectPathFailed": "No se pudo abrir el archivo de proyecto pasado a GeoLibre.",
+    "nativeProjectPathFailed": "No se pudo abrir el archivo de proyecto pasado a GeoSpaX.",
     "kmlSuperOverlayReadFailed": "No se pudo volver a leer el KML Super-Overlay «{{name}}», por lo que sus teselas están en blanco.",
     "projectControlFailed": "No se pudo aplicar el ajuste «{{control}}» del proyecto.",
     "pluginSnapshotFailed": "Es posible que algunos ajustes de complementos no se trasladen al nuevo renderizador.",
@@ -8557,7 +8557,7 @@
     "panelRenderFailed": "No se pudo abrir el panel «{{name}}».",
     "sharedSettingsFailed": "No se pudieron cargar los ajustes compartidos del enlace, por lo que se usan sus propios ajustes.",
     "sharedLanguageFailed": "No se pudo cambiar al idioma que piden los ajustes compartidos.",
-    "languageCatalogFailed": "No se pudo cargar la traducción de {{language}}, por lo que GeoLibre se muestra en inglés."
+    "languageCatalogFailed": "No se pudo cargar la traducción de {{language}}, por lo que GeoSpaX se muestra en inglés."
   },
   "shell": {
     "workspaceTitle": "Espacio de trabajo del mapa de GeoSpaX",
@@ -9047,7 +9047,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Descargar el archivo GeoParquet completo de esta tesela",
       "dataset": "Conjunto de datos",
-      "browseOnly": "La búsqueda en este conjunto de datos aún no es compatible con GeoLibre. Use los enlaces de arriba para obtenerlo desde su fuente.",
+      "browseOnly": "La búsqueda en este conjunto de datos aún no es compatible con GeoSpaX. Use los enlaces de arriba para obtenerlo desde su fuente.",
       "searchArea": "Área de búsqueda",
       "modeView": "Vista del mapa",
       "modeDraw": "Dibujar cuadro",
@@ -9294,7 +9294,7 @@
       "liftSelected": "Se seleccionaron {{count}} puntos dentro de {{polygons}} polígonos de {{layer}}.",
       "liftInstances": "Se crearon {{objects}} instancias de {{name}} a partir de {{layer}} ({{count}} puntos).",
       "fullFile": "Archivo completo con etiquetas",
-      "fullFileNote": "Escribe una copia local de esta nube de puntos con todas las etiquetas guardadas aplicadas, no solo los puntos cargados aquí. Se ejecuta en el servidor de GeoLibre.",
+      "fullFileNote": "Escribe una copia local de esta nube de puntos con todas las etiquetas guardadas aplicadas, no solo los puntos cargados aquí. Se ejecuta en el servidor de GeoSpaX.",
       "fullFileInput": "Copia local (.las, .laz o .copc.laz)",
       "fullFileOutput": "Archivo de salida (.las o .laz)",
       "fullFileWrite": "Escribir archivo",

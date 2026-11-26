@@ -15,7 +15,7 @@
 import { isCredentialFieldName, isCredentialUrlParam } from "@geolibre/core";
 import type { DiagnosticRecord } from "./diagnostics";
 
-export const ISSUE_REPOSITORY_URL = "https://github.com/opengeos/GeoLibre";
+export const ISSUE_REPOSITORY_URL = "https://github.com/jm0535/GeoSpaX";
 export const ISSUE_TEMPLATE = "bug_report.yml";
 
 /**
@@ -188,7 +188,7 @@ export function buildIssueReportUrl(
         const value = scrubbed[field];
         if (value !== undefined) reported[field] = truncateText(value, limits[field]);
       }
-      whatHappened = `GeoLibre reported: ${truncateText(titleText, limits.message)}`;
+      whatHappened = `GeoSpaX reported: ${truncateText(titleText, limits.message)}`;
       lines.push("", "Diagnostics entry:", "```json", JSON.stringify(reported, null, 2), "```");
     }
     return buildUrl({

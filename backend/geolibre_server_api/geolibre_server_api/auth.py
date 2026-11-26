@@ -97,7 +97,7 @@ MAX_FORM_BYTES = 16 * 1024
 MAX_PENDING_PER_BINDING = 5
 
 DESKTOP_CLIENT_ID = "geolibre-desktop"
-DESKTOP_REDIRECT = "org.geolibre.desktop:/oauth/callback"
+DESKTOP_REDIRECT = "geospax.in4metrix.dev:/oauth/callback"
 BROWSER_COOKIE = "__Host-geolibre_oauth_browser"
 
 # 3-39 chars, starting and ending alphanumeric. The middle group is *not*

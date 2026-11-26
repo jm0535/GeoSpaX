@@ -1,6 +1,6 @@
 # Web Services
 
-**Plugins → Web Services** is a submenu of catalog and service browsers. Each entry connects to one public (or self-hosted) data provider, searches it, and adds what you pick to the map as a normal GeoLibre layer.
+**Plugins → Web Services** is a submenu of catalog and service browsers. Each entry connects to one public (or self-hosted) data provider, searches it, and adds what you pick to the map as a normal GeoSpaX layer.
 
 They are grouped together because they behave the same way, not because they share a data source: every one of them opens a **docked side panel** rather than a floating on-map control, so it sits alongside the Layers and Style panels, resizes with them, and can be collapsed. That is also why these entries have no "position" submenu — unlike most plugins, there is no on-map control to place in a corner.
 
@@ -9,7 +9,7 @@ They are grouped together because they behave the same way, not because they sha
 ## How the panels behave
 
 - **Activating** an entry opens its panel; closing the panel deactivates the plugin. A check mark next to **Web Services** in the Plugins menu means at least one of them is active.
-- **Layers you add are real layers.** Whatever a panel puts on the map is mirrored into the GeoLibre layer store, so it appears in the [Layers panel](layers.md), can be reordered, hidden, restyled, and removed there, and is saved into the `.geolibre.json` [project file](projects.md). Reopening the project restores the layer and hands it back to its panel.
+- **Layers you add are real layers.** Whatever a panel puts on the map is mirrored into the GeoSpaX layer store, so it appears in the [Layers panel](layers.md), can be reordered, hidden, restyled, and removed there, and is saved into the `.geolibre.json` [project file](projects.md). Reopening the project restores the layer and hands it back to its panel.
 - **The catalog browsers are mutually exclusive.** STAC Catalogs and Planet Open Data share panel state, so activating one deactivates the other; if the switch fails, the plugin that was displaced comes back.
 - **Nothing here needs an account** except Hugging Face uploads (a user access token) and GeoLens private datasets (an API key).
 
@@ -105,7 +105,7 @@ Searches The National Map for [3D Elevation Program](https://www.usgs.gov/3d-ele
 - Search the **current view**, a **bounding box drawn on the map**, typed **coordinates**, or a USGS **1:24,000 topographic quad** by name and state.
 - Pick the **elevation datasets** (1 m DEM, 1/3 arc-second, 1 arc-second, Alaska 5 m, and others) and the file **format**, and optionally hide redundant partial tiles.
 - Footprints render on the map and in the Layers panel; click one to select its result, or export them all to GeoJSON.
-- **Load on Map** streams a GeoTIFF DEM through GeoLibre's raster path; **Download** saves the source file (IMG products are download-only).
+- **Load on Map** streams a GeoTIFF DEM through GeoSpaX's raster path; **Download** saves the source file (IMG products are download-only).
 
 ## Vantor Open Data
 
@@ -113,7 +113,7 @@ A STAC explorer for [Vantor's](https://www.vantor.com/) open disaster imagery re
 
 - Filter scenes by **event** and by **phase** (pre-event or post-event).
 - Restrict the search to the current view or to a **bounding box drawn on the map**; footprints render on the map and highlight as you hover a result.
-- Cloud-Optimized GeoTIFFs are added through GeoLibre's own raster path, so they become persistent layers you can restyle — and you can pick the **COG rendering engine** (GPU/deck.gl, the WebAssembly tiler, or a TiTiler server).
+- Cloud-Optimized GeoTIFFs are added through GeoSpaX's own raster path, so they become persistent layers you can restyle — and you can pick the **COG rendering engine** (GPU/deck.gl, the WebAssembly tiler, or a TiTiler server).
 - Download the source scene.
 
 ## Planet Open Data
@@ -129,7 +129,7 @@ This is a different catalog from [NASA Earthdata](#nasa-earthdata) above: GIBS s
 - **ImageServer** and **MapServer** items are added as raster layers rendered through their export endpoints.
 - **FeatureServer** items are added as GeoJSON vector layers, arriving with attributes, styling, and export intact.
 - Published **web maps** are expanded into their constituent layers.
-- An ArcGIS service can be **exported to a Cloud-Optimized GeoTIFF**; GeoLibre re-encodes the plain GeoTIFF ArcGIS returns, since ArcGIS has no COG output of its own.
+- An ArcGIS service can be **exported to a Cloud-Optimized GeoTIFF**; GeoSpaX re-encodes the plain GeoTIFF ArcGIS returns, since ArcGIS has no COG output of its own.
 
 ## OpenAerialMap
 
@@ -169,7 +169,7 @@ Browses the State of Tennessee's [downloadable GIS data portal](https://geodata.
 
 - The panel lists the whole catalog as soon as it opens, alphabetically; type a keyword to narrow it. **Search the current map area** starts off, since most layers are statewide.
 - **Add to map** loads feature services as editable vector layers and map or image services (such as statewide imagery) as raster layers. **Zoom** and **Details** work as in ArcGIS Hub, and Details opens the dataset's page on geodata.tn.gov. **Download** saves feature services as GeoJSON; map and image services only render imagery, so they have nothing to download.
-- The portal is an ArcGIS Hub site, so the panel searches the groups that make up its catalog. It reads that list from the site when it opens, so datasets the state adds show up without a GeoLibre update.
+- The portal is an ArcGIS Hub site, so the panel searches the groups that make up its catalog. It reads that list from the site when it opens, so datasets the state adds show up without a GeoSpaX update.
 
 ## US Federal GIS
 
@@ -187,7 +187,7 @@ Browses the public GIS data portal of any US state or the District of Columbia �
 
 - Choose a state and the panel lists its catalog alphabetically; type a keyword to narrow it. Where a state has more than one portal (for example a statewide geoportal plus its transportation or natural-resources agency), a second menu picks between them. **Open portal** opens the portal's own website.
 - **Add to map**, **Zoom**, **Download**, and **Details** work as in [Tennessee GIS](#tennessee-gis): feature services add as vector layers, map and image services (such as statewide imagery) as raster layers, and Download saves feature services as GeoJSON.
-- Every portal listed is an ArcGIS Hub site or ArcGIS Online organization, which is what lets one panel search them all. A Hub site's catalog is read from the site when you pick it, so datasets the state adds show up without a GeoLibre update. A few states (Louisiana, Montana, Nevada, Ohio, Oklahoma, South Dakota, among others) have no Hub catalog to read, so the panel searches everything the state's ArcGIS organization publishes; expect some non-GIS items such as dashboards' source tables there. States whose main clearinghouse is not built on ArcGIS (such as PASDA or TNRIS) are represented by the agency portals that are.
+- Every portal listed is an ArcGIS Hub site or ArcGIS Online organization, which is what lets one panel search them all. A Hub site's catalog is read from the site when you pick it, so datasets the state adds show up without a GeoSpaX update. A few states (Louisiana, Montana, Nevada, Ohio, Oklahoma, South Dakota, among others) have no Hub catalog to read, so the panel searches everything the state's ArcGIS organization publishes; expect some non-GIS items such as dashboards' source tables there. States whose main clearinghouse is not built on ArcGIS (such as PASDA or TNRIS) are represented by the agency portals that are.
 
 ## US Local GIS
 
@@ -207,7 +207,7 @@ Searches public [Socrata](https://dev.socrata.com/) open-data catalogs — the p
 Searches the [Humanitarian Data Exchange](https://data.humdata.org/) CKAN catalog and adds its available GeoJSON resources.
 
 !!! note "Why some searches route through a proxy"
-    HDX does not send CORS headers to browsers, so the web build routes this search through GeoLibre's public tiles Worker. The desktop app queries the API directly over native HTTP. The same applies to the OpenAerialMap metadata API and the Source Cooperative catalog.
+    HDX does not send CORS headers to browsers, so the web build routes this search through GeoSpaX's public tiles Worker. The desktop app queries the API directly over native HTTP. The same applies to the OpenAerialMap metadata API and the Source Cooperative catalog.
 
 ## STAC Catalogs
 
@@ -288,7 +288,7 @@ Browses [Fields of the World](https://fieldsofthe.world) (FTW), the global agric
 - Each tile offers **Add to map** (its fields as an editable GeoJSON layer, styled and filtered like the archive), **GeoParquet** (the source file, unchanged), and **GeoJSON**. With **Only fields in the search area** checked (the default), Add to map and GeoJSON keep only the fields overlapping the search area. The file is read one row group at a time, so even the largest tiles (about 3 million fields) can be clipped to a small box; the result is limited to 250,000 fields on the map or 1,000,000 in a GeoJSON file. Download the GeoParquet for anything larger.
 
 !!! note "Running the FTW model"
-    The plugin shows and downloads the published global predictions. To run the FTW model on your own area and Sentinel-2 scenes, use the [FTW inference app](https://fieldsofthe.world/ftw-inference-app) or the [ftw-baselines](https://github.com/fieldsoftheworld/ftw-baselines) command-line tools, then add the result to GeoLibre. The data is licensed CC-BY-4.0.
+    The plugin shows and downloads the published global predictions. To run the FTW model on your own area and Sentinel-2 scenes, use the [FTW inference app](https://fieldsofthe.world/ftw-inference-app) or the [ftw-baselines](https://github.com/fieldsoftheworld/ftw-baselines) command-line tools, then add the result to GeoSpaX. The data is licensed CC-BY-4.0.
 
 ## Ocean Data Platform
 
@@ -300,11 +300,11 @@ Browses the public datasets on HUB Ocean's [Ocean Data Platform](https://app.hub
 - **Zoom** fits the map to the dataset's extent, and **Details** opens its page in the ODP catalog, with its full description, provenance, and download options.
 
 !!! note "Public datasets only"
-    The panel lists and reads only datasets shared publicly on ODP; it does not sign in or take an API key. ODP's tile and features endpoints do not allow other websites to read them directly, so GeoLibre reads them through its own tile proxy (`tiles.geolibre.app`). Each dataset keeps its provider's license, shown in the result list; check it before reuse.
+    The panel lists and reads only datasets shared publicly on ODP; it does not sign in or take an API key. ODP's tile and features endpoints do not allow other websites to read them directly, so GeoSpaX reads them through its own tile proxy (`tiles.geolibre.app`). Each dataset keeps its provider's license, shown in the result list; check it before reuse.
 
 ## GeoLens
 
-Connects to a self-hosted [GeoLens](https://getgeolens.com) catalog — an open-source spatial catalog (FastAPI + PostGIS) you run on your own infrastructure, which makes it the recommended way to work with private data in GeoLibre.
+Connects to a self-hosted [GeoLens](https://getgeolens.com) catalog — an open-source spatial catalog (FastAPI + PostGIS) you run on your own infrastructure, which makes it the recommended way to work with private data in GeoSpaX.
 
 - Enter your server's base URL and, for private datasets, an API key. Search the catalog; each result links back to its metadata page.
 - Datasets are added over the standards GeoLens already serves: **signed vector tiles** (the scalable default), **OGC API Features** GeoJSON, or server-rendered **raster tiles**.

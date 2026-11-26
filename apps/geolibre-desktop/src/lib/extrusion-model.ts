@@ -456,7 +456,7 @@ export function encodeGlb(model: ExtrusionModel, layerName: string): Uint8Array 
 
   const binLength = positions.byteLength + normals.byteLength + indices.byteLength;
   const gltf: Record<string, unknown> = {
-    asset: { version: "2.0", generator: "GeoLibre" },
+    asset: { version: "2.0", generator: "GeoSpaX" },
     scene: 0,
     scenes: [{ name: layerName, nodes: [nodes.length - 1] }],
     nodes,
@@ -540,7 +540,7 @@ function fixed(value: number, digits: number): string {
 export function encodeObj(model: ExtrusionModel, layerName: string): string {
   const lines = [
     `# ${layerName.replace(/[\r\n]+/g, " ")}`,
-    "# Exported by GeoLibre. Units: metres, Y up.",
+    "# Exported by GeoSpaX. Units: metres, Y up.",
     `# Origin: longitude ${model.origin[0]}, latitude ${model.origin[1]}`,
   ];
   let vertexBase = 1;
@@ -588,7 +588,7 @@ export function encodeStl(model: ExtrusionModel): Uint8Array {
   const triangleCount = model.solids.reduce((sum, solid) => sum + solid.indices.length / 3, 0);
   const out = new Uint8Array(84 + triangleCount * 50);
   const view = new DataView(out.buffer);
-  out.set(new TextEncoder().encode("GeoLibre extrusion model, metres, Z up").subarray(0, 80));
+  out.set(new TextEncoder().encode("GeoSpaX extrusion model, metres, Z up").subarray(0, 80));
   view.setUint32(80, triangleCount, true);
   let offset = 84;
   for (const solid of model.solids) {

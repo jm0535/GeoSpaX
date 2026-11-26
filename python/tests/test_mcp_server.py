@@ -98,11 +98,11 @@ def _import_failing_on_the_sdk(missing: str):
 
 
 def test_entry_point_reports_a_missing_sdk_without_a_traceback(monkeypatch, capsys):
-    """`pip install geolibre` then `geolibre-mcp` must say what to install."""
+    """`pip install geospax` then `geospax-mcp` must say what to install."""
     monkeypatch.delitem(sys.modules, "geolibre.mcp.server", raising=False)
     monkeypatch.setattr(builtins, "__import__", _import_failing_on_the_sdk("mcp"))
     assert mcp_package.main([]) == 1
-    assert 'pip install "geolibre[mcp]"' in capsys.readouterr().err
+    assert 'pip install "geospax[mcp]"' in capsys.readouterr().err
 
 
 def test_entry_point_propagates_an_unrelated_import_error(monkeypatch):

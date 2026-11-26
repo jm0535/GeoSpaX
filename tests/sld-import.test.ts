@@ -289,7 +289,7 @@ describe("parseSld", () => {
     assert.ok(result.warnings.some((w) => /image\/icon marker/.test(w)));
   });
 
-  it("warns when a WellKnownName has no GeoLibre marker equivalent", () => {
+  it("warns when a WellKnownName has no GeoSpaX marker equivalent", () => {
     const result = parseSld(
       sld(`<Rule><PointSymbolizer><Graphic><Mark>
         <WellKnownName>shape://slash</WellKnownName>
@@ -298,7 +298,7 @@ describe("parseSld", () => {
     );
     // Falls back to a plain circle (no marker enabled) and warns.
     assert.notEqual(result.style.markerEnabled, true);
-    assert.ok(result.warnings.some((w) => /no GeoLibre equivalent/.test(w)));
+    assert.ok(result.warnings.some((w) => /no GeoSpaX equivalent/.test(w)));
   });
 
   it("disables a stale base marker when importing a plain circle point", () => {

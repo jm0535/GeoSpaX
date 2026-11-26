@@ -192,7 +192,7 @@ export const DEFAULT_GEOLENS_LABELS: GeoLensLabels = {
   blockedError: (host) =>
     `Could not reach ${host}. The request never completed — the host may be ` +
     `unreachable or offline, or, if it is reachable, it may not allow ` +
-    `cross-origin requests from GeoLibre (CORS).`,
+    `cross-origin requests from GeoSpaX (CORS).`,
   showing: (count) => `${count} dataset${count === 1 ? "" : "s"}.`,
   vectorBadge: "vector",
   rasterBadge: "raster",
@@ -811,7 +811,7 @@ function tileColumnsFor(
   if (wide && !wideDatasetsWarned.has(datasetKey)) {
     wideDatasetsWarned.add(datasetKey);
     console.info(
-      `[GeoLibre] GeoLens dataset "${label}" has ${fields.length} fields (over the ` +
+      `[GeoSpaX] GeoLens dataset "${label}" has ${fields.length} fields (over the ` +
         `${MAX_GEOLENS_TILE_COLUMNS}-field tile budget), so its tiles carry only the ` +
         `attributes this layer styles or binds by. Below zoom 10 the rest are absent ` +
         `from popups and the Style panel; load the dataset as GeoJSON to work with all ` +

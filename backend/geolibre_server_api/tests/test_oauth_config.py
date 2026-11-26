@@ -48,7 +48,7 @@ def test_oauth_cors_needs_explicit_desktop_origin_even_with_wildcard_api(tmp_pat
     desktop = {
         "client_id": "geolibre-desktop",
         "name": "GeoLibre Desktop",
-        "redirect_uris": ["org.geolibre.desktop:/oauth/callback"],
+        "redirect_uris": ["geospax.in4metrix.dev:/oauth/callback"],
         "scopes": ["read:projects"],
     }
     monkeypatch.setenv("GEOLIBRE_OAUTH_CLIENTS", json.dumps([*VALID_CLIENTS, desktop]))
@@ -128,7 +128,7 @@ def test_parse_issuer_normalizes_authority(raw, expected):
         {
             "client_id": "geolibre-desktop",
             "name": "Desktop",
-            "redirect_uris": ["org.geolibre.desktop:/other"],
+            "redirect_uris": ["geospax.in4metrix.dev:/other"],
             "scopes": ["read:projects"],
         },
     ],

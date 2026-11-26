@@ -1038,12 +1038,12 @@ export function parseMapboxStyle(input: unknown): MapboxStyleImportResult {
     const colorRamp = heatmapRampName(paint["heatmap-color"]);
     if (colorRamp !== null) patch.heatmapColorRamp = colorRamp;
     else if (paint["heatmap-color"] !== undefined) {
-      warnings.push("The heatmap color expression is not a built-in GeoLibre color ramp.");
+      warnings.push("The heatmap color expression is not a built-in GeoSpaX color ramp.");
     }
     const weightProperty = heatmapWeightProperty(paint["heatmap-weight"]);
     if (weightProperty !== null) patch.heatmapWeightProperty = weightProperty;
     else {
-      warnings.push("The heatmap weight expression is not a single GeoLibre attribute field.");
+      warnings.push("The heatmap weight expression is not a single GeoSpaX attribute field.");
     }
     applyZoomRange(heatmap, patch);
   }

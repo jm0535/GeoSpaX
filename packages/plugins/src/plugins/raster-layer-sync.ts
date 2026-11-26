@@ -689,7 +689,7 @@ function rasterPanelCollapsedFromControl(control: RasterSyncableControl): boolea
   } catch (error) {
     // getState is optional, so only a throwing implementation lands here;
     // surface it instead of letting it look like the method being absent.
-    console.warn("[GeoLibre] rasterPanelCollapsedFromControl: getState threw", error);
+    console.warn("[GeoSpaX] rasterPanelCollapsedFromControl: getState threw", error);
     return true;
   }
 }

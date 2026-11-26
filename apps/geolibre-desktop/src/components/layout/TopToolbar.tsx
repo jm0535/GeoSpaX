@@ -518,7 +518,7 @@ export function TopToolbar({
       )}
       {/* Remount on every project load so the composer starts from the opened
           project's saved layout instead of keeping the previous project's
-          settings and captured map (GeoLibre discussion #1992). */}
+          settings and captured map (GeoSpaX discussion #1992). */}
       <PrintLayoutDialog
         key={`print-layout-${projectGeneration}`}
         open={dialogs.printLayoutOpen}

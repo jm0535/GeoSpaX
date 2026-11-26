@@ -200,11 +200,11 @@ export function ProcessingMenu({
           </>
         )}
         {/* Heads the toolbox block below: the nine category submenus render as
-            bare siblings of the GeoLibre Toolbox submenu, so "Conversion"
-            (Whitebox) and "GeoLibre Toolbox → Conversion" (app dialog)
+            bare siblings of the GeoSpaX Toolbox submenu, so "Conversion"
+            (Whitebox) and "GeoSpaX Toolbox → Conversion" (app dialog)
             otherwise look like peers (GeoLibre#1904). Names the toolbox rather
             than repeating the bare product name, and says what clicking it
-            does; pairs with the GeoLibre Toolbox trigger below. Reuses the
+            does; pairs with the GeoSpaX Toolbox trigger below. Reuses the
             dialog's own heading string, already translated in every locale. */}
         {showWhitebox && (
           <DropdownMenuItem
@@ -258,12 +258,12 @@ export function ProcessingMenu({
               </DropdownMenuSubContent>
             </DropdownMenuSub>
           ))}
-        {/* Divide the toolbox block from GeoLibre's own tools, so the two
+        {/* Divide the toolbox block from GeoSpaX's own tools, so the two
             sections read as separate owners rather than one flat list. */}
         {showWhitebox && showGeolibre && <DropdownMenuSeparator />}
-        {/* GeoLibre's own tools (Turf vector, rasterio raster, format
+        {/* GeoSpaX's own tools (Turf vector, rasterio raster, format
             conversion, routing, spatial statistics) plus geocoding, batch &
-            models, and AI segmentation. Grouped under a single "GeoLibre
+            models, and AI segmentation. Grouped under a single "GeoSpaX
             Toolbox" submenu so their category names don't collide with the
             Whitebox category submenus above, and so the label names a toolbox
             the way its "Whitebox Toolbox" sibling does instead of standing as
@@ -729,7 +729,7 @@ export function ProcessingMenu({
             </DropdownMenuSubContent>
           </DropdownMenuSub>
         )}
-        {/* Divide the tool-category submenus (Whitebox, GeoLibre) from the
+        {/* Divide the tool-category submenus (Whitebox, GeoSpaX) from the
             workspaces and consoles below. Only when both sides are present. */}
         {(showWhitebox || showGeolibre) && showWorkspacesOrServices && <DropdownMenuSeparator />}
         {/* The workspaces run tools too — Model Builder composes them, and the
@@ -739,9 +739,9 @@ export function ProcessingMenu({
             not — they visualize and record rather than run anything — and the
             Planetary Computer / Earth Engine catalogs take `layers:add-remote`
             instead, because they bring imagery in. */}
-        {/* Model Builder sits at the top level rather than inside the GeoLibre
+        {/* Model Builder sits at the top level rather than inside the GeoSpaX
             Toolbox submenu: it is a canvas that composes tools from every
-            toolbox (Whitebox raster and GeoLibre vector alike), so filing it
+            toolbox (Whitebox raster and GeoSpaX vector alike), so filing it
             under one of them would misdescribe its reach. It heads the
             workspaces block with its SQL/Python/notebook/dashboard siblings. */}
         {show("processing.modelBuilder") && (

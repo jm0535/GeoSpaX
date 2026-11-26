@@ -143,7 +143,7 @@ export function installRasterClassification(control: unknown): void {
     typeof createColormapTexture !== "function"
   ) {
     console.warn(
-      "[GeoLibre] Raster classification unavailable: maplibre-gl-raster internals not found (re-verify on dependency bump).",
+      "[GeoSpaX] Raster classification unavailable: maplibre-gl-raster internals not found (re-verify on dependency bump).",
     );
     return;
   }
@@ -239,7 +239,7 @@ function ensureTexture(manager: RasterLayerManager, entry: ClassificationEntry):
     entry.key = key;
     return entry.texture;
   } catch (error) {
-    console.error("[GeoLibre] Failed to build raster classification texture", error);
+    console.error("[GeoSpaX] Failed to build raster classification texture", error);
     entry.texture = undefined;
     return null;
   }
@@ -456,7 +456,7 @@ export async function getRasterBandStats(
     return bandStatsFromAuto(auto, band);
   } catch (error) {
     if (!controller.signal.aborted) {
-      console.warn(`[GeoLibre] Failed to compute raster statistics for layer "${layerId}"`, error);
+      console.warn(`[GeoSpaX] Failed to compute raster statistics for layer "${layerId}"`, error);
     }
     return null;
   } finally {

@@ -256,8 +256,8 @@ export function writeLas(cloud: LasExportCloud, options: WriteLasOptions = {}): 
   view.setUint16(6, 0x11, true);
   view.setUint8(24, 1);
   view.setUint8(25, 4);
-  writeAscii(view, 26, "GeoLibre", 32);
-  writeAscii(view, 58, options.softwareName ?? "GeoLibre point cloud annotator", 32);
+  writeAscii(view, 26, "GeoSpaX", 32);
+  writeAscii(view, 58, options.softwareName ?? "GeoSpaX point cloud annotator", 32);
   const now = options.now ?? new Date();
   const dayOfYear = Math.floor(
     (Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) -
@@ -442,7 +442,7 @@ export function writeLaz(
     writeLas(cloud, {
       // maplibre-gl-lidar <= 0.18.0 detects LAZ by "laszip" in this field
       // (copc.js strips the 0x80 format bit), so name it to stay readable.
-      softwareName: "GeoLibre annotator (LASzip)",
+      softwareName: "GeoSpaX annotator (LASzip)",
       ...options,
       extraVlrs: [laszip],
       pointFormatFlags: 0x80,

@@ -99,7 +99,7 @@ export const DEFAULT_USGS_NLDI_LABELS: UsgsNldiLabels = {
   navigationButton: "1. Load sources & plot navigation",
   navigationButtonAgain: "Plot another navigation layer",
   exportButton: "Export rendered results to GeoJSON",
-  addLayersButton: "Add rendered results to GeoLibre Layers",
+  addLayersButton: "Add rendered results to GeoSpaX Layers",
   clearButton: "Clear NLDI result",
   noComid: "No COMID was returned for this point.",
   requestingBasin: "Requesting upstream basin\u2026",

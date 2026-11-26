@@ -169,7 +169,7 @@ export async function loadPluginBlocklist(registryUrl: string): Promise<void> {
       setPluginBlocklist(cached ?? []);
       activeUrl = url;
       if (cached) {
-        console.warn(`[GeoLibre] ${url} returned 404; keeping the cached plugin blocklist.`);
+        console.warn(`[GeoSpaX] ${url} returned 404; keeping the cached plugin blocklist.`);
       }
       return;
     }
@@ -197,7 +197,7 @@ export async function loadPluginBlocklist(registryUrl: string): Promise<void> {
       activeUrl = url;
     }
     console.warn(
-      `[GeoLibre] Could not fetch the plugin blocklist from ${url}` +
+      `[GeoSpaX] Could not fetch the plugin blocklist from ${url}` +
         (cached ? "; using the cached copy." : "; nothing is blocked."),
       error,
     );
@@ -217,7 +217,7 @@ export function ensurePluginBlocklistLoaded(): Promise<void> {
       registryUrl = resolveRegistryUrl();
     } catch (error) {
       console.warn(
-        "[GeoLibre] Could not resolve the plugin registry URL for the blocklist.",
+        "[GeoSpaX] Could not resolve the plugin registry URL for the blocklist.",
         error,
       );
       return;

@@ -5,13 +5,10 @@ cite it. Citations help others find the project, recognize the contributors,
 and support the continued development of free and open-source geospatial
 software.
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20785400.svg)](https://doi.org/10.5281/zenodo.20785400)
-
-GeoSpaX is archived on [Zenodo](https://zenodo.org/), which mints a Digital
-Object Identifier (DOI) for every release. The DOI above is the **concept DOI**:
-it always resolves to the latest version. To cite a specific version instead,
-open the [Zenodo record](https://doi.org/10.5281/zenodo.20785400) and copy the
-DOI shown for that release.
+GeoSpaX does not have its own DOI yet. Until it is archived on
+[Zenodo](https://zenodo.org/), cite the repository URL as below. (The DOI
+`10.5281/zenodo.20785400` belongs to the GeoLibre platform; use it only when
+citing GeoLibre — see [Citing the GeoLibre platform](#citing-the-geolibre-platform).)
 
 ## Recommended citation
 
@@ -26,17 +23,16 @@ DOI shown for that release.
   author    = {Moses, J.},
   title     = {{GeoSpaX 2.0.0: GSX domain workbenches for environmental and geospatial analysis}},
   year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.20785400},
-  url       = {https://github.com/jm0535/GeoSpaX}
+  url       = {https://github.com/jm0535/GeoSpaX},
+  note      = {Built on GeoLibre (doi:10.5281/zenodo.20785400)}
 }
 ```
 
 ## APA
 
 > Moses, J. (2026). GeoSpaX 2.0.0 — GSX domain workbenches for environmental
-> and geospatial analysis [Computer software]. Zenodo.
-> <https://doi.org/10.5281/zenodo.20785400>
+> and geospatial analysis [Computer software].
+> <https://github.com/jm0535/GeoSpaX>
 
 ## Citing the GeoLibre platform
 

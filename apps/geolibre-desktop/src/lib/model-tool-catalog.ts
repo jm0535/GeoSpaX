@@ -160,7 +160,7 @@ export function whiteboxToolDescriptor(tool: WhiteboxTool): ModelToolDescriptor 
   const group =
     tool.taxonomy_category?.trim() ||
     tool.category?.trim() ||
-    (tool.source ? "GeoLibre" : UNCATEGORIZED);
+    (tool.source ? "GeoSpaX" : UNCATEGORIZED);
   return {
     key: modelToolKey("whitebox", tool.id),
     provider: "whitebox",

@@ -182,7 +182,7 @@
     },
     "registryTrust": {
       "title_other": "Pasang plugin ini?",
-      "description_other": "Tautan ini membuka {{count}} plugin dari registri plugin resmi GeoLibre yang belum terpasang. Memasangnya akan menambahkannya ke plugin Anda dan mengaktifkannya."
+      "description_other": "Tautan ini membuka {{count}} plugin dari registri plugin resmi GeoSpaX yang belum terpasang. Memasangnya akan menambahkannya ke plugin Anda dan mengaktifkannya."
     },
     "title": "Kelola Plugin",
     "searchAria": "Cari plugin",
@@ -726,7 +726,7 @@
       "errorUrl": "Masukkan URL LandXML.",
       "errorTooLarge": "Berkas LandXML jarak jauh melebihi batas unduhan 100 MB.",
       "errorSelectType": "Pilih setidaknya satu jenis objek LandXML.",
-      "errorMissingCrs": "Berkas LandXML ini menggunakan koordinat terproyeksi. Masukkan CRS sumbernya agar GeoLibre dapat memproyeksikannya ulang ke WGS84.",
+      "errorMissingCrs": "Berkas LandXML ini menggunakan koordinat terproyeksi. Masukkan CRS sumbernya agar GeoSpaX dapat memproyeksikannya ulang ke WGS84.",
       "errorGeographicCrsBounds": "Koordinat berada di luar batas bujur dan lintang geografis. Pilih CRS sumber terproyeksi yang digunakan oleh berkas LandXML ini.",
       "summary": "{{surfaces}} permukaan, {{alignments}} alinyemen, {{profiles}} profil, {{points}} titik survei",
       "objectTypes": "Jenis objek",
@@ -866,12 +866,12 @@
     },
     "mssql": {
       "defaultName": "Layer SQL Server",
-      "errorDesktopOnly": "Layer SQL Server memerlukan GeoLibre Desktop.",
+      "errorDesktopOnly": "Layer SQL Server memerlukan GeoSpaX Desktop.",
       "errorConnect": "Tidak dapat terhubung ke SQL Server.",
       "errorPort": "Masukkan port SQL Server yang valid (1–65535).",
       "errorConnectFirst": "Hubungkan ke SQL Server terlebih dahulu.",
       "errorSelectTable": "Pilih tabel spasial yang akan dimuat.",
-      "desktopOnlyNotice": "Layer SQL Server hanya tersedia di GeoLibre Desktop.",
+      "desktopOnlyNotice": "Layer SQL Server hanya tersedia di GeoSpaX Desktop.",
       "savedConnection": "Koneksi tersimpan",
       "selectSavedConnection": "Koneksi baru",
       "server": "Server",
@@ -1588,13 +1588,13 @@
     "oauthFailed": "Gagal masuk. Silakan coba lagi.",
     "oauthRefreshFailed": "Tidak dapat menyegarkan sesi Anda. Periksa koneksi Anda dan coba lagi.",
     "oauthSetupFailed": "Proses masuk desktop tidak dapat dimulai. Mulai ulang aplikasi dan pastikan aplikasi yang terpasang dapat membuka tautan dan menjangkau server berbagi. Token API yang ditempelkan tetap dapat digunakan.",
-    "oauthRestartSignIn": "Tautan masuk ini dibuka setelah GeoLibre dimulai ulang. Mulai proses masuk lagi di sini; kode otorisasi sebelumnya tidak dapat digunakan.",
+    "oauthRestartSignIn": "Tautan masuk ini dibuka setelah GeoSpaX dimulai ulang. Mulai proses masuk lagi di sini; kode otorisasi sebelumnya tidak dapat digunakan.",
     "reauthBody": "Sesi {{shareHost}} Anda telah kedaluwarsa. Masuk lagi untuk terus berbagi.",
     "errorUnauthorized": "Token API {{shareHost}} Anda tidak valid atau telah kedaluwarsa. Perbarui di Pengaturan.",
     "reauthSignIn": "Masuk lagi",
     "liveAt": "Proyek Anda aktif di:",
     "credentialsRemoved": "{{count}} bidang kredensial tidak disertakan. Penerima harus memberikan kredensial sendiri atau menggunakan referensi yang diperantarai.",
-    "oauthSignOutIncomplete": "Anda telah keluar, tetapi sesi masuk yang tersimpan tidak dapat dihapus dari keychain sistem Anda, sehingga mungkin dipulihkan saat GeoLibre dimulai berikutnya. Pastikan keychain Anda tersedia, lalu masuk dan keluar lagi.",
+    "oauthSignOutIncomplete": "Anda telah keluar, tetapi sesi masuk yang tersimpan tidak dapat dihapus dari keychain sistem Anda, sehingga mungkin dipulihkan saat GeoSpaX dimulai berikutnya. Pastikan keychain Anda tersedia, lalu masuk dan keluar lagi.",
     "copyLink": "Salin tautan",
     "open": "Buka",
     "done": "Selesai",
@@ -2335,17 +2335,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Menunggu keychain sistem Anda…",
-    "keychainWaitDetail": "GeoLibre sedang memuat kredensial tersimpan Anda. Jika sistem meminta kata sandi untuk membuka keychain, jawab permintaan tersebut untuk melanjutkan. Permintaan itu mungkin berada di belakang jendela ini."
+    "keychainWaitDetail": "GeoSpaX sedang memuat kredensial tersimpan Anda. Jika sistem meminta kata sandi untuk membuka keychain, jawab permintaan tersebut untuk melanjutkan. Permintaan itu mungkin berada di belakang jendela ini."
   },
   "settings": {
     "title": "Pengaturan",
     "description": "Konfigurasi preferensi proyek dan pengaturan runtime.",
     "saveButton": "Simpan Pengaturan",
     "credentials": {
-      "keychain": "Token dan kunci API yang Anda simpan di GeoLibre disimpan di keychain sistem Anda.",
+      "keychain": "Token dan kunci API yang Anda simpan di GeoSpaX disimpan di keychain sistem Anda.",
       "projectKeychainUnavailable": "Penyimpanan kredensial proyek di keychain sistem tidak tersedia. Kunci proyek baru tetap berada di sesi ini; saat menyimpan proyek lokal, Anda akan ditanya apakah kunci tersebut disimpan di file atau dihapus.",
       "browser": "Token dan kunci API yang Anda simpan di sini disimpan di penyimpanan lokal browser ini, tempat skrip yang berjalan di situs ini dapat membacanya.",
-      "unavailable": "Keychain sistem Anda tidak dapat digunakan ({{error}}). Kredensial baru hanya bertahan sampai GeoLibre ditutup; kredensial yang disimpan sebelumnya mungkin tetap berada di penyimpanan browser sampai migrasi berhasil."
+      "unavailable": "Keychain sistem Anda tidak dapat digunakan ({{error}}). Kredensial baru hanya bertahan sampai GeoSpaX ditutup; kredensial yang disimpan sebelumnya mungkin tetap berada di penyimpanan browser sampai migrasi berhasil."
     },
     "section": {
       "language": "Bahasa",
@@ -2389,11 +2389,11 @@
         "role": "ambil peran",
         "other": "lainnya"
       },
-      "environmentHelp": "Menggunakan AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, dan AWS_SESSION_TOKEN dari lingkungan tempat GeoLibre dijalankan.",
-      "instanceHelp": "Menggunakan peran IAM dari mesin tempat GeoLibre berjalan: token identitas web (EKS IRSA), kredensial kontainer ECS atau EKS, atau profil instans EC2.",
+      "environmentHelp": "Menggunakan AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, dan AWS_SESSION_TOKEN dari lingkungan tempat GeoSpaX dijalankan.",
+      "instanceHelp": "Menggunakan peran IAM dari mesin tempat GeoSpaX berjalan: token identitas web (EKS IRSA), kredensial kontainer ECS atau EKS, atau profil instans EC2.",
       "roleArn": "Peran yang diambil",
       "externalId": "ID eksternal",
-      "roleHelp": "Opsional. GeoLibre memanggil AWS STS AssumeRole dengan kredensial di atas dan membaca bucket sebagai peran ini, mis. peran baca-saja lintas akun.",
+      "roleHelp": "Opsional. GeoSpaX memanggil AWS STS AssumeRole dengan kredensial di atas dan membaca bucket sebagai peran ini, mis. peran baca-saja lintas akun.",
       "accessKeyId": "ID kunci akses",
       "secretAccessKey": "Kunci akses rahasia",
       "sessionToken": "Token sesi",
@@ -2497,7 +2497,7 @@
       "globeByDefault": "Aktifkan bola dunia 3D secara bawaan",
       "globeByDefaultHint": "Digunakan untuk ruang kerja tanpa judul saat tidak ada proyek saat memulai atau tautan proyek yang diberikan.",
       "openS3Browser": "Buka Penjelajah S3 saat mulai",
-      "openS3BrowserHint": "Tampilkan panel Penjelajah S3 setiap kali GeoLibre dimulai. Panel tetap terbuka saat Anda membuka proyek.",
+      "openS3BrowserHint": "Tampilkan panel Penjelajah S3 setiap kali GeoSpaX dimulai. Panel tetap terbuka saat Anda membuka proyek.",
       "defaultView": "Tampilan peta bawaan",
       "defaultViewHint": "Tetapkan pusat dan tingkat zoom untuk ruang kerja tanpa judul.",
       "longitude": "Bujur pusat",
@@ -2505,7 +2505,7 @@
       "zoom": "Tingkat zoom",
       "useCurrentView": "Gunakan Tampilan Saat Ini",
       "layerStyles": "Gaya layer default",
-      "layerStylesHint": "Pilih file gaya layer (Proyek → Ekspor → Ekspor Gaya Layer). Setiap layer yang Anda tambahkan dengan nama yang cocok dengan gaya di dalamnya akan diberi gaya secara otomatis. Layer dalam proyek yang dibuka mempertahankan gaya tersimpannya. GeoLibre menyimpan salinan file tersebut, jadi pilih lagi setelah Anda mengeditnya.",
+      "layerStylesHint": "Pilih file gaya layer (Proyek → Ekspor → Ekspor Gaya Layer). Setiap layer yang Anda tambahkan dengan nama yang cocok dengan gaya di dalamnya akan diberi gaya secara otomatis. Layer dalam proyek yang dibuka mempertahankan gaya tersimpannya. GeoSpaX menyimpan salinan file tersebut, jadi pilih lagi setelah Anda mengeditnya.",
       "chooseLayerStyles": "Pilih File",
       "clearLayerStyles": "Bersihkan",
       "noLayerStylesSelected": "Tidak ada file gaya layer yang dipilih",
@@ -2605,8 +2605,8 @@
       "oauthSigningIn": "Sedang masuk…",
       "oauthSignOut": "Keluar",
       "oauthWebLifetime": "Token akses disimpan di memori; sesi penyegaran terbatas pada tab browser ini. Menutup tab mengharuskan Anda masuk lagi.",
-      "oauthDesktopKeychain": "Sesi masuk Anda disimpan di keychain sistem, sehingga GeoLibre tetap masuk setelah dimulai ulang sampai Anda keluar.",
-      "oauthDesktopSessionOnly": "Sesi masuk ini tidak dapat disimpan ke keychain sistem Anda, sehingga hanya bertahan sampai GeoLibre ditutup.",
+      "oauthDesktopKeychain": "Sesi masuk Anda disimpan di keychain sistem, sehingga GeoSpaX tetap masuk setelah dimulai ulang sampai Anda keluar.",
+      "oauthDesktopSessionOnly": "Sesi masuk ini tidak dapat disimpan ke keychain sistem Anda, sehingga hanya bertahan sampai GeoSpaX ditutup.",
       "accountLoading": "Memuat akun Anda…",
       "accountRetry": "Coba lagi",
       "accountIdentity": "Akun: {{account}}",
@@ -2636,7 +2636,7 @@
       "sessionRevoke": "Cabut",
       "sessionRevoking": "Mencabut…",
       "revokeSessionConfirm": "Cabut sesi \"{{label}}\"? Perangkat tersebut akan dikeluarkan. Tindakan ini tidak dapat dibatalkan.",
-      "revokeCurrentConfirm": "Cabut sesi ini \"{{label}}\"? Anda akan segera keluar dari GeoLibre.",
+      "revokeCurrentConfirm": "Cabut sesi ini \"{{label}}\"? Anda akan segera keluar dari GeoSpaX.",
       "revokeTokenConfirm": "Cabut token API pribadi \"{{label}}\"? Skrip dan CI yang menggunakannya akan berhenti berfungsi. Tindakan ini tidak dapat dibatalkan.",
       "revokeSessionConfirmButton": "Ya, cabut",
       "sessionCreated": "Dibuat: {{date}}",
@@ -2724,7 +2724,7 @@
       "statusReady": "{{provider}} telah dikonfigurasi dan siap digunakan.",
       "statusIncomplete": "Isi bidang wajib di bawah untuk mengaktifkan {{provider}}.",
       "secretsNote": "Kredensial disimpan secara lokal di perangkat ini, bukan dalam file proyek yang Anda bagikan, sehingga tetap tersimpan setelah aplikasi dimulai ulang. Siapa pun yang memiliki akses ke perangkat ini dapat membacanya.",
-      "secretsNoteKeychain": "Kunci API dan bidang rahasia lainnya disimpan di keychain sistem Anda, bukan di file proyek yang Anda bagikan, sehingga tetap ada setelah dimulai ulang. Bidang lain, seperti nama model dan URL, disimpan di pengaturan GeoLibre pada perangkat ini.",
+      "secretsNoteKeychain": "Kunci API dan bidang rahasia lainnya disimpan di keychain sistem Anda, bukan di file proyek yang Anda bagikan, sehingga tetap ada setelah dimulai ulang. Bidang lain, seperti nama model dan URL, disimpan di pengaturan GeoSpaX pada perangkat ini.",
       "getCredentials": "Tempat mendapatkan kredensial {{provider}}",
       "showValue": "Tampilkan {{name}}",
       "hideValue": "Sembunyikan {{name}}",
@@ -2850,7 +2850,7 @@
         "notSet": "Belum diatur",
         "getKey": "Dapatkan kunci gratis",
         "saveFailed": "Tidak dapat menyimpan kunci di browser ini.",
-        "saveFailedKeychain": "Tidak dapat menyimpan kunci di keychain sistem Anda. Kunci tetap berfungsi hingga GeoLibre ditutup."
+        "saveFailedKeychain": "Tidak dapat menyimpan kunci di keychain sistem Anda. Kunci tetap berfungsi hingga GeoSpaX ditutup."
       }
     }
   },
@@ -3551,7 +3551,7 @@
       "exportLayerStylesAsDesc": "Masukkan nama file. File gaya akan diunduh ke folder unduhan browser Anda saat Anda mengklik Simpan.",
       "exportLayerStylesFileName": "Nama file",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "Gaya Layer GeoLibre",
+      "layerStylesFile": "Gaya Layer GeoSpaX",
       "layerStylesImported": "Gaya layer diimpor",
       "layerStylesImportedSummary_other": "Gaya {{count}} layer diperbarui dari “{{file}}”.",
       "layerStylesUnused_other": "{{count}} gaya dalam file tidak cocok dengan layer mana pun di proyek ini:",
@@ -3669,7 +3669,7 @@
     },
     "windowClose": {
       "savePromptTitle": "Simpan perubahan sebelum menutup?",
-      "savePromptDescription": "Proyek saat ini memiliki perubahan yang belum disimpan. Simpan sebelum menutup GeoLibre?"
+      "savePromptDescription": "Proyek saat ini memiliki perubahan yang belum disimpan. Simpan sebelum menutup GeoSpaX?"
     },
     "error": {
       "couldNotOpenProject": "Tidak dapat membuka proyek.",
@@ -7890,7 +7890,7 @@
     "exportGeoTiff": "GeoTIFF (COG)",
     "extractSubset": "Ekstrak subset…",
     "stylesMenu": "Gaya",
-    "exportGeoLibreStyle": "Ekspor gaya URL GeoLibre",
+    "exportGeoLibreStyle": "Ekspor gaya URL GeoSpaX",
     "exportMapboxStyle": "Ekspor sebagai gaya Mapbox GL",
     "exportSldStyle": "Ekspor sebagai OGC SLD",
     "exportQmlStyle": "Ekspor sebagai QGIS QML",
@@ -7900,7 +7900,7 @@
     "exportStyleError": "Tidak dapat mengekspor gaya layer ini.",
     "importStyle": "Impor gaya (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "Impor gaya dari teks…",
-    "importStyleFromTextDescription": "Tempel gaya GeoLibre, Mapbox GL, SLD, atau QML. Formatnya dikenali dari teks.",
+    "importStyleFromTextDescription": "Tempel gaya GeoSpaX, Mapbox GL, SLD, atau QML. Formatnya dikenali dari teks.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "Impor",
     "openStyleManager": "Gaya tersimpan (Pengelola Gaya)…",
@@ -8452,7 +8452,7 @@
     "windowCloseGuardFailed": "Menutup jendela tidak akan menanyakan penyimpanan perubahan yang belum disimpan. Simpan pekerjaan Anda sebelum menutup.",
     "windowCloseSaveFailed": "Tidak dapat menyimpan proyek sebelum menutup.",
     "windowCloseFailed": "Tidak dapat menutup jendela.",
-    "nativeProjectPathFailed": "Tidak dapat membuka file proyek yang diteruskan ke GeoLibre.",
+    "nativeProjectPathFailed": "Tidak dapat membuka file proyek yang diteruskan ke GeoSpaX.",
     "kmlSuperOverlayReadFailed": "Tidak dapat membaca ulang KML Super-Overlay \"{{name}}\", sehingga tile-nya kosong.",
     "projectControlFailed": "Tidak dapat menerapkan pengaturan \"{{control}}\" proyek.",
     "pluginSnapshotFailed": "Beberapa pengaturan plugin mungkin tidak terbawa ke renderer baru.",
@@ -8461,7 +8461,7 @@
     "panelRenderFailed": "Panel \"{{name}}\" gagal dibuka.",
     "sharedSettingsFailed": "Tidak dapat memuat pengaturan bersama dari tautan, jadi pengaturan Anda sendiri yang digunakan.",
     "sharedLanguageFailed": "Tidak dapat beralih ke bahasa yang diminta pengaturan bersama.",
-    "languageCatalogFailed": "Tidak dapat memuat terjemahan {{language}}, sehingga GeoLibre menampilkan bahasa Inggris."
+    "languageCatalogFailed": "Tidak dapat memuat terjemahan {{language}}, sehingga GeoSpaX menampilkan bahasa Inggris."
   },
   "shell": {
     "workspaceTitle": "Ruang kerja peta GeoSpaX",
@@ -8950,7 +8950,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Unduh seluruh berkas GeoParquet untuk tile ini",
       "dataset": "Dataset",
-      "browseOnly": "Pencarian dataset ini di GeoLibre belum didukung. Gunakan tautan di atas untuk mengambilnya dari sumbernya.",
+      "browseOnly": "Pencarian dataset ini di GeoSpaX belum didukung. Gunakan tautan di atas untuk mengambilnya dari sumbernya.",
       "searchArea": "Area pencarian",
       "modeView": "Tampilan peta",
       "modeDraw": "Gambar kotak",
@@ -9197,7 +9197,7 @@
       "liftSelected": "{{count}} titik dipilih di dalam {{polygons}} poligon dari {{layer}}.",
       "liftInstances": "{{objects}} instans {{name}} dibuat dari {{layer}} ({{count}} titik).",
       "fullFile": "File lengkap dengan label",
-      "fullFileNote": "Menulis salinan lokal point cloud ini dengan semua label tersimpan diterapkan, bukan hanya titik yang dimuat di sini. Berjalan di server GeoLibre.",
+      "fullFileNote": "Menulis salinan lokal point cloud ini dengan semua label tersimpan diterapkan, bukan hanya titik yang dimuat di sini. Berjalan di server GeoSpaX.",
       "fullFileInput": "Salinan lokal (.las, .laz, atau .copc.laz)",
       "fullFileOutput": "File keluaran (.las atau .laz)",
       "fullFileWrite": "Tulis file",

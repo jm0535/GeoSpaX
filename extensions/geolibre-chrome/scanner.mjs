@@ -4,6 +4,8 @@
  * the active tab, so it cannot close over module-level values.
  */
 export function scanDocumentForDatasets() {
+  // Deep links to GeoSpaX, or to the GeoLibre platform it is built on (same format).
+  const APP_LINK_HOST = /^geospax2\.in4metrix\.dev$|(?:^|\.)geolibre\.app$/i;
   const datasets = new Map();
   const styleLinks = [];
   const geoHint =
@@ -171,7 +173,7 @@ export function scanDocumentForDatasets() {
     // A page may link to an existing GeoLibre deep link. Unpack it so users can
     // combine its datasets with other links found on the same page.
     const nestedData = url.searchParams.getAll("data");
-    if (nestedData.length && /(?:^|\.)geolibre\.app$/i.test(url.hostname)) {
+    if (nestedData.length && APP_LINK_HOST.test(url.hostname)) {
       const nestedStyles = url.searchParams.getAll("style");
       const nestedDataTypes = url.searchParams.getAll("dataType");
       nestedData.forEach((dataUrl, index) =>
@@ -311,7 +313,7 @@ export function scanDocumentForDatasets() {
         );
       }
       if (recoveredFiles === 0) {
-        console.warn("GeoLibre found no file entries in the Source Cooperative page inventory.");
+        console.warn("GeoSpaX found no file entries in the Source Cooperative page inventory.");
       }
     }
   }

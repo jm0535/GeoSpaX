@@ -122,7 +122,7 @@ function recordFailure(error: unknown, lasting: boolean): void {
     lasting: state.lasting || lasting,
     revision: state.revision + 1,
   }));
-  console.error("[GeoLibre] Secure credential storage failed", error);
+  console.error("[GeoSpaX] Secure credential storage failed", error);
 }
 
 /** Account → latest value not yet written; "" means delete. */

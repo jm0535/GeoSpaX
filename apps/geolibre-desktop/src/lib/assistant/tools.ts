@@ -79,10 +79,10 @@ async function loadModelToolDescriptors(): Promise<ModelToolDescriptor[]> {
     listWasmToolManifests(),
   ]);
   if (catalogResult.status === "rejected") {
-    console.warn("[GeoLibre] Assistant could not load the Whitebox catalog:", catalogResult.reason);
+    console.warn("[GeoSpaX] Assistant could not load the Whitebox catalog:", catalogResult.reason);
   }
   if (wasmResult.status === "rejected") {
-    console.warn("[GeoLibre] Assistant could not enumerate WASM manifests:", wasmResult.reason);
+    console.warn("[GeoSpaX] Assistant could not enumerate WASM manifests:", wasmResult.reason);
   }
   return buildModelToolCatalog(
     VECTOR_TOOLS,
@@ -150,7 +150,7 @@ async function rankWhiteboxSearch(
   } catch (error) {
     // `selectCatalogTools` resolves rather than throws for every failure it
     // knows about; this covers the transport import, which does not.
-    console.warn("[GeoLibre] Assistant catalog selection was unavailable:", error);
+    console.warn("[GeoSpaX] Assistant catalog selection was unavailable:", error);
     return null;
   }
 }

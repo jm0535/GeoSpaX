@@ -190,7 +190,7 @@ describe("fetchProjectFromUrl", () => {
           fetchImpl: okFetch("{ this is not json"),
         }),
       (error: Error) => {
-        assert.match(error.message, /is not a valid GeoLibre project/);
+        assert.match(error.message, /is not a valid GeoSpaX project/);
         assert.ok(error.message.includes(PROJECT_URL));
         return true;
       },
@@ -204,13 +204,13 @@ describe("fetchProjectFromUrl", () => {
           fetchImpl: okFetch(JSON.stringify({ not: "a project" })),
         }),
       (error: Error) => {
-        assert.match(error.message, /is not a valid GeoLibre project/);
+        assert.match(error.message, /is not a valid GeoSpaX project/);
         // Loosely assert the underlying reason carries through, without
         // hard-coding parseProject's exact wording.
         assert.match(error.message, /missing.*fields/i);
         // parseProject's own "Invalid GeoLibre project:" prefix is stripped so
         // the wrapper does not repeat the noun.
-        assert.doesNotMatch(error.message, /\): Invalid GeoLibre project:/);
+        assert.doesNotMatch(error.message, /\): Invalid GeoSpaX project:/);
         return true;
       },
     );

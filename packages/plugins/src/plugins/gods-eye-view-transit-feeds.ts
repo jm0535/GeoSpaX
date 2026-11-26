@@ -12,7 +12,7 @@ import { isViteDevServer } from "./gods-eye-view-feeds";
  * directly and reaches the six non-CORS operators through fixed relay routes.
  */
 export const ENTUR_TRANSIT_URL = "https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions";
-export const ENTUR_CLIENT_NAME = "GeoLibre-Gods-Eye-View";
+export const ENTUR_CLIENT_NAME = "GeoSpaX-Gods-Eye-View";
 export const TRANSIT_EDGE_BASE = "https://tiles.geolibre.app/transit/vehicles";
 export const TRANSIT_DEV_BASE = "/transit/vehicles";
 export const GTFS_MAX_ENTITIES = 50_000;

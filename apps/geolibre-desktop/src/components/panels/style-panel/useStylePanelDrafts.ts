@@ -314,7 +314,7 @@ export function useStylePanelDrafts(
       })
       .catch((error) => {
         if (!cancelled) {
-          console.error("[GeoLibre] Could not read vector attribute values", error);
+          console.error("[GeoSpaX] Could not read vector attribute values", error);
           setLoadedVectorPropertyValues(null);
           setVectorPropertyValuesUnavailable(true);
         }

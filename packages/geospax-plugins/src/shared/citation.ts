@@ -23,8 +23,7 @@ export const GSX_CITATION_BIBTEX = `@software{geospax_gsx_workbenches,
   title = {GeoSpaX ${GSX_PLUGIN_VERSION}: GSX domain workbenches for environmental and geospatial analysis},
   year = {2026},
   url = {${GSX_REPOSITORY_URL}},
-  note = {Built on GeoLibre (https://github.com/opengeos/GeoLibre); cite both when the platform is used.},
-  doi = {10.5281/zenodo.20785400}
+  note = {Built on GeoLibre (https://github.com/opengeos/GeoLibre, doi:10.5281/zenodo.20785400); cite both when the platform is used.}
 }`;
 
 function copyText(text: string, button: HTMLButtonElement): void {

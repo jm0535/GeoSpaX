@@ -1,8 +1,8 @@
 # Interface Overview
 
-GeoLibre opens to a single workspace that is the same on desktop and in the browser. This page is a tour of that workspace so the rest of the User Guide can refer to its parts by name.
+GeoSpaX opens to a single workspace that is the same on desktop and in the browser. This page is a tour of that workspace so the rest of the User Guide can refer to its parts by name.
 
-![GeoLibre interface overview: the Layers panel on the left, the map in the centre, the Style panel on the right, and the status bar along the bottom](https://assets.geolibre.app/images/geolibre-interface-overview.webp)
+![GeoSpaX interface overview: the Layers panel on the left, the map in the centre, the Style panel on the right, and the status bar along the bottom](https://assets.geolibre.app/images/geolibre-interface-overview.webp)
 
 ## The top toolbar
 
@@ -42,7 +42,7 @@ The **Edit** and **View** menus are the two most easily missed, because their co
 Every menu and toolbar action is also reachable from the keyboard, so you don't have to hunt through nested menus.
 
 - **Command palette** — press `Ctrl`/`Cmd` + `K` (or **Help → Command Palette**) to open a searchable list of actions: Add Data sources, Processing tools, Controls, Plugins, and more. Type to filter, move the highlight with the arrow keys, and press `Enter` to run the highlighted command.
-- **Individual tools** — start typing and the palette also lists every processing tool on its own: the GeoLibre Toolbox vector, network, and statistics tools under **Tools**, and each Whitebox tool under **Whitebox Toolbox**. Choosing one opens the processing dialog with that tool already selected, so `Ctrl`/`Cmd` + `K`, "slope", `Enter` reaches Whitebox's Slope without opening a menu. Tool names stay searchable in English in every language, an exact title match ranks first, and the palette hides whatever the active [interface profile](#simplify-the-interface) hides from the menus.
+- **Individual tools** — start typing and the palette also lists every processing tool on its own: the GeoSpaX Toolbox vector, network, and statistics tools under **Tools**, and each Whitebox tool under **Whitebox Toolbox**. Choosing one opens the processing dialog with that tool already selected, so `Ctrl`/`Cmd` + `K`, "slope", `Enter` reaches Whitebox's Slope without opening a menu. Tool names stay searchable in English in every language, an exact title match ranks first, and the palette hides whatever the active [interface profile](#simplify-the-interface) hides from the menus.
 - **Keyboard shortcuts cheat sheet** — press `?` (or **Help → Keyboard Shortcuts**) to see the full list of global shortcuts.
 
 ![The command palette, listing every Add Data source, Processing tool, control, and plugin in one searchable list](https://assets.geolibre.app/images/geolibre-command-palette.webp)
@@ -119,7 +119,7 @@ It also holds a **Diagnostics: N** button (also under **Help → Diagnostics**) 
 
 ### Coordinate format
 
-GeoLibre can report the pointer coordinate in seven notations:
+GeoSpaX can report the pointer coordinate in seven notations:
 
 | Format | Example |
 | --- | --- |
@@ -137,9 +137,9 @@ Click the coordinates in the status bar to cycle through them, or set the notati
 
 The UTM readout uses the same projection that draws the [Gridlines](map-controls.md#camera-overlay-and-recording-tools) UTM grid. Its zone follows the same rule as MGRS, including the Norway and Svalbard exceptions (Bergen reads as zone 32V, Longyearbyen as 33X), so the UTM and MGRS readouts always name the same zone. Outside the UTM latitude band (below 80°S or above 84°N) there is no valid UTM coordinate, and the readout falls back to decimal degrees.
 
-MGRS and USNG are the same grid reference at 1 m precision; USNG writes it with spaces. In the polar areas (below 80°S or above 84°N) the grid switches to UPS, which GeoLibre does not support, and the readout falls back to decimal degrees.
+MGRS and USNG are the same grid reference at 1 m precision; USNG writes it with spaces. In the polar areas (below 80°S or above 84°N) the grid switches to UPS, which GeoSpaX does not support, and the readout falls back to decimal degrees.
 
-The projected format reports x/y in any coordinate reference system with an EPSG code. Choose it in **Settings → Map Preferences → Coordinate format**, then type a code (for example `3857` for Web Mercator or `32618` for UTM zone 18N) or pick one with **Browse**. The code is saved with the project alongside the format, and the readout falls back to decimal degrees for a code GeoLibre does not know or a point the projection cannot place.
+The projected format reports x/y in any coordinate reference system with an EPSG code. Choose it in **Settings → Map Preferences → Coordinate format**, then type a code (for example `3857` for Web Mercator or `32618` for UTM zone 18N) or pick one with **Browse**. The code is saved with the project alongside the format, and the readout falls back to decimal degrees for a code GeoSpaX does not know or a point the projection cannot place.
 
 The place search at the foot of the Layers panel accepts the grid notations as well as lat/lon: type an MGRS or USNG reference (`18SUJ2337106519`, `18S UJ 23371 06519`, or a coarser `18SUJ23370651`) or a UTM coordinate (`18N 323394 4307395`, or the readout's own `18S 323394mE 4307395mN`) and pick **Go to** to fly there. The **Paste coordinates** box in **View → Set View** accepts the same grid references. A UTM letter is read as a latitude band, so `S` means band S (32°N–40°N) when the northing fits it and the southern hemisphere otherwise.
 
@@ -150,7 +150,7 @@ The place search at the foot of the Layers panel accepts the grid notations as w
 - **From the map's own 3D terrain**, whenever a usable sample is available there. This is instant, tracks the cursor live, and sends nothing off your device.
 - **From the public [Open-Meteo](https://open-meteo.com/) elevation API** when terrain returns no value for that point — because 3D terrain is off, but also when it is on and the terrain has no sample to give. The lookup waits until the pointer has been still for half a second, caches results per roughly 11 m cell, and runs only on Earth, never on a planetary basemap.
 
-Because that fallback sends the coordinates under your pointer to a third-party service, GeoLibre asks for consent the first time you enable the readout. **Declining is what guarantees the readout never reaches the network** — turning 3D terrain on makes the remote lookup rare, but does not by itself rule it out. Decline and the readout still works wherever terrain can answer. While a lookup is in flight the readout is blank rather than showing the previous point's height.
+Because that fallback sends the coordinates under your pointer to a third-party service, GeoSpaX asks for consent the first time you enable the readout. **Declining is what guarantees the readout never reaches the network** — turning 3D terrain on makes the remote lookup rare, but does not by itself rule it out. Decline and the readout still works wherever terrain can answer. While a lookup is in flight the readout is blank rather than showing the previous point's height.
 
 !!! tip "Reading elevation along a line"
     For a profile rather than a single point, use the Elevation Profile plugin, or the [Measure tool](map-controls.md#component-tools), which reports terrain-aware 3D distances.

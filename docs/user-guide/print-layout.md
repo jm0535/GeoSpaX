@@ -61,7 +61,7 @@ Tick the elements to place on the page under **Map elements**:
 | **Legend** | Built from the visible layers. See [Legend editor](#legend-editor). |
 | **Scale bar**, **North arrow** | **Group north arrow & scale bar** places them together. |
 | **Date** | The export date. |
-| **Include GeoLibre attribution** | Adds "Created with GeoLibre". |
+| **Include GeoSpaX attribution** | Adds "Created with GeoSpaX". |
 | **Footer text** | Free text along the bottom of the page. |
 | **Page border** | With **Border color** and **Border width**. |
 | **Info block (title block)** | An engineering-style block with **Author**, **Project No.**, **CRS**, **Revision**, and the scale. |

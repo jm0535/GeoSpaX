@@ -119,7 +119,7 @@ export function usePluginStateRestore({
           if (JSON.stringify(next) === JSON.stringify(stored)) return;
           state.setProjectPlugins(next, false);
         } catch (error) {
-          console.warn("[GeoLibre] Could not snapshot plugin state for the renderer swap", error);
+          console.warn("[GeoSpaX] Could not snapshot plugin state for the renderer swap", error);
           notify.warning(i18next.t("notifications.pluginSnapshotFailed"), {
             dedupeKey: "plugin-state-snapshot",
           });

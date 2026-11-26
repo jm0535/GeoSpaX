@@ -491,7 +491,7 @@ function applySymbol(
       if (info.markerSize !== undefined) patch.circleRadius = info.markerSize / 2;
       if (name && name !== "circle") {
         warnings.push(
-          `The "${name}" marker has no GeoLibre equivalent; it was imported as a circle.`,
+          `The "${name}" marker has no GeoSpaX equivalent; it was imported as a circle.`,
         );
       }
     }
@@ -508,7 +508,7 @@ function readLabeling(labeling: unknown, warnings: string[]): Partial<LabelStyle
     // GeoLibre's single label config cannot represent; flag it rather than
     // dropping the labels silently.
     if (type && type !== "simple") {
-      warnings.push(`The "${type}" labeling has no GeoLibre equivalent; labels were not imported.`);
+      warnings.push(`The "${type}" labeling has no GeoSpaX equivalent; labels were not imported.`);
     }
     return null;
   }
@@ -524,7 +524,7 @@ function readLabeling(labeling: unknown, warnings: string[]): Partial<LabelStyle
     labels.field = field;
     labels.expression = "";
   } else if (field && isExpression) {
-    warnings.push("The label is a QGIS expression; enable labels and pick a field in GeoLibre.");
+    warnings.push("The label is a QGIS expression; enable labels and pick a field in GeoSpaX.");
   }
 
   const textStyle = toArray(settings["text-style"])[0];
@@ -824,7 +824,7 @@ function classifyRules(
         }
         if (!isGroup || !blankFilter) {
           warnings.push(
-            "A nested or grouped ELSE rule has no GeoLibre equivalent; it was skipped.",
+            "A nested or grouped ELSE rule has no GeoSpaX equivalent; it was skipped.",
           );
           continue;
         }

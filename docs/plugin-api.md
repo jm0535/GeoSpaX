@@ -1,4 +1,4 @@
-# GeoLibre Plugin API
+# GeoSpaX Plugin API
 
 ## Interface
 
@@ -32,7 +32,7 @@ export interface GeoLibrePlugin {
   /**
    * Renderers this plugin supports. Defaults to `["maplibre"]`.
    * Engine-neutral plugins (e.g. catalog/service browsers that only write to
-   * the GeoLibre store) or plugins with multi-engine adapters declare
+   * the GeoSpaX store) or plugins with multi-engine adapters declare
    * `["maplibre", "cesium"]`; plugins that stay on the Style Spec surface the
    * two 2D engines share declare `["maplibre", "mapbox"]` (see "Supporting the
    * Mapbox renderer" below). The Plugins menu gates options against the active
@@ -64,7 +64,7 @@ export interface GeoLibrePlugin {
   sessionScoped?: boolean;
 }
 
-// Resolved by app.getDeckGL(): GeoLibre's own deck.gl modules, so a plugin
+// Resolved by app.getDeckGL(): GeoSpaX's own deck.gl modules, so a plugin
 // renders on the host's single instance instead of bundling its own copy.
 export interface GeoLibreDeckGL {
   core: typeof import("@deck.gl/core");
@@ -384,9 +384,9 @@ manager.activate("my-plugin", appApi);
 
 ## Add a built-in plugin (in this repository)
 
-Built-in plugins ship with GeoLibre itself. Most plugins do **not** need to be
+Built-in plugins ship with GeoSpaX itself. Most plugins do **not** need to be
 built in — see [External plugins](#external-plugins) to ship one without forking
-GeoLibre. To add one to this repository:
+GeoSpaX. To add one to this repository:
 
 1. Create a plugin file in `packages/plugins/src/plugins/`.
 
@@ -448,7 +448,7 @@ and Components in the Plugins menu when they use the plugin API or need plugin
 lifecycle behavior.
 
 The Components plugin wraps `maplibre-gl-components` controls and wires their
-layer events into the GeoLibre store. It provides Add Data shortcuts for
+layer events into the GeoSpaX store. It provides Add Data shortcuts for
 FlatGeobuf, PMTiles, Zarr, LiDAR, and Gaussian splats, while raster COG and
 GeoTIFF layers can also be added through the standard Add Raster Layer dialog.
 
@@ -518,9 +518,9 @@ export const myPlugin: GeoLibrePlugin = {
 
 Map control plugins can optionally expose `getMapControlPosition()` and `setMapControlPosition()` so the desktop Plugins menu can move the control between map corners. Position-aware plugins should remove and recreate or re-add their control when the position changes.
 
-Plugins with serializable runtime settings can expose `getProjectState()` and `applyProjectState()` so GeoLibre can save and restore those settings in the project file. A wrapper should use these hooks to adapt upstream control APIs such as `getState()` without requiring every upstream package to implement a GeoLibre-specific interface.
+Plugins with serializable runtime settings can expose `getProjectState()` and `applyProjectState()` so GeoSpaX can save and restore those settings in the project file. A wrapper should use these hooks to adapt upstream control APIs such as `getState()` without requiring every upstream package to implement a GeoSpaX-specific interface.
 
-Plugins that render with deck.gl should call `app.getDeckGL()` (returns a promise) to obtain GeoLibre's own deck.gl modules — `core`, `layers`, `geoLayers`, `meshLayers`, and `mapbox` (use `mapbox.MapboxOverlay` for interleaved MapLibre rendering). Render on the host's single deck.gl instance rather than bundling a second copy: deck.gl and luma.gl throw on a version mismatch and share global singletons, so a bundled copy fails to render. Call it with optional chaining (`app.getDeckGL?.()`) since a host variant may not ship deck.gl.
+Plugins that render with deck.gl should call `app.getDeckGL()` (returns a promise) to obtain GeoSpaX's own deck.gl modules — `core`, `layers`, `geoLayers`, `meshLayers`, and `mapbox` (use `mapbox.MapboxOverlay` for interleaved MapLibre rendering). Render on the host's single deck.gl instance rather than bundling a second copy: deck.gl and luma.gl throw on a version mismatch and share global singletons, so a bundled copy fails to render. Call it with optional chaining (`app.getDeckGL?.()`) since a host variant may not ship deck.gl.
 
 ### Shared projection library
 
@@ -564,7 +564,7 @@ requirement: reproject source coordinates before adding the layer. Omit proj4's
 runtime import and dependency from the plugin bundle when using this API;
 type-only references, such as the namespace import above, need no runtime copy.
 
-Plugins can also declare URL query parameters and handle them when GeoLibre opens. URL parameter handlers run after the map is ready, external plugins are loaded, and project plugin state has been restored. GeoLibre calls handlers for plugins whose declared parameter names are present in the URL, and it suppresses repeated handling of the same URL context for the same plugin. If a matching plugin is registered (installed) but inactive, GeoLibre first attempts to activate it via `PluginManager.activate`; the handler runs only if activation succeeds (an `activate()` that returns `false` or throws leaves the plugin inactive and skips dispatch). Parameter names are case-sensitive, as URL query parameters are: declaring `exampleGeoJson` will not match `?ExampleGeoJson=…`.
+Plugins can also declare URL query parameters and handle them when GeoSpaX opens. URL parameter handlers run after the map is ready, external plugins are loaded, and project plugin state has been restored. GeoSpaX calls handlers for plugins whose declared parameter names are present in the URL, and it suppresses repeated handling of the same URL context for the same plugin. If a matching plugin is registered (installed) but inactive, GeoSpaX first attempts to activate it via `PluginManager.activate`; the handler runs only if activation succeeds (an `activate()` that returns `false` or throws leaves the plugin inactive and skips dispatch). Parameter names are case-sensitive, as URL query parameters are: declaring `exampleGeoJson` will not match `?ExampleGeoJson=…`.
 
 ```typescript
 import type { GeoLibreAppAPI, GeoLibrePlugin } from "@geolibre/plugins";
@@ -602,12 +602,12 @@ export const plugin: GeoLibrePlugin = {
 };
 ```
 
-Validate URL parameter values before acting on them. Anyone can craft a link to GeoLibre, so handlers that fetch a parameter value should reject unexpected schemes (`file://`, `data:`, plain `http://`) and only contact origins they trust.
+Validate URL parameter values before acting on them. Anyone can craft a link to GeoSpaX, so handlers that fetch a parameter value should reject unexpected schemes (`file://`, `data:`, plain `http://`) and only contact origins they trust.
 
 For example:
 
 ```text
-https://web.geolibre.app/?url=https://example.com/project.geolibre.json&exampleGeoJson=https://example.com/data.geojson
+https://geospax2.in4metrix.dev/?url=https://example.com/project.geolibre.json&exampleGeoJson=https://example.com/data.geojson
 ```
 
 A URL parameter activates only an already-registered (installed) plugin that owns it; it never loads a plugin from the URL. For external plugins, include the plugin manifest URL in the project `plugins` state (so the plugin is registered) before relying on its URL handler — the matching parameter then activates and dispatches it even if it is not in the active set.
@@ -651,7 +651,7 @@ unsubscribe?.();
 ```
 
 These methods are a read-only query surface: calling them does not change the
-GeoLibre store. Plugins must also treat returned GeoJSON features as read-only
+GeoSpaX store. Plugins must also treat returned GeoJSON features as read-only
 and use host APIs such as `addGeoJsonLayer` when they need to add data.
 
 ## Layer groups
@@ -708,11 +708,11 @@ if (result && !result.ok)
   console.warn(`Style not applied (${result.reason})`, result.warnings);
 ```
 
-`result.warnings` lists what the style asked for that GeoLibre could not represent. On failure, `reason` is `invalid` when the text is not a style in any format read, `no-match` when it parsed but describes no symbology the layer can wear, `unsupported-layer` when the layer is not a vector layer; the layer is left untouched.
+`result.warnings` lists what the style asked for that GeoSpaX could not represent. On failure, `reason` is `invalid` when the text is not a style in any format read, `no-match` when it parsed but describes no symbology the layer can wear, `unsupported-layer` when the layer is not a vector layer; the layer is left untouched.
 
 ## Raster and tile layers
 
-`addGeoJsonLayer` registers vector data as a native layer. For raster and tile data there are three matching helpers — `addTileLayer` (XYZ), `addWmtsLayer` (WMTS), and `addWmsLayer` (WMS). Each returns the new layer's id, and the layer appears in the Layers panel with full opacity, reorder, and styling support and persists with the project, so a plugin no longer has to call `getMap().addSource()/addLayer()` directly (which leaves the layer invisible to GeoLibre's layer store).
+`addGeoJsonLayer` registers vector data as a native layer. For raster and tile data there are three matching helpers — `addTileLayer` (XYZ), `addWmtsLayer` (WMTS), and `addWmsLayer` (WMS). Each returns the new layer's id, and the layer appears in the Layers panel with full opacity, reorder, and styling support and persists with the project, so a plugin no longer has to call `getMap().addSource()/addLayer()` directly (which leaves the layer invisible to GeoSpaX's layer store).
 
 ```typescript
 export interface GeoLibreTileLayerOptions {
@@ -819,7 +819,7 @@ const cogId = await app.addCogLayer?.(
 );
 ```
 
-`addTileLayer`, `addWmtsLayer`, `addWmsLayer`, and `addWfsLayer` take an optional `metadata` object, merged into the new layer's `metadata`. Use it to leave a catalogue layer's provenance with it (the record id, a link to its metadata page, the publisher, the licence): it is shown in the layer's Metadata dialog and saved with the project. It must be a plain, JSON-serializable object, or the call throws (`addWfsLayer` rejects). GeoLibre's own keys win over a field of the same name, and credential-named fields (`token`, `apiKey`, ...) are stripped when the project is shared or exported. The Metadata dialog also shows the service address and request fields GeoLibre keeps on a service or tile layer's `source` (for WMS: `url`, `layers`, `styles`, `format`, `version`, `crs`, and `queryable` when false), with credentials removed.
+`addTileLayer`, `addWmtsLayer`, `addWmsLayer`, and `addWfsLayer` take an optional `metadata` object, merged into the new layer's `metadata`. Use it to leave a catalogue layer's provenance with it (the record id, a link to its metadata page, the publisher, the licence): it is shown in the layer's Metadata dialog and saved with the project. It must be a plain, JSON-serializable object, or the call throws (`addWfsLayer` rejects). GeoSpaX's own keys win over a field of the same name, and credential-named fields (`token`, `apiKey`, ...) are stripped when the project is shared or exported. The Metadata dialog also shows the service address and request fields GeoSpaX keeps on a service or tile layer's `source` (for WMS: `url`, `layers`, `styles`, `format`, `version`, `crs`, and `queryable` when false), with credentials removed.
 
 WFS layers use the host's GetFeature loader, including GeoJSON/GML fallback, reprojection, desktop native HTTP, and refresh. `addWfsLayer` resolves with the new layer id and rejects if loading fails or the service returns no features. Saved projects normally keep the request URL rather than embedding the downloaded collection, and reopening fetches it again. Exception: if saving strips credentials from the URL, the fetched collection is embedded so the layer remains visible without storing the secret; it is not refetched from the sanitized URL. The optional bbox is WGS84 `[west, south, east, north]` and must not cross the antimeridian (`west` must not exceed `east` — a Pacific-spanning box throws); the host applies the existing 1,000-feature limit.
 
@@ -847,7 +847,7 @@ The helpers are typed optional for forward-compatibility with host variants, so 
 
 ## Zarr layers
 
-`addZarrLayer` renders a Zarr store (Zarr v2/v3 over HTTP) through **GeoLibre's own** `@carbonplan/zarr-layer` instance and mirrors the result into the Layers panel. It is the Zarr counterpart of `addCogLayer`. Stores that are not read from a URL — a kerchunk-backed cloud NetCDF, an Icechunk repository, a folder on disk — reach the same renderer through an internal `store` option that this API does not expose, so they are added by GeoLibre's own panels rather than by a plugin.
+`addZarrLayer` renders a Zarr store (Zarr v2/v3 over HTTP) through **GeoSpaX's own** `@carbonplan/zarr-layer` instance and mirrors the result into the Layers panel. It is the Zarr counterpart of `addCogLayer`. Stores that are not read from a URL — a kerchunk-backed cloud NetCDF, an Icechunk repository, a folder on disk — reach the same renderer through an internal `store` option that this API does not expose, so they are added by GeoSpaX's own panels rather than by a plugin.
 
 Do not bundle `@carbonplan/zarr-layer` in a plugin: a second copy ships a duplicate numcodecs WASM payload, and adding the renderer's layer yourself with `getMap().addLayer()` produces a MapLibre **custom** layer, which has no paint properties for the Style panel to drive.
 
@@ -1009,7 +1009,7 @@ Neither may target the **calling** plugin: `activatePlugin` on yourself is meani
 
 ## Custom (WebGL) layers and paint ownership
 
-`registerExternalNativeLayer` mirrors a layer the plugin added to the map itself into GeoLibre's layer store, so it appears in the Layers panel and persists with the project:
+`registerExternalNativeLayer` mirrors a layer the plugin added to the map itself into GeoSpaX's layer store, so it appears in the Layers panel and persists with the project:
 
 ```typescript
 export interface GeoLibreExternalNativeLayerRegistration {
@@ -1046,7 +1046,7 @@ app.registerExternalNativeLayer?.({
   name: "My WebGL layer",
   type: "raster",
   nativeLayerIds: ["my-layer"],
-  // The layer has no MapLibre paint properties, so GeoLibre must not offer
+  // The layer has no MapLibre paint properties, so GeoSpaX must not offer
   // paint editors that cannot reach it.
   paintMode: "plugin",
   // Optional: keep the Opacity sliders live by forwarding them to the layer.
@@ -1058,7 +1058,7 @@ app.registerExternalNativeLayer?.({
 ```
 
 - `paintMode: "plugin"` tells the Style panel that the plugin paints the layer. It then shows only the controls that actually apply — insert-below, zoom range, and (with a bridge) opacity — instead of raster brightness/saturation/contrast/hue sliders that silently do nothing. Visibility, reordering, and removal keep working from the Layers panel; MapLibre honors `visibility` and the zoom range on a custom layer.
-- `paintBridge` supplies the setters GeoLibre calls when the user changes opacity or visibility. Supplying `setOpacity` keeps the Opacity slider in both the Layers and Style panels; omitting it hides the slider rather than leaving an inert one. Supplying a bridge implies `paintMode: "plugin"`.
+- `paintBridge` supplies the setters GeoSpaX calls when the user changes opacity or visibility. Supplying `setOpacity` keeps the Opacity slider in both the Layers and Style panels; omitting it hides the slider rather than leaving an inert one. Supplying a bridge implies `paintMode: "plugin"`.
 - The setters are called only when the value changes, not on every layer sync, and they are held outside the layer record (functions cannot be serialized into a project file). Re-register the layer after a project reload to restore the bridge, and call `unregisterExternalNativeLayer(id)` from `deactivate`.
 
 For Zarr specifically, prefer `addZarrLayer` above: the host's renderer already integrates with the panels, so no custom layer or bridge is needed.
@@ -1100,7 +1100,7 @@ export const myPlugin: GeoLibrePlugin = {
 
 Notes:
 
-- `render(container)` is called once with an empty element you fill with plain DOM. An external plugin cannot share GeoLibre's React instance, so the contract is DOM, not a React node. The container stays mounted across collapse, so any state in your DOM persists; the returned cleanup runs on close or unregister.
+- `render(container)` is called once with an empty element you fill with plain DOM. An external plugin cannot share GeoSpaX's React instance, so the contract is DOM, not a React node. The container stays mounted across collapse, so any state in your DOM persists; the returned cleanup runs on close or unregister.
 - Only one plugin panel is active at a time. The built-in panel on the side the plugin panel is docked (Layers on the left, Style on the right) collapses to its rail while the plugin panel is expanded next to it, and restores when the plugin panel moves to the other side, collapses to its own rail, or closes.
 - `openRightPanel(id)` makes the panel active and expanded (it also expands a collapsed panel); `collapseRightPanel(id)` collapses it to its rail without closing; `closeRightPanel(id)` releases the workspace; `getActiveRightPanel()` returns the active id or `null`.
 - The panel is a flex sibling of the map, so opening it shrinks the map view (the map keeps filling the remaining space); no manual map padding is required.
@@ -1111,7 +1111,7 @@ Notes:
 
 ## Toolbar menus
 
-A plugin can add its own top-level menu button to the GeoLibre banner (beside Project / Edit / View / Plugins), with nested submenus and action items. Register the menu in `activate` and unregister it in `deactivate`:
+A plugin can add its own top-level menu button to the GeoSpaX banner (beside Project / Edit / View / Plugins), with nested submenus and action items. Register the menu in `activate` and unregister it in `deactivate`:
 
 ```typescript
 const unregister = app.registerToolbarMenu?.({
@@ -1170,7 +1170,7 @@ The host re-reads every label each time it renders the menu tree, and it re-rend
 
 ## Adding items to built-in menus
 
-Most plugins do not need a top-level menu of their own. Like a QGIS plugin that adds itself to the Vector or Raster menu, a plugin can add items to one of GeoLibre's built-in menus instead:
+Most plugins do not need a top-level menu of their own. Like a QGIS plugin that adds itself to the Vector or Raster menu, a plugin can add items to one of GeoSpaX's built-in menus instead:
 
 ```typescript
 const unregister = app.registerMenuContribution?.({
@@ -1188,11 +1188,11 @@ const unregister = app.registerMenuContribution?.({
 
 The host always nests the items under a submenu named after your plugin, placed after a separator at the end of the target menu, and sorts plugin submenus alphabetically. A plugin cannot insert loose items between the built-in entries or reorder them. Several contributions from the same plugin to the same menu share one submenu, with a separator between them. Contributions with no items are not shown.
 
-Items use the same shape as [toolbar menus](#toolbar-menus): actions, submenus and separators, with optional icons and label getters that follow the app language. Register in `activate` and call the returned function (or `app.unregisterMenuContribution?.(id)`) in `deactivate`; re-registering the same `id` replaces the contribution. Ids are global, like toolbar menu ids, so prefix them with your plugin id; the host warns when one plugin's id replaces another's, and `unregisterMenuContribution` only removes contributions your own plugin registered. The host also drops a plugin's contributions when it is deactivated or its activation fails, so a missed disposer cannot leave stale items behind. A `menu` the host does not recognize (for example, one added in a newer GeoLibre) logs a warning and is ignored rather than failing your activation. Like toolbar menus, contributions are hidden in the read-only viewer and when a deployment does not grant `plugins:install`.
+Items use the same shape as [toolbar menus](#toolbar-menus): actions, submenus and separators, with optional icons and label getters that follow the app language. Register in `activate` and call the returned function (or `app.unregisterMenuContribution?.(id)`) in `deactivate`; re-registering the same `id` replaces the contribution. Ids are global, like toolbar menu ids, so prefix them with your plugin id; the host warns when one plugin's id replaces another's, and `unregisterMenuContribution` only removes contributions your own plugin registered. The host also drops a plugin's contributions when it is deactivated or its activation fails, so a missed disposer cannot leave stale items behind. A `menu` the host does not recognize (for example, one added in a newer GeoSpaX) logs a warning and is ignored rather than failing your activation. Like toolbar menus, contributions are hidden in the read-only viewer and when a deployment does not grant `plugins:install`.
 
 ## Following the app language
 
-The GeoLibre UI is translated with react-i18next, but a plugin renders its panels as plain DOM and cannot use the host's React hooks. Four methods bridge that gap:
+The GeoSpaX UI is translated with react-i18next, but a plugin renders its panels as plain DOM and cannot use the host's React hooks. Four methods bridge that gap:
 
 ```typescript
 // The active catalog code ("en", "zh", "pt-BR", ...).
@@ -1228,7 +1228,7 @@ Conventions:
 
 - **Always pass your own English text as `defaultValue`.** It is what renders in a language you ship no translation for, and on a host that predates these methods, so translations are an upgrade, not a prerequisite.
 - **Namespace your keys by plugin id** (`plugin.<your-id>.<something>`) so they cannot collide with the host's own keys. `registerTranslations` enforces this: it accepts only string values under `plugin.<id>.` and drops (with a console warning) anything else.
-- **The host's catalogs win.** A key GeoLibre's bundled catalogs already define keeps the host's text, and `registerTranslations` never overwrites an existing entry. Registrations last for the session; registering the same key again is a no-op, so do it once rather than on every activation.
+- **The host's catalogs win.** A key GeoSpaX's bundled catalogs already define keeps the host's text, and `registerTranslations` never overwrites an existing entry. Registrations last for the session; registering the same key again is a no-op, so do it once rather than on every activation.
 - Plural keys work as they do in the host: register `plugin.my-plugin.items_one` / `plugin.my-plugin.items_other` (and the extra forms languages such as Russian or Arabic need) and pass `{ count }` in `params`.
 - These methods are typed optional like the rest of the API, so call them with optional chaining and keep a literal fallback.
 - Panel titles and toolbar labels take getters precisely so they can call `app.translate?.()` and stay current; use those rather than re-registering on every language change. DOM you build once (buttons, hints, status lines) should be re-labelled from an `onLocaleChange` listener.
@@ -1238,7 +1238,7 @@ Built-in plugins (in `packages/plugins`) follow the same contract with two helpe
 - `createPluginTranslator(app, pluginId)` returns `tr(key, english, params?)`, which resolves `plugin.<pluginId>.<key>` and interpolates the English fallback itself when the host has no `translate`. A key starting with `@` is absolute, for reusing a host key (`tr("@common.cancel", "Cancel")`). `app` may be a getter, for plugins that keep the API in a module-level variable.
 - `pluginDisplayTitle(app, pluginId, name)` returns a panel-title getter that reads `toolbar.plugin.<pluginId>`, the plugin's name as the Plugins menu shows it, so the dock header and the menu entry stay in the same language.
 
-Their strings live in GeoLibre's bundled catalogs (`apps/geolibre-desktop/src/i18n/locales/*.json`) rather than in `registerTranslations`, and the catalog test requires every locale to carry them (see `docs/i18n.md`).
+Their strings live in GeoSpaX's bundled catalogs (`apps/geolibre-desktop/src/i18n/locales/*.json`) rather than in `registerTranslations`, and the catalog test requires every locale to carry them (see `docs/i18n.md`).
 
 ## Saving credentials
 
@@ -1303,9 +1303,9 @@ Use a right panel for a primary, persistent workspace and a floating panel for a
 
 ## External plugins
 
-Use the [GeoLibre plugin template](https://github.com/opengeos/geolibre-plugin-template) as the recommended starting point for external plugin development. The template includes a MapLibre control wrapper, a `plugin.json` manifest, a GeoLibre plugin entry point, and a `package:geolibre` script that builds the zip layout GeoLibre Desktop expects.
+Use the [GeoSpaX plugin template](https://github.com/opengeos/geolibre-plugin-template) as the recommended starting point for external plugin development. The template includes a MapLibre control wrapper, a `plugin.json` manifest, a GeoSpaX plugin entry point, and a `package:geolibre` script that builds the zip layout GeoSpaX Desktop expects.
 
-GeoLibre Desktop loads external plugins from the app data `plugins/` directory
+GeoSpaX Desktop loads external plugins from the app data `plugins/` directory
 at startup. External plugins are trusted code; whether they load is also
 controlled by the client-side [deployment plugin policy](deployment-policy.md#plugin-precedence).
 The policy is bypassable and provides neither signing nor sandboxing. External
@@ -1315,18 +1315,18 @@ plugins can be installed as:
 - An unpacked directory with a root `plugin.json`.
 - A HTTPS `plugin.json` manifest URL.
 
-The fastest way to install a `.zip` is **Manage Plugins > Settings > Install from file**: pick a packaged plugin archive and GeoLibre validates it (parsing `plugin.json`, enforcing the manifest rules, and checking the entry/style are present and within the size limit) before installing it. The plugin loads immediately and persists; reinstalling the same id replaces the previous copy and reloads the updated version. Persistence differs by build:
+The fastest way to install a `.zip` is **Manage Plugins > Settings > Install from file**: pick a packaged plugin archive and GeoSpaX validates it (parsing `plugin.json`, enforcing the manifest rules, and checking the entry/style are present and within the size limit) before installing it. The plugin loads immediately and persists; reinstalling the same id replaces the previous copy and reloads the updated version. Persistence differs by build:
 
 - **Desktop** copies the archive into the app data `plugins/` directory as `<plugin-id>.zip`, where the startup scan re-loads it.
 - **Web** unpacks the archive in the browser and stores the bundle in IndexedDB, replaying it on the next visit. Web-installed plugins are listed under **Install from file** with an uninstall control (the desktop copies live on disk and are managed there).
 
 The Plugins settings section can also add local development directories outside the app data folder. Each configured directory can contain plugin zips, unpacked plugin bundle folders, or be a single unpacked plugin bundle itself. Configured development directories are scanned before the app data `plugins/` directory, so a development copy can override an installed external plugin with the same ID. Built-in plugins still take precedence over all external plugins.
 
-For the web app, use manifest URLs or **Install from file** (above). Manifest URLs: GeoLibre fetches the manifest, resolves `entry` and `style` relative to the manifest URL, then loads the bundled ESM entry. Browser loading requires HTTPS except for `localhost` and depends on the host allowing CORS. Install-from-file unpacks the uploaded zip in the browser (no network or CORS) and persists it in IndexedDB. Both paths execute the bundled ESM entry the same way (a `blob:` `import()`, allowed by the web build's `script-src`), so external plugins remain trusted code regardless of how they were installed.
+For the web app, use manifest URLs or **Install from file** (above). Manifest URLs: GeoSpaX fetches the manifest, resolves `entry` and `style` relative to the manifest URL, then loads the bundled ESM entry. Browser loading requires HTTPS except for `localhost` and depends on the host allowing CORS. Install-from-file unpacks the uploaded zip in the browser (no network or CORS) and persists it in IndexedDB. Both paths execute the bundled ESM entry the same way (a `blob:` `import()`, allowed by the web build's `script-src`), so external plugins remain trusted code regardless of how they were installed.
 
 ### Bundled plugins (baked into the build)
 
-To ship an external plugin as part of GeoLibre — loaded automatically, with no Settings entry and no manifest URL — drop its built bundle into the Vite public directory, one folder per plugin id:
+To ship an external plugin as part of GeoSpaX — loaded automatically, with no Settings entry and no manifest URL — drop its built bundle into the Vite public directory, one folder per plugin id:
 
 ```text
 apps/geolibre-desktop/public/plugins/example-plugin/
@@ -1346,7 +1346,7 @@ eligible to load without being listed in `allowed` or permitting sideload, but
 an id in `blocked` still prevents loading. They are deduplicated by plugin id
 against any user/project plugin of the same id.
 
-Private plugins should be git-ignored under `public/plugins/` (see that folder's `.gitignore`) and copied in at build/deploy time (for example in CI before `npm run build`, or by a plugin repo's own install script) so their code stays out of GeoLibre's history. The discovery code is generic and committed; only the plugin payload is excluded.
+Private plugins should be git-ignored under `public/plugins/` (see that folder's `.gitignore`) and copied in at build/deploy time (for example in CI before `npm run build`, or by a plugin repo's own install script) so their code stays out of GeoSpaX's history. The discovery code is generic and committed; only the plugin payload is excluded.
 
 A bundled drop-in's `plugin.json` may additionally set `"activeByDefault": true`
 to activate the plugin on startup. Saved plugin state still wins: a loaded
@@ -1368,14 +1368,14 @@ If instead you want a plugin compiled into the main JS bundle (no `plugin.json`,
 }
 ```
 
-The `entry` file must export a `GeoLibrePlugin` as either the default export or a named `plugin` export. The exported plugin `id`, `name`, and `version` must match `plugin.json`. The entry must be a self-contained `.js` or `.mjs` bundle because relative module imports inside the zip are not resolved by this first loader. The optional `engines` array declares which of GeoLibre's four map renderers the plugin supports (`"maplibre" | "mapbox" | "cesium" | "arcgis"`, defaulting to `["maplibre"]`). Plugins supporting the native globe add `"cesium"`; plugins that stay on the Style Spec surface can add `"mapbox"` (see "Supporting the Mapbox renderer"); and plugins with an ArcGIS-native adapter can add `"arcgis"` (see the [ArcGIS renderer](arcgis-renderer.md)). The host suspends a plugin when the selected engine is not in this list and restores it when a compatible engine becomes active.
+The `entry` file must export a `GeoLibrePlugin` as either the default export or a named `plugin` export. The exported plugin `id`, `name`, and `version` must match `plugin.json`. The entry must be a self-contained `.js` or `.mjs` bundle because relative module imports inside the zip are not resolved by this first loader. The optional `engines` array declares which of GeoSpaX's four map renderers the plugin supports (`"maplibre" | "mapbox" | "cesium" | "arcgis"`, defaulting to `["maplibre"]`). Plugins supporting the native globe add `"cesium"`; plugins that stay on the Style Spec surface can add `"mapbox"` (see "Supporting the Mapbox renderer"); and plugins with an ArcGIS-native adapter can add `"arcgis"` (see the [ArcGIS renderer](arcgis-renderer.md)). The host suspends a plugin when the selected engine is not in this list and restores it when a compatible engine becomes active.
 
 External plugin entries are executed with `import(URL.createObjectURL(...))`, which is why the desktop CSP in `tauri.conf.json` includes `blob:` in `script-src`. Removing `blob:` from `script-src` breaks external plugin loading. Combined with `'unsafe-eval'`, this means code that can create a blob URL can execute scripts, which is acceptable because external plugins are trusted local files installed by the user.
 
 Because plugins run as trusted code in the host document, they can read `window.__GEOLIBRE_RUNTIME_ENV__`, the runtime environment map. On the desktop app this map includes the AI Assistant's [OS-environment keys](user-guide/ai-assistant.md#reading-keys-from-your-system-environment-desktop) (the allowlisted provider variables read from the user's shell), not only the values typed into Settings → Environment Variables. Treat any credential reachable through the app's environment as visible to installed plugins, and only install plugins you trust.
 
 Plugin project settings are treated as sensitive at the project egress
-boundary. GeoLibre keeps them in a trusted local save only when the user
+boundary. GeoSpaX keeps them in a trusted local save only when the user
 explicitly chooses to retain credentials, and removes the entire
 `plugins.settings` object from shares, standalone HTML exports, embed
 snapshots, and collaboration snapshots. The exception is state a plugin's
@@ -1426,7 +1426,7 @@ a `plugins` array, of entries:
 
 `bundleSha256` is optional: the lowercase hex SHA-256 of the published bundle, computed the way `computePluginBundleHash` in `plugin-integrity.ts` does (SHA-256 of the entry, SHA-256 of the style or of an empty string, then SHA-256 of the two digests). The hosted registry generates it for every plugin it serves. When an entry has one, installing it from the marketplace or a `?plugin=` deep link pins that hash before the URL is installed, so the first load checks the downloaded code against the reviewed hash instead of trusting whatever the URL serves first; a mismatch is held back like any changed bundle. The Update action likewise refuses a download that doesn't match, before evaluating it. An entry without `bundleSha256` keeps the trust-on-first-use pin.
 
-The registry's maintainers can also pull plugins through `blocklist.json`, published next to the registry (`https://plugins.geolibre.app/blocklist.json` for the hosted one, or `blocklist.json` beside a configured `registryUrl`). GeoLibre fetches it once per session before loading external plugins and caches it for offline starts. An entry with only an `id` blocks every version of that plugin from every external source (registry, manifest URL, zip, plugin directory): installing and loading are refused through the same policy gate as deployment-policy `blocked`, with the entry's `reason` shown. An entry that also has a `bundleSha256` blocks just that bundle, from every external source: a URL plugin, zip archive or plugin directory with exactly that code isn't loaded or installed, and an Update to it is refused, all before the code runs. Bundled drop-ins are never blocked. If the blocklist can't be fetched (or returns 404 after a list was cached), the cached copy applies; a registry that has never published one blocks nothing.
+The registry's maintainers can also pull plugins through `blocklist.json`, published next to the registry (`https://plugins.geolibre.app/blocklist.json` for the hosted one, or `blocklist.json` beside a configured `registryUrl`). GeoSpaX fetches it once per session before loading external plugins and caches it for offline starts. An entry with only an `id` blocks every version of that plugin from every external source (registry, manifest URL, zip, plugin directory): installing and loading are refused through the same policy gate as deployment-policy `blocked`, with the entry's `reason` shown. An entry that also has a `bundleSha256` blocks just that bundle, from every external source: a URL plugin, zip archive or plugin directory with exactly that code isn't loaded or installed, and an Update to it is refused, all before the code runs. Bundled drop-ins are never blocked. If the blocklist can't be fetched (or returns 404 after a list was cached), the cached copy applies; a registry that has never published one blocks nothing.
 
 Curate the registry and host plugin bundles in the [opengeos/geolibre-plugins](https://github.com/opengeos/geolibre-plugins) repo, which ships a `sample/` template.
 
@@ -1526,7 +1526,7 @@ installed plugin. The system prompt instead lists each plugin tool under a
 characters). The model loads the tools it needs with the host tool
 `load_plugin_tools`, passing exact tool names or a plugin id to load all of that
 plugin's tools. Loaded tools become callable in the same turn and stay loaded
-for the rest of the conversation. GeoLibre's own tools are always sent.
+for the rest of the conversation. GeoSpaX's own tools are always sent.
 
 Because the summary is all the model sees before it loads a tool, **open each
 `description` with a sentence that says what the tool does and which data it
@@ -1568,7 +1568,7 @@ export default {
 };
 ```
 
-Guidance is appended under a `Plugin guidance:` heading after GeoLibre's own
+Guidance is appended under a `Plugin guidance:` heading after GeoSpaX's own
 prompt, in registration order, each block labelled `[plugin <id>]` with the
 plugin that registered it, and never replaces or edits the host text. The
 heading tells the model the text only governs when and how to call the plugin's
@@ -1733,7 +1733,7 @@ only for the shared surface; a mapbox-gl map has none of MapLibre's extensions:
   styling and takes only the engine class that positions it.
   A plugin that constructs a _second_ Mapbox map must also pass
   `app.getMapboxAccessToken()` in its constructor options: mapbox-gl reads its
-  token from the global `mapboxgl.accessToken` unless handed one, and GeoLibre
+  token from the global `mapboxgl.accessToken` unless handed one, and GeoSpaX
   sets it per map, so a second map built without it renders nothing and logs
   every frame.
 

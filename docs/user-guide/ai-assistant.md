@@ -1,7 +1,7 @@
 # AI Assistant
 
 The **AI Assistant** is a "chat with your data" panel that turns plain-English
-requests into GeoLibre's own operations — Spatial SQL, layer styling, map
+requests into GeoSpaX's own operations — Spatial SQL, layer styling, map
 control, and more — and applies them **through the app**, the same way you would
 by hand. Open it from **Processing → AI Assistant** (top of the menu) or the
 command palette. It docks as a resizable panel at the bottom of the window (drag
@@ -47,20 +47,20 @@ providers in **Settings → AI Providers**:
 - **Custom** covers any OpenAI-compatible endpoint — LiteLLM, vLLM, Groq, Together, a local server, etc. — via its chat-completions API.
 
 Hosted keys (and AWS credentials) are used **directly from your browser** to call
-the provider; they are never sent to GeoLibre's servers. Saving the setting
+the provider; they are never sent to GeoSpaX's servers. Saving the setting
 enables the panel immediately — no reload needed.
 
 ### Using local Ollama from web.geolibre.app
 
 The hosted web app connects directly from your browser to Ollama on your
-computer. Prompts and responses do not pass through a GeoLibre server. Because
-the page origin is `https://web.geolibre.app`, Ollama must explicitly allow that
+computer. Prompts and responses do not pass through a GeoSpaX server. Because
+the page origin is `https://geospax2.in4metrix.dev`, Ollama must explicitly allow that
 origin before the browser can call its API.
 
 Set this environment variable for the Ollama server, then restart Ollama:
 
 ```text
-OLLAMA_ORIGINS=https://web.geolibre.app
+OLLAMA_ORIGINS=https://geospax2.in4metrix.dev
 ```
 
 Then open **Settings → AI Providers**, add or edit an **Ollama** profile, and
@@ -78,7 +78,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
 
     ```ini
     [Service]
-    Environment="OLLAMA_ORIGINS=https://web.geolibre.app"
+    Environment="OLLAMA_ORIGINS=https://geospax2.in4metrix.dev"
     ```
 
     Save the file, then reload and restart the service:
@@ -93,7 +93,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
     Set the variable for the Ollama application, then quit and reopen Ollama:
 
     ```bash
-    launchctl setenv OLLAMA_ORIGINS "https://web.geolibre.app"
+    launchctl setenv OLLAMA_ORIGINS "https://geospax2.in4metrix.dev"
     ```
 
 === "Windows"
@@ -101,7 +101,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
     1. Quit Ollama from the taskbar.
     2. Open **Edit environment variables for your account**.
     3. Create a user variable named `OLLAMA_ORIGINS` with the value
-       `https://web.geolibre.app`.
+       `https://geospax2.in4metrix.dev`.
     4. Start Ollama again from the Start menu.
 
 === "Docker"
@@ -110,13 +110,13 @@ Configure `OLLAMA_ORIGINS` for your operating system:
 
     ```bash
     docker run -d \
-      -e OLLAMA_ORIGINS=https://web.geolibre.app \
+      -e OLLAMA_ORIGINS=https://geospax2.in4metrix.dev \
       -p 11434:11434 \
       ollama/ollama
     ```
 
-For a self-hosted GeoLibre URL, replace `https://web.geolibre.app` with the
-exact origin shown in GeoLibre's error message, including its scheme and port,
+For a self-hosted GeoSpaX URL, replace `https://geospax2.in4metrix.dev` with the
+exact origin shown in GeoSpaX's error message, including its scheme and port,
 for example `http://192.168.1.98:4000`. This is an Ollama server permission and
 cannot be enabled automatically by a web page. See Ollama's
 [official server configuration and web-origin instructions](https://docs.ollama.com/faq#how-can-i-allow-additional-web-origins-to-access-ollama).
@@ -130,7 +130,7 @@ operator has configured it, then adds a server-only instance token and forwards
 the request to `ai.geolibre.app`. The browser receives neither the instance
 token nor the Cloudflare AI Gateway token.
 
-Users only need to sign in to the GeoLibre instance; they do not configure an
+Users only need to sign in to the GeoSpaX instance; they do not configure an
 AI provider key. Requests sent directly to `ai.geolibre.app` without the
 server-only token receive `401 Unauthorized`.
 
@@ -171,7 +171,7 @@ provider. Your choice is remembered across sessions.
 
 ### Reading keys from your system environment (desktop)
 
-On the **desktop app**, GeoLibre also reads the assistant's keys directly from
+On the **desktop app**, GeoSpaX also reads the assistant's keys directly from
 your operating system's environment variables — the ones you export from your
 shell profile or set in the Windows *Environment Variables* dialog. Set a
 supported variable in your OS environment, restart the app, and the matching
@@ -180,7 +180,7 @@ because it is not entered there, it is **never written to the saved
 `.geolibre.json` project file**. This is the recommended way to keep API keys out
 of project files that you share or commit.
 
-Only the following allowlisted names are read from your environment — GeoLibre
+Only the following allowlisted names are read from your environment — GeoSpaX
 never reads any other system variable (your `PATH`, `HOME`, and the like never
 reach the app), and this allowlist is enforced in the native backend, not just
 the UI:
@@ -241,7 +241,7 @@ dark", "zoom to the counties layer". They need no reasoning, no SQL and no code,
 just an intent and a layer id. Sending them through the full model still costs a
 round trip carrying the system prompt and every tool definition.
 
-If a [TypeSafe](https://typesafe.ai) credential is configured, GeoLibre routes
+If a [TypeSafe](https://typesafe.ai) credential is configured, GeoSpaX routes
 those requests with **Jev**, a model that returns typed judgments instead of
 generated text, and then runs the very same tool the model would have called.
 Measured against this repo's own prompt, that turns a **~3.8 s** wait on a
@@ -407,7 +407,7 @@ A few things worth knowing:
   cut off a session you started with the button.
 - **Speaking again while it is still working cancels that run** and starts over
   with what you just said, the same way sending a new message would.
-- **Recognition is your browser's, not GeoLibre's.** Chrome, Edge and Safari
+- **Recognition is your browser's, not GeoSpaX's.** Chrome, Edge and Safari
   provide it; Firefox and the desktop (Tauri) builds do not, and the microphone
   button is simply not shown there. Note that Chrome's implementation sends
   audio to Google's speech service for transcription — separate from your
@@ -419,7 +419,7 @@ A few things worth knowing:
 ## What it can do
 
 The assistant works by calling a fixed set of tools — it cannot invent
-operations, so its actions stay within GeoLibre's validated surface.
+operations, so its actions stay within GeoSpaX's validated surface.
 
 | Capability | What it does |
 | --- | --- |
@@ -518,7 +518,7 @@ load a CSV from a URL with pandas and summarize its columns
   **layer names** there for routing, and
   [tool search](#finding-the-right-whitebox-tool-optional) sends the text the
   assistant is **searching the tool catalog for** (that one carries no layer
-  names). Both are off unless you configure them, and GeoLibre refuses a
+  names). Both are off unless you configure them, and GeoSpaX refuses a
   routing endpoint that is plain HTTP on another origin.
 
 !!! note "Code-execution caveat"
@@ -538,7 +538,7 @@ load a CSV from a URL with pandas and summarize its columns
 
 ## Not the same as the agent skill
 
-The assistant runs **inside** GeoLibre and edits the map you are looking at. To
-have an AI agent *outside* GeoLibre — in a terminal, an editor, or a notebook —
+The assistant runs **inside** GeoSpaX and edits the map you are looking at. To
+have an AI agent *outside* GeoSpaX — in a terminal, an editor, or a notebook —
 build a project file for you, see the [agent skill](../agent-skill.md) and the
 [MCP server](../mcp.md).

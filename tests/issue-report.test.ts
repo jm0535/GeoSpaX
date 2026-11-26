@@ -105,7 +105,7 @@ describe("buildIssueReportUrl", () => {
       entry({ detail: "stack", url: "https://a.test/x.pmtiles?token=zzz", status: 403 }),
       context,
     );
-    assert.ok(url.startsWith("https://github.com/opengeos/GeoLibre/issues/new?"));
+    assert.ok(url.startsWith("https://github.com/jm0535/GeoSpaX/issues/new?"));
     const params = fields(url);
     assert.equal(params.get("template"), ISSUE_TEMPLATE);
     assert.equal(params.get("title"), "[Bug]: Layer failed");

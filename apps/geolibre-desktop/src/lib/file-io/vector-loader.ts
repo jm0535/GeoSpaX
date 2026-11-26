@@ -101,7 +101,7 @@ async function readVectorFileTextOrEmpty(file: File): Promise<string> {
   try {
     return await file.text();
   } catch (error) {
-    console.warn(`[GeoLibre] Could not read "${file.name}" as text; skipping its overlays.`, error);
+    console.warn(`[GeoSpaX] Could not read "${file.name}" as text; skipping its overlays.`, error);
     return "";
   }
 }
@@ -111,7 +111,7 @@ async function readLocalFileTextOrEmpty(path: string): Promise<string> {
   try {
     return await readLocalFileText(path);
   } catch (error) {
-    console.warn(`[GeoLibre] Could not read "${path}" as text; skipping its overlays.`, error);
+    console.warn(`[GeoSpaX] Could not read "${path}" as text; skipping its overlays.`, error);
     return "";
   }
 }
@@ -169,7 +169,7 @@ async function tryLoadNativeDuckDbVectorPath(
   } catch (error) {
     if (isVectorLoadCancelled(error)) throw error;
     console.warn(
-      "[GeoLibre] Native DuckDB vector load failed; falling back to DuckDB-WASM.",
+      "[GeoSpaX] Native DuckDB vector load failed; falling back to DuckDB-WASM.",
       error,
     );
     return { data: null, featureCountChecked };
@@ -207,7 +207,7 @@ async function loadBrowserVectorFile(
   // route here would be misleading for a container near the threshold.
   if (streamViaDuckDb && ROUTABLE_TEXT_EXTENSIONS.has(extension)) {
     console.info(
-      `[GeoLibre] "${file.name}" is ${Math.round(
+      `[GeoSpaX] "${file.name}" is ${Math.round(
         file.size / (1024 * 1024),
       )} MB; streaming it through DuckDB instead of the in-memory reader.`,
     );
@@ -411,7 +411,7 @@ export async function readVectorFileWithSidecars(path: string): Promise<{
       nativeData: await tryLoadPickedNativeVectorPath(path, {
         onLargeDataset: ({ name, featureCount }) => {
           console.warn(
-            `[GeoLibre] Skipping native vector restore for "${name}" because it contains ${featureCount.toLocaleString()} features; re-add the file to confirm loading it as GeoJSON.`,
+            `[GeoSpaX] Skipping native vector restore for "${name}" because it contains ${featureCount.toLocaleString()} features; re-add the file to confirm loading it as GeoJSON.`,
           );
           return false;
         },
@@ -463,7 +463,7 @@ async function loadTauriVectorFile(
   // See `loadBrowserVectorFile`: containers decide their own routing later.
   if (streamViaDuckDb && ROUTABLE_TEXT_EXTENSIONS.has(extension)) {
     console.info(
-      `[GeoLibre] "${browserSafeFileName(path)}" is ${Math.round(
+      `[GeoSpaX] "${browserSafeFileName(path)}" is ${Math.round(
         (sizeBytes ?? 0) / (1024 * 1024),
       )} MB; streaming it through DuckDB instead of the in-memory reader.`,
     );

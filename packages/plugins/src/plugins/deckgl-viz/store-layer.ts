@@ -78,7 +78,7 @@ export function createDeckVizStoreLayer(params: CreateDeckVizLayerParams): GeoLi
   const rowCount = params.rows?.length ?? params.geojson?.features.length ?? 0;
   if (rowCount > DECK_VIZ_ROW_WARN_COUNT) {
     console.warn(
-      "[GeoLibre] deck-viz: storing",
+      "[GeoSpaX] deck-viz: storing",
       rowCount,
       "rows inline; this will enlarge the saved project file",
     );

@@ -35,7 +35,7 @@ Configuration:
      "redirect_uris":["https://app.example/oauth-callback.html"],
      "scopes":["read:projects","write:projects","share:public","manage:sessions"]},
     {"client_id":"geolibre-desktop","name":"GeoLibre Desktop",
-     "redirect_uris":["org.geolibre.desktop:/oauth/callback"],
+     "redirect_uris":["geospax.in4metrix.dev:/oauth/callback"],
      "scopes":["read:projects","write:projects","share:public","manage:sessions"]}
   ]
   ```

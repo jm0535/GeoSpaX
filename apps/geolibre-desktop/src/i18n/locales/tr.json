@@ -187,8 +187,8 @@
     "registryTrust": {
       "title_one": "Bu eklenti yüklensin mi?",
       "title_other": "Bu eklentiler yüklensin mi?",
-      "description_one": "Bu bağlantı, resmi GeoLibre eklenti kayıt defterinden henüz yüklenmemiş bir eklentiyi açar. Yüklediğinizde eklenti, eklentilerinize eklenir ve etkinleştirilir.",
-      "description_other": "Bu bağlantı, resmi GeoLibre eklenti kayıt defterinden henüz yüklenmemiş {{count}} eklentiyi açar. Yüklediğinizde bu eklentiler, eklentilerinize eklenir ve etkinleştirilir."
+      "description_one": "Bu bağlantı, resmi GeoSpaX eklenti kayıt defterinden henüz yüklenmemiş bir eklentiyi açar. Yüklediğinizde eklenti, eklentilerinize eklenir ve etkinleştirilir.",
+      "description_other": "Bu bağlantı, resmi GeoSpaX eklenti kayıt defterinden henüz yüklenmemiş {{count}} eklentiyi açar. Yüklediğinizde bu eklentiler, eklentilerinize eklenir ve etkinleştirilir."
     },
     "title": "Eklentileri Yönet",
     "searchAria": "Eklentilerde ara",
@@ -737,7 +737,7 @@
       "errorUrl": "Bir LandXML URL'si girin.",
       "errorTooLarge": "Uzak LandXML dosyası 100 MB indirme sınırını aşıyor.",
       "errorSelectType": "En az bir LandXML nesne türü seçin.",
-      "errorMissingCrs": "Bu LandXML dosyası projeksiyonlu koordinatlar kullanıyor. GeoLibre'nin dosyayı WGS84'e yeniden izdüşümleyebilmesi için kaynak KRS'yi girin.",
+      "errorMissingCrs": "Bu LandXML dosyası projeksiyonlu koordinatlar kullanıyor. GeoSpaX'nin dosyayı WGS84'e yeniden izdüşümleyebilmesi için kaynak KRS'yi girin.",
       "errorGeographicCrsBounds": "Koordinatlar coğrafi boylam ve enlem sınırlarının dışında. Bu LandXML dosyasının kullandığı projeksiyonlu kaynak KRS'yi seçin.",
       "summary": "{{surfaces}} yüzey, {{alignments}} güzergâh, {{profiles}} profil, {{points}} ölçüm noktası",
       "objectTypes": "Nesne türleri",
@@ -884,12 +884,12 @@
     },
     "mssql": {
       "defaultName": "SQL Server Katmanı",
-      "errorDesktopOnly": "SQL Server katmanları GeoLibre Desktop gerektirir.",
+      "errorDesktopOnly": "SQL Server katmanları GeoSpaX Desktop gerektirir.",
       "errorConnect": "SQL Server'a bağlanılamadı.",
       "errorPort": "Geçerli bir SQL Server bağlantı noktası girin (1–65535).",
       "errorConnectFirst": "Önce SQL Server'a bağlanın.",
       "errorSelectTable": "Yüklenecek bir konumsal tablo seçin.",
-      "desktopOnlyNotice": "SQL Server katmanları yalnızca GeoLibre Desktop'ta kullanılabilir.",
+      "desktopOnlyNotice": "SQL Server katmanları yalnızca GeoSpaX Desktop'ta kullanılabilir.",
       "savedConnection": "Kayıtlı bağlantı",
       "selectSavedConnection": "Yeni bağlantı",
       "server": "Sunucu",
@@ -1629,13 +1629,13 @@
     "oauthFailed": "Giriş başarısız oldu. Lütfen tekrar deneyin.",
     "oauthRefreshFailed": "Oturumunuz yenilenemedi. Bağlantınızı kontrol edip tekrar deneyin.",
     "oauthSetupFailed": "Masaüstü girişi başlatılamadı. Uygulamayı yeniden başlatın ve yüklü uygulamanın bağlantıları açabildiğini ve paylaşım sunucusuna erişebildiğini kontrol edin. Yapıştırılmış API belirteçleri kullanılabilir olmaya devam eder.",
-    "oauthRestartSignIn": "Bu giriş bağlantısı GeoLibre yeniden başlatıldıktan sonra açıldı. Girişi burada yeniden başlatın; önceki yetkilendirme kodu kullanılamaz.",
+    "oauthRestartSignIn": "Bu giriş bağlantısı GeoSpaX yeniden başlatıldıktan sonra açıldı. Girişi burada yeniden başlatın; önceki yetkilendirme kodu kullanılamaz.",
     "reauthBody": "{{shareHost}} oturumunuzun süresi doldu. Paylaşmaya devam etmek için yeniden giriş yapın.",
     "errorUnauthorized": "{{shareHost}} API belirteciniz geçersiz veya süresi dolmuş. Ayarlar'da güncelleyin.",
     "reauthSignIn": "Yeniden giriş yap",
     "liveAt": "Projeniz şu adreste yayında:",
     "credentialsRemoved": "{{count}} kimlik bilgisi alanı dahil edilmedi. Alıcılar kendi kimlik bilgilerini sağlamalı veya aracılı bir referans kullanmalıdır.",
-    "oauthSignOutIncomplete": "Oturumunuz kapatıldı, ancak kaydedilen oturum açma bilgisi sistem anahtar zincirinizden kaldırılamadı; bu nedenle GeoLibre bir sonraki başlatılışında geri yüklenebilir. Anahtar zincirinizin kullanılabilir olduğunu kontrol edin, ardından oturum açıp yeniden çıkış yapın.",
+    "oauthSignOutIncomplete": "Oturumunuz kapatıldı, ancak kaydedilen oturum açma bilgisi sistem anahtar zincirinizden kaldırılamadı; bu nedenle GeoSpaX bir sonraki başlatılışında geri yüklenebilir. Anahtar zincirinizin kullanılabilir olduğunu kontrol edin, ardından oturum açıp yeniden çıkış yapın.",
     "copyLink": "Bağlantıyı kopyala",
     "open": "Aç",
     "done": "Bitti",
@@ -2386,17 +2386,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Sistem anahtar zinciriniz bekleniyor…",
-    "keychainWaitDetail": "GeoLibre kayıtlı kimlik bilgilerinizi yüklüyor. Sisteminiz anahtar zincirinin kilidini açmak için parola istediyse, devam etmek için bu istemi yanıtlayın. İstem bu pencerenin arkasında olabilir."
+    "keychainWaitDetail": "GeoSpaX kayıtlı kimlik bilgilerinizi yüklüyor. Sisteminiz anahtar zincirinin kilidini açmak için parola istediyse, devam etmek için bu istemi yanıtlayın. İstem bu pencerenin arkasında olabilir."
   },
   "settings": {
     "title": "Ayarlar",
     "description": "Proje tercihlerini ve çalışma zamanı ayarlarını yapılandırın.",
     "saveButton": "Ayarları Kaydet",
     "credentials": {
-      "keychain": "GeoLibre'de kaydettiğiniz belirteçler ve API anahtarları sistem anahtar zincirinizde saklanır.",
+      "keychain": "GeoSpaX'de kaydettiğiniz belirteçler ve API anahtarları sistem anahtar zincirinizde saklanır.",
       "projectKeychainUnavailable": "Sistem anahtar zincirinde proje kimlik bilgisi depolaması kullanılamıyor. Yeni proje anahtarları bu oturumda kalır; yerel bir projeyi kaydederken bunların dosyada tutulup tutulmayacağı veya kaldırılıp kaldırılmayacağı sorulur.",
       "browser": "Burada kaydettiğiniz belirteçler ve API anahtarları bu tarayıcının yerel depolamasında saklanır; bu sitede çalışan betikler bunları okuyabilir.",
-      "unavailable": "Sistem anahtar zinciriniz kullanılamadı ({{error}}). Yeni kimlik bilgileri yalnızca GeoLibre kapanana kadar geçerli olur; daha önce kaydedilmiş kimlik bilgileri, taşıma başarılı olana kadar tarayıcı depolamasında kalabilir."
+      "unavailable": "Sistem anahtar zinciriniz kullanılamadı ({{error}}). Yeni kimlik bilgileri yalnızca GeoSpaX kapanana kadar geçerli olur; daha önce kaydedilmiş kimlik bilgileri, taşıma başarılı olana kadar tarayıcı depolamasında kalabilir."
     },
     "section": {
       "language": "Dil",
@@ -2440,11 +2440,11 @@
         "role": "rol üstlenme",
         "other": "diğer"
       },
-      "environmentHelp": "GeoLibre'nin başlatıldığı ortamdaki AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ve AWS_SESSION_TOKEN değişkenlerini kullanır.",
-      "instanceHelp": "GeoLibre'nin çalıştığı makinenin IAM rolünü kullanır: bir web kimlik belirteci (EKS IRSA), ECS veya EKS kapsayıcı kimlik bilgileri ya da EC2 örnek profili.",
+      "environmentHelp": "GeoSpaX'nin başlatıldığı ortamdaki AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ve AWS_SESSION_TOKEN değişkenlerini kullanır.",
+      "instanceHelp": "GeoSpaX'nin çalıştığı makinenin IAM rolünü kullanır: bir web kimlik belirteci (EKS IRSA), ECS veya EKS kapsayıcı kimlik bilgileri ya da EC2 örnek profili.",
       "roleArn": "Üstlenilecek rol",
       "externalId": "Harici kimlik",
-      "roleHelp": "İsteğe bağlı. GeoLibre yukarıdaki kimlik bilgileriyle AWS STS AssumeRole çağrısı yapar ve bucket'ları bu rol olarak okur, ör. hesaplar arası salt okunur bir rol.",
+      "roleHelp": "İsteğe bağlı. GeoSpaX yukarıdaki kimlik bilgileriyle AWS STS AssumeRole çağrısı yapar ve bucket'ları bu rol olarak okur, ör. hesaplar arası salt okunur bir rol.",
       "accessKeyId": "Erişim anahtarı kimliği",
       "secretAccessKey": "Gizli erişim anahtarı",
       "sessionToken": "Oturum belirteci",
@@ -2548,7 +2548,7 @@
       "globeByDefault": "3D küreyi varsayılan olarak etkinleştir",
       "globeByDefaultHint": "Başlangıç projesi veya proje bağlantısı verilmediğinde adsız çalışma alanı için kullanılır.",
       "openS3Browser": "Başlangıçta S3 Tarayıcısını aç",
-      "openS3BrowserHint": "GeoLibre her başladığında S3 Tarayıcısı panelini göster. Bir proje açtığınızda açık kalır.",
+      "openS3BrowserHint": "GeoSpaX her başladığında S3 Tarayıcısı panelini göster. Bir proje açtığınızda açık kalır.",
       "defaultView": "Varsayılan harita görünümü",
       "defaultViewHint": "Adsız çalışma alanı için merkezi ve yakınlaştırmayı belirleyin.",
       "longitude": "Merkez boylamı",
@@ -2556,7 +2556,7 @@
       "zoom": "Yakınlaştırma düzeyi",
       "useCurrentView": "Geçerli Görünümü Kullan",
       "layerStyles": "Varsayılan katman stilleri",
-      "layerStylesHint": "Bir katman stilleri dosyası seçin (Proje → Dışa Aktar → Katman Stillerini Dışa Aktar). Eklediğiniz ve adı dosyadaki bir stille eşleşen her katman otomatik olarak stillendirilir. Açılan projelerdeki katmanlar kaydedilmiş stillerini korur. GeoLibre dosyanın bir kopyasını tutar, bu nedenle dosyayı düzenledikten sonra yeniden seçin.",
+      "layerStylesHint": "Bir katman stilleri dosyası seçin (Proje → Dışa Aktar → Katman Stillerini Dışa Aktar). Eklediğiniz ve adı dosyadaki bir stille eşleşen her katman otomatik olarak stillendirilir. Açılan projelerdeki katmanlar kaydedilmiş stillerini korur. GeoSpaX dosyanın bir kopyasını tutar, bu nedenle dosyayı düzenledikten sonra yeniden seçin.",
       "chooseLayerStyles": "Dosya Seç",
       "clearLayerStyles": "Temizle",
       "noLayerStylesSelected": "Katman stilleri dosyası seçilmedi",
@@ -2657,8 +2657,8 @@
       "oauthSigningIn": "Giriş yapılıyor…",
       "oauthSignOut": "Çıkış yap",
       "oauthWebLifetime": "Erişim belirteci bellekte tutulur; yenileme oturumu bu tarayıcı sekmesiyle sınırlıdır. Sekmeyi kapatırsanız tekrar giriş yapmanız gerekir.",
-      "oauthDesktopKeychain": "Oturum açma bilginiz sistem anahtar zincirinizde tutulur; böylece GeoLibre yeniden başlatıldıktan sonra da siz çıkış yapana kadar oturumunuz açık kalır.",
-      "oauthDesktopSessionOnly": "Bu oturum açma sistem anahtar zincirinize kaydedilemedi, bu nedenle yalnızca GeoLibre kapanana kadar geçerlidir.",
+      "oauthDesktopKeychain": "Oturum açma bilginiz sistem anahtar zincirinizde tutulur; böylece GeoSpaX yeniden başlatıldıktan sonra da siz çıkış yapana kadar oturumunuz açık kalır.",
+      "oauthDesktopSessionOnly": "Bu oturum açma sistem anahtar zincirinize kaydedilemedi, bu nedenle yalnızca GeoSpaX kapanana kadar geçerlidir.",
       "accountLoading": "Hesabınız yükleniyor…",
       "accountRetry": "Tekrar dene",
       "accountIdentity": "Hesap: {{account}}",
@@ -2688,7 +2688,7 @@
       "sessionRevoke": "İptal et",
       "sessionRevoking": "İptal ediliyor…",
       "revokeSessionConfirm": "“{{label}}” oturumu iptal edilsin mi? O cihazda oturum kapatılacak. Bu işlem geri alınamaz.",
-      "revokeCurrentConfirm": "Bu oturum (“{{label}}”) iptal edilsin mi? GeoLibre'den hemen çıkış yapılacak.",
+      "revokeCurrentConfirm": "Bu oturum (“{{label}}”) iptal edilsin mi? GeoSpaX'den hemen çıkış yapılacak.",
       "revokeTokenConfirm": "“{{label}}” kişisel API belirteci iptal edilsin mi? Onu kullanan betikler ve CI çalışmayı durduracak. Bu işlem geri alınamaz.",
       "revokeSessionConfirmButton": "Evet, iptal et",
       "sessionCreated": "Oluşturulma: {{date}}",
@@ -2777,7 +2777,7 @@
       "statusReady": "{{provider}} yapılandırıldı ve kullanıma hazır.",
       "statusIncomplete": "{{provider}} sağlayıcısını etkinleştirmek için aşağıdaki gerekli alanları doldurun.",
       "secretsNote": "Kimlik bilgileri, paylaştığınız proje dosyasında değil, bu cihazda yerel olarak kaydedilir, böylece yeniden başlatmalar arasında korunur. Bu cihaza erişimi olan herkes bunları okuyabilir.",
-      "secretsNoteKeychain": "API anahtarları ve diğer gizli alanlar, paylaştığınız proje dosyasında değil sistem anahtar zincirinizde saklanır; bu nedenle yeniden başlatmalardan sonra da korunur. Model adları ve URL'ler gibi diğer alanlar bu cihazdaki GeoLibre ayarlarına kaydedilir.",
+      "secretsNoteKeychain": "API anahtarları ve diğer gizli alanlar, paylaştığınız proje dosyasında değil sistem anahtar zincirinizde saklanır; bu nedenle yeniden başlatmalardan sonra da korunur. Model adları ve URL'ler gibi diğer alanlar bu cihazdaki GeoSpaX ayarlarına kaydedilir.",
       "getCredentials": "{{provider}} kimlik bilgileri nereden alınır",
       "showValue": "{{name}} göster",
       "hideValue": "{{name}} gizle",
@@ -2904,7 +2904,7 @@
         "notSet": "Ayarlanmadı",
         "getKey": "Ücretsiz anahtar alın",
         "saveFailed": "Anahtar bu tarayıcıya kaydedilemedi.",
-        "saveFailedKeychain": "Anahtar sistem anahtar zincirinize kaydedilemedi. GeoLibre kapanana kadar çalışır."
+        "saveFailedKeychain": "Anahtar sistem anahtar zincirinize kaydedilemedi. GeoSpaX kapanana kadar çalışır."
       }
     }
   },
@@ -3608,7 +3608,7 @@
       "exportLayerStylesAsDesc": "Bir dosya adı girin. Kaydet'e tıkladığınızda stil dosyası tarayıcınızın indirilenler klasörüne indirilir.",
       "exportLayerStylesFileName": "Dosya adı",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "GeoLibre Katman Stilleri",
+      "layerStylesFile": "GeoSpaX Katman Stilleri",
       "layerStylesImported": "Katman stilleri içe aktarıldı",
       "layerStylesImportedSummary_one": "\"{{file}}\" dosyasından {{count}} katman yeniden stillendirildi.",
       "layerStylesImportedSummary_other": "\"{{file}}\" dosyasından {{count}} katman yeniden stillendirildi.",
@@ -3732,7 +3732,7 @@
     },
     "windowClose": {
       "savePromptTitle": "Kapatmadan önce değişiklikler kaydedilsin mi?",
-      "savePromptDescription": "Mevcut projede kaydedilmemiş değişiklikler var. GeoLibre kapatılmadan önce kaydedilsin mi?"
+      "savePromptDescription": "Mevcut projede kaydedilmemiş değişiklikler var. GeoSpaX kapatılmadan önce kaydedilsin mi?"
     },
     "error": {
       "couldNotOpenProject": "Proje açılamadı.",
@@ -7989,7 +7989,7 @@
     "exportStyleError": "Bu katmanın stili dışa aktarılamadı.",
     "importStyle": "Stil içe aktar (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "Metinden stil içe aktar…",
-    "importStyleFromTextDescription": "Bir GeoLibre, Mapbox GL, SLD veya QML stili yapıştırın. Biçim metinden algılanır.",
+    "importStyleFromTextDescription": "Bir GeoSpaX, Mapbox GL, SLD veya QML stili yapıştırın. Biçim metinden algılanır.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "İçe aktar",
     "openStyleManager": "Kayıtlı stiller (Stil Yöneticisi)…",
@@ -8548,7 +8548,7 @@
     "windowCloseGuardFailed": "Pencere kapatılırken kaydedilmemiş değişiklikler için sorulmayacak. Kapatmadan önce çalışmanızı kaydedin.",
     "windowCloseSaveFailed": "Kapatmadan önce proje kaydedilemedi.",
     "windowCloseFailed": "Pencere kapatılamadı.",
-    "nativeProjectPathFailed": "GeoLibre'a iletilen proje dosyası açılamadı.",
+    "nativeProjectPathFailed": "GeoSpaX'a iletilen proje dosyası açılamadı.",
     "kmlSuperOverlayReadFailed": "KML Super-Overlay \"{{name}}\" yeniden okunamadı, bu yüzden döşemeleri boş.",
     "projectControlFailed": "Projenin \"{{control}}\" ayarı uygulanamadı.",
     "pluginSnapshotFailed": "Bazı eklenti ayarları yeni oluşturucuya aktarılmayabilir.",
@@ -8557,7 +8557,7 @@
     "panelRenderFailed": "\"{{name}}\" paneli açılamadı.",
     "sharedSettingsFailed": "Bağlantıdaki paylaşılan ayarlar yüklenemedi, bu yüzden kendi ayarlarınız kullanılıyor.",
     "sharedLanguageFailed": "Paylaşılan ayarların istediği dile geçilemedi.",
-    "languageCatalogFailed": "{{language}} çevirisi yüklenemedi, bu yüzden GeoLibre İngilizce gösteriliyor."
+    "languageCatalogFailed": "{{language}} çevirisi yüklenemedi, bu yüzden GeoSpaX İngilizce gösteriliyor."
   },
   "shell": {
     "workspaceTitle": "GeoSpaX harita çalışma alanı",
@@ -9047,7 +9047,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Bu döşemenin GeoParquet dosyasının tamamını indir",
       "dataset": "Veri kümesi",
-      "browseOnly": "Bu veri kümesinde arama GeoLibre'de henüz desteklenmiyor. Kaynağından almak için yukarıdaki bağlantıları kullanın.",
+      "browseOnly": "Bu veri kümesinde arama GeoSpaX'de henüz desteklenmiyor. Kaynağından almak için yukarıdaki bağlantıları kullanın.",
       "searchArea": "Arama alanı",
       "modeView": "Harita görünümü",
       "modeDraw": "Kutu çiz",
@@ -9294,7 +9294,7 @@
       "liftSelected": "{{layer}} katmanının {{polygons}} poligonu içinde {{count}} nokta seçildi.",
       "liftInstances": "{{layer}} katmanından {{name}} sınıfında {{objects}} örnek oluşturuldu ({{count}} nokta).",
       "fullFile": "Etiketli tam dosya",
-      "fullFileNote": "Yalnızca burada yüklenen noktalara değil, kaydedilen tüm etiketler uygulanmış olarak bu nokta bulutunun yerel bir kopyasını yazar. GeoLibre sunucusunda çalışır.",
+      "fullFileNote": "Yalnızca burada yüklenen noktalara değil, kaydedilen tüm etiketler uygulanmış olarak bu nokta bulutunun yerel bir kopyasını yazar. GeoSpaX sunucusunda çalışır.",
       "fullFileInput": "Yerel kopya (.las, .laz veya .copc.laz)",
       "fullFileOutput": "Çıktı dosyası (.las veya .laz)",
       "fullFileWrite": "Dosyayı yaz",

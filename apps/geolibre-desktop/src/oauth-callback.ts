@@ -35,8 +35,8 @@ if (opener && !opener.closed) {
   // Opened directly (no opener, e.g. the user pasted the URL): say what
   // happened instead of a blank page. There is nothing to hand a code to.
   status.textContent = payload.error
-    ? "Sign-in failed. Return to GeoLibre and try again."
-    : "Signed in. Return to the GeoLibre tab.";
+    ? "Sign-in failed. Return to GeoSpaX and try again."
+    : "Signed in. Return to the GeoSpaX tab.";
 }
 
 // Module scope: keeps `status`/`opener` from colliding with the DOM globals

@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in improving GeoLibre. This guide covers how to set up
+Thanks for your interest in improving GeoSpaX. This guide covers how to set up
 a development environment, the project layout, the local quality gate, and the
 pull request workflow. Contributions of all sizes are welcome, from fixing a
 typo to adding a new processing tool or plugin.
@@ -10,7 +10,7 @@ By participating, you agree to keep interactions respectful and constructive.
 ## Ways to Contribute
 
 - **Report a bug or request a feature** by opening an
-  [issue](https://github.com/opengeos/GeoLibre/issues). Include steps to
+  [issue](https://github.com/jm0535/GeoSpaX/issues). Include steps to
   reproduce, what you expected, and what happened, plus your OS and whether you
   hit it in the web or desktop build.
 - **Improve the documentation** under `docs/` (this site).
@@ -39,12 +39,12 @@ Fork the repository, then clone your fork. Replace `YOUR_GITHUB_USERNAME` with
 your GitHub username:
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/GeoLibre.git
-cd GeoLibre
+git clone https://github.com/YOUR_GITHUB_USERNAME/GeoSpaX.git
+cd GeoSpaX
 npm install
 ```
 
-GeoLibre is an npm workspaces monorepo, so a single `npm install` at the root
+GeoSpaX is an npm workspaces monorepo, so a single `npm install` at the root
 wires up every package. Use npm; the repository tracks `package-lock.json`.
 
 ## Run it locally
@@ -402,7 +402,7 @@ A few things worth knowing:
 - Assets are served with permissive CORS, so the app can fetch them
   cross-origin.
 
-Sample datasets are still served from another GeoLibre-operated host,
+Sample datasets are still served from another GeoSpaX-operated host,
 `data.geolibre.app`. Those URLs keep working and do not need rewriting;
 `geolibre-assets` is simply the one you can open a pull request against, so send
 new assets there.
@@ -414,11 +414,11 @@ references, it is a leftover, not a precedent.
 
 ## Plugins and extensions
 
-GeoLibre supports external plugins loaded from a zip, a local directory, or a
+GeoSpaX supports external plugins loaded from a zip, a local directory, or a
 hosted manifest URL. To build one, start from the
-[GeoLibre plugin template](https://github.com/opengeos/geolibre-plugin-template)
+[GeoSpaX plugin template](https://github.com/opengeos/geolibre-plugin-template)
 and follow the [Plugin API](plugin-api.md) contract. You do not need to fork
-GeoLibre itself to ship a plugin.
+GeoSpaX itself to ship a plugin.
 
 ## Backend sidecar
 
@@ -443,13 +443,13 @@ Run its tests with `npm run test:backend` from the repository root, or
 ## Sponsoring
 
 Code is not the only way to contribute. If you or your organization depend on
-GeoLibre, financial support keeps development, hosting, and app-store
-distribution going — see [Become a Sponsor](sponsor.md) for
+GeoSpaX, financial support keeps development, hosting, and app-store
+distribution going — see Become a Sponsor for
 [GitHub Sponsors](https://github.com/sponsors/giswqs) and
 [Buy Me a Coffee](https://buymeacoffee.com/giswqs).
 
 ## License
 
-GeoLibre is released under the [MIT License](https://github.com/opengeos/GeoLibre/blob/main/LICENSE).
+GeoSpaX is released under the [MIT License](https://github.com/opengeos/GeoLibre/blob/main/LICENSE).
 By contributing, you agree that your contributions are licensed under the same
 terms.

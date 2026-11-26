@@ -241,7 +241,7 @@ function ensureArcgisI3sTilesOverlay(app: GeoLibreAppAPI): Promise<void> {
   // rendered.
   i3sEnsureInFlight = runEnsureArcgisI3sTilesOverlay(app)
     .catch((error) => {
-      console.error("[GeoLibre] Failed to initialize the ArcGIS I3S overlay", error);
+      console.error("[GeoSpaX] Failed to initialize the ArcGIS I3S overlay", error);
     })
     .finally(() => {
       i3sEnsureInFlight = null;
@@ -266,7 +266,7 @@ async function runEnsureArcgisI3sTilesOverlay(app: GeoLibreAppAPI): Promise<void
       app.removeMapControl(i3sOverlay);
     } catch (error) {
       console.warn(
-        "[GeoLibre] Failed to detach the ArcGIS I3S overlay from the previous map",
+        "[GeoSpaX] Failed to detach the ArcGIS I3S overlay from the previous map",
         error,
       );
     }
@@ -325,7 +325,7 @@ function renderArcgisI3sTilesLayers(): void {
       try {
         i3sApp.removeMapControl(i3sOverlay);
       } catch (error) {
-        console.warn("[GeoLibre] Failed to remove the empty ArcGIS I3S overlay", error);
+        console.warn("[GeoSpaX] Failed to remove the empty ArcGIS I3S overlay", error);
       }
       i3sOverlayMounted = false;
     }
@@ -373,7 +373,7 @@ function scheduleI3sMountRetry(): void {
   if (i3sMountRetries >= I3S_MAX_MOUNT_RETRIES) {
     i3sMountGaveUp = true;
     console.warn(
-      "[GeoLibre] Gave up mounting the ArcGIS I3S overlay after repeated addMapControl failures.",
+      "[GeoSpaX] Gave up mounting the ArcGIS I3S overlay after repeated addMapControl failures.",
     );
     return;
   }
@@ -445,7 +445,7 @@ export function buildArcgisI3sTilesDeckLayer(
     // @loaders.gl Tileset3D calls this as (tile, message, url) — note the deck.gl
     // typings mislabel the order as (tile, url, message).
     onTileError: (_tile: unknown, message: string, tileUrl: string) =>
-      console.error(`[GeoLibre] ArcGIS I3S tile failed to load: ${message} (${tileUrl})`),
+      console.error(`[GeoSpaX] ArcGIS I3S tile failed to load: ${message} (${tileUrl})`),
   });
 }
 
@@ -492,7 +492,7 @@ function warnOnUnsupportedI3sSceneLayerType(url: string, tileset: unknown): void
   const layerType = header?.tileset?.layerType ?? header?.layerType;
   if (typeof layerType === "string" && !SUPPORTED_I3S_LAYER_TYPES.has(layerType)) {
     console.warn(
-      `[GeoLibre] ArcGIS I3S scene layer type "${layerType}" is not supported ` +
+      `[GeoSpaX] ArcGIS I3S scene layer type "${layerType}" is not supported ` +
         "(only 3DObject and IntegratedMesh mesh layers render); this layer may " +
         `not display: ${url}`,
     );

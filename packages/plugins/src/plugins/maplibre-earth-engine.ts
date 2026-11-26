@@ -87,7 +87,7 @@ export function openEarthEnginePanel(app: GeoLibreAppAPI): void {
   openStandaloneEarthEngineControl(app)
     .catch((error: unknown) => {
       // The control's package is fetched on first open; offline this can fail.
-      console.error("[GeoLibre] Failed to open the Earth Engine panel", error);
+      console.error("[GeoSpaX] Failed to open the Earth Engine panel", error);
       setEarthEngineControlVisible(false);
     })
     .finally(() => {

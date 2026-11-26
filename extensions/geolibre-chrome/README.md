@@ -1,14 +1,14 @@
-# Open data in GeoLibre
+# Open data in GeoSpaX
 
 A Manifest V3 Chrome extension that finds supported geospatial dataset links on
 the current page, reads back the geospatial service requests its interactive
-maps have already made, and opens selected data in GeoLibre.
+maps have already made, and opens selected data in GeoSpaX.
 
 ## Install
 
 The published extension is on the Chrome Web Store:
 
-[Open data in GeoLibre](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj)
+[Open data in GeoSpaX](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj)
 
 ## Install locally (development)
 
@@ -31,20 +31,19 @@ From the repository root, run:
 npm run build:chrome-extension
 ```
 
-The versioned upload ZIP is written to `dist/`. Store listing copy and
-permission explanations are in `STORE_LISTING.md`; the publishable privacy
-policy source is in `PRIVACY.md`. The policy must be hosted at a public URL
-before submitting the listing.
+The versioned upload ZIP is written to `dist/`. GeoSpaX does not publish this
+extension yet: a Chrome Web Store listing would need its own store copy and a
+privacy policy hosted at a public URL.
 
 ## Discovery
 
 The scanner recognizes GeoJSON/JSON, GeoParquet/Parquet, PMTiles, GeoTIFF/COG,
 LiDAR point clouds (LAS/LAZ/COPC and EPT `ept.json`), and ZIP links in anchors, linked resources, selected data attributes, and
-schema.org JSON-LD `contentUrl`/`downloadUrl` fields. Existing GeoLibre deep
+schema.org JSON-LD `contentUrl`/`downloadUrl` fields. Existing GeoSpaX deep
 links are unpacked, and a neighboring `name.style.json` or
 `name.geolibre.style.json` link is paired with the matching dataset. A point
 cloud whose URL has no LAS/LAZ suffix, found only because its link or metadata
-says COPC, LAZ, or LASzip, is opened with `dataType=lidar` so GeoLibre does not
+says COPC, LAZ, or LASzip, is opened with `dataType=lidar` so GeoSpaX does not
 read it as GeoJSON.
 
 Source Cooperative repository pages receive additional handling: the extension
@@ -69,7 +68,7 @@ Three consequences of reading the buffer rather than watching the network:
 - **Worker requests are invisible.** MapLibre and similar renderers fetch vector
   tiles from a web worker, which records them in the worker's own timeline, not
   the document's. Such a tileset is recovered from the metadata the main thread
-  *did* fetch: its TileJSON, or failing that the style document, which GeoLibre
+  *did* fetch: its TileJSON, or failing that the style document, which GeoSpaX
   can resolve a layer from on its own. A style is only offered in its own right
   when no tileset from its origin was found.
 
@@ -108,7 +107,7 @@ A service endpoint on its own is rarely enough to add a layer, so each result
 also carries what the page asked that service *for*: the WMS `LAYERS` value, the
 WFS `typeName`, the WMTS layer, and — for a vector tileset, whose source layers
 live in its style rather than its URL — the style document the page loaded from
-the same origin. These arrive in GeoLibre as `serviceLayer` and `serviceStyle`
+the same origin. These arrive in GeoSpaX as `serviceLayer` and `serviceStyle`
 and land in the matching form fields, so the dialog opens ready to submit rather
 than on an endpoint with an empty layer field. Because one endpoint can serve
 many layers, results are listed per layer (`WMS service: topp:states`) instead of
@@ -118,7 +117,7 @@ collapsing into a single entry per URL.
 
 After loading or reloading the unpacked extension, open one of these websites in
 a new tab, let its map finish drawing, then open the extension and confirm it
-lists the expected service. Selecting the result opens the matching GeoLibre Add
+lists the expected service. Selecting the result opens the matching GeoSpaX Add
 Data dialog with the service URL filled in. Each row below is a live third-party
 map, so what it detects is what a real page actually requests.
 
@@ -152,11 +151,11 @@ A document's buffer is its own and is discarded when the tab navigates, so a pag
 with no services (`https://example.com`) comes up empty rather than inheriting
 the page before it.
 
-After selecting a result, add the layer in GeoLibre and verify that the browser
+After selecting a result, add the layer in GeoSpaX and verify that the browser
 console does not report a CORS error while fetching the service.
 
-Remote servers must allow GeoLibre to fetch the selected URLs through CORS.
+Remote servers must allow GeoSpaX to fetch the selected URLs through CORS.
 Complete HTTP(S) URLs, including signed query parameters, are forwarded to
-GeoLibre. Cookies and other browser-session credentials are not forwarded, so
+GeoSpaX. Cookies and other browser-session credentials are not forwarded, so
 cookie-bound or session-authenticated links may fail. Temporary `blob:` and
 browser-internal links cannot be transferred.

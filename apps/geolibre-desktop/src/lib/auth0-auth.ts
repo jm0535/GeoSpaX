@@ -91,7 +91,7 @@ export function resolveAuth0Config(
     // (nothing usable at all) into the one that says nothing.
     if (rawDomain || rawClientId) {
       console.error(
-        `[GeoLibre] Ignoring an incomplete Auth0 configuration: ${AUTH0_DOMAIN_ENV} and ` +
+        `[GeoSpaX] Ignoring an incomplete Auth0 configuration: ${AUTH0_DOMAIN_ENV} and ` +
           `${AUTH0_CLIENT_ID_ENV} must both be set to valid values. The sign-in gate is OFF.`,
       );
     }

@@ -68,7 +68,7 @@ export function mountOccurrenceTool(
     title: options.title ?? "Occurrence & taxonomy data",
     description:
       options.description ??
-      "Query live biodiversity archives, clip coordinate searches to the current view, and add citation-stamped records to the GeoLibre layer store.",
+      "Query live biodiversity archives, clip coordinate searches to the current view, and add citation-stamped records to the GeoSpaX layer store.",
     method:
       "Live source APIs. Archive contents change; query URL, access date, source citation and requested limit are preserved in provenance.",
   });
@@ -366,7 +366,7 @@ export function mountGebcoTool(shell: PanelShell, parent: HTMLElement): void {
     id: "gebco",
     title: "GEBCO bathymetry preview",
     description:
-      "Add the GEBCO global gridded-bathymetry XYZ preview as a first-class GeoLibre tile layer.",
+      "Add the GEBCO global gridded-bathymetry XYZ preview as a first-class GeoSpaX tile layer.",
     method:
       "Rendered XYZ catalogue layer for visual context. It is not a numeric raster-window analysis source unless the host can sample that service.",
   });
@@ -378,7 +378,7 @@ export function mountGebcoTool(shell: PanelShell, parent: HTMLElement): void {
   add.addEventListener("click", () => {
     void withBusy(add, status, "Adding GEBCO tile layer…", () => {
       if (!shell.app.addTileLayer)
-        throw new Error("This GeoLibre host does not expose addTileLayer.");
+        throw new Error("This GeoSpaX host does not expose addTileLayer.");
       const url = "https://tiles.gebco.net/gebco/{z}/{x}/{y}.png";
       const outputId = shell.app.addTileLayer("GEBCO bathymetry (preview)", url, {
         tileSize: 256,

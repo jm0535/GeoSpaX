@@ -1,27 +1,27 @@
 # Self-Hosting & Private Data
 
-GeoLibre is a client-side application: the map, the layers, and the analysis all
-run in the browser or in the desktop shell, and nothing is uploaded to a GeoLibre
+GeoSpaX is a client-side application: the map, the layers, and the analysis all
+run in the browser or in the desktop shell, and nothing is uploaded to a GeoSpaX
 service unless you explicitly use an optional online feature (see
-[Privacy Policy](privacy.md)). That makes it a good fit for organizations that
+[GeoLibre Privacy Policy](https://geolibre.app/privacy/)). That makes it a good fit for organizations that
 cannot put their data on a public host at all: Indigenous and local communities
 managing their own monitoring data, health and humanitarian programs, protected
 species records, or any deployment where the data must stay on infrastructure the
 organization controls.
 
-What GeoLibre does **not** do is host your data. It reads data from wherever you
+What GeoSpaX does **not** do is host your data. It reads data from wherever you
 point it. So a private deployment is really two questions:
 
 1. **Where do the datasets and projects live, and who is allowed to read them?**
-2. **How does GeoLibre reach them from the browser?**
+2. **How does GeoSpaX reach them from the browser?**
 
 This page answers both. The short version:
 
 !!! tip "Recommended setup"
     Host your data with **[GeoLens](https://getgeolens.com)**, a self-hosted
     spatial catalog (FastAPI + PostGIS) with accounts, per-dataset permissions,
-    and OGC/STAC APIs. Host the **GeoLibre web build** next to it on the *same
-    origin*, behind the *same* authentication layer. Then use GeoLibre's built-in
+    and OGC/STAC APIs. Host the **GeoSpaX web build** next to it on the *same
+    origin*, behind the *same* authentication layer. Then use GeoSpaX's built-in
     **GeoLens plugin** to search the catalog and add datasets to the map. Every
     byte is served from your own origin to an authenticated browser and to
     nowhere else, credentials are sent only to that origin, and there is no CORS
@@ -29,10 +29,10 @@ This page answers both. The short version:
 
 ## Why same-origin matters
 
-Everything GeoLibre fetches is fetched by the browser, so the browser's rules
+Everything GeoSpaX fetches is fetched by the browser, so the browser's rules
 apply:
 
-- **Cookies.** GeoLibre's requests use the browser default credentials mode
+- **Cookies.** GeoSpaX's requests use the browser default credentials mode
   (`same-origin`). A session cookie set by your SSO layer is sent automatically
   when the data URL is on the **same origin** as the app, and is **not** sent
   when it is on a different origin. So a cookie-gated dataset works out of the
@@ -42,7 +42,7 @@ apply:
   URL being requested, so set it to `Path=/` for a layout that spreads the app,
   the API, and the project files across sibling paths.
 - **CORS.** Same-origin requests need no CORS headers at all. Cross-origin ones
-  need the data host to allow your GeoLibre origin explicitly.
+  need the data host to allow your GeoSpaX origin explicitly.
 - **Tile requests.** MapLibre issues raster and vector tile requests itself.
   Those follow the same cookie and CORS rules, which is why a tile endpoint
   gated by a session cookie only works when it is same-origin.
@@ -57,7 +57,7 @@ apply:
   `http:` to any host, so it can reach a self-hosted Ollama, SamGeo, or other
   service on your local network without HTTPS (issue #2620).
 
-Putting GeoLibre and the data on one origin turns all five of these from
+Putting GeoSpaX and the data on one origin turns all five of these from
 configuration problems into non-problems.
 
 ## Architecture
@@ -65,7 +65,7 @@ configuration problems into non-problems.
 ```mermaid
 flowchart LR
   U[Browser: one HTTPS origin, one session] --> P[Reverse proxy: TLS + SSO]
-  P --> L[GeoLibre web build at /gis]
+  P --> L[GeoSpaX web build at /gis]
   P --> G[GeoLens catalog and API at /api]
   P --> S[Project files at /projects]
   G --> D[(PostGIS + object storage)]
@@ -73,7 +73,7 @@ flowchart LR
   L -.reads.-> S
 ```
 
-One hostname, one login, three paths. GeoLibre at `/gis` reads the catalog at
+One hostname, one login, three paths. GeoSpaX at `/gis` reads the catalog at
 `/api`, the tiles at `/api/tiles/...`, and any saved projects at `/projects/...`,
 all with the visitor's own session.
 
@@ -81,10 +81,10 @@ all with the visitor's own session.
 
 [GeoLens](https://github.com/geolens-io/geolens) is an open-source, self-hosted
 geospatial data catalog and map builder built on FastAPI, PostGIS, React, and
-MapLibre. It is the piece GeoLibre deliberately does not try to be, and the two
+MapLibre. It is the piece GeoSpaX deliberately does not try to be, and the two
 line up well:
 
-| GeoLens provides | GeoLibre consumes it as |
+| GeoLens provides | GeoSpaX consumes it as |
 | --- | --- |
 | Dataset search (fuzzy plus optional semantic ranking over pgvector) | The catalog list in the GeoLens plugin panel |
 | Signed XYZ vector tiles (MVT) | A vector tile layer, token refreshed automatically |
@@ -107,19 +107,19 @@ Then set at least these in its `.env` before exposing it (see the
 
 | Variable | Why it matters here |
 | --- | --- |
-| `PUBLIC_APP_URL` / `PUBLIC_API_URL` | The browser-facing URLs. These are what you type into the GeoLibre plugin, so they must be the public HTTPS ones, not the Compose service names. |
-| `CORS_ALLOWED_ORIGINS` | Only needed if GeoLibre is served from a **different** origin. List that origin exactly. |
+| `PUBLIC_APP_URL` / `PUBLIC_API_URL` | The browser-facing URLs. These are what you type into the GeoSpaX plugin, so they must be the public HTTPS ones, not the Compose service names. |
+| `CORS_ALLOWED_ORIGINS` | Only needed if GeoSpaX is served from a **different** origin. List that origin exactly. |
 | `ENVIRONMENT=production` | Hides the API docs endpoints and hardens OAuth cookies. |
 | `JWT_SECRET_KEY` | Signing secret for sessions. |
 
 Upload your datasets and keep them private: GeoLens uses role-based access
-control with per-dataset permissions. The GeoLibre plugin can then read them two
+control with per-dataset permissions. The GeoSpaX plugin can then read them two
 ways, and which one applies depends on how your deployment authorizes API
 requests. On a same-origin deployment the plugin's calls carry the visitor's
 GeoLens session automatically. Otherwise, create a per-user API key and paste it
 into the plugin panel.
 
-## 2. Host the GeoLibre web build next to it
+## 2. Host the GeoSpaX web build next to it
 
 The published image serves the production web build with nginx:
 
@@ -165,8 +165,8 @@ generated final policy; build-only grants do not configure its guards.
 | `GEOLIBRE_MSSQL_ALLOW_MANAGED_IDENTITY` | unset unless needed | Managed identity authentication is disabled, because it signs in as the container's own Azure identity for every caller sharing the sidecar. Set to `1` only when the sidecar is single-tenant and its identity should back database access. `GEOLIBRE_MSSQL_DESKTOP_AUTH=1`, which also enables Windows and interactive Entra sign-in, implies this opt-in, so never set it on a shared sidecar. |
 | `GEOLIBRE_DISABLE_SIDECAR` | `1` if you do not need it | Skips uvicorn regardless of capabilities; every `/sidecar/` request returns HTTP 403 with an `application/json` detail response. |
 | `GEOLIBRE_EMBED_ORIGINS` | unset, or the exact host page origin | Off by default, so a framed deployment cannot be driven by whoever frames it. |
-| `GEOLIBRE_NO_EXTERNAL_CDN` (build arg) | `1` for restricted deployments | Strips GeoLibre's own references to external CDNs (`unpkg.com`, `cdn.jsdelivr.net`) from the build output. Features whose assets are only available from a CDN are disabled or degraded: storymap HTML export, built-in object detection models, ONNX WASM, 3D Tiles Draco/KTX2 decoders, and gdal3.js export. Pyodide is not hard-disabled — the flag drops only its default index URL, so setting `VITE_PYODIDE_INDEX_URL` to an approved mirror keeps it working. Also forces `GEOLIBRE_PGLITE_CDN=0`, `GEOLIBRE_CEREUS_CDN=0`, `GEOLIBRE_GDAL_CDN=0`, and `GEOLIBRE_DUCKDB_WASM_CDN=0` — so PGlite/PostGIS, CereusDB, and DuckDB-WASM stay **available**, vendored into the build under `/assets/` (at a larger build size) rather than fetched. Note that some third-party packages (DuckDB-WASM, loaders.gl, maplibre-gl-3d-tiles) carry their own internal CDN URLs that this flag cannot remove; see [architecture.md](architecture.md) for the details. Intended for deployments that cannot reference untrusted external CDNs (e.g. enterprise environments with strict CSP requirements). |
-| `GEOLIBRE_APP_NAME` | optional, e.g. `Acme Maps` | Replaces "GeoLibre" at the start of the toolbar and in the browser tab title. Whitespace runs collapse to one space and the name is capped at 60 characters. `VITE_GEOLIBRE_APP_NAME` is the equivalent build arg. |
+| `GEOLIBRE_NO_EXTERNAL_CDN` (build arg) | `1` for restricted deployments | Strips GeoSpaX's own references to external CDNs (`unpkg.com`, `cdn.jsdelivr.net`) from the build output. Features whose assets are only available from a CDN are disabled or degraded: storymap HTML export, built-in object detection models, ONNX WASM, 3D Tiles Draco/KTX2 decoders, and gdal3.js export. Pyodide is not hard-disabled — the flag drops only its default index URL, so setting `VITE_PYODIDE_INDEX_URL` to an approved mirror keeps it working. Also forces `GEOLIBRE_PGLITE_CDN=0`, `GEOLIBRE_CEREUS_CDN=0`, `GEOLIBRE_GDAL_CDN=0`, and `GEOLIBRE_DUCKDB_WASM_CDN=0` — so PGlite/PostGIS, CereusDB, and DuckDB-WASM stay **available**, vendored into the build under `/assets/` (at a larger build size) rather than fetched. Note that some third-party packages (DuckDB-WASM, loaders.gl, maplibre-gl-3d-tiles) carry their own internal CDN URLs that this flag cannot remove; see [architecture.md](architecture.md) for the details. Intended for deployments that cannot reference untrusted external CDNs (e.g. enterprise environments with strict CSP requirements). |
+| `GEOLIBRE_APP_NAME` | optional, e.g. `Acme Maps` | Replaces "GeoSpaX" at the start of the toolbar and in the browser tab title. Whitespace runs collapse to one space and the name is capped at 60 characters. `VITE_GEOLIBRE_APP_NAME` is the equivalent build arg. |
 | `VITE_WELCOME_DISABLED=1` (build arg) | optional | Skips the first-launch wizard for every visitor. |
 See [Getting Started](getting-started.md#run-with-docker) for the full list.
 
@@ -273,7 +273,7 @@ anyone the SSO layer has not admitted.
 !!! important "Two layers of authentication, not one"
     The forward-auth layer decides who reaches the origin. It does not, by
     itself, tell GeoLens who the visitor is: GeoLens applies its own accounts and
-    per-dataset permissions, and the GeoLibre plugin sends only what the browser
+    per-dataset permissions, and the GeoSpaX plugin sends only what the browser
     attaches (a same-origin cookie) plus an `X-Api-Key` header if you gave it a
     key. So the visitor needs a GeoLens identity too. Either configure GeoLens to
     consume your provider (it supports OAuth 2.0 / OIDC, so point it at the same
@@ -293,7 +293,7 @@ anyone the SSO layer has not admitted.
 
 If you also run the [projects server](server-api.md) (`geolibre-server` in
 `docker-compose.yml`), the same proxy can sign users in to it, so Share and the
-Project Gallery need no separate GeoLibre password. The server trusts the
+Project Gallery need no separate GeoSpaX password. The server trusts the
 proxy's `Remote-User` and `Remote-Email` headers on its sign-in (consent) page
 once `GEOLIBRE_PROXY_AUTH=true`, and only on connections from an address listed
 in `GEOLIBRE_TRUSTED_PROXIES`:
@@ -357,7 +357,7 @@ The nginx Basic Auth built into the web image (`GEOLIBRE_AUTH_USER` /
 `GEOLIBRE_AUTH_PASSWORD`) is not a substitute: it is a single shared
 credential, so it cannot tell the projects server who the visitor is.
 
-## 3. Connect GeoLibre to GeoLens
+## 3. Connect GeoSpaX to GeoLens
 
 The **GeoLens** plugin is built in. There is nothing to install, no marketplace
 step, and no bundled drop-in to deploy: open the **Plugins** menu and choose
@@ -379,7 +379,7 @@ In the panel:
    the panel). Raster datasets are added as server-rendered raster tiles.
 4. Each result carries a **Metadata** link back to its page in GeoLens.
 
-Once a dataset is on the map it is an ordinary GeoLibre layer: style it, classify
+Once a dataset is on the map it is an ordinary GeoSpaX layer: style it, classify
 it, open the [attribute table](user-guide/attribute-table.md), run
 [processing tools](user-guide/processing.md) and
 [spatial SQL](user-guide/sql-workspace.md) against it, and publish it into a
@@ -419,10 +419,10 @@ This is the part that matters for data sovereignty:
 ## The two deployment patterns, compared
 
 These are the two options raised in
-[discussion #1807](https://github.com/opengeos/GeoLibre/discussions/1807), and
+[discussion #1807](https://github.com/jm0535/GeoSpaX/discussions/1807), and
 they behave quite differently.
 
-### Pattern A: GeoLibre on the community server (recommended)
+### Pattern A: GeoSpaX on the community server (recommended)
 
 Serve the web build from the same VM and the same origin as the data, behind the
 same SSO layer, as described above.
@@ -440,21 +440,21 @@ This is the pattern to choose when the requirement is that the data must reach
 nobody but the users your own auth layer admits, and no third-party service
 along the way.
 
-### Pattern B: hosted GeoLibre, private data elsewhere
+### Pattern B: hosted GeoSpaX, private data elsewhere
 
-A user opens `https://web.geolibre.app/?url=https://community.example.org/project.geolibre.json`.
+A user opens `https://geospax2.in4metrix.dev/?url=https://community.example.org/project.geolibre.json`.
 
 The project fetch and every layer fetch is now cross-origin, so:
 
 - **Session cookies are not sent.** A URL gated by an SSO cookie returns the
-  login page (or a redirect), and GeoLibre reports a fetch or parse error. There
+  login page (or a redirect), and GeoSpaX reports a fetch or parse error. There
   is no setting that changes this.
-- **CORS must allow `https://web.geolibre.app`** on the data host, including any
+- **CORS must allow `https://geospax2.in4metrix.dev`** on the data host, including any
   custom request header you rely on.
 - **Credentials must therefore travel in the URL or in a header.** In practice
   that means a **signed, expiring URL** (an S3/MinIO presigned URL, a GeoLens
   signed tile URL, or your own HMAC scheme), because MapLibre's own tile requests
-  cannot carry a custom header that GeoLibre has not been told about. The GeoLens
+  cannot carry a custom header that GeoSpaX has not been told about. The GeoLens
   plugin is the exception on the header path: it sends `X-Api-Key` on its API
   calls, and attaches it to that dataset's raster tiles through MapLibre's
   `transformRequest` hook.
@@ -487,7 +487,7 @@ against a private, authenticated, same-origin host:
   straight out of a database through a local [Martin](https://martin.maplibre.org/)
   tile server, which is the closest analogue to pointing QGIS at a database. This
   is desktop only, and not available in the sandboxed Mac App Store build (see
-  [Downloads](downloads.md#what-the-store-build-leaves-out)).
+  [Get GeoSpaX](downloads.md)).
 - **MBTiles and local files.** The desktop app reads local MBTiles, rasters, and
   vector files with no server at all, which is the simplest possible private
   workflow: download from the community server, analyze offline.
@@ -506,19 +506,19 @@ the public internet:
 | --- | --- | --- |
 | Basemaps | OpenFreeMap / CARTO tiles | Use the Basemaps plugin's **custom style URL** and serve your own style plus a PMTiles basemap from your server, or use a blank background. Add the host to the CSP if it is not your own origin. |
 | Geocoding | Public Nominatim | Point it at a self-hosted Nominatim or Pelias (see [Data Integrations](user-guide/data-integrations.md#geocoding)). |
-| Routing and isochrones | Public FOSSGIS Valhalla (`valhalla1.openstreetmap.de`) | Set `VITE_ROUTING_ENDPOINT` to your own Valhalla server. This covers Processing → GeoLibre Toolbox → Network and the **Drive time** / **Walk time** [quick actions](user-guide/map-controls.md#quick-analysis-from-a-clicked-point). Add the host to the CSP. |
-| Pointer elevation readout | Public Open-Meteo elevation API, whenever 3D terrain has no sample for the point | Leave the readout off (it is off by default), or decline the consent prompt GeoLibre shows before the first remote lookup — that is the gate the resolver checks. Enabling 3D terrain makes the remote call rare but does not rule it out, since a point terrain cannot answer still falls through. |
+| Routing and isochrones | Public FOSSGIS Valhalla (`valhalla1.openstreetmap.de`) | Set `VITE_ROUTING_ENDPOINT` to your own Valhalla server. This covers Processing → GeoSpaX Toolbox → Network and the **Drive time** / **Walk time** [quick actions](user-guide/map-controls.md#quick-analysis-from-a-clicked-point). Add the host to the CSP. |
+| Pointer elevation readout | Public Open-Meteo elevation API, whenever 3D terrain has no sample for the point | Leave the readout off (it is off by default), or decline the consent prompt GeoSpaX shows before the first remote lookup — that is the gate the resolver checks. Enabling 3D terrain makes the remote call rare but does not rule it out, since a point terrain cannot answer still falls through. |
 | Python (Pyodide) vector engine | Loads Pyodide from jsDelivr | Set `VITE_PYODIDE_INDEX_URL` to a mirrored copy of the Pyodide distribution. |
 | AI assistant | Off unless configured | Leave `GEOLIBRE_AI_URL` unset, or route it through your own proxy. |
 | Project sharing | `share.geolibre.app` | `GEOLIBRE_SHARE_URL=off`, or your own [projects server](server-api.md). |
 | Collaboration | Off unless configured | Leave `GEOLIBRE_COLLAB_URL` unset, or run `workers/collab-node` yourself. |
-| Telemetry | None | GeoLibre collects no analytics or usage data. The hosted sites (geolibre.app, web.geolibre.app) run Google Analytics, but nothing you deploy does. The Docker image **cannot** turn it on: the `Dockerfile` declares no build argument for it, and the container's CSP does not allow `googletagmanager.com`. A build from source can, by setting `VITE_GEOLIBRE_GA_MEASUREMENT_ID` for `npm run build` with your own measurement ID; there is no runtime variable that enables it. See [Privacy Policy](privacy.md). |
+| Telemetry | None | GeoSpaX collects no analytics or usage data. The hosted sites (geolibre.app, web.geolibre.app) run Google Analytics, but nothing you deploy does. The Docker image **cannot** turn it on: the `Dockerfile` declares no build argument for it, and the container's CSP does not allow `googletagmanager.com`. A build from source can, by setting `VITE_GEOLIBRE_GA_MEASUREMENT_ID` for `npm run build` with your own measurement ID; there is no runtime variable that enables it. See [GeoLibre Privacy Policy](https://geolibre.app/privacy/). |
 
 ## Deployment checklist
 
 - [ ] GeoLens (or your own data host) running on the community VM, datasets
       private by default.
-- [ ] GeoLibre web build served from the **same origin**, under a path such as
+- [ ] GeoSpaX web build served from the **same origin**, under a path such as
       `/gis`, built with the matching `GEOLIBRE_APP_BASE`.
 - [ ] One TLS-terminating reverse proxy with your SSO layer in front of both.
 - [ ] `GEOLIBRE_SHARE_URL=off` (or your own server) so nothing can be published
@@ -540,4 +540,4 @@ the public internet:
 - [Collaboration](collaboration.md) for the self-hostable relay
 - [Data Integrations](user-guide/data-integrations.md#self-hosted-catalogs)
 - [Embedding & Sharing](user-guide/embedding.md)
-- [Privacy Policy](privacy.md)
+- [GeoLibre Privacy Policy](https://geolibre.app/privacy/)

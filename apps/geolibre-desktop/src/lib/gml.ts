@@ -25,7 +25,7 @@ export class GmlUnsupportedCrsError extends Error {
   readonly srsName: string;
   constructor(srsName: string) {
     super(
-      `The service returned features in ${srsName}, which GeoLibre cannot reproject. Request them in EPSG:4326 instead (set the SRS name).`,
+      `The service returned features in ${srsName}, which GeoSpaX cannot reproject. Request them in EPSG:4326 instead (set the SRS name).`,
     );
     this.name = "GmlUnsupportedCrsError";
     this.srsName = srsName;

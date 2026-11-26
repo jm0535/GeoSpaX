@@ -14,7 +14,7 @@ function request(group: string, origin = "http://localhost:5173"): Request {
 }
 
 describe("CelesTrak edge proxy", () => {
-  it("identifies GeoLibre, caches the fixed upstream, and adds CORS", async () => {
+  it("identifies GeoSpaX, caches the fixed upstream, and adds CORS", async () => {
     const calls: Array<{ url: string; init?: RequestInit }> = [];
     globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
       calls.push({ url: String(input), init });

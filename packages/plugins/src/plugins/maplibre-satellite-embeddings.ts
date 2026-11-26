@@ -1363,7 +1363,7 @@ function buildPanel(container: HTMLElement): () => void {
           CSS.hint,
           tr(
             "browseOnly",
-            "Searching this dataset in GeoLibre is not supported yet. Use the links above to get it from its source.",
+            "Searching this dataset in GeoSpaX is not supported yet. Use the links above to get it from its source.",
           ),
         ),
       );

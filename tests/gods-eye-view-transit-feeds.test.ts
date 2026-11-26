@@ -199,7 +199,7 @@ describe("God's Eye View transit feed", () => {
     assert.ok(samples[5] > samples[1]);
   });
 
-  it("identifies GeoLibre when fetching Entur", async () => {
+  it("identifies GeoSpaX when fetching Entur", async () => {
     const calls: Array<{ url: string; init?: RequestInit }> = [];
     const fetcher = (async (input: string | URL | Request, init?: RequestInit) => {
       calls.push({ url: String(input), init });

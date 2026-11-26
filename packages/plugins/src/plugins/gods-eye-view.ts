@@ -1096,7 +1096,7 @@ function keyRow(provider: GodsEyeViewKeyProvider, notice?: string): HTMLElement 
         : credentials?.location() === "keychain"
           ? translate(
               "panel.godsEyeView.apiKeys.saveFailedKeychain",
-              "Could not save the key in your system keychain. It works until GeoLibre closes.",
+              "Could not save the key in your system keychain. It works until GeoSpaX closes.",
             )
           : translate(
               "panel.godsEyeView.apiKeys.saveFailed",

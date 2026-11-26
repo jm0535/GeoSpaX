@@ -1,7 +1,7 @@
 # Deployment Policy
 
 `deployment.json` is a single, versioned file that describes the client-facing
-settings of a GeoLibre deployment: which capabilities users have, which
+settings of a GeoSpaX deployment: which capabilities users have, which
 interface elements are visible, which plugins may load, the curated service
 library, sharing endpoints, and branding.
 
@@ -116,7 +116,7 @@ For capability details and Docker route enforcement, see
 
 Point your editor at the schema for completion and validation by adding
 `"$schema": "https://raw.githubusercontent.com/opengeos/GeoLibre/main/schema/deployment.schema.json"`.
-GeoLibre ignores `$schema`.
+GeoSpaX ignores `$schema`.
 
 ## Field reference
 
@@ -205,7 +205,7 @@ Bundled drop-ins under `public/plugins/` are exempt from `allowed` and
 `sideload`, but still honor `blocked`. Built-in plugins are not external plugins
 and are not governed by these load restrictions.
 
-For URL plugins, GeoLibre must fetch `plugin.json` to learn the id. A denied id
+For URL plugins, GeoSpaX must fetch `plugin.json` to learn the id. A denied id
 never has its entry or stylesheet fetched or its code imported. Denials appear
 as external plugin load issues.
 
@@ -269,13 +269,13 @@ beyond the safe-integer range, none of which JSON Schema alone can all express.
 
 Place `deployment.json` in Tauri's `<app_config_dir>` (see
 [UI Profiles](ui-profiles.md) for the legacy profile locations). For the
-standard `org.geolibre.desktop` application identifier, the paths are:
+standard `geospax.in4metrix.dev` application identifier, the paths are:
 
 | OS | Policy path |
 | --- | --- |
-| Linux | `$XDG_CONFIG_HOME/org.geolibre.desktop/deployment.json`, or `~/.config/org.geolibre.desktop/deployment.json` when `XDG_CONFIG_HOME` is unset |
-| macOS | `~/Library/Application Support/org.geolibre.desktop/deployment.json` |
-| Windows | `%APPDATA%\org.geolibre.desktop\deployment.json` (normally `C:\Users\<user>\AppData\Roaming\org.geolibre.desktop\deployment.json`) |
+| Linux | `$XDG_CONFIG_HOME/geospax.in4metrix.dev/deployment.json`, or `~/.config/geospax.in4metrix.dev/deployment.json` when `XDG_CONFIG_HOME` is unset |
+| macOS | `~/Library/Application Support/geospax.in4metrix.dev/deployment.json` |
+| Windows | `%APPDATA%\geospax.in4metrix.dev\deployment.json` (normally `C:\Users\<user>\AppData\Roaming\geospax.in4metrix.dev\deployment.json`) |
 
 These follow Tauri's [app config directory](https://v2.tauri.app/reference/javascript/api/namespacepath/#appconfigdir).
 Sandboxed installations may resolve the directory inside their sandbox;
@@ -285,13 +285,13 @@ instead.
 The `read_deployment_policy` command returns raw UTF-8 text, or `null` when
 the file is absent. A leading UTF-8 BOM is accepted by the parser. The selected
 policy is applied before the first render, including capability restrictions,
-without rebuilding the app. Restart GeoLibre after changing the file; changes
+without rebuilding the app. Restart GeoSpaX after changing the file; changes
 are not watched.
 
 An existing config-dir file is authoritative, even if empty, malformed or of
 an unsupported version: it yields no policy rather than falling back to a
 bundled or web file. Config-dir and web policies are never merged. When the file
-is absent, GeoLibre fetches `<base>/deployment.json` instead. Other read errors
+is absent, GeoSpaX fetches `<base>/deployment.json` instead. Other read errors
 (including permission failures) produce a console warning in every build and
 fall back to that same web file. Unsupported versions also warn in every build.
 With no file in either location, existing behavior is unchanged.

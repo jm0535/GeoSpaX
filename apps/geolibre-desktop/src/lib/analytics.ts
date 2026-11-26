@@ -80,7 +80,7 @@ export function resolveAnalyticsId(
   const id = value.toUpperCase();
   if (!MEASUREMENT_ID_PATTERN.test(id)) {
     console.error(
-      `[GeoLibre] Ignoring ${GA_MEASUREMENT_ID_ENV}: ${value} is not a GA4 measurement ID (G-…).`,
+      `[GeoSpaX] Ignoring ${GA_MEASUREMENT_ID_ENV}: ${value} is not a GA4 measurement ID (G-…).`,
     );
     return undefined;
   }

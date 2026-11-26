@@ -23,7 +23,7 @@ can alternatively set `CESIUM_TOKEN` or `VITE_CESIUM_TOKEN` at build time. See
   proportional, marker, cluster, label, pattern, extrusion, and Z-aware
   rendering.
 - XYZ, WMS, WMTS, COG, raster PMTiles, local MBTiles, image overlays, and other
-  tile sources connected through GeoLibre's protocol bridge.
+  tile sources connected through GeoSpaX's protocol bridge.
 - Vector tiles, vector PMTiles, and vector MBTiles draped through a hidden
   MapLibre renderer so their Style Specification output is preserved.
 - Native 3D Tiles, Cesium ion tilesets and imagery, CZML, KML/KMZ, I3S scene
@@ -40,7 +40,7 @@ only plugins whose `engines` list contains `cesium` remain active.
 ## Scene and camera
 
 The globe provides 3D, 2D, and Columbus scene modes, terrain, native globe
-lighting, and a camera translated to and from GeoLibre's shared longitude,
+lighting, and a camera translated to and from GeoSpaX's shared longitude,
 latitude, zoom, bearing, and pitch state. Mixed panes synchronize by ground
 resolution rather than raw zoom, keeping their apparent scales aligned even
 when panes have different sizes.

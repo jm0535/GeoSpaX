@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "geolibre"
+name = "geospax"
 dynamic = ["version"]
-description = "GeoLibre in Jupyter: the full GeoLibre GIS app as an anywidget, with a leafmap-style Python API."
+description = "GeoSpaX in Jupyter: the GeoSpaX GIS app as an anywidget, with a leafmap-style Python API."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
-authors = [{ name = "Qiusheng Wu", email = "giswqs@gmail.com" }]
-keywords = ["geolibre", "gis", "maplibre", "jupyter", "anywidget", "mapping"]
+authors = [{ name = "J. Moses" }, { name = "Qiusheng Wu", email = "giswqs@gmail.com" }]
+keywords = ["geospax", "gis", "maplibre", "jupyter", "anywidget", "mapping"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Jupyter",
@@ -40,17 +40,19 @@ dev = ["pytest", "build", "anywidget[dev]", "jupyter-server", "mcp>=2.0", "dash>
 [project.scripts]
 # geolibre.mcp:main, not geolibre.mcp.server:main — the package-level wrapper
 # turns a missing `mcp` extra into an actionable message instead of a traceback.
-geolibre-mcp = "geolibre.mcp:main"
+geospax-mcp = "geolibre.mcp:main"
 
 [project.urls]
-Homepage = "https://geolibre.app"
-Repository = "https://github.com/opengeos/GeoLibre"
+Homepage = "https://geospax2.in4metrix.dev"
+Documentation = "https://jm0535.github.io/GeoSpaX/"
+Repository = "https://github.com/jm0535/GeoSpaX"
+Platform = "https://github.com/opengeos/GeoLibre"
 
 [tool.hatch.version]
-path = "src/geolibre/__init__.py"
+path = "src/geospax/__init__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/geolibre"]
+packages = ["src/geolibre", "src/geospax"]
 # The bundled app under static/ is produced by the build hook and git-ignored,
 # so it must be re-included explicitly here (VCS file discovery skips it).
 artifacts = ["src/geolibre/static/**"]

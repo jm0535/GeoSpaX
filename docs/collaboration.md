@@ -1,9 +1,9 @@
 # Real-time collaboration (live-synced sessions)
 
-> Status: **experimental MVP** (issue [#307](https://github.com/opengeos/GeoLibre/issues/307)).
+> Status: **experimental MVP** (issue [#307](https://github.com/jm0535/GeoSpaX/issues/307)).
 > Disabled unless `VITE_GEOLIBRE_COLLAB_URL` is configured.
 
-GeoLibre's project sharing is otherwise snapshot-based (upload to
+GeoSpaX's project sharing is otherwise snapshot-based (upload to
 share.geolibre.app). This feature adds a **live** mode: several people open the
 same session and see each other's layer/style/view edits in real time, with
 presence cursors and viewport indicators. It targets classrooms, workshops, and
@@ -220,7 +220,7 @@ secret configured:
   how the Collaborate dialog decides to hide the "require a signed-in account"
   option entirely.
 
-GeoLibre itself ships no sign-in flow yet, so the stock deployment leaves the
+GeoSpaX itself ships no sign-in flow yet, so the stock deployment leaves the
 secret unset and the whole identity path dormant. The protocol and relay support
 are in place for a deployment that fronts the relay with its own issuer.
 

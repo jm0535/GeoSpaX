@@ -120,7 +120,7 @@ export class SwipeRasterMirror {
       this.deps.removeControl(this.map, control);
     } catch (error) {
       // The comparison map may already be gone (removed by the swipe control).
-      console.debug("[GeoLibre] swipe raster mirror: removeControl", error);
+      console.debug("[GeoSpaX] swipe raster mirror: removeControl", error);
     }
   }
 
@@ -139,7 +139,7 @@ export class SwipeRasterMirror {
       },
       (error: unknown) => {
         this.controlPromise = null;
-        console.warn("[GeoLibre] swipe raster mirror: control load", error);
+        console.warn("[GeoSpaX] swipe raster mirror: control load", error);
         return null;
       },
     );
@@ -194,7 +194,7 @@ export class SwipeRasterMirror {
           this.applied.set(raster.id, { mirrorId, fingerprint, opacity: raster.opacity });
         }
       } catch (error) {
-        console.debug("[GeoLibre] swipe raster mirror: addRaster", error);
+        console.debug("[GeoSpaX] swipe raster mirror: addRaster", error);
       }
     }
   }

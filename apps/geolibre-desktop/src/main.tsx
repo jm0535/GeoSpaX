@@ -97,7 +97,7 @@ function applyConfiguredAppName(): void {
     const configuredAppName = readConfiguredAppName();
     if (configuredAppName) document.title = configuredAppName;
   } catch (error) {
-    console.error("[GeoLibre] Failed to apply the configured app name", error);
+    console.error("[GeoSpaX] Failed to apply the configured app name", error);
   }
 }
 applyConfiguredAppName();
@@ -146,7 +146,7 @@ if (isTauri()) {
   nativeArcGISFetchReady = import("./lib/arcgis-fetch")
     .then(({ installNativeArcGISFetch }) => installNativeArcGISFetch())
     .catch((error: unknown) => {
-      console.error("[GeoLibre] Failed to install native ArcGIS fetch", error);
+      console.error("[GeoSpaX] Failed to install native ArcGIS fetch", error);
     });
   // WebView2 can apply browser CORS and Local Network Access restrictions to
   // the loopback processing server. Route those requests through Tauri's
@@ -159,7 +159,7 @@ if (isTauri()) {
     nativeSidecarFetchReady = import("./lib/sidecar-fetch")
       .then(({ installNativeSidecarFetch }) => installNativeSidecarFetch())
       .catch((error: unknown) => {
-        console.error("[GeoLibre] Failed to install native sidecar fetch", error);
+        console.error("[GeoSpaX] Failed to install native sidecar fetch", error);
       });
   }
   nativeWmsIdentifyFetchReady = import("./lib/wms-identify-fetch")
@@ -167,7 +167,7 @@ if (isTauri()) {
     .catch((error: unknown) => {
       // Identify would stay on the webview fetch, which fails on WMS servers
       // without CORS headers (#2712), so surface the install failure.
-      console.error("[GeoLibre] Failed to install native WMS identify fetch", error);
+      console.error("[GeoSpaX] Failed to install native WMS identify fetch", error);
     });
   void import("./lib/geocoding-fetch")
     .then(({ installNativeGeocodingFetch }) => installNativeGeocodingFetch())
@@ -175,7 +175,7 @@ if (isTauri()) {
       // If the install fails, geocoding stays on the browser fetch (the
       // CORS-buggy path this fixes), so surface it rather than let it become a
       // silent unhandled rejection.
-      console.error("[GeoLibre] Failed to install native geocoding fetch", error);
+      console.error("[GeoSpaX] Failed to install native geocoding fetch", error);
     });
   // Built-in share host only: await the narrow native HTTP adapter before
   // either OAuth sign-in or token requests. Self-hosted origins retain browser
@@ -189,7 +189,7 @@ if (isTauri()) {
   void import("./lib/geolens-fetch")
     .then(({ installNativeGeoLensFetch }) => installNativeGeoLensFetch())
     .catch((error: unknown) => {
-      console.error("[GeoLibre] Failed to install native GeoLens fetch", error);
+      console.error("[GeoSpaX] Failed to install native GeoLens fetch", error);
     });
 }
 if (isDesktopRuntime()) {
@@ -200,7 +200,7 @@ if (isDesktopRuntime()) {
   );
 } else {
   void nativeShareFetchReady.catch(() => {
-    console.error("[GeoLibre] Failed to install native share transport");
+    console.error("[GeoSpaX] Failed to install native share transport");
   });
 }
 // Recover from chunks orphaned by a web redeploy (stale lazy import → 404). A
@@ -289,7 +289,7 @@ registerSW({
   onRegisterError(error) {
     // Registration can fail in production (non-secure origin, scope conflict).
     // The app still works without the SW, so surface it rather than fail.
-    console.error("[GeoLibre] Service worker registration failed", error);
+    console.error("[GeoSpaX] Service worker registration failed", error);
   },
 });
 
@@ -304,7 +304,7 @@ const sharedSettingsReady = sharedSettingsUrl
         // A shared settings file is optional configuration. Keep the app usable
         // with the visitor's local settings, but make a bad URL visible in the
         // diagnostics capture and developer console.
-        console.error("[GeoLibre] Failed to load shared desktop settings", error);
+        console.error("[GeoSpaX] Failed to load shared desktop settings", error);
         // The link promised a configured app; say why it looks like the
         // visitor's own instead. Worded once translations are up.
         void i18nReady.then(() =>
@@ -325,7 +325,7 @@ const desktopCredentialsReady = sharedSettingsReady
     ),
   )
   .catch((error: unknown) => {
-    console.error("[GeoLibre] Failed to load desktop credentials", error);
+    console.error("[GeoSpaX] Failed to load desktop credentials", error);
   });
 
 const startupLanguageReady = Promise.all([i18nReady, sharedSettingsReady]).then(
@@ -342,7 +342,7 @@ const startupLanguageReady = Promise.all([i18nReady, sharedSettingsReady]).then(
     } catch (error) {
       // Shared language is optional presentation configuration. If its lazy
       // catalog cannot load, retain the language i18next already initialized.
-      console.error("[GeoLibre] Failed to apply shared settings language", error);
+      console.error("[GeoSpaX] Failed to apply shared settings language", error);
       notify.warning(i18n.t("notifications.sharedLanguageFailed"), {
         dedupeKey: "shared-settings-language",
       });
@@ -422,5 +422,5 @@ void Promise.all([
     );
   })
   .catch((error: unknown) => {
-    console.error("Failed to start GeoLibre", error);
+    console.error("Failed to start GeoSpaX", error);
   });

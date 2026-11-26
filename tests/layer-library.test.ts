@@ -235,7 +235,7 @@ describe("canSaveLayerToLibrary", () => {
     );
   });
 
-  it("does not consult the host predicate for a layer GeoLibre renders itself", () => {
+  it("does not consult the host predicate for a layer GeoSpaX renders itself", () => {
     let asked = false;
     const plain = layer({ source: { url: "https://example.com/a.fgb" } });
     assert.equal(

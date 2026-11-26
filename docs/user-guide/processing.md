@@ -1,8 +1,8 @@
 # Processing Tools
 
-The **Processing** menu collects GeoLibre's analysis and conversion tools. It holds **two separate toolboxes** ([why](#two-toolboxes-in-one-menu)), plus the [SQL Workspace](sql-workspace.md), [Python Console](python-console.md), [AI Assistant](ai-assistant.md), and [AI Segmentation](segmentation.md), which have their own pages.
+The **Processing** menu collects GeoSpaX's analysis and conversion tools. It holds **two separate toolboxes** ([why](#two-toolboxes-in-one-menu)), plus the [SQL Workspace](sql-workspace.md), [Python Console](python-console.md), [AI Assistant](ai-assistant.md), and [AI Segmentation](segmentation.md), which have their own pages.
 
-![The Processing menu, with the Whitebox categories above the separator and the GeoLibre Toolbox below it](https://assets.geolibre.app/images/geolibre-processing-menu.webp)
+![The Processing menu, with the Whitebox categories above the separator and the GeoSpaX Toolbox below it](https://assets.geolibre.app/images/geolibre-processing-menu.webp)
 
 ## Two toolboxes in one menu
 
@@ -25,7 +25,7 @@ Processing
 ├─ Terrain          ▸  │
 ├─ Vector           ▸  ┘
 ├─────────────────────────
-├─ GeoLibre Toolbox ▸      ← GeoLibre's own built-in tools
+├─ GeoSpaX Toolbox ▸      ← GeoSpaX's own built-in tools
 │   ├─ Conversion         ▸
 │   ├─ Vector             ▸
 │   ├─ Network            ▸
@@ -49,12 +49,12 @@ Processing
 └─ Earth Engine
 ```
 
-The block between the first and second separators belongs to the **Whitebox Toolbox**; everything under **GeoLibre Toolbox** is GeoLibre's own. Because both toolboxes cover vector, raster, conversion, and network work, several category names appear twice. They are not duplicates, and they do not open the same thing:
+The block between the first and second separators belongs to the **Whitebox Toolbox**; everything under **GeoSpaX Toolbox** is GeoSpaX's own. Because both toolboxes cover vector, raster, conversion, and network work, several category names appear twice. They are not duplicates, and they do not open the same thing:
 
-| | **Whitebox Toolbox** | **GeoLibre Toolbox** |
+| | **Whitebox Toolbox** | **GeoSpaX Toolbox** |
 | --- | --- | --- |
-| Where in the menu | The **Whitebox Toolbox** item and the nine category submenus directly below it | The **GeoLibre Toolbox** submenu below the separator |
-| What it contains | 1,000+ tools: the [Whitebox Next Gen](https://github.com/opengeos/Whitebox-Next-Gen-ArcGIS) suite plus GeoLibre's own Rust tools from [geolibre-rust](https://github.com/opengeos/geolibre-rust) | GeoLibre's built-in tools, written for this app |
+| Where in the menu | The **Whitebox Toolbox** item and the nine category submenus directly below it | The **GeoSpaX Toolbox** submenu below the separator |
+| What it contains | 1,000+ tools: the [Whitebox Next Gen](https://github.com/opengeos/Whitebox-Next-Gen-ArcGIS) suite plus GeoSpaX's own Rust tools from [geolibre-rust](https://github.com/opengeos/geolibre-rust) | GeoSpaX's built-in tools, written for this app |
 | Categories come from | The tool manifests, [generated automatically](#whitebox-toolbox) | Hand-curated for this app |
 | What clicking a tool opens | One shared dialog, with the tool preselected and its form built from the tool's parameter manifest | A purpose-built dialog per tool family (Vector tools, Raster tools, Conversion, …) |
 | Where it runs | WebAssembly in the browser by default, optionally the [Python sidecar](#the-python-sidecar) | Turf.js or Pyodide in the browser, or the Python sidecar, depending on the tool |
@@ -64,26 +64,26 @@ The block between the first and second separators belongs to the **Whitebox Tool
 
 The pair that trips people up most often:
 
-- **`Processing → Vector → GeoLibre (WASM)`** lists the several hundred **vector tools GeoLibre contributes to the Whitebox toolbox**. They are compiled from [geolibre-rust](https://github.com/opengeos/geolibre-rust) to WebAssembly and sit in the same catalog as the Whitebox Next Gen tools, so the menu groups them under a `GeoLibre (WASM)` subheading to show where they came from. The same subheading appears under Conversion, Raster, Hydrology, and LiDAR. Every one of these opens the **Whitebox Toolbox dialog**.
-- **`Processing → GeoLibre Toolbox → Vector`** opens GeoLibre's own [Vector tools dialog](#vector): buffer, clip, spatial join, and the rest of the [list below](#vector), with an engine picker (Turf.js, GeoPandas sidecar, or Pyodide).
+- **`Processing → Vector → GeoSpaX (WASM)`** lists the several hundred **vector tools GeoSpaX contributes to the Whitebox toolbox**. They are compiled from [geolibre-rust](https://github.com/opengeos/geolibre-rust) to WebAssembly and sit in the same catalog as the Whitebox Next Gen tools, so the menu groups them under a `GeoSpaX (WASM)` subheading to show where they came from. The same subheading appears under Conversion, Raster, Hydrology, and LiDAR. Every one of these opens the **Whitebox Toolbox dialog**.
+- **`Processing → GeoSpaX Toolbox → Vector`** opens GeoSpaX's own [Vector tools dialog](#vector): buffer, clip, spatial join, and the rest of the [list below](#vector), with an engine picker (Turf.js, GeoPandas sidecar, or Pyodide).
 
-So the first is *"the vector part of the Whitebox toolbox, filtered to the tools GeoLibre wrote"*, and the second is *"GeoLibre's own vector toolbox"*. Both exist because they are different implementations with different strengths, not because one is a copy of the other.
+So the first is *"the vector part of the Whitebox toolbox, filtered to the tools GeoSpaX wrote"*, and the second is *"GeoSpaX's own vector toolbox"*. Both exist because they are different implementations with different strengths, not because one is a copy of the other.
 
-A few individual **tool** names collide the same way. `Processing → Conversion → GeoLibre (WASM) → Vector to PMTiles` is a WASM catalog tool that opens the Whitebox Toolbox dialog; `Processing → GeoLibre Toolbox → Conversion → Vector to PMTiles` is the Conversion dialog documented [below](#conversion), with its own file pickers and zoom, compression, and layer-name options. `Raster to PMTiles` appears in both places too. When a step in these docs or a tutorial names a Conversion tool, it means the GeoLibre Toolbox one.
+A few individual **tool** names collide the same way. `Processing → Conversion → GeoSpaX (WASM) → Vector to PMTiles` is a WASM catalog tool that opens the Whitebox Toolbox dialog; `Processing → GeoSpaX Toolbox → Conversion → Vector to PMTiles` is the Conversion dialog documented [below](#conversion), with its own file pickers and zoom, compression, and layer-name options. `Raster to PMTiles` appears in both places too. When a step in these docs or a tutorial names a Conversion tool, it means the GeoSpaX Toolbox one.
 
 !!! tip "Which one should I use?"
-    Start with **GeoLibre Toolbox** for everyday work on layers already on the map: fewer tools, guided dialogs, and a choice of engine. The analysis tools add their result to the map as a new layer; the Conversion tools write a file instead. Reach for the **Whitebox Toolbox** when you need something the GeoLibre Toolbox does not have, which is most terrain, hydrology, remote sensing, and LiDAR analysis, or a specific named tool from the full catalog.
+    Start with **GeoSpaX Toolbox** for everyday work on layers already on the map: fewer tools, guided dialogs, and a choice of engine. The analysis tools add their result to the map as a new layer; the Conversion tools write a file instead. Reach for the **Whitebox Toolbox** when you need something the GeoSpaX Toolbox does not have, which is most terrain, hydrology, remote sensing, and LiDAR analysis, or a specific named tool from the full catalog.
 
 !!! warning "The dialog's Source filter is a third, narrower thing"
-    Inside the Whitebox Toolbox dialog, the **source** dropdown offers *All sources / GeoLibre tools / Whitebox tools*. That filter splits the **Whitebox toolbox catalog only** by who wrote each tool. "GeoLibre tools" there means the same WASM tools that the menu labels `GeoLibre (WASM)`. It never shows the GeoLibre Toolbox dialogs, which are not in that catalog at all.
+    Inside the Whitebox Toolbox dialog, the **source** dropdown offers *All sources / GeoSpaX tools / Whitebox tools*. That filter splits the **Whitebox toolbox catalog only** by who wrote each tool. "GeoSpaX tools" there means the same WASM tools that the menu labels `GeoSpaX (WASM)`. It never shows the GeoSpaX Toolbox dialogs, which are not in that catalog at all.
 
-## GeoLibre Toolbox
+## GeoSpaX Toolbox
 
-GeoLibre's own tools, under **Processing → GeoLibre Toolbox**.
+GeoSpaX's own tools, under **Processing → GeoSpaX Toolbox**.
 
 ### Vector
 
-**Processing → GeoLibre Toolbox → Vector** opens the Vector tools dialog. Pick a tool from the list, choose the input layer and parameters, select an [engine](#engines), then **Run**. Output appears as a new layer.
+**Processing → GeoSpaX Toolbox → Vector** opens the Vector tools dialog. Pick a tool from the list, choose the input layer and parameters, select an [engine](#engines), then **Run**. Output appears as a new layer.
 
 !!! tip "Skipping the dialog"
     Several of these are also one click away from the **Quick analysis** submenu. Right-clicking the map runs a buffer or a drive- or walk-time isochrone on the clicked point; the submenu on a layer row runs a buffer, centroids, convex hull, or bounding box over the whole layer. See [Right-click quick actions](map-controls.md#right-click-quick-actions).
@@ -169,7 +169,7 @@ See the [Vector Analysis tutorial](../tutorials/vector-analysis.md).
 
 ### Raster
 
-**Processing → GeoLibre Toolbox → Raster** opens the Raster tools dialog. Most raster tools run on the rasterio Python sidecar: they take a file path in and write a file path out, then add the result to the map.
+**Processing → GeoSpaX Toolbox → Raster** opens the Raster tools dialog. Most raster tools run on the rasterio Python sidecar: they take a file path in and write a file path out, then add the result to the map.
 
 ![The Raster tools dialog, with the tool list at the top and the engine picker above the parameters](https://assets.geolibre.app/images/geolibre-raster-tools.webp)
 
@@ -227,7 +227,7 @@ See the [Terrain Analysis tutorial](../tutorials/terrain-analysis.md).
 
 ### Conversion
 
-**Processing → GeoLibre Toolbox → Conversion** writes data to cloud-native formats:
+**Processing → GeoSpaX Toolbox → Conversion** writes data to cloud-native formats:
 
 | Tool | Description |
 | --- | --- |
@@ -246,11 +246,11 @@ Every one of these has a client-side engine, so all of them work in the browser 
 The sidecar can also confine conversion inputs and outputs to an allowlist of directories, set through `GEOLIBRE_CONVERSION_ROOTS`. It is unset on the desktop app, where the paths are your own filesystem and there is nothing to confine. The Docker image sets it, because there the sidecar is reachable same-origin through the nginx proxy and must not be able to read or overwrite arbitrary container paths. See [Self-Hosting](../self-hosting.md).
 
 !!! note "Not the same as `Processing → Conversion`"
-    The bare **Conversion** submenu higher up the menu is the Whitebox toolbox's conversion *category* (format and raster/vector conversion tools from the WASM catalog). The dialogs in this table live under **GeoLibre Toolbox → Conversion**. See [Two toolboxes in one menu](#two-toolboxes-in-one-menu).
+    The bare **Conversion** submenu higher up the menu is the Whitebox toolbox's conversion *category* (format and raster/vector conversion tools from the WASM catalog). The dialogs in this table live under **GeoSpaX Toolbox → Conversion**. See [Two toolboxes in one menu](#two-toolboxes-in-one-menu).
 
 ### Network
 
-**Processing → GeoLibre Toolbox → Network** runs routing analysis against a [Valhalla](https://valhalla.github.io/valhalla/) server (the public FOSSGIS instance by default, so the coordinates you submit leave your device; self-hosted deployments can point at their own, see [Self-Hosting](../self-hosting.md)).
+**Processing → GeoSpaX Toolbox → Network** runs routing analysis against a [Valhalla](https://valhalla.github.io/valhalla/) server (the public FOSSGIS instance by default, so the coordinates you submit leave your device; self-hosted deployments can point at their own, see [Self-Hosting](../self-hosting.md)).
 
 | Tool | Description |
 | --- | --- |
@@ -260,7 +260,7 @@ The sidecar can also confine conversion inputs and outputs to an allowlist of di
 
 ### Spatial Statistics
 
-**Processing → GeoLibre Toolbox → Spatial Statistics** runs pattern analysis on a point or polygon layer and adds the result to the map.
+**Processing → GeoSpaX Toolbox → Spatial Statistics** runs pattern analysis on a point or polygon layer and adds the result to the map.
 
 | Tool | Description |
 | --- | --- |
@@ -300,7 +300,7 @@ layer already styled by the graduated renderer on the score.
 
 ### DGGS
 
-**Processing → GeoLibre Toolbox → DGGS** works with discrete global grid systems (H3, S2, A5, DGGRID, DGGAL).
+**Processing → GeoSpaX Toolbox → DGGS** works with discrete global grid systems (H3, S2, A5, DGGRID, DGGAL).
 
 | Tool | Description |
 | --- | --- |
@@ -310,7 +310,7 @@ layer already styled by the graduated renderer on the score.
 
 ### Geocode Addresses and Batch tools
 
-Two more entries sit below the separator in the GeoLibre Toolbox submenu:
+Two more entries sit below the separator in the GeoSpaX Toolbox submenu:
 
 - **Geocode Addresses** turns a table of addresses into a point layer.
 - **Batch tools** runs one tool across many input layers (*Batch*), or chains tools so each step's output feeds the next and saves the chain with the project (*Models*). Both modes draw on the Vector tools above and run on the client engine. For a graphical way to build the same kind of chain, see [Model Builder](#model-builder).
@@ -326,11 +326,11 @@ Two more entries sit below the separator in the GeoLibre Toolbox submenu:
 
 ![The Whitebox toolbox running locally with WebAssembly, listing the full catalog of 1,000+ tools with the Regularize Building Footprints tool selected](https://assets.geolibre.app/images/whitebox.webp)
 
-The tools come from the [Whitebox Next Gen](https://github.com/opengeos/Whitebox-Next-Gen-ArcGIS) suite together with GeoLibre's own WASM tools from [geolibre-rust](https://github.com/opengeos/geolibre-rust), which the dialog mixes into the same catalog (use the **source** dropdown to filter to one or the other). The category and subcategory names, and the tool names themselves, come straight from the tool manifests and are generated automatically, so they follow upstream naming rather than GeoLibre's.
+The tools come from the [Whitebox Next Gen](https://github.com/opengeos/Whitebox-Next-Gen-ArcGIS) suite together with GeoSpaX's own WASM tools from [geolibre-rust](https://github.com/opengeos/geolibre-rust), which the dialog mixes into the same catalog (use the **source** dropdown to filter to one or the other). The category and subcategory names, and the tool names themselves, come straight from the tool manifests and are generated automatically, so they follow upstream naming rather than GeoSpaX's.
 
 ### Where the tools run
 
-They run **in the browser**, through a WebAssembly runtime with raster and vector I/O — no Python sidecar, no server, and no data leaving your machine. That means the full toolbox is available on GeoLibre Web and on Android and iOS, not just the desktop app.
+They run **in the browser**, through a WebAssembly runtime with raster and vector I/O — no Python sidecar, no server, and no data leaving your machine. That means the full toolbox is available on GeoSpaX Web and on Android and iOS, not just the desktop app.
 
 The **Run locally (WASM)** checkbox controls the engine:
 
@@ -342,7 +342,7 @@ Either way the tool list is the same; only the executing engine changes.
 ### Finding and running a tool
 
 - **Search** by name at the top of the tool list, or narrow with the **category** and **source** dropdowns.
-- **Browse by category** without opening the dialog at all: the Processing menu has a submenu per category (Conversion, Hydrology, LiDAR, Network, Projection, Raster, Remote Sensing, Terrain, Vector) with nested subcategory submenus, including the `GeoLibre (WASM)` subheading for GeoLibre's own tools. Picking a tool opens the dialog with it preselected. The catalog is bundled offline, so the menu works with no network.
+- **Browse by category** without opening the dialog at all: the Processing menu has a submenu per category (Conversion, Hydrology, LiDAR, Network, Projection, Raster, Remote Sensing, Terrain, Vector) with nested subcategory submenus, including the `GeoSpaX (WASM)` subheading for GeoSpaX's own tools. Picking a tool opens the dialog with it preselected. The catalog is bundled offline, so the menu works with no network.
 - **Fill in the form** — the dialog builds it from the tool's own parameter manifest, with a file picker for path inputs and an output-format dropdown for vector outputs. Parameters that are ground distances get a metric unit picker.
 - **Run**, and the output is added to the map. Raster outputs are Cloud Optimized GeoTIFFs. A LiDAR output from the in-browser (WASM) engine, such as a classified point cloud, is downloaded as a LAS file; load it with **Add Data → LiDAR Layer**.
 
@@ -362,7 +362,7 @@ Every run is recorded in **Processing → History**, newest first, with the tool
 ![The Model Builder canvas, with the tool palette on the left, the graph in the middle, and the selected node's settings on the right](https://assets.geolibre.app/images/geolibre-model-builder.webp)
 
 - **Drag a tool from the palette** onto the canvas to add it as a node, then wire one node's output into the next node's input. **+ Input** and **+ Output** add the model's own entry and exit points, so the same graph can be re-run against different layers.
-- The palette draws on the client-side [GeoLibre Toolbox](#geolibre-toolbox) vector tools plus the open [Whitebox](#whitebox-toolbox) catalog, so a raster chain such as fill depressions → flow accumulation → extract streams is a valid model.
+- The palette draws on the client-side [GeoSpaX Toolbox](#geolibre-toolbox) vector tools plus the open [Whitebox](#whitebox-toolbox) catalog, so a raster chain such as fill depressions → flow accumulation → extract streams is a valid model.
 - The canvas checks the graph as you build it (missing inputs, unconnected ports, mismatched data types, loops), and **Run** executes the chain as one job, with progress in the message log at the bottom.
 - **Save** stores the model with the project, **Import** / **Export** move it between projects as a file, and **Copy Python script** puts the equivalent [`geolibre` Python](../python.md) code on the clipboard.
 

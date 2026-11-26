@@ -170,7 +170,7 @@ export function createPluginHttpSend(
     const onAbort = () => {
       if (registered) {
         void invoke("cancel_plugin_http_request", { requestId }).catch((error: unknown) => {
-          console.error("[GeoLibre] Failed to cancel native plugin request", error);
+          console.error("[GeoSpaX] Failed to cancel native plugin request", error);
         });
       }
     };

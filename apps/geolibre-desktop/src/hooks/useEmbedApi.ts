@@ -92,7 +92,7 @@ export function useEmbedApi(
           try {
             host.postMessage(message, target);
           } catch (error) {
-            console.error("[GeoLibre] Failed to post embed event", error);
+            console.error("[GeoSpaX] Failed to post embed event", error);
           }
         }
       }

@@ -167,7 +167,7 @@ export async function buildPaletteLegend(
     // pyramid (so the full image is scanned) could exceed the cap and drop
     // rare classes. Warn so an incomplete legend is at least traceable.
     console.warn(
-      `[GeoLibre] Palette legend scan capped at ${MAX_SCAN_TILES}/${totalTiles} tiles; ` +
+      `[GeoSpaX] Palette legend scan capped at ${MAX_SCAN_TILES}/${totalTiles} tiles; ` +
         "the legend may omit rare classes.",
     );
   }

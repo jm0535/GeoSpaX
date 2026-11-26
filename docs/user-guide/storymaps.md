@@ -56,7 +56,7 @@ Reorder chapters with the arrows and remove them with the trash icon.
 
 ## Import and export chapters
 
-To author content outside GeoLibre, use **Import** / **Export** next to **Add
+To author content outside GeoSpaX, use **Import** / **Export** next to **Add
 chapter**:
 
 - **Export JSON** writes the whole story (settings and chapters); **Import JSON**
@@ -111,7 +111,7 @@ markers** is enabled for the story.
 ## Export to HTML
 
 Click **Export HTML** to save a self-contained `.html` page that reproduces the
-story without GeoLibre. In-memory GeoJSON layers referenced by chapter effects
+story without GeoSpaX. In-memory GeoJSON layers referenced by chapter effects
 are inlined so the exported story behaves like the in-app preview. The page is a
 single static file you can host anywhere (GitHub Pages, Netlify, S3, or any web
 server).

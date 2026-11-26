@@ -182,7 +182,7 @@
     },
     "registryTrust": {
       "title_other": "安装插件？",
-      "description_other": "此链接将打开官方 GeoLibre 插件注册表中 {{count}} 个尚未安装的插件。安装后会将其添加到您的插件中并激活。"
+      "description_other": "此链接将打开官方 GeoSpaX 插件注册表中 {{count}} 个尚未安装的插件。安装后会将其添加到您的插件中并激活。"
     },
     "title": "管理插件",
     "searchAria": "搜索插件",
@@ -726,7 +726,7 @@
       "errorUrl": "请输入 LandXML URL。",
       "errorTooLarge": "远程 LandXML 文件超过了 100 MB 的下载上限。",
       "errorSelectType": "请至少选择一种 LandXML 对象类型。",
-      "errorMissingCrs": "此 LandXML 文件使用投影坐标。请输入其源坐标参考系，以便 GeoLibre 将其重投影到 WGS84。",
+      "errorMissingCrs": "此 LandXML 文件使用投影坐标。请输入其源坐标参考系，以便 GeoSpaX 将其重投影到 WGS84。",
       "errorGeographicCrsBounds": "坐标超出了地理经纬度范围。请选择此 LandXML 文件所用的投影源坐标参考系。",
       "summary": "{{surfaces}} 个曲面、{{alignments}} 条线形、{{profiles}} 个纵断面、{{points}} 个测量点",
       "objectTypes": "对象类型",
@@ -866,12 +866,12 @@
     },
     "mssql": {
       "defaultName": "SQL Server 图层",
-      "errorDesktopOnly": "SQL Server 图层需要 GeoLibre 桌面版。",
+      "errorDesktopOnly": "SQL Server 图层需要 GeoSpaX 桌面版。",
       "errorConnect": "无法连接到 SQL Server。",
       "errorPort": "请输入有效的 SQL Server 端口 (1–65535)。",
       "errorConnectFirst": "请先连接到 SQL Server。",
       "errorSelectTable": "请选择要加载的空间表。",
-      "desktopOnlyNotice": "SQL Server 图层仅在 GeoLibre 桌面版中可用。",
+      "desktopOnlyNotice": "SQL Server 图层仅在 GeoSpaX 桌面版中可用。",
       "savedConnection": "已保存的连接",
       "selectSavedConnection": "新建连接",
       "server": "服务器",
@@ -1588,13 +1588,13 @@
     "oauthFailed": "登录失败。请重试。",
     "oauthRefreshFailed": "无法刷新您的会话。请检查您的网络连接，然后重试。",
     "oauthSetupFailed": "无法启动桌面登录。请重启应用，并确认已安装的应用可以打开链接并访问共享服务器。粘贴的 API 令牌仍然可用。",
-    "oauthRestartSignIn": "此登录链接是在 GeoLibre 重启后打开的。请在此处重新开始登录；之前的授权码无法使用。",
+    "oauthRestartSignIn": "此登录链接是在 GeoSpaX 重启后打开的。请在此处重新开始登录；之前的授权码无法使用。",
     "reauthBody": "您的 {{shareHost}} 会话已过期。请重新登录以继续共享。",
     "errorUnauthorized": "您的 {{shareHost}} API 令牌无效或已过期。请在设置中更新它。",
     "reauthSignIn": "重新登录",
     "liveAt": "您的项目已发布在：",
     "credentialsRemoved": "未包含 {{count}} 个凭据字段。接收者需要提供自己的凭据或使用代理引用。",
-    "oauthSignOutIncomplete": "您已退出登录，但无法从系统钥匙串中移除已保存的登录信息，因此下次启动 GeoLibre 时可能会被恢复。请检查钥匙串是否可用，然后重新登录并再次退出登录。",
+    "oauthSignOutIncomplete": "您已退出登录，但无法从系统钥匙串中移除已保存的登录信息，因此下次启动 GeoSpaX 时可能会被恢复。请检查钥匙串是否可用，然后重新登录并再次退出登录。",
     "copyLink": "复制链接",
     "open": "打开",
     "done": "完成",
@@ -2335,17 +2335,17 @@
   },
   "startup": {
     "keychainWaitTitle": "正在等待系统钥匙串…",
-    "keychainWaitDetail": "GeoLibre 正在加载您已保存的凭据。如果系统要求输入密码以解锁钥匙串，请响应该提示以继续。该提示可能位于此窗口后面。"
+    "keychainWaitDetail": "GeoSpaX 正在加载您已保存的凭据。如果系统要求输入密码以解锁钥匙串，请响应该提示以继续。该提示可能位于此窗口后面。"
   },
   "settings": {
     "title": "设置",
     "description": "配置项目首选项和运行时设置。",
     "saveButton": "保存设置",
     "credentials": {
-      "keychain": "您在 GeoLibre 中保存的令牌和 API 密钥存储在系统钥匙串中。",
+      "keychain": "您在 GeoSpaX 中保存的令牌和 API 密钥存储在系统钥匙串中。",
       "projectKeychainUnavailable": "系统钥匙串中的项目凭据存储不可用。新的项目密钥仅保留在本次会话中；保存本地项目时会询问是将其保留在文件中还是移除。",
       "browser": "您在此处保存的令牌和 API 密钥存储在此浏览器的本地存储中，在此站点上运行的脚本可以读取它们。",
-      "unavailable": "无法使用您的系统钥匙串（{{error}}）。新凭据仅保留到 GeoLibre 关闭为止；之前保存的凭据可能会保留在浏览器存储中，直到迁移成功。"
+      "unavailable": "无法使用您的系统钥匙串（{{error}}）。新凭据仅保留到 GeoSpaX 关闭为止；之前保存的凭据可能会保留在浏览器存储中，直到迁移成功。"
     },
     "section": {
       "language": "语言",
@@ -2389,11 +2389,11 @@
         "role": "代入角色",
         "other": "其他"
       },
-      "environmentHelp": "使用启动 GeoLibre 时环境中的 AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY 和 AWS_SESSION_TOKEN。",
-      "instanceHelp": "使用运行 GeoLibre 的计算机的 IAM 角色：Web 身份令牌（EKS IRSA）、ECS 或 EKS 容器凭据，或 EC2 实例配置文件。",
+      "environmentHelp": "使用启动 GeoSpaX 时环境中的 AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY 和 AWS_SESSION_TOKEN。",
+      "instanceHelp": "使用运行 GeoSpaX 的计算机的 IAM 角色：Web 身份令牌（EKS IRSA）、ECS 或 EKS 容器凭据，或 EC2 实例配置文件。",
       "roleArn": "要代入的角色",
       "externalId": "外部 ID",
-      "roleHelp": "可选。GeoLibre 使用上述凭据调用 AWS STS AssumeRole，并以此角色读取存储桶，例如跨账户只读角色。",
+      "roleHelp": "可选。GeoSpaX 使用上述凭据调用 AWS STS AssumeRole，并以此角色读取存储桶，例如跨账户只读角色。",
       "accessKeyId": "访问密钥 ID",
       "secretAccessKey": "秘密访问密钥",
       "sessionToken": "会话令牌",
@@ -2497,7 +2497,7 @@
       "globeByDefault": "默认启用 3D 地球",
       "globeByDefaultHint": "在未提供启动项目或项目链接时，用于未命名的工作区。",
       "openS3Browser": "启动时打开 S3 浏览器",
-      "openS3BrowserHint": "每次启动 GeoLibre 时显示 S3 浏览器面板。打开项目时它会保持打开。",
+      "openS3BrowserHint": "每次启动 GeoSpaX 时显示 S3 浏览器面板。打开项目时它会保持打开。",
       "defaultView": "默认地图视图",
       "defaultViewHint": "为未命名的工作区设置中心点和缩放级别。",
       "longitude": "中心经度",
@@ -2505,7 +2505,7 @@
       "zoom": "缩放级别",
       "useCurrentView": "使用当前视图",
       "layerStyles": "默认图层样式",
-      "layerStylesHint": "选择一个图层样式文件（项目 → 导出 → 导出图层样式）。添加的图层若名称与文件中的某个样式匹配，将自动应用该样式。已打开项目中的图层保留其已保存的样式。GeoLibre 会保留该文件的副本，因此编辑文件后请重新选择。",
+      "layerStylesHint": "选择一个图层样式文件（项目 → 导出 → 导出图层样式）。添加的图层若名称与文件中的某个样式匹配，将自动应用该样式。已打开项目中的图层保留其已保存的样式。GeoSpaX 会保留该文件的副本，因此编辑文件后请重新选择。",
       "chooseLayerStyles": "选择文件",
       "clearLayerStyles": "清除",
       "noLayerStylesSelected": "未选择图层样式文件",
@@ -2605,8 +2605,8 @@
       "oauthSigningIn": "正在登录…",
       "oauthSignOut": "退出登录",
       "oauthWebLifetime": "访问令牌保存在内存中；刷新会话仅限于此浏览器标签页。关闭标签页后需要重新登录。",
-      "oauthDesktopKeychain": "您的登录信息保存在系统钥匙串中，因此重启后 GeoLibre 仍保持登录状态，直到您退出登录。",
-      "oauthDesktopSessionOnly": "此登录信息无法保存到您的系统钥匙串中，因此仅在 GeoLibre 关闭前有效。",
+      "oauthDesktopKeychain": "您的登录信息保存在系统钥匙串中，因此重启后 GeoSpaX 仍保持登录状态，直到您退出登录。",
+      "oauthDesktopSessionOnly": "此登录信息无法保存到您的系统钥匙串中，因此仅在 GeoSpaX 关闭前有效。",
       "accountLoading": "正在加载您的账户…",
       "accountRetry": "重试",
       "accountIdentity": "账户：{{account}}",
@@ -2636,7 +2636,7 @@
       "sessionRevoke": "撤销",
       "sessionRevoking": "正在撤销…",
       "revokeSessionConfirm": "撤销会话“{{label}}”？该设备将退出登录。此操作无法撤消。",
-      "revokeCurrentConfirm": "撤销当前会话“{{label}}”？您将立即退出 GeoLibre。",
+      "revokeCurrentConfirm": "撤销当前会话“{{label}}”？您将立即退出 GeoSpaX。",
       "revokeTokenConfirm": "撤销个人 API 令牌“{{label}}”？使用它的脚本和 CI 将停止工作。此操作无法撤消。",
       "revokeSessionConfirmButton": "是，撤销",
       "sessionCreated": "创建时间：{{date}}",
@@ -2724,7 +2724,7 @@
       "statusReady": "{{provider}} 已配置完成，可以使用。",
       "statusIncomplete": "请填写以下必填字段以启用 {{provider}}。",
       "secretsNote": "凭据保存在此设备本地，不在您共享的项目文件中，因此会在重启后保留。任何有权访问此设备的人都可以读取它们。",
-      "secretsNoteKeychain": "API 密钥和其他机密字段存储在系统钥匙串中，而不是您共享的项目文件中，因此重启后仍会保留。其他字段（如模型名称和 URL）保存在此设备上的 GeoLibre 设置中。",
+      "secretsNoteKeychain": "API 密钥和其他机密字段存储在系统钥匙串中，而不是您共享的项目文件中，因此重启后仍会保留。其他字段（如模型名称和 URL）保存在此设备上的 GeoSpaX 设置中。",
       "getCredentials": "在哪里获取 {{provider}} 凭据",
       "showValue": "显示 {{name}}",
       "hideValue": "隐藏 {{name}}",
@@ -2850,7 +2850,7 @@
         "notSet": "未设置",
         "getKey": "获取免费密钥",
         "saveFailed": "无法在此浏览器中保存该密钥。",
-        "saveFailedKeychain": "无法将密钥保存到系统钥匙串。该密钥在 GeoLibre 关闭前仍可使用。"
+        "saveFailedKeychain": "无法将密钥保存到系统钥匙串。该密钥在 GeoSpaX 关闭前仍可使用。"
       }
     }
   },
@@ -3550,7 +3550,7 @@
       "exportLayerStylesAsDesc": "请输入文件名。点击“保存”后，样式文件将下载到您浏览器的下载文件夹。",
       "exportLayerStylesFileName": "文件名",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "GeoLibre 图层样式",
+      "layerStylesFile": "GeoSpaX 图层样式",
       "layerStylesImported": "已导入图层样式",
       "layerStylesImportedSummary_other": "已根据“{{file}}”重新设置 {{count}} 个图层的样式。",
       "layerStylesUnused_other": "文件中有 {{count}} 个样式未匹配此项目中的任何图层：",
@@ -3669,7 +3669,7 @@
     },
     "windowClose": {
       "savePromptTitle": "关闭前保存更改？",
-      "savePromptDescription": "当前项目有未保存的更改。是否在关闭 GeoLibre 前保存？"
+      "savePromptDescription": "当前项目有未保存的更改。是否在关闭 GeoSpaX 前保存？"
     },
     "error": {
       "couldNotOpenProject": "无法打开项目。",
@@ -7900,7 +7900,7 @@
     "exportStyleError": "无法导出此图层的样式。",
     "importStyle": "导入样式（GeoSpaX URL / Mapbox GL / SLD / QML）…",
     "importStyleFromText": "从文本导入样式…",
-    "importStyleFromTextDescription": "粘贴 GeoLibre、Mapbox GL、SLD 或 QML 样式。格式将根据文本自动识别。",
+    "importStyleFromTextDescription": "粘贴 GeoSpaX、Mapbox GL、SLD 或 QML 样式。格式将根据文本自动识别。",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "导入",
     "openStyleManager": "已保存的样式（样式管理器）…",
@@ -8452,7 +8452,7 @@
     "windowCloseGuardFailed": "关闭窗口时不会提示保存未保存的更改。请在关闭前保存您的工作。",
     "windowCloseSaveFailed": "关闭前无法保存项目。",
     "windowCloseFailed": "无法关闭窗口。",
-    "nativeProjectPathFailed": "无法打开传递给 GeoLibre 的项目文件。",
+    "nativeProjectPathFailed": "无法打开传递给 GeoSpaX 的项目文件。",
     "kmlSuperOverlayReadFailed": "无法再次读取 KML Super-Overlay“{{name}}”，因此其瓦片为空白。",
     "projectControlFailed": "无法应用项目的“{{control}}”设置。",
     "pluginSnapshotFailed": "部分插件设置可能无法带到新的渲染器。",
@@ -8461,7 +8461,7 @@
     "panelRenderFailed": "面板“{{name}}”打开失败。",
     "sharedSettingsFailed": "无法从链接加载共享设置，因此将使用您自己的设置。",
     "sharedLanguageFailed": "无法切换到共享设置所要求的语言。",
-    "languageCatalogFailed": "无法加载{{language}}翻译，因此 GeoLibre 将显示英文。"
+    "languageCatalogFailed": "无法加载{{language}}翻译，因此 GeoSpaX 将显示英文。"
   },
   "shell": {
     "workspaceTitle": "GeoSpaX 地图工作区",
@@ -8950,7 +8950,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "下载此瓦片的完整 GeoParquet 文件",
       "dataset": "数据集",
-      "browseOnly": "GeoLibre 尚不支持搜索此数据集。请使用上方链接从其来源获取。",
+      "browseOnly": "GeoSpaX 尚不支持搜索此数据集。请使用上方链接从其来源获取。",
       "searchArea": "搜索区域",
       "modeView": "地图视图",
       "modeDraw": "绘制框",
@@ -9197,7 +9197,7 @@
       "liftSelected": "已选择 {{layer}} 中 {{polygons}} 个多边形内的 {{count}} 个点。",
       "liftInstances": "已从 {{layer}} 创建 {{objects}} 个 {{name}} 实例（{{count}} 个点）。",
       "fullFile": "带标签的完整文件",
-      "fullFileNote": "写入此点云的本地副本，并应用所有已保存的标签，而不仅限于此处加载的点。在 GeoLibre 服务器中运行。",
+      "fullFileNote": "写入此点云的本地副本，并应用所有已保存的标签，而不仅限于此处加载的点。在 GeoSpaX 服务器中运行。",
       "fullFileInput": "本地副本（.las、.laz 或 .copc.laz）",
       "fullFileOutput": "输出文件（.las 或 .laz）",
       "fullFileWrite": "写入文件",

@@ -182,7 +182,7 @@
     },
     "registryTrust": {
       "title_other": "플러그인을 설치하시겠습니까?",
-      "description_other": "이 링크는 공식 GeoLibre 플러그인 레지스트리에서 아직 설치되지 않은 플러그인 {{count}}개를 엽니다. 설치하면 플러그인 목록에 추가되고 활성화됩니다."
+      "description_other": "이 링크는 공식 GeoSpaX 플러그인 레지스트리에서 아직 설치되지 않은 플러그인 {{count}}개를 엽니다. 설치하면 플러그인 목록에 추가되고 활성화됩니다."
     },
     "title": "플러그인 관리",
     "searchAria": "플러그인 검색",
@@ -726,7 +726,7 @@
       "errorUrl": "LandXML URL을 입력하세요.",
       "errorTooLarge": "원격 LandXML 파일이 100 MB 다운로드 제한을 초과합니다.",
       "errorSelectType": "LandXML 객체 유형을 하나 이상 선택하세요.",
-      "errorMissingCrs": "이 LandXML 파일은 투영 좌표를 사용합니다. GeoLibre가 WGS84로 재투영할 수 있도록 원본 CRS를 입력하세요.",
+      "errorMissingCrs": "이 LandXML 파일은 투영 좌표를 사용합니다. GeoSpaX가 WGS84로 재투영할 수 있도록 원본 CRS를 입력하세요.",
       "errorGeographicCrsBounds": "좌표가 지리 경도·위도 범위를 벗어납니다. 이 LandXML 파일에서 사용하는 투영 원본 CRS를 선택하세요.",
       "summary": "표면 {{surfaces}}개, 선형 {{alignments}}개, 종단 {{profiles}}개, 측량점 {{points}}개",
       "objectTypes": "객체 유형",
@@ -866,12 +866,12 @@
     },
     "mssql": {
       "defaultName": "SQL Server 레이어",
-      "errorDesktopOnly": "SQL Server 레이어에는 GeoLibre Desktop이 필요합니다.",
+      "errorDesktopOnly": "SQL Server 레이어에는 GeoSpaX Desktop이 필요합니다.",
       "errorConnect": "SQL Server에 연결할 수 없습니다.",
       "errorPort": "올바른 SQL Server 포트(1–65535)를 입력하세요.",
       "errorConnectFirst": "먼저 SQL Server에 연결하세요.",
       "errorSelectTable": "불러올 공간 테이블을 선택하세요.",
-      "desktopOnlyNotice": "SQL Server 레이어는 GeoLibre Desktop에서만 사용할 수 있습니다.",
+      "desktopOnlyNotice": "SQL Server 레이어는 GeoSpaX Desktop에서만 사용할 수 있습니다.",
       "savedConnection": "저장된 연결",
       "selectSavedConnection": "새 연결",
       "server": "서버",
@@ -1588,13 +1588,13 @@
     "oauthFailed": "로그인에 실패했습니다. 다시 시도하세요.",
     "oauthRefreshFailed": "세션을 갱신할 수 없습니다. 연결을 확인하고 다시 시도하세요.",
     "oauthSetupFailed": "데스크톱 로그인을 시작할 수 없습니다. 앱을 다시 시작하고 설치된 앱이 링크를 열고 공유 서버에 연결할 수 있는지 확인하세요. 붙여넣은 API 토큰은 계속 사용할 수 있습니다.",
-    "oauthRestartSignIn": "이 로그인 링크는 GeoLibre가 다시 시작된 후에 열렸습니다. 여기에서 로그인을 다시 시작하세요. 이전 인증 코드는 사용할 수 없습니다.",
+    "oauthRestartSignIn": "이 로그인 링크는 GeoSpaX가 다시 시작된 후에 열렸습니다. 여기에서 로그인을 다시 시작하세요. 이전 인증 코드는 사용할 수 없습니다.",
     "reauthBody": "{{shareHost}} 세션이 만료되었습니다. 계속 공유하려면 다시 로그인하세요.",
     "errorUnauthorized": "{{shareHost}} API 토큰이 유효하지 않거나 만료되었습니다. 설정에서 업데이트하세요.",
     "reauthSignIn": "다시 로그인",
     "liveAt": "프로젝트가 게시된 위치:",
     "credentialsRemoved": "자격 증명 필드 {{count}}개가 포함되지 않았습니다. 수신자는 자신의 자격 증명을 제공하거나 브로커 참조를 사용해야 합니다.",
-    "oauthSignOutIncomplete": "로그아웃되었지만 저장된 로그인 정보를 시스템 키체인에서 제거할 수 없어 다음에 GeoLibre를 시작할 때 복원될 수 있습니다. 키체인을 사용할 수 있는지 확인한 다음 다시 로그인했다가 로그아웃하세요.",
+    "oauthSignOutIncomplete": "로그아웃되었지만 저장된 로그인 정보를 시스템 키체인에서 제거할 수 없어 다음에 GeoSpaX를 시작할 때 복원될 수 있습니다. 키체인을 사용할 수 있는지 확인한 다음 다시 로그인했다가 로그아웃하세요.",
     "copyLink": "링크 복사",
     "open": "열기",
     "done": "완료",
@@ -2335,17 +2335,17 @@
   },
   "startup": {
     "keychainWaitTitle": "시스템 키체인을 기다리는 중…",
-    "keychainWaitDetail": "GeoLibre가 저장된 자격 증명을 불러오는 중입니다. 시스템에서 키체인 잠금 해제 암호를 요청했다면 계속하려면 해당 프롬프트에 응답하세요. 이 창 뒤에 있을 수 있습니다."
+    "keychainWaitDetail": "GeoSpaX가 저장된 자격 증명을 불러오는 중입니다. 시스템에서 키체인 잠금 해제 암호를 요청했다면 계속하려면 해당 프롬프트에 응답하세요. 이 창 뒤에 있을 수 있습니다."
   },
   "settings": {
     "title": "설정",
     "description": "프로젝트 환경설정과 런타임 설정을 구성합니다.",
     "saveButton": "설정 저장",
     "credentials": {
-      "keychain": "GeoLibre에 저장한 토큰과 API 키는 시스템 키체인에 저장됩니다.",
+      "keychain": "GeoSpaX에 저장한 토큰과 API 키는 시스템 키체인에 저장됩니다.",
       "projectKeychainUnavailable": "시스템 키체인의 프로젝트 자격 증명 저장소를 사용할 수 없습니다. 새 프로젝트 키는 이 세션에만 유지되며, 로컬 프로젝트를 저장할 때 파일에 보관할지 제거할지 묻습니다.",
       "browser": "여기에 저장한 토큰과 API 키는 이 브라우저의 로컬 스토리지에 저장되며, 이 사이트에서 실행되는 스크립트가 읽을 수 있습니다.",
-      "unavailable": "시스템 키체인을 사용할 수 없습니다({{error}}). 새 자격 증명은 GeoLibre를 닫을 때까지만 유지되며, 이전에 저장된 자격 증명은 마이그레이션이 성공할 때까지 브라우저 저장소에 남아 있을 수 있습니다."
+      "unavailable": "시스템 키체인을 사용할 수 없습니다({{error}}). 새 자격 증명은 GeoSpaX를 닫을 때까지만 유지되며, 이전에 저장된 자격 증명은 마이그레이션이 성공할 때까지 브라우저 저장소에 남아 있을 수 있습니다."
     },
     "section": {
       "language": "언어",
@@ -2389,11 +2389,11 @@
         "role": "역할 수임",
         "other": "기타"
       },
-      "environmentHelp": "GeoLibre를 시작한 환경의 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN을 사용합니다.",
-      "instanceHelp": "GeoLibre가 실행되는 머신의 IAM 역할을 사용합니다: 웹 ID 토큰(EKS IRSA), ECS 또는 EKS 컨테이너 자격 증명, 또는 EC2 인스턴스 프로필.",
+      "environmentHelp": "GeoSpaX를 시작한 환경의 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN을 사용합니다.",
+      "instanceHelp": "GeoSpaX가 실행되는 머신의 IAM 역할을 사용합니다: 웹 ID 토큰(EKS IRSA), ECS 또는 EKS 컨테이너 자격 증명, 또는 EC2 인스턴스 프로필.",
       "roleArn": "수임할 역할",
       "externalId": "외부 ID",
-      "roleHelp": "선택 사항입니다. GeoLibre가 위의 자격 증명으로 AWS STS AssumeRole을 호출하고 이 역할로 버킷을 읽습니다(예: 교차 계정 읽기 전용 역할).",
+      "roleHelp": "선택 사항입니다. GeoSpaX가 위의 자격 증명으로 AWS STS AssumeRole을 호출하고 이 역할로 버킷을 읽습니다(예: 교차 계정 읽기 전용 역할).",
       "accessKeyId": "액세스 키 ID",
       "secretAccessKey": "비밀 액세스 키",
       "sessionToken": "세션 토큰",
@@ -2497,7 +2497,7 @@
       "globeByDefault": "기본적으로 3D 지구본 사용",
       "globeByDefaultHint": "시작 프로젝트나 프로젝트 링크가 지정되지 않은 경우 제목 없는 작업 공간에 사용됩니다.",
       "openS3Browser": "시작 시 S3 브라우저 열기",
-      "openS3BrowserHint": "GeoLibre를 시작할 때마다 S3 브라우저 패널을 표시합니다. 프로젝트를 열어도 계속 열려 있습니다.",
+      "openS3BrowserHint": "GeoSpaX를 시작할 때마다 S3 브라우저 패널을 표시합니다. 프로젝트를 열어도 계속 열려 있습니다.",
       "defaultView": "기본 지도 보기",
       "defaultViewHint": "제목 없는 작업 공간의 중심과 확대/축소 수준을 설정합니다.",
       "longitude": "중심 경도",
@@ -2505,7 +2505,7 @@
       "zoom": "확대/축소 레벨",
       "useCurrentView": "현재 보기 사용",
       "layerStyles": "기본 레이어 스타일",
-      "layerStylesHint": "레이어 스타일 파일을 선택하세요(프로젝트 → 내보내기 → 레이어 스타일 내보내기). 추가하는 레이어의 이름이 파일의 스타일과 일치하면 자동으로 스타일이 적용됩니다. 열린 프로젝트의 레이어는 저장된 스타일을 유지합니다. GeoLibre는 파일 사본을 보관하므로 파일을 편집한 후에는 다시 선택하세요.",
+      "layerStylesHint": "레이어 스타일 파일을 선택하세요(프로젝트 → 내보내기 → 레이어 스타일 내보내기). 추가하는 레이어의 이름이 파일의 스타일과 일치하면 자동으로 스타일이 적용됩니다. 열린 프로젝트의 레이어는 저장된 스타일을 유지합니다. GeoSpaX는 파일 사본을 보관하므로 파일을 편집한 후에는 다시 선택하세요.",
       "chooseLayerStyles": "파일 선택",
       "clearLayerStyles": "지우기",
       "noLayerStylesSelected": "선택한 레이어 스타일 파일 없음",
@@ -2605,8 +2605,8 @@
       "oauthSigningIn": "로그인 중…",
       "oauthSignOut": "로그아웃",
       "oauthWebLifetime": "액세스 토큰은 메모리에 보관되며, 갱신 세션은 이 브라우저 탭으로 한정됩니다. 탭을 닫으면 다시 로그인해야 합니다.",
-      "oauthDesktopKeychain": "로그인 정보가 시스템 키체인에 보관되므로 로그아웃할 때까지 다시 시작한 후에도 GeoLibre에 로그인된 상태가 유지됩니다.",
-      "oauthDesktopSessionOnly": "이 로그인 정보를 시스템 키체인에 저장할 수 없어 GeoLibre를 닫을 때까지만 유지됩니다.",
+      "oauthDesktopKeychain": "로그인 정보가 시스템 키체인에 보관되므로 로그아웃할 때까지 다시 시작한 후에도 GeoSpaX에 로그인된 상태가 유지됩니다.",
+      "oauthDesktopSessionOnly": "이 로그인 정보를 시스템 키체인에 저장할 수 없어 GeoSpaX를 닫을 때까지만 유지됩니다.",
       "accountLoading": "계정을 불러오는 중…",
       "accountRetry": "다시 시도",
       "accountIdentity": "계정: {{account}}",
@@ -2636,7 +2636,7 @@
       "sessionRevoke": "폐기",
       "sessionRevoking": "폐기 중…",
       "revokeSessionConfirm": "세션 \"{{label}}\"을(를) 폐기할까요? 해당 기기는 로그아웃됩니다. 이 작업은 되돌릴 수 없습니다.",
-      "revokeCurrentConfirm": "현재 세션 \"{{label}}\"을(를) 폐기할까요? GeoLibre에서 즉시 로그아웃됩니다.",
+      "revokeCurrentConfirm": "현재 세션 \"{{label}}\"을(를) 폐기할까요? GeoSpaX에서 즉시 로그아웃됩니다.",
       "revokeTokenConfirm": "개인 API 토큰 \"{{label}}\"을(를) 폐기할까요? 이 토큰을 사용하는 스크립트와 CI가 작동을 멈춥니다. 이 작업은 되돌릴 수 없습니다.",
       "revokeSessionConfirmButton": "예, 폐기",
       "sessionCreated": "생성: {{date}}",
@@ -2724,7 +2724,7 @@
       "statusReady": "{{provider}}이(가) 구성되어 사용할 준비가 되었습니다.",
       "statusIncomplete": "{{provider}}을(를) 활성화하려면 아래 필수 필드를 입력하세요.",
       "secretsNote": "자격 증명은 공유하는 프로젝트 파일이 아니라 이 기기에 로컬로 저장되므로 재시작 후에도 유지됩니다. 이 기기에 접근할 수 있는 사람은 누구나 읽을 수 있습니다.",
-      "secretsNoteKeychain": "API 키와 기타 비밀 필드는 공유하는 프로젝트 파일이 아닌 시스템 키체인에 저장되므로 다시 시작해도 유지됩니다. 모델 이름, URL 같은 다른 필드는 이 기기의 GeoLibre 설정에 저장됩니다.",
+      "secretsNoteKeychain": "API 키와 기타 비밀 필드는 공유하는 프로젝트 파일이 아닌 시스템 키체인에 저장되므로 다시 시작해도 유지됩니다. 모델 이름, URL 같은 다른 필드는 이 기기의 GeoSpaX 설정에 저장됩니다.",
       "getCredentials": "{{provider}} 자격 증명을 받는 방법",
       "showValue": "{{name}} 표시",
       "hideValue": "{{name}} 숨기기",
@@ -2850,7 +2850,7 @@
         "notSet": "설정되지 않음",
         "getKey": "무료 키 받기",
         "saveFailed": "이 브라우저에 키를 저장할 수 없습니다.",
-        "saveFailedKeychain": "키를 시스템 키체인에 저장할 수 없습니다. GeoLibre를 닫을 때까지는 사용할 수 있습니다."
+        "saveFailedKeychain": "키를 시스템 키체인에 저장할 수 없습니다. GeoSpaX를 닫을 때까지는 사용할 수 있습니다."
       }
     }
   },
@@ -3551,7 +3551,7 @@
       "exportLayerStylesAsDesc": "파일 이름을 입력하세요. 저장을 클릭하면 스타일 파일이 브라우저의 다운로드 폴더로 다운로드됩니다.",
       "exportLayerStylesFileName": "파일 이름",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "GeoLibre 레이어 스타일",
+      "layerStylesFile": "GeoSpaX 레이어 스타일",
       "layerStylesImported": "레이어 스타일을 가져왔습니다",
       "layerStylesImportedSummary_other": "“{{file}}”에서 레이어 {{count}}개의 스타일을 변경했습니다.",
       "layerStylesUnused_other": "파일의 스타일 {{count}}개가 이 프로젝트의 어떤 레이어와도 일치하지 않았습니다:",
@@ -3669,7 +3669,7 @@
     },
     "windowClose": {
       "savePromptTitle": "닫기 전에 변경 사항을 저장하시겠습니까?",
-      "savePromptDescription": "현재 프로젝트에 저장되지 않은 변경 사항이 있습니다. GeoLibre를 닫기 전에 저장하시겠습니까?"
+      "savePromptDescription": "현재 프로젝트에 저장되지 않은 변경 사항이 있습니다. GeoSpaX를 닫기 전에 저장하시겠습니까?"
     },
     "error": {
       "couldNotOpenProject": "프로젝트를 열 수 없습니다.",
@@ -7900,7 +7900,7 @@
     "exportStyleError": "이 레이어의 스타일을 내보낼 수 없습니다.",
     "importStyle": "스타일 가져오기(GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "텍스트에서 스타일 가져오기…",
-    "importStyleFromTextDescription": "GeoLibre, Mapbox GL, SLD 또는 QML 스타일을 붙여 넣으세요. 형식은 텍스트에서 자동으로 판별됩니다.",
+    "importStyleFromTextDescription": "GeoSpaX, Mapbox GL, SLD 또는 QML 스타일을 붙여 넣으세요. 형식은 텍스트에서 자동으로 판별됩니다.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "가져오기",
     "openStyleManager": "저장된 스타일 (스타일 관리자)…",
@@ -8452,7 +8452,7 @@
     "windowCloseGuardFailed": "창을 닫을 때 저장하지 않은 변경 내용에 대한 확인 메시지가 표시되지 않습니다. 닫기 전에 작업을 저장하세요.",
     "windowCloseSaveFailed": "닫기 전에 프로젝트를 저장할 수 없습니다.",
     "windowCloseFailed": "창을 닫을 수 없습니다.",
-    "nativeProjectPathFailed": "GeoLibre에 전달된 프로젝트 파일을 열 수 없습니다.",
+    "nativeProjectPathFailed": "GeoSpaX에 전달된 프로젝트 파일을 열 수 없습니다.",
     "kmlSuperOverlayReadFailed": "KML Super-Overlay \"{{name}}\"을(를) 다시 읽을 수 없어 타일이 비어 있습니다.",
     "projectControlFailed": "프로젝트의 \"{{control}}\" 설정을 적용할 수 없습니다.",
     "pluginSnapshotFailed": "일부 플러그인 설정이 새 렌더러로 이어지지 않을 수 있습니다.",
@@ -8461,7 +8461,7 @@
     "panelRenderFailed": "\"{{name}}\" 패널을 열지 못했습니다.",
     "sharedSettingsFailed": "링크의 공유 설정을 불러올 수 없어 사용자 설정을 사용합니다.",
     "sharedLanguageFailed": "공유 설정이 요청한 언어로 전환할 수 없습니다.",
-    "languageCatalogFailed": "{{language}} 번역을 불러올 수 없어 GeoLibre가 영어로 표시됩니다."
+    "languageCatalogFailed": "{{language}} 번역을 불러올 수 없어 GeoSpaX가 영어로 표시됩니다."
   },
   "shell": {
     "workspaceTitle": "GeoSpaX 지도 작업 공간",
@@ -8950,7 +8950,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "이 타일의 GeoParquet 파일 전체 다운로드",
       "dataset": "데이터셋",
-      "browseOnly": "GeoLibre에서는 아직 이 데이터셋 검색을 지원하지 않습니다. 위 링크를 사용해 출처에서 받으세요.",
+      "browseOnly": "GeoSpaX에서는 아직 이 데이터셋 검색을 지원하지 않습니다. 위 링크를 사용해 출처에서 받으세요.",
       "searchArea": "검색 영역",
       "modeView": "지도 화면",
       "modeDraw": "상자 그리기",
@@ -9197,7 +9197,7 @@
       "liftSelected": "{{layer}}의 폴리곤 {{polygons}}개 내부에서 포인트 {{count}}개를 선택했습니다.",
       "liftInstances": "{{layer}}에서 {{name}}의 인스턴스 {{objects}}개를 만들었습니다(포인트 {{count}}개).",
       "fullFile": "레이블이 적용된 전체 파일",
-      "fullFileNote": "여기서 로드된 포인트뿐 아니라 저장된 모든 레이블을 적용한 이 포인트 클라우드의 로컬 사본을 씁니다. GeoLibre 서버에서 실행됩니다.",
+      "fullFileNote": "여기서 로드된 포인트뿐 아니라 저장된 모든 레이블을 적용한 이 포인트 클라우드의 로컬 사본을 씁니다. GeoSpaX 서버에서 실행됩니다.",
       "fullFileInput": "로컬 사본 (.las, .laz 또는 .copc.laz)",
       "fullFileOutput": "출력 파일 (.las 또는 .laz)",
       "fullFileWrite": "파일 쓰기",

@@ -278,7 +278,7 @@ export const maplibreGeoEditorPlugin: GeoLibrePlugin = {
         return activateGeoEditor(app);
       },
       (error: unknown) => {
-        console.error("[GeoLibre] Failed to load the Geo Editor", error);
+        console.error("[GeoSpaX] Failed to load the Geo Editor", error);
         return false;
       },
     );

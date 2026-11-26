@@ -6,9 +6,9 @@
     "summary": "{{count}} שכבות · זום {{zoom}}",
     "restore": "שחזר",
     "discard": "מחק",
-    "restoreError": "לא ניתן לשחזר את תמונת המצב הזו. ייתכן שהיא פגומה או אינה תואמת לגרסת GeoLibre הזו.",
+    "restoreError": "לא ניתן לשחזר את תמונת המצב הזו. ייתכן שהיא פגומה או אינה תואמת לגרסת GeoSpaX הזו.",
     "recoveryTitle": "לשחזר עבודה שלא נשמרה?",
-    "recoveryDescription": "GeoLibre לא נסגר כראוי. קיימת שמירה אוטומטית חדשה יותר של „{{name}}”.",
+    "recoveryDescription": "GeoSpaX לא נסגר כראוי. קיימת שמירה אוטומטית חדשה יותר של „{{name}}”.",
     "autosavePaused": "השמירה האוטומטית מושהית: הפרויקט הזה גדול מ-{{limit}} MB, ולכן לא נשמרות תמונות מצב חדשות. יש לשמור אותו בדיסק כדי לשמור על העבודה שלך.",
     "diff": {
       "compare": "השווה",
@@ -105,7 +105,7 @@
     "libraryImportFailed": "לא ניתן לקרוא את קובץ ספריית השכבות הזה.",
     "libraryExportFailed": "לא ניתן לייצא את ספריית השכבות.",
     "libraryLayerMissing": "השכבה השמורה הזו כבר לא קיימת.",
-    "libraryLayerNeedsDesktop": "השכבה השמורה הזו קוראת קובץ מהדיסק, ולכן היא דורשת את GeoLibre Desktop. יש להוסיף את הקובץ שוב כדי לשמור רשומה חדשה.",
+    "libraryLayerNeedsDesktop": "השכבה השמורה הזו קוראת קובץ מהדיסק, ולכן היא דורשת את GeoSpaX Desktop. יש להוסיף את הקובץ שוב כדי לשמור רשומה חדשה.",
     "libraryLayerConfigNotApplied": "הקובץ עבור „{{name}}” נוסף, אך לא ניתן היה להתאים את הסגנון השמור שלו לשכבה יחידה, ולכן הוא לא הוחל מחדש.",
     "libraryLayerJoinsUnresolved_one": "השכבה נוספה, אך לא ניתן היה להחיל מחדש צירוף שמור אחד: השכבה שאליה הוא מצרף אינה נמצאת בפרויקט הזה.",
     "libraryLayerJoinsUnresolved_other": "השכבה נוספה, אך לא ניתן היה להחיל מחדש {{count}} צירופים שמורים: השכבות שאליהן הם מצרפים אינן נמצאות בפרויקט הזה.",
@@ -113,8 +113,8 @@
   },
   "about": {
     "trigger": "אודות",
-    "title": "אודות GeoLibre",
-    "description": "GeoLibre היא פלטפורמת GIS קלת משקל מבוססת ענן.",
+    "title": "אודות GeoSpaX",
+    "description": "GeoSpaX היא פלטפורמת GIS קלת משקל מבוססת ענן.",
     "version": "גרסה",
     "checkForUpdates": "בדוק עדכונים",
     "tryAgain": "נסה שוב",
@@ -133,7 +133,7 @@
     "steps": {
       "download": "יש להוריד את קובץ ההתקנה עבור הפלטפורמה שלך מדף ההורדות.",
       "install": "יש להריץ את קובץ ההתקנה. הפרויקטים המקומיים, ההגדרות ומפתחות ה-API שלך יישמרו.",
-      "reopen": "יש לפתוח מחדש את GeoLibre כדי להשלים את העדכון."
+      "reopen": "יש לפתוח מחדש את GeoSpaX כדי להשלים את העדכון."
     },
     "severity": {
       "major": "גרסה ראשית",
@@ -152,7 +152,7 @@
       "noTag": "הגרסה האחרונה אינה כוללת תג גרסה.",
       "network": "לא ניתן להתחבר ל-GitHub. יש לבדוק את החיבור ולנסות שוב.",
       "viewDownloads": "הצג הורדות",
-      "viewDownloadsHint": "פותח את דף ההורדות של GeoLibre בדפדפן כדי שתוכל לבדוק את הגרסה האחרונה באופן ידני."
+      "viewDownloadsHint": "פותח את דף ההורדות של GeoSpaX בדפדפן כדי שתוכל לבדוק את הגרסה האחרונה באופן ידני."
     },
     "startup": {
       "title": "עדכון זמין",
@@ -165,7 +165,7 @@
     }
   },
   "masBuild": {
-    "unavailable": "תכונה זו אינה זמינה בגרסת Mac App Store של GeoLibre Desktop."
+    "unavailable": "תכונה זו אינה זמינה בגרסת Mac App Store של GeoSpaX Desktop."
   },
   "bookmark": {
     "captureStateLabel": "כלול את מצב השכבות המלא (פעילות, לא פעילות וסדר השכבות)",
@@ -183,7 +183,7 @@
       "title": "לטעון תוספים מהפרויקט הזה?",
       "description_one": "הפרויקט הזה מבקש לטעון תוסף חיצוני אחד מכתובת URL שלא התקנת. תוספים מריצים קוד עם גישה מלאה לאפליקציה.",
       "description_other": "הפרויקט הזה מבקש לטעון {{count}} תוספים חיצוניים מכתובות URL שלא התקנת. תוספים מריצים קוד עם גישה מלאה לאפליקציה.",
-      "warning": "יש לטעון תוספים רק ממקורות שאתה סומך עליהם. תוספים שנטענו פועלים באותן הרשאות כמו GeoLibre עצמו.",
+      "warning": "יש לטעון תוספים רק ממקורות שאתה סומך עליהם. תוספים שנטענו פועלים באותן הרשאות כמו GeoSpaX עצמו.",
       "trustButton": "סמוך וטען",
       "dismissButton": "אל תטען",
       "description_two": "הפרויקט הזה מבקש לטעון {{count}} תוספים חיצוניים מכתובות URL שלא התקנת. תוספים מריצים קוד עם גישה מלאה לאפליקציה."
@@ -192,9 +192,9 @@
       "title_one": "להתקין את התוסף הזה?",
       "title_two": "להתקין את התוספים האלה?",
       "title_other": "להתקין את התוספים האלה?",
-      "description_one": "קישור זה פותח תוסף ממרשם התוספים הרשמי של GeoLibre שעדיין לא הותקן. התקנתו תוסיף אותו לתוספים שלך ותפעיל אותו.",
-      "description_two": "קישור זה פותח {{count}} תוספים ממרשם התוספים הרשמי של GeoLibre שעדיין לא הותקנו. התקנתם תוסיף אותם לתוספים שלך ותפעיל אותם.",
-      "description_other": "קישור זה פותח {{count}} תוספים ממרשם התוספים הרשמי של GeoLibre שעדיין לא הותקנו. התקנתם תוסיף אותם לתוספים שלך ותפעיל אותם."
+      "description_one": "קישור זה פותח תוסף ממרשם התוספים הרשמי של GeoSpaX שעדיין לא הותקן. התקנתו תוסיף אותו לתוספים שלך ותפעיל אותו.",
+      "description_two": "קישור זה פותח {{count}} תוספים ממרשם התוספים הרשמי של GeoSpaX שעדיין לא הותקנו. התקנתם תוסיף אותם לתוספים שלך ותפעיל אותם.",
+      "description_other": "קישור זה פותח {{count}} תוספים ממרשם התוספים הרשמי של GeoSpaX שעדיין לא הותקנו. התקנתם תוסיף אותם לתוספים שלך ותפעיל אותם."
     },
     "title": "ניהול תוספים",
     "searchAria": "חיפוש תוספים",
@@ -211,7 +211,7 @@
     "openHomepageAria": "פתח את דף הבית של {{name}}",
     "byAuthor": "מאת {{author}}",
     "updateAvailable": "עדכון זמין",
-    "requiresVersion": "דורש GeoLibre {{version}}+",
+    "requiresVersion": "דורש GeoSpaX {{version}}+",
     "install": "התקן",
     "installAria": "התקן את {{name}}",
     "removeConfirm": "להסיר?",
@@ -222,10 +222,10 @@
     "updateAria": "עדכן את {{name}}",
     "loading": "טוען…",
     "installed": "מותקן",
-    "settingsIntro": "GeoLibre תמיד סורק את תיקיית התוספים בנתוני האפליקציה שלו. ניתן להתקין תוסף ארוז (.zip) מקובץ, או להוסיף תיקיות מקומיות נוספות (בשולחן העבודה בלבד). כתובות URL של מניפסט (כולל התקנות מהמרקטפלייס) נטענות דרך הרשת; שינויים כאן חלים מיד.",
+    "settingsIntro": "GeoSpaX תמיד סורק את תיקיית התוספים בנתוני האפליקציה שלו. ניתן להתקין תוסף ארוז (.zip) מקובץ, או להוסיף תיקיות מקומיות נוספות (בשולחן העבודה בלבד). כתובות URL של מניפסט (כולל התקנות מהמרקטפלייס) נטענות דרך הרשת; שינויים כאן חלים מיד.",
     "installFromFile": "התקן מקובץ",
     "chooseZip": "בחר .zip…",
-    "installFromFileHintDesktop": "העתק ארכיון תוסף ארוז לתיקיית התוספים של GeoLibre.",
+    "installFromFileHintDesktop": "העתק ארכיון תוסף ארוז לתיקיית התוספים של GeoSpaX.",
     "installFromFileHintWeb": "טען ארכיון תוסף ארוז; הוא נשמר בדפדפן שלך ונטען מחדש בביקור הבא.",
     "localDirectories": "תיקיות מקומיות",
     "directoryAria": "תיקיית תוספים",
@@ -240,7 +240,7 @@
     "errorDirectoryPicker": "לא ניתן לפתוח את בורר התיקיות.",
     "errorInstall": "לא ניתן להתקין את התוסף.",
     "errorUninstall": "לא ניתן להסיר את התקנת התוסף.",
-    "description": "עיון, התקנה, עדכון והסרה של תוספים חיצוניים של GeoLibre. התוספים מופיעים ב<registryLink>מרשם התוספים של GeoLibre</registryLink>.",
+    "description": "עיון, התקנה, עדכון והסרה של תוספים חיצוניים של GeoSpaX. התוספים מופיעים ב<registryLink>מרשם התוספים של GeoSpaX</registryLink>.",
     "policySideloadDisabled": "התקנת תוספים שלא מהמרשם מושבתת על ידי מדיניות הפריסה.",
     "policyBlocked": "התוסף „{{pluginId}}” חסום על ידי מדיניות הפריסה.",
     "policyBlocklisted": "התוסף „{{pluginId}}” נחסם על ידי מאגר התוספים: {{reason}}",
@@ -349,7 +349,7 @@
     "add": "הוסף",
     "ok": "אישור",
     "done": "סיום",
-    "openWebApp": "פתח את אפליקציית הווב של GeoLibre"
+    "openWebApp": "פתח את אפליקציית הווב של GeoSpaX"
   },
   "addData": {
     "title": "הוספת נתונים",
@@ -404,7 +404,7 @@
       },
       "gdb": {
         "label": "הוסף שכבת File Geodatabase",
-        "description": "הוסף שכבה מתוך Esri File Geodatabase (תיקיית ‎.gdb). השכבה נקראת באמצעות שרת GeoLibre המקומי ומוטלת מחדש ל-WGS84."
+        "description": "הוסף שכבה מתוך Esri File Geodatabase (תיקיית ‎.gdb). השכבה נקראת באמצעות שרת GeoSpaX המקומי ומוטלת מחדש ל-WGS84."
       },
       "photos": {
         "label": "הוסף תמונות מתויגות גאוגרפית",
@@ -802,8 +802,8 @@
       "layerPlaceholder": "יש לבחור קודם Geodatabase",
       "readingLayers": "קורא שכבות...",
       "layerOption": "{{name}} ({{type}}, {{count}} ישויות)",
-      "help": "טבלאות שמכילות מאפיינים בלבד אינן מוצגות. מחלקת הישויות שנבחרה נטענת דרך שרת GeoLibre המקומי ומוטלת מחדש ל-WGS84.",
-      "desktopOnly": "שכבות File Geodatabase זמינות רק ב-GeoLibre Desktop. התכונה הזו קוראת תיקיית ‎.gdb מקומית דרך שרת GeoLibre המקומי, שאין ליישום האינטרנט גישה אליו.",
+      "help": "טבלאות שמכילות מאפיינים בלבד אינן מוצגות. מחלקת הישויות שנבחרה נטענת דרך שרת GeoSpaX המקומי ומוטלת מחדש ל-WGS84.",
+      "desktopOnly": "שכבות File Geodatabase זמינות רק ב-GeoLibre Desktop. התכונה הזו קוראת תיקיית ‎.gdb מקומית דרך שרת GeoSpaX המקומי, שאין ליישום האינטרנט גישה אליו.",
       "readError": "לא ניתן היה לקרוא את ה-File Geodatabase הזה.",
       "convertError": "לא ניתן היה לטעון את מחלקת הישויות הזו.",
       "errorNotGdb": "יש לבחור תיקייה שמסתיימת ב-‎.gdb (‏Esri File Geodatabase).",
@@ -902,7 +902,7 @@
     },
     "mssql": {
       "defaultName": "שכבת SQL Server",
-      "errorDesktopOnly": "שכבות SQL Server דורשות את GeoLibre Desktop.",
+      "errorDesktopOnly": "שכבות SQL Server דורשות את GeoSpaX Desktop.",
       "errorConnect": "לא ניתן להתחבר ל-SQL Server.",
       "errorPort": "יש להזין פורט SQL Server תקין (1–65535).",
       "errorConnectFirst": "יש להתחבר תחילה ל-SQL Server.",
@@ -955,7 +955,7 @@
     },
     "postgres": {
       "defaultName": "שכבת PostgreSQL",
-      "errorDesktopOnly": "שכבות PostgreSQL דורשות את GeoLibre Desktop.",
+      "errorDesktopOnly": "שכבות PostgreSQL דורשות את GeoSpaX Desktop.",
       "errorConnectionString": "יש להזין מחרוזת חיבור ל-PostgreSQL.",
       "statusCheckingBinary": "בודק את הקובץ הבינארי של Martin...",
       "statusDownloaded": "Martin הורד. מפעיל שרת מקומי...",
@@ -1518,7 +1518,7 @@
     "nmeaConnectFailed": "לא ניתן היה להתחבר למקלט.",
     "nmeaDisconnected": "המקלט התנתק.",
     "nmeaUnsupportedDevice": "לא נמצא שירות NMEA במכשיר הזה. ייתכן שזהו מקלט Bluetooth קלאסי, שיש לצמד אותו בהגדרות המערכת ואז לחבר אותו כאן כיציאה טורית.",
-    "nmeaUnsupported": "קריאת מקלט NMEA דורשת את ממשקי Web Serial או Web Bluetooth, שדפדפן זה אינו מספק. פתח את GeoLibre בדפדפן מבוסס Chromium כגון Chrome או Edge.",
+    "nmeaUnsupported": "קריאת מקלט NMEA דורשת את ממשקי Web Serial או Web Bluetooth, שדפדפן זה אינו מספק. פתח את GeoSpaX בדפדפן מבוסס Chromium כגון Chrome או Edge.",
     "nmeaSerialUnsupported": "Web Serial אינו זמין כאן, ולכן לא ניתן לפתוח מקלטים טוריים.",
     "nmeaBluetoothUnsupported": "Web Bluetooth אינו זמין כאן, ולכן לא ניתן לפתוח מקלטי Bluetooth Low Energy.",
     "nmeaBluetoothHint": "רוב מקלטי ה-GPS מסוג Bluetooth משתמשים ב-Bluetooth קלאסי: צמד אותם בהגדרות המערכת והם יופיעו כאן כיציאה טורית. השתמש ב\"התחבר ב-Bluetooth\" רק עבור מקלטי Bluetooth Low Energy.",
@@ -1900,7 +1900,7 @@
       "groupNavigation": "קבץ חץ צפון וסרגל קנה מידה",
       "footer": "טקסט כותרת תחתונה",
       "date": "תאריך",
-      "attribution": "כלול קרדיט של GeoLibre",
+      "attribution": "כלול קרדיט של GeoSpaX",
       "pageBorder": "מסגרת עמוד",
       "infoBlock": "בלוק מידע (בלוק כותרת)",
       "colorbar": "סרגל צבעים",
@@ -2202,7 +2202,7 @@
   },
   "auth": {
     "unavailableTitle": "ההתחברות אינה זמינה",
-    "unavailableDescription": "GeoLibre לא הצליח להתחבר לשירות ההתחברות, ולכן אינו יכול לדעת אם אתה מחובר. בדרך כלל מדובר בתקלה זמנית; אם היא נמשכת, ייתכן שיש לבדוק את הגדרות האימות של הפריסה הזו.",
+    "unavailableDescription": "GeoSpaX לא הצליח להתחבר לשירות ההתחברות, ולכן אינו יכול לדעת אם אתה מחובר. בדרך כלל מדובר בתקלה זמנית; אם היא נמשכת, ייתכן שיש לבדוק את הגדרות האימות של הפריסה הזו.",
     "retry": "נסה שוב",
     "signInTitle": "התחבר ל-GeoLibre",
     "signInDescription": "הפריסה הזו דורשת חשבון. תועבר לדף התחברות מאובטח ותוחזר לכאן.",
@@ -2437,7 +2437,7 @@
   },
   "startup": {
     "keychainWaitTitle": "ממתין למחזיק המפתחות של המערכת…",
-    "keychainWaitDetail": "GeoLibre טוען את פרטי ההזדהות השמורים שלך. אם המערכת ביקשה סיסמה כדי לפתוח את מחזיק המפתחות, ענה לבקשה כדי להמשיך. ייתכן שהיא מוסתרת מאחורי חלון זה."
+    "keychainWaitDetail": "GeoSpaX טוען את פרטי ההזדהות השמורים שלך. אם המערכת ביקשה סיסמה כדי לפתוח את מחזיק המפתחות, ענה לבקשה כדי להמשיך. ייתכן שהיא מוסתרת מאחורי חלון זה."
   },
   "settings": {
     "title": "הגדרות",
@@ -2447,7 +2447,7 @@
       "keychain": "אסימונים ומפתחות API שאתה שומר ב-GeoLibre מאוחסנים במחזיק המפתחות של המערכת.",
       "projectKeychainUnavailable": "אחסון פרטי הזדהות של פרויקטים במחזיק המפתחות של המערכת אינו זמין. מפתחות פרויקט חדשים נשארים בהפעלה זו; בשמירת פרויקט מקומי תישאל אם לשמור אותם בקובץ או להסיר אותם.",
       "browser": "אסימונים ומפתחות API שאתה שומר כאן מאוחסנים באחסון המקומי של דפדפן זה, שבו סקריפטים הפועלים באתר זה יכולים לקרוא אותם.",
-      "unavailable": "לא ניתן היה להשתמש במחזיק המפתחות של המערכת ({{error}}). פרטי הזדהות חדשים יישמרו רק עד לסגירת GeoLibre; פרטי הזדהות שנשמרו בעבר עשויים להישאר באחסון הדפדפן עד שההעברה תצליח."
+      "unavailable": "לא ניתן היה להשתמש במחזיק המפתחות של המערכת ({{error}}). פרטי הזדהות חדשים יישמרו רק עד לסגירת GeoSpaX; פרטי הזדהות שנשמרו בעבר עשויים להישאר באחסון הדפדפן עד שההעברה תצליח."
     },
     "section": {
       "language": "שפה",
@@ -2491,11 +2491,11 @@
         "role": "הנחת תפקיד",
         "other": "אחר"
       },
-      "environmentHelp": "משתמש ב-AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ו-AWS_SESSION_TOKEN מהסביבה שבה הופעל GeoLibre.",
-      "instanceHelp": "משתמש בתפקיד ה-IAM של המחשב שעליו פועל GeoLibre: אסימון זהות אינטרנט (EKS IRSA), פרטי הזדהות של קונטיינר ECS או EKS, או פרופיל המופע של EC2.",
+      "environmentHelp": "משתמש ב-AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY ו-AWS_SESSION_TOKEN מהסביבה שבה הופעל GeoSpaX.",
+      "instanceHelp": "משתמש בתפקיד ה-IAM של המחשב שעליו פועל GeoSpaX: אסימון זהות אינטרנט (EKS IRSA), פרטי הזדהות של קונטיינר ECS או EKS, או פרופיל המופע של EC2.",
       "roleArn": "תפקיד להנחה",
       "externalId": "מזהה חיצוני",
-      "roleHelp": "אופציונלי. GeoLibre קורא ל-AWS STS AssumeRole עם פרטי ההזדהות שלמעלה וקורא את הדליים בתפקיד זה, לדוגמה תפקיד לקריאה בלבד בין חשבונות.",
+      "roleHelp": "אופציונלי. GeoSpaX קורא ל-AWS STS AssumeRole עם פרטי ההזדהות שלמעלה וקורא את הדליים בתפקיד זה, לדוגמה תפקיד לקריאה בלבד בין חשבונות.",
       "accessKeyId": "מזהה מפתח גישה",
       "secretAccessKey": "מפתח גישה סודי",
       "sessionToken": "אסימון הפעלה",
@@ -2538,7 +2538,7 @@
     },
     "languagePack": {
       "title": "חבילות שפה",
-      "description": "הוספת תרגומים אופציונליים לשמות כלי Whitebox, לפרמטרים ולטקסט העזרה, בלי להגדיל כל התקנה של GeoLibre.",
+      "description": "הוספת תרגומים אופציונליים לשמות כלי Whitebox, לפרמטרים ולטקסט העזרה, בלי להגדיל כל התקנה של GeoSpaX.",
       "manage": "ניהול חבילות שפה",
       "interfaceLanguage": "שפת הממשק",
       "installed": "חבילת שפה של Whitebox מותקנת",
@@ -2560,10 +2560,10 @@
       "privacyLocalOnly": "החבילות נשמרות במכשיר הזה בלבד. גרסה זו אינה מורידה דבר: יש לייבא קובץ חבילת שפה במקום.",
       "browse": "עיון בחבילות שפה",
       "errorInvalidJson": "הקובץ אינו JSON תקין.",
-      "errorInvalidFormat": "הקובץ אינו חבילת שפה תקינה של GeoLibre Whitebox.",
-      "errorUnsupportedVersion": "גרסת חבילת השפה הזו אינה נתמכת בגרסת GeoLibre הנוכחית.",
+      "errorInvalidFormat": "הקובץ אינו חבילת שפה תקינה של GeoSpaX Whitebox.",
+      "errorUnsupportedVersion": "גרסת חבילת השפה הזו אינה נתמכת בגרסת GeoSpaX הנוכחית.",
       "errorInvalidLocale": "לחבילת השפה יש שפה לא תקינה או לא צפויה.",
-      "errorUnsupportedLocale": "GeoLibre אינו כולל את שפת הממשק הבסיסית שהחבילה הזו דורשת.",
+      "errorUnsupportedLocale": "GeoSpaX אינו כולל את שפת הממשק הבסיסית שהחבילה הזו דורשת.",
       "errorTooLarge": "חבילת השפה חורגת ממגבלת הבטיחות של 5 MB.",
       "errorNotFound": "אין עדיין חבילת שפה רשמית של Whitebox עבור השפה הזו.",
       "errorDownload": "לא ניתן להוריד את חבילת השפה. יש לבדוק את החיבור או לייבא קובץ מקומי.",
@@ -2571,9 +2571,9 @@
     },
     "updates": {
       "title": "עדכוני תוכנה",
-      "description": "קביעה כיצד GeoLibre בודק גרסאות חדשות בעת הפעלת יישום שולחן העבודה.",
+      "description": "קביעה כיצד GeoSpaX בודק גרסאות חדשות בעת הפעלת יישום שולחן העבודה.",
       "checkOnStartup": "בדוק עדכונים בהפעלה",
-      "checkOnStartupHint": "כשהאפשרות מופעלת, GeoLibre בודק אם קיימת גרסה חדשה בכל הפעלה של היישום. יש לכבות זאת לעבודה לא מקוונת לחלוטין.",
+      "checkOnStartupHint": "כשהאפשרות מופעלת, GeoSpaX בודק אם קיימת גרסה חדשה בכל הפעלה של היישום. יש לכבות זאת לעבודה לא מקוונת לחלוטין.",
       "notificationLevel": "הודע לי על",
       "notificationLevelHint": "יש לבחור אילו סוגי גרסאות יפעילו התראה בהפעלה.",
       "level": {
@@ -2584,7 +2584,7 @@
     },
     "startup": {
       "title": "פרויקט הפעלה",
-      "description": "יש לבחור כיצד GeoLibre פותח הפעלה חדשה.",
+      "description": "יש לבחור כיצד GeoSpaX פותח הפעלה חדשה.",
       "mode": {
         "default": "פתח את סביבת העבודה שהיא ברירת המחדל",
         "last": "פתח מחדש את הפרויקט האחרון",
@@ -2599,7 +2599,7 @@
       "globeByDefault": "הפעל גלובוס תלת-ממדי כברירת מחדל",
       "globeByDefaultHint": "משמש עבור סביבת העבודה ללא שם כשלא סופק פרויקט הפעלה או קישור לפרויקט.",
       "openS3Browser": "פתיחת דפדפן S3 בעת ההפעלה",
-      "openS3BrowserHint": "הצג את חלונית דפדפן S3 בכל הפעלה של GeoLibre. היא נשארת פתוחה כשפותחים פרויקט.",
+      "openS3BrowserHint": "הצג את חלונית דפדפן S3 בכל הפעלה של GeoSpaX. היא נשארת פתוחה כשפותחים פרויקט.",
       "defaultView": "תצוגת מפה כברירת מחדל",
       "defaultViewHint": "קביעת המרכז והזום עבור סביבת העבודה ללא שם.",
       "longitude": "קו אורך של המרכז",
@@ -2607,7 +2607,7 @@
       "zoom": "רמת זום",
       "useCurrentView": "השתמש בתצוגה הנוכחית",
       "layerStyles": "סגנונות שכבה כברירת מחדל",
-      "layerStylesHint": "בחר קובץ סגנונות שכבה (פרויקט ← ייצוא ← ייצוא סגנונות שכבה). כל שכבה שתוסיף ששמה תואם לסגנון בקובץ תעוצב אוטומטית. שכבות בפרויקטים שנפתחו שומרות על הסגנונות השמורים שלהן. GeoLibre שומר עותק של הקובץ, לכן בחר אותו שוב לאחר עריכתו.",
+      "layerStylesHint": "בחר קובץ סגנונות שכבה (פרויקט ← ייצוא ← ייצוא סגנונות שכבה). כל שכבה שתוסיף ששמה תואם לסגנון בקובץ תעוצב אוטומטית. שכבות בפרויקטים שנפתחו שומרות על הסגנונות השמורים שלהן. GeoSpaX שומר עותק של הקובץ, לכן בחר אותו שוב לאחר עריכתו.",
       "chooseLayerStyles": "בחר קובץ",
       "clearLayerStyles": "נקה",
       "noLayerStylesSelected": "לא נבחר קובץ סגנונות שכבה",
@@ -2618,7 +2618,7 @@
       "viewUnavailable": "תצוגת המפה הנוכחית אינה זמינה.",
       "selectError": "לא ניתן לקרוא את הפרויקט שנבחר.",
       "restoring": "פותח את פרויקט ההפעלה…",
-      "loadWarning": "פרויקט ההפעלה אינו זמין. GeoLibre פתח במקומו את סביבת העבודה שהיא ברירת המחדל."
+      "loadWarning": "פרויקט ההפעלה אינו זמין. GeoSpaX פתח במקומו את סביבת העבודה שהיא ברירת המחדל."
     },
     "map": {
       "constraintsTitle": "מגבלות מפה",
@@ -2710,7 +2710,7 @@
       "oauthSignOut": "התנתק",
       "oauthWebLifetime": "אסימון הגישה נשמר בזיכרון; הפעלת הרענון מוגבלת ללשונית הדפדפן הזו. סגירת הלשונית תחייב התחברות מחדש.",
       "oauthDesktopKeychain": "ההתחברות שלך נשמרת במחזיק המפתחות של המערכת, כך ש-GeoLibre נשאר מחובר גם לאחר הפעלה מחדש עד שתתנתק.",
-      "oauthDesktopSessionOnly": "לא ניתן היה לשמור התחברות זו במחזיק המפתחות של המערכת, ולכן היא תקפה רק עד לסגירת GeoLibre.",
+      "oauthDesktopSessionOnly": "לא ניתן היה לשמור התחברות זו במחזיק המפתחות של המערכת, ולכן היא תקפה רק עד לסגירת GeoSpaX.",
       "accountLoading": "טוען את החשבון שלך…",
       "accountRetry": "נסה שוב",
       "accountIdentity": "חשבון: {{account}}",
@@ -2830,7 +2830,7 @@
       "statusReady": "{{provider}} מוגדר ומוכן לשימוש.",
       "statusIncomplete": "יש למלא את שדות החובה למטה כדי להפעיל את {{provider}}.",
       "secretsNote": "פרטי הגישה נשמרים מקומית במכשיר הזה, ולא בקובץ הפרויקט שאתה משתף, ולכן הם נשמרים בין הפעלות. כל מי שיש לו גישה למכשיר הזה יוכל לקרוא אותם.",
-      "secretsNoteKeychain": "מפתחות API ושדות סודיים אחרים מאוחסנים במחזיק המפתחות של המערכת, ולא בקובץ הפרויקט שאתה משתף, ולכן הם נשמרים גם לאחר הפעלה מחדש. שדות אחרים, כמו שמות מודלים וכתובות URL, נשמרים בהגדרות GeoLibre במכשיר זה.",
+      "secretsNoteKeychain": "מפתחות API ושדות סודיים אחרים מאוחסנים במחזיק המפתחות של המערכת, ולא בקובץ הפרויקט שאתה משתף, ולכן הם נשמרים גם לאחר הפעלה מחדש. שדות אחרים, כמו שמות מודלים וכתובות URL, נשמרים בהגדרות GeoSpaX במכשיר זה.",
       "getCredentials": "היכן להשיג פרטי גישה של {{provider}}",
       "showValue": "הצג את {{name}}",
       "hideValue": "הסתר את {{name}}",
@@ -3072,7 +3072,7 @@
       "smartPaste": "הדבקת קואורדינטות",
       "smartPasteInputLabel": "מחרוזת קואורדינטות",
       "smartPastePlaceholder": "לדוגמה 51.5074, -0.1278 או 51°30'26\"N, 0°07'39\"W",
-      "smartPasteInfo": "יש להקליד או להדביק מחרוזת קואורדינטות מלאה בפורמט DD, DMS או DDM, ואז להריץ עיבוד קלט. GeoLibre מזהה את הפורמט וממלא את שדות קו האורך וקו הרוחב שלמטה. את הזום, ההטיה והאזימוט יש להתאים בנפרד לפני המעבר.",
+      "smartPasteInfo": "יש להקליד או להדביק מחרוזת קואורדינטות מלאה בפורמט DD, DMS או DDM, ואז להריץ עיבוד קלט. GeoSpaX מזהה את הפורמט וממלא את שדות קו האורך וקו הרוחב שלמטה. את הזום, ההטיה והאזימוט יש להתאים בנפרד לפני המעבר.",
       "smartPasteInfoLabel": "על הדבקת קואורדינטות",
       "smartPasteInvalid": "לא ניתן היה לקרוא את הקואורדינטות האלה. יש להזין קו אורך וקו רוחב מלאים בפורמט DD, DMS או DDM, לדוגמה 51.5074, -0.1278. מחרוזת חלקית או לא שלמה אינה ניתנת לפענוח.",
       "processInput": "עיבוד קלט",
@@ -3216,8 +3216,8 @@
     },
     "conversion": {
       "vectorToVector": "וקטור לוקטור",
-      "zipInputBrowserError": "המרת Shapefiles מכווצים אפשרית רק ביישום שולחן העבודה של GeoLibre. בדפדפן יש לבחור את קובץ ה-.shp הפרוס יחד עם קבצי ה-.dbf, ה-.shx וה-.prj שלו.",
-      "browserOutputUnsupported": "בדפדפן, הפלט יכול להיות GeoJSON, CSV, GeoParquet, GeoPackage, FlatGeobuf או Shapefile (.zip). פלט \".{{extension}}\" דורש את יישום שולחן העבודה של GeoLibre.",
+      "zipInputBrowserError": "המרת Shapefiles מכווצים אפשרית רק ביישום שולחן העבודה של GeoSpaX. בדפדפן יש לבחור את קובץ ה-.shp הפרוס יחד עם קבצי ה-.dbf, ה-.shx וה-.prj שלו.",
+      "browserOutputUnsupported": "בדפדפן, הפלט יכול להיות GeoJSON, CSV, GeoParquet, GeoPackage, FlatGeobuf או Shapefile (.zip). פלט \".{{extension}}\" דורש את יישום שולחן העבודה של GeoSpaX.",
       "outputExtensionRequired": "יש להוסיף סיומת קובץ לשם הפלט כדי לבחור את הפורמט.",
       "readingWithDuckDb": "קורא את {{name}} עם DuckDB-WASM",
       "readFeatures": "נקראו {{features}} ישויות מתוך {{name}}",
@@ -3231,7 +3231,7 @@
       "vectorToPmtiles": "וקטור ל-PMTiles",
       "rasterToCog": "רסטר ל-COG",
       "rasterToPmtiles": "רסטר ל-PMTiles",
-      "needsDesktop": "ההמרה הזו דורשת את יישום שולחן העבודה של GeoLibre או sidecar פעיל.",
+      "needsDesktop": "ההמרה הזו דורשת את יישום שולחן העבודה של GeoSpaX או sidecar פעיל.",
       "runsInBrowserDuckDb": "ההמרה מתבצעת בדפדפן שלך באמצעות DuckDB-WASM.",
       "runsInBrowserWriters": "ההמרה מתבצעת בדפדפן שלך באמצעות DuckDB-WASM והרכיבים המצורפים לכתיבה.",
       "runsInBrowserWasm": "ההמרה מתבצעת בדפדפן שלך באמצעות geolibre-wasm. אין צורך ב-sidecar.",
@@ -3239,7 +3239,7 @@
       "rasterShape": "נקרא רסטר {{width}}×{{height}} עם {{bands}} ערוצים",
       "wroteCog": "נכתב COG מרוצף עם תצוגות מקדימות ({{compression}})",
       "notAGeoTiff": "הקובץ הזה אינו GeoTIFF קריא. בדפדפן, רסטר ל-COG קורא GeoTIFF בלבד; פורמטים אחרים דורשים את יישום שולחן העבודה.",
-      "rasterTooLargeForBrowser": "בדפדפן, פעולה זו מפענחת את הרסטר כולו ב-WebAssembly, שמוגבל לכ-4 GB, ולכן הקובץ הזה אינו נכנס. יש להמיר אותו ביישום שולחן העבודה של GeoLibre, או לבנות את ה-COG מראש עם gdal_translate או rio-cogeo.",
+      "rasterTooLargeForBrowser": "בדפדפן, פעולה זו מפענחת את הרסטר כולו ב-WebAssembly, שמוגבל לכ-4 GB, ולכן הקובץ הזה אינו נכנס. יש להמיר אותו ביישום שולחן העבודה של GeoSpaX, או לבנות את ה-COG מראש עם gdal_translate או rio-cogeo.",
       "zoomRangeError": "רמות הזום חייבות לקיים 0 ≤ min ≤ max ≤ {{max}}.",
       "colormap": "מפת צבעים",
       "resampling": "דגימה מחדש",
@@ -3394,9 +3394,9 @@
       "outputFile": "קובץ פלט",
       "noOutput": "אין פלט עדיין.",
       "errorConnect": "לא ניתן היה להתחבר ל-sidecar.",
-      "needsDesktopSidecar": "כלי הרסטר דורשים את יישום שולחן העבודה של GeoLibre עם sidecar פעיל.",
+      "needsDesktopSidecar": "כלי הרסטר דורשים את יישום שולחן העבודה של GeoSpaX עם sidecar פעיל.",
       "errorPoll": "לא ניתן היה לתשאל את המשימה.",
-      "errorStartSidecar": "לא ניתן היה להפעיל את ה-sidecar של GeoLibre.",
+      "errorStartSidecar": "לא ניתן היה להפעיל את ה-sidecar של GeoSpaX.",
       "errorStartTool": "לא ניתן היה להפעיל את כלי הרסטר."
     },
     "mapControl": {
@@ -3516,7 +3516,7 @@
       "terrain": "פני שטח",
       "remoteSensing": "חישה מרחוק",
       "projection": "היטל",
-      "geolibre": "ארגז הכלים של GeoLibre",
+      "geolibre": "ארגז הכלים של GeoSpaX",
       "subGroupGeometry": "גאומטריה",
       "subGroupOverlay": "שכבות-על",
       "subGroupJoin": "צירוף",
@@ -3646,7 +3646,7 @@
       "embedEditedGeometryDesc": "הפרויקט הזה מכיל גאומטריות שנערכו. יש להטמיע נתוני וקטור (כ-{{size}}) כדי לשמר אותן. ללא הטמעה, שכבות מקושרות ייפתחו מחדש עם הגאומטריות המקוריות שלהן, ונתונים מקומיים עשויים להיות לא זמינים.",
       "embedVectorDesc": "בפרויקט זה יש {{count}} שכבות וקטוריות מקומיות שנטענו מהמחשב שלך. הדפדפן אינו יכול לקרוא אותן מחדש בעת פתיחת הפרויקט, ולכן יש להטמיע את הנתונים בקובץ הפרויקט כדי לשחזר אותם. ההטמעה מוסיפה כ-{{size}} לקובץ.",
       "embedVectorDescDesktop": "בפרויקט זה יש {{count}} שכבות וקטוריות מקומיות שנטענו מהמחשב שלך. אפשר להטמיע את הנתונים כדי שהפרויקט יהיה עצמאי (מוסיף כ-{{size}}), או לשמור הפניות לקבצים שייטענו מחדש מהדיסק בעת פתיחת הפרויקט. הפניות שומרות על קובץ קטן, אך יישברו אם קובץ מקור יוזז או יימחק בהמשך.",
-      "embedVectorDescMas": "בפרויקט זה יש {{count}} שכבות וקטוריות מקומיות שנטענו מהמחשב שלך. ארגז החול של Mac App Store אינו יכול לשמור גישה לקבצים אלה לאחר סגירת GeoLibre, ולכן יש להטמיע את הנתונים בקובץ הפרויקט כדי לשחזר אותם. ההטמעה מוסיפה כ-{{size}} לקובץ.",
+      "embedVectorDescMas": "בפרויקט זה יש {{count}} שכבות וקטוריות מקומיות שנטענו מהמחשב שלך. ארגז החול של Mac App Store אינו יכול לשמור גישה לקבצים אלה לאחר סגירת GeoSpaX, ולכן יש להטמיע את הנתונים בקובץ הפרויקט כדי לשחזר אותם. ההטמעה מוסיפה כ-{{size}} לקובץ.",
       "embedVectorLargeWarning": "הטמעה של כ-{{size}} יוצרת קובץ פרויקט גדול מאוד. פתיחתו מחדש עלולה להיות איטית או להיכשל, מכיוון שיש לפענח ולהחזיק בזיכרון את כל הישויות בבת אחת. עבור נתונים בגודל כזה, מומלץ להמיר את השכבות ל-PMTiles או ל-FlatGeobuf ולהוסיף אותן כשכבות מרוחקות במקום להטמיע אותן.",
       "embedVectorEmbedButton": "הטמע נתונים",
       "embedVectorReferenceButton": "שמור הפניות לקבצים",
@@ -3662,7 +3662,7 @@
       "exportLayerStylesAsDesc": "יש להזין שם קובץ. קובץ הסגנונות יורד לתיקיית ההורדות של הדפדפן בלחיצה על שמור.",
       "exportLayerStylesFileName": "שם קובץ",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "סגנונות שכבה של GeoLibre",
+      "layerStylesFile": "סגנונות שכבה של GeoSpaX",
       "layerStylesImported": "סגנונות השכבה יובאו",
       "layerStylesImportedSummary_one": "שכבה {{count}} עוצבה מחדש מתוך \"{{file}}\".",
       "layerStylesImportedSummary_two": "{{count}} שכבות עוצבו מחדש מתוך \"{{file}}\".",
@@ -3795,11 +3795,11 @@
     },
     "windowClose": {
       "savePromptTitle": "לשמור את השינויים לפני הסגירה?",
-      "savePromptDescription": "בפרויקט הנוכחי יש שינויים שלא נשמרו. לשמור אותם לפני סגירת GeoLibre?"
+      "savePromptDescription": "בפרויקט הנוכחי יש שינויים שלא נשמרו. לשמור אותם לפני סגירת GeoSpaX?"
     },
     "error": {
       "couldNotOpenProject": "לא ניתן היה לפתוח את הפרויקט.",
-      "multipleProjectDrop": "יש לגרור פרויקט GeoLibre אחד בכל פעם, ללא קבצים אחרים.",
+      "multipleProjectDrop": "יש לגרור פרויקט GeoSpaX אחד בכל פעם, ללא קבצים אחרים.",
       "projectDropNotAllowed": "פריסה זו אינה מאפשרת מעבר בין פרויקטים.",
       "couldNotImportQgisProject": "לא ניתן היה לייבא את פרויקט ה-QGIS.",
       "couldNotImportArcgisProject": "לא ניתן היה לייבא את פרויקט ה-ArcGIS Pro.",
@@ -3942,7 +3942,7 @@
     "filterSummary": "הוחל סינון שכבה: {{matched}} מתוך {{total}} ישויות תואמות.",
     "evaluationErrors": "לא ניתן היה להעריך {{count}} ישויות ולכן הן לא נכללו בהתאמה.",
     "unevaluableDisjoint": "{{count}} ישויות הוחרגו מכיוון שלא ניתן היה להעריך את הגאומטריה שלהן.",
-    "tooManyPairs": "השוואה זו דורשת {{pairs}} בדיקות של זוגות ישויות (מגבלה {{limit}}). יש להשתמש במקום זאת בעיבוד → GeoLibre → וקטור → בחירה לפי מיקום עם מנוע Sidecar.",
+    "tooManyPairs": "השוואה זו דורשת {{pairs}} בדיקות של זוגות ישויות (מגבלה {{limit}}). יש להשתמש במקום זאת בעיבוד → GeoSpaX → וקטור → בחירה לפי מיקום עם מנוע Sidecar.",
     "exportedLayerName": "{{name}} (בחירה)"
   },
   "loadEditorFeatures": {
@@ -4582,7 +4582,7 @@
     "zarrProblemUnsupportedUrl": "לא ניתן לקרוא את כתובת מאגר ה-Zarr הזה מפתח אחד בכל פעם",
     "zarrProblemUnavailable": "לא ניתן לפתוח מאגר Zarr זה",
     "chooseTarget": "בחירת מה להוסיף",
-    "cogUnsupported": "מארח GeoLibre זה אינו יכול להציג נכסי GeoTIFF מרוחקים",
+    "cogUnsupported": "מארח GeoSpaX זה אינו יכול להציג נכסי GeoTIFF מרוחקים",
     "formatCog": "COG",
     "formatGeoJson": "GeoJSON",
     "formatPmtiles": "PMTiles",
@@ -4734,7 +4734,7 @@
     "downloadTitle": "הורדת קובץ זה",
     "copyUrlTitle": "העתקת כתובת ה-URL של קובץ זה",
     "openProductTitle": "פתיחת דף המוצר הזה ב-source.coop",
-    "unsupportedTitle": "GeoLibre אינו יכול להציג פורמט זה — ניתן להוריד אותו במקום",
+    "unsupportedTitle": "GeoSpaX אינו יכול להציג פורמט זה — ניתן להוריד אותו במקום",
     "addError": "לא ניתן להוסיף קובץ זה: {{message}}",
     "largeFileWarning": "גודל הקובץ הוא {{size}}. הוא מוזרם מהמקור, ולכן נקראים רק החלקים שבתצוגה.",
     "streamHint": "גודל הקובץ הוא {{size}}. הוספה מעתיקה אותו לזיכרון; הזרמה קוראת רק את החלקים שבתצוגה.",
@@ -4779,7 +4779,7 @@
     "downloadTitle": "הורדת קובץ זה",
     "copyUrlTitle": "העתקת כתובת ה-URL של קובץ זה",
     "openDatasetTitle": "פתיחת דף מערך הנתונים הזה ב-huggingface.co",
-    "unsupportedTitle": "GeoLibre אינו יכול להציג פורמט זה — ניתן להוריד אותו במקום",
+    "unsupportedTitle": "GeoSpaX אינו יכול להציג פורמט זה — ניתן להוריד אותו במקום",
     "addError": "לא ניתן להוסיף קובץ זה: {{message}}",
     "notRasterIndex": "קובץ JSON זה אינו מאנדקס רסטרים, ולכן אין מה להציג על המפה. יש תמיכה ב-MosaicJSON ובאוספי STAC.",
     "largeFileWarning": "גודל הקובץ הוא {{size}}. הוא מוזרם מהמקור, ולכן נקראים רק החלקים שבתצוגה.",
@@ -4824,7 +4824,7 @@
     "selectedFiles_one": "נבחר קובץ {{count}} ({{size}}).",
     "selectedFiles_other": "נבחרו {{count}} קבצים ({{size}}).",
     "commitMessageLabel": "הודעת commit (אופציונלי)",
-    "commitMessagePlaceholder": "Upload with GeoLibre",
+    "commitMessagePlaceholder": "Upload with GeoSpaX",
     "upload": "העלה",
     "uploadPreparing": "מכין את ההעלאה…",
     "uploadHashing": "מחשב hash עבור {{name}} ({{index}}/{{total}})…",
@@ -5383,7 +5383,7 @@
       "importedLog": "יובא מודל עם {{nodes}} צמתים.",
       "importFailed": "הייבוא נכשל",
       "importInvalid": "הקובץ אינו מכיל גרף מודל.",
-      "importUnsupported": "הקובץ אינו מודל GeoLibre.",
+      "importUnsupported": "הקובץ אינו מודל GeoSpaX.",
       "rasterOutputUnsupported": "\"{{name}}\" הוא תוצאת רסטר, וגרסה זו אינה יכולה להוסיף אותה למפה.",
       "portNeedsVector": "\"{{port}}\" דורש נתוני וקטור, אך התקבל רסטר.",
       "toolNoOutput": "\"{{tool}}\" לא הפיק פלט.",
@@ -5442,7 +5442,7 @@
       "filterByCategory": "סינון לפי קטגוריה",
       "layerFor": "שכבה עבור {{name}}",
       "allSources": "כל המקורות",
-      "geolibreTools": "כלי GeoLibre",
+      "geolibreTools": "כלי GeoSpaX",
       "whiteboxTools": "כלי Whitebox",
       "toolbox": "ארגז הכלים של Whitebox",
       "checkingRuntime": "בודק סביבת ריצה.",
@@ -5497,8 +5497,8 @@
       "errorConnect": "לא ניתן היה להתחבר ל-sidecar.",
       "errorPoll": "לא ניתן היה לתשאל את המשימה.",
       "errorStartTool": "לא ניתן היה להפעיל את כלי Whitebox.",
-      "errorStartSidecar": "לא ניתן היה להפעיל את ה-sidecar של GeoLibre.",
-      "errorStopSidecar": "לא ניתן היה לעצור את ה-sidecar של GeoLibre.",
+      "errorStartSidecar": "לא ניתן היה להפעיל את ה-sidecar של GeoSpaX.",
+      "errorStopSidecar": "לא ניתן היה לעצור את ה-sidecar של GeoSpaX.",
       "noToolsFound": "לא נמצאו כלים.",
       "searchToolsByMeaning": "חיפוש כלים או תיאור משימה",
       "searchingByMeaning": "מחפש בקטלוג לפי משמעות",
@@ -5532,9 +5532,9 @@
       "runLocallyButton": "הרצה מקומית (WASM)",
       "troubleshootingTitle": "עדיין רוצים להשתמש בשרת?",
       "stepStartServerDesktop": "יש ללחוץ על \"הפעל שרת\" בחלונית רשימת הכלים כדי להפעיל אותו, ולהמתין כמה שניות עד שיעלה.",
-      "stepStartServerBrowser": "את השרת ניתן להפעיל רק מאפליקציית שולחן העבודה של GeoLibre. בדפדפן, יש להשאיר את \"הרצה מקומית (WASM)\" מופעל.",
+      "stepStartServerBrowser": "את השרת ניתן להפעיל רק מאפליקציית שולחן העבודה של GeoSpaX. בדפדפן, יש להשאיר את \"הרצה מקומית (WASM)\" מופעל.",
       "stepCheckPort": "יש לוודא שחומת אש, אנטי-וירוס או מדיניות רשת אינם חוסמים את הפורט המקומי {{port}}.",
-      "stepRestart": "אם השרת נעצר באופן בלתי צפוי, יש להפעיל מחדש את אפליקציית שולחן העבודה של GeoLibre ולפתוח שוב את חלון הדו-שיח הזה."
+      "stepRestart": "אם השרת נעצר באופן בלתי צפוי, יש להפעיל מחדש את אפליקציית שולחן העבודה של GeoSpaX ולפתוח שוב את חלון הדו-שיח הזה."
     },
     "vectorTools": {
       "title": "כלי וקטור",
@@ -7149,13 +7149,13 @@
     "segment": "בצע סגמנטציה",
     "status": {
       "checking": "בודק את שירות הסגמנטציה של AI…",
-      "unavailableDesktop": "שירות הסגמנטציה של AI עדיין אינו פועל. יש להפעיל את שרת GeoLibre עם segment-geospatial מופעל כדי להשתמש בו.",
-      "unavailableWeb": "סגמנטציה עם AI אינה זמינה בדפדפן. יש להשתמש באפליקציית שולחן העבודה של GeoLibre כדי להריץ אותה."
+      "unavailableDesktop": "שירות הסגמנטציה של AI עדיין אינו פועל. יש להפעיל את שרת GeoSpaX עם segment-geospatial מופעל כדי להשתמש בו.",
+      "unavailableWeb": "סגמנטציה עם AI אינה זמינה בדפדפן. יש להשתמש באפליקציית שולחן העבודה של GeoSpaX כדי להריץ אותה."
     },
     "error": {
       "chooseImage": "יש לבחור תמונה (GeoTIFF) לסגמנטציה.",
       "enterPrompt": "יש להזין הנחיית טקסט, למשל “עצים” או “מבנים”.",
-      "startServer": "לא ניתן היה להפעיל את ה-sidecar של GeoLibre.",
+      "startServer": "לא ניתן היה להפעיל את ה-sidecar של GeoSpaX.",
       "failed": "הסגמנטציה נכשלה."
     },
     "noObjects": "לא נמצאו אובייקטים.",
@@ -7166,7 +7166,7 @@
       "title": "לא ניתן היה להפעיל את שרת הסגמנטציה של AI.",
       "intro": "סגמנטציה עם AI פועלת בשרת עזר מקומי ({{sidecarUrl}}) שמארח את מודל SAM3 מ-segment-geospatial. הוא מריץ Python ברקע, בנפרד מהאפליקציה, ואינו חלק מגרסת הדפדפן.",
       "troubleshootingTitle": "איך להפעיל את השרת",
-      "stepInstall": "יש לוודא ששרת GeoLibre מותקן עם ה-backend של segment-geospatial מופעל, כך שמודל הסגמנטציה יהיה זמין.",
+      "stepInstall": "יש לוודא ששרת GeoSpaX מותקן עם ה-backend של segment-geospatial מופעל, כך שמודל הסגמנטציה יהיה זמין.",
       "stepStartServerDesktop": "יש ללחוץ על \"הפעל שרת\" למעלה כדי להפעיל אותו, ולהמתין כמה שניות עד שהמודל יעלה."
     }
   },
@@ -7426,7 +7426,7 @@
     "import": "ייבא…",
     "export": "ייצא…",
     "importFilterName": "ספריית סגנונות / QML / SLD",
-    "exportFilterName": "ספריית סגנונות של GeoLibre",
+    "exportFilterName": "ספריית סגנונות של GeoSpaX",
     "applied": "\"{{name}}\" הוחל על {{layer}}.",
     "appliedRampHint": "\"{{name}}\" הוחל. יש להחליף את השכבה לסגנון מדורג או מסווג כדי לראות את הסולם.",
     "saved": "\"{{name}}\" נשמר בספרייה.",
@@ -8132,7 +8132,7 @@
     "exportGeoTiff": "GeoTIFF (COG)",
     "extractSubset": "חלץ תת-קבוצה…",
     "stylesMenu": "סגנונות",
-    "exportGeoLibreStyle": "ייצא סגנון GeoLibre URL",
+    "exportGeoLibreStyle": "ייצא סגנון GeoSpaX URL",
     "exportMapboxStyle": "ייצא כסגנון Mapbox GL",
     "exportSldStyle": "ייצא כ-OGC SLD",
     "exportQmlStyle": "ייצא כ-QGIS QML",
@@ -8140,9 +8140,9 @@
     "exportStyleDataNotReady": "נתוני השכבה עדיין לא מוכנים. נסה שוב בעוד רגע.",
     "exportStyleNeedsFeatures": "ייצוא סגנון מחייב שכבת וקטור עם ישויות.",
     "exportStyleError": "לא ניתן לייצא את הסגנון של שכבה זו.",
-    "importStyle": "ייבא סגנון (GeoLibre URL / Mapbox GL / SLD / QML)…",
+    "importStyle": "ייבא סגנון (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "ייבא סגנון מטקסט…",
-    "importStyleFromTextDescription": "יש להדביק סגנון GeoLibre, Mapbox GL, SLD או QML. הפורמט מזוהה מתוך הטקסט.",
+    "importStyleFromTextDescription": "יש להדביק סגנון GeoSpaX, Mapbox GL, SLD או QML. הפורמט מזוהה מתוך הטקסט.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "ייבא",
     "openStyleManager": "סגנונות שמורים (מנהל הסגנונות)…",
@@ -8625,10 +8625,10 @@
   },
   "errorBoundary": {
     "title": "משהו השתבש",
-    "description": "GeoLibre נתקל בשגיאה בלתי צפויה ולא הצליח להמשיך. ייתכן שהעבודה שלך לא נשמרה — כדאי לנסות לשחזר לפני טעינה מחדש.",
+    "description": "GeoSpaX נתקל בשגיאה בלתי צפויה ולא הצליח להמשיך. ייתכן שהעבודה שלך לא נשמרה — כדאי לנסות לשחזר לפני טעינה מחדש.",
     "tryAgain": "נסה שוב",
     "reload": "טען את האפליקציה מחדש",
-    "sectionFailed": "הצגת {{label}} נכשלה. שאר GeoLibre עדיין זמין."
+    "sectionFailed": "הצגת {{label}} נכשלה. שאר GeoSpaX עדיין זמין."
   },
   "commandPalette": {
     "title": "לוח פקודות",
@@ -8708,7 +8708,7 @@
     "windowCloseGuardFailed": "סגירת החלון לא תבקש לשמור שינויים שלא נשמרו. יש לשמור את העבודה לפני הסגירה.",
     "windowCloseSaveFailed": "לא ניתן היה לשמור את הפרויקט לפני הסגירה.",
     "windowCloseFailed": "לא ניתן היה לסגור את החלון.",
-    "nativeProjectPathFailed": "לא ניתן היה לפתוח את קובץ הפרויקט שהועבר אל GeoLibre.",
+    "nativeProjectPathFailed": "לא ניתן היה לפתוח את קובץ הפרויקט שהועבר אל GeoSpaX.",
     "kmlSuperOverlayReadFailed": "לא ניתן היה לקרוא שוב את KML Super-Overlay \"{{name}}\", ולכן האריחים שלו ריקים.",
     "projectControlFailed": "לא ניתן היה להחיל את הגדרת \"{{control}}\" של הפרויקט.",
     "pluginSnapshotFailed": "ייתכן שחלק מהגדרות התוספים לא יועברו למנוע הרינדור החדש.",
@@ -8717,10 +8717,10 @@
     "panelRenderFailed": "פתיחת החלונית \"{{name}}\" נכשלה.",
     "sharedSettingsFailed": "לא ניתן היה לטעון את ההגדרות המשותפות מהקישור, ולכן נעשה שימוש בהגדרות שלך.",
     "sharedLanguageFailed": "לא ניתן היה לעבור לשפה שההגדרות המשותפות מבקשות.",
-    "languageCatalogFailed": "לא ניתן היה לטעון את התרגום ל-{{language}}, ולכן GeoLibre מוצגת באנגלית."
+    "languageCatalogFailed": "לא ניתן היה לטעון את התרגום ל-{{language}}, ולכן GeoSpaX מוצגת באנגלית."
   },
   "shell": {
-    "workspaceTitle": "סביבת עבודת המפה של GeoLibre",
+    "workspaceTitle": "סביבת עבודת המפה של GeoSpaX",
     "section": {
       "toolbar": "סרגל כלים",
       "sharedLeftSidebar": "סרגל צד שמאלי משותף",
@@ -8929,7 +8929,7 @@
     "navigationButton": "1. טעינת מקורות ושרטוט ניווט",
     "navigationButtonAgain": "שרטוט שכבת ניווט נוספת",
     "exportButton": "ייצוא התוצאות המשורטטות ל-GeoJSON",
-    "addLayersButton": "הוספת התוצאות המשורטטות לשכבות GeoLibre",
+    "addLayersButton": "הוספת התוצאות המשורטטות לשכבות GeoSpaX",
     "clearButton": "נקה את תוצאת NLDI",
     "noComid": "לא הוחזר COMID עבור הנקודה הזו.",
     "requestingBasin": "מבקש אגן במעלה הזרם…",
@@ -9391,7 +9391,7 @@
       "liftSelected": "נבחרו {{count}} נקודות בתוך {{polygons}} פוליגונים של {{layer}}.",
       "liftInstances": "נוצרו {{objects}} מופעים של {{name}} מתוך {{layer}} ({{count}} נקודות).",
       "fullFile": "קובץ מלא עם תוויות",
-      "fullFileNote": "כותב עותק מקומי של ענן הנקודות הזה עם כל התוויות השמורות, ולא רק הנקודות שנטענו כאן. פועל בשרת GeoLibre.",
+      "fullFileNote": "כותב עותק מקומי של ענן הנקודות הזה עם כל התוויות השמורות, ולא רק הנקודות שנטענו כאן. פועל בשרת GeoSpaX.",
       "fullFileInput": "עותק מקומי (‎.las, ‎.laz או ‎.copc.laz)",
       "fullFileOutput": "קובץ פלט (‎.las או ‎.laz)",
       "fullFileWrite": "כתוב קובץ",

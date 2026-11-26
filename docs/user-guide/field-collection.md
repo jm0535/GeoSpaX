@@ -1,6 +1,6 @@
 # GPS Tracking & Field Collection
 
-GeoLibre has two tools for work in the field, both on the **Controls** menu:
+GeoSpaX has two tools for work in the field, both on the **Controls** menu:
 
 - **GPS Tracking...** streams a live position onto the map, records a track
   log, and captures points where you stand.
@@ -33,7 +33,7 @@ Pick one entry under **Position source**:
   **RTK fixed**, **RTK float**, **Differential GPS**). **Disconnect** releases
   the receiver.
 
-GeoLibre parses the GGA, RMC, VTG, GSA, and GST sentences from any talker (GP,
+GeoSpaX parses the GGA, RMC, VTG, GSA, and GST sentences from any talker (GP,
 GN, GL, …). Accuracy comes from GST when the receiver sends it; otherwise it is
 estimated from HDOP.
 

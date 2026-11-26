@@ -433,7 +433,7 @@ describe("syncRasterLayersToStore", () => {
     assert.deepEqual(layer.metadata.bounds, [0, 0, 1, 1]);
   });
 
-  it("preserves GeoLibre-owned symbology across a control resync", () => {
+  it("preserves GeoSpaX-owned symbology across a control resync", () => {
     const { control } = fakeControl([rasterInfo()]);
     syncRasterLayersToStore(control);
 

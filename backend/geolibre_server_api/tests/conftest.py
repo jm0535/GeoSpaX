@@ -11,7 +11,7 @@ from geolibre_server_api.main import FileStorage, create_app
 
 PUBLIC_URL = "https://share.example"
 WEB_REDIRECT = f"{PUBLIC_URL}/oauth-callback.html"
-DESKTOP_REDIRECT = "org.geolibre.desktop:/oauth/callback"
+DESKTOP_REDIRECT = "geospax.in4metrix.dev:/oauth/callback"
 
 OAUTH_CLIENTS = [
     {

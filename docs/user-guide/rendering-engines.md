@@ -1,13 +1,13 @@
 # Rendering Engines
 
-GeoLibre can draw the same project with four rendering engines. **MapLibre GL
+GeoSpaX can draw the same project with four rendering engines. **MapLibre GL
 JS** is the default, but the primary map and every pane in a split layout can
 independently use MapLibre, Mapbox GL JS, CesiumJS, or the ArcGIS Maps SDK for
 JavaScript.
 
 | Engine | Best suited to | Credentials and loading |
 | --- | --- | --- |
-| **MapLibre GL JS** | The broadest GeoLibre feature and plugin support; vector styles, raster data, terrain, and lightweight 3D content | No credential required; bundled with GeoLibre |
+| **MapLibre GL JS** | The broadest GeoSpaX feature and plugin support; vector styles, raster data, terrain, and lightweight 3D content | No credential required; bundled with GeoSpaX |
 | **Mapbox GL JS** | Mapbox styles and services, Mapbox globe and terrain, and a Style-Spec-compatible alternative to MapLibre | A Mapbox access token is required; the engine is loaded only when selected |
 | **CesiumJS** | A native 3D globe, terrain, 3D Tiles, CZML, Cesium ion assets, I3S, and globe-oriented analysis | A Cesium ion token is required; the web version bundles a demo token, desktop and mobile need your own; loaded only when selected |
 | **ArcGIS Maps SDK for JavaScript** | Native ArcGIS services, Esri basemaps, and ArcGIS 2D maps or 3D scenes | Works without a key; an ArcGIS API key adds Esri basemap styles; SDK modules load from Esri's CDN when first selected |
@@ -15,7 +15,7 @@ JavaScript.
 ## Switch the primary map
 
 Choose **View → Rendering engine**, then select **MapLibre**, **Mapbox**,
-**Cesium**, or **ArcGIS**. GeoLibre replaces the active canvas; it does not keep
+**Cesium**, or **ArcGIS**. GeoSpaX replaces the active canvas; it does not keep
 the previous engine hidden and consuming graphics resources.
 
 The project store is independent of any renderer, so the camera, layers,
@@ -56,7 +56,7 @@ behavior, supported layers, licensing, and deployment details.
 
 ## Feature compatibility
 
-GeoLibre exposes only the tools and plugins supported by the active engine.
+GeoSpaX exposes only the tools and plugins supported by the active engine.
 MapLibre currently has the widest compatibility. Mapbox shares much of the
 MapLibre Style Specification surface, while Cesium and ArcGIS use native layer
 and scene adapters. A plugin also declares which engines it supports, so an

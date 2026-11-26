@@ -296,7 +296,7 @@ function bundleHashOrUndefined(value: unknown, id: string): string | undefined {
   if (value === undefined || value === null) return undefined;
   if (typeof value === "string" && /^[0-9a-f]{64}$/.test(value)) return value;
   console.warn(
-    `[GeoLibre] Ignoring the registry's bundleSha256 for "${id}": expected 64 lowercase hex characters. Installing it falls back to trust-on-first-use.`,
+    `[GeoSpaX] Ignoring the registry's bundleSha256 for "${id}": expected 64 lowercase hex characters. Installing it falls back to trust-on-first-use.`,
   );
   return undefined;
 }

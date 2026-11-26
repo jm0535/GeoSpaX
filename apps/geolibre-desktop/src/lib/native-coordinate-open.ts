@@ -28,7 +28,7 @@ export async function initializeNativeCoordinateOpen(): Promise<void> {
     const urls = await getCurrent();
     if (!receivedCoordinate && urls) accept(urls);
   } catch (error) {
-    console.error("[GeoLibre] Could not initialize coordinate links", error);
+    console.error("[GeoSpaX] Could not initialize coordinate links", error);
   }
 }
 

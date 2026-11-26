@@ -11,7 +11,7 @@ import { describe, it } from "node:test";
 
 const TEMPLATE = "apps/geolibre-desktop/src-tauri/main.desktop";
 const CONFIG = "apps/geolibre-desktop/src-tauri/tauri.conf.json";
-const MIME_XML = "packaging/linux/org.geolibre.project.xml";
+const MIME_XML = "packaging/linux/geospax.in4metrix.dev.project.xml";
 
 type Config = {
   bundle?: {
@@ -87,7 +87,7 @@ describe("linux desktop entry", () => {
       assert.equal(bundle?.desktopTemplate, "main.desktop", `${format} uses the default template`);
       assert.ok(
         Object.values(bundle?.files ?? {}).some((source) =>
-          source.endsWith("/org.geolibre.project.xml"),
+          source.endsWith("/geospax.in4metrix.dev.project.xml"),
         ),
         `${format} does not install ${MIME_XML}`,
       );

@@ -5,7 +5,7 @@ import { isGeoLibreProjectFileName } from "../apps/geolibre-desktop/src/lib/taur
 import { resolveDroppedProjectIfCurrent } from "../apps/geolibre-desktop/src/lib/dropped-project";
 import type { GeoLibreProject } from "@geolibre/core";
 
-test("recognizes GeoLibre project files dropped onto the app", () => {
+test("recognizes GeoSpaX project files dropped onto the app", () => {
   assert.equal(isGeoLibreProjectFileName("map.geolibre.json"), true);
   assert.equal(isGeoLibreProjectFileName("map.geolibre"), true);
   assert.equal(isGeoLibreProjectFileName("MAP.GEOLIBRE.JSON"), true);

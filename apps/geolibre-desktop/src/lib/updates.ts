@@ -6,10 +6,10 @@
  */
 
 /** Page that lists cross-platform installers. */
-export const UPDATE_URL = "https://geolibre.app/downloads/";
+export const UPDATE_URL = "https://jm0535.github.io/GeoSpaX/downloads/";
 
 /** GitHub REST endpoint for the latest published release. */
-export const LATEST_RELEASE_URL = "https://api.github.com/repos/opengeos/GeoLibre/releases/latest";
+export const LATEST_RELEASE_URL = "https://api.github.com/repos/jm0535/GeoSpaX/releases/latest";
 
 /**
  * The running app version, injected by Vite at build time. Guarded so the pure
