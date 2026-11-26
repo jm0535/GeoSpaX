@@ -1,6 +1,6 @@
 # Notebook panel
 
-GeoLibre can run a Jupyter notebook **beside the map**, in a resizable,
+GeoSpaX can run a Jupyter notebook **beside the map**, in a resizable,
 collapsible panel (open it from **Processing → Jupyter Notebook**). It works in
 both the web and desktop builds, with a different Python runtime behind the same
 `<iframe>` panel:
@@ -14,8 +14,8 @@ both the web and desktop builds, with a different Python runtime behind the same
   sidecar) on `127.0.0.1:8766`, token-authenticated, and embeds it. This gives
   full CPython with the native geospatial stack (geopandas, rasterio, GDAL, …).
 
-This is distinct from the [`geolibre` Python package](python.md), which does the
-inverse — embedding the *whole GeoLibre app* inside a notebook cell.
+This is distinct from the [`geospax` Python package](python.md), which does the
+inverse — embedding the *whole GeoSpaX app* inside a notebook cell.
 
 ## Scripting the map from a cell
 
@@ -24,9 +24,9 @@ it is bundled into JupyterLite's filesystem, so **no `pip install` is needed**;
 on desktop it is placed on the kernel's import path. Just import it:
 
 ```python
-import geolibre
+import geospax
 
-m = geolibre.connect()          # or geolibre.Map()
+m = geolibre.connect()          # or geospax.Map()
 m.fly_to(-122.4, 37.8, zoom=11) # animate the live map in the left pane
 layer_id = m.add_geojson(
     gdf,
@@ -48,12 +48,12 @@ returns one matching layer or raises `ValueError`. The id can be passed directly
 `set_visibility`, `set_opacity`, `set_style`, `remove_layer`, or
 `zoom_to_layer`.
 
-All commands fan out to every GeoLibre window connected to the same Jupyter
+All commands fan out to every GeoSpaX window connected to the same Jupyter
 server. For `add_geojson`, `list_layers`, and `get_layer`, the first correlated
 reply is returned to the notebook and later replies are ignored. Because each
 window maintains its own map state, use one connected window when chaining a
 returned layer id into later read-back calls. This behavior is only visible if
-you attach multiple GeoLibre windows to one Jupyter server.
+you attach multiple GeoSpaX windows to one Jupyter server.
 
 `add_geojson` returns `None` instead of an id in two situations, and never
 fails outright in either:
@@ -92,7 +92,7 @@ than depending on how the notebook is being *displayed*:
   `POST …/geolibre/relay/command`, a `…/geolibre/relay/socket` WebSocket, and
   `GET …/geolibre/relay/status`. At load it publishes `GEOLIBRE_RELAY_URL` and
   `GEOLIBRE_RELAY_TOKEN` into the server's environment, which **kernels inherit**
-  — that is how `import geolibre` finds the map with no configuration.
+  — that is how `import geospax` finds the map with no configuration.
 - The app subscribes to that socket for its whole lifetime
   (`useJupyterRelay`), reconnecting with backoff, and runs each command against
   the same `createScriptingHandlers` surface.
@@ -103,7 +103,7 @@ The POST answers with how many app windows received the command, so a
 disconnected session is reported instead of silently doing nothing:
 
 ```python
-geolibre.is_connected()   # False -> no GeoLibre window is listening
+geolibre.is_connected()   # False -> no GeoSpaX window is listening
 ```
 
 When a command cannot be delivered the client raises a
@@ -153,7 +153,7 @@ build still succeeds. Be aware of what that produces: the panel does *not* show 
 "not built" message. Its iframe asks for `/jupyterlite/lab/index.html`, and
 anything that answers an unknown path with `index.html` — Tauri's asset
 resolver, or a static host with an SPA fallback such as
-`try_files $uri /index.html` — hands the panel **a second copy of GeoLibre**
+`try_files $uri /index.html` — hands the panel **a second copy of GeoSpaX**
 instead (GeoLibre#1851, GeoLibre#1658). Install the deps above and rebuild.
 
 Two builds therefore treat a missing CLI as fatal rather than skippable, because

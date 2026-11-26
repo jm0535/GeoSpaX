@@ -519,7 +519,7 @@ function resolveContentFlags(opts: LayoutOptions): ContentFlags {
   // the other new booleans: GH #526 wants a pre-checked "Created with GeoLibre"
   // credit so it survives a user replacing the footer text.
   const attributionText =
-    opts.showAttribution !== false && (opts.attributionText ?? "Created with GeoLibre").trim();
+    opts.showAttribution !== false && (opts.attributionText ?? "Created with GeoSpaX").trim();
   const footerText = opts.showFooter && opts.footerText.trim();
   const dateText = (opts.showDate && (opts.dateText ?? "").trim()) || false;
   return {

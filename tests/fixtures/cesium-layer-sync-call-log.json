@@ -2428,7 +2428,7 @@
   "imagery-insecure-headers": [
     [
       "console.warn",
-      "[GeoLibre] skipping \"layer\" on the globe: request headers cannot be sent over http://tiles.example.com/{z}/{x}/{y}.png"
+      "[GeoSpaX] skipping \"layer\" on the globe: request headers cannot be sent over http://tiles.example.com/{z}/{x}/{y}.png"
     ],
     [
       "onLayerError",
@@ -2527,7 +2527,7 @@
   "imagery-wmts-bad-scheme": [
     [
       "console.warn",
-      "[GeoLibre] skipping \"layer\" on the globe: unsupported WMTS tiling scheme \"PolarTilingScheme\""
+      "[GeoSpaX] skipping \"layer\" on the globe: unsupported WMTS tiling scheme \"PolarTilingScheme\""
     ],
     [
       "onLayerError",

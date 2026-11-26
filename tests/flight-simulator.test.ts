@@ -1322,7 +1322,7 @@ describe("flight simulator on the Mapbox renderer", () => {
 
       startFlying();
       stopFlying();
-      assert.deepEqual(terrainChanges, [true, false], "takeoff must turn GeoLibre's DEM on");
+      assert.deepEqual(terrainChanges, [true, false], "takeoff must turn GeoSpaX's DEM on");
       resetStore();
     });
   });

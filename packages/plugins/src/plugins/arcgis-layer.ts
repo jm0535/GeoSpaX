@@ -775,7 +775,7 @@ function startArcGISViewportLoader(
       // A timeout that survived its retry gets guidance the user can act on;
       // ArcGIS's own wording for it blames the query parameters, which are fine.
       if (isArcGISTransientQueryError(error)) {
-        console.error("[GeoLibre] ArcGIS viewport query timed out", error);
+        console.error("[GeoSpaX] ArcGIS viewport query timed out", error);
         reportArcGISViewportError(layerId, ARCGIS_VIEWPORT_TIMEOUT);
         return;
       }
@@ -903,7 +903,7 @@ function stopArcGISViewportLoader(layerId: string): void {
 
 function handleArcGISViewportError(layerId: string, error: unknown): void {
   if (isArcGISAbortError(error)) return;
-  console.error("[GeoLibre] ArcGIS viewport query failed", error);
+  console.error("[GeoSpaX] ArcGIS viewport query failed", error);
   reportArcGISViewportError(layerId, error instanceof Error ? error.message : String(error));
 }
 
@@ -2057,13 +2057,13 @@ function finishArcGISPaging(
 ): FeatureCollection {
   if (plan.maxFeatures !== null && features.length >= plan.maxFeatures) {
     console.warn(
-      `[GeoLibre] ArcGIS feature download stopped at the requested maximum of ` +
+      `[GeoSpaX] ArcGIS feature download stopped at the requested maximum of ` +
         `${plan.maxFeatures} features (partial dataset).`,
     );
   } else if (truncated || (plan.total !== null && features.length < plan.total)) {
     const of = plan.total === null ? "" : ` of ${plan.total}`;
     console.warn(
-      `[GeoLibre] ArcGIS feature query was truncated: loaded ${features.length}${of} ` +
+      `[GeoSpaX] ArcGIS feature query was truncated: loaded ${features.length}${of} ` +
         `features (partial dataset).`,
     );
   }

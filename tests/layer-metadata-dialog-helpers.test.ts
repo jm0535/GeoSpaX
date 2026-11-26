@@ -76,7 +76,7 @@ describe("Metadata dialog draft", () => {
 });
 
 describe("GeoParquet key-value metadata", () => {
-  it("writes the normalized record under the GeoLibre key", () => {
+  it("writes the normalized record under the GeoSpaX key", () => {
     assert.equal(layerParquetKeyValueMetadata(makeLayer()), undefined);
     const entries = layerParquetKeyValueMetadata(
       makeLayer({ descriptiveMetadata: { title: " It's " } }),

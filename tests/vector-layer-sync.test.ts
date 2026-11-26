@@ -949,7 +949,7 @@ describe("wireVectorStoreSync", () => {
     assert.equal(pushed.labelField, "");
   });
 
-  it("does not touch the control for GeoLibre-only style fields", () => {
+  it("does not touch the control for GeoSpaX-only style fields", () => {
     const { control, calls } = fakeControl([vectorInfo()]);
     syncVectorLayersToStore(control);
     wireVectorStoreSync(control);

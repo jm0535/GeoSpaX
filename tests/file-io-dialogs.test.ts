@@ -85,7 +85,7 @@ describe("saveProjectFile in the browser", () => {
       suggestedName: "My Map.geolibre",
       types: [
         {
-          description: "GeoLibre Project",
+          description: "GeoSpaX Project",
           accept: { "application/json": [".geolibre", ".json"] },
         },
       ],

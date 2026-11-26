@@ -123,5 +123,5 @@ export function contractMessage(
   } catch {
     // Reported by the assertion itself.
   }
-  return `${pkg}@${version}: ${detail}. GeoLibre mirrors this by hand; read "${section}" in docs/maintenance.md and update the mirror (or drop it if upstream now exports it).`;
+  return `${pkg}@${version}: ${detail}. GeoSpaX mirrors this by hand; read "${section}" in docs/maintenance.md and update the mirror (or drop it if upstream now exports it).`;
 }

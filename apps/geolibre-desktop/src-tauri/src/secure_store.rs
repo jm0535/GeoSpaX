@@ -18,7 +18,7 @@ use std::collections::{HashMap, HashSet};
 use std::sync::Mutex;
 
 /// Keychain service name; matches the bundle identifier.
-const SERVICE: &str = "org.geolibre.desktop";
+const SERVICE: &str = "geospax.in4metrix.dev";
 const MAX_ACCOUNT_BYTES: usize = 512;
 
 /// Serializes every store call. keyring documents that the Windows credential

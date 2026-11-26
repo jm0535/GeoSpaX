@@ -46,7 +46,7 @@ describe("isMapboxStyleUrl", () => {
     assert.equal(isMapboxStyleUrl("https://api.mapbox.com/styles/v1/someone/custom"), true);
   });
 
-  it("rejects other basemap URLs and GeoLibre sentinels", () => {
+  it("rejects other basemap URLs and GeoSpaX sentinels", () => {
     assert.equal(isMapboxStyleUrl(undefined), false);
     assert.equal(isMapboxStyleUrl(""), false);
     assert.equal(isMapboxStyleUrl("https://tiles.openfreemap.org/styles/liberty"), false);

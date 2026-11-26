@@ -74,7 +74,7 @@ export function useRasterFileHandlers(
         try {
           bytes = await readBytes();
         } catch (error) {
-          console.error("[GeoLibre] Failed to read raster for conversion", error);
+          console.error("[GeoSpaX] Failed to read raster for conversion", error);
           notify.error(
             bytesAreRemote
               ? t("raster.rasterDownloadFailed", { name })
@@ -99,7 +99,7 @@ export function useRasterFileHandlers(
         const samples = geoTiffSampleCount(info);
         if (exceedsBrowserCogConversionLimit(samples)) {
           console.warn(
-            `[GeoLibre] Skipping in-browser COG conversion for "${name}": ${samples.toLocaleString()} decoded samples exceed the safe memory limit.`,
+            `[GeoSpaX] Skipping in-browser COG conversion for "${name}": ${samples.toLocaleString()} decoded samples exceed the safe memory limit.`,
           );
           notify.warning(t("raster.cogConvertTooLarge", { name }));
           return;
@@ -129,7 +129,7 @@ export function useRasterFileHandlers(
         // layer (and its message) in place.
         dismiss();
       } catch (error) {
-        console.error("[GeoLibre] Failed to convert GeoTIFF to COG", error);
+        console.error("[GeoSpaX] Failed to convert GeoTIFF to COG", error);
         notify.error(t("raster.cogConvertFailed", { name }), { error });
       }
     });

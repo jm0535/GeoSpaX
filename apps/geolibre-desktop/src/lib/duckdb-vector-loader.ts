@@ -220,7 +220,7 @@ export async function ensureSpatialExtension(
           // loading. Warn (not debug, which DevTools hides by default) so a
           // genuinely corrupt/mislabelled file surfaces its real cause here
           // instead of only as a later "stoi: no conversion" on DESCRIBE.
-          console.warn("[GeoLibre] spatial warm-up failed (ignored)", error);
+          console.warn("[GeoSpaX] spatial warm-up failed (ignored)", error);
         }
       }
 
@@ -464,7 +464,7 @@ async function readGeoParquetMetadataJson(
     const metadata = row?.[GEOPARQUET_METADATA_COLUMN];
     return typeof metadata === "string" ? metadata : null;
   } catch (err) {
-    console.warn("[GeoLibre] Could not read GeoParquet metadata; reprojection skipped.", err);
+    console.warn("[GeoSpaX] Could not read GeoParquet metadata; reprojection skipped.", err);
     return null;
   }
 }
@@ -501,7 +501,7 @@ async function readParquetSourceCrs(
   } catch (err) {
     // `parquet_schema` is available in every DuckDB build the app ships, but a
     // file it cannot parse must still load through the CRS84 assumption.
-    console.warn("[GeoLibre] Could not read the Parquet logical types.", err);
+    console.warn("[GeoSpaX] Could not read the Parquet logical types.", err);
     return null;
   }
 }
@@ -550,7 +550,7 @@ async function readSourceCrs(
       // CRS in the `.prj` sidecar, so reproject from that before giving up
       // (issue #1148).
       if (prjCrs) return prjCrs;
-      console.warn("[GeoLibre] Could not read CRS metadata; reprojection skipped.", retryErr);
+      console.warn("[GeoSpaX] Could not read CRS metadata; reprojection skipped.", retryErr);
       return null;
     }
   }

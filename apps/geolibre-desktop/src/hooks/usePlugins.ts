@@ -953,7 +953,7 @@ async function ensureExternalPluginsLoadedWithSettings(
         pluginManifestUrls,
       );
       if (unloaded.length) {
-        console.info(`Unloaded external GeoLibre plugins: ${unloaded.join(", ")}`);
+        console.info(`Unloaded external GeoSpaX plugins: ${unloaded.join(", ")}`);
       }
       return loadExternalPlugins(
         manager,
@@ -987,7 +987,7 @@ async function ensureExternalPluginsLoadedWithSettings(
       notifyExternalPluginsListeners();
       if (result.loadedPluginIds.length) {
         console.info(
-          `Loaded external GeoLibre plugins from ${result.pluginSources.join(
+          `Loaded external GeoSpaX plugins from ${result.pluginSources.join(
             ", ",
           )}: ${result.loadedPluginIds.join(", ")}`,
         );
@@ -997,7 +997,7 @@ async function ensureExternalPluginsLoadedWithSettings(
       }
     })
     .catch((error) => {
-      console.warn("Could not load external GeoLibre plugins.", error);
+      console.warn("Could not load external GeoSpaX plugins.", error);
     })
     .finally(() => {
       // A settings change can start a new load while this one is in flight.

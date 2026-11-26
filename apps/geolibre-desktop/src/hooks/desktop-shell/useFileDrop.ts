@@ -116,7 +116,7 @@ export function useFileDrop({
             // Fire-and-forget here so drag feedback never waits on imports.
             if (event.payload.type === "enter") {
               void prepareRasterControl(createAppAPI(mapControllerRef)).catch((error) => {
-                console.warn("[GeoLibre] Could not prepare the raster drop handler", error);
+                console.warn("[GeoSpaX] Could not prepare the raster drop handler", error);
               });
             }
             return;

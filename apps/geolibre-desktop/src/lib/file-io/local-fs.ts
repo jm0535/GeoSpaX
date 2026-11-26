@@ -74,7 +74,7 @@ export async function readLocalFileBytes(path: string): Promise<Uint8Array<Array
     // failure (a moved/deleted file, not a scope denial) is still diagnosable
     // even though the command's "Could not read local file" error is what
     // ultimately surfaces.
-    console.debug(`[GeoLibre] fs read of "${path}" failed; retrying via read_local_file.`, error);
+    console.debug(`[GeoSpaX] fs read of "${path}" failed; retrying via read_local_file.`, error);
     const buffer = await invoke<ArrayBuffer>("read_local_file", { path });
     return new Uint8Array(buffer);
   }
@@ -94,7 +94,7 @@ export async function readLocalFileText(path: string): Promise<string> {
     return await readTextFile(path);
   } catch (error) {
     if (!isTauri()) throw error;
-    console.debug(`[GeoLibre] fs read of "${path}" failed; retrying via read_local_file.`, error);
+    console.debug(`[GeoSpaX] fs read of "${path}" failed; retrying via read_local_file.`, error);
     const buffer = await invoke<ArrayBuffer>("read_local_file", { path });
     // `fatal: true` matches `readTextFile`, which rejects on malformed UTF-8
     // rather than silently substituting U+FFFD: a corrupt KML/GPX/GeoJSON
@@ -115,7 +115,7 @@ export async function localFileSizeBytes(path: string): Promise<number | undefin
   try {
     return (await stat(path)).size;
   } catch (error) {
-    console.debug(`[GeoLibre] Could not stat "${path}" for the large-file guard.`, error);
+    console.debug(`[GeoSpaX] Could not stat "${path}" for the large-file guard.`, error);
     return undefined;
   }
 }

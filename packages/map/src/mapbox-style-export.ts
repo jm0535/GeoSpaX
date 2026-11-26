@@ -193,7 +193,7 @@ function buildLabelLayer(
   if (labels.dedupe !== "off" && pointOnly && labels.field) {
     warnings.push(
       "Duplicate-label handling (unique/concatenate) is applied live in " +
-        "GeoLibre and is not carried into the exported style; every feature is " +
+        "GeoSpaX and is not carried into the exported style; every feature is " +
         "labeled.",
     );
   }

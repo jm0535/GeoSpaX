@@ -77,7 +77,7 @@ export function useWindowCloseGuard(saveProject: () => Promise<boolean>): Window
         else unlisten = stop;
       })
       .catch((error) => {
-        console.error("[GeoLibre] Could not guard the window close", error);
+        console.error("[GeoSpaX] Could not guard the window close", error);
         // Closing the window would then drop unsaved work without asking.
         notify.warning(i18next.t("notifications.windowCloseGuardFailed"), {
           dedupeKey: "window-close-guard",
@@ -129,7 +129,7 @@ export function useWindowCloseGuard(saveProject: () => Promise<boolean>): Window
     try {
       await destroyCurrentWindow();
     } catch (error) {
-      console.error("[GeoLibre] Could not close the window", error);
+      console.error("[GeoSpaX] Could not close the window", error);
       notify.error(i18next.t("notifications.windowCloseFailed"), {
         dedupeKey: "window-close",
         error,

@@ -121,11 +121,11 @@ describe("diagnostics network info capture", () => {
       category: "runtime",
       level: "error",
       message:
-        "Deep link failed (org.geolibre.desktop:/oauth/callback?code=CALLBACK_CODE&state=CALLBACK_STATE&iss=https%3A%2F%2Fshare.geolibre.app)",
+        "Deep link failed (geospax.in4metrix.dev:/oauth/callback?code=CALLBACK_CODE&state=CALLBACK_STATE&iss=https%3A%2F%2Fshare.geolibre.app)",
       detail:
         "Exchange failed for https://share.geolibre.app/oauth/token?code_verifier=PKCE_SECRET&refresh_token=REFRESH_SECRET&safe=visible",
-      source: "org.geolibre.desktop:/oauth/callback?code=SOURCE_CODE",
-      url: "org.geolibre.desktop:/oauth/callback?code=URL_CODE&state=URL_STATE",
+      source: "geospax.in4metrix.dev:/oauth/callback?code=SOURCE_CODE",
+      url: "geospax.in4metrix.dev:/oauth/callback?code=URL_CODE&state=URL_STATE",
     });
     const [record] = getDiagnosticsSnapshot().records;
     const exported = JSON.stringify(record);
@@ -140,7 +140,7 @@ describe("diagnostics network info capture", () => {
     ]) {
       assert.ok(!exported.includes(secret), `${secret} escaped redaction`);
     }
-    assert.ok(record.message.includes("org.geolibre.desktop:/oauth/callback"));
+    assert.ok(record.message.includes("geospax.in4metrix.dev:/oauth/callback"));
     assert.ok(record.detail?.includes("safe=visible"));
     assert.ok(record.source?.includes("REDACTED"));
     assert.ok(record.url?.includes("REDACTED"));
@@ -244,7 +244,7 @@ describe("diagnostics startup transient suppression", () => {
     return {
       event: {
         message,
-        filename: "https://web.geolibre.app/",
+        filename: "https://geospax2.in4metrix.dev/",
         lineno: 0,
         colno: 0,
         preventDefault: () => {

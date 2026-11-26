@@ -137,7 +137,7 @@ export function connect(
   const listeners = new Map<EventName, Set<(payload: never) => void>>();
 
   const send = <T>(type: string, payload: Record<string, unknown> = {}): Promise<T> => {
-    if (disconnected) return Promise.reject(new Error("The GeoLibre client is disconnected"));
+    if (disconnected) return Promise.reject(new Error("The GeoSpaX client is disconnected"));
     const requestId = `geolibre-${Date.now()}-${++sequence}`;
     target.postMessage({ v: EMBED_API_VERSION, type, payload, requestId }, origin);
     return new Promise<T>((resolve, reject) => {
@@ -212,7 +212,7 @@ export function connect(
       if (requestId && request) {
         pending.delete(requestId);
         if (payload.ok === true) request.resolve(payload.result);
-        else request.reject(new Error(String(payload.error ?? "GeoLibre request failed")));
+        else request.reject(new Error(String(payload.error ?? "GeoSpaX request failed")));
       }
     } else if (type === "ready") {
       readyResolve?.(client);
@@ -223,7 +223,7 @@ export function connect(
 
   const timer = window.setTimeout(() => {
     client.disconnect();
-    readyReject?.(new Error("Timed out waiting for GeoLibre"));
+    readyReject?.(new Error("Timed out waiting for GeoSpaX"));
   }, options.timeoutMs ?? 15_000);
   return ready.finally(() => window.clearTimeout(timer));
 }

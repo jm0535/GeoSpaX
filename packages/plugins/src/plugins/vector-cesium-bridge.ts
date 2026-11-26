@@ -128,7 +128,7 @@ export function bridgeVectorControlToStore(control: VectorControl, app: GeoLibre
         // Console-only: the plugin layer has no notification API; the layer
         // panel shows the 2D-only badge for the record.
         console.warn(
-          `[GeoLibre] Vector layer "${info.name}" is too large to render on the globe and stays 2D-only.`,
+          `[GeoSpaX] Vector layer "${info.name}" is too large to render on the globe and stays 2D-only.`,
         );
         continue;
       }
@@ -141,7 +141,7 @@ export function bridgeVectorControlToStore(control: VectorControl, app: GeoLibre
           syncVectorLayersToStore(control);
         })
         .catch((error: unknown) => {
-          console.error("[GeoLibre] Failed to prepare vector geometry for Cesium", error);
+          console.error("[GeoSpaX] Failed to prepare vector geometry for Cesium", error);
           if (pending.get(info.id) === source) pending.delete(info.id);
         });
     }

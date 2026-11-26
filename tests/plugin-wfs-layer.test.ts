@@ -49,7 +49,7 @@ describe("addPluginWfsLayer", () => {
     assert.equal(request.searchParams.get("typeNames"), "ns:roads");
   });
 
-  it("merges plugin metadata under GeoLibre's own keys (#2855)", async () => {
+  it("merges plugin metadata under GeoSpaX's own keys (#2855)", async () => {
     globalThis.fetch = (async () => new Response(JSON.stringify(JSON_FEATURES))) as typeof fetch;
     const id = await addPluginWfsLayer("Catalogued", {
       url: "https://8.8.8.8/wfs",

@@ -139,7 +139,7 @@ async function runEnsureSharedDeckOverlay(
       app.removeMapControl(overlay);
     } catch (error) {
       // The old map may already be gone; surface anything unexpected.
-      console.debug("[GeoLibre] shared-deck-overlay: cleanup", error);
+      console.debug("[GeoSpaX] shared-deck-overlay: cleanup", error);
     }
   }
   boundMap = map;
@@ -158,7 +158,7 @@ async function runEnsureSharedDeckOverlay(
       let root = layer;
       while (root?.parent) root = root.parent;
       if (root) loadErrors.set(root.id, error.message);
-      console.error("[GeoLibre] deck layer failed", error);
+      console.error("[GeoSpaX] deck layer failed", error);
     },
     onDeviceInitialized: (initializedDevice: unknown) => {
       device = initializedDevice;
@@ -166,7 +166,7 @@ async function runEnsureSharedDeckOverlay(
         try {
           listener(initializedDevice);
         } catch (error) {
-          console.warn("[GeoLibre] shared-deck-overlay: device listener", error);
+          console.warn("[GeoSpaX] shared-deck-overlay: device listener", error);
         }
       }
     },
@@ -219,7 +219,7 @@ export function onSharedDeckDevice(listener: DeviceListener): () => void {
     try {
       listener(device);
     } catch (error) {
-      console.warn("[GeoLibre] shared-deck-overlay: device listener", error);
+      console.warn("[GeoSpaX] shared-deck-overlay: device listener", error);
     }
   }
   return () => {
@@ -249,7 +249,7 @@ function renderSharedDeckOverlay(): void {
         .then(() => {
           if (overlay === current) overlayMounted = true;
         })
-        .catch((error: unknown) => console.error("[GeoLibre] ArcGIS deck overlay failed", error));
+        .catch((error: unknown) => console.error("[GeoSpaX] ArcGIS deck overlay failed", error));
     }
     return;
   }
@@ -286,7 +286,7 @@ function scheduleMountRetry(): void {
   if (mountRetries >= MAX_MOUNT_RETRIES) {
     mountGaveUp = true;
     console.warn(
-      "[GeoLibre] shared-deck-overlay: gave up mounting after repeated addMapControl failures.",
+      "[GeoSpaX] shared-deck-overlay: gave up mounting after repeated addMapControl failures.",
     );
     return;
   }

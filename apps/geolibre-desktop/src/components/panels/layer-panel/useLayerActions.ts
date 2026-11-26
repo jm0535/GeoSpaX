@@ -615,10 +615,10 @@ export function useLayerActions({
           defaultName: `${sanitizeExportFileName(
             geoLibreStyleSourceName(layer),
           )}.geolibre.style.json`,
-          filters: [{ name: "GeoLibre URL style", extensions: ["json"] }],
+          filters: [{ name: "GeoSpaX URL style", extensions: ["json"] }],
           browserTypes: [
             {
-              description: "GeoLibre URL style",
+              description: "GeoSpaX URL style",
               accept: { "application/json": [".json"] },
             },
           ],
@@ -715,7 +715,7 @@ export function useLayerActions({
         const picked = await openLocalDataFileWithFallback({
           filters: [
             {
-              name: "Style (GeoLibre URL / Mapbox GL / SLD / QML)",
+              name: "Style (GeoSpaX URL / Mapbox GL / SLD / QML)",
               extensions: ["json", "sld", "qml", "xml"],
             },
           ],

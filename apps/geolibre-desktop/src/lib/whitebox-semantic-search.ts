@@ -142,7 +142,7 @@ export async function searchWhiteboxToolsByMeaning(
   } catch (error) {
     // `selectCatalogTools` resolves rather than throws for every failure it
     // knows about; this covers the transport import, which does not.
-    console.warn("[GeoLibre] Whitebox catalog selection was unavailable:", error);
+    console.warn("[GeoSpaX] Whitebox catalog selection was unavailable:", error);
     return null;
   }
 }

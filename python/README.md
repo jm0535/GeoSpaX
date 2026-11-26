@@ -5,10 +5,10 @@
 [![image](https://img.shields.io/conda/vn/conda-forge/geolibre.svg)](https://anaconda.org/conda-forge/geolibre)
 [![Conda Recipe](https://img.shields.io/badge/recipe-geolibre-green.svg)](https://github.com/conda-forge/geolibre-feedstock)
 
-GeoLibre in Jupyter: the full [GeoLibre](https://geolibre.app) GIS app as an
+GeoSpaX in Jupyter: the full [GeoSpaX](https://jm0535.github.io/GeoSpaX) GIS app as an
 [anywidget](https://anywidget.dev), with a leafmap-style Python API.
 
-The widget embeds the complete GeoLibre app (menus, panels, processing tools)
+The widget embeds the complete GeoSpaX app (menus, panels, processing tools)
 inside a notebook cell. State syncs both ways through a single
 `.geolibre.json` project, so data you add from Python appears in the UI, and
 edits you make in the UI are readable back from Python.
@@ -16,7 +16,7 @@ edits you make in the UI are readable back from Python.
 ## Install
 
 ```bash
-pip install geolibre
+pip install geospax
 ```
 
 Or with conda from [conda-forge](https://anaconda.org/conda-forge/geolibre):
@@ -28,7 +28,7 @@ conda install -c conda-forge geolibre
 ## Quickstart
 
 ```python
-from geolibre import Map
+from geospax import Map
 
 m = Map(center=(-100, 40), zoom=4)
 m.add_geojson("https://example.com/data.geojson", name="Data")
@@ -75,13 +75,13 @@ m.to_project()["mapView"]["center"]
 
 ### Dash
 
-Install the optional Dash integration with `pip install "geolibre[dash]"`.
+Install the optional Dash integration with `pip install "geospax[dash]"`.
 `DashMap` is a Dash component and exposes map interactions as callback
-properties while retaining GeoLibre's existing map implementation:
+properties while retaining GeoSpaX's existing map implementation:
 
 ```python
 from dash import Dash, Input, Output, html
-from geolibre import DashMap
+from geospax import DashMap
 
 app = Dash(__name__)
 m = DashMap(center=(-119.0, 39.8), zoom=12, basemap="dark", height="800px")
@@ -157,7 +157,7 @@ For headless authoring and scripts that do not need a widget, commonly used
 project utilities are available directly from the top-level package:
 
 ```python
-from geolibre import (
+from geospax import (
     basemap_catalog,
     builtin_legend_names,
     color_ramp_names,
@@ -180,15 +180,15 @@ anywhere untrusted, or use `Map.save_project`, which redacts by default.
 ## Notes
 
 - **marimo** can render the anywidget, but its browser may not be able to reach
-  GeoLibre's random localhost port. If the iframe reports
+  GeoSpaX's random localhost port. If the iframe reports
   `127.0.0.1 refused to connect`, select the hosted app before displaying the
   map:
 
   ```python
-  from geolibre import Map
+  from geospax import Map
 
   m = Map(center=(-100, 40), zoom=4)
-  m._app_url = "https://web.geolibre.app/"
+  m._app_url = "https://geospax2.in4metrix.dev/"
   m.add_basemap("dark")
   m.add_vector(
       "https://data.source.coop/giswqs/opengeos/world_cities.geojson",
@@ -206,7 +206,7 @@ anywhere untrusted, or use `Map.save_project`, which redacts by default.
 
   **Privacy:** The widget sends its synchronized project, including any inlined
   local data, to the origin in `_app_url` through `window.postMessage`. Use only
-  a trusted app URL, or host the GeoLibre app yourself, when working with
+  a trusted app URL, or host the GeoSpaX app yourself, when working with
   sensitive data.
 - The bundled app is served from a localhost HTTP server, so the interactive
   widget works in local Jupyter and VS Code directly. **Google Colab** routes
@@ -214,7 +214,7 @@ anywhere untrusted, or use `Map.save_project`, which redacts by default.
   managed/shared hubs) the front-end tries two same-origin routes and uses
   whichever is live, so a host needs only one of them: the Jupyter Server
   extension bundled with `geolibre` at `{base_url}geolibre/app/` (enabled
-  automatically on `pip install geolibre`, but registered only after the Jupyter
+  automatically on `pip install geospax`, but registered only after the Jupyter
   server restarts), and `jupyter-server-proxy` at `{base_url}proxy/{port}/`
   (works in the running server with no restart where it is installed). On other
   remote servers (Binder, remote JupyterLab), pass `Map(server_proxy=True)` to
@@ -224,7 +224,7 @@ anywhere untrusted, or use `Map.save_project`, which redacts by default.
   with `ee.Authenticate()` and initialize with `ee.Initialize(project=...)`
   before adding a layer. The generated tile URL is tied to an Earth Engine map
   id that expires, so a saved project may need the layer regenerated later.
-- Optional extras: `pip install "geolibre[all]"` adds GeoPandas/Shapely support
+- Optional extras: `pip install "geospax[all]"` adds GeoPandas/Shapely support
   for `add_geojson(geodataframe)` and for reading **local** vector files
   (`add_vector`/`add_geoparquet`/`add_flatgeobuf`/`add_shp`/`add_kml`/`add_gpkg`),
   plus xarray/rioxarray/rasterio/rio-tiler support for in-memory rasters.
@@ -244,12 +244,12 @@ The package also ships a headless [MCP](https://modelcontextprotocol.io) server
 that authors `.geolibre.json` projects from an AI client:
 
 ```bash
-pip install "geolibre[mcp]"
-geolibre-mcp --root ~/maps
+pip install "geospax[mcp]"
+geospax-mcp --root ~/maps
 ```
 
 It confines every read and write to the roots you pass (`--root`, repeatable, or
 `GEOLIBRE_MCP_ROOTS`) and builds projects through the same builders this package
 uses, so anything it writes opens in the widget unchanged. See
-[docs/mcp.md](https://geolibre.app/mcp/) for the tool list and client
+[docs/mcp.md](https://jm0535.github.io/GeoSpaX/mcp/) for the tool list and client
 configuration.

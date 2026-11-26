@@ -47,7 +47,7 @@ function errorCode(action: () => unknown): string | undefined {
   return undefined;
 }
 
-describe("GeoLibre language packs", () => {
+describe("GeoSpaX language packs", () => {
   it("parses a scoped Whitebox translation pack", () => {
     const parsed = parseLanguagePack(JSON.stringify(pack()));
     assert.equal(parsed.locale, "zh");

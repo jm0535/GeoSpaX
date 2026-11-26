@@ -273,7 +273,7 @@ export function DeckVizSource({ initialDeckVizKind }: DeckVizSourceProps) {
     }
     if (result.text.length > DECK_VIZ_SIZE_WARN_BYTES) {
       console.warn(
-        "[GeoLibre] deck-viz: large payload stored inline in the project",
+        "[GeoSpaX] deck-viz: large payload stored inline in the project",
         result.text.length,
         "bytes",
       );

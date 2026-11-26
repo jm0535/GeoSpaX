@@ -13,18 +13,18 @@
 # See https://github.com/AppImage/AppImageSpec/blob/master/draft.md#update-information
 #
 # Usage:
-#   REPO=opengeos/GeoLibre TAG=v1.5.0 \
-#     scripts/embed-appimage-update-info.sh path/to/GeoLibre.Desktop_1.5.0_amd64.AppImage
+#   REPO=jm0535/GeoSpaX TAG=v1.5.0 \
+#     scripts/embed-appimage-update-info.sh path/to/GeoSpaX.Desktop_1.5.0_amd64.AppImage
 #
 #   # Print the update information string for a file name and exit (no writes):
-#   REPO=opengeos/GeoLibre TAG=v1.5.0 \
-#     scripts/embed-appimage-update-info.sh --print GeoLibre.Desktop_1.5.0_amd64.AppImage
+#   REPO=jm0535/GeoSpaX TAG=v1.5.0 \
+#     scripts/embed-appimage-update-info.sh --print GeoSpaX.Desktop_1.5.0_amd64.AppImage
 #
 # REPO (owner/name) and TAG (the release tag, e.g. v1.5.0) are both required.
 # The AppImage is patched in place, so run this before uploading it.
 set -euo pipefail
 
-: "${REPO:?Set REPO to the GitHub repository, e.g. opengeos/GeoLibre}"
+: "${REPO:?Set REPO to the GitHub repository, e.g. jm0535/GeoSpaX}"
 : "${TAG:?Set TAG to the release tag, e.g. v1.5.0}"
 
 print_only=false

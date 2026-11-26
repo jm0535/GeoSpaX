@@ -134,7 +134,7 @@ export function installStaleChunkReload(options?: { enabled?: boolean }): () => 
     // their rejection intact for the feature to report, preserving its project.
     if (isExternalModuleFailure(payload, window.location.origin)) {
       console.warn(
-        "[GeoLibre] External module preload failed; leaving the error to its feature.",
+        "[GeoSpaX] External module preload failed; leaving the error to its feature.",
         payload,
       );
       return;
@@ -144,7 +144,7 @@ export function installStaleChunkReload(options?: { enabled?: boolean }): () => 
     const message = payload instanceof Error ? payload.message : payload;
     if (typeof message === "string" && /importing a module script failed/i.test(message)) {
       console.warn(
-        "[GeoLibre] Ambiguous WebKit module preload failure; preserving the open project.",
+        "[GeoSpaX] Ambiguous WebKit module preload failure; preserving the open project.",
         payload,
       );
       return;
@@ -171,7 +171,7 @@ export function installStaleChunkReload(options?: { enabled?: boolean }): () => 
       // reload and let Vite surface the original error rather than risk a
       // refresh loop.
       console.warn(
-        "[GeoLibre] Stale-chunk reload guard unavailable (storage blocked); leaving the preload error to surface.",
+        "[GeoSpaX] Stale-chunk reload guard unavailable (storage blocked); leaving the preload error to surface.",
         payload,
       );
       return;
@@ -179,7 +179,7 @@ export function installStaleChunkReload(options?: { enabled?: boolean }): () => 
     if (outcome === "reloaded") {
       // Only suppress Vite's rethrow when we are recovering by reloading; a
       // cooldown-suppressed (broken-build) error should still surface.
-      console.warn("[GeoLibre] Reloading to recover from a stale chunk.", payload);
+      console.warn("[GeoSpaX] Reloading to recover from a stale chunk.", payload);
       event.preventDefault();
     } else if (outcome === "deferred-unsaved") {
       // Reloading would discard unsaved work (and raise the "Leave site?"

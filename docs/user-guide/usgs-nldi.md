@@ -1,6 +1,6 @@
 # USGS NLDI workflows
 
-GeoLibre includes a **USGS NLDI** plugin for tracing a point to the National
+GeoSpaX includes a **USGS NLDI** plugin for tracing a point to the National
 Hydrography Dataset (NHD) network and displaying the result on the map.
 
 ## Trace a map point
@@ -15,7 +15,7 @@ elevation-based `raindropPath` in orange. The clicked point is marked in red.
 
 ## Basin workflow
 
-After a trace, GeoLibre calls NLDI hydrolocation for the clicked coordinate.
+After a trace, GeoSpaX calls NLDI hydrolocation for the clicked coordinate.
 When a COMID is available, use **Basin from hydrolocation** to request the
 simplified upstream basin. The selected COMID also enables navigation options
 for upstream mainstem, upstream tributaries, downstream mainstem, and
@@ -35,8 +35,8 @@ flowline, raindrop path, basin, and any plotted navigation features as one
 GeoJSON FeatureCollection. The `_nldiLayer` property identifies each result
 group in the exported file.
 
-Use **Add rendered results to GeoLibre Layers** to copy the current NLDI
-results into the Layers panel. GeoLibre creates one **USGS NLDI results** group
+Use **Add rendered results to GeoSpaX Layers** to copy the current NLDI
+results into the Layers panel. GeoSpaX creates one **USGS NLDI results** group
 containing the flowline, raindrop path, selected point, basin, and every
 navigation result plotted so far. These copied layers remain in the project
 even after the temporary NLDI map overlays are cleared.

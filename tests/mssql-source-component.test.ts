@@ -77,7 +77,7 @@ describe("MssqlSource", () => {
   it("explains the desktop-only constraint and disables connecting in the web app", () => {
     renderMssqlSource();
 
-    const notice = "SQL Server layers are only available in GeoLibre Desktop.";
+    const notice = "SQL Server layers are only available in GeoSpaX Desktop.";
     assert.equal(screen.getByText(notice).textContent, notice);
     assert.ok(screen.getByLabelText("Server"));
     assert.ok(screen.getByLabelText("Database"));

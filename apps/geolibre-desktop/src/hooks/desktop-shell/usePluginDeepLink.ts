@@ -86,7 +86,7 @@ const getPluginManagerVersion = () => getPluginManager().getVersion();
  * @param error - What activation threw.
  */
 function reportActivationFailure(id: string, error: unknown): void {
-  console.error(`[GeoLibre] Could not activate the plugin "${id}"`, error);
+  console.error(`[GeoSpaX] Could not activate the plugin "${id}"`, error);
   notify.error(i18next.t("notifications.pluginActivateFailed", { id }), {
     // A plugin error can embed a keyed URL; never show a token on screen.
     description: error instanceof Error ? scrubForIssueReport(error.message) : undefined,
@@ -165,7 +165,7 @@ export function usePluginDeepLink({
         if (viewer && VIEWER_BLOCKED_PLUGIN_IDS.includes(id)) continue;
         try {
           if (!(await activateDeepLinkedPlugin(id, mapControllerRef))) {
-            console.warn(`[GeoLibre] The plugin "${id}" from the ?plugin= link did not activate.`);
+            console.warn(`[GeoSpaX] The plugin "${id}" from the ?plugin= link did not activate.`);
           }
         } catch (error) {
           reportActivationFailure(id, error);
@@ -206,7 +206,7 @@ export function usePluginDeepLink({
                 continue;
               }
               console.warn(
-                `[GeoLibre] The plugin "${entry.id}" from the ?plugin= link did not activate.`,
+                `[GeoSpaX] The plugin "${entry.id}" from the ?plugin= link did not activate.`,
               );
             } catch (error) {
               reportActivationFailure(entry.id, error);
@@ -214,16 +214,16 @@ export function usePluginDeepLink({
           } else if (loaded) {
             // The id belongs to a plugin this entry would not replace.
             console.warn(
-              `[GeoLibre] Ignoring "${entry.id}" in the ?plugin= link: a plugin with that id is already loaded.`,
+              `[GeoSpaX] Ignoring "${entry.id}" in the ?plugin= link: a plugin with that id is already loaded.`,
             );
           } else if (viewer) {
             // The read-only viewer has nowhere to ask, so it never installs plugins.
             console.warn(
-              `[GeoLibre] Ignoring "${entry.id}" in the ?plugin= link: it is not installed, and layout=viewer never installs plugins.`,
+              `[GeoSpaX] Ignoring "${entry.id}" in the ?plugin= link: it is not installed, and layout=viewer never installs plugins.`,
             );
           } else if (!satisfiesMinVersion(__GEOLIBRE_VERSION__, entry.minGeoLibreVersion)) {
             console.warn(
-              `[GeoLibre] Ignoring "${entry.id}" in the ?plugin= link: it needs GeoLibre ${entry.minGeoLibreVersion} or newer.`,
+              `[GeoSpaX] Ignoring "${entry.id}" in the ?plugin= link: it needs GeoSpaX ${entry.minGeoLibreVersion} or newer.`,
             );
           } else {
             toPrompt.push(entry);
@@ -232,7 +232,7 @@ export function usePluginDeepLink({
         setPending(toPrompt);
       } catch (error) {
         console.warn(
-          "[GeoLibre] Could not look up the ?plugin= link in the plugin registry",
+          "[GeoSpaX] Could not look up the ?plugin= link in the plugin registry",
           error,
         );
       }
@@ -240,7 +240,7 @@ export function usePluginDeepLink({
         // The valid names go last, after a fixed label: the docs check in
         // e2e/plugin-deep-link.spec.ts reads them from this message.
         console.warn(
-          `[GeoLibre] Ignoring unknown plugin(s) in the ?plugin= link: ${unknown.join(", ")}. ` +
+          `[GeoSpaX] Ignoring unknown plugin(s) in the ?plugin= link: ${unknown.join(", ")}. ` +
             `Valid names: ${pluginDeepLinkNames(DEEP_LINKABLE_PLUGIN_IDS).join(", ")}`,
         );
       }
@@ -275,14 +275,14 @@ export function usePluginDeepLink({
     );
     for (const entry of failed) {
       console.warn(
-        `[GeoLibre] The plugin "${entry.id}" from the ?plugin= link did not load: ${loadIssues.get(entry.manifestUrl)}`,
+        `[GeoSpaX] The plugin "${entry.id}" from the ?plugin= link did not load: ${loadIssues.get(entry.manifestUrl)}`,
       );
     }
     void (async () => {
       for (const { id } of ready) {
         try {
           if (!(await activateDeepLinkedPlugin(id, mapControllerRef))) {
-            console.warn(`[GeoLibre] The plugin "${id}" from the ?plugin= link did not activate.`);
+            console.warn(`[GeoSpaX] The plugin "${id}" from the ?plugin= link did not activate.`);
           }
         } catch (error) {
           reportActivationFailure(id, error);

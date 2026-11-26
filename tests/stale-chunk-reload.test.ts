@@ -100,7 +100,7 @@ it("preserves the project for WebKit's unattributed import error", () => {
   let reloads = 0;
   Object.assign(globalThis, {
     window: Object.assign(target, {
-      location: { origin: "https://web.geolibre.app", reload: () => reloads++ },
+      location: { origin: "https://geospax2.in4metrix.dev", reload: () => reloads++ },
       sessionStorage: { getItem: () => null, setItem: () => {} },
     }),
   });
@@ -114,7 +114,7 @@ it("preserves the project for WebKit's unattributed import error", () => {
     assert.equal(ambiguous.defaultPrevented, false, "the feature still receives its rejection");
     const local = Object.assign(new Event("vite:preloadError", { cancelable: true }), {
       payload: new TypeError(
-        "Failed to fetch dynamically imported module: https://web.geolibre.app/assets/old.js",
+        "Failed to fetch dynamically imported module: https://geospax2.in4metrix.dev/assets/old.js",
       ),
     });
     target.dispatchEvent(local);
@@ -127,7 +127,7 @@ it("preserves the project for WebKit's unattributed import error", () => {
 });
 
 it("leaves CDN import errors to their feature while retaining local stale-chunk recovery", () => {
-  const origin = "https://web.geolibre.app";
+  const origin = "https://geospax2.in4metrix.dev";
   assert.equal(
     isExternalModuleFailure(
       new TypeError(
@@ -147,7 +147,7 @@ it("leaves CDN import errors to their feature while retaining local stale-chunk 
   assert.equal(
     isExternalModuleFailure(
       new Error(
-        "Failed to fetch dynamically imported module: https://web.geolibre.app/assets/old-hash.js",
+        "Failed to fetch dynamically imported module: https://geospax2.in4metrix.dev/assets/old-hash.js",
       ),
       origin,
     ),
@@ -156,7 +156,7 @@ it("leaves CDN import errors to their feature while retaining local stale-chunk 
   assert.equal(
     isExternalModuleFailure(
       new Error(
-        "Importing https://js.arcgis.com/5.1/@arcgis/core/Map.js from https://web.geolibre.app/assets/arcgis.js failed",
+        "Importing https://js.arcgis.com/5.1/@arcgis/core/Map.js from https://geospax2.in4metrix.dev/assets/arcgis.js failed",
       ),
       origin,
     ),

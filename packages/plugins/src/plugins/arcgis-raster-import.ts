@@ -87,7 +87,7 @@ export async function restoreArcgisRasterFiles(
       });
       if (typeof source !== "string") retainFile(layer.id, url);
     } catch (error) {
-      console.warn(`[GeoLibre] Could not reopen raster ${layer.name}`, error);
+      console.warn(`[GeoSpaX] Could not reopen raster ${layer.name}`, error);
     }
   }
 }

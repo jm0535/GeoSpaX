@@ -827,10 +827,10 @@ export function ProcessingDialog({ mapControllerRef, onAddRaster }: ProcessingDi
       const wasmTools = wasmResult.status === "fulfilled" ? wasmResult.value : [];
       const wasmError = wasmResult.status === "rejected" ? wasmResult.reason : null;
       if (wasmError) {
-        console.warn("[GeoLibre] Could not enumerate WASM tool manifests:", wasmError);
+        console.warn("[GeoSpaX] Could not enumerate WASM tool manifests:", wasmError);
       }
       if (catalogError) {
-        console.warn("[GeoLibre] Could not load Whitebox catalog snapshot:", catalogError);
+        console.warn("[GeoSpaX] Could not load Whitebox catalog snapshot:", catalogError);
       }
       const nextTools = withGlobalDemTool(mergeWasmToolManifests(catalogTools, wasmTools));
       setTools(nextTools);
@@ -1699,7 +1699,7 @@ export function ProcessingDialog({ mapControllerRef, onAddRaster }: ProcessingDi
     try {
       await stopGeoLibreSidecar();
       setRuntimeAvailable(false);
-      setRuntimeMessage("GeoLibre sidecar is stopped. Showing GitHub catalog only.");
+      setRuntimeMessage("GeoSpaX sidecar is stopped. Showing GitHub catalog only.");
       setJob(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : t("processing.whitebox.errorStopSidecar"));
@@ -1890,7 +1890,7 @@ export function ProcessingDialog({ mapControllerRef, onAddRaster }: ProcessingDi
               its half. Back to a column once the list has a column of its own,
               which is narrower than the panel. Flex, not a 2-col grid, so the
               category select still fills the row when the source filter is
-              absent (no GeoLibre-authored tools in the catalog). */}
+              absent (no GeoSpaX-authored tools in the catalog). */}
           <div className="flex gap-2 @xl/panel:flex-col @xl/panel:gap-3">
             <Select
               className="min-w-0 flex-1"

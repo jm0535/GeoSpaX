@@ -182,7 +182,7 @@
     },
     "registryTrust": {
       "title_other": "プラグインをインストールしますか?",
-      "description_other": "このリンクは、公式 GeoLibre プラグインレジストリにある未インストールのプラグイン {{count}} 件を開きます。インストールすると、プラグインに追加されて有効になります。"
+      "description_other": "このリンクは、公式 GeoSpaX プラグインレジストリにある未インストールのプラグイン {{count}} 件を開きます。インストールすると、プラグインに追加されて有効になります。"
     },
     "title": "プラグインの管理",
     "searchAria": "プラグインを検索",
@@ -726,7 +726,7 @@
       "errorUrl": "LandXMLのURLを入力してください。",
       "errorTooLarge": "リモートのLandXMLファイルが100 MBのダウンロード上限を超えています。",
       "errorSelectType": "LandXMLのオブジェクトタイプを1つ以上選択してください。",
-      "errorMissingCrs": "このLandXMLファイルは投影座標を使用しています。GeoLibreがWGS84に再投影できるよう、元のCRSを入力してください。",
+      "errorMissingCrs": "このLandXMLファイルは投影座標を使用しています。GeoSpaXがWGS84に再投影できるよう、元のCRSを入力してください。",
       "errorGeographicCrsBounds": "座標が地理的な経度・緯度の範囲外です。このLandXMLファイルで使用されている投影座標系を元のCRSとして選択してください。",
       "summary": "サーフェス {{surfaces}} 件、線形 {{alignments}} 件、縦断 {{profiles}} 件、測量点 {{points}} 件",
       "objectTypes": "オブジェクトタイプ",
@@ -866,12 +866,12 @@
     },
     "mssql": {
       "defaultName": "SQL Serverレイヤー",
-      "errorDesktopOnly": "SQL ServerレイヤーにはGeoLibreデスクトップ版が必要です。",
+      "errorDesktopOnly": "SQL ServerレイヤーにはGeoSpaXデスクトップ版が必要です。",
       "errorConnect": "SQL Serverに接続できませんでした。",
       "errorPort": "有効なSQL Serverのポート (1–65535) を入力してください。",
       "errorConnectFirst": "先にSQL Serverに接続してください。",
       "errorSelectTable": "読み込む空間テーブルを選択してください。",
-      "desktopOnlyNotice": "SQL ServerレイヤーはGeoLibreデスクトップ版でのみ利用できます。",
+      "desktopOnlyNotice": "SQL ServerレイヤーはGeoSpaXデスクトップ版でのみ利用できます。",
       "savedConnection": "保存済みの接続",
       "selectSavedConnection": "新しい接続",
       "server": "サーバー",
@@ -1588,13 +1588,13 @@
     "oauthFailed": "サインインに失敗しました。もう一度お試しください。",
     "oauthRefreshFailed": "セッションを更新できませんでした。接続を確認して、もう一度お試しください。",
     "oauthSetupFailed": "デスクトップのサインインを開始できませんでした。アプリを再起動し、インストール済みのアプリがリンクを開けて共有サーバーに接続できることを確認してください。貼り付けたAPIトークンは引き続き使用できます。",
-    "oauthRestartSignIn": "このサインインリンクは GeoLibre の再起動後に開かれました。ここでサインインをやり直してください。以前の認可コードは使用できません。",
+    "oauthRestartSignIn": "このサインインリンクは GeoSpaX の再起動後に開かれました。ここでサインインをやり直してください。以前の認可コードは使用できません。",
     "reauthBody": "{{shareHost}} のセッションの有効期限が切れました。共有を続けるには、もう一度サインインしてください。",
     "errorUnauthorized": "{{shareHost}} のAPIトークンが無効か期限切れです。設定で更新してください。",
     "reauthSignIn": "再度サインイン",
     "liveAt": "プロジェクトは次のURLで公開されています:",
     "credentialsRemoved": "{{count}} 個の認証情報フィールドは含まれていません。受信者は自分の認証情報を指定するか、ブローカー参照を使用する必要があります。",
-    "oauthSignOutIncomplete": "サインアウトしましたが、保存されたサインイン情報をシステムのキーチェーンから削除できなかったため、次回 GeoLibre の起動時に復元される可能性があります。キーチェーンが利用可能であることを確認してから、もう一度サインインしてサインアウトしてください。",
+    "oauthSignOutIncomplete": "サインアウトしましたが、保存されたサインイン情報をシステムのキーチェーンから削除できなかったため、次回 GeoSpaX の起動時に復元される可能性があります。キーチェーンが利用可能であることを確認してから、もう一度サインインしてサインアウトしてください。",
     "copyLink": "リンクをコピー",
     "open": "開く",
     "done": "完了",
@@ -2335,17 +2335,17 @@
   },
   "startup": {
     "keychainWaitTitle": "システムのキーチェーンを待機中…",
-    "keychainWaitDetail": "GeoLibre は保存された認証情報を読み込んでいます。キーチェーンのロックを解除するためにシステムがパスワードを求めた場合は、そのプロンプトに応答して続行してください。このウィンドウの背後に表示されている場合があります。"
+    "keychainWaitDetail": "GeoSpaX は保存された認証情報を読み込んでいます。キーチェーンのロックを解除するためにシステムがパスワードを求めた場合は、そのプロンプトに応答して続行してください。このウィンドウの背後に表示されている場合があります。"
   },
   "settings": {
     "title": "設定",
     "description": "プロジェクトの環境設定とランタイム設定を構成します。",
     "saveButton": "設定を保存",
     "credentials": {
-      "keychain": "GeoLibre で保存したトークンと API キーは、システムのキーチェーンに保存されます。",
+      "keychain": "GeoSpaX で保存したトークンと API キーは、システムのキーチェーンに保存されます。",
       "projectKeychainUnavailable": "システムのキーチェーンにプロジェクトの認証情報を保存できません。新しいプロジェクトのキーはこのセッション内にのみ保持されます。ローカルプロジェクトを保存する際に、ファイルに残すか削除するかを確認します。",
       "browser": "ここで保存したトークンと API キーはこのブラウザのローカルストレージに保存され、このサイトで実行されるスクリプトから読み取ることができます。",
-      "unavailable": "システムのキーチェーンを使用できませんでした ({{error}})。新しい認証情報は GeoLibre を閉じるまでしか保持されません。以前に保存した認証情報は、移行が成功するまでブラウザのストレージに残る場合があります。"
+      "unavailable": "システムのキーチェーンを使用できませんでした ({{error}})。新しい認証情報は GeoSpaX を閉じるまでしか保持されません。以前に保存した認証情報は、移行が成功するまでブラウザのストレージに残る場合があります。"
     },
     "section": {
       "language": "言語",
@@ -2389,11 +2389,11 @@
         "role": "ロールの引き受け",
         "other": "その他"
       },
-      "environmentHelp": "GeoLibre の起動時の環境にある AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY、AWS_SESSION_TOKEN を使用します。",
-      "instanceHelp": "GeoLibre が実行されているマシンの IAM ロールを使用します: Web ID トークン (EKS IRSA)、ECS または EKS のコンテナ認証情報、または EC2 インスタンスプロファイル。",
+      "environmentHelp": "GeoSpaX の起動時の環境にある AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY、AWS_SESSION_TOKEN を使用します。",
+      "instanceHelp": "GeoSpaX が実行されているマシンの IAM ロールを使用します: Web ID トークン (EKS IRSA)、ECS または EKS のコンテナ認証情報、または EC2 インスタンスプロファイル。",
       "roleArn": "引き受けるロール",
       "externalId": "外部 ID",
-      "roleHelp": "任意。GeoLibre は上記の認証情報で AWS STS AssumeRole を呼び出し、このロールとしてバケットを読み取ります (例: クロスアカウントの読み取り専用ロール)。",
+      "roleHelp": "任意。GeoSpaX は上記の認証情報で AWS STS AssumeRole を呼び出し、このロールとしてバケットを読み取ります (例: クロスアカウントの読み取り専用ロール)。",
       "accessKeyId": "アクセスキーID",
       "secretAccessKey": "シークレットアクセスキー",
       "sessionToken": "セッショントークン",
@@ -2497,7 +2497,7 @@
       "globeByDefault": "既定で3D地球儀を有効にする",
       "globeByDefaultHint": "起動時のプロジェクトもプロジェクトリンクも指定されていない場合の、無題のワークスペースに使用されます。",
       "openS3Browser": "起動時に S3 ブラウザーを開く",
-      "openS3BrowserHint": "GeoLibre を起動するたびに S3 ブラウザーパネルを表示します。プロジェクトを開いても開いたままになります。",
+      "openS3BrowserHint": "GeoSpaX を起動するたびに S3 ブラウザーパネルを表示します。プロジェクトを開いても開いたままになります。",
       "defaultView": "既定の地図表示",
       "defaultViewHint": "無題のワークスペースの中心とズームを設定します。",
       "longitude": "中心の経度",
@@ -2505,7 +2505,7 @@
       "zoom": "ズームレベル",
       "useCurrentView": "現在の表示を使用",
       "layerStyles": "既定のレイヤースタイル",
-      "layerStylesHint": "レイヤースタイルファイルを選択します (プロジェクト → エクスポート → レイヤースタイルをエクスポート)。追加したレイヤーの名前がファイル内のスタイルと一致すると、自動的にスタイルが適用されます。開いたプロジェクトのレイヤーは保存済みのスタイルを維持します。GeoLibre はファイルのコピーを保持するため、ファイルを編集した後はもう一度選択してください。",
+      "layerStylesHint": "レイヤースタイルファイルを選択します (プロジェクト → エクスポート → レイヤースタイルをエクスポート)。追加したレイヤーの名前がファイル内のスタイルと一致すると、自動的にスタイルが適用されます。開いたプロジェクトのレイヤーは保存済みのスタイルを維持します。GeoSpaX はファイルのコピーを保持するため、ファイルを編集した後はもう一度選択してください。",
       "chooseLayerStyles": "ファイルを選択",
       "clearLayerStyles": "クリア",
       "noLayerStylesSelected": "レイヤースタイルファイルが選択されていません",
@@ -2605,8 +2605,8 @@
       "oauthSigningIn": "サインイン中…",
       "oauthSignOut": "サインアウト",
       "oauthWebLifetime": "アクセストークンはメモリ内に保持され、更新セッションはこのブラウザタブに限定されます。タブを閉じると、再度サインインが必要です。",
-      "oauthDesktopKeychain": "サインイン情報はシステムのキーチェーンに保持されるため、サインアウトするまで GeoLibre は再起動後もサインインしたままになります。",
-      "oauthDesktopSessionOnly": "このサインインをシステムのキーチェーンに保存できなかったため、GeoLibre を閉じるまでしか保持されません。",
+      "oauthDesktopKeychain": "サインイン情報はシステムのキーチェーンに保持されるため、サインアウトするまで GeoSpaX は再起動後もサインインしたままになります。",
+      "oauthDesktopSessionOnly": "このサインインをシステムのキーチェーンに保存できなかったため、GeoSpaX を閉じるまでしか保持されません。",
       "accountLoading": "アカウントを読み込み中…",
       "accountRetry": "再試行",
       "accountIdentity": "アカウント: {{account}}",
@@ -2636,7 +2636,7 @@
       "sessionRevoke": "失効",
       "sessionRevoking": "失効中…",
       "revokeSessionConfirm": "セッション「{{label}}」を失効させますか？そのデバイスはサインアウトされます。この操作は元に戻せません。",
-      "revokeCurrentConfirm": "このセッション「{{label}}」を失効させますか？GeoLibre から直ちにサインアウトされます。",
+      "revokeCurrentConfirm": "このセッション「{{label}}」を失効させますか？GeoSpaX から直ちにサインアウトされます。",
       "revokeTokenConfirm": "個人用APIトークン「{{label}}」を失効させますか？これを使用しているスクリプトやCIは動作しなくなります。この操作は元に戻せません。",
       "revokeSessionConfirmButton": "はい、失効させる",
       "sessionCreated": "作成日時: {{date}}",
@@ -2724,7 +2724,7 @@
       "statusReady": "{{provider}} は設定済みで使用できます。",
       "statusIncomplete": "{{provider}} を有効にするには、以下の必須項目を入力してください。",
       "secretsNote": "認証情報は、共有するプロジェクトファイルではなくこのデバイスにローカル保存されるため、再起動後も保持されます。このデバイスにアクセスできる人は誰でも読み取れる可能性があります。",
-      "secretsNoteKeychain": "API キーなどのシークレットフィールドは、共有するプロジェクトファイルではなくシステムのキーチェーンに保存されるため、再起動後も保持されます。モデル名や URL などのその他のフィールドは、このデバイスの GeoLibre の設定に保存されます。",
+      "secretsNoteKeychain": "API キーなどのシークレットフィールドは、共有するプロジェクトファイルではなくシステムのキーチェーンに保存されるため、再起動後も保持されます。モデル名や URL などのその他のフィールドは、このデバイスの GeoSpaX の設定に保存されます。",
       "getCredentials": "{{provider}} の認証情報の取得方法",
       "showValue": "{{name}} を表示",
       "hideValue": "{{name}} を非表示",
@@ -2850,7 +2850,7 @@
         "notSet": "未設定",
         "getKey": "無料のキーを取得",
         "saveFailed": "このブラウザーにキーを保存できませんでした。",
-        "saveFailedKeychain": "キーをシステムのキーチェーンに保存できませんでした。GeoLibre を閉じるまでは使用できます。"
+        "saveFailedKeychain": "キーをシステムのキーチェーンに保存できませんでした。GeoSpaX を閉じるまでは使用できます。"
       }
     }
   },
@@ -3551,7 +3551,7 @@
       "exportLayerStylesAsDesc": "ファイル名を入力してください。「保存」をクリックすると、スタイルファイルがブラウザのダウンロードフォルダにダウンロードされます。",
       "exportLayerStylesFileName": "ファイル名",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "GeoLibre レイヤースタイル",
+      "layerStylesFile": "GeoSpaX レイヤースタイル",
       "layerStylesImported": "レイヤースタイルをインポートしました",
       "layerStylesImportedSummary_other": "「{{file}}」から {{count}} 個のレイヤーのスタイルを変更しました。",
       "layerStylesUnused_other": "ファイル内の {{count}} 個のスタイルは、このプロジェクトのどのレイヤーにも一致しませんでした:",
@@ -3669,7 +3669,7 @@
     },
     "windowClose": {
       "savePromptTitle": "閉じる前に変更を保存しますか?",
-      "savePromptDescription": "現在のプロジェクトには未保存の変更があります。GeoLibre を閉じる前に保存しますか?"
+      "savePromptDescription": "現在のプロジェクトには未保存の変更があります。GeoSpaX を閉じる前に保存しますか?"
     },
     "error": {
       "couldNotOpenProject": "プロジェクトを開けませんでした。",
@@ -7900,7 +7900,7 @@
     "exportStyleError": "このレイヤーのスタイルをエクスポートできませんでした。",
     "importStyle": "スタイルをインポート (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "テキストからスタイルをインポート…",
-    "importStyleFromTextDescription": "GeoLibre、Mapbox GL、SLD、またはQMLのスタイルを貼り付けてください。形式はテキストから判別されます。",
+    "importStyleFromTextDescription": "GeoSpaX、Mapbox GL、SLD、またはQMLのスタイルを貼り付けてください。形式はテキストから判別されます。",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "インポート",
     "openStyleManager": "保存済みスタイル(スタイルマネージャー)…",
@@ -8452,7 +8452,7 @@
     "windowCloseGuardFailed": "ウィンドウを閉じるとき、未保存の変更の保存を確認しません。閉じる前に作業内容を保存してください。",
     "windowCloseSaveFailed": "閉じる前にプロジェクトを保存できませんでした。",
     "windowCloseFailed": "ウィンドウを閉じられませんでした。",
-    "nativeProjectPathFailed": "GeoLibreに渡されたプロジェクトファイルを開けませんでした。",
+    "nativeProjectPathFailed": "GeoSpaXに渡されたプロジェクトファイルを開けませんでした。",
     "kmlSuperOverlayReadFailed": "KML Super-Overlay「{{name}}」を再度読み取れなかったため、タイルが空白です。",
     "projectControlFailed": "プロジェクトの「{{control}}」設定を適用できませんでした。",
     "pluginSnapshotFailed": "一部のプラグイン設定は新しいレンダラーに引き継がれない可能性があります。",
@@ -8461,7 +8461,7 @@
     "panelRenderFailed": "パネル「{{name}}」を開けませんでした。",
     "sharedSettingsFailed": "リンクから共有設定を読み込めなかったため、ご自身の設定を使用しています。",
     "sharedLanguageFailed": "共有設定が指定する言語に切り替えられませんでした。",
-    "languageCatalogFailed": "{{language}}の翻訳を読み込めなかったため、GeoLibreは英語で表示されています。"
+    "languageCatalogFailed": "{{language}}の翻訳を読み込めなかったため、GeoSpaXは英語で表示されています。"
   },
   "shell": {
     "workspaceTitle": "GeoSpaX マップワークスペース",
@@ -8950,7 +8950,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "このタイルのGeoParquetファイル全体をダウンロード",
       "dataset": "データセット",
-      "browseOnly": "このデータセットの検索はGeoLibreではまだサポートされていません。上のリンクから提供元で入手してください。",
+      "browseOnly": "このデータセットの検索はGeoSpaXではまだサポートされていません。上のリンクから提供元で入手してください。",
       "searchArea": "検索範囲",
       "modeView": "地図表示",
       "modeDraw": "ボックスを描画",
@@ -9197,7 +9197,7 @@
       "liftSelected": "{{layer}} の {{polygons}} 個のポリゴン内にある {{count}} 個のポイントを選択しました。",
       "liftInstances": "{{layer}} から {{name}} のインスタンスを {{objects}} 個作成しました ({{count}} ポイント)。",
       "fullFile": "ラベル付きの完全なファイル",
-      "fullFileNote": "ここで読み込んだポイントだけでなく、保存されたすべてのラベルを適用したこのポイントクラウドのローカルコピーを書き出します。GeoLibre サーバーで実行されます。",
+      "fullFileNote": "ここで読み込んだポイントだけでなく、保存されたすべてのラベルを適用したこのポイントクラウドのローカルコピーを書き出します。GeoSpaX サーバーで実行されます。",
       "fullFileInput": "ローカルコピー (.las、.laz、.copc.laz)",
       "fullFileOutput": "出力ファイル (.las または .laz)",
       "fullFileWrite": "ファイルを書き出す",

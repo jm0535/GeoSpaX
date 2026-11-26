@@ -33,7 +33,7 @@ function layer(sourcePath?: string): GeoLibreLayer {
   };
 }
 
-describe("GeoLibre URL style export", () => {
+describe("GeoSpaX URL style export", () => {
   it("derives the source from a ZIP member filename", () => {
     assert.equal(
       geoLibreStyleSourceName(layer("https://example.com/export.zip#folder/parks.geojson")),

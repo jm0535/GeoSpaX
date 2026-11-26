@@ -762,7 +762,7 @@ function ensureDeck(app: GeoLibreAppAPI): void {
       engine?.render();
     })
     .catch((error) => {
-      console.warn("[GeoLibre] route-animation: deck.gl unavailable", error);
+      console.warn("[GeoSpaX] route-animation: deck.gl unavailable", error);
     })
     .finally(() => {
       deckGLPending = false;

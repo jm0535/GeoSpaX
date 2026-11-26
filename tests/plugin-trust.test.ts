@@ -27,7 +27,7 @@ describe("partitionProjectPluginManifestUrls", () => {
   });
 
   it("trusts a project URL that ships as a bundled drop-in", () => {
-    const url = "https://geolibre.app/plugins/demo/plugin.json";
+    const url = "https://jm0535.github.io/GeoSpaX/plugins/demo/plugin.json";
     const { trusted, untrusted } = partitionProjectPluginManifestUrls([url], [], [url]);
     assert.deepEqual(trusted, [url]);
     assert.deepEqual(untrusted, []);
@@ -91,7 +91,7 @@ describe("partitionProjectPluginManifestUrls", () => {
 
   it("retains installed and bundled trust while withholding unknown project URLs", () => {
     const installed = "https://plugins.example.com/installed/plugin.json";
-    const bundled = "https://geolibre.app/plugins/demo/plugin.json";
+    const bundled = "https://jm0535.github.io/GeoSpaX/plugins/demo/plugin.json";
     const unknown = "https://third-party.example.com/plugin.json";
     const result = partitionProjectPluginManifestUrls(
       [installed, bundled, unknown],

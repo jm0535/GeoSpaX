@@ -1,30 +1,30 @@
 # AI Segmentation
 
-**Processing → GeoLibre Toolbox → AI Segmentation** turns imagery into vector features
+**Processing → GeoSpaX Toolbox → AI Segmentation** turns imagery into vector features
 using [segment-geospatial](https://github.com/opengeos/segment-geospatial)
 (SamGeo) and Meta's **SAM 3** model. Describe what you want — *"trees"*,
-*"buildings"*, *"water"* — or run automatic segmentation, and GeoLibre adds the
+*"buildings"*, *"water"* — or run automatic segmentation, and GeoSpaX adds the
 resulting polygons as a new vector layer.
 
 !!! note "Requires the Python sidecar and a model backend"
-    Segmentation runs deep-learning models, so it needs the GeoLibre desktop
+    Segmentation runs deep-learning models, so it needs the GeoSpaX desktop
     app with the Python sidecar **plus** a running `samgeo-api` model server. A
     CUDA GPU is strongly recommended; CPU inference works but is slow. See
     [Setup](#setup) below.
 
 ## How it works
 
-The heavy model stack (PyTorch + SAM 3) does **not** run inside the GeoLibre
+The heavy model stack (PyTorch + SAM 3) does **not** run inside the GeoSpaX
 sidecar. Instead the sidecar exposes a thin `/ml` reverse-proxy in front of a
 separate **`samgeo-api`** server (the REST server shipped with
-`segment-geospatial`). GeoLibre uploads the image to the sidecar, which forwards
+`segment-geospatial`). GeoSpaX uploads the image to the sidecar, which forwards
 it to `samgeo-api`, runs SAM 3, and returns GeoJSON polygons.
 
 ```text
 SegmentationDialog ──image+prompt──▶ sidecar /ml/segment/* ──▶ samgeo-api (SAM 3) ──▶ GeoJSON
 ```
 
-This keeps the GeoLibre sidecar small and lets the model server run wherever you
+This keeps the GeoSpaX sidecar small and lets the model server run wherever you
 have a GPU.
 
 ## Setup
@@ -36,11 +36,11 @@ environment that has a working PyTorch build (ideally CUDA):
 pip install "segment-geospatial[api,samgeo3]"
 ```
 
-Then either let GeoLibre launch the model server for you, or run it yourself:
+Then either let GeoSpaX launch the model server for you, or run it yourself:
 
 - **Auto-launch (default).** If `samgeo-api` is on the `PATH` of the environment
-  the sidecar runs in, GeoLibre starts it automatically on first use.
-- **Run it yourself / on another machine.** Start the server and point GeoLibre
+  the sidecar runs in, GeoSpaX starts it automatically on first use.
+- **Run it yourself / on another machine.** Start the server and point GeoSpaX
   at it:
 
     ```bash
@@ -87,7 +87,7 @@ pip install -e "backend/geolibre_server[ml]"
 
 ## Using it
 
-1. Open **Processing → GeoLibre Toolbox → AI Segmentation**.
+1. Open **Processing → GeoSpaX Toolbox → AI Segmentation**.
 2. If the backend isn't reachable, the dialog shows a message and a **Start
    server** button (desktop) — click it to launch the sidecar and model server.
 3. **Choose a GeoTIFF.** Pick a georeferenced raster (`.tif`/`.tiff`; PNG/JPG
@@ -104,7 +104,7 @@ pip install -e "backend/geolibre_server[ml]"
 
 ## Notes & limitations
 
-- **SAM 3 only.** GeoLibre uses the SAM 3 backend, which covers text, box/point,
+- **SAM 3 only.** GeoSpaX uses the SAM 3 backend, which covers text, box/point,
   and automatic prompts well. (SAM 2 is intentionally not wired up.)
 - **Desktop only.** Like the raster tools, segmentation needs the desktop app
   and the Python sidecar; it is not available in the browser-only build.

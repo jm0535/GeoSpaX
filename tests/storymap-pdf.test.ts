@@ -195,7 +195,7 @@ describe("buildStoryMapHandoutPdf", () => {
       opts({
         title: "Title",
         subtitle: "A subtitle",
-        byline: "By GeoLibre",
+        byline: "By GeoSpaX",
         footer: "Footer",
       }),
     );

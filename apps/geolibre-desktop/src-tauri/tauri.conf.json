@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "GeoSpaX Desktop",
   "version": "3.3.0",
-  "identifier": "org.geolibre.desktop",
+  "identifier": "geospax.in4metrix.dev",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:5173",
@@ -42,7 +42,7 @@
         "role": "Editor",
         "rank": "Owner",
         "exportedType": {
-          "identifier": "org.geolibre.project",
+          "identifier": "geospax.in4metrix.dev.project",
           "conformsTo": ["public.json"]
         }
       }
@@ -51,14 +51,14 @@
       "deb": {
         "desktopTemplate": "main.desktop",
         "files": {
-          "/usr/share/mime/packages/org.geolibre.project.xml": "../../../packaging/linux/org.geolibre.project.xml"
+          "/usr/share/mime/packages/geospax.in4metrix.dev.project.xml": "../../../packaging/linux/geospax.in4metrix.dev.project.xml"
         },
         "postInstallScript": "../../../packaging/linux/post-install.sh"
       },
       "rpm": {
         "desktopTemplate": "main.desktop",
         "files": {
-          "/usr/share/mime/packages/org.geolibre.project.xml": "../../../packaging/linux/org.geolibre.project.xml"
+          "/usr/share/mime/packages/geospax.in4metrix.dev.project.xml": "../../../packaging/linux/geospax.in4metrix.dev.project.xml"
         },
         "postInstallScript": "../../../packaging/linux/post-install.sh"
       }
@@ -75,7 +75,7 @@
   "plugins": {
     "deep-link": {
       "desktop": {
-        "schemes": ["org.geolibre.desktop"]
+        "schemes": ["geospax.in4metrix.dev"]
       }
     }
   }

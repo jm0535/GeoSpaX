@@ -574,7 +574,7 @@ export async function readCurrentRasterWindow(
   width = 256,
 ): Promise<SampledRasterWindow> {
   if (!app.readRasterWindow)
-    throw new Error("This GeoLibre host does not expose raster-window reads.");
+    throw new Error("This GeoSpaX host does not expose raster-window reads.");
   const bounds = currentBounds(app);
   if (!bounds) throw new Error("The current map view has no finite raster sampling extent.");
   const grid = chooseRasterGrid(bounds, width);

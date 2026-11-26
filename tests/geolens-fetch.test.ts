@@ -54,7 +54,7 @@ describe("GeoLens fetch override", () => {
    * `http:default` entry would be routed to a client that is not allowed to
    * reach it, so keep the two in sync.
    */
-  it("offers exactly one GeoLibre-operated sample server", () => {
+  it("offers exactly one GeoSpaX-operated sample server", () => {
     assert.deepEqual(geoLibreSampleHosts(), ["datasets.geolibre.app"]);
   });
 

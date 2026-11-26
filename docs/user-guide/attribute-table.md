@@ -96,7 +96,7 @@ which are read-only here.
 
 ## Calculated fields
 
-GeoLibre has two kinds of calculated field.
+GeoSpaX has two kinds of calculated field.
 
 ### Field calculator
 

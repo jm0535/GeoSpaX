@@ -1,19 +1,19 @@
 # MCP server
 
-GeoLibre ships an [MCP](https://modelcontextprotocol.io) server that authors
-GeoLibre projects. Point an MCP client (Claude Desktop, Claude Code, or any
+GeoSpaX ships an [MCP](https://modelcontextprotocol.io) server that authors
+GeoSpaX projects. Point an MCP client (Claude Desktop, Claude Code, or any
 other) at it and you can ask for a map in words: the server writes a real
 `.geolibre.json` project you open in the desktop app, the web app, or the
 `geolibre` Jupyter widget, and can export it as a standalone HTML page.
 
-The file tools are **headless**. They need no browser, no running GeoLibre
+The file tools are **headless**. They need no browser, no running GeoSpaX
 instance, and no bundled web build. They build project files with the same
 [project builders](python.md) the Python package uses, so a project they write
 is byte-for-byte the kind the app already loads.
 
 The `live_*` tools are the other half. They speak the desktop Notebook relay
 ([Notebook panel](notebook.md)), so a command from an MCP client moves the map
-already open in GeoLibre Desktop. Open **Processing → Jupyter Notebook** once
+already open in GeoSpaX Desktop. Open **Processing → Jupyter Notebook** once
 per app launch; the panel can be closed after that. Web and JupyterLite have
 no relay, so those tools have nothing to attach to there.
 
@@ -22,13 +22,13 @@ no relay, so those tools have nothing to attach to there.
 The MCP SDK is an optional extra:
 
 ```bash
-pip install "geolibre[mcp]"
+pip install "geospax[mcp]"
 ```
 
 ## Run it
 
 ```bash
-geolibre-mcp --root ~/maps
+geospax-mcp --root ~/maps
 ```
 
 The server speaks MCP over stdio, which is what desktop clients spawn. The
@@ -45,7 +45,7 @@ same shape:
 {
   "mcpServers": {
     "geolibre": {
-      "command": "geolibre-mcp",
+      "command": "geospax-mcp",
       "args": ["--root", "/Users/you/maps"]
     }
   }
@@ -55,10 +55,10 @@ same shape:
 For Claude Code:
 
 ```bash
-claude mcp add geolibre -- geolibre-mcp --root ~/maps
+claude mcp add geolibre -- geospax-mcp --root ~/maps
 ```
 
-If `geolibre-mcp` is not on the client's `PATH` (common when it was installed
+If `geospax-mcp` is not on the client's `PATH` (common when it was installed
 into a virtualenv), give the interpreter instead:
 
 ```json
@@ -167,7 +167,7 @@ are the saved, shareable equivalent.
 
 | Tool | What it does |
 | --- | --- |
-| `live_status` | Report whether a GeoLibre Desktop window is listening. |
+| `live_status` | Report whether a GeoSpaX Desktop window is listening. |
 | `live_list_layers` | List the open map's layers. |
 | `live_fly_to` / `live_fit_bounds` / `live_zoom_to_layer` | Move the camera. |
 | `live_set_basemap` | Switch the basemap. |
@@ -184,7 +184,7 @@ result layer ids, so check `live_list_layers` before running it again.
 
 ### Export
 
-`export_html` writes a standalone page that embeds the hosted GeoLibre viewer
+`export_html` writes a standalone page that embeds the hosted GeoSpaX viewer
 and injects the project into it, so the recipient needs no install. Credentials
 are stripped from the project on the way out. Layers pointing at local files
 will not load for anyone else, so use hosted URLs for a shareable export.
@@ -227,7 +227,7 @@ will not load for anyone else, so use hosted URLs for a shareable export.
 
 ## Driving the server from an agent
 
-GeoLibre ships an [agent skill](agent-skill.md) that teaches an external AI
+GeoSpaX ships an [agent skill](agent-skill.md) that teaches an external AI
 agent how to use these tools well: which `add_*_layer` tool fits which data,
 what order to call things in, and the limits above. Install it from
 `skills/geolibre/` in the repository.
@@ -236,7 +236,7 @@ what order to call things in, and the limits above. Install it from
 
 The tools are thin wrappers over `geolibre.authoring`, a widget-free module of
 operations on project dicts (add/remove/restyle a layer, move the camera,
-compose the map controls). `geolibre.Map` delegates to the same module, so the
+compose the map controls). `geospax.Map` delegates to the same module, so the
 notebook widget and the MCP server cannot drift apart in how they build a
 project.
 

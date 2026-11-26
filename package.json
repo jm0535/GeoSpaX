@@ -2,7 +2,7 @@
   "name": "geospax",
   "version": "2.0.0",
   "private": true,
-  "description": "GeoSpaX: a multi-domain geospatial analysis GIS built on GeoLibre — a free and open-source, lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data, with twelve GSX workbenches spanning agriculture through soil. It runs in the web browser, on the desktop, on mobile, and inside Jupyter notebooks, all while keeping your data local and private",
+  "description": "GeoSpaX: a multi-domain geospatial analysis GIS built on GeoLibre \u2014 a free and open-source, lightweight, cloud-native GIS platform for visualizing, exploring, and analyzing geospatial data, with twelve GSX workbenches spanning agriculture through soil. It runs in the web browser, on the desktop, on mobile, and inside Jupyter notebooks, all while keeping your data local and private",
   "workspaces": [
     "apps/*",
     "packages/*",
@@ -53,8 +53,8 @@
     "tauri:build": "node scripts/tauri-build.mjs",
     "tauri:build:native-duckdb": "node scripts/tauri-build.mjs --native-duckdb",
     "tauri:build:mas": "node scripts/tauri-build.mjs --mas",
-    "msix:build": "pwsh -NoProfile -ExecutionPolicy Bypass -File packaging/msix/build-msix.ps1",
-    "portable:build": "pwsh -NoProfile -ExecutionPolicy Bypass -File packaging/portable/build-portable.ps1"
+    "geospax:rebrand": "node scripts/geospax-rebrand.mjs",
+    "geospax:rebrand:check": "node scripts/geospax-rebrand.mjs --check"
   },
   "dependencies": {
     "patch-package": "^8.0.1"

@@ -1,12 +1,12 @@
-# GeoLibre Source Code Deep Dive: Core Techniques Worth Reusing in WebGIS Projects
+# GeoSpaX Source Code Deep Dive: Core Techniques Worth Reusing in WebGIS Projects
 
-> **Abstract**: This article provides an in-depth analysis of the GeoLibre source code architecture, covering dependency selection, the DuckDB-WASM Spatial core engine, web-side performance optimization, state management, offline PWA caching, and cloud-native geospatial data solutions. All source file paths are annotated for developer reference and reuse.
+> **Abstract**: This article provides an in-depth analysis of the GeoSpaX source code architecture, covering dependency selection, the DuckDB-WASM Spatial core engine, web-side performance optimization, state management, offline PWA caching, and cloud-native geospatial data solutions. All source file paths are annotated for developer reference and reuse.
 >
 > **Original source**: "GIS开发手记", original link: <https://mp.weixin.qq.com/s/482yiH-VsKP7OmBw9UWG6g>
 
 ## Preface
 
-This article walks through the GeoLibre repository source code layer by layer, covering dependency selection, the DuckDB-WASM spatial computation kernel, frontend performance optimization strategies, state management design, the three-tier offline caching strategy, and the cloud-native geospatial data solution. All corresponding source file paths are annotated. Every technical approach described can be directly applied to your own WebGIS projects.
+This article walks through the GeoSpaX repository source code layer by layer, covering dependency selection, the DuckDB-WASM spatial computation kernel, frontend performance optimization strategies, state management design, the three-tier offline caching strategy, and the cloud-native geospatial data solution. All corresponding source file paths are annotated. Every technical approach described can be directly applied to your own WebGIS projects.
 
 ## 1. The Toolbox: Open-Source Libraries Worth Examining Individually
 
@@ -31,7 +31,7 @@ The repository is an npm workspaces monorepo with 7 packages plus a desktop appl
 
 ![Supported formats](https://assets.geolibre.app/images/add-data-formats.webp)
 
-The KML case is particularly illustrative. `docs/architecture.md:61` states it clearly: KML is handled by a **custom-built parser** to **preserve embedded styling**, outputting simplestyle-spec properties (`fill`, `stroke`, `stroke-width`) so that styled KML looks the same in GeoLibre as it does in Google Earth. Only when the custom parser fails does it fall back to DuckDB Spatial, **at the cost of losing style information**.
+The KML case is particularly illustrative. `docs/architecture.md:61` states it clearly: KML is handled by a **custom-built parser** to **preserve embedded styling**, outputting simplestyle-spec properties (`fill`, `stroke`, `stroke-width`) so that styled KML looks the same in GeoSpaX as it does in Google Earth. Only when the custom parser fails does it fall back to DuckDB Spatial, **at the cost of losing style information**.
 
 > **Key insight**: General-purpose libraries inevitably discard format-specific information when unifying data models. And that information is often exactly what users care about most.
 
@@ -86,7 +86,7 @@ The "one codebase, two runtimes" design is documented at `docs/architecture.md:7
 
 This section is the core of this article. **If you only read one thing, read this.**
 
-First, let's cover WebAssembly in one sentence: the GeoLibre repository has 315 hits for the `wasm` identifier. **Database, language runtime, native toolchain, codec, and machine learning** — all five capability categories are powered by WASM engines: DuckDB, sql.js (SQLite), PGlite + PostGIS, CereusDB (SedonaDB), Pyodide, `geolibre-wasm` (a WASI build of Whitebox), gdal3.js, `cog-tiler-wasm`, h5wasm, onnxruntime-web. **When you trace the native languages, the picture becomes clear: C, C++, Rust. WASM here is not about accelerating JavaScript — it's about bringing decades of accumulated native GIS ecosystem into the browser wholesale.**
+First, let's cover WebAssembly in one sentence: the GeoSpaX repository has 315 hits for the `wasm` identifier. **Database, language runtime, native toolchain, codec, and machine learning** — all five capability categories are powered by WASM engines: DuckDB, sql.js (SQLite), PGlite + PostGIS, CereusDB (SedonaDB), Pyodide, `geolibre-wasm` (a WASI build of Whitebox), gdal3.js, `cog-tiler-wasm`, h5wasm, onnxruntime-web. **When you trace the native languages, the picture becomes clear: C, C++, Rust. WASM here is not about accelerating JavaScript — it's about bringing decades of accumulated native GIS ecosystem into the browser wholesale.**
 
 ![Processing menu: a row of WASM engines behind it](https://assets.geolibre.app/images/processing-tools-menu.webp)
 
@@ -106,7 +106,7 @@ These three names are often conflated. They are nested:
 
 And behind the spatial extension's `ST_Read` lies **a subset of GDAL**. The implication: issue a single SQL statement in the browser, and you can read the vector formats that subset covers. It is the extension's own bundled GDAL, not whatever GDAL is installed on the machine, so the exact list is whatever the loaded build ships — run `SELECT * FROM ST_Drivers()` to see it.
 
-### 2.2 What GeoLibre Uses It For
+### 2.2 What GeoSpaX Uses It For
 
 DuckDB invocation points in the source code are categorized as follows:
 
@@ -148,7 +148,7 @@ export function selectDuckDbBundle() {
 
 **Manually listing bundles rather than using the default CDN resolution ensures Vite produces content-hashed local artifacts for the WASM and worker** — which in turn enables safe caching by the Service Worker's CacheFirst strategy (see Section 5).
 
-**Second, extension loading must be "per-instance, run-once."** `INSTALL spatial` goes over the network, and `LOAD` has state; concurrent calls will conflict. GeoLibre's approach is worth studying:
+**Second, extension loading must be "per-instance, run-once."** `INSTALL spatial` goes over the network, and `LOAD` has state; concurrent calls will conflict. GeoSpaX's approach is worth studying:
 
 ```ts
 // Memoized per-instance: the shared library and the SQL Workspace
@@ -174,11 +174,11 @@ export async function ensureSpatialExtension(db, connection, beforeLoad?) {
 
 This short piece of code embodies three design decisions. It caches the Promise, not a boolean — concurrent calls share the same loading operation. It uses `WeakMap` keyed by instance — not a module-level singleton; when an instance is rebuilt, the cache automatically invalidates. On failure it clears the memoized entry, but only after verifying identity — preventing it from wiping out a new loading attempt someone else just wrote. **Miss any one of these three, and you'll encounter "spatial function sporadically does not exist" in production.**
 
-**Third, leave an escape hatch for loading extensions without network access.** `INSTALL spatial` by default downloads from DuckDB's extension repository. GeoLibre adds an environment variable `VITE_DUCKDB_SPATIAL_EXTENSION_PATH`: when set, it directly issues `LOAD '<local path>'`, skipping `INSTALL` entirely.
+**Third, leave an escape hatch for loading extensions without network access.** `INSTALL spatial` by default downloads from DuckDB's extension repository. GeoSpaX adds an environment variable `VITE_DUCKDB_SPATIAL_EXTENSION_PATH`: when set, it directly issues `LOAD '<local path>'`, skipping `INSTALL` entirely.
 
 For intranet, government, and offline desktop deployments, this single configuration setting is the difference between working and not working. The same pattern is reused for the h3 community extension (`INSTALL h3 FROM community`) — DuckDB's extension ecosystem is usable in the browser, and many developers don't know this.
 
-**Fourth, manage Workers and lifecycles yourself.** DuckDB runs in a dedicated Worker. **The WASM heap is tied to the Worker's lifetime; only `terminate()` truly returns it to the system.** GeoLibre implements reference counting for the SQL Workspace instance: if queries are still running, it marks the instance for "destroy when idle" and waits until the last query releases before shutting down. **This is essential in scenarios requiring instance recreation — a direct `terminate()` would kill in-flight queries.**
+**Fourth, manage Workers and lifecycles yourself.** DuckDB runs in a dedicated Worker. **The WASM heap is tied to the Worker's lifetime; only `terminate()` truly returns it to the system.** GeoSpaX implements reference counting for the SQL Workspace instance: if queries are still running, it marks the instance for "destroy when idle" and waits until the last query releases before shutting down. **This is essential in scenarios requiring instance recreation — a direct `terminate()` would kill in-flight queries.**
 
 ### 2.4 A Real-World Bug Worth More Than Any Tutorial
 
@@ -186,7 +186,7 @@ A noteworthy record found in source code comments, **which illustrates "what it'
 
 > duckdb-wasm 1.33.1-dev45 will **permanently destroy** an instance's remote `read_parquet` — if that instance executes `LOAD spatial` **before completing its first remote read**. Afterward, all remote Parquet reads fail with `stoi: no conversion`, and this **cannot be recovered in-place**.
 
-GeoLibre counters this with a two-pronged approach:
+GeoSpaX counters this with a two-pronged approach:
 
 **First, warming up.** The `beforeLoad` hook on `ensureSpatialExtension` is exactly for this — before `LOAD spatial`, it runs `SELECT 1 FROM read_parquet(…) LIMIT 0` against whatever remote reader this query uses. **`LIMIT 0` only fetches the Parquet footer, incurring almost no additional traffic.** If this particular query has no remote Parquet, it falls back to reading a small public sample file.
 
@@ -211,11 +211,11 @@ Many articles praise DuckDB-WASM. This section specifically examines the actual 
 | Feature count confirmation threshold | 500,000 | User must confirm before materializing beyond this |
 | Threading | Single-threaded | Very large data should go back to the server |
 
-The 2 GiB limit has an instructive detail: the guard check happens **before ingestion begins** (`_registerSource` runs ahead of the streaming branch, so "streaming reads" can't bypass it either). GeoLibre's approach is to communicate this clearly in the file browser panel rather than letting users click Add and wait for an inevitable failure. **Failures that can be determined in advance should never be deferred to runtime.**
+The 2 GiB limit has an instructive detail: the guard check happens **before ingestion begins** (`_registerSource` runs ahead of the streaming branch, so "streaming reads" can't bypass it either). GeoSpaX's approach is to communicate this clearly in the file browser panel rather than letting users click Add and wait for an inevitable failure. **Failures that can be determined in advance should never be deferred to runtime.**
 
-There's also the **copy vs. stream** trade-off: only GeoParquet truly supports "query in place without copying." Other formats silently fall back to full copy even when the stream option is provided — so GeoLibre only shows this button for GeoParquet. **A button whose click makes no difference is worse than no button at all.** In copy mode, memory usage roughly tracks the **decompressed** data size, which can be several times the Parquet disk size. Beyond 100 MB, the UI prompts the user to switch to streaming.
+There's also the **copy vs. stream** trade-off: only GeoParquet truly supports "query in place without copying." Other formats silently fall back to full copy even when the stream option is provided — so GeoSpaX only shows this button for GeoParquet. **A button whose click makes no difference is worse than no button at all.** In copy mode, memory usage roughly tracks the **decompressed** data size, which can be several times the Parquet disk size. Beyond 100 MB, the UI prompts the user to switch to streaming.
 
-One final instructive comparison: GeoLibre's desktop build exposes a `native-duckdb` compile-time switch to use native DuckDB instead. But the Rust side carries a hard constraint:
+One final instructive comparison: GeoSpaX's desktop build exposes a `native-duckdb` compile-time switch to use native DuckDB instead. But the Rust side carries a hard constraint:
 
 ```rust
 compile_error!("the `mas` (Mac App Store) build must not enable `native-duckdb`: \
@@ -443,7 +443,7 @@ Several particularly pragmatic details:
 
 - To eliminate the "network required on first use," you can set `GEOLIBRE_PGLITE_CDN=0` and `GEOLIBRE_CEREUS_CDN=0` to bundle them into `/assets/` — **at the cost of PGlite alone adding back ~22 MB to the Tauri binary**
 - **Pyodide and gdal3.js have no such switch.** Pyodide always loads from CDN (`VITE_PYODIDE_INDEX_URL` can change the mirror, but **that mirror is not within the scope of the two CacheFirst rules**; unless you place it under `/assets/`, it falls back to ordinary HTTP caching). gdal3.js is never vendored; `GEOLIBRE_GDAL_CDN=0` disables **that export feature**, it does not bundle it
-- **To strip all GeoLibre-controlled external CDN references** (for deployments that cannot reference any untrusted CDN), set `GEOLIBRE_NO_EXTERNAL_CDN=1`. This implies all `*_CDN=0` flags and additionally disables features that embed CDN URLs in their source code (storymap HTML export, built-in detection models, ONNX WASM, 3D Tiles decoder paths, and the Pyodide default URL). Third-party npm packages may still contain internal CDN URL strings that are not under GeoLibre's control
+- **To strip all GeoSpaX-controlled external CDN references** (for deployments that cannot reference any untrusted CDN), set `GEOLIBRE_NO_EXTERNAL_CDN=1`. This implies all `*_CDN=0` flags and additionally disables features that embed CDN URLs in their source code (storymap HTML export, built-in detection models, ONNX WASM, 3D Tiles decoder paths, and the Pyodide default URL). Third-party npm packages may still contain internal CDN URL strings that are not under GeoSpaX's control
 - **Desktop builds do not install a Service Worker** (Tauri's own resources are already offline), so desktop installations re-fetch CDN engines on every install
 - Basemaps only cache CORS-friendly default sources (OpenFreeMap, CARTO); other remote tiles and WMS/WFS are **by design unavailable offline**
 - New deployments use `registerType: "autoUpdate"` + `skipWaiting`, but **deliberately suppress Workbox's default "force reload on activation"** — because under relative-base sub-paths like `/demo/`, it incorrectly triggers and wipes out the user's in-progress map state. Page recovery is handled by `installStaleChunkReload`, which **only reloads when an orphaned lazy chunk 404s**, with cooldown protection
@@ -504,7 +504,7 @@ This is especially critical for government dashboards and public service portals
 
 **Benefit 5: A whole link disappears from the chain, and operational costs collapse with it.**
 
-**No publishing workflow, no service processes, no database connection pools, no middleware to patch.** A data update is just overwriting a file. GeoLibre's entire "directly read remote GeoParquet / COG / PMTiles in the browser" capability is proof this path works. Every online catalog it connects to (STAC, Source Cooperative, Overture Maps, Planetary Computer) follows this model.
+**No publishing workflow, no service processes, no database connection pools, no middleware to patch.** A data update is just overwriting a file. GeoSpaX's entire "directly read remote GeoParquet / COG / PMTiles in the browser" capability is proof this path works. Every online catalog it connects to (STAC, Source Cooperative, Overture Maps, Planetary Computer) follows this model.
 
 **But the trade-offs are real — these four points are genuine:**
 
@@ -515,7 +515,7 @@ This is especially critical for government dashboards and public service portals
 
 > **So cloud-native formats have a well-defined sweet spot: large, static, multi-user reads, viewport-constrained access — all four satisfied yields maximum benefit.** Conversely, high-frequency-write dynamic operational data does not suit this model, which is why Section 6.7's checklist explicitly says "do not touch the PostGIS path."
 
-### 6.2 How GeoLibre Reads These Formats
+### 6.2 How GeoSpaX Reads These Formats
 
 | Format | Read Path | Key Point |
 |---|---|---|
@@ -545,21 +545,21 @@ One more detail worth remembering: Source Cooperative's unknown API paths don't 
 
 ### 6.4 "Convert to COG" Does Not Mean Renaming the Extension to `.tif`
 
-COG's ability to be read via Range requests depends on **internal tiling and pyramid overviews within the file**. A striped GeoTIFF can technically be range-read too — its strip offsets and byte counts are in the header — but a strip spans the full image width, so fetching a small map extent drags in far more bytes than it needs, and with no overviews there is no coarse level to zoom out against. Naming it `.tif` changes none of that, and GeoLibre's client-side readers require internal tiles outright.
+COG's ability to be read via Range requests depends on **internal tiling and pyramid overviews within the file**. A striped GeoTIFF can technically be range-read too — its strip offsets and byte counts are in the header — but a strip spans the full image width, so fetching a small map extent drags in far more bytes than it needs, and with no overviews there is no coarse level to zoom out against. Naming it `.tif` changes none of that, and GeoSpaX's client-side readers require internal tiles outright.
 
-GeoLibre's handling is instructive: the panel **first reads the file header with a Range request** to determine whether internal tiles exist; if not, it prompts the user to go through client-side conversion (the gdal3.js path) before loading. **A few KB of header for a definitive answer, rather than making the user wait through an inevitably slow load.**
+GeoSpaX's handling is instructive: the panel **first reads the file header with a Range request** to determine whether internal tiles exist; if not, it prompts the user to go through client-side conversion (the gdal3.js path) before loading. **A few KB of header for a definitive answer, rather than making the user wait through an inevitably slow load.**
 
 The trade-offs among the three raster engines are also documented in the source: `cog-tiler-wasm` (default, browser WASM, **at the cost of only using built-in color ramps** — custom classification is lost), `maplibre-gl-raster` (GPU, full symbology), `titiler` (server-side). **The default is chosen for stability, not feature completeness.**
 
 ### 6.5 What If the Data Isn't Cloud-Native? Externalize the Index
 
-NetCDF / HDF5 are de facto standards for scientific data, but they weren't designed for HTTP. GeoLibre's approach is **kerchunk reference manifests**: the manifest maps Zarr keys to **`[url, offset, length]`** (byte ranges within the original file), and implements a **minimal zarrita `Readable` (only needs a `get(key)`)** — then feeds it directly into the existing Zarr rendering pipeline. The source comment's phrase "with no rewrite" is the key point: **not a single line of rendering code changed.**
+NetCDF / HDF5 are de facto standards for scientific data, but they weren't designed for HTTP. GeoSpaX's approach is **kerchunk reference manifests**: the manifest maps Zarr keys to **`[url, offset, length]`** (byte ranges within the original file), and implements a **minimal zarrita `Readable` (only needs a `get(key)`)** — then feeds it directly into the existing Zarr rendering pipeline. The source comment's phrase "with no rewrite" is the key point: **not a single line of rendering code changed.**
 
 > **This idea generalizes: don't change the data, don't change the renderer — just insert a "key → byte range" mapping layer in between.** Historical formats unsuitable for streaming reads become demand-readable as long as you can compute the offsets.
 
 ### 6.6 Catalog Browsers Should Do Exactly One Thing: Produce URLs
 
-GeoLibre integrates STAC, Source Cooperative, Overture Maps, Planetary Computer, Hugging Face — a large number of online data sources — and stays manageable through one principle: **when adding a layer, deliberately delegate to the controls that already understand each format** — PMTiles to `addPMTilesLayerFromUrl`, GeoParquet to `addVectorLayerFromUrl`, COG to `app.addCogLayer`. As a result, data clicked in from a catalog and data added manually via Add Data are **fully equivalent**: the same layer panel, the same styling capabilities, the same persistence into projects.
+GeoSpaX integrates STAC, Source Cooperative, Overture Maps, Planetary Computer, Hugging Face — a large number of online data sources — and stays manageable through one principle: **when adding a layer, deliberately delegate to the controls that already understand each format** — PMTiles to `addPMTilesLayerFromUrl`, GeoParquet to `addVectorLayerFromUrl`, COG to `app.addCogLayer`. As a result, data clicked in from a catalog and data added manually via Add Data are **fully equivalent**: the same layer panel, the same styling capabilities, the same persistence into projects.
 
 > **One data source integration = one "how to find the URL" adapter. Reading and rendering are always a single implementation. This is the only way to integrate N data sources without losing control.**
 
@@ -613,4 +613,4 @@ GeoLibre integrates STAC, Source Cooperative, Overture Maps, Planetary Computer,
 
 </ol>
 
-> None of the items on this checklist require importing a single line of GeoLibre's code. Its greatest contribution is not yet another mapping application — it's proving, with a complete project you can run, install, and read the source of, that **a spatial database running in the browser is sufficient to replace the half of the work that used to require a server**.
+> None of the items on this checklist require importing a single line of GeoSpaX's code. Its greatest contribution is not yet another mapping application — it's proving, with a complete project you can run, install, and read the source of, that **a spatial database running in the browser is sufficient to replace the half of the work that used to require a server**.

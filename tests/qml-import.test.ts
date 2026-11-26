@@ -263,7 +263,7 @@ describe("parseQml", () => {
     );
     assert.equal(result.labels, null);
     assert.ok(
-      result.warnings.some((w) => /"rule-based" labeling has no GeoLibre equivalent/.test(w)),
+      result.warnings.some((w) => /"rule-based" labeling has no GeoSpaX equivalent/.test(w)),
     );
   });
 

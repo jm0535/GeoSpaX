@@ -2,8 +2,8 @@
 
 Install the optional dependency and run it over stdio::
 
-    pip install "geolibre[mcp]"
-    geolibre-mcp --root ~/maps
+    pip install "geospax[mcp]"
+    geospax-mcp --root ~/maps
 
 :mod:`geolibre.mcp.workspace` needs nothing beyond the standard library, so it
 imports cleanly without the SDK; :mod:`geolibre.mcp.server` requires ``mcp``.
@@ -20,14 +20,14 @@ __all__ = ["Workspace", "WorkspaceError", "build_server", "main"]
 
 MISSING_SDK_MESSAGE = (
     'The GeoLibre MCP server needs the "mcp" SDK, which is an optional extra.\n'
-    'Install it with:  pip install "geolibre[mcp]"'
+    'Install it with:  pip install "geospax[mcp]"'
 )
 
 
 def main(argv: list[str] | None = None) -> int:
     """Run the MCP server, reporting a missing SDK as an actionable message.
 
-    This is what the ``geolibre-mcp`` console script points at, so a user who
+    This is what the ``geospax-mcp`` console script points at, so a user who
     installed plain ``geolibre`` gets the one line that tells them what to do
     rather than a ``ModuleNotFoundError`` traceback.
 

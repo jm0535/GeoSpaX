@@ -1,4 +1,4 @@
-export const GEOLIBRE_WEB_URL = "https://web.geolibre.app/";
+export const GEOLIBRE_WEB_URL = "https://geospax2.in4metrix.dev/";
 
 /** Build the repeated data/style/dataType deep link consumed by GeoLibre. */
 export function buildGeoLibreUrl(datasets, baseUrl = GEOLIBRE_WEB_URL) {
@@ -27,7 +27,7 @@ export function buildGeoLibreUrl(datasets, baseUrl = GEOLIBRE_WEB_URL) {
     const service = services[0];
     const serviceUrl = new URL(service.url);
     if (serviceUrl.protocol !== "http:" && serviceUrl.protocol !== "https:") {
-      throw new Error("GeoLibre can only open HTTP or HTTPS service links.");
+      throw new Error("GeoSpaX can only open HTTP or HTTPS service links.");
     }
     target.searchParams.set("add", serviceKinds[service.format]);
     // A tileset known only through its style has the style as its own URL, and
@@ -40,7 +40,7 @@ export function buildGeoLibreUrl(datasets, baseUrl = GEOLIBRE_WEB_URL) {
     if (service.styleUrl) {
       const styleUrl = new URL(service.styleUrl);
       if (styleUrl.protocol !== "http:" && styleUrl.protocol !== "https:") {
-        throw new Error("GeoLibre can only open HTTP or HTTPS style links.");
+        throw new Error("GeoSpaX can only open HTTP or HTTPS style links.");
       }
       target.searchParams.set("serviceStyle", styleUrl.href);
     }
@@ -49,11 +49,11 @@ export function buildGeoLibreUrl(datasets, baseUrl = GEOLIBRE_WEB_URL) {
   const entries = datasets.map((dataset) => {
     const dataUrl = new URL(dataset.url);
     if (dataUrl.protocol !== "http:" && dataUrl.protocol !== "https:") {
-      throw new Error("GeoLibre can only open HTTP or HTTPS dataset links.");
+      throw new Error("GeoSpaX can only open HTTP or HTTPS dataset links.");
     }
     const styleUrl = dataset.styleUrl ? new URL(dataset.styleUrl) : null;
     if (styleUrl && styleUrl.protocol !== "http:" && styleUrl.protocol !== "https:") {
-      throw new Error("GeoLibre can only open HTTP or HTTPS style links.");
+      throw new Error("GeoSpaX can only open HTTP or HTTPS style links.");
     }
     return { dataUrl, styleUrl, dataType: dataset.dataType ?? null };
   });

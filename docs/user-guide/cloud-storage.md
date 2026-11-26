@@ -1,6 +1,6 @@
 # Cloud Storage (Amazon S3)
 
-GeoLibre reads data straight from Amazon S3 and S3-compatible object stores (MinIO, Cloudflare R2, Wasabi, Ceph). Public buckets need no setup; private buckets are read with an **S3 connection** you add under **Settings → Cloud Storage**.
+GeoSpaX reads data straight from Amazon S3 and S3-compatible object stores (MinIO, Cloudflare R2, Wasabi, Ceph). Public buckets need no setup; private buckets are read with an **S3 connection** you add under **Settings → Cloud Storage**.
 
 ## Where S3 URLs work
 
@@ -13,7 +13,7 @@ GeoLibre reads data straight from Amazon S3 and S3-compatible object stores (Min
 | **SQL Workspace** | `read_parquet('s3://bucket/path/data.parquet')`, `ST_Read('s3://…')`, or a bare `FROM 's3://…'` |
 | **Plugins → Web Services → S3 Browser** | Browse a bucket and add files with one click |
 
-Layers keep the `s3://` URI (or the object URL) you added, never a signed URL. GeoLibre signs each read when the layer loads, so a saved or shared project carries no credentials, and a signature never expires under an open project.
+Layers keep the `s3://` URI (or the object URL) you added, never a signed URL. GeoSpaX signs each read when the layer loads, so a saved or shared project carries no credentials, and a signature never expires under an open project.
 
 ## S3 connections
 
@@ -33,8 +33,8 @@ Open **Settings → Cloud Storage** and choose **Add connection**. Each connecti
 | --- | --- | --- |
 | **Access keys** | Web and desktop | An access key ID, secret access key, and optional session token. |
 | **AWS profile** | Desktop | A profile from `~/.aws/config` / `~/.aws/credentials` (or `AWS_CONFIG_FILE` / `AWS_SHARED_CREDENTIALS_FILE`). Blank uses `AWS_PROFILE`, else `default`. |
-| **Environment variables** | Desktop | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` from the environment GeoLibre was started with. |
-| **IAM role (instance/container)** | Desktop | The role of the machine GeoLibre runs on. See [IAM roles](#iam-roles). |
+| **Environment variables** | Desktop | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` from the environment GeoSpaX was started with. |
+| **IAM role (instance/container)** | Desktop | The role of the machine GeoSpaX runs on. See [IAM roles](#iam-roles). |
 | **Anonymous (public)** | Web and desktop | No signing, for public buckets on a custom endpoint. |
 
 AWS profiles can hold:
@@ -52,11 +52,11 @@ For an SSO profile, **Sign in with SSO** runs the same device sign-in as `aws ss
 
 ### IAM roles
 
-GeoLibre assumes IAM roles itself with AWS STS, so no AWS CLI is needed:
+GeoSpaX assumes IAM roles itself with AWS STS, so no AWS CLI is needed:
 
 - **Role profiles**: a profile with `role_arn` and `source_profile` (chains included) or `credential_source` (`Environment`, `Ec2InstanceMetadata`, `EcsContainer`). `external_id`, `role_session_name`, and `duration_seconds` are honored. A profile with `web_identity_token_file` uses `AssumeRoleWithWebIdentity`. Profiles that set `mfa_serial` still need the AWS CLI (v2) on `PATH`, which prompts for the code.
-- **Role to assume**: set a role ARN, plus an external ID if its trust policy requires one, on any connection. GeoLibre resolves the connection's credentials first (keys, a profile, the environment, or an instance role), then assumes the role, for example a cross-account read-only role.
-- **IAM role (instance/container)**: when GeoLibre runs on AWS, it uses the host's role in the order the AWS SDKs use:
+- **Role to assume**: set a role ARN, plus an external ID if its trust policy requires one, on any connection. GeoSpaX resolves the connection's credentials first (keys, a profile, the environment, or an instance role), then assumes the role, for example a cross-account read-only role.
+- **IAM role (instance/container)**: when GeoSpaX runs on AWS, it uses the host's role in the order the AWS SDKs use:
     1. web identity: `AWS_WEB_IDENTITY_TOKEN_FILE` with `AWS_ROLE_ARN` (EKS IRSA);
     2. ECS and EKS Pod Identity container credentials;
     3. the EC2 instance profile, through IMDSv2.
@@ -97,7 +97,7 @@ The web app, and the desktop webview for raster and PMTiles reads, fetch S3 obje
 ```json
 [
   {
-    "AllowedOrigins": ["https://web.geolibre.app", "tauri://localhost", "http://tauri.localhost"],
+    "AllowedOrigins": ["https://geospax2.in4metrix.dev", "tauri://localhost", "http://tauri.localhost"],
     "AllowedMethods": ["GET", "HEAD"],
     "AllowedHeaders": ["*"],
     "ExposeHeaders": ["Content-Length", "Content-Range", "ETag", "Last-Modified", "Accept-Ranges"],
@@ -108,11 +108,11 @@ The web app, and the desktop webview for raster and PMTiles reads, fetch S3 obje
 
 Replace the first origin with your own deployment's origin. On the desktop app, listing and vector downloads go through the native HTTP client and need no CORS rule, but COG, PMTiles, and point cloud streaming still read from the webview and need the `tauri://localhost` / `http://tauri.localhost` origins.
 
-When a read fails because the bucket's CORS rules block the app, GeoLibre says so — naming the bucket and the origin to allow — instead of a bare "Failed to fetch". It tells the two apart by repeating the request: if a normal request now succeeds, the failure was transient; if only a `no-cors` request (which CORS cannot block) gets an answer, the bucket is reachable and its CORS configuration is the cause.
+When a read fails because the bucket's CORS rules block the app, GeoSpaX says so — naming the bucket and the origin to allow — instead of a bare "Failed to fetch". It tells the two apart by repeating the request: if a normal request now succeeds, the failure was transient; if only a `no-cors` request (which CORS cannot block) gets an answer, the bucket is reachable and its CORS configuration is the cause.
 
 ## How it works
 
-A private object is read through a **SigV4 presigned URL**, minted in the app from the connection's credentials and valid for up to 12 hours (or until temporary credentials expire). Every reader GeoLibre uses already accepts an HTTPS URL: the COG renderers, PMTiles, DuckDB-WASM, and the vector loader. So signing the URL is the one change that makes all of them read private data. PMTiles archives re-sign on each range read once the previous URL nears expiry.
+A private object is read through a **SigV4 presigned URL**, minted in the app from the connection's credentials and valid for up to 12 hours (or until temporary credentials expire). Every reader GeoSpaX uses already accepts an HTTPS URL: the COG renderers, PMTiles, DuckDB-WASM, and the vector loader. So signing the URL is the one change that makes all of them read private data. PMTiles archives re-sign on each range read once the previous URL nears expiry.
 
 ## Limitations
 

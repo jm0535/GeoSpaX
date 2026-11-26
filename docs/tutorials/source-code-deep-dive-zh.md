@@ -1,6 +1,6 @@
-# GeoLibre 源码深度拆解：值得 WebGIS 开发者复用的核心技术
+# GeoSpaX 源码深度拆解：值得 WebGIS 开发者复用的核心技术
 
-> **摘要**：本文深度剖析 GeoLibre 源码架构，包含依赖选型、DuckDB‑WASM Spatial 核心引擎、Web 端性能优化、状态管理、离线 PWA 缓存及云原生地理空间数据方案。文中全部标注源码文件路径，方便开发者查阅复用。
+> **摘要**：本文深度剖析 GeoSpaX 源码架构，包含依赖选型、DuckDB‑WASM Spatial 核心引擎、Web 端性能优化、状态管理、离线 PWA 缓存及云原生地理空间数据方案。文中全部标注源码文件路径，方便开发者查阅复用。
 >
 > **原文来源**：微信公众号"GIS开发手记"，原文链接：<https://mp.weixin.qq.com/s/482yiH-VsKP7OmBw9UWG6g>
 >
@@ -8,7 +8,7 @@
 
 ## 前言
 
-本文对照 GeoLibre 仓库源码逐层拆解项目架构，梳理项目依赖选型、DuckDB-WASM 空间计算内核、前端性能优化策略、状态管理设计、离线缓存三层策略与云原生地理数据整套方案，文中标注全部对应源码文件路径，所有技术方案均可直接复用至 WebGIS 项目。
+本文对照 GeoSpaX 仓库源码逐层拆解项目架构，梳理项目依赖选型、DuckDB-WASM 空间计算内核、前端性能优化策略、状态管理设计、离线缓存三层策略与云原生地理数据整套方案，文中标注全部对应源码文件路径，所有技术方案均可直接复用至 WebGIS 项目。
 
 
 ## 一、它的工具箱：值得单独拿出来看的开源库
@@ -34,7 +34,7 @@
 
 ![支持格式](https://assets.geolibre.app/images/add-data-formats.webp)
 
-KML 那条尤其能说明取舍。`docs/architecture.md:61` 写得很直白：KML 由**自研解析器**读取，为的是**保留内嵌符号化**，输出 simplestyle-spec 属性（`fill`、`stroke`、`stroke-width`），这样带样式的 KML 在 GeoLibre 里和在 Google Earth 里长得一样；解析器读不了的才退回 DuckDB Spatial，**代价是丢掉样式**。
+KML 那条尤其能说明取舍。`docs/architecture.md:61` 写得很直白：KML 由**自研解析器**读取，为的是**保留内嵌符号化**，输出 simplestyle-spec 属性（`fill`、`stroke`、`stroke-width`），这样带样式的 KML 在 GeoSpaX 里和在 Google Earth 里长得一样；解析器读不了的才退回 DuckDB Spatial，**代价是丢掉样式**。
 
 > **关键启发：** 通用库为了统一数据模型，一定会丢掉格式特有的信息。而那些信息往往正是用户最在意的部分。
 
@@ -89,7 +89,7 @@ KML 那条尤其能说明取舍。`docs/architecture.md:61` 写得很直白：KM
 
 这一节是这篇的重点。**如果只看一件事，看这个。**
 
-先把 WebAssembly 这件事一句话说完：GeoLibre 仓库里带 `wasm` 的标识符有 315 处命中，**数据库、语言运行时、原生工具链、编解码、机器学习**五类能力全部由 WASM 引擎承担——DuckDB、sql.js（SQLite）、PGlite + PostGIS、CereusDB（SedonaDB）、Pyodide、`geolibre-wasm`（Whitebox 的 WASI 构建）、gdal3.js、`cog-tiler-wasm`、h5wasm、onnxruntime-web。**原生语言连起来看就明白了：C、C++、Rust。WASM 在这里不是给 JS 加速，是把 GIS 领域几十年积累的原生生态整体搬进浏览器。**
+先把 WebAssembly 这件事一句话说完：GeoSpaX 仓库里带 `wasm` 的标识符有 315 处命中，**数据库、语言运行时、原生工具链、编解码、机器学习**五类能力全部由 WASM 引擎承担——DuckDB、sql.js（SQLite）、PGlite + PostGIS、CereusDB（SedonaDB）、Pyodide、`geolibre-wasm`（Whitebox 的 WASI 构建）、gdal3.js、`cog-tiler-wasm`、h5wasm、onnxruntime-web。**原生语言连起来看就明白了：C、C++、Rust。WASM 在这里不是给 JS 加速，是把 GIS 领域几十年积累的原生生态整体搬进浏览器。**
 
 ![数据处理菜单：背后是一排 WASM 引擎](https://assets.geolibre.app/images/processing-tools-menu.webp)
 
@@ -109,7 +109,7 @@ KML 那条尤其能说明取舍。`docs/architecture.md:61` 写得很直白：KM
 
 而 spatial 扩展的 `ST_Read` 背后，是 **GDAL 的一个子集**。这句话的含义是：在浏览器里发一条 SQL，就能读这个子集覆盖的那些矢量格式。注意它用的是扩展自带的 GDAL，不是机器上装的那份，所以具体能读哪些取决于当前加载的构建——用 `SELECT * FROM ST_Drivers()` 可以列出来。
 
-### 2.2 GeoLibre 拿它干了什么
+### 2.2 GeoSpaX 拿它干了什么
 
 源码中 DuckDB 的调用点归类如下：
 
@@ -151,7 +151,7 @@ export function selectDuckDbBundle() {
 
 **手动列 bundle 而不是用默认 CDN 解析，是为了让 Vite 把 wasm 和 worker 打成带哈希的本地产物**——这样才能被 Service Worker 的 CacheFirst 安全缓存（见第五节）。
 
-**第二，扩展加载必须做成「按实例只跑一次」。** `INSTALL spatial` 会走网络，`LOAD` 有状态，并发调用会互相打架。GeoLibre 的做法很值得借鉴：
+**第二，扩展加载必须做成「按实例只跑一次」。** `INSTALL spatial` 会走网络，`LOAD` 有状态，并发调用会互相打架。GeoSpaX 的做法很值得借鉴：
 
 ```ts
 // 按实例记忆化：共享库和 SQL 工作区各有自己的 DB，各记各的
@@ -175,11 +175,11 @@ export async function ensureSpatialExtension(db, connection, beforeLoad?) {
 
 这段小代码里有三个决定。缓存的是 Promise 不是布尔值——并发调用共享同一次加载。用 `WeakMap` 按实例存——不是模块级单例，实例被重建后自动失效。失败要清除记忆，但清除前先校验身份——避免清掉别人刚写进去的新加载。**三条缺一条，就会在生产环境上遇到「偶发的空间函数不存在」。**
 
-**第三，留一个「不联网也能加载扩展」的口子。** `INSTALL spatial` 默认从 DuckDB 的扩展仓库下载。GeoLibre 加了一个环境变量 `VITE_DUCKDB_SPATIAL_EXTENSION_PATH`：配了就直接 `LOAD '<本地路径>'`，跳过 `INSTALL`。
+**第三，留一个「不联网也能加载扩展」的口子。** `INSTALL spatial` 默认从 DuckDB 的扩展仓库下载。GeoSpaX 加了一个环境变量 `VITE_DUCKDB_SPATIAL_EXTENSION_PATH`：配了就直接 `LOAD '<本地路径>'`，跳过 `INSTALL`。
 
 做内网、政务、离线桌面端的，这一行配置就是能不能用的分界线。同样的模式还复用给了 h3 社区扩展（`INSTALL h3 FROM community`）——DuckDB 的扩展生态在浏览器里是能用的，这点很多人不知道。
 
-**第四，Worker 和生命周期要自己管。** DuckDB 跑在独立 Worker 里，**WASM 堆是跟着 Worker 走的，只有 `terminate()` 才真正还给系统**。GeoLibre 给 SQL 工作区的实例做了引用计数：还有查询在跑就先标记「空闲时销毁」，等最后一个查询释放再关。**这在需要重建实例的场景里是刚需——直接 terminate 会把正在跑的查询打断。**
+**第四，Worker 和生命周期要自己管。** DuckDB 跑在独立 Worker 里，**WASM 堆是跟着 Worker 走的，只有 `terminate()` 才真正还给系统**。GeoSpaX 给 SQL 工作区的实例做了引用计数：还有查询在跑就先标记「空闲时销毁」，等最后一个查询释放再关。**这在需要重建实例的场景里是刚需——直接 terminate 会把正在跑的查询打断。**
 
 ### 2.4 一个真实的坑，比任何教程都值钱
 
@@ -187,7 +187,7 @@ export async function ensureSpatialExtension(db, connection, beforeLoad?) {
 
 > duckdb-wasm 1.33.1-dev45 会**永久破坏**一个实例的远程 `read_parquet`——只要这个实例在**完成第一次远程读取之前**执行了 `LOAD spatial`。之后所有远程 Parquet 读取都报 `stoi: no conversion`，而且**无法在原地恢复**。
 
-GeoLibre 的应对是两手：
+GeoSpaX 的应对是两手：
 
 **一是预热。** `ensureSpatialExtension` 那个 `beforeLoad` 钩子就是干这个的——在 `LOAD spatial` 之前，先拿这条查询自己的远程 reader 跑一次 `SELECT 1 FROM read_parquet(…) LIMIT 0`。**`LIMIT 0` 只会取 Parquet 的 footer，几乎不产生额外流量。**如果这条查询本身没有远程 Parquet，就退回读一个公开的小样本文件兜底。
 
@@ -212,11 +212,11 @@ GeoLibre 的应对是两手：
 | 要素数确认阈值 | 500,000 | 超过要用户确认才物化 |
 | 线程 | 单线程 | 超大数据该回服务端就回服务端 |
 
-2 GiB 那条有个细节很有参考价值：这个门禁是**在开始摄取之前**就判掉的（`_registerSource` 跑在流式分支前面，所以「流式读取」也绕不过去）。GeoLibre 的做法是在文件浏览面板上直接把话说清楚，而不是让用户点了 Add 之后等一个必然失败的结果。**能提前判定的失败，就不要留到运行时。**
+2 GiB 那条有个细节很有参考价值：这个门禁是**在开始摄取之前**就判掉的（`_registerSource` 跑在流式分支前面，所以「流式读取」也绕不过去）。GeoSpaX 的做法是在文件浏览面板上直接把话说清楚，而不是让用户点了 Add 之后等一个必然失败的结果。**能提前判定的失败，就不要留到运行时。**
 
-还有一条关于**拷贝 vs 流式**的取舍：只有 GeoParquet 真正支持「原地查询不拷贝」，其他格式即使给了 stream 选项也会悄悄回落成拷贝——所以 GeoLibre 干脆只在 GeoParquet 上显示这个按钮。**一个点了没区别的按钮，比没有这个按钮更糟。**而拷贝模式的内存占用大致跟**解压后**的数据量走，是 Parquet 磁盘体积的好几倍，超过 100 MB 就会提示改用流式。
+还有一条关于**拷贝 vs 流式**的取舍：只有 GeoParquet 真正支持「原地查询不拷贝」，其他格式即使给了 stream 选项也会悄悄回落成拷贝——所以 GeoSpaX 干脆只在 GeoParquet 上显示这个按钮。**一个点了没区别的按钮，比没有这个按钮更糟。**而拷贝模式的内存占用大致跟**解压后**的数据量走，是 Parquet 磁盘体积的好几倍，超过 100 MB 就会提示改用流式。
 
-最后一个有意思的对照：GeoLibre 桌面端留了个 `native-duckdb` 编译开关，可以换成原生 DuckDB。但 Rust 侧写着一条硬约束——
+最后一个有意思的对照：GeoSpaX 桌面端留了个 `native-duckdb` 编译开关，可以换成原生 DuckDB。但 Rust 侧写着一条硬约束——
 
 ```rust
 compile_error!("the `mas` (Mac App Store) build must not enable `native-duckdb`: \
@@ -444,7 +444,7 @@ Web 构建是一个可安装的 PWA，用 `vite-plugin-pwa` + Workbox。缓存**
 
 - 想去掉「首次也要联网」，可以用 `GEOLIBRE_PGLITE_CDN=0`、`GEOLIBRE_CEREUS_CDN=0` 把它们塞回 `/assets/`——**代价是 PGlite 一个就给 Tauri 二进制加回 ~22 MB**
 - **Pyodide 和 gdal3.js 没有这个开关。** Pyodide 永远走 CDN（`VITE_PYODIDE_INDEX_URL` 能改镜像，但**那个镜像不在两条 CacheFirst 规则的匹配范围内**，除非把它放到 `/assets/` 下，否则只能退回普通 HTTP 缓存）；gdal3.js 从不 vendor，`GEOLIBRE_GDAL_CDN=0` 的效果是**关掉那个导出功能**，不是打包它
-- **要去掉所有由 GeoLibre 控制的外部 CDN 引用**（适用于不允许引用任何不受信外部 CDN 的部署），设置 `GEOLIBRE_NO_EXTERNAL_CDN=1`。它隐含所有 `*_CDN=0` 标志，并额外禁用那些源码中嵌入了 CDN URL 的功能（故事地图 HTML 导出、内置检测模型、ONNX WASM、3D Tiles 解码器路径、Pyodide 默认 URL）。第三方 npm 包内部的 CDN URL 字符串不受 GeoLibre 控制，无法移除
+- **要去掉所有由 GeoSpaX 控制的外部 CDN 引用**（适用于不允许引用任何不受信外部 CDN 的部署），设置 `GEOLIBRE_NO_EXTERNAL_CDN=1`。它隐含所有 `*_CDN=0` 标志，并额外禁用那些源码中嵌入了 CDN URL 的功能（故事地图 HTML 导出、内置检测模型、ONNX WASM、3D Tiles 解码器路径、Pyodide 默认 URL）。第三方 npm 包内部的 CDN URL 字符串不受 GeoSpaX 控制，无法移除
 - **桌面构建不装 Service Worker**（Tauri 自带资源已离线），所以桌面版每次安装都会重新拉一次 CDN 引擎
 - 底图只缓存 CORS 友好的默认源（OpenFreeMap、CARTO），其它远程瓦片和 WMS/WFS **按设计就是离线不可用**
 - 新部署用 `registerType: "autoUpdate"` + `skipWaiting`，但**故意压掉了 Workbox 默认的「激活时强制刷新」**——因为在 `/demo/` 这种相对 base 的子路径下会误触发，把用户正在编辑的地图状态冲掉。页面恢复交给 `installStaleChunkReload`，**只在孤儿 lazy chunk 404 时才重载**，还带冷却保护
@@ -505,7 +505,7 @@ Web 构建是一个可安装的 PWA，用 `vite-plugin-pwa` + Workbox。缓存**
 
 **收益五，链路短了一整段，运维成本跟着塌下来。**
 
-**没有发布流程，没有服务进程，没有数据库连接池，没有要打补丁的中间件。**数据更新就是覆盖一个文件。GeoLibre 整套「浏览器里直读远程 GeoParquet / COG / PMTiles」的能力就是这条路走通的证明，它接的那些在线目录（STAC、Source Cooperative、Overture Maps、Planetary Computer）全是这个模式。
+**没有发布流程，没有服务进程，没有数据库连接池，没有要打补丁的中间件。**数据更新就是覆盖一个文件。GeoSpaX 整套「浏览器里直读远程 GeoParquet / COG / PMTiles」的能力就是这条路走通的证明，它接的那些在线目录（STAC、Source Cooperative、Overture Maps、Planetary Computer）全是这个模式。
 
 **但也得说清代价，这四条是真的：**
 
@@ -516,7 +516,7 @@ Web 构建是一个可安装的 PWA，用 `vite-plugin-pwa` + Workbox。缓存**
 
 > **所以云原生格式的适用面是有边界的：大体量、静态、多用户读、按视口取用——四条都满足时收益最大。** 反过来，高频写入的动态业务数据不适合它，这也是为什么下面第 6.7 节那份清单里明确写着「PostGIS 那条不要动」。
 
-### 6.2 GeoLibre 直读这些格式时走的路
+### 6.2 GeoSpaX 直读这些格式时走的路
 
 | 格式 | 读取路径 | 关键点 |
 |---|---|---|
@@ -546,21 +546,21 @@ Web 构建是一个可安装的 PWA，用 `vite-plugin-pwa` + Workbox。缓存**
 
 ### 6.4 「转成 COG」不是把后缀改成 `.tif`
 
-COG 能被 range 直读，靠的是**文件内部有瓦片切分和金字塔（overviews）**。条带式 GeoTIFF 严格说也能 range 读——条带的偏移和字节数就写在头里——但一个条带横跨整幅影像的宽度，取一小块地图范围要连带拉回远超所需的字节，而且没有 overviews 就没有可供缩小时使用的粗级别。后缀叫不叫 `.tif` 都改变不了这一点，况且 GeoLibre 的客户端读取器直接要求文件内部有瓦片。
+COG 能被 range 直读，靠的是**文件内部有瓦片切分和金字塔（overviews）**。条带式 GeoTIFF 严格说也能 range 读——条带的偏移和字节数就写在头里——但一个条带横跨整幅影像的宽度，取一小块地图范围要连带拉回远超所需的字节，而且没有 overviews 就没有可供缩小时使用的粗级别。后缀叫不叫 `.tif` 都改变不了这一点，况且 GeoSpaX 的客户端读取器直接要求文件内部有瓦片。
 
-GeoLibre 的处理值得借鉴：面板**先用一个 Range 请求把文件头读回来**，判断有没有内部瓦片；没有就提示走客户端转换（gdal3.js 那条路）再加载。**用几 KB 的头部换一个明确判断，而不是让用户等一次必然很慢的加载。**
+GeoSpaX 的处理值得借鉴：面板**先用一个 Range 请求把文件头读回来**，判断有没有内部瓦片；没有就提示走客户端转换（gdal3.js 那条路）再加载。**用几 KB 的头部换一个明确判断，而不是让用户等一次必然很慢的加载。**
 
 三个栅格引擎的取舍源码里也写清楚了：`cog-tiler-wasm`（默认，浏览器 WASM，**代价是只能用内置色带**，自定义分级失效）、`maplibre-gl-raster`（GPU，符号化完整）、`titiler`（服务端）。**默认值选的是最稳的那个，不是功能最全的。**
 
 ### 6.5 数据不是云原生格式怎么办：把索引外置
 
-NetCDF / HDF5 是科学数据的事实标准，却不是为 HTTP 设计的。GeoLibre 的做法是 **kerchunk 引用清单**：清单把 Zarr 的 key 映射到 **`[url, offset, length]`**（原始文件里的一段字节区间），再实现成一个**最小的 zarrita `Readable`（只要一个 `get(key)`）**，直接交给项目里已有的 Zarr 渲染管线——源码注释那句「with no rewrite」是重点，**渲染代码一行没改**。
+NetCDF / HDF5 是科学数据的事实标准，却不是为 HTTP 设计的。GeoSpaX 的做法是 **kerchunk 引用清单**：清单把 Zarr 的 key 映射到 **`[url, offset, length]`**（原始文件里的一段字节区间），再实现成一个**最小的 zarrita `Readable`（只要一个 `get(key)`）**，直接交给项目里已有的 Zarr 渲染管线——源码注释那句「with no rewrite」是重点，**渲染代码一行没改**。
 
 > **思路可以推广：不改数据、不改渲染，只在中间加一层「key → 字节区间」的映射。** 手里那些不适合流式读取的历史格式，只要能算出偏移量，就能变成按需读取的。
 
 ### 6.6 目录浏览器只该做一件事：产出 URL
 
-GeoLibre 接了 STAC、Source Cooperative、Overture Maps、Planetary Computer、Hugging Face 一大堆在线数据源，靠一条原则不失控：**添加图层时刻意委托给已经懂每种格式的那些控件**——PMTiles 给 `addPMTilesLayerFromUrl`，GeoParquet 给 `addVectorLayerFromUrl`，COG 给 `app.addCogLayer`。于是目录里点进来的数据和手动 Add Data 的**完全同权**：一样进图层面板、一样能改样式、一样能存进工程。
+GeoSpaX 接了 STAC、Source Cooperative、Overture Maps、Planetary Computer、Hugging Face 一大堆在线数据源，靠一条原则不失控：**添加图层时刻意委托给已经懂每种格式的那些控件**——PMTiles 给 `addPMTilesLayerFromUrl`，GeoParquet 给 `addVectorLayerFromUrl`，COG 给 `app.addCogLayer`。于是目录里点进来的数据和手动 Add Data 的**完全同权**：一样进图层面板、一样能改样式、一样能存进工程。
 
 > **一个数据源接入 = 一个「怎么找到 URL」的适配器，读取和渲染永远只有一份实现。这是接入 N 个数据源还不失控的唯一办法。**
 
@@ -614,4 +614,4 @@ GeoLibre 接了 STAC、Source Cooperative、Overture Maps、Planetary Computer�
 
 </ol>
 
-> 这份清单里没有一条需要引入 GeoLibre 的代码。它最大的贡献不是又一个地图应用，而是把「一个跑在浏览器里的空间数据库，足以替代过去必须放在服务端的那些工作」这件事，用一个能跑、能装、能查源码的完整项目证明了一遍。
+> 这份清单里没有一条需要引入 GeoSpaX 的代码。它最大的贡献不是又一个地图应用，而是把「一个跑在浏览器里的空间数据库，足以替代过去必须放在服务端的那些工作」这件事，用一个能跑、能装、能查源码的完整项目证明了一遍。

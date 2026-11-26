@@ -153,10 +153,10 @@ async function whiteboxTools(): Promise<WhiteboxTool[]> {
     listWasmToolManifests(),
   ]);
   if (catalogResult.status === "rejected") {
-    console.warn("[GeoLibre] Could not load Whitebox catalog snapshot:", catalogResult.reason);
+    console.warn("[GeoSpaX] Could not load Whitebox catalog snapshot:", catalogResult.reason);
   }
   if (manifestResult.status === "rejected") {
-    console.warn("[GeoLibre] Could not enumerate WASM tool manifests:", manifestResult.reason);
+    console.warn("[GeoSpaX] Could not enumerate WASM tool manifests:", manifestResult.reason);
   }
   // Hide locked ("pro"-tier) tools: they cannot run in the browser.
   const catalog =

@@ -1509,7 +1509,7 @@ export function useProjectFileActions(mapControllerRef: MapControllerRef) {
         (!credentials.written || (!credentials.stripped && credentials.keptPlaintext)) &&
         !(await rememberProjectCredentials(credentials.rollback))
       ) {
-        console.error("[GeoLibre] Could not restore stored project credentials", {
+        console.error("[GeoSpaX] Could not restore stored project credentials", {
           accounts: Object.keys(credentials.rollback),
         });
         setActionError(t("toolbar.error.credentialRollbackFailed"));

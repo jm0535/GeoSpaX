@@ -187,7 +187,7 @@ export function useLayerMetadataDialog() {
       })
       .catch((error: unknown) => {
         if (cancelled) return;
-        console.warn("[GeoLibre] Failed to read raster metadata", error);
+        console.warn("[GeoSpaX] Failed to read raster metadata", error);
         setRasterInfoState({ layerId, status: "error" });
       });
 
@@ -262,7 +262,7 @@ export function useLayerMetadataDialog() {
           setMetadataNote({ tone: "success", key: "layers.metadataEdit.exportStacSaved" });
         }
       } catch (error) {
-        console.warn("[GeoLibre] STAC Item export failed", error);
+        console.warn("[GeoSpaX] STAC Item export failed", error);
         setMetadataNote({ tone: "error", key: "layers.metadataEdit.exportStacError" });
       }
     },

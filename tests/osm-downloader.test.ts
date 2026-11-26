@@ -270,7 +270,7 @@ describe("downloadOsmGeoJson", () => {
     assert.equal(defaultOverpassEndpoint(false), OVERPASS_DEFAULT_ENDPOINT);
   });
 
-  it("uses GeoLibre's CORS-enabled Overpass relay by default", async () => {
+  it("uses GeoSpaX's CORS-enabled Overpass relay by default", async () => {
     const calls: string[] = [];
     const fetchImpl: OverpassFetch = async (url) => {
       calls.push(url);

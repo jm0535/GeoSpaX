@@ -39,7 +39,7 @@ export function openFlatGeobufAddVectorLayerPanel(app: GeoLibreAppAPI): void {
     void import("../maplibre-vector")
       .then(({ openVectorLayerPanel }) => openVectorLayerPanel(app))
       .catch((error) => {
-        console.error("[GeoLibre] Failed to open the vector layer panel", error);
+        console.error("[GeoSpaX] Failed to open the vector layer panel", error);
       });
     return;
   }

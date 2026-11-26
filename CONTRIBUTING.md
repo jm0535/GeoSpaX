@@ -1,14 +1,14 @@
-# Contributing to GeoLibre
+# Contributing to GeoSpaX
 
 <p align="center">
   <img src="docs/assets/geospax_logo_final.svg" width="140" alt="GeoSpaX logo — a teal X with a globe at its center" />
 </p>
 
-Thanks for your interest in improving GeoLibre. The full contributing guide,
+Thanks for your interest in improving GeoSpaX. The full contributing guide,
 including development setup, the repository layout, the quality gate, and the
 pull request workflow, lives in the documentation:
 
-**<https://geolibre.app/contributing/>** (source: [`docs/contributing.md`](docs/contributing.md))
+**<https://jm0535.github.io/GeoSpaX/contributing/>** (source: [`docs/contributing.md`](docs/contributing.md))
 
 ## Quick Start
 
@@ -16,8 +16,8 @@ Fork the repository, then clone your fork. Replace `YOUR_GITHUB_USERNAME` with
 your GitHub username:
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/GeoLibre.git
-cd GeoLibre
+git clone https://github.com/YOUR_GITHUB_USERNAME/GeoSpaX.git
+cd GeoSpaX
 npm install
 npm run dev          # web build at http://localhost:5173
 ```
@@ -36,4 +36,4 @@ Prefer `--files` over `--all-files`, which re-checks the whole repository. See
 Branch off `main` (never commit to it directly), keep changes focused, follow
 [Conventional Commits](https://www.conventionalcommits.org/) for messages, and
 open your pull request against `main`. Found a bug or have an idea? Open an
-[issue](https://github.com/opengeos/GeoLibre/issues).
+[issue](https://github.com/jm0535/GeoSpaX/issues).

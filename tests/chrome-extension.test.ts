@@ -22,7 +22,7 @@ function scan(html: string, url = "https://catalog.example.com/page/") {
   }
 }
 
-describe("GeoLibre Chrome extension scanner", () => {
+describe("GeoSpaX Chrome extension scanner", () => {
   it("finds supported absolute and relative dataset links", () => {
     assert.deepEqual(
       scan(`
@@ -265,7 +265,7 @@ describe("GeoLibre Chrome extension scanner", () => {
   });
 
   it("preserves a discovered style when stronger metadata replaces a dataset", () => {
-    const target = new URL("https://web.geolibre.app/");
+    const target = new URL("https://geospax2.in4metrix.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.json");
     target.searchParams.append("style", "https://data.example.com/roads.style.json");
     const [found] = scan(`
@@ -278,8 +278,8 @@ describe("GeoLibre Chrome extension scanner", () => {
     assert.equal(found.styleUrl, "https://data.example.com/roads.style.json");
   });
 
-  it("unpacks data and positional styles from existing GeoLibre links", () => {
-    const target = new URL("https://web.geolibre.app/");
+  it("unpacks data and positional styles from existing GeoSpaX links", () => {
+    const target = new URL("https://geospax2.in4metrix.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.geojson");
     target.searchParams.append("data", "https://data.example.com/dem.tif");
     target.searchParams.append("style", "");
@@ -296,7 +296,7 @@ describe("GeoLibre Chrome extension scanner", () => {
     );
   });
 
-  it("finds LiDAR point clouds and hints the endpoints GeoLibre cannot classify", () => {
+  it("finds LiDAR point clouds and hints the endpoints GeoSpaX cannot classify", () => {
     const found = scan(`
       <a href="https://data.example.com/autzen.copc.laz">Autzen</a>
       <a href="survey.LAS">Survey</a>
@@ -322,8 +322,8 @@ describe("GeoLibre Chrome extension scanner", () => {
     assert.equal(byUrl.has("https://example.com/programs/elevation"), false);
   });
 
-  it("keeps the dataType hint of an unpacked GeoLibre link", () => {
-    const target = new URL("https://web.geolibre.app/");
+  it("keeps the dataType hint of an unpacked GeoSpaX link", () => {
+    const target = new URL("https://geospax2.in4metrix.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.geojson");
     target.searchParams.append("data", "https://api.example.com/download/42?token=abc");
     target.searchParams.append("dataType", "");
@@ -363,7 +363,7 @@ describe("GeoLibre Chrome extension scanner", () => {
   });
 });
 
-describe("GeoLibre Chrome extension URL builder", () => {
+describe("GeoSpaX Chrome extension URL builder", () => {
   it("builds repeated data and positional style parameters", () => {
     const result = new URL(
       buildGeoLibreUrl([
@@ -467,7 +467,7 @@ describe("GeoLibre Chrome extension URL builder", () => {
   });
 });
 
-describe("GeoLibre Chrome extension service request scanner", () => {
+describe("GeoSpaX Chrome extension service request scanner", () => {
   it("recognizes OGC web services and removes operation parameters", () => {
     const cases = [
       ["WMS", "GetMap", "WMS", "raster"],
@@ -633,7 +633,7 @@ describe("GeoLibre Chrome extension service request scanner", () => {
   });
 });
 
-describe("GeoLibre Chrome extension request history", () => {
+describe("GeoSpaX Chrome extension request history", () => {
   it("pairs a vector tileset with the style requested after it", () => {
     assert.deepEqual(
       collectServiceCandidates([

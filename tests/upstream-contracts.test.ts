@@ -570,7 +570,7 @@ describe("@geoman-io/maplibre-geoman-free", () => {
       assert.ok(
         text.includes("`${e.actionType}__${e.mode}`"),
         message(
-          "action instance keys are no longer `${actionType}__${mode}` (GeoLibre hooks `edit__change`)",
+          "action instance keys are no longer `${actionType}__${mode}` (GeoSpaX hooks `edit__change`)",
         ),
       );
       assert.match(

@@ -895,11 +895,11 @@ def test_desktop_custom_scheme_flow(oauth_client):
         oauth_client, client_id="geolibre-desktop"
     )
     assert response.status_code == 200
-    assert "org.geolibre.desktop:/oauth/callback" in response.text
+    assert "geospax.in4metrix.dev:/oauth/callback" in response.text
     approved = approve(oauth_client, interaction, csrf)
     assert approved.status_code == 303
     location = approved.headers["location"]
-    assert location.startswith("org.geolibre.desktop:/oauth/callback?")
+    assert location.startswith("geospax.in4metrix.dev:/oauth/callback?")
     code = redirect_params(approved)["code"]
     exchanged = exchange_code(oauth_client, code, client_id="geolibre-desktop", verifier=verifier)
     assert exchanged.status_code == 200, exchanged.text

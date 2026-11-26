@@ -52,7 +52,7 @@ describe("popup enable flags", () => {
 });
 
 describe("visible popup fields", () => {
-  it("drops GeoLibre's internal columns and the full-resolution photo twin", () => {
+  it("drops GeoSpaX's internal columns and the full-resolution photo twin", () => {
     const fields = visiblePopupFields({
       name: "a",
       __geolibre_row: 1,
@@ -452,7 +452,7 @@ describe("expressions honor field visibility", () => {
     );
   });
 
-  it("hides GeoLibre's internal columns from an expression", () => {
+  it("hides GeoSpaX's internal columns from an expression", () => {
     assert.equal(
       resolveConfiguredPopupTitle(SENSITIVE, {
         titleExpression: '["to-string", ["get", "__geolibre_row"]]',

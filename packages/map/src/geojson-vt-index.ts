@@ -100,7 +100,7 @@ export function encodeTile(index: TileIndex, z: number, x: number, y: number): A
     // larger backing buffer.
     return pbf.buffer.slice(pbf.byteOffset, pbf.byteOffset + pbf.byteLength) as ArrayBuffer;
   } catch (err) {
-    console.warn("[GeoLibre] geojson-vt tile encode failed", err);
+    console.warn("[GeoSpaX] geojson-vt tile encode failed", err);
     return new ArrayBuffer(0);
   }
 }
@@ -202,7 +202,7 @@ export function createTileIndexSession(
           // A layer that cannot be indexed serves empty tiles rather than
           // stale ones from its previous data.
           indexes.delete(request.layerId);
-          console.warn("[GeoLibre] geojson-vt index build failed", err);
+          console.warn("[GeoSpaX] geojson-vt index build failed", err);
         }
         return;
       }

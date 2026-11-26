@@ -48,7 +48,7 @@ export class CesiumBaseLayerPickerControl implements CesiumWidgetControlHandle {
           tooltip: entry.name,
           iconUrl: buildModuleUrl(`Widgets/Images/ImageryProviders/${entry.icon}`),
           category:
-            "category" in entry ? entry.category : "assetId" in entry ? "Cesium ion" : "GeoLibre",
+            "category" in entry ? entry.category : "assetId" in entry ? "Cesium ion" : "GeoSpaX",
           creationFunction: () => {
             if (!this.syncing) this.selectImagery(entry.id);
             return [];

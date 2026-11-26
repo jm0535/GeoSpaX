@@ -106,7 +106,7 @@ export function useEmbedBridge(mapControllerRef: RefObject<MapEngine | null>): v
           targetOrigin(),
         );
       } catch (error) {
-        console.error("[GeoLibre] Failed to post embed state", error);
+        console.error("[GeoSpaX] Failed to post embed state", error);
       }
     };
 

@@ -133,7 +133,7 @@ describe("desktop OAuth callback", () => {
     assert.equal(receiver.accept(callback), true);
     assert.equal(cold, 1);
     assert.equal(receiver.accept("geo:1,2"), false);
-    assert.equal(receiver.accept("org.geolibre.desktop:/oauth/callback"), true);
+    assert.equal(receiver.accept("geospax.in4metrix.dev:/oauth/callback"), true);
     assert.equal(cold, 1);
   });
 

@@ -183,7 +183,7 @@ export function splitKmlFolderLayers(
     // GPS track with a `<TimeStamp>` on every point), so load the placemarks
     // as static layers instead.
     console.warn(
-      `[GeoLibre] "${path}" has ${begins.size} distinct KML times, which would need ${buckets.size} layers; loading it without Time Slider animation (limit ${KML_TIME_FRAME_LAYER_LIMIT}).`,
+      `[GeoSpaX] "${path}" has ${begins.size} distinct KML times, which would need ${buckets.size} layers; loading it without Time Slider animation (limit ${KML_TIME_FRAME_LAYER_LIMIT}).`,
     );
     buckets = planBuckets(false);
   }

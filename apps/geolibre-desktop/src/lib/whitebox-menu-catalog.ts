@@ -38,7 +38,7 @@ export const WHITEBOX_MENU_CATALOG: WhiteboxMenuCategory[] = [
     labelKey: "toolbar.item.conversion",
     subcategories: [
       {
-        label: "GeoLibre (WASM)",
+        label: "GeoSpaX (WASM)",
         tools: [
           { id: "calculate_transit_service_frequency", name: "Calculate Transit Service Frequency" },
           { id: "excel_to_table", name: "Excel To Table" },
@@ -113,7 +113,7 @@ export const WHITEBOX_MENU_CATALOG: WhiteboxMenuCategory[] = [
     labelKey: "toolbar.item.hydrology",
     subcategories: [
       {
-        label: "GeoLibre (WASM)",
+        label: "GeoSpaX (WASM)",
         tools: [
           { id: "delineate_depressions", name: "Delineate Depressions" },
           { id: "delineate_mounts", name: "Delineate Mounts" },
@@ -259,7 +259,7 @@ export const WHITEBOX_MENU_CATALOG: WhiteboxMenuCategory[] = [
     labelKey: "toolbar.item.lidar",
     subcategories: [
       {
-        label: "GeoLibre (WASM)",
+        label: "GeoSpaX (WASM)",
         tools: [
           { id: "assign_projection_lidar", name: "Assign Projection Lidar" },
         ],
@@ -407,7 +407,7 @@ export const WHITEBOX_MENU_CATALOG: WhiteboxMenuCategory[] = [
     labelKey: "toolbar.item.raster",
     subcategories: [
       {
-        label: "GeoLibre (WASM)",
+        label: "GeoSpaX (WASM)",
         tools: [
           { id: "aggregate_multidimensional_raster", name: "Aggregate Multidimensional Raster" },
           { id: "analyze_changes_ccdc", name: "Analyze Changes Using CCDC" },
@@ -1054,7 +1054,7 @@ export const WHITEBOX_MENU_CATALOG: WhiteboxMenuCategory[] = [
     labelKey: "toolbar.item.vector",
     subcategories: [
       {
-        label: "GeoLibre (WASM)",
+        label: "GeoSpaX (WASM)",
         tools: [
           { id: "add_surface_information", name: "Add Surface Information" },
           { id: "add_z_information", name: "Add Z Information" },

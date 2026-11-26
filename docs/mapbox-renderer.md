@@ -253,7 +253,7 @@ The Background card fades its land and water colors, labels (including ocean lab
 
 ## License and terms
 
-GeoLibre itself is MIT licensed, but the Mapbox renderer depends on
+GeoSpaX itself is MIT licensed, but the Mapbox renderer depends on
 [Mapbox GL JS](https://github.com/mapbox/mapbox-gl-js) v3 (`mapbox-gl`
 3.30.0 at the time of writing), which is **not** open source. Mapbox GL JS v3
 is distributed under the

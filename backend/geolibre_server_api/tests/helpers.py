@@ -18,7 +18,7 @@ from uuid import uuid4
 from fake_idp import FakeIdp
 
 WEB_REDIRECT = "https://share.example/oauth-callback.html"
-DESKTOP_REDIRECT = "org.geolibre.desktop:/oauth/callback"
+DESKTOP_REDIRECT = "geospax.in4metrix.dev:/oauth/callback"
 ORIGIN = "https://share.example"
 
 

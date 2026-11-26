@@ -1,6 +1,6 @@
 # Data Integrations
 
-Beyond the [Add Data](adding-data.md) menu, GeoLibre connects to several hosted catalogs and imagery providers through dedicated panels and plugins. This page is a map of what is available and where to find it.
+Beyond the [Add Data](adding-data.md) menu, GeoSpaX connects to several hosted catalogs and imagery providers through dedicated panels and plugins. This page is a map of what is available and where to find it.
 
 ![Planetary Computer panel](https://assets.geolibre.app/images/geolibre-planetary-computer.webp)
 
@@ -24,7 +24,7 @@ Beyond the [Add Data](adding-data.md) menu, GeoLibre connects to several hosted 
 
 GeoLens is an open-source spatial catalog (FastAPI + PostGIS) that you run on
 your own infrastructure, which makes it the recommended way to keep private data
-private while still working with it in GeoLibre. In the plugin panel, enter your
+private while still working with it in GeoSpaX. In the plugin panel, enter your
 server's base URL (for example `https://maps.example.org`) and, for private
 datasets, a GeoLens API key. Each result links back to its metadata page, vector
 tile tokens are refreshed automatically before they expire, and a dataset loaded
@@ -37,7 +37,7 @@ URL and dataset id. Layers from public datasets restore automatically; layers
 from private ones stay blank until the recipient reconnects with their own key.
 
 See [Self-Hosting & Private Data](../self-hosting.md) for the full deployment
-guide, including how to serve GeoLibre and GeoLens from one origin behind a
+guide, including how to serve GeoSpaX and GeoLens from one origin behind a
 single sign-on layer.
 
 ## Web Services
@@ -78,7 +78,7 @@ The plugins under **Imagery and street-level**, **Time series and comparison**, 
 
 ## Geocoding
 
-GeoLibre can turn addresses into points and points into addresses. Both run through a selectable provider; the public [Nominatim](https://nominatim.openstreetmap.org/) service is the default and needs no key.
+GeoSpaX can turn addresses into points and points into addresses. Both run through a selectable provider; the public [Nominatim](https://nominatim.openstreetmap.org/) service is the default and needs no key.
 
 | Tool | Where | What it does |
 | --- | --- | --- |
@@ -109,7 +109,7 @@ Requests to the public Nominatim endpoint are paced to one per second and a sing
 
 The public CartoCiudad endpoint is paced to roughly five requests per second and is not row-capped. IGN publishes no rate limit, so this is a courtesy default rather than their policy: it keeps a large batch from bursting at a free public service without borrowing Nominatim's much stricter numbers.
 
-Self-hosted Nominatim and the keyed providers (Mapbox, ArcGIS, Google, hosted Pelias) are not paced or capped by GeoLibre; their own quotas apply.
+Self-hosted Nominatim and the keyed providers (Mapbox, ArcGIS, Google, hosted Pelias) are not paced or capped by GeoSpaX; their own quotas apply.
 
 ### Configuring with environment variables
 

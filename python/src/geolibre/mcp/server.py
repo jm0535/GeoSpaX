@@ -6,7 +6,7 @@ only state. Nothing here needs a browser, a running app, or the bundled web
 build: the output is a project file the user opens in GeoLibre (desktop, web, or
 Jupyter), or a standalone HTML page exported from it.
 
-The ``mcp`` SDK is an optional dependency (``pip install "geolibre[mcp]"``); it
+The ``mcp`` SDK is an optional dependency (``pip install "geospax[mcp]"``); it
 is imported here and nowhere else in the package, so the rest of ``geolibre``
 keeps working without it.
 """
@@ -2164,7 +2164,7 @@ def main(argv: list[str] | None = None) -> int:
         A process exit code.
     """
     parser = argparse.ArgumentParser(
-        prog="geolibre-mcp",
+        prog="geospax-mcp",
         description="MCP server that authors GeoLibre (.geolibre.json) projects.",
     )
     parser.add_argument(
@@ -2188,10 +2188,10 @@ def main(argv: list[str] | None = None) -> int:
         workspace = Workspace(args.root)
     except WorkspaceError as exc:
         # stdout carries the protocol on stdio, so diagnostics go to stderr.
-        print(f"geolibre-mcp: {exc}", file=sys.stderr)
+        print(f"geospax-mcp: {exc}", file=sys.stderr)
         return 2
     print(
-        f"geolibre-mcp {__version__} serving {os.pathsep.join(str(r) for r in workspace.roots)}",
+        f"geospax-mcp {__version__} serving {os.pathsep.join(str(r) for r in workspace.roots)}",
         file=sys.stderr,
     )
     build_server(workspace).run(transport=args.transport)

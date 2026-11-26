@@ -1,11 +1,11 @@
 # MapLibre renderer
 
-Choose **View → Rendering engine → MapLibre** to use GeoLibre's default
-renderer. MapLibre GL JS is bundled with every GeoLibre distribution, requires
+Choose **View → Rendering engine → MapLibre** to use GeoSpaX's default
+renderer. MapLibre GL JS is bundled with every GeoSpaX distribution, requires
 no account or access token, and is available for both the primary map and every
 split pane.
 
-MapLibre has the broadest feature and plugin compatibility in GeoLibre. New
+MapLibre has the broadest feature and plugin compatibility in GeoSpaX. New
 projects use it unless `primaryRenderer` says otherwise, and an omitted
 `viewKind` in a secondary pane also means MapLibre.
 
@@ -19,7 +19,7 @@ projects use it unless `primaryRenderer` says otherwise, and an omitted
 - Vector tiles and vector PMTiles or MBTiles, including imported Mapbox styles
   and ArcGIS vector-tile services.
 - 3D Tiles, I3S, LiDAR and COPC point clouds, Gaussian splats, 3D models, Zarr,
-  NetCDF/HDF, and deck.gl visualization layers through GeoLibre's specialized
+  NetCDF/HDF, and deck.gl visualization layers through GeoSpaX's specialized
   renderers and overlays.
 - Feature picking, selection, editing, measurement, extent drawing, draggable
   placement, print and screenshot capture, and the full MapLibre-oriented
@@ -34,7 +34,7 @@ itself does not.
 
 MapLibre supports Mercator and globe projections. **Controls → Globe** switches
 the projection, while **Controls → Terrain** adds elevation to either view. The
-terrain source can be GeoLibre's global source or a compatible local or remote
+terrain source can be GeoSpaX's global source or a compatible local or remote
 COG DEM. This globe projection remains a MapLibre style map; choose the
 [Cesium renderer](cesium-renderer.md) for a native 3D globe and Cesium-native
 scene formats.
@@ -58,6 +58,6 @@ sources and style layers, while specialized controls register protocols or
 shared overlays for formats that MapLibre does not draw directly. The reusable
 headless surface is published as `@geolibre/map`.
 
-MapLibre GL JS and GeoLibre are open source under permissive licenses. See the
+MapLibre GL JS and GeoSpaX are open source under permissive licenses. See the
 [architecture](architecture.md#rendering-engine-model) for the shared engine
 model and [Acknowledgements](acknowledgements.md) for project and license links.

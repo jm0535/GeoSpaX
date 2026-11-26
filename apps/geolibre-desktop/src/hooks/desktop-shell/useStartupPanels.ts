@@ -39,8 +39,8 @@ export function useStartupPanels({
     if (!openS3Browser || manager.isActive(S3_BROWSER_PLUGIN_ID)) return;
     void Promise.resolve(manager.activate(S3_BROWSER_PLUGIN_ID, createAppAPI(mapControllerRef)))
       .then((activated) => {
-        if (!activated) console.warn("[GeoLibre] Could not open the S3 Browser at startup");
+        if (!activated) console.warn("[GeoSpaX] Could not open the S3 Browser at startup");
       })
-      .catch((error) => console.warn("[GeoLibre] Could not open the S3 Browser at startup", error));
+      .catch((error) => console.warn("[GeoSpaX] Could not open the S3 Browser at startup", error));
   }, [externalPluginsReady, mapControllerRef, mapReadyGeneration, openS3Browser, viewer]);
 }

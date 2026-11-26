@@ -424,7 +424,7 @@ export function featureSuitability(
   const provenance = makeProvenance(
     "weighted-linear-combination",
     "Min-max standardised weighted linear combination",
-    "Input layer CRS (GeoLibre vector store; coordinates exported as EPSG:4326)",
+    "Input layer CRS (GeoSpaX vector store; coordinates exported as EPSG:4326)",
     {
       criteria: resolved.map(({ id, field, weight, direction, min, max }) => ({
         id,

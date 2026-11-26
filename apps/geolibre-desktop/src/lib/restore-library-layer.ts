@@ -137,7 +137,7 @@ export async function restoreLibraryLayer(
   try {
     await restore(app);
   } catch (error) {
-    console.error("[GeoLibre] Failed to restore a layer added from My Data", error);
+    console.error("[GeoSpaX] Failed to restore a layer added from My Data", error);
     notify.error(i18next.t("notifications.libraryLayerRestoreFailed", { name: layer.name }), {
       error,
     });

@@ -339,7 +339,7 @@ export const DEFAULT_HUGGINGFACE_LABELS: HuggingFaceLabels = {
   downloadTitle: "Download this file",
   copyUrlTitle: "Copy this file's URL",
   openDatasetTitle: "Open this dataset's page on huggingface.co",
-  unsupportedTitle: "GeoLibre cannot render this format — download it instead",
+  unsupportedTitle: "GeoSpaX cannot render this format — download it instead",
   addError: (message) => `Could not add this file: ${message}`,
   notRasterIndex:
     "This JSON file does not index any rasters, so there is nothing to put on the map. " +
@@ -395,7 +395,7 @@ export const DEFAULT_HUGGINGFACE_LABELS: HuggingFaceLabels = {
   clearSelection: "Clear",
   selectedFiles: (count, size) => `${count} file${count === 1 ? "" : "s"} selected (${size}).`,
   commitMessageLabel: "Commit message (optional)",
-  commitMessagePlaceholder: "Upload with GeoLibre",
+  commitMessagePlaceholder: "Upload with GeoSpaX",
   upload: "Upload",
   uploadPreparing: "Preparing upload…",
   uploadHashing: (name, index, total) => `Hashing ${name} (${index}/${total})…`,

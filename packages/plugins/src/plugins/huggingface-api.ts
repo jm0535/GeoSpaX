@@ -975,7 +975,7 @@ export async function uploadDatasetFiles(
     JSON.stringify({
       key: "header",
       value: {
-        summary: spec.commitMessage?.trim() || `Upload ${staged.length} file(s) with GeoLibre`,
+        summary: spec.commitMessage?.trim() || `Upload ${staged.length} file(s) with GeoSpaX`,
         ...(spec.commitDescription ? { description: spec.commitDescription } : {}),
       },
     }),

@@ -91,7 +91,7 @@ function openDatabase(): Promise<IDBDatabase> {
     request.onblocked = () =>
       rejectOnce(
         new ProjectHistoryBlockedError(
-          "Project history is blocked by another GeoLibre tab. Close or reload other tabs and try again.",
+          "Project history is blocked by another GeoSpaX tab. Close or reload other tabs and try again.",
         ),
       );
   });

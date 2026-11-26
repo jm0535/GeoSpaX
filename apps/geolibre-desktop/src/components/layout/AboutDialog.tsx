@@ -26,7 +26,7 @@ import { UpdateInstructions } from "./UpdateInstructions";
 const LINKS = [
   {
     labelKey: "about.homePage",
-    href: "https://geolibre.app",
+    href: "https://jm0535.github.io/GeoSpaX",
   },
   {
     labelKey: "about.githubRepository",

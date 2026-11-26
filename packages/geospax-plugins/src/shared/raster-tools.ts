@@ -63,7 +63,7 @@ async function sampleBand(
   height: number,
 ): Promise<RasterSample> {
   if (!shell.app.readRasterWindow)
-    throw new Error("This GeoLibre host does not expose raster-window reads.");
+    throw new Error("This GeoSpaX host does not expose raster-window reads.");
   const reading = await shell.app.readRasterWindow(layerId, { bounds, width, height, band });
   if (!reading)
     throw new Error("The selected layer could not be sampled as a raster in the current view.");

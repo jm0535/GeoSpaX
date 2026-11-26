@@ -124,7 +124,7 @@ export function ProviderModelPicker({
         // key, so it only stays visible while those still match, and a
         // transient failure should not drop a known-good list for the presets.
         setError(t("settings.ai.modelsFailedToLoad", { message }));
-        console.error(`[GeoLibre] Could not load ${PROVIDER_LABELS[provider]} models`, cause);
+        console.error(`[GeoSpaX] Could not load ${PROVIDER_LABELS[provider]} models`, cause);
       } finally {
         if (generation === requestGeneration.current) setLoading(false);
       }

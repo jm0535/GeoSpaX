@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Open data in GeoLibre",
-  "description": "Find geospatial datasets and services used by the current page and open them in GeoLibre.",
+  "name": "Open data in GeoSpaX",
+  "description": "Find geospatial datasets and services used by the current page and open them in GeoSpaX.",
   "version": "0.3.1",
-  "homepage_url": "https://geolibre.app/",
+  "homepage_url": "https://jm0535.github.io/GeoSpaX/",
   "minimum_chrome_version": "106",
   "permissions": ["activeTab", "scripting"],
   "action": {
-    "default_title": "Open data in GeoLibre",
+    "default_title": "Open data in GeoSpaX",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/geospax-16.png",

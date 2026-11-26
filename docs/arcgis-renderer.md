@@ -8,13 +8,13 @@ choices, and the Python and iframe APIs accept `arcgis` as a renderer name.
 
 ## Nothing is bundled
 
-The SDK is **not** part of GeoLibre's build. `@arcgis/core` is 84 MB unpacked
+The SDK is **not** part of GeoSpaX's build. `@arcgis/core` is 84 MB unpacked
 across 18,810 files, and bundling it would grow the web build, the Python wheel
 and the desktop installers by tens of megabytes. Instead the engine imports the
 modules it needs from Esri's versioned ES-module CDN the first time an ArcGIS
 pane mounts (`https://js.arcgis.com/<version>/@arcgis/core/…`), the same way
 the PostGIS and Sedona SQL engines are fetched from jsDelivr. Only the adapter
-code in `packages/map/src/arcgis-*.ts` ships with GeoLibre.
+code in `packages/map/src/arcgis-*.ts` ships with GeoSpaX.
 
 Consequences:
 
@@ -102,7 +102,7 @@ override draws Esri World Imagery instead.
   split into the SDK's `WMSLayer` description), and vector tiles with named
   source layers (drawn by the SDK's `VectorTileLayer` from the same style
   layers the Mapbox engine compiles). Markers, line decorations and fill
-  patterns are GeoLibre's generated images, baked into a sprite sheet the SDK
+  patterns are GeoSpaX's generated images, baked into a sprite sheet the SDK
   reads through a request interceptor; labels use Arial from Esri's public
   glyph service, so they need the network. Past a source's maximum zoom the
   SDK magnifies its last tiles, patterns and decoration spacing with them,
@@ -339,7 +339,7 @@ Camera, projection, pointer events and the DOM go through the view. Its style
 calls (`addSource`, `addLayer`, `setPaintProperty`, `getStyle`, ...) record
 into a style that is never drawn by the SDK directly; instead:
 
-- A layer the plugin mirrors into the GeoLibre store (a Web Services WMS
+- A layer the plugin mirrors into the GeoSpaX store (a Web Services WMS
   layer, footprints registered with `registerExternalNativeLayer`) is drawn by
   the engine from that store record, like any other layer.
 - Any other GeoJSON layer (a grid, a selection outline, a draw preview) is
@@ -422,6 +422,6 @@ native webview testing on each desktop platform.
 
 The ArcGIS Maps SDK for JavaScript is distributed by Esri under its own
 [terms of use](https://developers.arcgis.com/javascript/latest/licensing/), not
-an open-source license. GeoLibre does not redistribute it; the SDK is fetched
+an open-source license. GeoSpaX does not redistribute it; the SDK is fetched
 from Esri's CDN by the user's browser at runtime, and use of Esri's basemaps and
 location services is governed by the account the API key belongs to.

@@ -187,8 +187,8 @@
     "registryTrust": {
       "title_one": "Deze plugin installeren?",
       "title_other": "Deze plugins installeren?",
-      "description_one": "Deze link opent een plugin uit het officiële GeoLibre-pluginregister die nog niet is geïnstalleerd. Bij installatie wordt deze aan uw plugins toegevoegd en geactiveerd.",
-      "description_other": "Deze link opent {{count}} plugins uit het officiële GeoLibre-pluginregister die nog niet zijn geïnstalleerd. Bij installatie worden ze aan uw plugins toegevoegd en geactiveerd."
+      "description_one": "Deze link opent een plugin uit het officiële GeoSpaX-pluginregister die nog niet is geïnstalleerd. Bij installatie wordt deze aan uw plugins toegevoegd en geactiveerd.",
+      "description_other": "Deze link opent {{count}} plugins uit het officiële GeoSpaX-pluginregister die nog niet zijn geïnstalleerd. Bij installatie worden ze aan uw plugins toegevoegd en geactiveerd."
     },
     "title": "Plugins beheren",
     "searchAria": "Plugins zoeken",
@@ -737,7 +737,7 @@
       "errorUrl": "Voer een LandXML-URL in.",
       "errorTooLarge": "Het externe LandXML-bestand overschrijdt de downloadlimiet van 100 MB.",
       "errorSelectType": "Selecteer ten minste één LandXML-objecttype.",
-      "errorMissingCrs": "Dit LandXML-bestand gebruikt geprojecteerde coördinaten. Voer het bron-CRS in zodat GeoLibre het naar WGS84 kan herprojecteren.",
+      "errorMissingCrs": "Dit LandXML-bestand gebruikt geprojecteerde coördinaten. Voer het bron-CRS in zodat GeoSpaX het naar WGS84 kan herprojecteren.",
       "errorGeographicCrsBounds": "De coördinaten vallen buiten de geografische grenzen van lengte- en breedtegraad. Kies het geprojecteerde bron-CRS dat dit LandXML-bestand gebruikt.",
       "summary": "{{surfaces}} oppervlak(ken), {{alignments}} alignement(en), {{profiles}} profiel(en), {{points}} meetpunt(en)",
       "objectTypes": "Objecttypen",
@@ -884,12 +884,12 @@
     },
     "mssql": {
       "defaultName": "SQL Server-laag",
-      "errorDesktopOnly": "SQL Server-lagen vereisen GeoLibre Desktop.",
+      "errorDesktopOnly": "SQL Server-lagen vereisen GeoSpaX Desktop.",
       "errorConnect": "Kan geen verbinding maken met SQL Server.",
       "errorPort": "Voer een geldige SQL Server-poort in (1–65535).",
       "errorConnectFirst": "Maak eerst verbinding met SQL Server.",
       "errorSelectTable": "Selecteer een ruimtelijke tabel om te laden.",
-      "desktopOnlyNotice": "SQL Server-lagen zijn alleen beschikbaar in GeoLibre Desktop.",
+      "desktopOnlyNotice": "SQL Server-lagen zijn alleen beschikbaar in GeoSpaX Desktop.",
       "savedConnection": "Opgeslagen verbinding",
       "selectSavedConnection": "Nieuwe verbinding",
       "server": "Server",
@@ -1629,13 +1629,13 @@
     "oauthFailed": "Aanmelden is mislukt. Probeer het opnieuw.",
     "oauthRefreshFailed": "Kan uw sessie niet vernieuwen. Controleer uw verbinding en probeer het opnieuw.",
     "oauthSetupFailed": "Aanmelden via de desktop-app kon niet worden gestart. Start de app opnieuw en controleer of de geïnstalleerde app links kan openen en de deelserver kan bereiken. Geplakte API-tokens blijven beschikbaar.",
-    "oauthRestartSignIn": "Deze aanmeldlink is geopend nadat GeoLibre opnieuw is gestart. Start het aanmelden hier opnieuw; de eerdere autorisatiecode kan niet worden gebruikt.",
+    "oauthRestartSignIn": "Deze aanmeldlink is geopend nadat GeoSpaX opnieuw is gestart. Start het aanmelden hier opnieuw; de eerdere autorisatiecode kan niet worden gebruikt.",
     "reauthBody": "Uw {{shareHost}}-sessie is verlopen. Meld u opnieuw aan om te blijven delen.",
     "errorUnauthorized": "Uw {{shareHost}} API-token is ongeldig of verlopen. Werk het bij in Instellingen.",
     "reauthSignIn": "Opnieuw aanmelden",
     "liveAt": "Uw project is live op:",
     "credentialsRemoved": "{{count}} veld(en) met aanmeldgegevens zijn niet opgenomen. Ontvangers moeten hun eigen aanmeldgegevens opgeven of een bemiddelde verwijzing gebruiken.",
-    "oauthSignOutIncomplete": "U bent afgemeld, maar de opgeslagen aanmelding kon niet worden verwijderd uit de sleutelhanger van uw systeem en wordt mogelijk hersteld wanneer GeoLibre de volgende keer start. Controleer of uw sleutelhanger beschikbaar is en meld u daarna opnieuw aan en weer af.",
+    "oauthSignOutIncomplete": "U bent afgemeld, maar de opgeslagen aanmelding kon niet worden verwijderd uit de sleutelhanger van uw systeem en wordt mogelijk hersteld wanneer GeoSpaX de volgende keer start. Controleer of uw sleutelhanger beschikbaar is en meld u daarna opnieuw aan en weer af.",
     "copyLink": "Link kopiëren",
     "open": "Openen",
     "done": "Gereed",
@@ -2386,17 +2386,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Wachten op de sleutelhanger van uw systeem…",
-    "keychainWaitDetail": "GeoLibre laadt uw opgeslagen aanmeldgegevens. Als uw systeem om een wachtwoord heeft gevraagd om de sleutelhanger te ontgrendelen, beantwoord dan die vraag om door te gaan. Het venster kan zich achter dit venster bevinden."
+    "keychainWaitDetail": "GeoSpaX laadt uw opgeslagen aanmeldgegevens. Als uw systeem om een wachtwoord heeft gevraagd om de sleutelhanger te ontgrendelen, beantwoord dan die vraag om door te gaan. Het venster kan zich achter dit venster bevinden."
   },
   "settings": {
     "title": "Instellingen",
     "description": "Configureer projectvoorkeuren en runtime-instellingen.",
     "saveButton": "Instellingen opslaan",
     "credentials": {
-      "keychain": "Tokens en API-sleutels die u in GeoLibre opslaat, worden bewaard in de sleutelhanger van uw systeem.",
+      "keychain": "Tokens en API-sleutels die u in GeoSpaX opslaat, worden bewaard in de sleutelhanger van uw systeem.",
       "projectKeychainUnavailable": "Opslag van projectaanmeldgegevens in de sleutelhanger van het systeem is niet beschikbaar. Nieuwe projectsleutels blijven in deze sessie; bij het opslaan van een lokaal project wordt gevraagd of ze in het bestand moeten blijven of verwijderd moeten worden.",
       "browser": "Tokens en API-sleutels die u hier opslaat, worden bewaard in de lokale opslag van deze browser, waar scripts op deze site ze kunnen lezen.",
-      "unavailable": "De sleutelhanger van uw systeem kon niet worden gebruikt ({{error}}). Nieuwe aanmeldgegevens blijven alleen bewaard tot GeoLibre wordt gesloten; eerder opgeslagen aanmeldgegevens kunnen in de browseropslag blijven staan tot de migratie slaagt."
+      "unavailable": "De sleutelhanger van uw systeem kon niet worden gebruikt ({{error}}). Nieuwe aanmeldgegevens blijven alleen bewaard tot GeoSpaX wordt gesloten; eerder opgeslagen aanmeldgegevens kunnen in de browseropslag blijven staan tot de migratie slaagt."
     },
     "section": {
       "language": "Taal",
@@ -2440,11 +2440,11 @@
         "role": "rol aannemen",
         "other": "overig"
       },
-      "environmentHelp": "Gebruikt AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY en AWS_SESSION_TOKEN uit de omgeving waarmee GeoLibre is gestart.",
-      "instanceHelp": "Gebruikt de IAM-rol van de machine waarop GeoLibre draait: een webidentiteitstoken (EKS IRSA), ECS- of EKS-containeraanmeldgegevens, of het EC2-instantieprofiel.",
+      "environmentHelp": "Gebruikt AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY en AWS_SESSION_TOKEN uit de omgeving waarmee GeoSpaX is gestart.",
+      "instanceHelp": "Gebruikt de IAM-rol van de machine waarop GeoSpaX draait: een webidentiteitstoken (EKS IRSA), ECS- of EKS-containeraanmeldgegevens, of het EC2-instantieprofiel.",
       "roleArn": "Aan te nemen rol",
       "externalId": "Externe ID",
-      "roleHelp": "Optioneel. GeoLibre roept AWS STS AssumeRole aan met de bovenstaande aanmeldgegevens en leest de buckets als deze rol, bijvoorbeeld een alleen-lezen rol in een ander account.",
+      "roleHelp": "Optioneel. GeoSpaX roept AWS STS AssumeRole aan met de bovenstaande aanmeldgegevens en leest de buckets als deze rol, bijvoorbeeld een alleen-lezen rol in een ander account.",
       "accessKeyId": "Toegangssleutel-ID",
       "secretAccessKey": "Geheime toegangssleutel",
       "sessionToken": "Sessietoken",
@@ -2548,7 +2548,7 @@
       "globeByDefault": "3D-globe standaard inschakelen",
       "globeByDefaultHint": "Wordt gebruikt voor de naamloze werkruimte wanneer er geen opstartproject en geen projectlink is opgegeven.",
       "openS3Browser": "S3-browser openen bij het opstarten",
-      "openS3BrowserHint": "Toon het S3-browserpaneel telkens wanneer GeoLibre start. Het blijft open wanneer u een project opent.",
+      "openS3BrowserHint": "Toon het S3-browserpaneel telkens wanneer GeoSpaX start. Het blijft open wanneer u een project opent.",
       "defaultView": "Standaardkaartweergave",
       "defaultViewHint": "Stel het middelpunt en het zoomniveau in voor de naamloze werkruimte.",
       "longitude": "Lengtegraad van het middelpunt",
@@ -2556,7 +2556,7 @@
       "zoom": "Zoomniveau",
       "useCurrentView": "Huidige weergave gebruiken",
       "layerStyles": "Standaardlaagstijlen",
-      "layerStylesHint": "Kies een laagstijlbestand (Project → Exporteren → Laagstijlen exporteren). Elke laag die u toevoegt en waarvan de naam overeenkomt met een stijl in het bestand, krijgt die stijl automatisch. Lagen in geopende projecten behouden hun opgeslagen stijlen. GeoLibre bewaart een kopie van het bestand, dus kies het opnieuw nadat u het hebt bewerkt.",
+      "layerStylesHint": "Kies een laagstijlbestand (Project → Exporteren → Laagstijlen exporteren). Elke laag die u toevoegt en waarvan de naam overeenkomt met een stijl in het bestand, krijgt die stijl automatisch. Lagen in geopende projecten behouden hun opgeslagen stijlen. GeoSpaX bewaart een kopie van het bestand, dus kies het opnieuw nadat u het hebt bewerkt.",
       "chooseLayerStyles": "Bestand kiezen",
       "clearLayerStyles": "Wissen",
       "noLayerStylesSelected": "Geen laagstijlbestand geselecteerd",
@@ -2657,8 +2657,8 @@
       "oauthSigningIn": "Aanmelden…",
       "oauthSignOut": "Afmelden",
       "oauthWebLifetime": "Het toegangstoken blijft in het geheugen; de vernieuwingssessie is beperkt tot dit browsertabblad. Na het sluiten van het tabblad moet u zich opnieuw aanmelden.",
-      "oauthDesktopKeychain": "Uw aanmelding wordt bewaard in de sleutelhanger van uw systeem, zodat GeoLibre na een herstart aangemeld blijft totdat u zich afmeldt.",
-      "oauthDesktopSessionOnly": "Deze aanmelding kon niet worden opgeslagen in de sleutelhanger van uw systeem en blijft daarom alleen geldig tot GeoLibre wordt gesloten.",
+      "oauthDesktopKeychain": "Uw aanmelding wordt bewaard in de sleutelhanger van uw systeem, zodat GeoSpaX na een herstart aangemeld blijft totdat u zich afmeldt.",
+      "oauthDesktopSessionOnly": "Deze aanmelding kon niet worden opgeslagen in de sleutelhanger van uw systeem en blijft daarom alleen geldig tot GeoSpaX wordt gesloten.",
       "accountLoading": "Uw account laden…",
       "accountRetry": "Opnieuw proberen",
       "accountIdentity": "Account: {{account}}",
@@ -2688,7 +2688,7 @@
       "sessionRevoke": "Intrekken",
       "sessionRevoking": "Intrekken…",
       "revokeSessionConfirm": "Sessie ‘{{label}}’ intrekken? Dat apparaat wordt afgemeld. Dit kan niet ongedaan worden gemaakt.",
-      "revokeCurrentConfirm": "Deze sessie ‘{{label}}’ intrekken? U wordt direct afgemeld bij GeoLibre.",
+      "revokeCurrentConfirm": "Deze sessie ‘{{label}}’ intrekken? U wordt direct afgemeld bij GeoSpaX.",
       "revokeTokenConfirm": "Persoonlijk API-token ‘{{label}}’ intrekken? Scripts en CI die het gebruiken, werken dan niet meer. Dit kan niet ongedaan worden gemaakt.",
       "revokeSessionConfirmButton": "Ja, intrekken",
       "sessionCreated": "Aangemaakt: {{date}}",
@@ -2777,7 +2777,7 @@
       "statusReady": "{{provider}} is geconfigureerd en klaar voor gebruik.",
       "statusIncomplete": "Vul de onderstaande verplichte velden in om {{provider}} in te schakelen.",
       "secretsNote": "Inloggegevens worden lokaal op dit apparaat opgeslagen, niet in het projectbestand dat u deelt, zodat ze bewaard blijven na herstarten. Iedereen met toegang tot dit apparaat kan ze lezen.",
-      "secretsNoteKeychain": "API-sleutels en andere geheime velden worden opgeslagen in de sleutelhanger van uw systeem, niet in het projectbestand dat u deelt, zodat ze bewaard blijven na herstarten. Andere velden, zoals modelnamen en URL's, worden opgeslagen in de instellingen van GeoLibre op dit apparaat.",
+      "secretsNoteKeychain": "API-sleutels en andere geheime velden worden opgeslagen in de sleutelhanger van uw systeem, niet in het projectbestand dat u deelt, zodat ze bewaard blijven na herstarten. Andere velden, zoals modelnamen en URL's, worden opgeslagen in de instellingen van GeoSpaX op dit apparaat.",
       "getCredentials": "Waar u inloggegevens voor {{provider}} kunt verkrijgen",
       "showValue": "{{name}} tonen",
       "hideValue": "{{name}} verbergen",
@@ -2904,7 +2904,7 @@
         "notSet": "Niet ingesteld",
         "getKey": "Gratis sleutel aanvragen",
         "saveFailed": "De sleutel kon niet in deze browser worden opgeslagen.",
-        "saveFailedKeychain": "Kan de sleutel niet opslaan in de sleutelhanger van uw systeem. Hij werkt totdat GeoLibre wordt gesloten."
+        "saveFailedKeychain": "Kan de sleutel niet opslaan in de sleutelhanger van uw systeem. Hij werkt totdat GeoSpaX wordt gesloten."
       }
     }
   },
@@ -3608,7 +3608,7 @@
       "exportLayerStylesAsDesc": "Voer een bestandsnaam in. Het stijlbestand wordt gedownload naar de downloadmap van uw browser wanneer u op Opslaan klikt.",
       "exportLayerStylesFileName": "Bestandsnaam",
       "exportLayerStylesFileNamePlaceholder": "mijn-kaartstijlen.json",
-      "layerStylesFile": "GeoLibre-laagstijlen",
+      "layerStylesFile": "GeoSpaX-laagstijlen",
       "layerStylesImported": "Laagstijlen geïmporteerd",
       "layerStylesImportedSummary_one": "{{count}} laag opnieuw gestijld vanuit ‘{{file}}’.",
       "layerStylesImportedSummary_other": "{{count}} lagen opnieuw gestijld vanuit ‘{{file}}’.",
@@ -3732,7 +3732,7 @@
     },
     "windowClose": {
       "savePromptTitle": "Wijzigingen opslaan voor het sluiten?",
-      "savePromptDescription": "Het huidige project bevat niet-opgeslagen wijzigingen. Opslaan voordat GeoLibre wordt gesloten?"
+      "savePromptDescription": "Het huidige project bevat niet-opgeslagen wijzigingen. Opslaan voordat GeoSpaX wordt gesloten?"
     },
     "error": {
       "couldNotOpenProject": "Het project kon niet worden geopend.",
@@ -7979,7 +7979,7 @@
     "exportGeoTiff": "GeoTIFF (COG)",
     "extractSubset": "Subset extraheren…",
     "stylesMenu": "Stijlen",
-    "exportGeoLibreStyle": "GeoLibre-URL-stijl exporteren",
+    "exportGeoLibreStyle": "GeoSpaX-URL-stijl exporteren",
     "exportMapboxStyle": "Exporteren als Mapbox GL-stijl",
     "exportSldStyle": "Exporteren als OGC SLD",
     "exportQmlStyle": "Exporteren als QGIS QML",
@@ -7989,7 +7989,7 @@
     "exportStyleError": "De stijl van deze laag kon niet worden geëxporteerd.",
     "importStyle": "Stijl importeren (GeoSpaX URL / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "Stijl importeren uit tekst…",
-    "importStyleFromTextDescription": "Plak een GeoLibre-, Mapbox GL-, SLD- of QML-stijl. Het formaat wordt uit de tekst afgeleid.",
+    "importStyleFromTextDescription": "Plak een GeoSpaX-, Mapbox GL-, SLD- of QML-stijl. Het formaat wordt uit de tekst afgeleid.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "Importeren",
     "openStyleManager": "Opgeslagen stijlen (Stijlbeheer)…",
@@ -8548,7 +8548,7 @@
     "windowCloseGuardFailed": "Bij het sluiten van het venster wordt niet gevraagd om niet-opgeslagen wijzigingen op te slaan. Sla je werk op voordat je sluit.",
     "windowCloseSaveFailed": "Kan het project niet opslaan voor het sluiten.",
     "windowCloseFailed": "Kan het venster niet sluiten.",
-    "nativeProjectPathFailed": "Kan het aan GeoLibre doorgegeven projectbestand niet openen.",
+    "nativeProjectPathFailed": "Kan het aan GeoSpaX doorgegeven projectbestand niet openen.",
     "kmlSuperOverlayReadFailed": "Kan de KML Super-Overlay \"{{name}}\" niet opnieuw lezen, dus de tegels zijn leeg.",
     "projectControlFailed": "Kan de instelling \"{{control}}\" van het project niet toepassen.",
     "pluginSnapshotFailed": "Sommige plugin-instellingen worden mogelijk niet overgenomen naar de nieuwe renderer.",
@@ -8557,7 +8557,7 @@
     "panelRenderFailed": "Het paneel \"{{name}}\" kon niet worden geopend.",
     "sharedSettingsFailed": "Kan de gedeelde instellingen uit de link niet laden, dus je eigen instellingen worden gebruikt.",
     "sharedLanguageFailed": "Kan niet overschakelen naar de taal die de gedeelde instellingen vragen.",
-    "languageCatalogFailed": "Kan de vertaling voor {{language}} niet laden, dus GeoLibre toont Engels."
+    "languageCatalogFailed": "Kan de vertaling voor {{language}} niet laden, dus GeoSpaX toont Engels."
   },
   "shell": {
     "workspaceTitle": "GeoSpaX-kaartwerkruimte",
@@ -9047,7 +9047,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Het volledige GeoParquet-bestand voor deze tegel downloaden",
       "dataset": "Dataset",
-      "browseOnly": "Zoeken in deze dataset wordt nog niet ondersteund in GeoLibre. Gebruik de links hierboven om de dataset bij de bron op te halen.",
+      "browseOnly": "Zoeken in deze dataset wordt nog niet ondersteund in GeoSpaX. Gebruik de links hierboven om de dataset bij de bron op te halen.",
       "searchArea": "Zoekgebied",
       "modeView": "Kaartweergave",
       "modeDraw": "Kader tekenen",
@@ -9294,7 +9294,7 @@
       "liftSelected": "{{count}} punten geselecteerd binnen {{polygons}} polygonen van {{layer}}.",
       "liftInstances": "{{objects}} instanties van {{name}} aangemaakt uit {{layer}} ({{count}} punten).",
       "fullFile": "Volledig bestand met labels",
-      "fullFileNote": "Schrijft een lokale kopie van deze puntenwolk met alle opgeslagen labels toegepast, niet alleen de punten die hier zijn geladen. Wordt uitgevoerd op de GeoLibre-server.",
+      "fullFileNote": "Schrijft een lokale kopie van deze puntenwolk met alle opgeslagen labels toegepast, niet alleen de punten die hier zijn geladen. Wordt uitgevoerd op de GeoSpaX-server.",
       "fullFileInput": "Lokale kopie (.las, .laz of .copc.laz)",
       "fullFileOutput": "Uitvoerbestand (.las of .laz)",
       "fullFileWrite": "Bestand schrijven",

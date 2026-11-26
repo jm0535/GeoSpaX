@@ -105,7 +105,7 @@ describe("plugin-owned paint registration", () => {
     assert.equal(layer.metadata.paintMode, "plugin");
   });
 
-  it("leaves an ordinary registration painted by GeoLibre", () => {
+  it("leaves an ordinary registration painted by GeoSpaX", () => {
     const layer = createExternalNativeStoreLayer(registration());
     assert.equal(layer.metadata.paintMode, undefined);
     assert.equal(pluginOwnsPaint(layer), false);

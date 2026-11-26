@@ -884,12 +884,12 @@
     },
     "mssql": {
       "defaultName": "SQL Server Layer",
-      "errorDesktopOnly": "SQL Server layers require GeoLibre Desktop.",
+      "errorDesktopOnly": "SQL Server layers require GeoSpaX Desktop.",
       "errorConnect": "Could not connect to SQL Server.",
       "errorPort": "Enter a valid SQL Server port (1–65535).",
       "errorConnectFirst": "Connect to SQL Server first.",
       "errorSelectTable": "Select a spatial table to load.",
-      "desktopOnlyNotice": "SQL Server layers are only available in GeoLibre Desktop.",
+      "desktopOnlyNotice": "SQL Server layers are only available in GeoSpaX Desktop.",
       "savedConnection": "Saved connection",
       "selectSavedConnection": "New connection",
       "server": "Server",
@@ -1629,13 +1629,13 @@
     "oauthFailed": "Sign-in failed. Please try again.",
     "oauthRefreshFailed": "Could not refresh your session. Check your connection and try again.",
     "oauthSetupFailed": "Desktop sign-in could not start. Restart the app and check that the installed app can open links and reach the share server. Pasted API tokens remain available.",
-    "oauthRestartSignIn": "This sign-in link opened after GeoLibre restarted. Start sign-in again here; the earlier authorization code cannot be used.",
+    "oauthRestartSignIn": "This sign-in link opened after GeoSpaX restarted. Start sign-in again here; the earlier authorization code cannot be used.",
     "reauthBody": "Your {{shareHost}} session has expired. Sign in again to keep sharing.",
     "errorUnauthorized": "Your {{shareHost}} API token is invalid or expired. Update it in Settings.",
     "reauthSignIn": "Sign in again",
     "liveAt": "Your project is live at:",
     "credentialsRemoved": "{{count}} credential field(s) were not included. Recipients must provide their own credentials or use a brokered reference.",
-    "oauthSignOutIncomplete": "You are signed out, but the saved sign-in could not be removed from your system keychain, so it may be restored the next time GeoLibre starts. Check that your keychain is available, then sign in and sign out again.",
+    "oauthSignOutIncomplete": "You are signed out, but the saved sign-in could not be removed from your system keychain, so it may be restored the next time GeoSpaX starts. Check that your keychain is available, then sign in and sign out again.",
     "copyLink": "Copy link",
     "open": "Open",
     "done": "Done",
@@ -2386,17 +2386,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Waiting for your system keychain…",
-    "keychainWaitDetail": "GeoLibre is loading your saved credentials. If your system asked for a password to unlock the keychain, answer that prompt to continue. It may be behind this window."
+    "keychainWaitDetail": "GeoSpaX is loading your saved credentials. If your system asked for a password to unlock the keychain, answer that prompt to continue. It may be behind this window."
   },
   "settings": {
     "title": "Settings",
     "description": "Configure project preferences and runtime settings.",
     "saveButton": "Save Settings",
     "credentials": {
-      "keychain": "Tokens and API keys you save in GeoLibre are stored in your system keychain.",
+      "keychain": "Tokens and API keys you save in GeoSpaX are stored in your system keychain.",
       "projectKeychainUnavailable": "Project credential storage in the system keychain is unavailable. New project keys stay in this session; saving a local project asks whether to keep them in the file or strip them.",
       "browser": "Tokens and API keys you save here are stored in this browser's local storage, where scripts running on this site can read them.",
-      "unavailable": "Your system keychain could not be used ({{error}}). New credentials last only until GeoLibre closes; previously saved credentials may remain in browser storage until migration succeeds."
+      "unavailable": "Your system keychain could not be used ({{error}}). New credentials last only until GeoSpaX closes; previously saved credentials may remain in browser storage until migration succeeds."
     },
     "section": {
       "language": "Language",
@@ -2440,11 +2440,11 @@
         "role": "assume role",
         "other": "other"
       },
-      "environmentHelp": "Uses AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN from the environment GeoLibre was started with.",
-      "instanceHelp": "Uses the IAM role of the machine GeoLibre runs on: a web identity token (EKS IRSA), ECS or EKS container credentials, or the EC2 instance profile.",
+      "environmentHelp": "Uses AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN from the environment GeoSpaX was started with.",
+      "instanceHelp": "Uses the IAM role of the machine GeoSpaX runs on: a web identity token (EKS IRSA), ECS or EKS container credentials, or the EC2 instance profile.",
       "roleArn": "Role to assume",
       "externalId": "External ID",
-      "roleHelp": "Optional. GeoLibre calls AWS STS AssumeRole with the credentials above and reads the buckets as this role, e.g. a cross-account read-only role.",
+      "roleHelp": "Optional. GeoSpaX calls AWS STS AssumeRole with the credentials above and reads the buckets as this role, e.g. a cross-account read-only role.",
       "accessKeyId": "Access key ID",
       "secretAccessKey": "Secret access key",
       "sessionToken": "Session token",
@@ -2509,7 +2509,7 @@
       "privacyLocalOnly": "Packs are stored only on this device. This build downloads nothing: import a language-pack file instead.",
       "browse": "Browse language packs",
       "errorInvalidJson": "That file is not valid JSON.",
-      "errorInvalidFormat": "That file is not a valid GeoLibre Whitebox language pack.",
+      "errorInvalidFormat": "That file is not a valid GeoSpaX Whitebox language pack.",
       "errorUnsupportedVersion": "This language-pack version is not supported by this GeoSpaX release.",
       "errorInvalidLocale": "The language pack has an invalid or unexpected locale.",
       "errorUnsupportedLocale": "GeoSpaX does not include the base interface language required by this pack.",
@@ -2548,7 +2548,7 @@
       "globeByDefault": "Enable 3D globe by default",
       "globeByDefaultHint": "Used for the untitled workspace when no startup project or project link is provided.",
       "openS3Browser": "Open the S3 Browser at startup",
-      "openS3BrowserHint": "Show the S3 Browser panel each time GeoLibre starts. It stays open when you open a project.",
+      "openS3BrowserHint": "Show the S3 Browser panel each time GeoSpaX starts. It stays open when you open a project.",
       "defaultView": "Default map view",
       "defaultViewHint": "Set the center and zoom for the untitled workspace.",
       "longitude": "Center longitude",
@@ -2556,7 +2556,7 @@
       "zoom": "Zoom level",
       "useCurrentView": "Use Current View",
       "layerStyles": "Default layer styles",
-      "layerStylesHint": "Choose a layer styles file (Project → Export → Export Layer Styles). Each layer you add whose name matches a style in it is styled automatically. Layers in opened projects keep their saved styles. GeoLibre keeps a copy of the file, so choose it again after editing it.",
+      "layerStylesHint": "Choose a layer styles file (Project → Export → Export Layer Styles). Each layer you add whose name matches a style in it is styled automatically. Layers in opened projects keep their saved styles. GeoSpaX keeps a copy of the file, so choose it again after editing it.",
       "chooseLayerStyles": "Choose File",
       "clearLayerStyles": "Clear",
       "noLayerStylesSelected": "No layer styles file selected",
@@ -2657,8 +2657,8 @@
       "oauthSigningIn": "Signing in…",
       "oauthSignOut": "Sign out",
       "oauthWebLifetime": "The access token stays in memory; the refresh session is scoped to this browser tab. Closing the tab requires signing in again.",
-      "oauthDesktopKeychain": "Your sign-in is kept in your system keychain, so GeoLibre stays signed in after a restart until you sign out.",
-      "oauthDesktopSessionOnly": "This sign-in could not be saved to your system keychain, so it lasts only until GeoLibre closes.",
+      "oauthDesktopKeychain": "Your sign-in is kept in your system keychain, so GeoSpaX stays signed in after a restart until you sign out.",
+      "oauthDesktopSessionOnly": "This sign-in could not be saved to your system keychain, so it lasts only until GeoSpaX closes.",
       "accountLoading": "Loading your account…",
       "accountRetry": "Try again",
       "accountIdentity": "Account: {{account}}",
@@ -2688,7 +2688,7 @@
       "sessionRevoke": "Revoke",
       "sessionRevoking": "Revoking…",
       "revokeSessionConfirm": "Revoke session “{{label}}”? That device will be signed out. This cannot be undone.",
-      "revokeCurrentConfirm": "Revoke this session “{{label}}”? You will be signed out of GeoLibre immediately.",
+      "revokeCurrentConfirm": "Revoke this session “{{label}}”? You will be signed out of GeoSpaX immediately.",
       "revokeTokenConfirm": "Revoke personal API token “{{label}}”? Scripts and CI using it will stop working. This cannot be undone.",
       "revokeSessionConfirmButton": "Yes, revoke",
       "sessionCreated": "Created: {{date}}",
@@ -2777,7 +2777,7 @@
       "statusReady": "{{provider}} is configured and ready to use.",
       "statusIncomplete": "Fill in the required fields below to enable {{provider}}.",
       "secretsNote": "Credentials are saved locally on this device, not in the project file you share, so they persist across restarts. Anyone with access to this device could read them.",
-      "secretsNoteKeychain": "API keys and other secret fields are stored in your system keychain, not in the project file you share, so they persist across restarts. Other fields, such as model names and URLs, are saved in GeoLibre's settings on this device.",
+      "secretsNoteKeychain": "API keys and other secret fields are stored in your system keychain, not in the project file you share, so they persist across restarts. Other fields, such as model names and URLs, are saved in GeoSpaX's settings on this device.",
       "getCredentials": "Where to get {{provider}} credentials",
       "showValue": "Show {{name}}",
       "hideValue": "Hide {{name}}",
@@ -2904,7 +2904,7 @@
         "notSet": "Not set",
         "getKey": "Get a free key",
         "saveFailed": "Could not save the key in this browser.",
-        "saveFailedKeychain": "Could not save the key in your system keychain. It works until GeoLibre closes."
+        "saveFailedKeychain": "Could not save the key in your system keychain. It works until GeoSpaX closes."
       }
     }
   },
@@ -3608,7 +3608,7 @@
       "exportLayerStylesAsDesc": "Enter a file name. The styles file will download to your browser's downloads folder when you click Save.",
       "exportLayerStylesFileName": "File name",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "GeoLibre Layer Styles",
+      "layerStylesFile": "GeoSpaX Layer Styles",
       "layerStylesImported": "Layer styles imported",
       "layerStylesImportedSummary_one": "Restyled {{count}} layer from \"{{file}}\".",
       "layerStylesImportedSummary_other": "Restyled {{count}} layers from \"{{file}}\".",
@@ -3732,7 +3732,7 @@
     },
     "windowClose": {
       "savePromptTitle": "Save changes before closing?",
-      "savePromptDescription": "The current project has unsaved changes. Save them before closing GeoLibre?"
+      "savePromptDescription": "The current project has unsaved changes. Save them before closing GeoSpaX?"
     },
     "error": {
       "couldNotOpenProject": "Could not open project.",
@@ -8612,7 +8612,7 @@
     "windowCloseGuardFailed": "Closing the window will not ask to save unsaved changes. Save your work before closing.",
     "windowCloseSaveFailed": "Could not save the project before closing.",
     "windowCloseFailed": "Could not close the window.",
-    "nativeProjectPathFailed": "Could not open the project file passed to GeoLibre.",
+    "nativeProjectPathFailed": "Could not open the project file passed to GeoSpaX.",
     "kmlSuperOverlayReadFailed": "Could not read the KML Super-Overlay \"{{name}}\" again, so its tiles are blank.",
     "projectControlFailed": "Could not apply the project's \"{{control}}\" setting.",
     "pluginSnapshotFailed": "Some plugin settings may not carry over to the new renderer.",
@@ -8621,7 +8621,7 @@
     "panelRenderFailed": "The panel \"{{name}}\" failed to open.",
     "sharedSettingsFailed": "Could not load the shared settings from the link, so your own settings are in use.",
     "sharedLanguageFailed": "Could not switch to the language the shared settings ask for.",
-    "languageCatalogFailed": "Could not load the {{language}} translation, so GeoLibre is showing English."
+    "languageCatalogFailed": "Could not load the {{language}} translation, so GeoSpaX is showing English."
   },
   "shell": {
     "workspaceTitle": "GeoSpaX map workspace",
@@ -9047,7 +9047,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Download the whole GeoParquet file for this tile",
       "dataset": "Dataset",
-      "browseOnly": "Searching this dataset in GeoLibre is not supported yet. Use the links above to get it from its source.",
+      "browseOnly": "Searching this dataset in GeoSpaX is not supported yet. Use the links above to get it from its source.",
       "searchArea": "Search area",
       "modeView": "Map view",
       "modeDraw": "Draw box",
@@ -9294,7 +9294,7 @@
       "liftSelected": "Selected {{count}} points inside {{polygons}} polygons of {{layer}}.",
       "liftInstances": "Created {{objects}} instances of {{name}} from {{layer}} ({{count}} points).",
       "fullFile": "Full file with labels",
-      "fullFileNote": "Writes a local copy of this point cloud with every saved label applied, not only the points loaded here. Runs in the GeoLibre server.",
+      "fullFileNote": "Writes a local copy of this point cloud with every saved label applied, not only the points loaded here. Runs in the GeoSpaX server.",
       "fullFileInput": "Local copy (.las, .laz or .copc.laz)",
       "fullFileOutput": "Output file (.las or .laz)",
       "fullFileWrite": "Write file",

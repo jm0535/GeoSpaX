@@ -5,7 +5,7 @@ classes directly on the map. Use it to fix misclassified points (for
 example, stadium seating left as "never classified") or to build training
 labels for point cloud segmentation models. It is the first slice of the
 plan tracked in
-[opengeos/GeoLibre#2749](https://github.com/opengeos/GeoLibre/issues/2749).
+[opengeos/GeoLibre#2749](https://github.com/jm0535/GeoSpaX/issues/2749).
 
 ## Start a session
 
@@ -202,7 +202,7 @@ The exports above cover the points loaded in the session. **Full file with
 labels** writes a whole local copy of the point cloud with every saved label
 (and instance id) applied instead: enter the path of the local copy (the same
 LAS, LAZ or COPC file the layer streams) and an output `.las` or `.laz` path,
-then **Write file**. It runs in the GeoLibre server, which reads the file chunk
+then **Write file**. It runs in the GeoSpaX server, which reads the file chunk
 by chunk, so files larger than memory work; a COPC is written as plain LAS/LAZ.
 The section shows when the server is running and the cloud was loaded from a
 URL (only those have saved labels). In the web build the paths must be inside

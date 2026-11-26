@@ -182,7 +182,7 @@
     },
     "registryTrust": {
       "title_other": "Cài đặt plugin?",
-      "description_other": "Liên kết này mở {{count}} plugin chưa được cài đặt từ sổ đăng ký plugin chính thức của GeoLibre. Khi cài đặt, chúng sẽ được thêm vào danh sách plugin của bạn và được kích hoạt."
+      "description_other": "Liên kết này mở {{count}} plugin chưa được cài đặt từ sổ đăng ký plugin chính thức của GeoSpaX. Khi cài đặt, chúng sẽ được thêm vào danh sách plugin của bạn và được kích hoạt."
     },
     "title": "Quản lý plugin",
     "searchAria": "Tìm kiếm plugin",
@@ -726,7 +726,7 @@
       "errorUrl": "Nhập URL LandXML.",
       "errorTooLarge": "Tệp LandXML từ xa vượt quá giới hạn tải xuống 100 MB.",
       "errorSelectType": "Chọn ít nhất một loại đối tượng LandXML.",
-      "errorMissingCrs": "Tệp LandXML này dùng tọa độ phẳng (đã chiếu). Hãy nhập CRS nguồn để GeoLibre có thể chiếu lại sang WGS84.",
+      "errorMissingCrs": "Tệp LandXML này dùng tọa độ phẳng (đã chiếu). Hãy nhập CRS nguồn để GeoSpaX có thể chiếu lại sang WGS84.",
       "errorGeographicCrsBounds": "Các tọa độ nằm ngoài phạm vi kinh độ và vĩ độ địa lý. Hãy chọn CRS nguồn dạng chiếu mà tệp LandXML này sử dụng.",
       "summary": "{{surfaces}} bề mặt, {{alignments}} tuyến, {{profiles}} trắc dọc, {{points}} điểm đo đạc",
       "objectTypes": "Loại đối tượng",
@@ -866,12 +866,12 @@
     },
     "mssql": {
       "defaultName": "Lớp SQL Server",
-      "errorDesktopOnly": "Lớp SQL Server yêu cầu GeoLibre Desktop.",
+      "errorDesktopOnly": "Lớp SQL Server yêu cầu GeoSpaX Desktop.",
       "errorConnect": "Không thể kết nối với SQL Server.",
       "errorPort": "Nhập cổng SQL Server hợp lệ (1–65535).",
       "errorConnectFirst": "Hãy kết nối với SQL Server trước.",
       "errorSelectTable": "Chọn một bảng không gian để tải.",
-      "desktopOnlyNotice": "Lớp SQL Server chỉ có trong GeoLibre Desktop.",
+      "desktopOnlyNotice": "Lớp SQL Server chỉ có trong GeoSpaX Desktop.",
       "savedConnection": "Kết nối đã lưu",
       "selectSavedConnection": "Kết nối mới",
       "server": "Máy chủ",
@@ -1598,13 +1598,13 @@
     "oauthFailed": "Đăng nhập không thành công. Vui lòng thử lại.",
     "oauthRefreshFailed": "Không thể làm mới phiên của bạn. Hãy kiểm tra kết nối và thử lại.",
     "oauthSetupFailed": "Không thể bắt đầu đăng nhập trên máy tính. Hãy khởi động lại ứng dụng và kiểm tra xem ứng dụng đã cài đặt có thể mở liên kết và kết nối tới máy chủ chia sẻ hay không. Mã thông báo API được dán vào vẫn có thể sử dụng.",
-    "oauthRestartSignIn": "Liên kết đăng nhập này được mở sau khi GeoLibre khởi động lại. Hãy bắt đầu đăng nhập lại tại đây; mã ủy quyền trước đó không thể sử dụng được.",
+    "oauthRestartSignIn": "Liên kết đăng nhập này được mở sau khi GeoSpaX khởi động lại. Hãy bắt đầu đăng nhập lại tại đây; mã ủy quyền trước đó không thể sử dụng được.",
     "reauthBody": "Phiên {{shareHost}} của bạn đã hết hạn. Hãy đăng nhập lại để tiếp tục chia sẻ.",
     "errorUnauthorized": "Mã thông báo API {{shareHost}} của bạn không hợp lệ hoặc đã hết hạn. Hãy cập nhật trong Cài đặt.",
     "reauthSignIn": "Đăng nhập lại",
     "liveAt": "Dự án của bạn đang hoạt động tại:",
     "credentialsRemoved": "{{count}} trường thông tin xác thực không được bao gồm. Người nhận phải cung cấp thông tin xác thực của riêng họ hoặc sử dụng tài liệu tham khảo được môi giới.",
-    "oauthSignOutIncomplete": "Bạn đã đăng xuất, nhưng không thể xóa thông tin đăng nhập đã lưu khỏi chuỗi khóa hệ thống, nên nó có thể được khôi phục vào lần tới GeoLibre khởi động. Hãy kiểm tra chuỗi khóa có khả dụng không, rồi đăng nhập và đăng xuất lại.",
+    "oauthSignOutIncomplete": "Bạn đã đăng xuất, nhưng không thể xóa thông tin đăng nhập đã lưu khỏi chuỗi khóa hệ thống, nên nó có thể được khôi phục vào lần tới GeoSpaX khởi động. Hãy kiểm tra chuỗi khóa có khả dụng không, rồi đăng nhập và đăng xuất lại.",
     "copyLink": "Sao chép liên kết",
     "open": "Chỉ nguồn __PH0__ được kiểm tra.",
     "done": "Xong",
@@ -2335,17 +2335,17 @@
   },
   "startup": {
     "keychainWaitTitle": "Đang chờ chuỗi khóa hệ thống…",
-    "keychainWaitDetail": "GeoLibre đang tải thông tin xác thực đã lưu của bạn. Nếu hệ thống yêu cầu mật khẩu để mở khóa chuỗi khóa, hãy trả lời lời nhắc đó để tiếp tục. Lời nhắc có thể nằm phía sau cửa sổ này."
+    "keychainWaitDetail": "GeoSpaX đang tải thông tin xác thực đã lưu của bạn. Nếu hệ thống yêu cầu mật khẩu để mở khóa chuỗi khóa, hãy trả lời lời nhắc đó để tiếp tục. Lời nhắc có thể nằm phía sau cửa sổ này."
   },
   "settings": {
     "title": "Cài đặt",
     "description": "Thẻ kiến ​​thức sử dụng Wikipedia",
     "saveButton": "Lưu cài đặt",
     "credentials": {
-      "keychain": "Mã thông báo và khóa API bạn lưu trong GeoLibre được lưu trong chuỗi khóa hệ thống.",
+      "keychain": "Mã thông báo và khóa API bạn lưu trong GeoSpaX được lưu trong chuỗi khóa hệ thống.",
       "projectKeychainUnavailable": "Không thể dùng kho thông tin xác thực dự án trong chuỗi khóa hệ thống. Khóa dự án mới chỉ được giữ trong phiên này; khi lưu dự án cục bộ, bạn sẽ được hỏi giữ chúng trong tệp hay loại bỏ.",
       "browser": "Mã thông báo và khóa API bạn lưu ở đây được lưu trong bộ nhớ cục bộ của trình duyệt này, nơi các tập lệnh chạy trên trang này có thể đọc được.",
-      "unavailable": "Không thể dùng chuỗi khóa hệ thống ({{error}}). Thông tin xác thực mới chỉ tồn tại đến khi đóng GeoLibre; thông tin xác thực đã lưu trước đó có thể vẫn nằm trong bộ nhớ trình duyệt cho đến khi di chuyển thành công."
+      "unavailable": "Không thể dùng chuỗi khóa hệ thống ({{error}}). Thông tin xác thực mới chỉ tồn tại đến khi đóng GeoSpaX; thông tin xác thực đã lưu trước đó có thể vẫn nằm trong bộ nhớ trình duyệt cho đến khi di chuyển thành công."
     },
     "section": {
       "language": "Ngôn ngữ",
@@ -2389,11 +2389,11 @@
         "role": "đảm nhận vai trò",
         "other": "khác"
       },
-      "environmentHelp": "Dùng AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY và AWS_SESSION_TOKEN từ môi trường mà GeoLibre được khởi động.",
-      "instanceHelp": "Dùng vai trò IAM của máy đang chạy GeoLibre: mã thông báo danh tính web (EKS IRSA), thông tin xác thực vùng chứa ECS hoặc EKS, hoặc hồ sơ phiên bản EC2.",
+      "environmentHelp": "Dùng AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY và AWS_SESSION_TOKEN từ môi trường mà GeoSpaX được khởi động.",
+      "instanceHelp": "Dùng vai trò IAM của máy đang chạy GeoSpaX: mã thông báo danh tính web (EKS IRSA), thông tin xác thực vùng chứa ECS hoặc EKS, hoặc hồ sơ phiên bản EC2.",
       "roleArn": "Vai trò cần đảm nhận",
       "externalId": "ID bên ngoài",
-      "roleHelp": "Tùy chọn. GeoLibre gọi AWS STS AssumeRole bằng thông tin xác thực ở trên và đọc các bucket với vai trò này, ví dụ một vai trò chỉ đọc liên tài khoản.",
+      "roleHelp": "Tùy chọn. GeoSpaX gọi AWS STS AssumeRole bằng thông tin xác thực ở trên và đọc các bucket với vai trò này, ví dụ một vai trò chỉ đọc liên tài khoản.",
       "accessKeyId": "ID khóa truy cập",
       "secretAccessKey": "Khóa truy cập bí mật",
       "sessionToken": "Mã thông báo phiên",
@@ -2497,7 +2497,7 @@
       "globeByDefault": "Bật khối cầu 3D theo mặc định",
       "globeByDefaultHint": "Được dùng cho không gian làm việc chưa đặt tên khi không có dự án khởi động hoặc liên kết dự án.",
       "openS3Browser": "Mở Trình duyệt S3 khi khởi động",
-      "openS3BrowserHint": "Hiển thị bảng Trình duyệt S3 mỗi khi GeoLibre khởi động. Bảng vẫn mở khi bạn mở một dự án.",
+      "openS3BrowserHint": "Hiển thị bảng Trình duyệt S3 mỗi khi GeoSpaX khởi động. Bảng vẫn mở khi bạn mở một dự án.",
       "defaultView": "Chế độ xem bản đồ mặc định",
       "defaultViewHint": "Đặt tâm và mức thu phóng cho không gian làm việc chưa đặt tên.",
       "longitude": "Kinh độ tâm",
@@ -2505,7 +2505,7 @@
       "zoom": "Mức thu phóng",
       "useCurrentView": "Dùng chế độ xem hiện tại",
       "layerStyles": "Kiểu lớp mặc định",
-      "layerStylesHint": "Chọn một tệp kiểu lớp (Dự án → Xuất → Xuất kiểu lớp). Mỗi lớp bạn thêm có tên khớp với một kiểu trong tệp sẽ được tạo kiểu tự động. Các lớp trong dự án đã mở giữ nguyên kiểu đã lưu. GeoLibre giữ một bản sao của tệp, vì vậy hãy chọn lại sau khi chỉnh sửa tệp.",
+      "layerStylesHint": "Chọn một tệp kiểu lớp (Dự án → Xuất → Xuất kiểu lớp). Mỗi lớp bạn thêm có tên khớp với một kiểu trong tệp sẽ được tạo kiểu tự động. Các lớp trong dự án đã mở giữ nguyên kiểu đã lưu. GeoSpaX giữ một bản sao của tệp, vì vậy hãy chọn lại sau khi chỉnh sửa tệp.",
       "chooseLayerStyles": "Chọn tệp",
       "clearLayerStyles": "Xóa",
       "noLayerStylesSelected": "Chưa chọn tệp kiểu lớp",
@@ -2605,8 +2605,8 @@
       "oauthSigningIn": "Đang đăng nhập…",
       "oauthSignOut": "Đăng xuất",
       "oauthWebLifetime": "Mã thông báo truy cập được giữ trong bộ nhớ; phiên làm mới chỉ giới hạn trong thẻ trình duyệt này. Đóng thẻ sẽ yêu cầu đăng nhập lại.",
-      "oauthDesktopKeychain": "Thông tin đăng nhập được giữ trong chuỗi khóa hệ thống, nên GeoLibre vẫn đăng nhập sau khi khởi động lại cho đến khi bạn đăng xuất.",
-      "oauthDesktopSessionOnly": "Không thể lưu thông tin đăng nhập này vào chuỗi khóa hệ thống, nên nó chỉ tồn tại đến khi đóng GeoLibre.",
+      "oauthDesktopKeychain": "Thông tin đăng nhập được giữ trong chuỗi khóa hệ thống, nên GeoSpaX vẫn đăng nhập sau khi khởi động lại cho đến khi bạn đăng xuất.",
+      "oauthDesktopSessionOnly": "Không thể lưu thông tin đăng nhập này vào chuỗi khóa hệ thống, nên nó chỉ tồn tại đến khi đóng GeoSpaX.",
       "accountLoading": "Đang tải tài khoản của bạn…",
       "accountRetry": "Thử lại",
       "accountIdentity": "Tài khoản: {{account}}",
@@ -2636,7 +2636,7 @@
       "sessionRevoke": "Thu hồi",
       "sessionRevoking": "Đang thu hồi…",
       "revokeSessionConfirm": "Thu hồi phiên “{{label}}”? Thiết bị đó sẽ bị đăng xuất. Không thể hoàn tác thao tác này.",
-      "revokeCurrentConfirm": "Thu hồi phiên này “{{label}}”? Bạn sẽ bị đăng xuất khỏi GeoLibre ngay lập tức.",
+      "revokeCurrentConfirm": "Thu hồi phiên này “{{label}}”? Bạn sẽ bị đăng xuất khỏi GeoSpaX ngay lập tức.",
       "revokeTokenConfirm": "Thu hồi mã thông báo API cá nhân “{{label}}”? Các tập lệnh và CI đang dùng nó sẽ ngừng hoạt động. Không thể hoàn tác thao tác này.",
       "revokeSessionConfirmButton": "Có, thu hồi",
       "sessionCreated": "Ngày tạo: {{date}}",
@@ -2724,7 +2724,7 @@
       "statusReady": "Nhà cung cấp: {{provider}}",
       "statusIncomplete": "Điền vào các trường bắt buộc bên dưới để bật {{provider}}.",
       "secretsNote": "Thông tin xác thực được lưu cục bộ trên thiết bị này chứ không phải trong tệp dự án mà bạn chia sẻ, vì vậy chúng vẫn tồn tại trong suốt quá trình khởi động lại. Bất cứ ai có quyền truy cập vào thiết bị này đều có thể đọc chúng.",
-      "secretsNoteKeychain": "Khóa API và các trường bí mật khác được lưu trong chuỗi khóa hệ thống, không phải trong tệp dự án bạn chia sẻ, nên chúng được giữ lại sau khi khởi động lại. Các trường khác, như tên mô hình và URL, được lưu trong cài đặt GeoLibre trên thiết bị này.",
+      "secretsNoteKeychain": "Khóa API và các trường bí mật khác được lưu trong chuỗi khóa hệ thống, không phải trong tệp dự án bạn chia sẻ, nên chúng được giữ lại sau khi khởi động lại. Các trường khác, như tên mô hình và URL, được lưu trong cài đặt GeoSpaX trên thiết bị này.",
       "getCredentials": "Nơi nhận thông tin xác thực {{provider}}",
       "showValue": "Hiển thị {{name}}",
       "hideValue": "{{name}} hồ sơ",
@@ -2850,7 +2850,7 @@
         "notSet": "Chưa đặt",
         "getKey": "Nhận khóa miễn phí",
         "saveFailed": "Không thể lưu khóa trong trình duyệt này.",
-        "saveFailedKeychain": "Không thể lưu khóa vào chuỗi khóa hệ thống. Khóa vẫn hoạt động cho đến khi đóng GeoLibre."
+        "saveFailedKeychain": "Không thể lưu khóa vào chuỗi khóa hệ thống. Khóa vẫn hoạt động cho đến khi đóng GeoSpaX."
       }
     }
   },
@@ -3551,7 +3551,7 @@
       "exportLayerStylesAsDesc": "Nhập tên tệp. Tệp kiểu sẽ được tải xuống thư mục tải xuống của trình duyệt khi bạn nhấp Lưu.",
       "exportLayerStylesFileName": "Tên tệp",
       "exportLayerStylesFileNamePlaceholder": "my-map-styles.json",
-      "layerStylesFile": "Kiểu lớp GeoLibre",
+      "layerStylesFile": "Kiểu lớp GeoSpaX",
       "layerStylesImported": "Đã nhập kiểu lớp",
       "layerStylesImportedSummary_other": "Đã đổi kiểu {{count}} lớp từ “{{file}}”.",
       "layerStylesUnused_other": "{{count}} kiểu trong tệp không khớp với lớp nào trong dự án này:",
@@ -3669,7 +3669,7 @@
     },
     "windowClose": {
       "savePromptTitle": "Lưu thay đổi trước khi đóng?",
-      "savePromptDescription": "Dự án hiện tại có thay đổi chưa được lưu. Lưu trước khi đóng GeoLibre?"
+      "savePromptDescription": "Dự án hiện tại có thay đổi chưa được lưu. Lưu trước khi đóng GeoSpaX?"
     },
     "error": {
       "couldNotOpenOsmPbf": "Không thể mở tệp OSM PBF.",
@@ -7890,7 +7890,7 @@
     "exportGeoTiff": "GeoTIFF (COG)",
     "extractSubset": "Trích xuất tập hợp con…",
     "stylesMenu": "Kiểu dáng",
-    "exportGeoLibreStyle": "Xuất kiểu URL GeoLibre",
+    "exportGeoLibreStyle": "Xuất kiểu URL GeoSpaX",
     "exportMapboxStyle": "Xuất dưới dạng kiểu Mapbox GL",
     "exportSldStyle": "Xuất dưới dạng OGC SLD",
     "exportQmlStyle": "Chỉnh sửa tiện ích",
@@ -7900,7 +7900,7 @@
     "exportStyleError": "Không thể xuất kiểu của lớp này.",
     "importStyle": "Kiểu nhập (URL GeoSpaX / Mapbox GL / SLD / QML)…",
     "importStyleFromText": "Nhập kiểu từ văn bản…",
-    "importStyleFromTextDescription": "Dán kiểu GeoLibre, Mapbox GL, SLD hoặc QML. Định dạng được nhận biết từ văn bản.",
+    "importStyleFromTextDescription": "Dán kiểu GeoSpaX, Mapbox GL, SLD hoặc QML. Định dạng được nhận biết từ văn bản.",
     "importStyleFromTextPlaceholder": "{ \"version\": 8, \"layers\": [ … ] }",
     "importStyleFromTextApply": "Nhập",
     "openStyleManager": "Kiểu đã lưu (Trình quản lý kiểu)…",
@@ -8452,7 +8452,7 @@
     "windowCloseGuardFailed": "Đóng cửa sổ sẽ không hỏi lưu các thay đổi chưa lưu. Hãy lưu công việc trước khi đóng.",
     "windowCloseSaveFailed": "Không thể lưu dự án trước khi đóng.",
     "windowCloseFailed": "Không thể đóng cửa sổ.",
-    "nativeProjectPathFailed": "Không thể mở tệp dự án được chuyển cho GeoLibre.",
+    "nativeProjectPathFailed": "Không thể mở tệp dự án được chuyển cho GeoSpaX.",
     "kmlSuperOverlayReadFailed": "Không thể đọc lại KML Super-Overlay \"{{name}}\", nên các ô của nó bị trống.",
     "projectControlFailed": "Không thể áp dụng cài đặt \"{{control}}\" của dự án.",
     "pluginSnapshotFailed": "Một số cài đặt plugin có thể không được chuyển sang trình kết xuất mới.",
@@ -8461,7 +8461,7 @@
     "panelRenderFailed": "Không thể mở bảng \"{{name}}\".",
     "sharedSettingsFailed": "Không thể tải cài đặt được chia sẻ từ liên kết, nên đang dùng cài đặt của bạn.",
     "sharedLanguageFailed": "Không thể chuyển sang ngôn ngữ mà cài đặt được chia sẻ yêu cầu.",
-    "languageCatalogFailed": "Không thể tải bản dịch {{language}}, nên GeoLibre đang hiển thị tiếng Anh."
+    "languageCatalogFailed": "Không thể tải bản dịch {{language}}, nên GeoSpaX đang hiển thị tiếng Anh."
   },
   "shell": {
     "section": {
@@ -8950,7 +8950,7 @@
       "downloadParquet": "Parquet",
       "downloadParquetTitle": "Tải xuống toàn bộ tệp GeoParquet của ô này",
       "dataset": "Tập dữ liệu",
-      "browseOnly": "GeoLibre chưa hỗ trợ tìm kiếm tập dữ liệu này. Hãy dùng các liên kết ở trên để lấy từ nguồn.",
+      "browseOnly": "GeoSpaX chưa hỗ trợ tìm kiếm tập dữ liệu này. Hãy dùng các liên kết ở trên để lấy từ nguồn.",
       "searchArea": "Vùng tìm kiếm",
       "modeView": "Chế độ xem bản đồ",
       "modeDraw": "Vẽ hộp",
@@ -9197,7 +9197,7 @@
       "liftSelected": "Đã chọn {{count}} điểm bên trong {{polygons}} đa giác của {{layer}}.",
       "liftInstances": "Đã tạo {{objects}} thực thể {{name}} từ {{layer}} ({{count}} điểm).",
       "fullFile": "Tệp đầy đủ kèm nhãn",
-      "fullFileNote": "Ghi một bản sao cục bộ của đám mây điểm này với mọi nhãn đã lưu được áp dụng, không chỉ các điểm đã tải ở đây. Chạy trên máy chủ GeoLibre.",
+      "fullFileNote": "Ghi một bản sao cục bộ của đám mây điểm này với mọi nhãn đã lưu được áp dụng, không chỉ các điểm đã tải ở đây. Chạy trên máy chủ GeoSpaX.",
       "fullFileInput": "Bản sao cục bộ (.las, .laz hoặc .copc.laz)",
       "fullFileOutput": "Tệp đầu ra (.las hoặc .laz)",
       "fullFileWrite": "Ghi tệp",

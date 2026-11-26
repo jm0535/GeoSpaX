@@ -1,12 +1,12 @@
-# GeoLibre vs. other GIS platforms
+# GeoSpaX vs. other GIS platforms
 
-How GeoLibre compares to the desktop GIS, cloud GIS, and web-mapping tools people
+How GeoSpaX compares to the desktop GIS, cloud GIS, and web-mapping tools people
 most often ask about: **QGIS**, **ArcGIS Pro**, **ArcGIS Online**, **CARTO**,
 **Felt**, and **kepler.gl** — plus **Google Earth** and **Google Earth Pro**,
 which get [a section of their own](#google-earth-and-google-earth-pro) because
 they are virtual globes rather than a GIS.
 
-GeoLibre is not trying to replace any of these outright. It occupies a spot none
+GeoSpaX is not trying to replace any of these outright. It occupies a spot none
 of them quite fills: a **free and open-source GIS that runs in a browser tab with
 nothing installed**, keeps your data on your own machine, and still ships real
 analysis, spatial SQL, cartography, and a project file — then packages the *same*
@@ -14,14 +14,14 @@ app as a desktop install, an Android app, an iOS app, and a Jupyter widget.
 
 !!! note "How to read this"
     Comparisons like this age quickly and are written by an interested party. The
-    GeoLibre column reflects [what ships today](features.md); the other columns
+    GeoSpaX column reflects [what ships today](features.md); the other columns
     describe each product's mainstream, out-of-the-box behavior as of
     **August 2026**, not what is reachable with every add-on, extension, or
     third-party plugin. Where a capability arrives through a separate product
     (QField for QGIS in the field, ArcGIS Field Maps for ArcGIS), the table says
     so rather than crediting it to the base product. Found something wrong or
     out of date? Please
-    [open an issue](https://github.com/opengeos/GeoLibre/issues) — corrections
+    [open an issue](https://github.com/jm0535/GeoSpaX/issues) — corrections
     are welcome.
 
 !!! info "This page is closed to new columns"
@@ -37,13 +37,13 @@ app as a desktop install, an Android app, an iOS app, and a Jupyter widget.
     an opening.
 
     Corrections to the platforms already listed are still very welcome. If you
-    maintain another tool and want it compared with GeoLibre, publish that
+    maintain another tool and want it compared with GeoSpaX, publish that
     comparison on your own site and add a link under
     [Comparisons hosted elsewhere](#comparisons-hosted-elsewhere).
 
 ## Complementary, not competing
 
-A useful way to think about GeoLibre and QGIS is smartphone cameras versus
+A useful way to think about GeoSpaX and QGIS is smartphone cameras versus
 professional cameras. Smartphone cameras did not replace professional cameras,
 and it would not have made sense to pour every advance in photography into
 making professional cameras better. The two serve different people and
@@ -52,17 +52,17 @@ and control. A smartphone camera prioritizes accessibility, convenience, and
 the ability to capture and share something instantly.
 
 QGIS is the professional camera: mature, powerful, feature-rich, and
-extensible. GeoLibre is closer to the smartphone camera: lightweight,
+extensible. GeoSpaX is closer to the smartphone camera: lightweight,
 reachable from a web browser, cross-platform, and designed so that people can
 work with geospatial data without installing complex software or setting up
 servers.
 
-![QGIS and GeoLibre as professional and smartphone cameras](https://assets.geolibre.app/images/QGIS-GeoLibre.webp)
+![QGIS and GeoSpaX as professional and smartphone cameras](https://assets.geolibre.app/images/QGIS-GeoLibre.webp)
 
 The geospatial community benefits from both. Separate projects can also
 experiment with new architectures and technologies, and the ideas that work out
 can strengthen the broader open-source geospatial ecosystem. The goal of
-GeoLibre is not to replace QGIS, but to make GIS accessible in places, and to
+GeoSpaX is not to replace QGIS, but to make GIS accessible in places, and to
 people, where a traditional desktop GIS may not be the best fit.
 
 The rest of this page is written in that spirit: the tables are there to help
@@ -70,7 +70,7 @@ you pick the right tool for a given job, not to declare a winner.
 
 ## At a glance
 
-| | **GeoLibre** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
+| | **GeoSpaX** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
 |---|---|---|---|---|---|---|---|
 | **License** | MIT, open source | GPL-2.0+, open source | Proprietary | Proprietary | Proprietary | Proprietary | MIT, open source |
 | **Cost** | Free | Free | Paid subscription | Paid subscription (credit-metered analysis) | Paid subscription | Paid subscription | Free |
@@ -84,7 +84,7 @@ you pick the right tool for a given job, not to declare a winner.
 
 ## Data and formats
 
-| | **GeoLibre** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
+| | **GeoSpaX** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
 |---|---|---|---|---|---|---|---|
 | **Format breadth** | Wide — DuckDB-WASM Spatial plus in-house readers | **Widest** — everything GDAL/OGR reads | Very wide, plus native Esri formats | Common upload formats | Common upload formats + RaQuet for raster data | Common upload formats | CSV, GeoJSON, Arrow/Parquet |
 | **Cloud-native vector** | GeoParquet, FlatGeobuf, PMTiles, streamed over HTTP range requests | GeoParquet, FlatGeobuf, PMTiles (recent GDAL) | GeoParquet (recent), no native PMTiles | — | GeoParquet | Some cloud sources on higher plans | Arrow/Parquet |
@@ -98,9 +98,9 @@ you pick the right tool for a given job, not to declare a winner.
 
 ## Analysis and processing
 
-| | **GeoLibre** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
+| | **GeoSpaX** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
 |---|---|---|---|---|---|---|---|
-| **Geoprocessing tools** | **1,000+** (Whitebox suite + GeoLibre's own), running in the browser on WebAssembly | **1,000+** (native, GDAL, GRASS, SAGA) | **Most mature and complete**, plus paid extensions | A useful subset, credit-metered | 200+ Workflows components and 180+ Analytics Toolbox SQL functions, **executed as SQL in your warehouse** | A small set of common tools | No tool catalog — analysis goes through SQL and the AI assistant |
+| **Geoprocessing tools** | **1,000+** (Whitebox suite + GeoSpaX's own), running in the browser on WebAssembly | **1,000+** (native, GDAL, GRASS, SAGA) | **Most mature and complete**, plus paid extensions | A useful subset, credit-metered | 200+ Workflows components and 180+ Analytics Toolbox SQL functions, **executed as SQL in your warehouse** | A small set of common tools | No tool catalog — analysis goes through SQL and the AI assistant |
 | **Where analysis runs** | Your browser (WASM), no server required; optional Python sidecar on desktop | Your machine | Your machine, or a server/portal | Vendor cloud | **Your cloud data warehouse** — queries are pushed down live, with repeated identical queries served from CARTO-managed cache | Vendor cloud | Your browser |
 | **Vector analysis** | Buffer, overlay, dissolve, joins, selection, topology checks — Turf.js, or GeoPandas via Pyodide/sidecar | Comprehensive | Comprehensive | Common tools | Buffer, overlay, spatial join, clip, Voronoi/Delaunay, KNN, trade areas — as warehouse SQL | Common tools | Spatial joins via SQL or the AI assistant |
 | **Raster analysis** | Hillshade, slope, contour, zonal/focal stats, raster calculator, reclassify, mosaic — rasterio sidecar with a browser fallback | Comprehensive (GDAL/GRASS/SAGA) | Comprehensive; Spatial Analyst extension | Limited | Narrow — zonal statistics and band value extraction | — | — |
@@ -113,7 +113,7 @@ you pick the right tool for a given job, not to declare a winner.
 
 ## Cartography, styling, and layout
 
-| | **GeoLibre** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
+| | **GeoSpaX** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
 |---|---|---|---|---|---|---|---|
 | **Renderers** | Single, categorized, graduated, rule-based, expression, heatmap, cluster, proportional symbols, diagrams | **Richest** — plus every symbol layer type | Very rich | Smart-mapping styles | Point, line, polygon, grid, H3, raster — plus heatmap and cluster aggregation; quantile/quantize/log/custom scales | Simple, well-designed defaults | Visualization-oriented |
 | **Data-defined everything** | Expression Builder wired into filters, labels, styling, field calculation, selection | Yes, pervasive | Attribute-driven symbology (Arcade) | Arcade | Attribute-driven styling per channel; custom **SQL** aggregation expressions in place of an expression language | — | — |
@@ -126,7 +126,7 @@ you pick the right tool for a given job, not to declare a winner.
 
 ## Automation, extensibility, and sharing
 
-| | **GeoLibre** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
+| | **GeoSpaX** | **QGIS** | **ArcGIS Pro** | **ArcGIS Online** | **CARTO** | **Felt** | **kepler.gl** |
 |---|---|---|---|---|---|---|---|
 | **Scripting** | Python Console, `geolibre` Python package, docked Jupyter notebook beside the map | PyQGIS, `qgis_process` headless CLI | `arcpy`, notebooks | ArcGIS API for Python / JavaScript | CARTO + deck.gl + CARTO CLI + REST APIs | REST API + Python client | JS library |
 | **Notebook integration** | The **whole app** embeds as a Jupyter anywidget with two-way project sync | Bindings, not the UI | Notebooks in Pro drive `arcpy` | Hosted notebooks | `pydeck-carto` widget in Jupyter or Colab; Analytics Toolbox SQL from any warehouse notebook | — | Widget |
@@ -142,7 +142,7 @@ you pick the right tool for a given job, not to declare a winner.
 Google Earth is the tool most people have used before they ever open a GIS, and
 it is the comparison this project is asked about most often. It belongs in a
 different category than everything above: Google Earth is a **virtual globe** for
-exploring, annotating, and presenting Google's imagery, while GeoLibre is a GIS
+exploring, annotating, and presenting Google's imagery, while GeoSpaX is a GIS
 that happens to ship a globe. The two overlap at the moment of *looking* at the
 Earth and diverge almost everywhere after it.
 
@@ -169,7 +169,7 @@ Two products share the name, and they are heading in opposite directions:
 *Google Earth Engine* is a third, unrelated product — a cloud platform for
 planetary-scale raster analysis — and is out of scope here.
 
-| | **GeoLibre** | **Google Earth** (web and mobile) | **Google Earth Pro** (desktop) |
+| | **GeoSpaX** | **Google Earth** (web and mobile) | **Google Earth Pro** (desktop) |
 |---|---|---|---|
 | **License and cost** | MIT, free | Proprietary; free tier plus paid per-seat plans | Proprietary, free — downloads end 25 June 2027 |
 | **What it is for** | Analysis, cartography, and data work | Exploring, annotating, and presenting imagery | The same, with a GIS-adjacent import and measurement set |
@@ -188,18 +188,18 @@ planetary-scale raster analysis — and is out of scope here.
 
 ### Where they overlap
 
-GeoLibre borrows from the Google Earth playbook on purpose, and several features
+GeoSpaX borrows from the Google Earth playbook on purpose, and several features
 exist precisely because people expect them from Earth: a **Cesium globe** with
 terrain, an **Elevation Profile** along a drawn or selected line, an interactive
 **viewshed** from a right-clicked point, **Historical Imagery**, **Street View**,
 a **camera tour recorder** that exports video, and **planetary globes** for the
 Moon, Mars, and beyond.
 
-KML fidelity gets the same treatment. GeoLibre reads KML and KMZ with an in-house
+KML fidelity gets the same treatment. GeoSpaX reads KML and KMZ with an in-house
 parser that preserves embedded symbology, folder structure, `GroundOverlay`
 images, time-tagged placemarks, embedded COLLADA models, and `NetworkLink`
 Super-Overlays served as tiles rather than loaded whole — so a document authored
-in Earth Pro generally arrives looking the way it did there. That makes GeoLibre
+in Earth Pro generally arrives looking the way it did there. That makes GeoSpaX
 a realistic destination for a KML archive when Earth Pro downloads end, and the
 map's right-click menu still offers **Open in Google Earth** for trips in the
 other direction.
@@ -208,24 +208,24 @@ other direction.
 
 - **Imagery.** Google's own imagery archive, its depth of historical coverage,
   and the quality of its photorealistic 3D mesh are not things an open-source
-  project reproduces. GeoLibre can display Google's photorealistic tiles with
+  project reproduces. GeoSpaX can display Google's photorealistic tiles with
   your API key, but the archive and the historical slider belong to Earth.
 - **Street View.** Native, complete, and free of credential setup.
 - **Effortlessness.** Earth opens and flies. There is no layer model, no CRS, no
   project file, and nothing to learn — for simply showing someone a place, that
   is exactly right.
 
-### Where GeoLibre is better
+### Where GeoSpaX is better
 
 Everything downstream of looking: attribute tables and joins, a real
 geoprocessing toolbox, spatial SQL, data-driven cartography, print layouts,
 reprojection, and an open project file you can keep, diff, script, and embed.
-Earth shows you the world; GeoLibre lets you ask questions of your own data on
+Earth shows you the world; GeoSpaX lets you ask questions of your own data on
 top of it — and keeps that data on your machine rather than in a Google account.
 
 ## Where each one is the right choice
 
-**Choose GeoLibre when** you want a real GIS in a browser tab with nothing to
+**Choose GeoSpaX when** you want a real GIS in a browser tab with nothing to
 install, your data has to stay on your machine, you work with cloud-native
 formats (COG, GeoParquet, PMTiles, Zarr, STAC), you want the same app on desktop,
 Android, and inside a notebook, or you are embedding a map workspace into your
@@ -263,16 +263,16 @@ a portable project file.
 **Choose Google Earth when** the job is to look at the world, show it to someone,
 or annotate a place — Google's imagery, historical coverage, Street View, and
 photorealistic 3D are unmatched, and nothing has to be learned first. **Choose
-GeoLibre over Google Earth Pro when** you need attribute data, analysis,
+GeoSpaX over Google Earth Pro when** you need attribute data, analysis,
 projections, or cartographic output, or when you want a successor now that Earth
-Pro downloads end on 25 June 2027; GeoLibre reads KML and KMZ with their
+Pro downloads end on 25 June 2027; GeoSpaX reads KML and KMZ with their
 symbology, overlays, models, and Super-Overlays intact.
 
-They also compose. GeoLibre reads QGIS and ArcGIS Pro projects and exchanges
+They also compose. GeoSpaX reads QGIS and ArcGIS Pro projects and exchanges
 symbology as SLD, QML, and Mapbox GL JSON, so it is reasonable to author in
-QGIS or Pro and publish or embed with GeoLibre.
+QGIS or Pro and publish or embed with GeoSpaX.
 
-## Where GeoLibre is not the strongest option
+## Where GeoSpaX is not the strongest option
 
 Stated plainly, so the table above is worth trusting:
 
@@ -284,49 +284,49 @@ Stated plainly, so the table above is worth trusting:
   formats — notably File Geodatabase — only work in the desktop build.
 - **Depth of specialized toolboxes.** ArcGIS Pro's Spatial Analyst, Geostatistical
   Analyst, and Network Analyst, and QGIS's twenty years of plugins, cover
-  workflows GeoLibre has no equivalent for.
+  workflows GeoSpaX has no equivalent for.
 - **Enterprise data management.** Versioned editing, replication, and enterprise
-  geodatabase administration are outside GeoLibre's scope.
-- **Maturity.** GeoLibre is stable and in active development, but it is far
+  geodatabase administration are outside GeoSpaX's scope.
+- **Maturity.** GeoSpaX is stable and in active development, but it is far
   younger than QGIS or ArcGIS. Some capabilities listed as shipping are recent —
   see [Recently added](index.md#recently-added).
 
 ## Comparisons hosted elsewhere
 
 Since this page cannot keep growing, other projects are welcome to compare
-themselves with GeoLibre on their own site, and to have that page linked from
+themselves with GeoSpaX on their own site, and to have that page linked from
 here.
 
 <!--
   Entries go here, one line each, alphabetical by tool name:
-  - [<Tool> vs GeoLibre](<https URL>), maintained by <the project or author>
+  - [<Tool> vs GeoSpaX](<https URL>), maintained by <the project or author>
   Delete the "none submitted yet" line below once the first one lands.
 -->
 
-- [Maptitude vs GeoLibre](https://www.caliper.com/maptitude/solutions/maptitude-vs-geolibre.htm), maintained by Caliper Corporation
+- [Maptitude vs GeoSpaX](https://www.caliper.com/maptitude/solutions/maptitude-vs-geolibre.htm), maintained by Caliper Corporation
 
 To add one, follow the [documentation contribution
 instructions](contributing.md#documentation) and open a pull request adding a
 single line of the form
-`- [Acme vs GeoLibre](https://acme.example/vs-geolibre), maintained by Acme`.
+`- [Acme vs GeoSpaX](https://acme.example/vs-geolibre), maintained by Acme`.
 To keep the list useful:
 
-- The linked page must actually compare your tool with GeoLibre, rather than
+- The linked page must actually compare your tool with GeoSpaX, rather than
   being a general product, pricing, or marketing page.
 - Link the comparison itself, not a site root or a redirect.
 - Say who maintains it, so readers know whose viewpoint they are reading.
 - It must be publicly readable, with no login, paywall, or signup.
 - One entry per project.
 
-These pages are written and maintained by their own authors. GeoLibre does not
+These pages are written and maintained by their own authors. GeoSpaX does not
 review, verify, or endorse what they claim, including what they claim about
-GeoLibre. Links that stop working, or that describe GeoLibre inaccurately and
+GeoSpaX. Links that stop working, or that describe GeoSpaX inaccurately and
 are not corrected when asked, will be removed.
 
 ## See also
 
-- [Features](features.md) — the complete, current inventory of what GeoLibre does
-- [Roadmap](roadmap.md) — release history and what is planned next
-- [Getting Started](getting-started.md) — install the app or open GeoLibre Web
+- [Features](features.md) — the complete, current inventory of what GeoSpaX does
+- Roadmap — release history and what is planned next
+- [Getting Started](getting-started.md) — install the app or open GeoSpaX Web
 - [Importing a QGIS project](user-guide/projects.md#importing-a-qgis-project) and
   [an ArcGIS Pro project](user-guide/projects.md#importing-an-arcgis-pro-project)

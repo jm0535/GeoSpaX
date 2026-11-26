@@ -161,7 +161,7 @@ export function resolveSystemOneEndpoint(env: Record<string, string>): SystemOne
 function allowed(endpoint: SystemOneEndpoint): SystemOneEndpoint | null {
   if (isAllowedEndpointUrl(endpoint.url)) return endpoint;
   console.warn(
-    `[GeoLibre] Ignoring the System One endpoint ${endpoint.url}: it is plain HTTP on another` +
+    `[GeoSpaX] Ignoring the System One endpoint ${endpoint.url}: it is plain HTTP on another` +
       " origin, which would expose prompts and let a response be rewritten. Use HTTPS.",
   );
   return null;

@@ -163,7 +163,7 @@ export function VectorStylePanel({
     hasVectorPaintControls &&
     pointRenderer !== "heatmap" &&
     (controlPainted
-      ? // GeoLibre sizes a control-painted layer's points itself
+      ? // GeoSpaX sizes a control-painted layer's points itself
         // (syncVectorControlPointSymbology in @geolibre/map), but the control
         // draws its lines with a flat width.
         supportsPointRenderer && pointRenderer === "single"

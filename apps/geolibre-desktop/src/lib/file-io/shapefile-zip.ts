@@ -146,7 +146,7 @@ export async function loadShapefileZip(
   }
   if (shouldRouteToDuckDb(unzipped.file.data.byteLength)) {
     console.info(
-      `[GeoLibre] "${unzipped.file.name}" is ${Math.round(
+      `[GeoSpaX] "${unzipped.file.name}" is ${Math.round(
         unzipped.file.data.byteLength / (1024 * 1024),
       )} MB uncompressed; reading it with DuckDB instead of shpjs to keep the parse off the main thread.`,
     );

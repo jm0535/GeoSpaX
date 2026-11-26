@@ -162,7 +162,7 @@ describe("SettingsDialog", () => {
       );
       assert.doesNotMatch(
         dialog.textContent ?? "",
-        /Tokens and API keys you save in GeoLibre are stored in your system keychain/,
+        /Tokens and API keys you save in GeoSpaX are stored in your system keychain/,
       );
       assert.doesNotMatch(dialog.textContent ?? "", /Keys are kept in your system keychain/);
 

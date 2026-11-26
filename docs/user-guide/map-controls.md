@@ -87,7 +87,7 @@ Results are added as new layers, and a banner reports progress and any failure w
 The same **Quick analysis** submenu also appears in each vector layer's actions menu in the [Layers panel](layers.md), where it operates on the whole layer instead of a point: **Buffer all features by …**, **Centroids**, **Convex hull**, and **Bounding box**.
 
 !!! warning "Drive and walk time call an external service"
-    Isochrones are computed by a Valhalla routing server — by default the public FOSSGIS instance at `valhalla1.openstreetmap.de`, so the clicked coordinate leaves your device. GeoLibre asks for consent the first time. Self-hosted deployments can point at their own server; see [Self-Hosting](../self-hosting.md).
+    Isochrones are computed by a Valhalla routing server — by default the public FOSSGIS instance at `valhalla1.openstreetmap.de`, so the clicked coordinate leaves your device. GeoSpaX asks for consent the first time. Self-hosted deployments can point at their own server; see [Self-Hosting](../self-hosting.md).
 
 ### Viewshed from a clicked point
 
@@ -132,7 +132,7 @@ Annotations are saved with the project, and the **Elements** panel lists them so
 
 Comments are anchored notes for review and feedback, kept separate from annotations because they are a conversation rather than map decoration.
 
-- Activate the comment tool from the **Comments** panel on the right sidebar, or by pressing `C`, then click the map to drop a pin and write the note. Pressing `C` again turns the tool back off. GeoLibre asks for your name once and remembers it.
+- Activate the comment tool from the **Comments** panel on the right sidebar, or by pressing `C`, then click the map to drop a pin and write the note. Pressing `C` again turns the tool back off. GeoSpaX asks for your name once and remembers it.
 - Each pin opens a thread you can reply to, resolve, reopen, or delete.
 - Filter the panel by **Open**, **Resolved**, or **All**. Resolved pins are hidden from the map while the Open filter is active.
 - In a live [collaboration](../collaboration.md) session, adding, replying, resolving, and deleting all sync to the other participants.

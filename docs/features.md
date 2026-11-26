@@ -1,10 +1,10 @@
 # Features
 
-A feature-by-feature list of what GeoLibre can do today — the latest release plus
+A feature-by-feature list of what GeoSpaX can do today — the latest release plus
 what has landed on `main` since (see [Recently added](index.md#recently-added)).
 For task-oriented walkthroughs, see the [User Guide](user-guide/interface.md) and
 the [Tutorials](tutorials/index.md); for what is planned next, see the
-[Roadmap](roadmap.md). For how this stacks up against QGIS, ArcGIS, Felt, and
+Roadmap. For how this stacks up against QGIS, ArcGIS, Felt, and
 kepler.gl, see the [Comparison](comparison.md).
 
 ## Platforms and interface
@@ -89,7 +89,7 @@ kepler.gl, see the [Comparison](comparison.md).
 - ArcGIS Hub, Socrata, and CKAN (Humanitarian Data Exchange) open-data browsers under Plugins → Web Services: search public dataset catalogs by keyword (or restrict the ArcGIS Hub search to the current map area), page through results, and add a dataset to the map or download it
 - OSM Downloader under Plugins → Web Services: query buildings, roads, amenities, waterways, land use, all tagged features, or a custom tag from the current view or typed bounds through Overpass, then add the result as GeoJSON or save it to disk
 - Drag and drop vector and GeoTIFF/COG raster files onto the map to add them as layers
-- **Open data in GeoLibre**, a [Chrome extension](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj) on the Chrome Web Store, that collects the supported dataset links and map services (WMS, WMTS, WFS, OGC API - Features, ArcGIS Feature Services, XYZ/TMS, and vector tiles) on the page you are viewing and opens the ones you pick together on one GeoLibre map
+- **Open data in GeoSpaX**, a [Chrome extension](https://chromewebstore.google.com/detail/open-data-in-geolibre/joinecgbfoldanidcoakpjgkbaceaooj) on the Chrome Web Store, that collects the supported dataset links and map services (WMS, WMTS, WFS, OGC API - Features, ArcGIS Feature Services, XYZ/TMS, and vector tiles) on the page you are viewing and opens the ones you pick together on one GeoSpaX map
 
 ## Layers, styling, and labels
 
@@ -122,7 +122,7 @@ kepler.gl, see the [Comparison](comparison.md).
     - **Rule-based renderer**: per-rule symbol properties, scale-dependent visibility, nested rules, and per-rule toggles, and it can hide features matching no rule
     - **Style toolkit**: diagram symbology (pie, donut, and bar charts drawn on features); a symbology pack of inverted-polygon masks, arrow and marker lines, and geometry generators whose derived centroids can be sized and whose buffer distances can be driven by an attribute; and data-driven proportional sizing for marker icons
     - **Style Manager**: saves reusable symbol, color-ramp, and label presets to a personal library, where they can be renamed, and applies them across projects
-    - **Interchange**: vector layer symbology imports and exports as OGC SLD, QGIS QML, Mapbox GL style JSON, and compact GeoLibre URL style JSON; URL-style exports omit feature data, carry filename-matched sources for ZIP layers, work directly with `?style=`, and can be imported back onto any selected vector layer
+    - **Interchange**: vector layer symbology imports and exports as OGC SLD, QGIS QML, Mapbox GL style JSON, and compact GeoSpaX URL style JSON; URL-style exports omit feature data, carry filename-matched sources for ZIP layers, work directly with `?style=`, and can be imported back onto any selected vector layer
     - **Layer styles by name**: Export Layer Styles writes every layer's style to one JSON file keyed by layer name, Import Layer Styles restyles the matching layers in one undo step, and a Startup setting auto-applies a styles file to each matching layer as it is added
 - Data-defined label engine for labeling vector features by any attribute or expression
     - ArcGIS-style placement and styling controls: anchor, X/Y offset, rotation, wrap width, and letter case
@@ -169,7 +169,7 @@ kepler.gl, see the [Comparison](comparison.md).
     - Add results to the map or export them
     - An in-browser PostGIS SQL engine via PGlite and an Apache Sedona spatial SQL engine
 - Multiple DuckDB SQL query-result layers with identify, selection, and attribute table support
-- **SQL Server write-back** in GeoLibre Desktop: save attribute and geometry edits, inserts, and deletions to the loaded table, scoped by its read baseline. Deleting every loaded feature preserves rows added outside that baseline.
+- **SQL Server write-back** in GeoSpaX Desktop: save attribute and geometry edits, inserts, and deletions to the loaded table, scoped by its read baseline. Deleting every loaded feature preserves rows added outside that baseline.
     - Saves for one layer cannot overlap. A committed write with a failed reread, or a write whose result cannot be confirmed, blocks another save until manual Refresh restores database-assigned keys and the baseline. This recovery requirement survives project save and reopen.
     - Failed recovery reads retain local features, including when the saved refresh-failure policy says to clear them. A layer without a read baseline must be loaded again before saving.
     - Saved project metadata is not authenticated write authority: review the connection, table, and edits before saving a shared or hand-edited project; database permissions remain the authorization boundary.
@@ -216,7 +216,7 @@ kepler.gl, see the [Comparison](comparison.md).
 
 ## AI, Python, and automation
 
-- Natural-language GIS assistant that turns plain-English requests into auditable, undoable GeoLibre operations — Spatial SQL, symbology, add and remove data, and map control
+- Natural-language GIS assistant that turns plain-English requests into auditable, undoable GeoSpaX operations — Spatial SQL, symbology, add and remove data, and map control
     - Provider-pluggable with your own API key, also read from OS environment variables
     - A dedicated AI Providers settings section with per-feature provider dropdowns and multiple named profiles (provider, model, and credentials) you can switch between from the assistant panel
     - An in-panel model picker over the active profile's models, credentials that survive a provider change, and arrow-key recall of previous prompts
@@ -235,9 +235,9 @@ kepler.gl, see the [Comparison](comparison.md).
     - The bundled Whitebox WASM catalog runs from the widget through `list_whitebox_tools` and `run_whitebox_tool`, resolving `Layer` handles to layer ids and adding both vector and raster outputs back to the map, so terrain and raster work no longer means leaving the notebook for the UI
     - `add_ee_layer` turns an authenticated Earth Engine image, image collection, feature collection, or feature into a restorable tile layer, geemap-style, mosaicking a collection and styling vectors before asking Earth Engine for the map id (needs `earthengine-api`)
     - An xarray `DataArray` or `Dataset` is materialized as a session-scoped Cloud Optimized GeoTIFF and rendered directly in the browser, cleaned up when the `Map` is closed or collected
-- MCP server (`geolibre-mcp`) that lets an AI client author real `.geolibre.json` projects headlessly over stdio — no browser, no running app, and no bundled web build — composing them with the same builders the Python package uses, so anything it writes opens unchanged in the desktop app, the web app, and the Jupyter widget. Every read and write is confined to the roots given by `--root` or `GEOLIBRE_MCP_ROOTS`. See [MCP server](mcp.md)
-- R package (`geolibre`) for interactive GeoLibre maps in RStudio, Quarto, R Markdown, and Shiny, with GeoJSON, `sf`, remote raster, camera, and project-file support. See the [R package guide](r.md)
-- A shipped agent skill (`skills/geolibre/`) for people driving GeoLibre from Claude Code or any other skill-loading runtime: a SKILL.md plus progressive-disclosure references for the MCP tool surface, the Python API, hand-written project JSON, and the basemap, color-ramp, legend-preset, and layer-type catalog, so an agent knows which entry point to reach for and in what order to call it. Its copy is checked against the real registries by a test. See [Agent skill](agent-skill.md)
+- MCP server (`geospax-mcp`) that lets an AI client author real `.geolibre.json` projects headlessly over stdio — no browser, no running app, and no bundled web build — composing them with the same builders the Python package uses, so anything it writes opens unchanged in the desktop app, the web app, and the Jupyter widget. Every read and write is confined to the roots given by `--root` or `GEOLIBRE_MCP_ROOTS`. See [MCP server](mcp.md)
+- R package (`geolibre`) for interactive GeoSpaX maps in RStudio, Quarto, R Markdown, and Shiny, with GeoJSON, `sf`, remote raster, camera, and project-file support. See the R package guide
+- A shipped agent skill (`skills/geolibre/`) for people driving GeoSpaX from Claude Code or any other skill-loading runtime: a SKILL.md plus progressive-disclosure references for the MCP tool surface, the Python API, hand-written project JSON, and the basemap, color-ramp, legend-preset, and layer-type catalog, so an agent knows which entry point to reach for and in what order to call it. Its copy is checked against the real registries by a test. See [Agent skill](agent-skill.md)
 - Optional Python FastAPI sidecar for heavier processing workflows
 
 ## Processing and analysis
@@ -246,7 +246,7 @@ kepler.gl, see the [Comparison](comparison.md).
     - In the browser build every conversion runs client-side on DuckDB-WASM, the pure-JS writers, or `geolibre-wasm` (Vector to PMTiles on a background worker)
     - The desktop app prefers the Python sidecar, whose GDAL/rio-cogeo stack reads more input formats and tiles deeper
 - **1,000+ geoprocessing tools** in the Whitebox toolbox, running entirely in the browser through a WebAssembly runtime with raster and vector I/O — no Python sidecar required, so the full set works on the web, desktop, and Android
-    - Surfaces both the Whitebox Next Gen suite and GeoLibre's own WASM tools, filterable by source
+    - Surfaces both the Whitebox Next Gen suite and GeoSpaX's own WASM tools, filterable by source
     - Nine categories: vector (~315 tools), raster (~255), remote sensing (~155), hydrology (~100), terrain (~100), LiDAR (~65), conversion (~50), network (~25), and projection (4)
     - Browsable by category directly in the Processing menu, with nested subcategory submenus and an offline-bundled tool catalog
     - A **Run locally (WASM)** toggle switches any tool between the in-browser runtime and the Python sidecar, which reads native file paths for batch runs over a directory
@@ -265,7 +265,7 @@ kepler.gl, see the [Comparison](comparison.md).
     - **Engines**: Turf.js in the browser, an optional GeoPandas sidecar engine for every tool, and an in-browser GeoPandas engine via Pyodide (no server, same results as the sidecar)
 - Raster menu with hillshade, slope, aspect, reproject, resample, clip by extent, clip by mask layer, polygonize, contour, zonal statistics, raster calculator, reclassify, mosaic, and focal statistics
     - Backed by a rasterio Python sidecar, with a client-side fallback so core tools also run in the browser when no sidecar is available
-    - Plus in-browser extraction of COG, WMS, and XYZ bounding-box subsets, a keyless global DEM downloader under Processing → GeoLibre Toolbox → Raster (public AWS Terrain Tiles; current-view or drawn extent), and a normalized-difference index builder for any HTTP COG
+    - Plus in-browser extraction of COG, WMS, and XYZ bounding-box subsets, a keyless global DEM downloader under Processing → GeoSpaX Toolbox → Raster (public AWS Terrain Tiles; current-view or drawn extent), and a normalized-difference index builder for any HTTP COG
 - Spectral Index toolbox (NDVI, GNDVI, NDWI, NDMI, NDBI, NBR, EVI, SAVI) with Sentinel-2, Landsat 8-9, NAIP, and custom band layouts, evaluated client-side with geotiff.js or on the rasterio sidecar
 - Spatial Statistics toolbox, including Emerging Hot Spot Analysis that builds a space-time cube from timestamped points, runs Getis-Ord Gi\* per time slice, and classifies each cell as a new, intensifying, persistent, diminishing, sporadic, oscillating, or historical hot or cold spot
     - Plus a Composite score builder for suitability and index analysis: normalize, weight, and combine several numeric fields into one index, 0-100 by default or 0-1, with an explicit choice of how features missing a value are treated, and the result styled by the score on arrival
@@ -274,7 +274,7 @@ kepler.gl, see the [Comparison](comparison.md).
     - Any model copies out as a runnable Python script for the Notebook panel or JupyterLite
 - Processing batch runner with model and pipeline chaining, to run a sequence of tools as one job
 - Processing History panel that lists every tool run, re-runs any of them with one click, and copies the equivalent Python code
-- Raster Georeferencer (Processing → GeoLibre Toolbox → Raster → Georeferencing) that pins a non-georeferenced image to the map with ground control points using a least-squares affine fit, reporting per-GCP and RMS residuals
+- Raster Georeferencer (Processing → GeoSpaX Toolbox → Raster → Georeferencing) that pins a non-georeferenced image to the map with ground control points using a least-squares affine fit, reporting per-GCP and RMS residuals
 - Network analysis tools for isochrones, service areas, origin–destination (OD) cost matrices, and sequential routes (directions) through an ordered set of waypoints
 - Geocoding tools for forward, batch, and reverse geocoding through a multi-provider abstraction
 - AI Segmentation (SamGeo) that turns imagery into vector features with [segment-geospatial](https://github.com/opengeos/segment-geospatial) and Meta's SAM 3 — text prompts ("trees", "buildings") or automatic segmentation, proxied to a separate `samgeo-api` model server (GPU recommended). See [AI Segmentation](user-guide/segmentation.md)
@@ -362,7 +362,7 @@ See the [Plugin API](plugin-api.md) to build your own.
 
 - Browser deployment with Docker, with optional HTTP Basic Auth for the web container. See [Embedding & Sharing](user-guide/embedding.md)
     - Embed-friendly URL parameters, including `?url=` project deep links that skip the welcome wizard, a `?welcome=0` param to opt out of onboarding, coordinate links (`?lat=40.7128&lon=-74.006&zoom=12` or compact `?12/40.7128/-74.006`), and `loading=true`, which exposes screenshot readiness on the document element for headless capture
-    - On Android, GeoLibre handles `geo:` links, opening the map at the location without replacing layers
+    - On Android, GeoSpaX handles `geo:` links, opening the map at the location without replacing layers
     - A `maponly` chrome-free mode, a `panels=collapsed` layout that keeps the Layers and Style icon rails reachable while starting both panels collapsed, and an option to hide the top toolbar outright for a focused viewer
     - A `layout=viewer` read-only preset that keeps Layers, View, Controls, basemaps, and search/identify while hiding every authoring path — menus, shortcuts, drag-and-drop import, and the plugins whose on-map control writes to the project — so an embed cannot be steered into editing
     - A `settingsUrl=` parameter that loads shared presentation settings (language, layout, accent theme, and UI profile) before the first render, restricted to presentation fields so a link cannot inject credentials, plugins, or local paths, and lasting for that page only rather than replacing what the user has saved
@@ -384,31 +384,23 @@ See the [Plugin API](plugin-api.md) to build your own.
   See [Deployment Policy](deployment-policy.md),
   [Deployment Capabilities](deployment-capabilities.md), and
   [container route enforcement](self-hosting.md#container-policy-enforcement).
-- `GEOLIBRE_NO_EXTERNAL_CDN=1` build for deployments that cannot load from untrusted third-party hosts: it strips the GeoLibre-controlled CDN references, vendors the PGlite and CereusDB engines into the build rather than dropping them, and makes the few features that genuinely need a remote host (GDAL export, ONNX object detection and Segment Everything, story map HTML export, Pyodide without a configured mirror) report that up front instead of failing at the end of a run. See [Self-hosting](self-hosting.md)
+- `GEOLIBRE_NO_EXTERNAL_CDN=1` build for deployments that cannot load from untrusted third-party hosts: it strips the GeoSpaX-controlled CDN references, vendors the PGlite and CereusDB engines into the build rather than dropping them, and makes the few features that genuinely need a remote host (GDAL export, ONNX object detection and Segment Everything, story map HTML export, Pyodide without a configured mirror) report that up front instead of failing at the end of a run. See [Self-hosting](self-hosting.md)
 - Versioned `postMessage` API for a host page that frames the app. See [Talking to the map at runtime](user-guide/embedding.md#talking-to-the-map-at-runtime)
     - **Commands**: load a project, move the camera, highlight features, open a processing tool, toggle and list layers, apply filters, read the viewport, add a layer, and export the map as a PNG at runtime
     - **Events back out**: `ready`, `ack`, `projectLoaded`, `selectionChanged`, `viewChanged`, `toolCompleted`, and `serverFileWritten`
     - Protocol v2 is current, and v1 hosts stay supported
     - Off unless the deployment names its trusted origins (`GEOLIBRE_EMBED_ORIGINS`), which are enforced in both directions
     - The origin allowlist decides who may send commands; [deployment capabilities](deployment-capabilities.md) decide which commands exist, so a trusted host page can be granted a narrow slice rather than the whole API
-- Dependency-free `@geolibre/embed` npm client for that protocol: `connect()` resolves once the app is ready, each typed command returns a promise settled from its correlated acknowledgement, and events are subscribed by name. Published from each GeoLibre release, so its version tracks the app. See [The typed client](user-guide/embedding.md#the-typed-client)
-- `@geolibre/core` and `@geolibre/map` published to npm alongside it, so another application can build on GeoLibre's Zustand store, `.geolibre.json` project schema, and MapLibre layer-sync engine without vendoring the monorepo. See [Maintenance](maintenance.md)
+- Dependency-free `@geolibre/embed` npm client for that protocol: `connect()` resolves once the app is ready, each typed command returns a promise settled from its correlated acknowledgement, and events are subscribed by name. Published from each GeoSpaX release, so its version tracks the app. See [The typed client](user-guide/embedding.md#the-typed-client)
+- `@geolibre/core` and `@geolibre/map` published to npm alongside it, so another application can build on GeoSpaX's Zustand store, `.geolibre.json` project schema, and MapLibre layer-sync engine without vendoring the monorepo. See [Maintenance](maintenance.md)
 - Desktop app capabilities
     - A diagnostics panel that captures native Tauri HTTP requests in the network log and classifies failed `fetch()` errors
     - OS trust store and mTLS client-certificate support for native HTTP
     - Automatic layer reload when local files change on disk
     - A guided update workflow with a startup update check and update preferences
-- Desktop packaging and distribution
-    - MSIX packaging support, Windows Package Manager (winget) distribution as `OpenGeos.GeoLibre`, and a Windows portable zip build that runs without installation
-    - macOS installers signed with an Apple Developer ID certificate and notarized by Apple, so they open without a Gatekeeper workaround. An official [Homebrew Cask](https://github.com/Homebrew/homebrew-cask/blob/main/Casks/g/geolibre.rb) installs and upgrades them with no tap or trust step
-    - A sandboxed [Mac App Store](https://apps.apple.com/app/geolibre-desktop/id6796848769) build of the same app, which trades the Python sidecar engines, server-backed PostgreSQL/PostGIS layers via martin, the local Jupyter server, Earth Engine sign-in, and external plugin installs for Store installation and updates. The in-browser SQL engines, including PGlite/PostGIS, still run. See [Downloads](downloads.md#mac-app-store)
-    - Linux AppImages that carry embedded update information and a published `.zsync`, so AppImageUpdate, AppImageLauncher, AppManager, and AM can update the app by transferring only the blocks that changed
-- Native Android app built from the same codebase with Tauri v2 mobile, published on [Google Play](https://play.google.com/store/apps/details?id=org.geolibre.app). See [Android](android.md)
-    - A GitHub Actions workflow builds both the universal App Bundle that Play ships and signed, per-architecture sideload APKs (~40 MB)
-    - A permanent `org.geolibre.app` package id, API level 36, and 16 KB page-size alignment verified in CI
-    - Tools that depend on a local desktop process (Raster, Conversion, AI Segmentation, PostgreSQL/Martin) are hidden on mobile, so nothing is shown that cannot run; the WebAssembly geoprocessing toolbox needs no such process and stays available
-- Native iOS app for iPhone and iPad built from the same codebase with Tauri v2 mobile, published on the [App Store](https://apps.apple.com/app/geolibre/id6796039674). See [iOS](ios.md)
-    - A GitHub Actions workflow on a macOS runner archives unsigned and exports a signed, submittable `.ipa` when the Apple signing secrets are present, stamping a monotonic `CFBundleVersion` and asserting the bundle id, signature, and minimum OS version
-    - The `NSLocationWhenInUseUsageDescription` string lives in a checked-in `Info.ios.plist` and covers Field Collection, GPS Tracking, and the GeoLocate control, so requesting location does not terminate the app
-    - The same tools that need a local desktop process (Raster, Conversion, AI Segmentation, PostgreSQL/Martin) are hidden on iOS as they are on Android, since the iOS sandbox forbids spawning one; the WebAssembly geoprocessing toolbox stays available
+- Desktop packaging
+    - Windows, macOS and Linux installers are built from source with `npm run tauri:build` (Tauri v2): `.msi`/`-setup.exe`, `.dmg`/`.app`, and `.deb`/`.rpm`/`.AppImage`. GeoSpaX does not yet publish signed installers or app-store listings; see [Get GeoSpaX](downloads.md)
+    - The desktop app identifier is `geospax.in4metrix.dev`, so GeoSpaX installs, settings and keychain entries never collide with an installed GeoSpaX
+- Mobile builds
+    - The same codebase builds Android and iOS apps with Tauri v2 mobile (`geospax.in4metrix.dev`). GeoSpaX mobile apps are not published to Google Play or the App Store yet. Tools that need a local desktop process (Raster, Conversion, AI Segmentation, PostgreSQL/Martin) are hidden on mobile; the WebAssembly geoprocessing toolbox stays available
 - Installable, offline-capable Progressive Web App (PWA) build, plus a **Download Offline Area** tool that pre-caches the current map view's basemap tiles, and service-worker caching of the CDN-loaded Pyodide and PGlite/PostGIS engines so browser SQL and Python keep working offline after first use

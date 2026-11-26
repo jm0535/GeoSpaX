@@ -44,8 +44,7 @@ nav:
   - Comparison: comparison.md
   - Demos: demos.md
   - Gallery: gallery.md
-  - Downloads: downloads.md
-  - Sponsor: sponsor.md
+  - Get GeoSpaX: downloads.md
   # Keep this deployment-relative: production serves at /, while PR previews
   # are nested under /pages-preview/GeoLibre/pr-<number>/.
   - Launch GeoLibre Web: https://web.geolibre.app
@@ -113,9 +112,6 @@ nav:
       - ArcGIS Renderer: arcgis-renderer.md
       - Self-Hosting: self-hosting.md
       - Server API: server-api.md
-      - Android: android.md
-      - iOS: ios.md
-      - Mac App Store: mac-app-store.md
       - Project Format: project-format.md
       - Plugin API: plugin-api.md
       - Collaboration: collaboration.md
@@ -128,13 +124,10 @@ nav:
       - MCP Server: mcp.md
       - Agent Skill: agent-skill.md
       - Notebook Panel: notebook.md
-      - Roadmap: roadmap.md
       - Contributing: contributing.md
       - Maintenance Notes: maintenance.md
       - How to Cite: citation.md
       - Acknowledgements: acknowledgements.md
-      - Privacy Policy: privacy.md
-      - Terms of Service: terms.md
 
 plugins:
   - search

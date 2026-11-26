@@ -91,7 +91,7 @@ export function useLanguagePack(open: boolean, language: string): LanguagePackSt
       })
       .catch((loadError: unknown) => {
         if (!cancelled) {
-          console.error("[GeoLibre] Failed to read the installed language pack", loadError);
+          console.error("[GeoSpaX] Failed to read the installed language pack", loadError);
           setInstalledLanguagePack(null);
         }
       });

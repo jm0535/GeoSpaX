@@ -7,10 +7,65 @@ restating any of it.
 
 If you are just getting set up, read [Contributing](contributing.md) first.
 
+<!-- geospax:keep -->
+## Upstream sync and rebranding
+
+GeoSpaX is an independent app built on [GeoLibre](https://github.com/opengeos/GeoLibre)
+and keeps taking its updates. Two rules keep that cheap:
+
+1. **Internal code names stay GeoLibre's.** The `@geolibre/*` packages,
+   `apps/geolibre-desktop`, the `.geolibre.json` project format, `GEOLIBRE_*`
+   environment variables and the `geolibre` Python module are not renamed:
+   renaming them would turn every sync into hundreds of conflicts. Users never
+   see them (`import geospax` re-exports the Python module).
+2. **Everything users read says GeoSpaX**, applied by a script rather than by
+   hand: `scripts/geospax-rebrand.mjs` rebrands UI strings, messages, locale
+   catalogs, tests and docs, and points app/docs/issue/release links at GeoSpaX.
+   It deliberately keeps credits (`opengeos/GeoLibre` links, "built on
+   GeoLibre", versions, upstream issue refs `GeoLibre#123`), the names of
+   GeoLibre-run services (Share.GeoLibre, the plugin registry, `*.geolibre.app`
+   service hosts, GeoLibre's privacy policy and terms), schema ids that saved
+   files are validated against, YouTube video titles, and code comments.
+
+Identity that differs from GeoLibre on purpose: app id `geospax.in4metrix.dev`
+(desktop, mobile, deep-link scheme, keychain service), project file type
+`geospax.in4metrix.dev.project`, the Python distribution `geospax`, and the
+Linux packaging files under `packaging/linux/`.
+
+### Merging a GeoLibre release
+
+```bash
+git remote add upstream https://github.com/opengeos/GeoLibre.git   # once
+git fetch upstream --tags
+git checkout -b sync/geolibre-vX.Y.Z origin/main
+git merge vX.Y.Z
+```
+
+- **Rebranded lines that conflict:** take upstream's side
+  (`git checkout --theirs <file>`); the script re-applies the branding.
+- **Locale catalogs:** merge key by key (upstream catalog as base, re-apply the
+  keys GeoSpaX changed), then run the script.
+- **Files GeoSpaX deleted** (GeoLibre's store/publish workflows, its
+  distribution recipes under `packaging/{aur,copr,msix,portable,winget}`, its
+  privacy/terms/sponsor/roadmap/mobile-store pages, `docs/CNAME`): keep them
+  deleted (`git rm`).
+- **New `org.geolibre.*` ids** in upstream code: change them to
+  `geospax.in4metrix.dev` (`.project` for the file type).
+- `package-lock.json`: take upstream's, then `npm install`.
+
+Then:
+
+```bash
+npm run geospax:rebrand          # re-apply branding
+npm run geospax:rebrand:check    # must report 0 (also enforced by tests)
+npm run build && npm run test:frontend
+```
+<!-- /geospax:keep -->
+
 ## Dependency bumps that need a manual check
 
 Several features depend on values or DOM contracts that upstream packages do not
-export, so GeoLibre mirrors them by hand. Drift usually produces **no build
+export, so GeoSpaX mirrors them by hand. Drift usually produces **no build
 error** — the feature just stops working. After bumping any of the packages
 below (**including Dependabot PRs**), do the listed check and run the frontend
 suite.
@@ -50,7 +105,7 @@ at zoom >= 12 on Mesa GPUs without them). Before bumping it, confirm
   the result, or new/renamed WASM tools silently miss the menu. The Processing
   _dialog_ lists tools dynamically, so the gap only shows in the menu. Whitebox
   translations are optional external packs in `opengeos/geolibre-language-packs`,
-  not entries generated into GeoLibre's bundled locale JSON.
+  not entries generated into GeoSpaX's bundled locale JSON.
 - **`MAX_VECTOR_PMTILES_ZOOM`** (`packages/processing/src/wasm-convert.ts`)
   mirrors the deepest zoom `vector_to_pmtiles` accepts (18 — past it the tool
   exits with `validation error: max_zoom must be <= 18`). The cap lives inside
@@ -181,14 +236,14 @@ black — it declines the stack.
   `maplibre-gl-fema-wms`, `maplibre-gl-nasa-earthdata`,
   `maplibre-gl-enviroatlas`, and `maplibre-gl-national-map` by calling the
   control lifecycle directly and moving the panel element that `onAdd()`
-  appends to the map container into GeoLibre's native right-panel host. Vantor
+  appends to the map container into GeoSpaX's native right-panel host. Vantor
   returns a wrapper instead, so the bridge selects its `.vantor-panel`
   descendant. The scoped CSS in `index.css` mirrors each package's panel,
   header, toggle, close, and resize-handle class names;
   `tests/upstream-contracts.test.ts` lists them per package and fails when a
   package stops rendering one (or `index.css` stops styling it). After bumping
   any of these packages, activate every migrated Web Services plugin and verify that
-  its catalog renders, resizing the GeoLibre dock preserves the content, and
+  its catalog renders, resizing the GeoSpaX dock preserves the content, and
   no vendor panel remains under the map container.
 
 ### `maplibre-gl-components` (`packages/plugins/package.json`)
@@ -222,7 +277,7 @@ black — it declines the stack.
   `PMTilesLayerControlState` handed to every handler, so `pmtilesLayerOptions`
   reads it and the compiler checks it — the rules for a stale selection, and for
   the archive ids the control reuses across a panel close, are written at that
-  function and at `addPMTilesArchive`. A reused id is the one case GeoLibre cannot
+  function and at `addPMTilesArchive`. A reused id is the one case GeoSpaX cannot
   repair: two archives then name one MapLibre source, the first to sync wins it
   and the other draws nothing, so `addPMTilesArchive` warns rather than pretending
   otherwise — while an archive that takes a layer over outright is drawn
@@ -234,7 +289,7 @@ black — it declines the stack.
 - **The MeasureControl's `_panel` and `_sourceId`**
   (`packages/plugins/src/plugins/terrain-measure.ts`, via `measurePanelElement`
   and `measureSourceId`) are private members that only the control knows: the
-  panel carries GeoLibre's Terrain (3D)/heading sections and the resize styling,
+  panel carries GeoSpaX's Terrain (3D)/heading sections and the resize styling,
   and the source id is how `lidar-measure-mirror.ts` finds the geometry it
   redraws above a LiDAR point cloud (#2533). Both readers warn and fall back to
   doing nothing on a rename; `tests/upstream-contracts.test.ts` builds a real
@@ -284,7 +339,7 @@ check, so add new browse panels against that module rather than duplicating it
 (`source-coop-api.ts` re-exports it under its own names for compatibility).
 
 Adoption (`adoptVectorControlLayers` in `vector-layer-sync.ts`, #2715) hands the
-control's small GeoJSON-mode layers to GeoLibre, and leans on three things the
+control's small GeoJSON-mode layers to GeoSpaX, and leans on three things the
 package does not promise. `getLayerGeoJSON` must return the whole collection for
 a `renderMode: "geojson"`, `ingestMode: "table"` layer. `removeLayer` must drop
 the layer's DuckDB table as well as its map source, or adoption keeps two copies
@@ -359,7 +414,7 @@ whole downloads get the size check. If upstream changes that routing, update the
 copy, or a streamed file gets a needless size check and a downloaded one skips
 it. `addLidarLayerFromUrl` also relies on `load` firing, and adding the store
 layer, before `loadPointCloud` resolves; it throws if not.
-`tests/lidar-url-layer.test.ts` pins the GeoLibre side of both, and
+`tests/lidar-url-layer.test.ts` pins the GeoSpaX side of both, and
 `tests/upstream-contracts.test.ts` fails if `loadPointCloud` stops routing on
 those strings. Re-read `loadPointCloud` on a bump.
 
@@ -453,7 +508,7 @@ wrapper.
 relies on two things zarr-cesium does not export as API:
 
 - `ZarrLayerProvider` only honours named matplotlib colormaps (its documented
-  `colorScale` option is not forwarded in 0.3.3), so GeoLibre writes the layer's
+  `colorScale` option is not forwarded in 0.3.3), so GeoSpaX writes the layer's
   ramp to the provider's private `source.colorScale.colors` and calls
   `source.updateColormapTexture()`. If those move, the globe draws the default
   ramp and logs one warning.
@@ -539,7 +594,7 @@ the package's `COLORMAP_OPTIONS`, `NORMALIZED_DIFFERENCE_INDICES`,
 `CUSTOM_NORMALIZED_DIFFERENCE`, `indexById` and `guessBandForRole`. The Style
 panel's colormap and spectral index pickers need them as soon as they render,
 and the package ships as one shared chunk, so importing even one constant put
-the whole ~0.35 MB library on the startup path. Everything else GeoLibre takes
+the whole ~0.35 MB library on the startup path. Everything else GeoSpaX takes
 from the package is async and dynamic-imports it instead; keep new value
 imports that way.
 `tests/raster-picker-mirror.test.ts` compares every value and both helpers with
@@ -549,7 +604,7 @@ the package export, so a colormap added or renamed upstream fails
 ### `tauri-plugin-persisted-scope` — private on-disk format
 
 `PersistedScopeState` (`apps/geolibre-desktop/src-tauri/src/lib.rs`) mirrors the
-plugin's private bincode `Scope` structure so GeoLibre can remove legacy
+plugin's private bincode `Scope` structure so GeoSpaX can remove legacy
 per-photo grants before the plugin synchronously replays them at startup. On a
 `tauri-plugin-persisted-scope` bump, compare the upstream struct's field order
 and types against this mirror and run the Rust scope-cleanup tests. Bincode
@@ -559,7 +614,7 @@ not cover it.
 
 The `bincode` dependency itself is pinned to the **1.x** line and Dependabot is
 configured (`.github/dependabot.yml`) to skip its major bumps: the plugin writes
-the file with bincode 1, so GeoLibre must decode and re-encode it with the same
+the file with bincode 1, so GeoSpaX must decode and re-encode it with the same
 wire format. Only move when `tauri-plugin-persisted-scope` moves. (bincode 3.0.0
 is additionally a deliberately unbuildable release — its whole source is
 `compile_error!("https://xkcd.com/2347/")`.)
@@ -648,7 +703,7 @@ After a bump, check all five — none of these fail the build:
   class names (`.cesium-button`, `.cesium-toolbar-button`,
   `.cesium-sceneModePicker-wrapper`). A renamed observable leaves the English
   default in place; a renamed class leaves Cesium's dark-blue chrome on a
-  GeoLibre toolbar. Neither fails the build. Tooltip assertions live in
+  GeoSpaX toolbar. Neither fails the build. Tooltip assertions live in
   `e2e/cesium-primary-renderer.spec.ts`, alongside control mounting and alignment
   checks. The fullscreen button is the fragile
   one: its tooltip is a read-only computed, so the translated string is written
@@ -844,7 +899,7 @@ caveat.
 
 The Style-panel control (`blendModeControl` in `StylePanel.tsx`, rendered in each
 of its terminal branches) is gated on `!pluginOwnsPaint && !controlRendersLayer`:
-blending only reaches layers **GeoLibre itself paints**, so anything a control
+blending only reaches layers **GeoSpaX itself paints**, so anything a control
 renders or paints (3D Tiles, Gaussian splats, LiDAR, the COG raster control, and
 Add Vector Layer, which sets `customLayerType` _and_ `controlOwnsPaint`) is
 excluded — layer-sync never applies `fillPaint`/`linePaint` to those, so the
@@ -1058,7 +1113,7 @@ listed in its `ALLOWLIST`. The wrapper exists because plain `npm audit` cannot
 accept a single finding, so one unpatchable transitive advisory reddens every PR
 until upstream ships a fix — which for an unmaintained leaf package may be never.
 Only allowlist an advisory when there is **no patched version to upgrade to** and
-the vulnerable code is **unreachable from a GeoLibre runtime path**, and say why on
+the vulnerable code is **unreachable from a GeoSpaX runtime path**, and say why on
 both counts in the entry. Anything upgradeable gets upgraded instead. Stale entries
 print a warning rather than failing, since the advisory database is a live service
 and a transient omission must not redden an unrelated PR.
@@ -1081,7 +1136,7 @@ from `npm view <pkg>@<version> --json` (npm 12 wraps that output in an array).
 Check a fresh `npm ci` with `npm ls <pkg>` before you commit. That override
 patches GHSA-w3rx-r6r6-pgpr and GHSA-5p2g-fcmc-qvqq, but image-size 2.x takes a
 buffer rather than a path, so texture-compressor's own CLI can no longer read
-image sizes. GeoLibre never runs it: only `@loaders.gl/textures`'
+image sizes. GeoSpaX never runs it: only `@loaders.gl/textures`'
 `encodeImageURLToCompressedTextureURL`, a Node-only encoder, spawns it via
 `npx`. Drop the override once loaders.gl stops depending on texture-compressor
 (4.5.x already makes it a peer).
@@ -1261,8 +1316,8 @@ output when a build actually runs. Rebuild, or delete the stale directory.
   `menuSubcategory` back to a bundled locale.
 - **The agent skill.** `skills/geolibre/` is a _user-facing_ agent skill — a
   `SKILL.md` plus `references/` that teaches an external AI agent to author
-  `.geolibre.json` projects through `geolibre-mcp`, the Python package, or
-  hand-written JSON. It is not for contributors working on GeoLibre itself. It
+  `.geolibre.json` projects through `geospax-mcp`, the Python package, or
+  hand-written JSON. It is not for contributors working on GeoSpaX itself. It
   restates things that live elsewhere: the MCP tool surface
   (`python/src/geolibre/mcp/server.py`), the basemap/color-ramp/legend catalogs
   (`python/src/geolibre/basemaps.py`, `color_ramp.py`, `legends.py`), the project

@@ -1,6 +1,6 @@
 # Projects
 
-A GeoLibre project captures your whole workspace in a single `.geolibre.json` file: the map view, the basemap, every layer with its source and style, map preferences, plugin state, and environment variables. Everything in this section lives under the **Project** menu.
+A GeoSpaX project captures your whole workspace in a single `.geolibre.json` file: the map view, the basemap, every layer with its source and style, map preferences, plugin state, and environment variables. Everything in this section lives under the **Project** menu.
 
 !!! note "Some entries may be hidden"
     The Project menu is filtered by the active [UI profile](../ui-profiles.md), and a few entries are desktop-only. If an item described below is missing, check the profile in use and whether you are running the browser build.
@@ -9,7 +9,7 @@ A GeoLibre project captures your whole workspace in a single `.geolibre.json` fi
 
 ## New
 
-**Project → New...** starts a fresh project. GeoLibre offers to save the current project first, then resets the layers, map view, controls, and plugin state to defaults.
+**Project → New...** starts a fresh project. GeoSpaX offers to save the current project first, then resets the layers, map view, controls, and plugin state to defaults.
 
 The **New project** dialog names the project and picks its starting basemap: the OpenFreeMap styles, a **Regional** group, sections for the Moon, Mars, and other celestial bodies, a blank background, or a custom MapLibre style or PMTiles URL.
 
@@ -30,7 +30,7 @@ The collapsible **Examples** section lists a few curated starter projects from t
 !!! note "Loading a project at startup"
     You can open a project directly by passing its URL with the `url` query parameter, for example `?url=https://share.geolibre.app/you/project.geolibre.json`. See [Embedding & Sharing](embedding.md).
 
-    On the desktop app you can also have GeoLibre reopen the last local project — or one specific local project — every time it launches; remote share links are never replayed on launch. See [Settings → Startup](settings.md#startup). A project URL in the address bar always takes precedence over that preference.
+    On the desktop app you can also have GeoSpaX reopen the last local project — or one specific local project — every time it launches; remote share links are never replayed on launch. See [Settings → Startup](settings.md#startup). A project URL in the address bar always takes precedence over that preference.
 
 ## Save and Save As
 
@@ -43,7 +43,7 @@ Both capture the current map view, basemap, layers, styles, preferences, and plu
 
 ## Project history and crash recovery
 
-GeoLibre autosaves the project as you work. Three seconds after a change settles — a layer added, a style edited, the camera moved — it writes a snapshot to your browser's local IndexedDB storage. Autosaves never touch your `.geolibre.json` file; only **Save** does that.
+GeoSpaX autosaves the project as you work. Three seconds after a change settles — a layer added, a style edited, the camera moved — it writes a snapshot to your browser's local IndexedDB storage. Autosaves never touch your `.geolibre.json` file; only **Save** does that.
 
 **Project → History...** lists the snapshots for the current project, newest first, each summarized by its layer count and zoom level. **Restore** loads a snapshot back into the workspace, as an undoable step so you can back out of it. There is no manual delete here — snapshots age out on their own once a cap is hit.
 
@@ -52,21 +52,21 @@ GeoLibre autosaves the project as you work. Three seconds after a change settles
 The store is capped, so history stays bounded: at most 20 snapshots per project, 10 MB per snapshot, and 50 MB in total. The oldest snapshots are dropped once a cap is hit, and a project too large to fit in a single snapshot is not autosaved.
 
 !!! note "Crash recovery is a standalone-browser feature"
-    In the browser build, and outside an embedded (iframe) session, GeoLibre marks the session open while you work. If the tab or browser goes away without closing cleanly and a newer autosave exists than your last explicit save, the next launch offers **Recover unsaved work?** with the option to restore or discard it. The desktop app and embedded deployments keep the history list but do not show this prompt.
+    In the browser build, and outside an embedded (iframe) session, GeoSpaX marks the session open while you work. If the tab or browser goes away without closing cleanly and a newer autosave exists than your last explicit save, the next launch offers **Recover unsaved work?** with the option to restore or discard it. The desktop app and embedded deployments keep the history list but do not show this prompt.
 
 Snapshots are stored per project — keyed by file path, or by name for a project you have not saved yet — and live only on the device that made them. They are not uploaded, not shared, and not part of the `.geolibre.json` file.
 
 ## Importing a QGIS project
 
-**Project → Import → Import QGIS Project…** reads a QGIS `.qgs` or `.qgz` project and rebuilds it as a GeoLibre project: its layers, layer groups (including nested ones), group visibility, layer order, styling, and the saved map view.
+**Project → Import → Import QGIS Project…** reads a QGIS `.qgs` or `.qgz` project and rebuilds it as a GeoSpaX project: its layers, layer groups (including nested ones), group visibility, layer order, styling, and the saved map view.
 
-The importer targets file-based vector layers plus rasters the app can open, and it reports what it could not bring across rather than failing the whole import — you get the project plus a list of skipped layers and the reason (an unsupported data provider, an unsupported file format, a missing source, a network share path, or a remote source). Layers skipped for the same reason are grouped into one line with a count, so a project where hundreds of layers share one root cause reads at a glance; expand a group to see the layer names. In the browser build, layers that reference a local path on disk are listed as skipped because a browser cannot reopen those paths; open the same project in GeoLibre Desktop to load them.
+The importer targets file-based vector layers plus rasters the app can open, and it reports what it could not bring across rather than failing the whole import — you get the project plus a list of skipped layers and the reason (an unsupported data provider, an unsupported file format, a missing source, a network share path, or a remote source). Layers skipped for the same reason are grouped into one line with a count, so a project where hundreds of layers share one root cause reads at a glance; expand a group to see the layer names. In the browser build, layers that reference a local path on disk are listed as skipped because a browser cannot reopen those paths; open the same project in GeoSpaX Desktop to load them.
 
 ## Importing an ArcGIS Pro project
 
-**Project → Import → Import ArcGIS Pro Project…** reads an ArcGIS Pro `.aprx` project or standalone `.mapx` map. GeoLibre reads the CIM JSON stored in the file directly, so ArcGIS Pro and ArcPy do not need to be installed.
+**Project → Import → Import ArcGIS Pro Project…** reads an ArcGIS Pro `.aprx` project or standalone `.mapx` map. GeoSpaX reads the CIM JSON stored in the file directly, so ArcGIS Pro and ArcPy do not need to be installed.
 
-An ArcGIS Pro project can contain several maps; GeoLibre imports its first 2D map. The importer preserves the saved extent, file-based feature layers and GeoTIFF rasters, nested groups, visibility, simple symbols, field-based labels, ArcGIS vector-tile portal items, and cached map services. Unsupported sources such as file geodatabases, scenes, and network-share paths are listed, grouped by reason, after the rest of the project is imported. A File Geodatabase layer is named as such rather than reported as a generic unsupported format, and feature layers and rasters are reported separately, because their workarounds differ: in the desktop build a geodatabase's feature classes can be added with **Add Data → File Geodatabase (GDB)**, while a raster stored in a `.gdb` has to be exported to GeoTIFF first. Local data paths cannot be reopened by the browser build.
+An ArcGIS Pro project can contain several maps; GeoSpaX imports its first 2D map. The importer preserves the saved extent, file-based feature layers and GeoTIFF rasters, nested groups, visibility, simple symbols, field-based labels, ArcGIS vector-tile portal items, and cached map services. Unsupported sources such as file geodatabases, scenes, and network-share paths are listed, grouped by reason, after the rest of the project is imported. A File Geodatabase layer is named as such rather than reported as a generic unsupported format, and feature layers and rasters are reported separately, because their workarounds differ: in the desktop build a geodatabase's feature classes can be added with **Add Data → File Geodatabase (GDB)**, while a raster stored in a `.gdb` has to be exported to GeoTIFF first. Local data paths cannot be reopened by the browser build.
 
 ## Templates
 
@@ -79,7 +79,7 @@ An ArcGIS Pro project can contain several maps; GeoLibre imports its first 2D ma
 Connecting your account depends on the build:
 
 - **Web app**: click **Sign in** in the Share dialog (or Settings → Environment Variables). A popup opens `share.geolibre.app`'s consent page; approving it connects the app, and the sign-in is kept for the browser session. Session expired prompts offer a one-click re-sign-in.
-- **GeoLibre Desktop** (and as a fallback everywhere): paste a personal API token — created under Settings → API tokens at [share.geolibre.app/settings](https://share.geolibre.app/settings) — into the **Share.GeoLibre API token** field in **Settings → Environment Variables**.
+- **GeoSpaX Desktop** (and as a fallback everywhere): paste a personal API token — created under Settings → API tokens at [share.geolibre.app/settings](https://share.geolibre.app/settings) — into the **Share.GeoLibre API token** field in **Settings → Environment Variables**.
 
 ### Share-readiness check
 

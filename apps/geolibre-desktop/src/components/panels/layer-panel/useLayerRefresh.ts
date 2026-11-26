@@ -626,7 +626,7 @@ export function useLayerRefresh({ layers, isCollapsed }: UseLayerRefreshOptions)
           // watcher and show a spurious error while watching is actually active.
           if (cancelled) return;
           watchUnsubsRef.current.delete(layer.id);
-          console.warn(`[GeoLibre] Could not watch "${path}" for changes.`, error);
+          console.warn(`[GeoSpaX] Could not watch "${path}" for changes.`, error);
           setRefreshStatuses((current) => ({
             ...current,
             [layer.id]: {

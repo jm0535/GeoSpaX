@@ -57,7 +57,7 @@ Below the renderer controls, a **Diagram** control draws a small chart on each f
 
 Below the renderer and label controls, the **Quick filters** section narrows what
 the layer draws without writing an expression. Pick a field from **Add a
-filter...** and GeoLibre reads the data to decide which control it deserves:
+filter...** and GeoSpaX reads the data to decide which control it deserves:
 
 - a **Values** list of checkboxes with a count beside each value (with a search
   box once there are more than a handful),
@@ -110,7 +110,7 @@ misread.
 
 ### Style interchange and URL styles
 
-The selected vector layer's **Layer actions → Styles** submenu imports and exports GeoLibre URL style JSON, Mapbox/MapLibre style JSON, OGC SLD, and QGIS QML. A GeoLibre URL style is a compact MapLibre style whose feature data is supplied separately through the `data` URL parameter. Export one when you want to publish the current symbology beside hosted GeoJSON or a ZIP of GeoJSON files; import it when you want to apply that symbology to a layer already open in GeoLibre.
+The selected vector layer's **Layer actions → Styles** submenu imports and exports GeoSpaX URL style JSON, Mapbox/MapLibre style JSON, OGC SLD, and QGIS QML. A GeoSpaX URL style is a compact MapLibre style whose feature data is supplied separately through the `data` URL parameter. Export one when you want to publish the current symbology beside hosted GeoJSON or a ZIP of GeoJSON files; import it when you want to apply that symbology to a layer already open in GeoSpaX.
 
 See [Managing Layers](layers.md#importing-and-exporting-styles) for the menu workflow and [Embedding & Sharing](embedding.md#open-remote-data) for the JSON conventions.
 
@@ -128,7 +128,7 @@ Further down the Style panel, the **Popup** section designs what a viewer sees w
 - **Value type** formats the value: **Number** (decimals, thousands separator), **Date** (date, date and time, time, ISO 8601, or year), **Link**, **Image**, or plain **Text**. For **Text**, **Number** and **Date** fields, **Prefix** and **Suffix** wrap the result, which is where a currency symbol or a unit goes.
 - **In hover tooltip** puts a field in the tooltip's short subset. Keep it to one or two fields: the tip follows the pointer, so it is a glance, not a table. Image fields are skipped there and stay in the click popup, where there is room to show the picture.
 
-Layers loaded through **Add Vector Layer** are designed here too, once the panel has handed them over to GeoLibre, which it does for every layer it loads in GeoJSON mode with up to 100,000 features (see [Adding data](adding-data.md#files)). A layer the panel keeps, such as a tiled or streamed one, has no features in GeoLibre for the designer to read, so the Popup section does not appear for it. The panel's own **Popup** checkbox opens a separate, unstyled attribute table on click; it is off by default so the two do not both answer the same click. Tick it only if you want the control's raw table back.
+Layers loaded through **Add Vector Layer** are designed here too, once the panel has handed them over to GeoSpaX, which it does for every layer it loads in GeoJSON mode with up to 100,000 features (see [Adding data](adding-data.md#files)). A layer the panel keeps, such as a tiled or streamed one, has no features in GeoSpaX for the designer to read, so the Popup section does not appear for it. The panel's own **Popup** checkbox opens a separate, unstyled attribute table on click; it is off by default so the two do not both answer the same click. Tick it only if you want the control's raw table back.
 
 Fields you hid or excluded from the [attribute table](attribute-table.md) stay out of the popup: the popup design selects from the visible fields and cannot re-expose a hidden one. A layer with nothing configured behaves exactly as before, and the whole design saves with the project, so it travels to the Python package and the MCP authoring tools as well.
 

@@ -119,7 +119,7 @@ export function parseLanguagePack(text: string): GeoLibreLanguagePack {
     throw new LanguagePackError("invalid-format", "The language pack root must be an object.");
   }
   if (raw.format !== LANGUAGE_PACK_FORMAT || raw.scope !== LANGUAGE_PACK_SCOPE) {
-    throw new LanguagePackError("invalid-format", "This is not a GeoLibre Whitebox language pack.");
+    throw new LanguagePackError("invalid-format", "This is not a GeoSpaX Whitebox language pack.");
   }
   if (raw.formatVersion !== LANGUAGE_PACK_FORMAT_VERSION) {
     throw new LanguagePackError(

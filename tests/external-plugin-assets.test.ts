@@ -9,10 +9,10 @@ describe("pluginAssetUrlFromSource", () => {
   it("resolves an asset against a bundled plugin's manifest URL", () => {
     assert.equal(
       pluginAssetUrlFromSource(
-        "https://geolibre.app/plugins/demo-plugin/plugin.json",
+        "https://jm0535.github.io/GeoSpaX/plugins/demo-plugin/plugin.json",
         "dist/sample-data",
       ),
-      "https://geolibre.app/plugins/demo-plugin/dist/sample-data",
+      "https://jm0535.github.io/GeoSpaX/plugins/demo-plugin/dist/sample-data",
     );
   });
 
@@ -36,7 +36,7 @@ describe("pluginAssetUrlFromSource", () => {
   it("returns null for a desktop filesystem source (no URL base)", () => {
     assert.equal(
       pluginAssetUrlFromSource(
-        "/home/user/.local/share/org.geolibre.desktop/plugins/x",
+        "/home/user/.local/share/geospax.in4metrix.dev/plugins/x",
         "dist/sample-data",
       ),
       null,
@@ -49,14 +49,14 @@ describe("pluginAssetUrlFromSource", () => {
 
   it("rejects paths that escape the plugin directory", () => {
     assert.equal(
-      pluginAssetUrlFromSource("https://geolibre.app/plugins/x/plugin.json", "../secrets"),
+      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "../secrets"),
       null,
     );
   });
 
   it("rejects absolute paths", () => {
     assert.equal(
-      pluginAssetUrlFromSource("https://geolibre.app/plugins/x/plugin.json", "/etc/passwd"),
+      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "/etc/passwd"),
       null,
     );
   });
@@ -66,7 +66,7 @@ describe("pluginAssetUrlFromSource", () => {
     // it to ".." and the resolved URL lands outside the plugin directory, so
     // the directory-containment guard still rejects it.
     assert.equal(
-      pluginAssetUrlFromSource("https://geolibre.app/plugins/x/plugin.json", "%2e%2e/secrets"),
+      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "%2e%2e/secrets"),
       null,
     );
   });
@@ -79,7 +79,7 @@ describe("managedUrlSourcesForIds", () => {
   const SOURCES: Record<string, string> = {
     "url-plugin": "https://data.example.com/url-plugin/plugin.json",
     "bundled-plugin": "tauri://localhost/plugins/bundled-plugin/plugin.json",
-    "filesystem-plugin": "/home/user/.local/share/org.geolibre.desktop/plugins/fs-plugin",
+    "filesystem-plugin": "/home/user/.local/share/geospax.in4metrix.dev/plugins/fs-plugin",
     "web-archive-plugin": "web-archive:web-archive-plugin",
   };
   const sourceOf = (pluginId: string) => SOURCES[pluginId];

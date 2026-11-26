@@ -403,7 +403,7 @@ function* serializeProjectWithLayerCacheSteps(
 export function parseProject(json: string): GeoLibreProject {
   const data = JSON.parse(json) as Partial<GeoLibreProject>;
   if (!data.version || !data.name || !data.mapView) {
-    throw new Error("Invalid GeoLibre project: missing required fields");
+    throw new Error("Invalid GeoSpaX project: missing required fields");
   }
   const layerGroups = normalizeLayerGroups(data.layerGroups);
   const validGroupIds = new Set(layerGroups.map((g) => g.id));

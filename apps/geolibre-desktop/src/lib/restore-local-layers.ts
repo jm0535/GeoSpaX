@@ -80,14 +80,14 @@ export async function restoreLocalFileLayers(): Promise<void> {
               match = named;
             } else {
               console.warn(
-                `[GeoLibre] Could not match layer "${layer.name}" to a layer in "${path}" by name; using the first. (Renaming a multi-layer file's layers can break this match.)`,
+                `[GeoSpaX] Could not match layer "${layer.name}" to a layer in "${path}" by name; using the first. (Renaming a multi-layer file's layers can break this match.)`,
               );
             }
           }
           useAppStore.getState().updateLayer(layer.id, { geojson: match.data });
         }
       } catch (error) {
-        console.warn(`[GeoLibre] Could not reload local layer(s) from "${path}".`, error);
+        console.warn(`[GeoSpaX] Could not reload local layer(s) from "${path}".`, error);
         dropLayers(layers, path);
       }
     }),
@@ -97,7 +97,7 @@ export async function restoreLocalFileLayers(): Promise<void> {
 function dropLayers(layers: GeoLibreLayer[], path: string): void {
   for (const layer of layers) {
     console.info(
-      `[GeoLibre] Layer "${layer.name}" could not be re-read from "${path}"; removing it.`,
+      `[GeoSpaX] Layer "${layer.name}" could not be re-read from "${path}"; removing it.`,
     );
     useAppStore.getState().removeLayer(layer.id);
   }

@@ -45,7 +45,7 @@ function updateSelection() {
   elements.openButton.disabled = count === 0;
   elements.openButton.setAttribute(
     "aria-label",
-    count ? `Open ${count} dataset${count === 1 ? "" : "s"} in GeoLibre` : "Select a dataset",
+    count ? `Open ${count} dataset${count === 1 ? "" : "s"} in GeoSpaX` : "Select a dataset",
   );
 }
 
@@ -146,7 +146,7 @@ async function inspectPage() {
     });
     documentDatasets = results[0]?.result ?? [];
   } catch (error) {
-    console.debug("GeoLibre could not scan the current document.", error);
+    console.debug("GeoSpaX could not scan the current document.", error);
   }
   let services = [];
   try {
@@ -164,7 +164,7 @@ async function inspectPage() {
     });
     services = collectServiceCandidates(results.flatMap((frame) => frame?.result ?? []));
   } catch (error) {
-    console.debug("GeoLibre could not read the page's requests.", error);
+    console.debug("GeoSpaX could not read the page's requests.", error);
   }
   renderDatasets(mergeServiceCandidates(documentDatasets, services));
 }
@@ -200,7 +200,7 @@ elements.openButton.addEventListener("click", async () => {
     elements.openError.textContent =
       error instanceof Error && error.message
         ? error.message
-        : "GeoLibre could not be opened. Please try again.";
+        : "GeoSpaX could not be opened. Please try again.";
     elements.openError.hidden = false;
   }
 });

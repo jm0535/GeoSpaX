@@ -54,7 +54,7 @@ guide (one of the pages listed above) in a new tab.
   parameters) so a study is reproducible.
 - **How to cite.** Every workbench ends with a **How to cite** section
   giving ready-to-copy APA and BibTeX entries. If a workbench contributes
-  to a report, thesis or paper, cite GeoSpaX — and also cite the GeoLibre
+  to a report, thesis or paper, cite GeoSpaX — and also cite the GeoSpaX
   platform and every dataset provider (GBIF, OBIS, iNaturalist, WoRMS,
   World Bank, GEBCO and others) whose layers you mapped.
 

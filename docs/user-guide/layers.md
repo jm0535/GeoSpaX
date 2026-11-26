@@ -53,14 +53,14 @@ names stay legible over a multiplied hillshade.
     or a scale-dependent minimum zoom), or convert the points to polygons.
 
 A blend mode is saved with the project and travels with a copied style, but it
-is a GeoLibre rendering setting with no equivalent in the MapLibre or Mapbox
+is a GeoSpaX rendering setting with no equivalent in the MapLibre or Mapbox
 style specification, so it is dropped when you export a layer's style to a style
 file, SLD, or QML.
 
 !!! note "Why these five modes"
 
     MapLibre draws every layer into one WebGL canvas and offers no per-layer
-    blending API, so GeoLibre applies these modes inside the renderer using the
+    blending API, so GeoSpaX applies these modes inside the renderer using the
     GPU's fixed-function blend stage. That stage can express these five and no
     more. Photoshop-style modes such as Overlay, Colour Dodge, and Soft Light
     need to read the colours already on the canvas from inside a shader, which
@@ -71,7 +71,7 @@ file, SLD, or QML.
     for the upstream work that would widen this list.
 
 Blending is applied while MapLibre draws a layer, so it reaches only the layers
-GeoLibre itself styles. The following are drawn or styled elsewhere, and so have
+GeoSpaX itself styles. The following are drawn or styled elsewhere, and so have
 no Blend menu:
 
 - **3D Tiles, Gaussian splats, LiDAR point clouds, and deck.gl overlays**, which
@@ -79,7 +79,7 @@ no Blend menu:
 - **Cloud-Optimized GeoTIFFs** added through **Add Data > Raster Layer**, for
   the same reason on their default rendering engine.
 - **Vector layers added through Add Data > Vector Layer**, which do draw through
-  MapLibre but are styled by their own control rather than by GeoLibre, so there
+  MapLibre but are styled by their own control rather than by GeoSpaX, so there
   is no point at which the blend mode could be applied.
 
 Everything else blends: local and remote GeoJSON, ordinary raster layers (XYZ,
@@ -127,17 +127,17 @@ Some entries are unavailable on layers they do not apply to: **Select by Locatio
 
 Vector layers have a **Layer actions → Styles** submenu for symbology interchange:
 
-- **Export GeoLibre URL style** writes a compact `.geolibre.style.json` file designed for the [`data` and `style` URL parameters](embedding.md#open-remote-data). It contains no feature data. Its MapLibre render layers use the original GeoJSON filename stem as `source`, allowing one style document to distinguish GeoJSON members in a ZIP.
+- **Export GeoSpaX URL style** writes a compact `.geolibre.style.json` file designed for the [`data` and `style` URL parameters](embedding.md#open-remote-data). It contains no feature data. Its MapLibre render layers use the original GeoJSON filename stem as `source`, allowing one style document to distinguish GeoJSON members in a ZIP.
 - **Export as Mapbox GL style** writes a self-contained Mapbox/MapLibre style with the layer's GeoJSON embedded.
 - **Export as OGC SLD** and **Export as QGIS QML** produce styles for other desktop and server GIS software.
-- **Import style from file (GeoLibre URL / Mapbox GL / SLD / QML)…** applies a supported style file to the selected layer. When importing a GeoLibre URL style interactively, the filename-based `source` association is ignored because the selected layer is the target.
+- **Import style from file (GeoSpaX URL / Mapbox GL / SLD / QML)…** applies a supported style file to the selected layer. When importing a GeoSpaX URL style interactively, the filename-based `source` association is ignored because the selected layer is the target.
 - **Import style from text…** opens a box to paste a style into, for one copied out of QGIS, a gist, or a catalog page rather than saved to disk. It reads the same four formats, decided from the text rather than a file extension, and reports the same warnings. The Style panel header carries the same box, so you do not have to leave the panel to reach it.
 - **Saved styles (Style Manager)…** applies a preset from your style library, or saves the current symbology into it. The same library is reachable from **Settings → Style Manager**.
 
-To use a GeoLibre URL style, upload it to a CORS-enabled web host and open GeoLibre with both URLs:
+To use a GeoSpaX URL style, upload it to a CORS-enabled web host and open GeoSpaX with both URLs:
 
 ```text
-https://web.geolibre.app/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 See [Embedding & Sharing](embedding.md#open-remote-data) for GeoParquet and PMTiles deep links, ZIP source matching, REST API responses, raster-style JSON, and encoding nested URLs.

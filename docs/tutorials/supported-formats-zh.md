@@ -1,6 +1,6 @@
-# GeoLibre 支持 GIS 数据格式完整清单
+# GeoSpaX 支持 GIS 数据格式完整清单
 
-> **摘要**：本文完整梳理 GeoLibre 内置支持的全部 GIS 数据格式，涵盖矢量、栅格、云原生地理空间格式及每种格式的内部解析逻辑，为国内 WebGIS 开发者提供完整的技术参考清单。
+> **摘要**：本文完整梳理 GeoSpaX 内置支持的全部 GIS 数据格式，涵盖矢量、栅格、云原生地理空间格式及每种格式的内部解析逻辑，为国内 WebGIS 开发者提供完整的技术参考清单。
 >
 > **原文来源**："GIS开发手记"，原文链接：<https://mp.weixin.qq.com/s/GrtQzetCBgKtYruEhjsOAw>
 >
@@ -8,7 +8,7 @@
 
 ## 前言
 
-本文完整梳理 GeoLibre 内置支持的全部地理空间数据格式，区分矢量、栅格、云原生地理格式，同时说明每种格式对应的解析依赖、读取优先级与适用场景，可供 WebGIS 开发人员快速查阅。
+本文完整梳理 GeoSpaX 内置支持的全部地理空间数据格式，区分矢量、栅格、云原生地理格式，同时说明每种格式对应的解析依赖、读取优先级与适用场景，可供 WebGIS 开发人员快速查阅。
 
 ## 一、运行形态与平台说明
 
@@ -20,7 +20,7 @@
 | 桌面 | Tauri v2 原生应用 | Windows / macOS / Linux，微软商店、Homebrew、winget、AUR、Flatpak 都有 |
 | 安卓 | Google Play 原生 App | 每 ABI 约 40MB |
 | iOS | App Store 原生 App | iPhone 与 iPad，同一套代码经 Tauri v2 mobile 构建 |
-| Jupyter | `pip install geolibre` | 整个应用嵌进 notebook 单元格 |
+| Jupyter | `pip install geospax` | 整个应用嵌进 notebook 单元格 |
 
 > **核心应用没有账号、没有服务器、没有费用。** 本地文件就地读取、不出本机，应用加载完成后本地流程也能离线继续用。例外的是那些可选的远程能力：在线目录（STAC、Source Cooperative、Overture、Planetary Computer）、从 CDN 下载底图与瓦片，以及 Earth Engine、需要鉴权的 ArcGIS 服务等，都需要联网，部分还需要各自的凭据或 OAuth 登录。
 
@@ -28,7 +28,7 @@
 
 ## 二、矢量数据格式支持
 
-矢量数据是 GeoLibre 适配最完善的能力模块，文件选择器内置统一的格式白名单，支持拖拽自动识别，无需手动选择文件类型，覆盖 17 种主流矢量扩展名。
+矢量数据是 GeoSpaX 适配最完善的能力模块，文件选择器内置统一的格式白名单，支持拖拽自动识别，无需手动选择文件类型，覆盖 17 种主流矢量扩展名。
 
 ```text
 geojson, json, gpkg, geoparquet, parquet, fgb, flatgeobuf,
@@ -158,7 +158,7 @@ geoparquet, duckdb-query, deckgl-viz, video, image
 
 ## 七、云原生格式与数据目录
 
-这一节是 GeoLibre 和传统桌面 GIS 拉开距离的地方。
+这一节是 GeoSpaX 和传统桌面 GIS 拉开距离的地方。
 
 **科学数据格式：**
 
@@ -200,7 +200,7 @@ geoparquet, duckdb-query, deckgl-viz, video, image
 
 | 格式 | 扩展名 | 方向 |
 |---|---|---|
-| GeoLibre 工程 | `.geolibre` / `.geolibre.json` | 读 + 写 |
+| GeoSpaX 工程 | `.geolibre` / `.geolibre.json` | 读 + 写 |
 | **QGIS 工程** | `.qgz` `.qgs` | **只能导入**。用 DOMParser 解析 XML，不执行任何 QGIS 代码；只导入它认识的 17 种矢量格式和 GeoTIFF |
 | **Mapbox GL / MapLibre 样式** | `.json` | 导入 + 导出 |
 | **OGC SLD** | `.sld` `.xml` | 导入 + 导出 |
@@ -351,7 +351,7 @@ _浏览器端输出格式是子集：geojson / json / csv / parquet / geoparquet
 
 拿到一个混装了 shp、tif、gpkg、tileset.json 的压缩包，以前要开三四个软件；现在的答案是：**打开一个 30MB 的应用（或者干脆一个网页），全拖进去。**
 
-GeoLibre 真正的价值在于——不在于它比 QGIS 强（它不强），而在于它把**「看一眼数据」这件事的成本降低到了接近零**。这个位置以前是空的。
+GeoSpaX 真正的价值在于——不在于它比 QGIS 强（它不强），而在于它把**「看一眼数据」这件事的成本降低到了接近零**。这个位置以前是空的。
 
 对做多引擎或三维 GIS 开发的人，它还有一层参考价值：**引擎无关的 store 设计**。把状态存成普通的图层记录和视图状态，而不是绑死在某个渲染引擎的对象上，就能在不改变工程模型的前提下接入另一个渲染器。这个思路值得借鉴。
 
@@ -359,7 +359,7 @@ GeoLibre 真正的价值在于——不在于它比 QGIS 强（它不强），�
 
 1. **只想看看** —— 直接开 `web.geolibre.app`，不用装不用注册
 2. **要真干活** —— GitHub Releases 下桌面版，或走微软商店 / Homebrew / winget，两分钟的事
-3. **Python 用户** —— `pip install geolibre`，要 GeoPandas 支持就 `pip install "geolibre[all]"`，需要 Python 3.10+
+3. **Python 用户** —— `pip install geospax`，要 GeoPandas 支持就 `pip install "geospax[all]"`，需要 Python 3.10+
 4. **内网 / 离线环境** —— `VITE_PYODIDE_INDEX_URL` 和 `VITE_DUCKDB_SPATIAL_EXTENSION_PATH` 可以把 Pyodide 和 DuckDB 空间扩展指到内部镜像，**不用重新构建**；官方也有 Docker 镜像 `ghcr.io/opengeos/geolibre:latest`
 5. **二次开发** —— npm workspaces 单体仓库，所以要用 **npm**（仓库跟踪 `package-lock.json`）配 **Node 22+**；主应用在 `apps/geolibre-desktop`，MIT 许可
 

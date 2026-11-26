@@ -1,12 +1,12 @@
-# GeoLibre Supported GIS Data Formats — Complete Reference
+# GeoSpaX Supported GIS Data Formats — Complete Reference
 
-> **Abstract**: This article provides a comprehensive inventory of all GIS data formats natively supported by GeoLibre, covering vector, raster, and cloud-native geospatial formats, along with the internal parsing logic for each format. It serves as a complete technical reference for WebGIS developers.
+> **Abstract**: This article provides a comprehensive inventory of all GIS data formats natively supported by GeoSpaX, covering vector, raster, and cloud-native geospatial formats, along with the internal parsing logic for each format. It serves as a complete technical reference for WebGIS developers.
 >
 > **Original source**: "GIS开发手记", original link: <https://mp.weixin.qq.com/s/GrtQzetCBgKtYruEhjsOAw>
 
 ## Preface
 
-This article systematically catalogs every geospatial data format built into GeoLibre, distinguishing between vector, raster, and cloud-native geospatial formats, while documenting each format's corresponding parsing dependency, read priority, and applicable scenarios — a ready reference for WebGIS developers.
+This article systematically catalogs every geospatial data format built into GeoSpaX, distinguishing between vector, raster, and cloud-native geospatial formats, while documenting each format's corresponding parsing dependency, read priority, and applicable scenarios — a ready reference for WebGIS developers.
 
 ## 1. Runtime Configurations & Platform Overview
 
@@ -18,7 +18,7 @@ Before listing formats, it's important to clarify "where it runs," since many fo
 | Desktop | Tauri v2 native application | Windows / macOS / Linux; available via Microsoft Store, Homebrew, winget, AUR, Flatpak |
 | Android | Google Play native app | ~40 MB per ABI |
 | iOS | App Store native app | iPhone and iPad, same codebase via Tauri v2 mobile |
-| Jupyter | `pip install geolibre` | The entire application embedded in a notebook cell |
+| Jupyter | `pip install geospax` | The entire application embedded in a notebook cell |
 
 > **No accounts, no servers, no fees for the core application.** Local files are read in place and stay on your machine, and once the app has loaded, local workflows keep working offline. The optional remote pieces are the exception: online catalogs (STAC, Source Cooperative, Overture, Planetary Computer), basemap and tile downloads from a CDN, and services such as Earth Engine or an authenticated ArcGIS endpoint all need network access, and some need their own credentials or OAuth sign-in.
 
@@ -26,7 +26,7 @@ Before listing formats, it's important to clarify "where it runs," since many fo
 
 ## 2. Vector Data Format Support
 
-Vector data is GeoLibre's most mature capability. The file picker has a built-in unified format allowlist, supports drag-and-drop auto-detection (no manual format selection needed), and covers 17 mainstream vector extensions.
+Vector data is GeoSpaX's most mature capability. The file picker has a built-in unified format allowlist, supports drag-and-drop auto-detection (no manual format selection needed), and covers 17 mainstream vector extensions.
 
 ```text
 geojson, json, gpkg, geoparquet, parquet, fgb, flatgeobuf,
@@ -156,7 +156,7 @@ What you can fill in under "Add Data → Web Services":
 
 ## 7. Cloud-Native Formats & Data Catalogs
 
-This section is where GeoLibre pulls ahead of traditional desktop GIS.
+This section is where GeoSpaX pulls ahead of traditional desktop GIS.
 
 **Scientific data formats:**
 
@@ -194,11 +194,11 @@ This section is where GeoLibre pulls ahead of traditional desktop GIS.
 
 ## 8. Project & Style Interoperability
 
-This is easy to overlook but determines whether GeoLibre can fit into your existing workflow.
+This is easy to overlook but determines whether GeoSpaX can fit into your existing workflow.
 
 | Format | Extension | Direction |
 |---|---|---|
-| GeoLibre project | `.geolibre` / `.geolibre.json` | Read + write |
+| GeoSpaX project | `.geolibre` / `.geolibre.json` | Read + write |
 | **QGIS project** | `.qgz` `.qgs` | **Import only**. Parses XML with DOMParser; no QGIS code is executed; only imports the 17 recognized vector formats and GeoTIFF |
 | **Mapbox GL / MapLibre style** | `.json` | Import + export |
 | **OGC SLD** | `.sld` `.xml` | Import + export |
@@ -356,7 +356,7 @@ Having covered the strengths, let's discuss the limitations.
 
 You receive a zip archive containing a mix of shp, tif, gpkg, and tileset.json — previously requiring three or four different applications. The answer now: **open a 30 MB application (or just a webpage), and drag everything in.**
 
-GeoLibre's real value is not that it's better than QGIS (it isn't) — it's that it drives **the cost of "just take a quick look at the data" down to near zero**. This niche was previously empty.
+GeoSpaX's real value is not that it's better than QGIS (it isn't) — it's that it drives **the cost of "just take a quick look at the data" down to near zero**. This niche was previously empty.
 
 For those working with multi-engine or 3D GIS development, there's an additional layer of reference value: **the engine-agnostic store design**. Storing state as plain layer records and view state, rather than tying it to a specific engine's objects, lets another renderer plug in without changing the project model. This approach is worth adopting.
 
@@ -364,7 +364,7 @@ Usage paths by scenario:
 
 1. **Just want to take a look** — Open `web.geolibre.app` directly; no installation, no registration
 2. **Need to get real work done** — Download the desktop version from GitHub Releases, or via Microsoft Store / Homebrew / winget; a two-minute process
-3. **Python users** — `pip install geolibre`; for GeoPandas support, `pip install "geolibre[all]"`; requires Python 3.10+
+3. **Python users** — `pip install geospax`; for GeoPandas support, `pip install "geospax[all]"`; requires Python 3.10+
 4. **Intranet / offline environments** — `VITE_PYODIDE_INDEX_URL` and `VITE_DUCKDB_SPATIAL_EXTENSION_PATH` can point Pyodide and the DuckDB spatial extension to internal mirrors, **no rebuild required**; an official Docker image is also available at `ghcr.io/opengeos/geolibre:latest`
 5. **Secondary development** — npm workspaces monorepo, so use **npm** (the repo tracks `package-lock.json`) on **Node 22+**; main application in `apps/geolibre-desktop`; MIT licensed
 

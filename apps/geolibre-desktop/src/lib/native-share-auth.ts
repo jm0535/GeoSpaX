@@ -1,6 +1,6 @@
 import { isDesktopRuntime } from "./is-mobile";
 
-export const DESKTOP_SHARE_CALLBACK = "org.geolibre.desktop:/oauth/callback";
+export const DESKTOP_SHARE_CALLBACK = "geospax.in4metrix.dev:/oauth/callback";
 
 type Callback =
   | { state: string; issuer: string; code: string; error?: never }
@@ -25,7 +25,7 @@ export function parseNativeShareCallback(raw: string): Callback | null {
   try {
     const url = new URL(raw);
     if (
-      url.protocol !== "org.geolibre.desktop:" ||
+      url.protocol !== "geospax.in4metrix.dev:" ||
       url.host ||
       url.username ||
       url.password ||
@@ -124,7 +124,7 @@ export class NativeShareAuthReceiver {
   accept(raw: string): boolean {
     // Other deep links belong to the coordinate/file listeners. Never pass an
     // OAuth URL through those queues and never log its raw value.
-    if (!raw.toLowerCase().startsWith("org.geolibre.desktop:")) return false;
+    if (!raw.toLowerCase().startsWith("geospax.in4metrix.dev:")) return false;
     const callback = parseNativeShareCallback(raw);
     // A callback for any terminated transaction is stale — never consume the
     // pending attempt with it. Replays of a consumed state are ignored too.

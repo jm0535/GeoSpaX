@@ -154,9 +154,9 @@ export async function fetchProjectFromUrl(
     // not repeat the noun it already states, but fall back to the full message
     // if stripping would leave nothing (so the colon never dangles).
     const raw = error instanceof Error ? error.message : String(error);
-    const detail = raw.replace(/^Invalid GeoLibre project:\s*/i, "") || raw;
+    const detail = raw.replace(/^Invalid GeoSpaX project:\s*/i, "") || raw;
     throw new Error(
-      `The file at ${projectUrl} is not a valid GeoLibre project ` + `(.geolibre.json): ${detail}`,
+      `The file at ${projectUrl} is not a valid GeoSpaX project ` + `(.geolibre.json): ${detail}`,
       { cause: error },
     );
   }

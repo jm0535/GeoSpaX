@@ -284,7 +284,7 @@ export function createAppAPI(
         (typeof version !== "string" || !/^1\.\d/.test(version.trim()))
       ) {
         console.warn(
-          `[GeoLibre] addWmsLayer: unsupported WMS version "${String(
+          `[GeoSpaX] addWmsLayer: unsupported WMS version "${String(
             version,
           )}"; using "${resolvedVersion}".`,
         );
@@ -748,7 +748,7 @@ export function createAppAPI(
       // forever.
       if (projection !== "globe" && projection !== "mercator") {
         console.warn(
-          `[GeoLibre] setMapProjection: ignoring unknown projection "${String(
+          `[GeoSpaX] setMapProjection: ignoring unknown projection "${String(
             projection,
           )}" (expected "globe" or "mercator").`,
         );

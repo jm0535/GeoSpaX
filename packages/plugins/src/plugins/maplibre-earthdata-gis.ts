@@ -195,7 +195,7 @@ export const DEFAULT_EARTHDATA_GIS_LABELS: EarthdataGisLabels = {
     added === total
       ? `Added ${added} layer${added === 1 ? "" : "s"} from this web map.`
       : `Added ${added} of ${total} layers from this web map; the rest could not be reached.`,
-  webMapEmpty: "this web map has no layers GeoLibre can render.",
+  webMapEmpty: "this web map has no layers GeoSpaX can render.",
   add: "Add",
   adding: "Adding…",
   remove: "Remove",

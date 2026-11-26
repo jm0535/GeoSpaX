@@ -228,7 +228,7 @@ export class PluginManager {
         const pluginState = plugin.getProjectState?.();
         if (pluginState !== undefined) settings[plugin.id] = pluginState;
       } catch (error) {
-        console.warn(`[GeoLibre] Could not read the project state of plugin "${plugin.id}"`, error);
+        console.warn(`[GeoSpaX] Could not read the project state of plugin "${plugin.id}"`, error);
         // Keep a live position read before the state accessor threw.
         if (!(plugin.id in mapControlPositions)) {
           const position = fallbackState?.mapControlPositions[plugin.id];
@@ -512,7 +512,7 @@ export class PluginManager {
           } catch (error) {
             handledPluginIds.delete(id);
             console.warn(
-              `Plugin '${id}' could not be activated from GeoLibre URL parameters.`,
+              `Plugin '${id}' could not be activated from GeoSpaX URL parameters.`,
               error,
             );
             continue;
@@ -532,7 +532,7 @@ export class PluginManager {
           // Unmark so a later dispatch for the same context retries the
           // plugin instead of silently skipping it after a failure.
           handledPluginIds.delete(id);
-          console.warn(`Plugin '${id}' could not handle GeoLibre URL parameters.`, error);
+          console.warn(`Plugin '${id}' could not handle GeoSpaX URL parameters.`, error);
         }
       }
     } finally {

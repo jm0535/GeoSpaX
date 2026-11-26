@@ -268,7 +268,7 @@ export interface StacLabels {
 const ZARR_PROBLEMS: Record<Exclude<ZarrTargetCheck, "array">, string> = {
   group: "This asset names a group of arrays, not one that can be drawn",
   missing: "This store does not hold that variable",
-  unauthorized: "This Zarr store needs credentials GeoLibre cannot supply yet",
+  unauthorized: "This Zarr store needs credentials GeoSpaX cannot supply yet",
   "unsupported-url": "This Zarr store's address cannot be read one key at a time",
   unavailable: "This Zarr store could not be opened",
 };
@@ -348,7 +348,7 @@ let labels: StacLabels = {
     "Only GeoTIFF/COG, GeoJSON, GeoParquet, PMTiles, and Zarr assets can be added to the map",
   addFailed: "Could not add asset",
   addNoSourceLayers: "This archive lists no layers to draw",
-  cogUnsupported: "This GeoLibre host cannot visualize remote GeoTIFF assets",
+  cogUnsupported: "This GeoSpaX host cannot visualize remote GeoTIFF assets",
   formatCog: "COG",
   formatGeoJson: "GeoJSON",
   formatPmtiles: "PMTiles",
@@ -744,7 +744,7 @@ function rememberAssetAccess(layerId: string, access: StacAssetAccess | null): v
   if (!access) return;
   const layer = useAppStore.getState().layers.find((candidate) => candidate.id === layerId);
   if (!layer) {
-    console.warn("[GeoLibre] STAC asset access could not be stored: no layer", layerId);
+    console.warn("[GeoSpaX] STAC asset access could not be stored: no layer", layerId);
     return;
   }
   useAppStore.getState().updateLayer(layerId, {

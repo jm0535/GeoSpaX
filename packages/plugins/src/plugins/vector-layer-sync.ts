@@ -331,7 +331,7 @@ export async function adoptVectorControlLayers(
         declinedAdoptions.delete(info.id);
         adopted.push(info.id);
       } catch (error) {
-        console.error(`[GeoLibre] Could not adopt vector layer "${info.name}"`, error);
+        console.error(`[GeoSpaX] Could not adopt vector layer "${info.name}"`, error);
       } finally {
         adoptingLayerIds.delete(info.id);
       }
@@ -1276,7 +1276,7 @@ function vectorPanelCollapsedFromControl(control: VectorSyncableControl): boolea
   } catch (error) {
     // getState is optional, so only a throwing implementation lands here;
     // surface it instead of letting it look like the method being absent.
-    console.warn("[GeoLibre] vectorPanelCollapsedFromControl: getState threw", error);
+    console.warn("[GeoSpaX] vectorPanelCollapsedFromControl: getState threw", error);
     return true;
   }
 }

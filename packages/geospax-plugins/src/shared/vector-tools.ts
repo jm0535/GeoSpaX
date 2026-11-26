@@ -2484,7 +2484,7 @@ export function mountProvenanceTool(
       "geospax-project-snapshot.json",
       JSON.stringify(snapshot, null, 2),
       {
-        description: "GeoLibre project snapshot",
+        description: "GeoSpaX project snapshot",
         extensions: ["json"],
         mimeType: "application/json",
         promptName: true,

@@ -50,10 +50,10 @@ describe("readConfiguredAppName", () => {
 
 describe("resolveAppName", () => {
   it("keeps the product default when nothing is configured", () => {
-    assert.equal(resolveAppName("GeoLibre Desktop", {}, {}), "GeoLibre Desktop");
+    assert.equal(resolveAppName("GeoSpaX Desktop", {}, {}), "GeoSpaX Desktop");
   });
 
   it("replaces the default with the configured name", () => {
-    assert.equal(resolveAppName("GeoLibre", { [APP_NAME_ENV_KEY]: "Acme Maps" }, {}), "Acme Maps");
+    assert.equal(resolveAppName("GeoSpaX", { [APP_NAME_ENV_KEY]: "Acme Maps" }, {}), "Acme Maps");
   });
 });

@@ -105,7 +105,7 @@ export function useStartupProject(): {
     try {
       return consumeInlineProjectFragment();
     } catch (error) {
-      console.error("[GeoLibre] Could not load the direct-file project", error);
+      console.error("[GeoSpaX] Could not load the direct-file project", error);
       return null;
     }
   });

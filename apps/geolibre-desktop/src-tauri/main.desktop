@@ -9,4 +9,4 @@ Icon={{icon}}
 Name={{name}}
 Terminal=false
 Type=Application
-MimeType=application/vnd.geolibre.project+json;x-scheme-handler/org.geolibre.desktop;
+MimeType=application/vnd.geolibre.project+json;x-scheme-handler/geospax.in4metrix.dev;
