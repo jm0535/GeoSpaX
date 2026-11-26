@@ -25,7 +25,7 @@ const PROJECT_DTO = {
   username: "giswqs",
   slug: "my-map",
   projectUrl: "https://share.geolibre.app/giswqs/my-map",
-  viewerUrl: "https://geospax2.in4metrix.dev/?url=https://share.geolibre.app/giswqs/my-map.geolibre.json",
+  viewerUrl: "https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/my-map.geolibre.json",
   rawJsonUrl: "https://share.geolibre.app/giswqs/my-map.geolibre.json",
 };
 const BASE = "https://share.geolibre.app";

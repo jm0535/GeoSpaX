@@ -12,14 +12,14 @@ const ID = "G-ABC1234567";
 
 /** A hosted URL carrying the kind of query GeoLibre puts in its own links. */
 const SENSITIVE_URL = {
-  origin: "https://geospax2.in4metrix.dev",
+  origin: "https://geospax.in4metrix.dev",
   pathname: "/",
   search: "?url=https://example.com/secret-project.geolibre.json&session=abc123",
 };
 
 /** The page that linked here, itself carrying a project in its query. */
 const SENSITIVE_REFERRER =
-  "https://geospax2.in4metrix.dev/?url=https://example.com/private.geolibre.json";
+  "https://geospax.in4metrix.dev/?url=https://example.com/private.geolibre.json";
 
 /** A document with the globals gtag.js seeds, as a browser page would have. */
 function makeDocument() {
@@ -102,8 +102,8 @@ describe("analytics installation", () => {
       ["set", "js", "config", "event"],
     );
     const page = {
-      page_location: "https://geospax2.in4metrix.dev/",
-      page_referrer: "https://geospax2.in4metrix.dev/",
+      page_location: "https://geospax.in4metrix.dev/",
+      page_referrer: "https://geospax.in4metrix.dev/",
     };
     assert.deepEqual(calls[2], ["config", ID, { ...page, send_page_view: false }]);
     assert.deepEqual(calls[3], ["event", "page_view", page]);

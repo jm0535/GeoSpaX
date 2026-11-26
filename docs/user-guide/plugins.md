@@ -131,7 +131,7 @@ Add `plugin=<link name>` to a GeoSpaX web address to open the app with that
 plugin already active, as if you had picked it from the Plugins menu:
 
 ```text
-https://geospax2.in4metrix.dev/?plugin=nasa-earthdata
+https://geospax.in4metrix.dev/?plugin=nasa-earthdata
 ```
 
 List several with commas (`?plugin=graticule,h3-grid`). The full plugin id, such

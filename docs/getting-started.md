@@ -1,6 +1,6 @@
 # Getting Started
 
-[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax2.in4metrix.dev/)
+[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax.in4metrix.dev/)
 [![Docs](https://img.shields.io/badge/Docs-GeoSpaX-2E7D32.svg)](https://jm0535.github.io/GeoSpaX/)
 [![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -26,7 +26,7 @@ The same app ships in every form, so `.geolibre` projects (including legacy
 GeoSpaX Web is the full app in your browser, with nothing to install.
 Processing happens client-side in your browser session.
 
-[Launch GeoSpaX Web](https://geospax2.in4metrix.dev/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax.in4metrix.dev/){ .md-button .md-button--primary }
 
 You can load vector data supported by DuckDB-WASM Spatial, drag GeoTIFF/COG
 rasters onto the map, add URL-based services and datasets (XYZ, WMS, GeoJSON,

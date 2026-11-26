@@ -4,7 +4,7 @@ These tutorials walk through common GeoSpaX workflows end to end. Each one is sh
 
 ## Before you start
 
-- You can follow most tutorials in the **live viewer** at [web.geolibre.app](https://geospax2.in4metrix.dev/), which is the browser build of GeoSpaX. No installation required.
+- You can follow most tutorials in the **live viewer** at [web.geolibre.app](https://geospax.in4metrix.dev/), which is the browser build of GeoSpaX. No installation required.
 - A few steps need the **desktop app**: opening and saving project files, reading local MBTiles and rasters, and the Python sidecar tools (raster processing and sidecar conversions). These are called out where they appear. See [Downloads](../downloads.md) to install. The Whitebox geoprocessing toolbox is not among them — its 1,000+ tools run in the browser on WebAssembly.
 - The sample dataset used in several tutorials is a public GeoParquet file of world countries: `https://data.source.coop/giswqs/opengeos/countries.parquet`.
 

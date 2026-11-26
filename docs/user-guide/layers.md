@@ -137,7 +137,7 @@ Vector layers have a **Layer actions → Styles** submenu for symbology intercha
 To use a GeoSpaX URL style, upload it to a CORS-enabled web host and open GeoSpaX with both URLs:
 
 ```text
-https://geospax2.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 See [Embedding & Sharing](embedding.md#open-remote-data) for GeoParquet and PMTiles deep links, ZIP source matching, REST API responses, raster-style JSON, and encoding nested URLs.

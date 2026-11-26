@@ -97,7 +97,7 @@ The web app, and the desktop webview for raster and PMTiles reads, fetch S3 obje
 ```json
 [
   {
-    "AllowedOrigins": ["https://geospax2.in4metrix.dev", "tauri://localhost", "http://tauri.localhost"],
+    "AllowedOrigins": ["https://geospax.in4metrix.dev", "tauri://localhost", "http://tauri.localhost"],
     "AllowedMethods": ["GET", "HEAD"],
     "AllowedHeaders": ["*"],
     "ExposeHeaders": ["Content-Length", "Content-Range", "ETag", "Last-Modified", "Accept-Ranges"],

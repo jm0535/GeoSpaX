@@ -54,13 +54,13 @@ enables the panel immediately — no reload needed.
 
 The hosted web app connects directly from your browser to Ollama on your
 computer. Prompts and responses do not pass through a GeoSpaX server. Because
-the page origin is `https://geospax2.in4metrix.dev`, Ollama must explicitly allow that
+the page origin is `https://geospax.in4metrix.dev`, Ollama must explicitly allow that
 origin before the browser can call its API.
 
 Set this environment variable for the Ollama server, then restart Ollama:
 
 ```text
-OLLAMA_ORIGINS=https://geospax2.in4metrix.dev
+OLLAMA_ORIGINS=https://geospax.in4metrix.dev
 ```
 
 Then open **Settings → AI Providers**, add or edit an **Ollama** profile, and
@@ -78,7 +78,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
 
     ```ini
     [Service]
-    Environment="OLLAMA_ORIGINS=https://geospax2.in4metrix.dev"
+    Environment="OLLAMA_ORIGINS=https://geospax.in4metrix.dev"
     ```
 
     Save the file, then reload and restart the service:
@@ -93,7 +93,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
     Set the variable for the Ollama application, then quit and reopen Ollama:
 
     ```bash
-    launchctl setenv OLLAMA_ORIGINS "https://geospax2.in4metrix.dev"
+    launchctl setenv OLLAMA_ORIGINS "https://geospax.in4metrix.dev"
     ```
 
 === "Windows"
@@ -101,7 +101,7 @@ Configure `OLLAMA_ORIGINS` for your operating system:
     1. Quit Ollama from the taskbar.
     2. Open **Edit environment variables for your account**.
     3. Create a user variable named `OLLAMA_ORIGINS` with the value
-       `https://geospax2.in4metrix.dev`.
+       `https://geospax.in4metrix.dev`.
     4. Start Ollama again from the Start menu.
 
 === "Docker"
@@ -110,12 +110,12 @@ Configure `OLLAMA_ORIGINS` for your operating system:
 
     ```bash
     docker run -d \
-      -e OLLAMA_ORIGINS=https://geospax2.in4metrix.dev \
+      -e OLLAMA_ORIGINS=https://geospax.in4metrix.dev \
       -p 11434:11434 \
       ollama/ollama
     ```
 
-For a self-hosted GeoSpaX URL, replace `https://geospax2.in4metrix.dev` with the
+For a self-hosted GeoSpaX URL, replace `https://geospax.in4metrix.dev` with the
 exact origin shown in GeoSpaX's error message, including its scheme and port,
 for example `http://192.168.1.98:4000`. This is an Ollama server permission and
 cannot be enabled automatically by a web page. See Ollama's

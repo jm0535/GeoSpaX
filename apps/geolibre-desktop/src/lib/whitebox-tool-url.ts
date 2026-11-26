@@ -126,7 +126,7 @@ export function whiteboxToolFromLocation(): WhiteboxToolUrlTarget | null {
  * `tauri://…` origin that recipients can't open. The web build shares its own
  * origin instead (see `whiteboxToolShareBase`).
  */
-export const GEOLIBRE_WEB_APP_URL = "https://geospax2.in4metrix.dev/";
+export const GEOLIBRE_WEB_APP_URL = "https://geospax.in4metrix.dev/";
 
 /**
  * The base URL a "Copy link" share should build on.
