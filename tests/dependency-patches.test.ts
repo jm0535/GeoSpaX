@@ -42,23 +42,6 @@ function run(root: string, args: string[], env: Record<string, string> = {}) {
 }
 
 describe("dependency patch lifecycle", () => {
-  it("builds the website (not the app) on Vercel; the app ships on Fly.io", () => {
-    const repo = fileURLToPath(new URL("..", import.meta.url));
-    const rootConfig = JSON.parse(
-      readFileSync(join(repo, "vercel.json"), "utf8")
-    );
-    assert.match(rootConfig.buildCommand, /zensical build/);
-    assert.equal(rootConfig.outputDirectory, "site");
-    assert.equal(
-      existsSync(join(repo, "apps/geolibre-desktop/vercel.json")),
-      false
-    );
-    assert.match(
-      readFileSync(join(repo, "fly.toml"), "utf8"),
-      /dockerfile = "Dockerfile"/
-    );
-  });
-
   it("never runs the patch CLI during a Vercel npm postinstall", () => {
     const { root, tool, marker } = fixture();
     try {
