@@ -43,8 +43,8 @@ dev = ["pytest", "build", "anywidget[dev]", "jupyter-server", "mcp>=2.0", "dash>
 geospax-mcp = "geolibre.mcp:main"
 
 [project.urls]
-Homepage = "https://geospax.in4metrix.dev"
-Documentation = "https://jm0535.github.io/GeoSpaX/"
+Homepage = "https://geospax.fly.dev"
+Documentation = "https://geospax.in4metrix.dev/"
 Repository = "https://github.com/jm0535/GeoSpaX"
 Platform = "https://github.com/opengeos/GeoLibre"
 

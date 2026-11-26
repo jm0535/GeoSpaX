@@ -25,7 +25,7 @@ The shared file captures the same layers, styles, plugin state, and map view as 
 Anyone can open the shared project in the live viewer by passing it as the `url` parameter:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/you/my-map.geolibre.json
+https://geospax.fly.dev/?url=https://share.geolibre.app/you/my-map.geolibre.json
 ```
 
 ## 4. Embed it in a page
@@ -34,7 +34,7 @@ Use an `<iframe>` and the embed parameters to control the chrome. For a clean, m
 
 ```html
 <iframe
-  src="https://geospax.in4metrix.dev/?url=https://share.geolibre.app/you/my-map.geolibre.json&amp;maponly"
+  src="https://geospax.fly.dev/?url=https://share.geolibre.app/you/my-map.geolibre.json&amp;maponly"
   title="GeoSpaX map"
   width="100%"
   height="600"
@@ -74,7 +74,7 @@ npm install @geolibre/embed
 import { connect } from "@geolibre/embed";
 
 const map = await connect(document.querySelector("iframe"), {
-  origin: "https://geospax.in4metrix.dev",
+  origin: "https://geospax.fly.dev",
 });
 
 map.on("selectionChanged", ({ featureIds }) => showRecordFor(featureIds[0]));

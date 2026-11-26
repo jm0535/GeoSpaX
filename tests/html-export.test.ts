@@ -21,13 +21,13 @@ describe("buildProjectHtml", () => {
     const html = buildProjectHtml({
       project: PROJECT,
       title: "My Map",
-      appUrl: "https://geospax.in4metrix.dev/",
+      appUrl: "https://geospax.fly.dev/",
     });
     assert.match(html, /<title>My Map<\/title>/);
     // "&" is HTML-escaped to "&amp;" in the attribute (decoded back by browsers).
     assert.match(
       html,
-      /<iframe id="geolibre-frame" data-src="https:\/\/geospax\.in4metrix\.dev\/\?embed=1&amp;welcome=0" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"/,
+      /<iframe id="geolibre-frame" data-src="https:\/\/geospax\.fly\.dev\/\?embed=1&amp;welcome=0" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"/,
     );
     // The project rides in a JSON <script> block and is replayed over the bridge.
     assert.match(html, /id="geolibre-project"/);
@@ -66,7 +66,7 @@ describe("buildProjectHtml", () => {
 
   it("defaults the app URL to the hosted viewer", () => {
     const html = buildProjectHtml({ project: PROJECT, title: "T" });
-    assert.match(html, /data-src="https:\/\/geospax\.in4metrix\.dev\/\?embed=1&amp;welcome=0"/);
+    assert.match(html, /data-src="https:\/\/geospax\.fly\.dev\/\?embed=1&amp;welcome=0"/);
   });
 
   it("escapes '<' in the inlined JSON so a value cannot break out", () => {
@@ -108,16 +108,16 @@ describe("buildProjectHtml", () => {
       appUrl: "javascript:alert(1)",
     });
     assert.ok(!html.includes("javascript:alert(1)"));
-    assert.match(html, /data-src="https:\/\/geospax\.in4metrix\.dev\/\?embed=1&amp;welcome=0"/);
+    assert.match(html, /data-src="https:\/\/geospax\.fly\.dev\/\?embed=1&amp;welcome=0"/);
   });
 
   it("does not append embed=1 twice when the app URL already has it", () => {
     const html = buildProjectHtml({
       project: PROJECT,
       title: "T",
-      appUrl: "https://geospax.in4metrix.dev/?embed=1",
+      appUrl: "https://geospax.fly.dev/?embed=1",
     });
-    assert.match(html, /data-src="https:\/\/geospax\.in4metrix\.dev\/\?embed=1&amp;welcome=0"/);
+    assert.match(html, /data-src="https:\/\/geospax\.fly\.dev\/\?embed=1&amp;welcome=0"/);
     assert.ok(!html.includes("embed=1&amp;embed=1"));
   });
 
@@ -125,9 +125,9 @@ describe("buildProjectHtml", () => {
     const html = buildProjectHtml({
       project: PROJECT,
       title: "T",
-      appUrl: "https://geospax.in4metrix.dev/?welcome=off",
+      appUrl: "https://geospax.fly.dev/?welcome=off",
     });
-    assert.match(html, /data-src="https:\/\/geospax\.in4metrix\.dev\/\?welcome=off&amp;embed=1"/);
+    assert.match(html, /data-src="https:\/\/geospax\.fly\.dev\/\?welcome=off&amp;embed=1"/);
     assert.ok(!html.includes("welcome=off&amp;welcome=0"));
   });
 

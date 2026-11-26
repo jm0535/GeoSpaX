@@ -1,4 +1,4 @@
-export const GEOLIBRE_WEB_URL = "https://geospax.in4metrix.dev/";
+export const GEOLIBRE_WEB_URL = "https://geospax.fly.dev/";
 
 /** Build the repeated data/style/dataType deep link consumed by GeoLibre. */
 export function buildGeoLibreUrl(datasets, baseUrl = GEOLIBRE_WEB_URL) {

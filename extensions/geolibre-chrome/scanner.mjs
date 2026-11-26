@@ -5,7 +5,7 @@
  */
 export function scanDocumentForDatasets() {
   // Deep links to GeoSpaX, or to the GeoLibre platform it is built on (same format).
-  const APP_LINK_HOST = /^geospax\.in4metrix\.dev$|(?:^|\.)geolibre\.app$/i;
+  const APP_LINK_HOST = /^geospax\.fly\.dev$|(?:^|\.)geolibre\.app$/i;
   const datasets = new Map();
   const styleLinks = [];
   const geoHint =

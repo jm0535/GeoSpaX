@@ -57,17 +57,17 @@ export function rebrandUrls(text) {
     text
       .replace(
         /(?<![\w.-])https?:\/\/web\.geolibre\.app(?![\w.-])/g,
-        "https://geospax.in4metrix.dev"
+        "https://geospax.fly.dev"
       )
       .replace(
         /(?<![\w.-])https?:\/\/geolibre\.app\/demo(?=\/|\b)/g,
-        "https://geospax.in4metrix.dev"
+        "https://geospax.fly.dev"
       )
       // Schema ids are identifiers that saved files are validated against, not
       // links: rebranding them would make GeoSpaX reject existing files.
       .replace(
         /(?<![\w.-])https?:\/\/geolibre\.app(?![\w.-])(?!\/(?:schemas|privacy|terms)\/)/g,
-        "https://jm0535.github.io/GeoSpaX"
+        "https://geospax.in4metrix.dev"
       )
       .replace(
         /github\.com\/opengeos\/GeoLibre\/(issues|releases|discussions)/g,
@@ -140,7 +140,7 @@ function rebrandMarkdown(text) {
       const out =
         keep || VIDEO_LINE.test(line)
           ? line
-          : rebrandPython(rebrandUrls(rebrandText(line)));
+          : rebrandAnchors(rebrandPython(rebrandUrls(rebrandText(line))));
       if (line.includes(KEEP_END)) keep = false;
       return out;
     })
@@ -249,3 +249,8 @@ function run() {
 // Only run when executed directly, never on import (tests import the rules).
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1])
   run();
+
+/** Heading anchors follow the rebranded heading text ("## GeoSpaX Toolbox"). */
+function rebrandAnchors(text) {
+  return text.replace(/(\]\([^)\s]*#)geolibre-/g, "$1geospax-");
+}

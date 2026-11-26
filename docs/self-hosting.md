@@ -442,14 +442,14 @@ along the way.
 
 ### Pattern B: hosted GeoSpaX, private data elsewhere
 
-A user opens `https://geospax.in4metrix.dev/?url=https://community.example.org/project.geolibre.json`.
+A user opens `https://geospax.fly.dev/?url=https://community.example.org/project.geolibre.json`.
 
 The project fetch and every layer fetch is now cross-origin, so:
 
 - **Session cookies are not sent.** A URL gated by an SSO cookie returns the
   login page (or a redirect), and GeoSpaX reports a fetch or parse error. There
   is no setting that changes this.
-- **CORS must allow `https://geospax.in4metrix.dev`** on the data host, including any
+- **CORS must allow `https://geospax.fly.dev`** on the data host, including any
   custom request header you rely on.
 - **Credentials must therefore travel in the URL or in a header.** In practice
   that means a **signed, expiring URL** (an S3/MinIO presigned URL, a GeoLens

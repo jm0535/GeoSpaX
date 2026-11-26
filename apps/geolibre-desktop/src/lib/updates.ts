@@ -6,7 +6,7 @@
  */
 
 /** Page that lists cross-platform installers. */
-export const UPDATE_URL = "https://jm0535.github.io/GeoSpaX/downloads/";
+export const UPDATE_URL = "https://geospax.in4metrix.dev/downloads/";
 
 /** GitHub REST endpoint for the latest published release. */
 export const LATEST_RELEASE_URL = "https://api.github.com/repos/jm0535/GeoSpaX/releases/latest";

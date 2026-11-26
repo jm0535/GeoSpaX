@@ -265,7 +265,7 @@ describe("GeoSpaX Chrome extension scanner", () => {
   });
 
   it("preserves a discovered style when stronger metadata replaces a dataset", () => {
-    const target = new URL("https://geospax.in4metrix.dev/");
+    const target = new URL("https://geospax.fly.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.json");
     target.searchParams.append("style", "https://data.example.com/roads.style.json");
     const [found] = scan(`
@@ -279,7 +279,7 @@ describe("GeoSpaX Chrome extension scanner", () => {
   });
 
   it("unpacks data and positional styles from existing GeoSpaX links", () => {
-    const target = new URL("https://geospax.in4metrix.dev/");
+    const target = new URL("https://geospax.fly.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.geojson");
     target.searchParams.append("data", "https://data.example.com/dem.tif");
     target.searchParams.append("style", "");
@@ -323,7 +323,7 @@ describe("GeoSpaX Chrome extension scanner", () => {
   });
 
   it("keeps the dataType hint of an unpacked GeoSpaX link", () => {
-    const target = new URL("https://geospax.in4metrix.dev/");
+    const target = new URL("https://geospax.fly.dev/");
     target.searchParams.append("data", "https://data.example.com/roads.geojson");
     target.searchParams.append("data", "https://api.example.com/download/42?token=abc");
     target.searchParams.append("dataType", "");

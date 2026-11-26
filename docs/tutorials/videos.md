@@ -132,7 +132,7 @@ the browser. Covers loading the data, projected coordinate systems, tuning the
 parameters, comparing before and after, and exporting the result.
 
 Try it yourself with the
-[live sample project](https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/regularize-building-footprints.geolibre.json).
+[live sample project](https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/regularize-building-footprints.geolibre.json).
 
 Related: [Processing Tools](../user-guide/processing.md) ·
 [AI Segmentation](../user-guide/segmentation.md)

@@ -1,12 +1,21 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 
-const script = fileURLToPath(new URL("../scripts/apply-dependency-patches.mjs", import.meta.url));
+const script = fileURLToPath(
+  new URL("../scripts/apply-dependency-patches.mjs", import.meta.url)
+);
 
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), "geospax-patches-"));
@@ -33,27 +42,36 @@ function run(root: string, args: string[], env: Record<string, string> = {}) {
 }
 
 describe("dependency patch lifecycle", () => {
-  it("configures both Vercel project roots to defer installation and require patches on build", () => {
+  it("builds the website (not the app) on Vercel; the app ships on Fly.io", () => {
     const repo = fileURLToPath(new URL("..", import.meta.url));
-    const rootConfig = JSON.parse(readFileSync(join(repo, "vercel.json"), "utf8"));
-    const appConfig = JSON.parse(
-      readFileSync(join(repo, "apps/geolibre-desktop/vercel.json"), "utf8"),
+    const rootConfig = JSON.parse(
+      readFileSync(join(repo, "vercel.json"), "utf8")
     );
-    for (const config of [rootConfig, appConfig]) {
-      assert.match(config.installCommand, /GEOSPAX_DEFER_PATCHES=1/);
-      assert.match(config.buildCommand, /apply-dependency-patches\.mjs --required &&/);
-    }
-    assert.equal(rootConfig.outputDirectory, "apps/geolibre-desktop/dist");
-    assert.equal(appConfig.outputDirectory, "dist");
+    assert.match(rootConfig.buildCommand, /zensical build/);
+    assert.equal(rootConfig.outputDirectory, "site");
+    assert.equal(
+      existsSync(join(repo, "apps/geolibre-desktop/vercel.json")),
+      false
+    );
+    assert.match(
+      readFileSync(join(repo, "fly.toml"), "utf8"),
+      /dockerfile = "Dockerfile"/
+    );
   });
 
   it("never runs the patch CLI during a Vercel npm postinstall", () => {
     const { root, tool, marker } = fixture();
     try {
-      writeFileSync(tool, `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`);
+      writeFileSync(
+        tool,
+        `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`
+      );
       const result = run(root, [], { VERCEL: "1" });
       assert.equal(result.status, 0, result.stderr);
-      assert.match(result.stdout, /Deferring patches until the Vercel build step/);
+      assert.match(
+        result.stdout,
+        /Deferring patches until the Vercel build step/
+      );
       assert.equal(existsSync(marker), false);
 
       // Also work if the patch tool hasn't been installed at all.
@@ -67,7 +85,10 @@ describe("dependency patch lifecycle", () => {
   it("runs patches in --required mode even on Vercel, and propagates failures", () => {
     const { root, tool, marker } = fixture();
     try {
-      writeFileSync(tool, `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`);
+      writeFileSync(
+        tool,
+        `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`
+      );
       const result = run(root, ["--required"], { VERCEL: "1" });
       assert.equal(result.status, 0, result.stderr);
       assert.equal(existsSync(marker), true);
@@ -82,7 +103,10 @@ describe("dependency patch lifecycle", () => {
   it("keeps patching non-Vercel installs when the full tree is present", () => {
     const { root, tool, marker } = fixture();
     try {
-      writeFileSync(tool, `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`);
+      writeFileSync(
+        tool,
+        `require("node:fs").writeFileSync(${JSON.stringify(marker)}, "ran");`
+      );
       assert.equal(run(root, []).status, 0);
       assert.equal(existsSync(marker), true);
     } finally {
