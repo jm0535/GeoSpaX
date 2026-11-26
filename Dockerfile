@@ -34,6 +34,15 @@ COPY packages/map/package.json packages/map/package.json
 COPY packages/plugins/package.json packages/plugins/package.json
 COPY packages/processing/package.json packages/processing/package.json
 COPY packages/ui/package.json packages/ui/package.json
+COPY packages/embed/package.json packages/embed/package.json
+COPY packages/geospax-analysis/package.json packages/geospax-analysis/package.json
+COPY packages/geospax-data/package.json packages/geospax-data/package.json
+COPY packages/geospax-plugins/package.json packages/geospax-plugins/package.json
+COPY workers/ai-proxy/package.json workers/ai-proxy/package.json
+COPY workers/collab/package.json workers/collab/package.json
+COPY workers/collab-node/package.json workers/collab-node/package.json
+COPY workers/tiles/package.json workers/tiles/package.json
+COPY workers/viewer/package.json workers/viewer/package.json
 
 RUN npm ci
 

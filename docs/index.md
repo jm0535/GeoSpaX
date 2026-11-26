@@ -19,7 +19,7 @@ hide:
       DuckDB-WASM Spatial and deck.gl).
     </p>
     <div class="hero__actions">
-      <a class="md-button md-button--primary" href="https://geospax.in4metrix.dev/">Launch GeoSpaX Web</a>
+      <a class="md-button md-button--primary" href="https://geospax.fly.dev/">Launch GeoSpaX Web</a>
       <a class="md-button" href="getting-started/">Get started</a>
       <a class="md-button" href="user-guide/interface/">User guide</a>
       <a class="md-button" href="downloads/">Download app</a>
@@ -143,13 +143,13 @@ GeoSpaX Web is the full browser version of the GeoSpaX app, ready to use with no
 Open a project by passing a public `.geolibre.json` URL with the `url` query parameter:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json
+https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json
 ```
 
 You can also open hosted data directly. `data` accepts GeoJSON, GeoParquet, PMTiles, REST endpoints returning GeoJSON or ZIP, ZIP archives containing multiple GeoJSON files, and COGs. Add `style` to apply hosted vector or raster symbology:
 
 ```text
-https://geospax.in4metrix.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
+https://geospax.fly.dev/?data=https://assets.geolibre.app/data/places.geojson&style=https://assets.geolibre.app/data/sample.style.json
 ```
 
 Vector layers can produce a compatible file from **Layer actions → Styles → Export GeoSpaX URL style**, and apply it again with **Import style from file (GeoSpaX URL / Mapbox GL / SLD / QML)…**, or with **Import style from text…** by pasting the style itself.
@@ -157,13 +157,13 @@ Vector layers can produce a compatible file from **Layer actions → Styles → 
 For narrow embeds, add `?layout=compact` to the demo URL to use icon-only toolbar buttons and hide project metadata:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=compact
+https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=compact
 ```
 
 For map-focused embeds, add `&panels=none` to hide the Layers, Style, and Attribute table panels:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=compact&panels=none
+https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=compact&panels=none
 ```
 
 Use `toolbar=icons` when you only want icon-only toolbar buttons, or `toolbar=none` to hide the top toolbar while retaining panels and the status bar. `panels=hidden`, `panels=hide`, `panels=off`, and `hidePanels=true` are accepted aliases for hiding panels.
@@ -174,18 +174,18 @@ starting both panels collapsed.
 For a fully chrome-free, map-only embed, add `&maponly` to hide the toolbar menu, all panels, and the status bar:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&maponly
+https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&maponly
 ```
 
 For a read-only embed that viewers can still explore, use `&layout=viewer`. It keeps the Layers list, View and Controls menus, basemaps, and search/identify, and hides everything that would change the project:
 
 ```text
-https://geospax.in4metrix.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=viewer
+https://geospax.fly.dev/?url=https://share.geolibre.app/giswqs/3d-tiles.geolibre.json&layout=viewer
 ```
 
 Other parameters control the toolbar, panels, and theme. See [Embedding & Sharing](user-guide/embedding.md) for the full parameter reference and `<iframe>` examples.
 
-[Launch GeoSpaX Web](https://geospax.in4metrix.dev/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax.fly.dev/){ .md-button .md-button--primary }
 [Embedding & Sharing](user-guide/embedding.md){ .md-button }
 
 ## Project status

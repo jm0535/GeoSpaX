@@ -37,7 +37,7 @@ A model has three kinds of nodes:
 - **Output**: a result that is added to the map when the model runs, named by
   its **Result name**. Add one with **+ Output**.
 
-The palette offers the client-side [GeoSpaX Toolbox](processing.md#geolibre-toolbox)
+The palette offers the client-side [GeoSpaX Toolbox](processing.md#geospax-toolbox)
 vector tools and the open [Whitebox](processing.md#whitebox-toolbox) tool catalog.
 Type in **Search tools** to filter it, then drag a tool onto the canvas (or click
 it, or press `Enter`, to add it at a default spot).

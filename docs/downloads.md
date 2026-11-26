@@ -9,7 +9,7 @@ PyPI release are not published yet.
 The full app in your browser, nothing to install. Your data stays in your
 browser session.
 
-[Launch GeoSpaX Web](https://geospax.in4metrix.dev/){ .md-button .md-button--primary }
+[Launch GeoSpaX Web](https://geospax.fly.dev/){ .md-button .md-button--primary }
 
 ## Desktop app (Windows, macOS, Linux)
 

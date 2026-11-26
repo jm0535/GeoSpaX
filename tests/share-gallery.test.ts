@@ -45,7 +45,7 @@ function rawProject(overrides: Record<string, unknown> = {}) {
     tags: ["water", "ocean"],
     rawJsonUrl: `${BASE}/giswqs/my-map.geolibre.json`,
     projectUrl: `${BASE}/giswqs/my-map`,
-    viewerUrl: `https://geospax.in4metrix.dev/?url=${BASE}/giswqs/my-map.geolibre.json`,
+    viewerUrl: `https://geospax.fly.dev/?url=${BASE}/giswqs/my-map.geolibre.json`,
     ...overrides,
   };
 }

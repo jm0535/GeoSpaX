@@ -62,7 +62,7 @@ export const CHELSA_BIOCLIM = [
 ] as const;
 
 const CHELSA_DIRECT = "https://os.zhdk.cloud.switch.ch/chelsav2";
-/** Same-origin rewrite on the web deployment (see apps/geolibre-desktop/vercel.json). */
+/** Same-origin rewrite on the web deployment (proxied by docker/nginx.conf on the Fly.io deployment). */
 const CHELSA_PROXY_PATH = "/chelsa";
 const DEFAULT_BIOCLIM = new Set(["bio1", "bio4", "bio12", "bio15"]);
 

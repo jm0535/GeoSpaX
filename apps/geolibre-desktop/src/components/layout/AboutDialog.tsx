@@ -26,7 +26,7 @@ import { UpdateInstructions } from "./UpdateInstructions";
 const LINKS = [
   {
     labelKey: "about.homePage",
-    href: "https://jm0535.github.io/GeoSpaX",
+    href: "https://geospax.in4metrix.dev/",
   },
   {
     labelKey: "about.githubRepository",

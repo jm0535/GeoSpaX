@@ -5,7 +5,7 @@
 [![image](https://img.shields.io/conda/vn/conda-forge/geolibre.svg)](https://anaconda.org/conda-forge/geolibre)
 [![Conda Recipe](https://img.shields.io/badge/recipe-geolibre-green.svg)](https://github.com/conda-forge/geolibre-feedstock)
 
-GeoSpaX in Jupyter: the full [GeoSpaX](https://jm0535.github.io/GeoSpaX) GIS app as an
+GeoSpaX in Jupyter: the full [GeoSpaX](https://geospax.in4metrix.dev/) GIS app as an
 [anywidget](https://anywidget.dev), with a leafmap-style Python API.
 
 The widget embeds the complete GeoSpaX app (menus, panels, processing tools)
@@ -188,7 +188,7 @@ anywhere untrusted, or use `Map.save_project`, which redacts by default.
   from geospax import Map
 
   m = Map(center=(-100, 40), zoom=4)
-  m._app_url = "https://geospax.in4metrix.dev/"
+  m._app_url = "https://geospax.fly.dev/"
   m.add_basemap("dark")
   m.add_vector(
       "https://data.source.coop/giswqs/opengeos/world_cities.geojson",
@@ -251,5 +251,5 @@ geospax-mcp --root ~/maps
 It confines every read and write to the roots you pass (`--root`, repeatable, or
 `GEOLIBRE_MCP_ROOTS`) and builds projects through the same builders this package
 uses, so anything it writes opens in the widget unchanged. See
-[docs/mcp.md](https://jm0535.github.io/GeoSpaX/mcp/) for the tool list and client
+[docs/mcp.md](https://geospax.in4metrix.dev/mcp/) for the tool list and client
 configuration.

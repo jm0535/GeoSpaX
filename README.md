@@ -13,22 +13,22 @@
 > Lineage: `jm0535/map-kit` v1.4.3 → GeoSpaX 2.0 platform rewrite, built on the
 > open-source [GeoLibre](https://github.com/opengeos/GeoLibre) platform (MIT).
 
-[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax.in4metrix.dev/)
-[![Docs](https://img.shields.io/badge/Docs-GeoSpaX-2E7D32.svg)](https://jm0535.github.io/GeoSpaX/)
+[![Launch GeoSpaX](https://img.shields.io/badge/Launch-GeoSpaX%20Web-2E7D32.svg)](https://geospax.fly.dev/)
+[![Docs](https://img.shields.io/badge/Docs-GeoSpaX-2E7D32.svg)](https://geospax.in4metrix.dev/)
 [![GeoSpaX version](https://img.shields.io/badge/GeoSpaX-2.0.0-2E7D32.svg)](https://github.com/jm0535/GeoSpaX)
 [![Built on GeoLibre](https://img.shields.io/badge/Built%20on-GeoLibre%203.3.0-0D47A1.svg)](https://github.com/opengeos/GeoLibre)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-- **[Launch GeoSpaX Web](https://geospax.in4metrix.dev/)** — the full app in your browser, nothing to install
-- **[Get GeoSpaX](https://jm0535.github.io/GeoSpaX/downloads/)** — web app, desktop installers built from source, and the Python package
+- **[Launch GeoSpaX Web](https://geospax.fly.dev/)** — the full app in your browser, nothing to install
+- **[Get GeoSpaX](https://geospax.in4metrix.dev/downloads/)** — web app, desktop installers built from source, and the Python package
 - **[GSX workbench guides](docs/user-guide/gsx-plugins/index.md)** — what each domain workbench does and how to use it
 - **[Species distribution modelling](docs/user-guide/gsx-plugins/species-distribution-modelling.md)** — occurrences → CHELSA / Copernicus covariates → SDM → spatial cross-validation → suitability raster
-- **[Getting started](https://jm0535.github.io/GeoSpaX/getting-started/)** — use GeoSpaX, run it from source, and configure it
-- **[Features](https://jm0535.github.io/GeoSpaX/features/)** — the complete feature list
+- **[Getting started](https://geospax.in4metrix.dev/getting-started/)** — use GeoSpaX, run it from source, and configure it
+- **[Features](https://geospax.in4metrix.dev/features/)** — the complete feature list
 
 ## GeoSpaX — what's new in 2.0.0
 
-> **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` remains live at `geospax.in4metrix.dev`; v2 is the forward path.
+> **Lineage:** `jm0535/map-kit` **v1.4.3** (Leaflet, 22k-line `index.html`, FR422 habitat-assessment at PNG University of Technology) → **GeoSpaX v2.0.0** platform rewrite on GeoLibre. `map-kit` was previously served at `geospax.in4metrix.dev`, which now hosts the GeoSpaX website; v2 is the forward path.
 
 GeoSpaX keeps **1,000+ GeoLibre WebAssembly tools** and adds a domain-analysis layer as **twelve bundled GSX workbenches** (`public/plugins/<id>/`, no upstream file edited — `docs/plugin-api.md` §Bundled plugins). Workbenches are opt-in: activate the ones you want under **Plugins → Manage Plugins**. Every workbench ships with a [detailed user guide](docs/user-guide/gsx-plugins/index.md) and a built-in **How to cite** section (APA + BibTeX) so results are citable:
 
@@ -86,13 +86,13 @@ Build drop-ins: `npm run build -w @geospax/plugins` → `apps/geolibre-desktop/p
 GeoSpaX includes everything in the GeoLibre platform it is built on: four
 rendering engines (MapLibre, Mapbox, Cesium, ArcGIS), 1,000+ WebAssembly
 geoprocessing tools, DuckDB Spatial SQL, 3D and planetary maps, story maps,
-plugins and more. See [Features](https://jm0535.github.io/GeoSpaX/features/)
-and [Demos](https://jm0535.github.io/GeoSpaX/demos/).
+plugins and more. See [Features](https://geospax.in4metrix.dev/features/)
+and [Demos](https://geospax.in4metrix.dev/demos/).
 
 ## Documentation
 
 The User Guide, GSX workbench guides and tutorials are published at
-**[jm0535.github.io/GeoSpaX](https://jm0535.github.io/GeoSpaX/)**.
+**[geospax.in4metrix.dev](https://geospax.in4metrix.dev/)**.
 
 - **Reference:** [Architecture](docs/architecture.md) ·
   [Project format](docs/project-format.md) · [Plugin API](docs/plugin-api.md) ·

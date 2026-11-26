@@ -244,7 +244,7 @@ describe("diagnostics startup transient suppression", () => {
     return {
       event: {
         message,
-        filename: "https://geospax.in4metrix.dev/",
+        filename: "https://geospax.fly.dev/",
         lineno: 0,
         colno: 0,
         preventDefault: () => {

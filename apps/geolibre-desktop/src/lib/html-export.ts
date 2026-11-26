@@ -10,7 +10,7 @@ import {
 import { arePanelsHidden, HIDDEN_PANEL_VALUES, normalizedParam } from "./layout-params";
 
 // Hosted viewer used as the default embed target (matches Python's default).
-export const DEFAULT_VIEWER_BASE_URL = "https://geospax.in4metrix.dev/";
+export const DEFAULT_VIEWER_BASE_URL = "https://geospax.fly.dev/";
 
 // Excludes the structural CSS chars ("{};:") so a width/height can't close the
 // <style> rule and inject CSS; "/" is allowed so calc() divisions pass (extends

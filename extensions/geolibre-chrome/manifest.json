@@ -3,7 +3,7 @@
   "name": "Open data in GeoSpaX",
   "description": "Find geospatial datasets and services used by the current page and open them in GeoSpaX.",
   "version": "0.3.1",
-  "homepage_url": "https://jm0535.github.io/GeoSpaX/",
+  "homepage_url": "https://geospax.in4metrix.dev/",
   "minimum_chrome_version": "106",
   "permissions": ["activeTab", "scripting"],
   "action": {

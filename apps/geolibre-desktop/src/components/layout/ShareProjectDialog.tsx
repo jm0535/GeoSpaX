@@ -89,7 +89,7 @@ interface ShareProjectDialogProps {
 }
 
 /** The user guide section on what a shared project can and cannot carry. */
-const SHARING_LOCAL_DATA_DOCS_URL = "https://jm0535.github.io/GeoSpaX/user-guide/projects/#sharing-local-data";
+const SHARING_LOCAL_DATA_DOCS_URL = "https://geospax.in4metrix.dev/user-guide/projects/#sharing-local-data";
 
 /**
  * What the readiness checks look at: the live layers plus the project-level

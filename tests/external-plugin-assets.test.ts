@@ -9,10 +9,10 @@ describe("pluginAssetUrlFromSource", () => {
   it("resolves an asset against a bundled plugin's manifest URL", () => {
     assert.equal(
       pluginAssetUrlFromSource(
-        "https://jm0535.github.io/GeoSpaX/plugins/demo-plugin/plugin.json",
+        "https://geospax.in4metrix.dev/plugins/demo-plugin/plugin.json",
         "dist/sample-data",
       ),
-      "https://jm0535.github.io/GeoSpaX/plugins/demo-plugin/dist/sample-data",
+      "https://geospax.in4metrix.dev/plugins/demo-plugin/dist/sample-data",
     );
   });
 
@@ -49,14 +49,14 @@ describe("pluginAssetUrlFromSource", () => {
 
   it("rejects paths that escape the plugin directory", () => {
     assert.equal(
-      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "../secrets"),
+      pluginAssetUrlFromSource("https://geospax.in4metrix.dev/plugins/x/plugin.json", "../secrets"),
       null,
     );
   });
 
   it("rejects absolute paths", () => {
     assert.equal(
-      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "/etc/passwd"),
+      pluginAssetUrlFromSource("https://geospax.in4metrix.dev/plugins/x/plugin.json", "/etc/passwd"),
       null,
     );
   });
@@ -66,7 +66,7 @@ describe("pluginAssetUrlFromSource", () => {
     // it to ".." and the resolved URL lands outside the plugin directory, so
     // the directory-containment guard still rejects it.
     assert.equal(
-      pluginAssetUrlFromSource("https://jm0535.github.io/GeoSpaX/plugins/x/plugin.json", "%2e%2e/secrets"),
+      pluginAssetUrlFromSource("https://geospax.in4metrix.dev/plugins/x/plugin.json", "%2e%2e/secrets"),
       null,
     );
   });

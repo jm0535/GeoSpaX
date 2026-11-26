@@ -362,7 +362,7 @@ Every run is recorded in **Processing → History**, newest first, with the tool
 ![The Model Builder canvas, with the tool palette on the left, the graph in the middle, and the selected node's settings on the right](https://assets.geolibre.app/images/geolibre-model-builder.webp)
 
 - **Drag a tool from the palette** onto the canvas to add it as a node, then wire one node's output into the next node's input. **+ Input** and **+ Output** add the model's own entry and exit points, so the same graph can be re-run against different layers.
-- The palette draws on the client-side [GeoSpaX Toolbox](#geolibre-toolbox) vector tools plus the open [Whitebox](#whitebox-toolbox) catalog, so a raster chain such as fill depressions → flow accumulation → extract streams is a valid model.
+- The palette draws on the client-side [GeoSpaX Toolbox](#geospax-toolbox) vector tools plus the open [Whitebox](#whitebox-toolbox) catalog, so a raster chain such as fill depressions → flow accumulation → extract streams is a valid model.
 - The canvas checks the graph as you build it (missing inputs, unconnected ports, mismatched data types, loops), and **Run** executes the chain as one job, with progress in the message log at the bottom.
 - **Save** stores the model with the project, **Import** / **Export** move it between projects as a file, and **Copy Python script** puts the equivalent [`geolibre` Python](../python.md) code on the clipboard.
 

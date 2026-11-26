@@ -8,7 +8,7 @@ Thanks for your interest in improving GeoSpaX. The full contributing guide,
 including development setup, the repository layout, the quality gate, and the
 pull request workflow, lives in the documentation:
 
-**<https://jm0535.github.io/GeoSpaX/contributing/>** (source: [`docs/contributing.md`](docs/contributing.md))
+**<https://geospax.in4metrix.dev/contributing/>** (source: [`docs/contributing.md`](docs/contributing.md))
 
 ## Quick Start
 
